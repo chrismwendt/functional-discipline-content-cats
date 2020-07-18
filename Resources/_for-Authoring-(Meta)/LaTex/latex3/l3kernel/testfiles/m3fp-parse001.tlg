@@ -1,0 +1,373 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: Arithmetic
+============================================================
+14
+20
+25097981.411
+============================================================
+============================================================
+TEST 2: Unary minus
+============================================================
+10
+-20
+25132017.411
+============================================================
+============================================================
+TEST 3: Special values
+============================================================
+inf
+inf
+nan
+============================================================
+============================================================
+TEST 4: Functions
+============================================================
+5.09861228866811
+2.90138771133189
+0.0940478276166993
+============================================================
+============================================================
+TEST 5: Various errors
+============================================================
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown fp word skjdhf.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing ) inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing number before ')'.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Extra ) ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+nan
+()
+()
+nan
+0.36
+45
+============================================================
+============================================================
+TEST 6: More errors
+============================================================
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing number before '*'.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Premature end in fp expression.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing number before '/'.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing number before '='.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown fp word e.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Erroneous variable \relax used!
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Erroneous variable \l_undefined_int used!
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+nan
+nan
+1
+nan
+nan
+============================================================
+============================================================
+TEST 7: Ignoring unknown symbols
+============================================================
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol @ ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol ## ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol @ ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol $ ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol ' ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol ; ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol " ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Missing * inserted.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol [ ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Unknown symbol ] ignored.
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+2
+0.3
+2
+3
+============================================================
+============================================================
+TEST 8: More special values
+============================================================
+3.141592653589793
+57.29577951308231
+0.0174532925199433
+1
+0
+10.00001525878906
+4.3055419921875
+72.27
+1
+12
+28.45275590551181
+2.845275590551181
+1.07000856496063
+12.84010277952756
+1.066978346456693
+12.80374015748031
+1.00375
+1.52587890625e-5
+============================================================
+============================================================
+TEST 9: Exponent and minus
+============================================================
+-8
+-8
+-0.5
+-0.001220703125
+-0.001220703125
+0.001220703125
+65536
+2.323057312541877e-8
+43046721
+1.52587890625e-5
+-0.93364101391902
+============================================================
+============================================================
+TEST 10: Juxtaposition and precedence
+============================================================
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Invalid operation (1)/(())
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Invalid operation (3.141592653589793)^((2,))
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+(72.27, 2.845275590551181)
+2.856642116043664
+2.856642116043664
+454.0857331207334
+16
+2
+0.1591549430918953
+1.570796326794896
+1.570796326794896
+1.570796326794896
+0.006918500069185001
+36.135
+36.135
+36.135
+0.9999999999999997
+nan
+============================================================
+============================================================
+TEST 11: Exponent e/E
+============================================================
+0.341
+3000.001
+============================================================

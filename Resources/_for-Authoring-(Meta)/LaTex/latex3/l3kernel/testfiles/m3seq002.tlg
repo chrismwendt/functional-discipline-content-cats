@@ -1,0 +1,286 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson
+============================================================
+TEST 1: creation
+============================================================
+Defining \l_a_seq on line ...
+Defining \g_b_seq on line ...
+TRUE
+TRUE
+macro:->\s__seq 
+macro:->\s__seq 
+============================================================
+============================================================
+TEST 2: clearing
+============================================================
+macro:->\s__seq 
+macro:->\s__seq \__seq_item:n {test a}
+macro:->\s__seq 
+============================================================
+undefined
+undefined
+! LaTeX3 Error: The variable \l_undefined_seq has not been declared on line
+(LaTeX3)        53.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_undefined_seq { ... }
+without first having:
+  \tl_new:N \l_undefined_seq
+LaTeX will create the variable and continue.
+! LaTeX3 Error: The variable \g_undefined_seq has not been declared on line
+(LaTeX3)        53.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \g_undefined_seq { ... }
+without first having:
+  \tl_new:N \g_undefined_seq
+LaTeX will create the variable and continue.
+macro:->\s__seq 
+macro:->\s__seq 
+undefined
+macro:->\s__seq 
+============================================================
+============================================================
+TEST 3: clear_new
+============================================================
+Defining \l_c_seq on line ...
+Defining \g_d_seq on line ...
+macro:->\s__seq 
+macro:->\s__seq 
+macro:->\s__seq \__seq_item:n {test a}
+macro:->\s__seq 
+macro:->\s__seq 
+macro:->\s__seq 
+============================================================
+============================================================
+TEST 4: (g)set_eq
+============================================================
+! LaTeX3 Error: The variable \l_e_seq has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_e_seq { ... }
+without first having:
+  \tl_new:N \l_e_seq
+LaTeX will create the variable and continue.
+! LaTeX3 Error: The variable \g_f_seq has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \g_f_seq { ... }
+without first having:
+  \tl_new:N \g_f_seq
+LaTeX will create the variable and continue.
+macro:->\s__seq \__seq_item:n {abc}
+macro:->\s__seq \__seq_item:n {abc}
+macro:->\s__seq \__seq_item:n {abc}
+============================================================
+macro:->\s__seq \__seq_item:n {abc}
+undefined
+macro:->\s__seq 
+============================================================
+macro:->\s__seq \__seq_item:n {abc}
+macro:->\s__seq \__seq_item:n {abc}
+macro:->\s__seq \__seq_item:n {abc}
+============================================================
+============================================================
+TEST 5: gconcat
+============================================================
+The sequence \g_b_seq contains the items (without outer braces):
+>  {abc}
+>  {def}
+>  {uvw}
+>  {xyz}.
+============================================================
+The sequence \g_b_seq contains the items (without outer braces):
+>  {ABC}
+>  {DEF}
+>  {UVW}
+>  {XYZ}.
+============================================================
+============================================================
+TEST 6: put left
+============================================================
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {\l_tmpc_tl \par }
+>  {\ERROR B\par }
+>  {FULL EXPANSION\par }
+>  {\l_tmpb_tl \par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 7: put right
+============================================================
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {\ERROR A\par }
+>  {\l_tmpb_tl \par }
+>  {FULL EXPANSION\par }
+>  {\ERROR B\par }
+>  {\l_tmpc_tl \par }.
+============================================================
+============================================================
+TEST 8: gput left
+============================================================
+The sequence \g_b_seq contains the items (without outer braces):
+>  {\l_tmpc_tl \par }
+>  {\ERROR B\par }
+>  {FULL EXPANSION\par }
+>  {\l_tmpb_tl \par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 9: gput right
+============================================================
+The sequence \g_b_seq contains the items (without outer braces):
+>  {\ERROR A\par }
+>  {\l_tmpb_tl \par }
+>  {FULL EXPANSION\par }
+>  {\ERROR B\par }
+>  {\l_tmpc_tl \par }.
+============================================================
+============================================================
+TEST 10: seq_if_empty (expect Y/N/N)
+============================================================
+YES
+NO
+NO
+============================================================
+============================================================
+TEST 11: seq_get
+============================================================
+> \l_tmpa_tl=\q_no_value .
+> \l_tmpa_tl=.
+> \l_tmpa_tl=a\par .
+> \l_tmpa_tl=.
+> \l_tmpa_tl=b\par .
+============================================================
+============================================================
+TEST 12: push (same as put_left)
+============================================================
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {\ERROR C\par }
+>  {\ERROR B\par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 13: gpush (same as gput_left)
+============================================================
+The sequence \g_b_seq contains the items (without outer braces):
+>  {\ERROR B}
+>  {\ERROR C\par }
+>  {\ERROR B\par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 14: top (same as get)
+============================================================
+============================================================
+============================================================
+TEST 15: if_in (expect 2 first false)
+============================================================
+FALSE
+FALSE
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+============================================================
+============================================================
+TEST 16: if_in (T)
+============================================================
+TRUE
+TRUE
+TRUE
+TRUE
+TRUE
+============================================================
+============================================================
+TEST 17: if_in (F)
+============================================================
+FALSE
+FALSE
+============================================================
+============================================================
+TEST 18: map_inline
+============================================================
+c
+b\par 
+a
+c
+b\par 
+a
+============================================================
+============================================================
+TEST 19: map
+============================================================
+c
+b\par 
+a
+c
+b\par 
+a
+============================================================
+============================================================
+TEST 20: map_variable
+============================================================
+c
+b\par 
+a
+Final: [a]
+c
+b\par 
+a
+Final: [a]
+============================================================
+============================================================
+TEST 21: pop
+============================================================
+c
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {b\par }
+>  {a}.
+b\par 
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {a}.
+a
+The sequence \l_tmpa_seq is empty
+> .
+============================================================
+\q_no_value 
+The sequence \l_tmpa_seq is empty
+> .
+============================================================
+============================================================
+TEST 22: gpop
+============================================================
+local->c.
+global->.
+The sequence \g_tmpb_seq contains the items (without outer braces):
+>  {b\par }
+>  {a}.
+local->b\par .
+global->.
+The sequence \g_tmpb_seq contains the items (without outer braces):
+>  {a}.
+local->a.
+global->.
+The sequence \g_tmpb_seq is empty
+> .
+============================================================
+local->\q_no_value .
+global->.
+The sequence \g_tmpb_seq is empty
+> .
+============================================================

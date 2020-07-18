@@ -1,0 +1,1523 @@
+% \iffalse
+%
+%% File l3kernel-extras.dtx (C) Copyright 2012-2019 The LaTeX3 Project
+%%
+%% It may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License (LPPL), either version 1.3c of this
+%% license or (at your option) any later version.  The latest version
+%% of this license is in the file
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% This file is part of the "l3trial bundle" (The Work in LPPL)
+%% and all files in that bundle must be distributed together.
+%%
+%% The released version of this bundle is available from CTAN.
+%%
+%% -----------------------------------------------------------------------
+%%
+%% The development version of the bundle can be found at
+%%
+%%    http://www.latex-project.org/svnroot/experimental/trunk/
+%%
+%% for those people who are interested.
+%%
+%%%%%%%%%%%
+%% NOTE: %%
+%%%%%%%%%%%
+%%
+%%   Snapshots taken from the repository represent work in progress and may
+%%   not work or may contain conflicting material!  We therefore ask
+%%   people _not_ to put them into distributions, archives, etc. without
+%%   prior consultation with the LaTeX Project Team.
+%%
+%% -----------------------------------------------------------------------
+%%
+%
+%<*driver|package>
+\RequirePackage{expl3}
+%</driver|package>
+%<*driver>
+\documentclass[full]{l3doc}
+\usepackage{amsmath}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3kernel-extras} package\\ Add ons to \pkg{l3kernel}^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX3 Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Released 2018-04-30}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{\pkg{l3kernel-extras} documentation}
+%
+% \subsection{Expandable warnings}
+%
+% \begin{function}[EXP]
+%   {
+%     \__kernel_msg_expandable_warning:nnnnnn,
+%     \__kernel_msg_expandable_warning:nnnnn,
+%     \__kernel_msg_expandable_warning:nnnn,
+%     \__kernel_msg_expandable_warning:nnn,
+%     \__kernel_msg_expandable_warning:nn
+%   }
+%   \begin{syntax}
+%     \cs{__kernel_msg_expandable_warning:nnnnnn} \Arg{module} \Arg{message} \Arg{arg one} \Arg{arg two} \Arg{arg three} \Arg{arg four}
+%   \end{syntax}
+%   Issues a warning, passing \meta{arg one} to \meta{arg four}
+%   to the text-creating functions. The resulting string must
+%   be shorter than a line, otherwise it will be cropped.
+% \end{function}
+%
+% \subsection{\pkg{l3basics}}
+%
+% \begin{function}{\group_insert_after:n, \group_insert_after:x}
+%   \begin{syntax}
+%     \cs{group_insert_after:n} \Arg{tokens}
+%   \end{syntax}
+%   Places the \meta{tokens} in the input stream once the current group
+%   ends.  If this function is called multiple times, the \meta{tokens}
+%   will be inserted in the same order.  Note that a construction such as
+%   \begin{verbatim}
+%     \tl_set:Nn \l_example_tl { outside }
+%     \group_begin:
+%       \tl_set:Nn \l_example_tl { inside }
+%       \group_insert_after:n { \tl_use:N \l_example_tl }
+%     \group_end:
+%   \end{verbatim}
+%   will use the value of \cs{l_example_tl} when \cs{tl_use:N}, which is
+%   outside the group.  Using \cs{group_insert_after:x} would instead
+%   use \enquote{\texttt{inside}}.
+% \end{function}
+%
+% \begin{function}{\group_insert_after:N}
+%   This function (currently a copy of \tn{aftergroup}, should be
+%   redefined to be a copy of \cs{group_insert_after:n} (see
+%   implementation section for reasons).
+% \end{function}
+%
+% \begin{function}{\group_after_set:NNn}
+%   \begin{syntax}
+%     \cs{group_after_set:NNn} \meta{`set' function} \meta{variable} \Arg{value}
+%   \end{syntax}
+%   Locally sets the \meta{variable} to some \meta{value} using the specified
+%   \meta{`set' function}.  The variable is set up to be locally defined in
+%   the group one level higher.  Used as:
+%   \begin{verbatim}
+%     \group_begin:
+%       \group_begin:
+%         \group_after_set:NNn \int_set:Nn \y {3}
+%         % \y == 3
+%       \group_end:
+%       % \y == 3
+%     \group_end:
+%     \y == undefined
+%   \end{verbatim}
+%   Only variables can be set in this way (e.g., \texttt{tl},
+%   \texttt{clist}, \texttt{int}, etc.).  There is not yet an analogous
+%   method for functions set with the \cs{cs_set:Npn} family of commands.
+% \end{function}
+%
+% \subsection{\pkg{l3int}}
+%
+% \begin{function}[EXP]{\int_mul_truncate:nn}
+%   \begin{syntax}
+%     \cs{int_mult_truncate:Nn} \Arg{intexpr} \Arg{value}
+%   \end{syntax}
+%   Multiples the \meta{integer expression} by \meta{value}, which may be any real
+%   value.  The result is truncated and left in the input stream as an
+%   \meta{integer denotation} after two expansions.
+% \end{function}
+%
+% \subsection{\pkg{l3token}}
+%
+% \begin{function}{\peek_after:nw}
+%   \begin{syntax}
+%     \cs{peek_after:nw} \Arg{token list} \meta{token}
+%   \end{syntax}
+%   Locally sets the test variable \cs{l_peek_token} equal to \meta{token}
+%   (as an implicit token, \emph{not} as a token list), and then
+%   expands the \meta{token list}. The \meta{token} will remain in
+%   the input stream as the next item after the \meta{token list}.
+%   The \meta{token} here may be \verb*| |, |{| or |}| (assuming
+%   normal \TeX{} category codes), \emph{i.e.}~it is not necessarily the
+%   next argument which would be grabbed by a normal function.
+% \end{function}
+%
+% \begin{function}{\peek_gafter:nw}
+%   \begin{syntax}
+%     \cs{peek_gafter:nw} \Arg{token list} \meta{token}
+%   \end{syntax}
+%   Globally sets the test variable \cs{g_peek_token} equal to \meta{token}
+%   (as an implicit token, \emph{not} as a token list), and then
+%   expands the \meta{token list}. The \meta{token} will remain in
+%   the input stream as the next item after the \meta{token list}.
+%   The \meta{token} here may be \verb*| |, |{| or |}| (assuming
+%   normal \TeX{} category codes), \emph{i.e.}~it is not necessarily the
+%   next argument which would be grabbed by a normal function.
+% \end{function}
+%
+% \begin{function}[EXP]{\char_category_name:N, \char_category_name:n}
+%   \begin{syntax}
+%     \cs{char_category_name:N} \meta{char}
+%     \cs{char_category_name:N} |\|\meta{char}
+%     \cs{char_category_name:n} \Arg{intexpr}
+%   \end{syntax}
+%   Expands to the category name, one of |escape|, |group_begin|,
+%   |group_end|, |math_toggle|, |alignment|, |end_line|, |parameter|,
+%   |superscript|, |subscript|, |ignore|, |space|, |letter|, |other|,
+%   |active|, |comment|, |invalid|.
+% \end{function}
+%
+% \begin{function}{\char_show:N, \char_show:n}
+%   \begin{syntax}
+%     \cs{char_show:N} \meta{char}
+%     \cs{char_show:N} |\|\meta{char}
+%     \cs{char_show:n} \Arg{intexpr}
+%   \end{syntax}
+%   Shows information about the character, given either as an explicit
+%   character token, as a one-character control sequence, or as its
+%   character code \meta{intexpr}.
+% \end{function}
+%
+% \subsection{\pkg{l3skip}}
+%
+% \begin{function}[EXP]{\skip_abs:n}
+%   \begin{syntax}
+%     \cs{skip_abs:n} \Arg{skipexpr}
+%   \end{syntax}
+%   Converts each component (main, shrink, stretch) of the
+%   \meta{skipexpr} to its absolute value, leaving the result in the
+%   input stream as an \meta{skip denotation}.
+% \end{function}
+%
+% \begin{function}[EXP,pTF]
+%   {
+%     \skip_compare_main:nNn,
+%     \skip_compare_stretch:nNn,
+%     \skip_compare_shrink:nNn,
+%   }
+%   \begin{syntax}
+%     \cs{skip_compare_main_p:nNn} \Arg{skipexpr_1} \meta{relation} \Arg{skipexpr_2} \\
+%     \cs{skip_compare_main:nNnTF}
+%     ~~\Arg{skipexpr_1} \meta{relation} \Arg{skipexpr_2}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{skip expressions} as
+%   described for \cs{skip_eval:n}. The appropriate components (main,
+%   stretch or shrink) of the two results are then compared using the
+%   \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                 & |=| \\
+%       Greater than          & |>| \\
+%       Less than             & |<| \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]
+%   {\skip_compare_main:n, \skip_compare_stretch:n, \skip_compare_shrink:n}
+%   \begin{syntax}
+%     \cs{skip_compare_main_p:n} \{ \meta{skipexpr1} \meta{relation} \meta{skipexpr2} \} \\
+%     \cs{skip_compare_main:nTF}
+%     ~~\{ \meta{skipexpr1} \meta{relation} \meta{skipexpr2} \}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{skip expressions} as
+%   described for \cs{skip_eval:n}. The appropriate components (main,
+%   stretch or shrink) of the two results are then compared using the
+%   \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                    & |=| or |==| \\
+%       Greater than or equal to & |>=|        \\
+%       Greater than             & |>|         \\
+%       Less than or equal to    & |<=|        \\
+%       Less than                & |<|         \\
+%       Not equal                & |!=|        \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]{\skip_compare:nNn}
+%   \begin{syntax}
+%     \cs{skip_compare_p:nNn} \Arg{skipexpr_1} \meta{relation} \Arg{skipexpr_2} \\
+%     \cs{skip_compare:nNnTF}
+%     ~~\Arg{skipexpr_1} \meta{relation} \Arg{skipexpr_2}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{skip expressions}
+%   as described for \cs{skip_eval:n}. The two results are then
+%   compared using the \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                 & |=| \\
+%       Greater than          & |>| \\
+%       Less than             & |<| \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]{\skip_compare:n}
+%   \begin{syntax}
+%     \cs{skip_compare_p:n} \{ \meta{skipexpr1} \meta{relation} \meta{skipexpr2} \} \\
+%     \cs{skip_compare:nTF}
+%     ~~\{ \meta{skipexpr1} \meta{relation} \meta{skipexpr2} \}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{skip expressions}
+%   as described for \cs{skip_eval:n}. The two results are then
+%   compared using the \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                    & |=| or |==| \\
+%       Greater than or equal to & |>=|        \\
+%       Greater than             & |>|         \\
+%       Less than or equal to    & |<=|        \\
+%       Less than                & |<|         \\
+%       Not equal                & |!=|        \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP]{\muskip_abs:n}
+%   \begin{syntax}
+%     \cs{muskip_abs:n} \Arg{muexpr}
+%   \end{syntax}
+%   Converts each component (main, shrink, stretch) of the
+%   \meta{muexpr} to its absolute value, leaving the result in the
+%   input stream as an \meta{muskip denotation}.
+% \end{function}
+%
+% \begin{function}[EXP,pTF]
+%   {
+%     \muskip_compare_main:nNn,
+%     \muskip_compare_stretch:nNn,
+%     \muskip_compare_shrink:nNn,
+%   }
+%   \begin{syntax}
+%     \cs{muskip_compare_main_p:nNn} \Arg{muexpr_1} \meta{relation} \Arg{muexpr_2} \\
+%     \cs{muskip_compare_main:nNnTF}
+%     ~~\Arg{muexpr_1} \meta{relation} \Arg{muexpr_2}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{muskip expressions} as
+%   described for \cs{muskip_eval:n}. The appropriate components (main,
+%   stretch or shrink) of the two results are then compared using the
+%   \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                 & |=| \\
+%       Greater than          & |>| \\
+%       Less than             & |<| \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]
+%   {\muskip_compare_main:n, \muskip_compare_stretch:n, \muskip_compare_shrink:n}
+%   \begin{syntax}
+%     \cs{muskip_compare_main_p:n} \{ \meta{muexpr1} \meta{relation} \meta{muexpr2} \} \\
+%     \cs{muskip_compare_main:nTF}
+%     ~~\{ \meta{muexpr1} \meta{relation} \meta{muexpr2} \}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{muskip expressions} as
+%   described for \cs{muskip_eval:n}. The appropriate components (main,
+%   stretch or shrink) of the two results are then compared using the
+%   \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                    & |=| or |==| \\
+%       Greater than or equal to & |>=|        \\
+%       Greater than             & |>|         \\
+%       Less than or equal to    & |<=|        \\
+%       Less than                & |<|         \\
+%       Not equal                & |!=|        \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]{\muskip_compare:nNn}
+%   \begin{syntax}
+%     \cs{muskip_compare_p:nNn} \Arg{muexpr_1} \meta{relation} \Arg{muexpr_2} \\
+%     \cs{muskip_compare:nNnTF}
+%     ~~\Arg{muexpr_1} \meta{relation} \Arg{muexpr_2}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{muskip expressions}
+%   as described for \cs{muskip_eval:n}. The two results are then
+%   compared using the \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                 & |=| \\
+%       Greater than          & |>| \\
+%       Less than             & |<| \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \begin{function}[EXP,pTF]{\muskip_compare:n}
+%   \begin{syntax}
+%     \cs{muskip_compare_p:n} \{ \meta{muexpr1} \meta{relation} \meta{muexpr2} \} \\
+%     \cs{muskip_compare:nTF}
+%     ~~\{ \meta{muexpr1} \meta{relation} \meta{muexpr2} \}
+%     ~~\Arg{true code} \Arg{false code}
+%   \end{syntax}
+%   This function first evaluates each of the \meta{muskip expressions}
+%   as described for \cs{muskip_eval:n}. The two results are then
+%   compared using the \meta{relation}:
+%   \begin{center}
+%     \begin{tabular}{ll}
+%       Equal                    & |=| or |==| \\
+%       Greater than or equal to & |>=|        \\
+%       Greater than             & |>|         \\
+%       Less than or equal to    & |<=|        \\
+%       Less than                & |<|         \\
+%       Not equal                & |!=|        \\
+%     \end{tabular}
+%   \end{center}
+% \end{function}
+%
+% \subsection{Replace tokens by others in a token list}
+%
+% Perhaps the functions below should be renamed to
+% \cs{prg_new_replace_function:nn}, \emph{etc.}
+%
+% \begin{function}{\tl_new_replace:nn, \tl_set_replace:nn, \tl_gset_replace:nn}
+%   \begin{syntax}
+%     \cs{tl_new_replace:nn} \Arg{name} \\
+%     ~~|{| \\
+%     ~~~~\Arg{from_1} \Arg{to_1} \\
+%     ~~~~\Arg{from_2} \Arg{to_2} \\
+%     ~~~~\ldots \\
+%     ~~~~\Arg{from$\sb{n}$} \Arg{to$\sb{n}$} \\
+%     ~~|}|
+%   \end{syntax}
+%   Defines an expandable function
+%   \begin{quote}
+%     |\|\meta{name}_replace:n \Arg{tokens}
+%   \end{quote}
+%   which replaces \meta{from_1} by \meta{to_1}, \meta{from_2} by
+%   \meta{to_2}, \emph{etc.} in \meta{tokens}, and leaves the result in
+%   the input stream.  This function does the replacements in the same
+%   order as the code
+%   \begin{quote}
+%     \cs{tl_replace_all:Nnn} \meta{tl~var} \Arg{from_1} \Arg{to_1} \\
+%     \cs{tl_replace_all:Nnn} \meta{tl~var} \Arg{from_2} \Arg{to_2} \\
+%     \ldots \\
+%     \cs{tl_replace_all:Nnn} \meta{tl~var} \Arg{from$\sb{n}$} \Arg{to$\sb{n}$}
+%   \end{quote}
+%   but operates on \meta{tokens} expandably without requiring those
+%   tokens to be stored into a \meta{tl~var}, at the cost of being
+%   slower.
+% \end{function}
+%
+% \subsection{Miscellaneous proposals}
+%
+% [Old thoughts; I'm not sorting those, so we may have already added
+% some of the functions mentioned here.]
+%
+% Change the first argument of the conditional-defining commands to be
+% of \texttt{n}-type, such that
+% \begin{quote}
+%   \cs{prg_new_conditional:npnn} |{ cs_if_exist:N } #1 { TF }| \Arg{code}
+% \end{quote}
+% defines \cs{cs_if_exist:NTF}.
+%
+% Introduce \cs{prg_new_conditionals:Npn} which defines all $4$
+% conditionals (\texttt{TF}, \texttt{T}, \texttt{F}, and \texttt{p}),
+% and \cs{prg_new_protected_conditionals:Npn}, which defines the first
+% $3$ only (since predicates can't be protected).  With the proposal
+% above, the \texttt{N} argument would be \texttt{n}, but the two
+% proposals are orthogonal.
+%
+% Check that packages are loaded at $\tn{currentgrouplevel}=0$, for
+% example by adding
+% \begin{verbatim}
+%   \int_compare:nNnF \tex_currentgrouplevel:D = 0
+%     {
+%       \__kernel_msg_error:nnnnnn
+%         { kernel } { package-in-group } {#1} {#2} {#3} {#4}
+%       \tex_endinput:D
+%     }
+% \end{verbatim}
+% to the definition of \cs{ProvidesExplPackage} and
+% \cs{ProvidesExplClass}.  Well, really, this \enquote{error} should be
+% \enquote{critical} (which includes the \tn{endinput}), but since for
+% some reason we don't provide a kernel critical error, let it be.
+%
+% Separate |\bool_| functions into a separate \pkg{l3bool} file?
+%
+% We could add
+% \begin{itemize}
+%   \item \cs{tl_if_N_type:nTF} (similar to \cs{tl_if_single_token:nTF})
+%   \item \cs{tl_item:NnF}, \cs{tl_item:cnF}, \cs{tl_item:nnF}, where
+%     the last argument is used when the token list doesn't have such an
+%     item;
+%   \item \cs{bool_if_eq:nnTF}, \cs{clist_if_eq:NNTF},
+%     \cs{seq_if_eq:NNTF} (but the clist one was deprecated some time
+%     back: look at the reasons).
+%   \item \cs{seq_item:NnF}, \cs{seq_item:cnF};
+%   \item \cs{seq_head:N}, \cs{seq_head:NF};
+%   \item \cs{seq_get_head:NN};
+%   \item \cs{seq_get_left:NN}, \cs{seq_get_left:NNTF};
+%   \item \cs{seq_get_right:NN}, \cs{seq_get_right:NNTF};
+%   \item \cs{seq_get_item:NnN}, \cs{seq_get_item:NnNTF};
+%   \item \cs{seq_replace_all:Nnn} \meta{seq} \Arg{old item} \Arg{new
+%       item} (and the \texttt{once} version);
+%   \item \cs{seq_put:Nnn} \meta{seq} \Arg{position} \meta{replacement
+%       item}
+%   \item \cs{seq_insert:Nnn} \meta{seq} \Arg{position} \meta{inserted
+%       item}, makes the sequence one item longer;
+%   \item \cs{seq_pop_item:NnN} \meta{seq} \Arg{position} \meta{tl}
+%     removes the item at \meta{position} from the sequence, and stores
+%     it in the \meta{tl}.
+% \end{itemize}
+% Potentially some of the \pkg{l3seq} function could be added to
+% \pkg{l3clist} too.
+%
+% For \pkg{l3prop},
+% \begin{itemize}
+%   \item \cs{prop_value:Nn}, \cs{prop_value:NnF}
+%   \item \cs{prop_get_value:NnN}, \cs{prop_get_value:NnNTF}.
+% \end{itemize}
+%
+% Add \texttt{const} for all datatypes:
+% \begin{itemize}
+%   \item \cs{hbox_const:Nn}, \cs{vbox_const:Nn}
+%   \item \cs{hcoffin_const:Nn}, \cs{vcoffin_const:Nn}
+%   \item \cs{ior_const:Nn}, \cs{iow_const:Nn} probably bad since we
+%     have very few streams available.
+% \end{itemize}
+%
+% Add \texttt{concat} or similar for all datatypes where it might
+% potentially make sense:
+% \begin{itemize}
+%   \item \cs{hbox_concat:NNN}, \cs{vbox_concat:NNN}
+%   \item \cs{hcoffin_concat:NNN}, \cs{vcoffin_concat:NNN}
+%   \item \cs{prop_join:NNN} (or concat? but here duplicate keys must be
+%     resolved)
+%   \item \cs{file_concat:nnn}.
+% \end{itemize}
+%
+% Add \cs{DeclareDocumentShortHand} (or simply \cs{DeclareShortHand}) as
+% a synonym for \cs{tl_set:Nn}.  Perhaps \texttt{Shorthand} rather than
+% \texttt{ShortHand}?
+%
+% Add \cs{fp_case:nnTF}, perhaps also \cs{skip_case:nnTF} and
+% \cs{muskip_case:nnTF}?
+%
+% \subsection{Possible addition to \pkg{l3tl} or \pkg{l3str}}
+%
+% \begin{function}[EXP, pTF]{\tl_if_rescan_safe:n}
+%   \begin{syntax}
+%     \cs{tl_if_rescan_safe:n} \Arg{token list}
+%   \end{syntax}
+%   Tests if the operation \cs{tl_rescan:nn} |{ }| \Arg{token list} can
+%   be done safely, in other words if rescanning the \meta{token list}
+%   with the current category code r\'egime would result in a balanced
+%   token list without error.  This conditional returns \texttt{false}
+%   if the rescanned token list contains an invalid character, or an
+%   unequal number of begin or end-group characters.
+%   \begin{texnote}
+%     This function is not implemented yet!
+%   \end{texnote}
+% \end{function}
+%
+% This does not require doing a full tokenization (we cannot anyways,
+% since \TeX{} doesn't let us produce arbitrary characters).  Method:
+% \begin{itemize}
+%   \item Turn the token list to a string with category other spaces
+%     (with \cs{__kernel_str_to_other:n} from the \pkg{l3str} bundle).
+%   \item Convert each character to its value to get a clist of
+%     integers.
+%   \item In the same pass, detect characters with character code
+%     \tn{newlinechar} and split the clist at each \tn{newlinechar},
+%     \emph{i.e.} split the file that is written into its lines.
+%   \item Go through each line, detecting and replacing the double-caret
+%     notation.
+%   \item Read each line one character at a time.  When encountering a
+%     catcode $0$ character, read and discard one character.  When
+%     encountering a catcode $1$ character, increase the brace counter
+%     (which starts at $0$).  When encountering a catcode $2$ character,
+%     decrease the brace counter and check that it is non-negative,
+%     otherwise bail out.  Catcode $5$ and catcode $14$ characters cause
+%     \TeX{} to ignore the rest of the line.  Catcode $15$ makes us bail
+%     out.  Everything else is ignored (because it does not affect the
+%     rescannability of the token list).
+% \end{itemize}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3kernel-extras} implementation}
+%
+%    \begin{macrocode}
+%<*initex|package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*package>
+\ProvidesExplPackage{l3kernel-extras}{2018-04-30}{}
+  {L3 Experimental additions to l3kernel}
+%</package>
+%    \end{macrocode}
+%
+% \subsection{Expandable warnings}
+%
+% We already know how to get expandable errors (see
+% \cs{__msg_expandable_error:n}).  It turns out that \eTeX{}'s
+% \cs{tracingnesting} can be abused to produce custom warnings
+% expandably.
+%
+%    \begin{macrocode}
+\int_gset:Nn \tex_tracingnesting:D { 2 }
+%    \end{macrocode}
+%
+% \begin{macro}[EXP]{\__msg_expandable_warning:n}
+% \begin{macro}[aux, EXP]
+%   {\__msg_expandable_warning_aux:nn, \__msg_expandable_warning_loop:n}
+%   The idea is to use the warnings that \eTeX{} produces when a
+%   conditional is ended in a different file than where it was started.
+%   Build a file using \cs{tex_scantokens:D}, with essentially
+%   \tn{inputlineno} empty lines, followed by a line with the string
+%   \texttt{LaTeX3 warning:} followed by the warning message.  This
+%   \cs{tex_scantokens:D} is expanded before the previous \cs{if:w},
+%   hence the \cs{if:w} starts within the new file, but does not have a
+%   line number (since it was not input in that file): those properties
+%   make the \eTeX{} warning shorter.
+%
+%   We need to get rid of the contents of the file.  A simple
+%   \cs{use_none_delimit_by_q_recursion_stop:w} would fail since there
+%   is an end-of-file marker at the end of the \cs{tex_scantokens:D}
+%   file.  Instead, we read the contents as for a token list mapping,
+%   with an additional \cs{exp_not:N}, inserted there to prevent the
+%   end-of-file marker from making \cs{tex_scantokens:D} choke.  The
+%   warning is in fact produced when \cs{exp_not:N} goes beyond the
+%   end-of-file marker (hence acting on the following quark).
+%    \begin{macrocode}
+\cs_new:Npn \__msg_expandable_warning:n
+  {
+    \exp_args:Nf \__msg_expandable_warning_aux:nn
+      {
+        \exp_args:Nno \prg_replicate:nn
+          { \int_max:nn { 0 } { \tex_inputlineno:D - 2 } }
+          { \iow_newline: }
+      }
+  }
+\cs_new:Npn \__msg_expandable_warning_aux:nn #1#2
+  {
+    \exp_after:wN \if:w
+    \exp_after:wN ?
+    \exp_after:wN ?
+    \exp_after:wN \__msg_expandable_warning_loop:n
+    \tex_scantokens:D { #1 LaTeX3 ~ warning: ~ #2 }
+      \q_recursion_tail \q_recursion_stop
+    \fi:
+  }
+\cs_new:Npn \__msg_expandable_warning_loop:n #1
+  {
+    \quark_if_recursion_tail_stop:n {#1}
+    \exp_after:wN \__msg_expandable_warning_loop:n \exp_not:N
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}
+%   {
+%     \__kernel_msg_expandable_warning:nnnnnn,
+%     \__kernel_msg_expandable_warning:nnnnn,
+%     \__kernel_msg_expandable_warning:nnnn,
+%     \__kernel_msg_expandable_warning:nnn,
+%     \__kernel_msg_expandable_warning:nn
+%   }
+%   The command built from the csname
+%   |\c__msg_text_prefix_tl LaTeX / #1 / #2|
+%   takes four arguments and builds the warning text, which is fed to
+%   \cs{__msg_expandable_warning:n}.
+%    \begin{macrocode}
+\cs_new:Npn \__kernel_msg_expandable_warning:nnnnnn #1#2#3#4#5#6
+  {
+    \exp_args:Nf \__msg_expandable_warning:n
+      {
+        \exp_args:NNc \exp_after:wN \exp_stop_f:
+          { \c__msg_text_prefix_tl LaTeX / #1 / #2 }
+          {#3} {#4} {#5} {#6}
+      }
+  }
+\cs_new:Npn \__kernel_msg_expandable_warning:nnnnn #1#2#3#4#5
+  {
+    \__kernel_msg_expandable_warning:nnnnnn
+      {#1} {#2} {#3} {#4} {#5} { }
+  }
+\cs_new:Npn \__kernel_msg_expandable_warning:nnnn #1#2#3#4
+  {
+    \__kernel_msg_expandable_warning:nnnnnn
+      {#1} {#2} {#3} {#4} { } { }
+  }
+\cs_new:Npn \__kernel_msg_expandable_warning:nnn #1#2#3
+  {
+    \__kernel_msg_expandable_warning:nnnnnn
+      {#1} {#2} {#3} { } { } { }
+  }
+\cs_new:Npn \__kernel_msg_expandable_warning:nn #1#2
+  {
+    \__kernel_msg_expandable_warning:nnnnnn
+      {#1} {#2} { } { } { } { }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \LuaTeX{}'s \tn{scantokens} is broken (it stops reading after a single
+% line), so the approach above fails.  However, using \Lua{} code we can
+% get a better looking warning, so let's.  We could add some
+% \cs{iow_newline:} within the argument of \cs{tex_luaescapestring:D}
+% if wanted.
+%    \begin{macrocode}
+\sys_if_engine_luatex:T
+  {
+    \cs_gset:Npn \__msg_expandable_warning:n #1
+      {
+        \tex_directlua:D
+          {
+            texio.write_nl
+              ( "
+                \tex_luaescapestring:D
+                  {
+                    l. \int_use:N \tex_inputlineno:D \c_space_tl
+                    LaTeX3~ warning:~ \tl_to_str:n {#1}
+                  }
+              " )
+          }
+      }
+  }
+%    \end{macrocode}
+% Actually, let's also improve expandable errors for \LuaTeX{}.  We
+% could even include an error text (|tex.error| can take a second
+% argument, which is a table of strings, for the help text).
+%    \begin{macrocode}
+\sys_if_engine_luatex:T
+  {
+    \cs_gset:Npx \__msg_expandable_error:n #1
+      {
+        \exp_not:N \tex_directlua:D
+          \exp_not:N \use:n
+            {
+              {
+                tex.error
+                  ( "
+                    \exp_not:N \tex_luaescapestring:D
+                      { \exp_not:N \tl_to_str:n { LaTeX3~error:~#1} }
+                  " )
+                \prg_replicate:nn { 50 } { ~ }
+              }
+            }
+      }
+    \cs_undefine:N \__msg_expandable_error:w
+  }
+%    \end{macrocode}
+%
+% \subsection{\pkg{l3basics}}
+%
+% \begin{macro}{\group_insert_after:n, \group_insert_after:x}
+% \begin{macro}[EXP]{\__group_insert_after:NNn}
+%   The material to insert at the end of a given group is stored in a
+%   global variable, whose name is built from the
+%   \tn{currentgrouplevel}.  We build the variable's name once, then
+%   feed it to an auxiliary.  First make sure the variable exists by
+%   defining it if needed.  If it is empty, this is the first time
+%   \cs{group_insert_after:n} is called in this group.  Use the \TeX{}
+%   primitive \tn{aftergroup} to insert that token list, which is
+%   initialized to clear itself (emptiness is used as a flag).  Finally
+%   append the new material to the token list being inserted.
+%    \begin{macrocode}
+\cs_new_protected:Npn \group_insert_after:n
+  {
+    \exp_args:NNc \__group_insert_after:NNn \tl_gput_right:Nn
+      { g_group_after_ \int_use:N \tex_currentgrouplevel:D _tl }
+  }
+\cs_new_protected:Npn \group_insert_after:x
+  {
+    \exp_args:NNc \__group_insert_after:NNn \tl_gput_right:Nx
+      { g_group_after_ \int_use:N \tex_currentgrouplevel:D _tl }
+  }
+\cs_new_protected:Npn \__group_insert_after:NNn #1#2#3
+  {
+    \tl_if_exist:NF #2 { \tl_new:N #2 }
+    \tl_if_empty:NT #2
+      {
+        \tex_aftergroup:D #2
+        \tl_gset:Nn #2 { \tl_gclear:N #2 }
+      }
+    #1 #2 {#3}
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\group_insert_after:N, \group_insert_after:c}
+%   We cannot define \cs{group_insert_after:N} directly as the \TeX{}
+%   primitive \tn{aftergroup}, because the order would not be preserved
+%   between tokens inserted with the \texttt{n}-type variant and the
+%   \texttt{N}-type variant.  Instead, we simply copy the definition of
+%   the \texttt{n}-type function.
+%    \begin{macrocode}
+\cs_gset_eq:NN \group_insert_after:N \group_insert_after:n
+\cs_generate_variant:Nn \group_insert_after:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\group_after_set:NNn}
+%   A bad name that allows local variables to \enquote{escape} out of
+%   the current group.  (Without being global.)  Set the variable
+%   locally for use inside the group, then after the group place the
+%   assignment and the value of the variable.  We don't use |#3| as a
+%   value, because this may involve functions or variables which are
+%   only defined in the group.
+%    \begin{macrocode}
+\cs_new_protected:Npn \group_after_set:NNn #1#2#3
+  {
+    #1 #2 {#3}
+    \group_insert_after:x { \exp_not:n { #1 #2 } { \exp_not:V #2 } }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{\pkg{l3int}}
+%
+% \begin{macro}{\int_mul_truncate:nn}
+% \begin{macro}{\__int_dim_eval:w}
+%   Analogous to and more useful than \cs{int_div_truncate:nn}.  Uses
+%   the integer representation of lengths in \texttt{sp} for the
+%   calculation.  Since we cannot have fractional amounts of an
+%   \texttt{sp}, we must define |#1| to be the integer expression to be
+%   multiplied, and |#2| to be the (real) scaling factor.
+%    \begin{macrocode}
+\cs_new:Npn \int_mul_truncate:nn #1 #2
+  {
+    \int_value:w
+      \__int_dim_eval:w
+        #2 \__int_dim_eval:w \int_eval:n {#1} sp \scan_stop:
+        \scan_stop:
+  }
+\cs_new_eq:NN \__int_dim_eval:w \tex_dimexpr:D
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{\pkg{l3token}}
+%
+% \begin{macro}{\peek_after:nw, \peek_gafter:nw}
+%   Store the argument in \cs{__peek_true:w}, then use
+%   \cs{peek_after:Nw} or \cs{peek_gafter:Nw}.
+%    \begin{macrocode}
+\cs_new_protected:Npn \peek_after:nw #1
+  {
+    \cs_set:Npx \__peek_true:w { \exp_not:n {#1} }
+    \peek_after:Nw \__peek_true:w
+  }
+\cs_new_protected:Npn \peek_gafter:nw #1
+  {
+    \cs_set:Npx \__peek_true:w { \exp_not:n {#1} }
+    \peek_gafter:Nw \__peek_true:w
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\char_category_name:N, \char_category_name:n}
+%   Use \cs{int_case:nn} to expand to the correct character category
+%   name.
+%    \begin{macrocode}
+\cs_new:Npn \char_category_name:N #1
+  { \char_category_name:n { `#1 } }
+\cs_new:Npn \char_category_name:n #1
+  {
+    \int_case:nn { \char_value_catcode:n {#1} }
+      {
+        {  0 } { escape }
+        {  1 } { group_begin }
+        {  2 } { group_end }
+        {  3 } { math_toggle }
+        {  4 } { alignment }
+        {  5 } { end_line }
+        {  6 } { parameter }
+        {  7 } { math_superscript }
+        {  8 } { math_subscript }
+        {  9 } { ignore }
+        { 10 } { space }
+        { 11 } { letter }
+        { 12 } { other }
+        { 13 } { active }
+        { 14 } { comment }
+        { 15 } { invalid }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\char_show:N, \char_show:n}
+% \begin{macro}[aux]{\__char_show:N}
+% \begin{macro}[aux, EXP]
+%   {\__char_show_code:n, \__char_show_p:n, \__char_if_in_font:nNTF}
+%    \begin{macrocode}
+\int_new:N \l__char_code_int
+\tl_new:N \l__char_lowercase_tl
+\tl_new:N \l__char_uppercase_tl
+\tl_new:N \l__char_internal_tl
+\cs_new_protected:Npn \char_show:N #1 { \char_show:n { `#1 } }
+\cs_new_protected:Npn \char_show:n #1
+  {
+    \int_set:Nn \l__char_code_int {#1}
+    \exp_after:wN \exp_after:wN \exp_after:wN \__char_show:N 
+      \char_generate:nn { \l__char_code_int } { 12 }
+  }
+\cs_new_protected:Npn \__char_show:N #1
+  {
+    \group_begin:
+      \cs_set_eq:NN \ \c_space_tl
+      \cs_set:Npn \\ { \iow_newline: > ~ }
+      \tex_lowercase:D { \tl_set:Nn \l__char_lowercase_tl {#1} }
+      \tex_uppercase:D { \tl_set:Nn \l__char_uppercase_tl {#1} }
+      \tl_set:Nx \l__char_internal_tl
+        {
+          \\ category \
+          \char_category_name:n { \l__char_code_int } \
+          ( \char_value_catcode:n { \l__char_code_int } )
+        }
+      \tl_put_right:Nx \l__char_internal_tl
+        {
+          \\ lowercase \
+          \l__char_lowercase_tl \
+          ( \char_value_lccode:n { \l__char_code_int } )
+        }
+      \tl_put_right:Nx \l__char_internal_tl
+        {
+          \\ uppercase \
+          \l__char_uppercase_tl \
+          ( \char_value_uccode:n { \l__char_code_int } )
+        }
+      \tl_put_right:Nx \l__char_internal_tl
+        {
+          \\ space ~ factor \
+          \char_value_sfcode:n { \l__char_code_int }
+        }
+      \tl_put_right:Nx \l__char_internal_tl
+        {
+          \\ math ~ code \
+          " \int_to_Hex:n { \tex_mathcode:D \l__char_code_int }
+          \int_compare:nT { \tex_mathcode:D \l__char_code_int = "8000 }
+            { ~ ( math ~ active ) }
+        }
+      \tl_put_right:Nx \l__char_internal_tl
+        {
+          \int_compare:nTF { \tex_delcode:D \l__char_code_int < 0 }
+            { \\ not ~ a ~ delimiter }
+            {
+              \\ delimiter ~ code \
+              " \int_to_Hex:n { \tex_delcode:D \l__char_code_int }
+            }
+        }
+      \__char_if_in_font:nNTF \l__char_code_int \tex_font:D
+        { \__char_show_in_font: }
+        {
+          \tl_put_right:Nx \l__char_internal_tl
+            { \\ not ~ in ~ current ~ font }
+        }
+      \msg_show:nnxxxx { LaTeX/kernel } { show-char }
+        { \tl_to_str:n {#1} } { \tl_to_str:N \l__char_internal_tl } { } { }
+    \group_end:
+  }
+\cs_new_protected:Npn \__char_show_in_font:
+  {
+    \tl_put_right:Nx \l__char_internal_tl
+      {
+        \\ size ~ in ~ current ~ font:
+        \iow_newline: \ \ \ \
+        ht~\tex_the:D \tex_fontcharht:D \tex_font:D \l__char_code_int , \
+        wd~\tex_the:D \tex_fontcharwd:D \tex_font:D \l__char_code_int , \
+        dp~\tex_the:D \tex_fontchardp:D \tex_font:D \l__char_code_int , \
+        ic~\tex_the:D \tex_fontcharic:D \tex_font:D \l__char_code_int
+      }
+    \int_compare:nF { \__char_show_code:n { ef } = 0 }
+      {
+        \tl_put_right:Nx \l__char_internal_tl
+          {
+            \\ expansion ~ factor \
+            \__char_show_code:n { ef }
+          }
+      }
+    \bool_lazy_and:nnF
+      { \__char_show_p:n { lp } }
+      { \__char_show_p:n { rp } }
+      {
+        \tl_put_right:Nx \l__char_internal_tl
+          {
+            \\ protrusion: \
+            left ~ margin ~ \__char_show_code:n { lp } , \
+            right ~ margin ~ \__char_show_code:n { rp }
+          }
+      }
+    \bool_lazy_all:nF
+      {
+        { \__char_show_p:n { knbs } }
+        { \__char_show_p:n { stbs } }
+        { \__char_show_p:n { shbs } }
+      }
+      {
+        \tl_put_right:Nx \l__char_internal_tl
+          {
+            \\ bscodes: \
+            \__char_show_code:n { knbs } \
+            plus ~ \__char_show_code:n { stbs } \
+            minus ~ \__char_show_code:n { shbs }
+          }
+      }
+    \bool_lazy_and:nnF
+      { \__char_show_p:n { knbc } }
+      { \__char_show_p:n { knac } }
+      {
+        \tl_put_right:Nx \l__char_internal_tl
+          {
+            \\ knccodes: \
+            before ~ \__char_show_code:n { knbc } , \
+            after ~ \__char_show_code:n { knac }
+          }
+      }
+    \int_compare:nF { \__char_show_code:n { tag } = 0 }
+      {
+        \tl_put_right:Nx \l__char_internal_tl
+          { \\ tagcode ~ \__char_show_code:n { tag } }
+      }
+  }
+\cs_new:Npn \__char_show_p:n #1
+  { \int_compare_p:n { \__char_show_code:n {#1} = 0 } }
+\cs_new:Npn \__char_show_code:n #1
+  {
+    \int_eval:n
+      {
+        \cs_if_exist_use:cF { tex_#1code:D }
+          { \cs_if_exist_use:cF { #1 code } { 0 \use_none:nn } }
+        \tex_font:D \l__char_code_int
+      }
+  }
+\prg_new_conditional:Npnn \__char_if_in_font:nN #1#2 { TF }
+  {
+    \tex_iffontchar:D #2 \int_eval:n {#1} \exp_stop_f:
+      \prg_return_true:
+    \else:
+      \prg_return_false:
+    \fi:
+  }
+\__kernel_msg_new:nnn { kernel } { show-char }
+  {
+    The ~ character ~ '#1' ~ has ~ character ~ code ~
+    \int_eval:n { `#1 } , ~ and ~ properties #2
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Additions to \pkg{l3skip}}
+%
+% \begin{macro}[EXP]{\skip_abs:n}
+% \begin{macro}[EXP,aux]{\skip_abs_aux:wwN}
+%   Evaluate the \meta{skipexpr}, then remove all |-|.  Namely,
+%   \cs{skip_abs_aux:wwN} receives a \meta{skip} followed by some
+%   trailing material.  If the \meta{skip} contains a |-| sign, then
+%   |#3| is \cs{skip_abs_aux:wwN} itself, and that step of expansion
+%   simply removes the |-|, leaving everything else unchanged.  Once
+%   there are no more |-| in the \meta{skip}, |#2| and |#3| become
+%   empty, and |#1| is our result, followed by \cs{use_none:nn}
+%   \cs{scan_stop:} \cs{skip_abs_aux:wwN}. This disappears, and the
+%   overall \meta{skipexpr} is closed by \cs{scan_stop:} inserted by our
+%   auxiliary.
+%    \begin{macrocode}
+\cs_new:Npn \skip_abs:n #1
+  {
+    \skip_use:N \tex_glueexpr:D
+      \exp_last_unbraced:Nf \skip_abs_aux:wwN { \skip_eval:n {#1} }
+      \use_none:nn \scan_stop: \skip_abs_aux:wwN
+      - \scan_stop: { }
+  }
+\cs_new:Npn \skip_abs_aux:wwN #1 - #2 \scan_stop: #3
+  { #3 #1 #2 \scan_stop: #3 }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP,pTF]
+%   {
+%     \skip_compare_main:nNn,
+%     \skip_compare_stretch:nNn,
+%     \skip_compare_shrink:nNn,
+%   }
+% \begin{macro}[EXP, aux]{\skip_compare_component_aux:wwNNN}
+%   Similar to \cs{dim_compare:nNnTF}.  For the main component,
+%   \cs{if_dim:w} automatically casts the \meta{skip} to a
+%   \meta{dimension}.  For the other components, first we evaluate the
+%   glue expressions, then compare the appropriate glue components.
+%   Infinite glues complicate the picture: if one of the operands has a
+%   higher order infinity than the other, replace the negligible glue by
+%   zero.  The use of \cs{tex_glueexpr:D} and \cs{scan_stop:} ensures
+%   that the arguments of \cs{if_dim:w} are entirely found before the
+%   expansion hits \cs{prg_return_true:}.
+%    \begin{macrocode}
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \skip_compare_main:nNn #1#2#3 { p , T , F , TF }
+  {
+    \if_dim:w \tex_glueexpr:D #1 #2 \tex_glueexpr:D #3 \scan_stop:
+      \prg_return_true: \else: \prg_return_false: \fi:
+  }
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \skip_compare_stretch:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \skip_compare_component_aux:wwNNN
+      \skip_use:N \tex_glueexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_glueexpr:D #3 ;
+      #2
+      \tex_gluestretchorder:D
+      \tex_gluestretch:D
+  }
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \skip_compare_shrink:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \skip_compare_component_aux:wwNNN
+      \skip_use:N \tex_glueexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_glueexpr:D #3 ;
+      #2
+      \tex_glueshrinkorder:D
+      \tex_glueshrink:D
+  }
+\cs_new:Npn \skip_compare_component_aux:wwNNN #1;#2;#3#4#5
+  {
+    \if_dim:w
+        \if_int_compare:w #4#1<#4#2
+          \c_zero_dim
+        \else:
+          #5 \tex_glueexpr:D #1 \scan_stop:
+        \fi:
+        #3
+        \if_int_compare:w #4#1>#4#2
+          \c_zero_dim
+        \else:
+          #5 \tex_glueexpr:D #2 \scan_stop:
+        \fi:
+      \prg_return_true:
+    \else:
+      \prg_return_false:
+    \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP,pTF]{\skip_compare:nNn}
+% \begin{macro}[EXP, aux]{\__skip_compare:wwN, \__skip_compare_auxii:wwN}
+%   Goal: compare $a\ \mathtt{plus}\ b\ \mathtt{minus}\ c$ with $a'\
+%   \mathtt{plus}\ b'\ \mathtt{minus}\ c'$.  Those are equal if and only
+%   if $a=a'$, $b=b'$ and $c=c'$.  The first is less than the second if
+%   and only if $a<a'$, $|b|<|b'|$, and $|c'|<|c|$.
+%    \begin{macrocode}
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \skip_compare:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \__skip_compare:wwN
+      \skip_use:N \tex_glueexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_glueexpr:D #3 ;
+      #2
+  }
+\cs_new:Npn \__skip_compare:wwN #1; #2; #3
+  {
+    \if_charcode:w = #3
+      \str_if_eq:nnTF {#1} {#2}
+         { \prg_return_true:}
+         { \prg_return_false: }
+    \else:
+      \if_dim:w \tex_glueexpr:D #1 #3 \tex_glueexpr:D #2 \scan_stop:
+        \exp_after:wN \__skip_compare_auxii:wwN
+          \skip_use:N \tex_glueexpr:D \skip_abs:n {#1} \exp_after:wN ;
+          \skip_use:N \tex_glueexpr:D \skip_abs:n {#2} ;
+          #3
+      \else:
+        \prg_return_false:
+      \fi:
+    \fi:
+  }
+\cs_new:Npn \__skip_compare_auxii:wwN #1;#2;#3
+  {
+    \skip_compare_stretch:nNnTF {#2} #3 {#1}
+      { \prg_return_false: }
+      {
+        \skip_compare_shrink:nNnTF {#1} #3 {#2}
+          { \prg_return_false: }
+          { \prg_return_true: }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\muskip_abs:n}
+%   This relies on the same auxiliary as \cs{skip_abs:n}.  See this
+%   function for an explanation of the code.
+%    \begin{macrocode}
+\cs_new:Npn \muskip_abs:n #1
+  {
+    \muskip_use:N \tex_muexpr:D
+      \exp_last_unbraced:Nf \skip_abs_aux:wwN { \muskip_eval:n {#1} }
+      \use_none:nn \scan_stop: \skip_abs_aux:wwN
+      - \scan_stop: { }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,pTF]
+%   {
+%     \muskip_compare_main:nNn,
+%     \muskip_compare_stretch:nNn,
+%     \muskip_compare_shrink:nNn,
+%   }
+%   Those functions are based on the same auxiliaries as their
+%   \texttt{skip} counterparts, but mu expressions must be converted to
+%   glue using the \eTeX{} primitive \tn{mutoglue}.
+%    \begin{macrocode}
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \muskip_compare_main:nNn #1#2#3 { p , T , F , TF }
+  {
+    \if_dim:w \tex_mutoglue:D \tex_muexpr:D #1
+           #2 \tex_mutoglue:D \tex_muexpr:D #3 \scan_stop:
+      \prg_return_true:
+    \else:
+      \prg_return_false:
+    \fi:
+  }
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \muskip_compare_stretch:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \skip_compare_component_aux:wwNNN
+      \skip_use:N \tex_mutoglue:D \tex_muexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_mutoglue:D #3 ;
+      #2
+      \tex_gluestretchorder:D
+      \tex_gluestretch:D
+  }
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \muskip_compare_shrink:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \skip_compare_component_aux:wwNNN
+      \skip_use:N \tex_mutoglue:D \tex_muexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_mutoglue:D \tex_muexpr:D #3 ;
+      #2
+      \tex_glueshrinkorder:D
+      \tex_glueshrink:D
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,pTF]{\muskip_compare:nNn}
+%   This function uses the same auxiliaries as \cs{skip_compare:nNn},
+%   first converting the mu units to points.
+%    \begin{macrocode}
+%\__kernel_patch_conditional_args:nNNpnn { { (#1) } {#2} { (#3) } }
+\prg_new_conditional:Npnn \muskip_compare:nNn #1#2#3 { p , T , F , TF }
+  {
+    \exp_after:wN \__skip_compare:wwN
+      \skip_use:N \tex_mutoglue:D \tex_glueexpr:D #1 \exp_after:wN ;
+      \skip_use:N \tex_mutoglue:D \tex_glueexpr:D #3 ;
+      #2
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Replace tokens by others in a token list}
+%
+% The reader is highly encouraged to take a look at the implementation
+% of \cs{tl_replace_all:Nnn} and comments therein before this section.
+% One difference is that since the replacement functions we define must
+% fully expand upon \texttt{f}-type expansion, we cannot leave the
+% material that is already converted behind in the input stream.  The
+% process is divided in separate passes for each pair \Arg{from}
+% \Arg{to}, each using one dedicated auxiliary function, with an
+% argument delimited by \meta{from}.
+%
+% \begin{variable}[aux]{\l__tl_replace_int}
+%   Labels the pairs \Arg{from$\sb{i}$} \Arg{to$\sb{i}$} in the second
+%   argument of \cs{tl_new_replace:nn} and related functions.
+%    \begin{macrocode}
+\int_new:N \l__tl_replace_int
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}[aux]{\l__tl_replace_name_tl}
+%   Expands to the name of the current auxiliary (as labelled by
+%   \cs{l__tl_replace_int}) of the replacement function being defined.
+%    \begin{macrocode}
+\tl_new:N \l__tl_replace_name_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}[aux]{\l__tl_replace_code_tl}
+%   The code for the replacement function is built one
+%   \Arg{from$\sb{i}$} \Arg{to$\sb{i}$} pair at a time in this variable.
+%    \begin{macrocode}
+\tl_new:N \l__tl_replace_code_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\tl_new_replace:nn, \tl_set_replace:nn, \tl_gset_replace:nn}
+%   All three public functions are defined in terms of a common
+%   auxiliary.
+%    \begin{macrocode}
+\cs_new_protected:Npn \tl_new_replace:nn
+  { \__tl_replace_set:NNnn \cs_new:cpx \cs_new_eq:cN }
+\cs_new_protected:Npn \tl_set_replace:nn
+  { \__tl_replace_set:NNnn \cs_set:cpx \cs_set_eq:cN }
+\cs_new_protected:Npn \tl_gset_replace:nn
+  { \__tl_replace_set:NNnn \cs_gset:cpx \cs_gset_eq:cN }
+%    \end{macrocode}
+% \end{macro}
+%
+% ^^A todo: this suffers from #151 and #273 like \tl_replace_all:Nnn did
+% \begin{macro}[aux]{\__tl_replace_set:NNnn}
+%   The arguments are two definition functions, the \meta{name}, and a
+%   list of pairs \Arg{from$\sb{i}$} \Arg{to$\sb{i}$}.  The auxiliaries
+%   to the replacement function have the form
+%   \texttt{\char`\\\meta{name}_replace_\meta{int}:nwwn}.  Each step in
+%   the loop over replacement pairs defines one auxiliary, increments
+%   the \meta{int} (which starts at $1$), and adds some code for use in
+%   the main replacement function.  The last auxiliary is defined to
+%   clean up at the end.  Then we use the code collected so far to
+%   define the replacement function: this starts by calling the first
+%   auxiliary, with some trailing markers.  The whole construction is
+%   wrapped within \cs{exp_not:f}, whose \texttt{f}-type expansion is
+%   stopped at the end of the last pass by \cs{__tl_replace_end:nwn},
+%   and of course braces, which ensure that any |&| is hidden from
+%   \TeX{}'s table-making.
+%    \begin{macrocode}
+\cs_new_protected:Npn \__tl_replace_set:NNnn #1#2#3#4
+  {
+    \tl_set:Nx \l__tl_replace_name_tl
+      { #3 _replace_ \exp_not:n { \int_use:N \l__tl_replace_int } :nwwn }
+    \int_set:Nn \l__tl_replace_int { 1 }
+    \tl_clear:N \l__tl_replace_code_tl
+    \__tl_replace_set_loop:Nnn #1
+      #4
+      \q_recursion_tail \q_recursion_tail
+      \q_recursion_stop
+    #2 { \l__tl_replace_name_tl } \__tl_replace_end:nwn
+    \int_set:Nn \l__tl_replace_int { 1 }
+    #1 { #3_replace:n } ##1
+      {
+        \exp_not:N \exp_not:f
+          {
+            \exp_not:c { \l__tl_replace_name_tl } { }
+              \exp_not:N \prg_do_nothing:
+              ##1
+              \exp_not:N \q_nil
+              \exp_not:N \q_mark { }
+              \exp_not:o \l__tl_replace_code_tl
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[aux]{\__tl_replace_set_loop:Nnn}
+%   After checking that neither the \meta{from} nor the \meta{to}
+%   arguments are \cs{q_recursion_tail}, set up the pass which replaces
+%   \meta{from} by \meta{to}.  During a given pass, the tokens which
+%   have already undergone the replacement are stored as the first
+%   argument (\meta{transformed tokens}) of the auxiliary, the second
+%   argument (\meta{delimited tokens}) is delimited by \meta{from} and
+%   starts with \cs{prg_do_nothing:} to avoid losing braces, the third
+%   argument (\meta{remaining tokens}) is the end of the token list, and
+%   the fourth (\meta{action}) is most often empty.  Store the
+%   \meta{delimited tokens} and \meta{to} at the end of the
+%   \meta{transformed tokens}, after expanding once to get rid of
+%   \cs{prg_do_nothing:}, then call the auxiliary again, which looks for
+%   the next occurrence of \meta{from} among the \meta{remaining tokens}
+%   (with \cs{prg_do_nothing:} prepended to avoid losing braces).  The
+%   main replacement function is constructed in such a way that as long
+%   as \meta{from} occurs, the \cs{q_mark} delimiter taken by the
+%   auxiliary is at the end of the true token list, and the
+%   \meta{action} is empty.  At the end, the \meta{from} delimiter is a
+%   trailing delimiter from the main function, and the \meta{action} is
+%   set to do some cleanup and call the auxiliary for the next pass (see
+%   \cs{__tl_replace_cleanup:NNnnNnwn}).
+%    \begin{macrocode}
+\cs_new_protected:Npn \__tl_replace_set_loop:Nnn #1#2#3
+  {
+    \quark_if_recursion_tail_stop:n {#2}
+    \quark_if_recursion_tail_stop_do:nn {#3}
+      {
+        \__kernel_msg_error:nnxx { replace } { odd-groups }
+          { \token_to_str:N \tl_..._replace:nn } { \tl_to_str:n {#2} }
+      }
+    \tl_if_empty:nTF {#2}
+      {
+        \__kernel_msg_error:nnx
+          { kernel } { empty-search-pattern }
+          { \tl_to_str:n {#3} }
+      }
+      {
+        #1 { \l__tl_replace_name_tl } ##1##2 #2 ##3 \q_mark ##4
+          {
+            ##4
+            \exp_not:N \__tl_replace_next:onNn
+              {##2}
+              { \exp_not:n {#3} }
+              \exp_not:c { \l__tl_replace_name_tl }
+              {##1}
+            ##3 \exp_not:N \q_mark {##4}
+          }
+        \int_incr:N \l__tl_replace_int
+        \tl_put_right:Nx \l__tl_replace_code_tl
+          {
+            \exp_not:n {#2}
+            \exp_not:N \q_mark
+            {
+              \exp_not:N \__tl_replace_cleanup:NNnnNnwn
+              \exp_not:c { \l__tl_replace_name_tl }
+            }
+          }
+      }
+    \__tl_replace_set_loop:Nnn #1
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[aux, EXP]{\__tl_replace_next:nnNn}
+%   The arguments are 1.~\meta{delimited tokens}, 2.~\meta{to},
+%   3.~current auxiliary, 4.~\meta{transformed tokens}.  Insert
+%   \cs{prg_do_nothing:} to avoid losing braces.
+%    \begin{macrocode}
+\cs_new:Npn \__tl_replace_next:nnNn #1#2#3#4
+  { #3 { #4 #1 #2 } \prg_do_nothing: }
+\cs_generate_variant:Nn \__tl_replace_next:nnNn { o }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[aux, EXP]{\__tl_replace_cleanup:NNnnNnwn}
+% \begin{macro}[aux, EXP]
+%   {\__tl_replace_cleanup_next:nNn, \__tl_replace_cleanup_next:oNn}
+%   Remove some material from the pass which just ended, then call |#1|,
+%   the auxiliary for the next pass, with an empty \meta{transformed
+%     tokens} and a leading \cs{prg_do_nothing:} to avoid losing braces.
+%   The appropriate trailing tokens are already added by the main
+%   function.
+%    \begin{macrocode}
+\cs_new:Npn \__tl_replace_cleanup:NNnnNnwn #1#2#3#4#5#6#7 \q_mark #8
+  { \__tl_replace_cleanup_next:oNn {#3} #1 {#6} }
+\cs_new:Npn \__tl_replace_cleanup_next:nNn #1#2#3
+  { #2 { } \prg_do_nothing: #3 #1 }
+\cs_generate_variant:Nn \__tl_replace_cleanup_next:nNn { o }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[aux]{\__tl_replace_end:nwn}
+%   Once all the passes have occurred, there is a need to remove the
+%   trailing \cs{q_nil} (there to avoid losing trailing braces), then
+%   expand \cs{prg_do_nothing:} away and stop the current
+%   \texttt{f}-type expansion.
+%    \begin{macrocode}
+\cs_new:Npn \__tl_replace_end:nwn #1 #2 \q_nil \q_mark #3
+  { \exp_after:wN \exp_stop_f: #2 }
+%    \end{macrocode}
+% \end{macro}
+%
+% A message, for use when the second argument of \cs{tl_new_replace:nn}
+% is not of the right form (it could be used for the \cs{int_case:nn}
+% functions, \emph{etc.}).
+%    \begin{macrocode}
+\__kernel_msg_new:nnnn { replace } { odd-groups }
+  { Odd~number~of~brace~groups. }
+  {
+    The~second~argument~of~#1~must~have~the~form\\\\
+    \iow_indent:n
+      {
+        \{ ~ key ~ 1 ~ \} ~ \{ ~ value ~ 1 ~ \} \\
+        ... \\
+        \{ ~ key ~ N ~ \} ~ \{ ~ value ~ N ~ \} \\
+      }
+    \\
+    The~extra~brace~group~'#2'~will~be~ignored.
+  }
+%    \end{macrocode}
+%
+% \subsection{Optimizations for \pkg{l3seq} }
+%
+% The idea here is that most modules could gain a factor of $2$ in
+% speed, but at the price of having obfuscated code.  So those
+% optimizations shall wait until we have a better idea of what are the
+% bottlenecks in a \LaTeX3 format.
+%
+% \begin{macro}{\seq_pop_left:NN, \seq_pop_left:cN}
+% \UnitTested
+% \begin{macro}{\seq_gpop_left:NN, \seq_gpop_left:cN}
+% \UnitTested
+% \begin{macro}[aux]{\seq_pop_left_aux:NNN}
+% \begin{macro}[aux]{\seq_pop_left_aux:NNNn}
+%    \begin{macrocode}
+\cs_gset_protected:Npn \seq_pop_left:NN
+  { \seq_pop_left_aux:NNN \tex_edef:D }
+\cs_gset_protected:Npn \seq_gpop_left:NN
+  { \seq_pop_left_aux:NNN \tex_xdef:D }
+\cs_gset_protected:Npn \seq_pop_left_aux:NNN #1#2#3
+  {
+    \tex_edef:D #3
+      {
+        \if_meaning:w #2 \c_empty_tl
+          \exp_not:N \q_no_value
+        \else:
+          \if_false: { \fi:
+            \exp_after:wN \seq_pop_left_aux:NNNn
+            \exp_after:wN #1
+            \exp_after:wN #2
+            #2
+          }
+        \fi:
+      }
+  }
+\cs_gset:Npn \seq_pop_left_aux:NNNn #1#2 \s__seq \__seq_item:n #3
+  {
+    \exp_not:n {#3} \if_false: { \fi: }
+    #1 #2 { \s__seq
+      \__kernel_exp_not:w \exp_after:wN { \if_false: } } \fi:
+  }
+\cs_generate_variant:Nn \seq_pop_left:NN  { c }
+\cs_generate_variant:Nn \seq_gpop_left:NN { c }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</initex|package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

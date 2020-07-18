@@ -1,0 +1,257 @@
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\RequirePackage{l3draw}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\AUTHOR{Joseph Wright}
+
+\ExplSyntaxOn
+
+\cs_set_protected:Npn \test:n #1
+  {
+    \hbox_set:Nn \l_tmpa_box
+      {
+        \draw_begin:
+        #1
+        \draw_path_use_clear:n { stroke }
+        \draw_end:
+      }
+    \box_show:N \l_tmpa_box
+  }
+
+\START
+
+\TEST { \draw_path_moveto:n }
+  {
+    \test:n
+      { \draw_path_moveto:n { 10pt , 10pt } }
+  }
+
+\TEST { \draw_path_lineto:n }
+  {
+    \test:n
+      { \draw_path_lineto:n { 10pt , 10pt } }
+  }
+
+\TEST { \draw_path_curveto:nnn }
+  {
+    \test:n
+      {
+        \draw_path_curveto:nnn
+          { \draw_point_vec:nn { 0 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 2 } }
+      }
+  }
+
+\TEST { \draw_path_close: }
+  {
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_lineto:n { 1 , 0 }
+        \draw_path_lineto:n { 1 , 1 }
+        \draw_path_lineto:n { 0 , 1 }
+        \draw_path_close:
+      }
+  }
+
+\TEST { \draw_path_curveto:nnn }
+  {
+    \test:n
+      {
+        \draw_path_curveto:nn
+          { \draw_point_vec:nn { 1 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 2 } }
+      }
+  }
+
+\TEST { \draw_path_arc:nnn(n) }
+  {
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { 90 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { 180 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { 220 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { 360 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { -90 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { -180 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { -270 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnn { 0 } { -360 } { 2cm }
+      }
+    \test:n
+      {
+        \draw_path_moveto:n { 0 , 0 }
+        \draw_path_arc:nnnn { 0 } { 90 } { 1cm } { 2cm }
+      }
+  }
+
+\TEST { \draw_path_arc_axes:nnnn }
+  {
+    \test:n
+      {
+        \draw_path_arc_axes:nnnn { 0 } { 90 }
+          { \draw_point_vec:nn { 2 } { 0 } }
+          { \draw_point_vec:nn { 0 } { 2 } }
+      }
+  }
+
+\TEST { \draw_path_ellipse:nnn }
+  {
+    \test:n
+      {
+        \draw_path_ellipse:nnn { 1 , 1 } { 1 , 1 } { -2 , 2 }
+      }
+    \test:n
+      {
+        \draw_path_ellipse:nnn { 1cm , 0cm } { 1.5cm , 0cm } { 0cm , 1cm }
+      }
+  }
+
+\TEST { \draw_path_circle:nn }
+  {
+    \test:n
+      {
+        \draw_path_circle:nn { 1 , 1 } { 3cm }
+      }
+  }
+
+\TEST { \draw_path_rectangle:nn }
+  {
+    \test:n
+      {
+        \draw_path_rectangle:nn
+          { \draw_point_vec:nn { 2 } { 2 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+      }
+    \test:n
+      {
+        \draw_transform_matrix:nnnn { 1 } { 0 } { 1 } { 1 }
+        \draw_path_rectangle:nn
+          { \draw_point_vec:nn { 2 } { 2 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+      }
+    \test:n
+      {
+        \draw_path_corner_arc:nn { 2pt } { 2pt }
+        \draw_path_rectangle:nn
+          { \draw_point_vec:nn { 2 } { 2 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+      }
+    \test:n
+      {
+        \draw_path_rectangle_corners:nn
+          { \draw_point_vec:nn { 2 } { 2 } }
+          { \draw_point_vec:nn { 3 } { 3 } }
+      }
+  }
+
+\TEST { \draw_path_grid:nn }
+  {
+    \test:n
+      {
+        \draw_path_grid:nnnn
+          { 1cm }
+          { 1cm }
+          { 0cm , 0cm }
+          { 5cm , 5cm }
+      }
+    \test:n
+      {
+        \draw_path_grid:nnnn
+          { 1cm }
+          { 1cm }
+          { 5cm , 5cm }
+          { 0cm , 0cm }
+      }
+    \test:n
+      {
+        \draw_path_grid:nnnn
+          { -1cm }
+          { -1cm }
+          { 0cm , 0cm }
+          { 5cm , 5cm }
+      }
+    \test:n
+      {
+        \draw_path_grid:nnnn
+          { 1cm }
+          { 2cm }
+          { 0cm , 0cm }
+          { 5cm , 5cm }
+      }
+  }
+
+\TEST { \draw_path_canvas_moveto:n }
+  {
+    \test:n
+      {
+        \draw_path_canvas_moveto:n { 10pt , 10pt }
+        \draw_transform_matrix:nnnn { 2 } { 1 } { 0 } { 1 }
+        \draw_transform_shift:n { 10 , 10 }
+        \draw_path_canvas_moveto:n { 10pt , 10pt }
+      }
+  }
+
+\TEST { \draw_path_canvas_lineto:n }
+  {
+    \test:n
+      {
+        \draw_path_canvas_lineto:n { 10pt , 10pt }
+        \draw_transform_matrix:nnnn { 2 } { 1 } { 0 } { 1 }
+        \draw_transform_shift:n { 10 , 10 }
+        \draw_path_canvas_lineto:n { 10pt , 10pt }
+      }
+  }
+
+\TEST { \draw_path_canvas_curveto:nnn }
+  {
+    \test:n
+      {
+        \draw_path_canvas_curveto:nnn
+          { \draw_point_vec:nn { 0 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 2 } }
+        \draw_transform_matrix:nnnn { 2 } { 1 } { 0 } { 1 }
+        \draw_transform_shift:n { 10 , 10 }
+        \draw_path_canvas_curveto:nnn
+          { \draw_point_vec:nn { 0 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 1 } }
+          { \draw_point_vec:nn { 1 } { 2 } }
+      }
+  }
+
+\END

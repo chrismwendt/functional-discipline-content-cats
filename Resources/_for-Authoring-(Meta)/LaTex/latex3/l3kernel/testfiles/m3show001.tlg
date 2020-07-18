@@ -1,0 +1,175 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson, Bruno Le Floch
+============================================================
+TEST 1: INTEGER
+============================================================
+> \l_tmpa_int=1.
+<recently read> }
+l. ...  }
+> 2+3=5.
+<recently read> }
+l. ...  }
+> \l_tmpa_int *\l_tmpa_int =1.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: DIMENSION
+============================================================
+> \l_tmpa_dim=1.0pt.
+<recently read> }
+l. ...  }
+> 2pt+3pt=5.0pt.
+<recently read> }
+l. ...  }
+> 2.3\l_tmpa_dim =2.3pt.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 3: SKIP
+============================================================
+> \l_tmpa_skip=1.0pt plus 2.0pt minus 3.0pt.
+<recently read> }
+l. ...  }
+> 2ptplus3pt--2ptminus4pt=4.0pt plus 3.0pt minus -4.0pt.
+<recently read> }
+l. ...  }
+> 3.4\l_tmpa_skip =3.4pt.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 4: MUSKIP
+============================================================
+> \l_tmpa_muskip=1.0mu plus 2.0mu minus 3.0mu.
+<recently read> }
+l. ...  }
+> 2muplus3mu--2muminus4mu=4.0mu plus 3.0mu minus -4.0mu.
+<recently read> }
+l. ...  }
+> 3.4\l_tmpa_muskip =3.4mu.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 5: TL
+============================================================
+> \l_tmpa_tl=tokens.
+<recently read> }
+l. ...  }
+> tokens.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 6: SEQ
+============================================================
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {item2}
+>  {item1}.
+<recently read> }
+l. ...  }
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {item2}
+>  {item1}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 7: CLIST
+============================================================
+Defining \l_my_very_very_very_very_very_very_long_clist on line ...
+The comma list \l_my_very_very_very_very_very_very_long_clist contains the
+items (without outer braces):
+>  {item2}
+>  {item1}.
+<recently read> }
+l. ...  }
+The comma list \l_my_very_very_very_very_very_very_long_clist contains the
+items (without outer braces):
+>  {item2}
+>  {item1}.
+<recently read> }
+l. ...  }
+The comma list contains the items (without outer braces):
+>  {1}
+>  {2}
+>  {}
+>  {3}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 8: PROP
+============================================================
+The property list \l_tmpa_prop contains the pairs (without outer braces):
+>  {key1}  =>  {val1}
+>  {key2}  =>  {val2}.
+<recently read> }
+l. ...  }
+The property list \l_tmpa_prop contains the pairs (without outer braces):
+>  {key1}  =>  {val1}
+>  {key2}  =>  {val2}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 9: IO
+============================================================
+The following input streams are in use:
+>  0  =>  Reserved by format.
+<recently read> }
+l. ...  }
+The following output streams are in use:
+>  0  =>  Reserved by format
+>  1  =>  Reserved by format
+>  2  =>  Reserved by format.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 10: BOOL
+============================================================
+Defining \l_testa_bool on line ...
+! LaTeX3 Error: Variable \l_testb_bool undefined.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+LaTeX has been asked to show a variable \l_testb_bool, but this has not been
+defined yet.
+Defining \l_testb_bool on line ...
+> \l_testb_bool=false.
+<recently read> }
+l. ...  }
+> \l_testa_bool=true.
+<recently read> }
+l. ...  }
+> \c_true_bool=true.
+<recently read> }
+l. ...  }
+> \c_false_bool=false.
+<recently read> }
+l. ...  }
+> \c_true_bool &&!(\int_compare_p:n {1=2}||\c_false_bool )=true.
+<recently read> }
+l. ...  }
+> \c_true_bool &&!(\int_compare_p:n {1=2}||\c_true_bool )=false.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 11: FP
+============================================================
+> \l_tmpa_fp=1.
+<recently read> }
+l. ...  }
+> 1+2=3.
+<recently read> }
+l. ...  }
+> \l_tmpa_fp =1.
+<recently read> }
+l. ...  }
+============================================================

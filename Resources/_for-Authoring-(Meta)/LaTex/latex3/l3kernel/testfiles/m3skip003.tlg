@@ -1,0 +1,47 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+Defining \l_tmpc_dim on line ...
+\l_tmpc_dim=\dimen...
+============================================================
+TEST 1: dim_compare:n
+============================================================
+FFTFFTT
+FFTFFTT
+TFFTFTF
+FTFTTFT
+============================================================
+============================================================
+TEST 2: Dim case statements
+============================================================
+72.26999pt
+72.27pt
+YES
+============================================================
+============================================================
+TEST 3: skip_if_eq:nn
+============================================================
+TTTFF
+============================================================
+============================================================
+TEST 4: show:n
+============================================================
+> \l_tmpa_dim=0.0625pt.
+<recently read> }
+l. ...}
+> 3pt+\l_tmpa_dim =3.0625pt.
+<recently read> }
+l. ...}
+> \l_tmpa_skip=0.00781pt plus -2.0pt minus 2.0pt.
+<recently read> }
+l. ...}
+> 3ptminus\l_tmpa_skip +\l_tmpa_skip =3.00781pt plus -2.0pt minus 2.00781pt.
+<recently read> }
+l. ...}
+> \l_tmpa_muskip=512.0mu plus -2.0mu minus 2.0mu.
+<recently read> }
+l. ...}
+> 3muminus\l_tmpa_muskip +\l_tmpa_muskip =515.0mu plus -2.0mu minus 514.0mu.
+<recently read> }
+l. ...}
+============================================================

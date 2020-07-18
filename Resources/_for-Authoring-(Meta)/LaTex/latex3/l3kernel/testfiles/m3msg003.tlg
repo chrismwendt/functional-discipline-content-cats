@@ -1,0 +1,206 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: All non-lethal classes
+============================================================
+this/no-extra-text, error
+! Package module Error: This message has no more text. Arguments: A, B {C}, D,
+(module)                .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+this/no-extra-text, warning
+Package module Warning: This message has no more text. Arguments: A, B {C}, D,
+(module)                .
+this/no-extra-text, info
+Package module Info: This message has no more text. Arguments: A, B {C}, D, .
+this/no-extra-text, log
+This message has no more text. Arguments: A, B {C}, D, .
+this/no-extra-text, none
+this/has-extra-text, error
+! Package module Error: This one does. Arguments: A, B {C}, D, .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: A, B {C}, D, .
+this/has-extra-text, warning
+Package module Warning: This one does. Arguments: A, B {C}, D, .
+this/has-extra-text, info
+Package module Info: This one does. Arguments: A, B {C}, D, .
+this/has-extra-text, log
+This one does. Arguments: A, B {C}, D, .
+this/has-extra-text, none
+that/no-extra-text, error
+! Package module Error: That message has no more text. Arguments: A, B {C}, D,
+(module)                .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+that/no-extra-text, warning
+Package module Warning: That message has no more text. Arguments: A, B {C}, D,
+(module)                .
+that/no-extra-text, info
+Package module Info: That message has no more text. Arguments: A, B {C}, D, .
+that/no-extra-text, log
+That message has no more text. Arguments: A, B {C}, D, .
+that/no-extra-text, none
+that/has-extra-text, error
+! Package module Error: That one does. Arguments: A, B {C}, D, .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: A, B {C}, D, .
+that/has-extra-text, warning
+Package module Warning: That one does. Arguments: A, B {C}, D, .
+that/has-extra-text, info
+Package module Info: That one does. Arguments: A, B {C}, D, .
+that/has-extra-text, log
+That one does. Arguments: A, B {C}, D, .
+that/has-extra-text, none
+============================================================
+============================================================
+TEST 2: msg_set with different number of args
+============================================================
+! Package module Error: The message should now have no extra text. A, B, C, D.
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! Package module Error: This one now has extra text. A, B, C, D.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The extra text, arguments A, B, C, D.
+! Package module Error: Foo.
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! Package module Error: Foo.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Bar.
+! Package module Error: This one does. Arguments: A, B, C, D.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: A, B, C, D.
+! Package module Error: This message has no more text. Arguments: A, B, C, D.
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! LaTeX3 Error: Unknown message 'new-message-1' for module 'module'.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+LaTeX was asked to display a message called 'new-message-1'
+by the module 'module': this message does not exist.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+============================================================
+============================================================
+TEST 3: msg_redirect_class
+============================================================
+! LaTeX3 Error: Unknown message class 'foo'.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+LaTeX has been asked to redirect messages to a class 'foo':
+this was never defined.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! Package module Error: This message has no more text. Arguments: 1, , , .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+LaTeX3 Warning: Message redirection loop caused by {error} => {warning}.
+Package module Warning: This message has no more text. Arguments: 2, , , .
+! LaTeX3 Error: Message redirection loop caused by {warning} => {error}.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Adding the message redirection {warning} => {error} created an infinite loop
+    {warning} => {error} => {warning}
+! Package module Error: This message has no more text. Arguments: 3, , , .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+Package module Warning: This message has no more text. Arguments: 4, , , .
+! Package module Error: This message has no more text. Arguments: 5, , , .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+============================================================
+============================================================
+TEST 4: msg_redirect
+============================================================
+Package module Warning: This one does. Arguments: A, , , .
+Package module Info: This one does. Arguments: B, , , .
+Package module Warning: This one does. Arguments: C, , , .
+Package module Info: This one does. Arguments: D, , , .
+Package module Info: That one does. Arguments: E, , , .
+! Package module Error: This one does. Arguments: F, , , .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: F, , , .
+Package module Info: That one does. Arguments: G, , , .
+This one does. Arguments: H, , , .
+! Package module Error: This message has no more text. Arguments: I, , , .
+Type <return> to continue.
+ ...                                              
+l. ...  }
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! Package module Error: This one does. Arguments: J, , , .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: J, , , .
+LaTeX3 Info: Message redirection loop caused by {fatal} => {info}.
+Package module Info: This one does. Arguments: K, , , .
+This one does. Arguments: L, , , .
+LaTeX3 Info: Message redirection loop caused by {info} => {error} for module
+(LaTeX3)     'module/this'.
+! Package module Error: This one does. Arguments: M, , , .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: M, , , .
+! Package module Error: This one does. Arguments: N, , , .
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+Some extra text. Arguments: N, , , .
+That one does. Arguments: O, , , .
+That one does. Arguments: P, , , .
+That one does. Arguments: Q, , , .
+Package module Warning: That one does. Arguments: R, , , .
+That one does. Arguments: S, , , .
+============================================================

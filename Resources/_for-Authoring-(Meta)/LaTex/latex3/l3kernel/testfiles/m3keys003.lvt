@@ -1,0 +1,183 @@
+% Copyright (C) 2013-2016,2018-2020 The LaTeX3 Project
+
+
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+
+\begin{document}
+\START
+\AUTHOR{Joseph Wright}
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST { .choice: }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .choice: ,
+        key-one / a .code:n = { \TYPE { "a" } } ,
+        key-one / b .code:n = { \TYPE { "b" } } ,
+        key-one / c .code:n = { \TYPE { "#1" } } ,
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a ,
+        key-one = c ,
+        key-one = d ,
+        key-one     ,
+      }
+    \keys_define:nn { module }
+      {
+        key-one .choice: ,
+        key-one / a .code:n       = { \TYPE { "a" } } ,
+        key-one / b .code:n       = { \TYPE { "b" } } ,
+        key-one / c .code:n       = { \TYPE { "#1" } } ,
+        key-one / unknown .code:n = { \TYPE { "#1" } }
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a ,
+        key-one = c ,
+        key-one = d ,
+        key-one     ,
+      }
+    \keys_define:nn { module }
+      {
+        key-one .choice: ,
+        key-one .default:n = { a },
+        key-one / a .code:n = { \TRUE } ,
+        key-one / b .code:n = { \FALSE } ,
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a ,
+        key-one = b ,
+        key-one     ,
+        key-one = d ,
+      }
+  }
+
+\TEST { .choices:nn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .choices:nn =
+          { a , b , c }
+          {
+            \TYPE
+              { \l_keys_choice_tl \c_space_tl  \int_use:N \l_keys_choice_int }
+          }
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a ,
+        key-one = c ,
+        key-one = d ,
+        key-one     ,
+      }
+  }
+
+\TEST { .multichoice: }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .multichoice: ,
+        key-one / a .code:n = { \TYPE { "a" } } ,
+        key-one / b .code:n = { \TYPE { "b" } } ,
+        key-one / c .code:n = { \TYPE { "#1" } } ,
+      }
+    \keys_set:nn { module }
+      {
+        key-one = { a , c } ,
+        key-one = c ,
+        key-one = d ,
+        key-one     ,
+      }
+    \keys_define:nn { module }
+      {
+        key-one .multichoice: ,
+        key-one / a .code:n       = { \TYPE { "a" } } ,
+        key-one / b .code:n       = { \TYPE { "b" } } ,
+        key-one / c .code:n       = { \TYPE { "#1" } } ,
+        key-one / unknown .code:n = { \TYPE { "#1" } }
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a ,
+        key-one = { c , d } ,
+        key-one     ,
+      }
+  }
+
+\TEST { .multichoices:nn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .multichoices:nn =
+          { a , b , c }
+          {
+            \TYPE
+              { \l_keys_choice_tl \c_space_tl  \int_use:N \l_keys_choice_int }
+          }
+      }
+    \keys_set:nn { module }
+      {
+        key-one = { a , c } ,
+      }
+  }
+
+\TEST { .choice:~and~.multichoice:~errors }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .choice: ,
+        key-one / a .choice:
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a
+      }
+    \keys_define:nn { module }
+      {
+        key-one .multichoice: ,
+        key-one / a .multichoice:
+      }
+    \keys_set:nn { module }
+      {
+        key-one = a
+      }
+  }
+
+\TEST { .inherit:n }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .code:n = \tl_show:n {#1} , 
+        key-one .default:n = foo ,
+        key-two .choices:nn = { a , b } { \tl_show:n {#1} }
+      }
+    \keys_define:nn { module-two }
+      {
+        path .inherit:n = module
+      }
+    \keys_set:nn { module-two / path }
+      {
+        key-one = a ,
+        key-two = b ,
+        key-one
+      }
+    \keys_set:nn { module-two / path }
+      {
+        key-not-defined = a ,
+        key-two = c
+      }
+  }
+
+\END

@@ -1,0 +1,40 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Joseph Wright
+============================================================
+TEST 1: Key names and paths
+============================================================
+Defining key foo/bar/baz on line ...
+> \l_keys_key_str=baz.
+> \l_keys_path_str=foo/bar/baz.
+Defining key foo/baz/bar on line ...
+> \l_keys_key_str=bar.
+> \l_keys_path_str=foo/baz/bar.
+============================================================
+============================================================
+TEST 2: Modules hidden in key part
+============================================================
+Defining key moduleA/foobar on line ...
+Defining key moduleA/foobar/unknown on line ...
+Defining key moduleB/test on line ...
+> xxx.
+> xxx.
+============================================================
+============================================================
+TEST 3: Space handling
+============================================================
+Defining key foo/bar baz on line ...
+! LaTeX3 Error: The key 'foo/barbaz' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'foo' does not have a key called 'foo/barbaz'.
+Check that you have spelled the key name correctly.
+> value-b.
+! LaTeX3 Error: The key 'f o o/barbaz' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'f o o' does not have a key called 'f o o/barbaz'.
+Check that you have spelled the key name correctly.
+============================================================

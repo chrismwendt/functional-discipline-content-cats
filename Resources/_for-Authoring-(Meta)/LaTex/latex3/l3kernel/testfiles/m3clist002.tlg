@@ -1,0 +1,466 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson
+Defining \l_tmpc_tl on line ...
+============================================================
+TEST 1: creation
+============================================================
+Defining \l_a_clist on line ...
+Defining \g_b_clist on line ...
+TRUE
+TRUE
+Empty --
+Empty --
+============================================================
+============================================================
+TEST 2: clearing
+============================================================
+macro:->
+macro:->test a
+macro:->
+============================================================
+undefined
+undefined
+! LaTeX3 Error: The variable \l_undefined_clist has not been declared on line
+(LaTeX3)        54.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_undefined_clist { ... }
+without first having:
+  \tl_new:N \l_undefined_clist
+LaTeX will create the variable and continue.
+! LaTeX3 Error: The variable \g_undefined_clist has not been declared on line
+(LaTeX3)        54.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \g_undefined_clist { ... }
+without first having:
+  \tl_new:N \g_undefined_clist
+LaTeX will create the variable and continue.
+! LaTeX3 Error: Inconsistent local/global assignment
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Local assignment to a global variable '\g_undefined_clist'.
+macro:->
+macro:->
+undefined
+undefined
+============================================================
+============================================================
+TEST 3: clear_new
+============================================================
+Defining \l_c_clist on line ...
+Defining \g_d_clist on line ...
+macro:->
+macro:->
+macro:->test a
+macro:->
+macro:->
+macro:->
+============================================================
+============================================================
+TEST 4: (g)set_eq
+============================================================
+! LaTeX3 Error: The variable \l_e_clist has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_e_clist { ... }
+without first having:
+  \tl_new:N \l_e_clist
+LaTeX will create the variable and continue.
+! LaTeX3 Error: The variable \g_f_clist has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \g_f_clist { ... }
+without first having:
+  \tl_new:N \g_f_clist
+LaTeX will create the variable and continue.
+macro:->abc
+macro:->abc
+macro:->abc
+============================================================
+macro:->abc
+undefined
+macro:->
+============================================================
+macro:->abc
+macro:->abc
+macro:->abc
+============================================================
+============================================================
+TEST 5: concat
+============================================================
+macro:->abc,def,uvw,xyz
+macro:->
+============================================================
+macro:->ABC,DEF,UVW,XYZ
+macro:->
+============================================================
+============================================================
+TEST 6: gconcat
+============================================================
+macro:->abc,def,uvw,xyz
+============================================================
+macro:->ABC,DEF,UVW,XYZ
+============================================================
+============================================================
+TEST 7: set N
+============================================================
+> \l_tmpa_clist=macro:->\a ,{,\b },c##,\par ,d \e .
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {\a }
+>  {,\b }
+>  {c##}
+>  {\par }
+>  {d \e }.
+> \l_tmpa_clist=macro:->a,a,a.
+> \l_tmpa_clist=macro:->a,a,a,{####}\c_space_tl .
+> \l_tmpa_clist=macro:->a,a,a,{##}  a,a,a,##.
+============================================================
+============================================================
+TEST 8: set c
+============================================================
+> \l_tmpa_clist=macro:->\a ,{,\b },c##,\par ,d \e .
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {\a }
+>  {,\b }
+>  {c##}
+>  {\par }
+>  {d \e }.
+> \l_tmpa_clist=macro:->a,a,a.
+> \l_tmpa_clist=macro:->a,a,a,{####}\c_space_tl .
+> \l_tmpa_clist=macro:->a,a,a,{##}  a,a,a,##.
+============================================================
+============================================================
+TEST 9: gset N
+============================================================
+> \g_tmpa_clist=macro:->\a ,{,\b },c##,\par ,d \e .
+The comma list \g_tmpa_clist contains the items (without outer braces):
+>  {\a }
+>  {,\b }
+>  {c##}
+>  {\par }
+>  {d \e }.
+> \g_tmpa_clist=macro:->a,a,a.
+> \g_tmpa_clist=macro:->a,a,a,{####}\c_space_tl .
+> \g_tmpa_clist=macro:->a,a,a,{##}  a,a,a,##.
+============================================================
+============================================================
+TEST 10: gset c
+============================================================
+> \g_tmpa_clist=macro:->\a ,{,\b },c##,\par ,d \e .
+The comma list \g_tmpa_clist contains the items (without outer braces):
+>  {\a }
+>  {,\b }
+>  {c##}
+>  {\par }
+>  {d \e }.
+> \g_tmpa_clist=macro:->a,a,a.
+> \g_tmpa_clist=macro:->a,a,a,{####}\c_space_tl .
+> \g_tmpa_clist=macro:->a,a,a,{##}  a,a,a,##.
+============================================================
+============================================================
+TEST 11: put left
+============================================================
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {\l_tmpc_tl \par }
+>  {\ERROR B\par }
+>  {FULL EXPANSION\par }
+>  {\l_tmpb_tl \par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 12: put right
+============================================================
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {\ERROR A\par }
+>  {\l_tmpb_tl \par }
+>  {FULL EXPANSION\par }
+>  {\ERROR B\par }
+>  {\l_tmpc_tl \par }.
+============================================================
+============================================================
+TEST 13: gput left
+============================================================
+The comma list \g_b_clist contains the items (without outer braces):
+>  {\l_tmpc_tl \par }
+>  {\ERROR B\par }
+>  {FULL EXPANSION\par }
+>  {\l_tmpb_tl \par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 14: gput right
+============================================================
+The comma list \g_b_clist contains the items (without outer braces):
+>  {\ERROR A\par }
+>  {\l_tmpb_tl \par }
+>  {FULL EXPANSION\par }
+>  {\ERROR B\par }
+>  {\l_tmpc_tl \par }.
+============================================================
+============================================================
+TEST 15: if_empty (expect Y/Y/N NB. different than seq!!)
+============================================================
+YES
+YES
+NO
+============================================================
+============================================================
+TEST 16: get
+============================================================
+> \l_tmpa_tl=\q_no_value .
+> \l_tmpa_tl=\q_no_value .
+> \l_tmpa_tl=a\par .
+> \l_tmpa_tl=\q_no_value .
+> \l_tmpa_tl=b\par .
+============================================================
+============================================================
+TEST 17: push (same as put_left)
+============================================================
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {\ERROR C\par }
+>  {\ERROR B\par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 18: gpush (same as gput_left)
+============================================================
+The comma list \g_b_clist contains the items (without outer braces):
+>  {\ERROR C\par }
+>  {\ERROR B\par }
+>  {\ERROR A\par }.
+============================================================
+============================================================
+TEST 19: if_in (expect 2 first false)
+============================================================
+FALSE
+FALSE
+TRUE
+FALSE
+TRUE
+TRUE
+============================================================
+============================================================
+TEST 20: if_in with empty (check this behaviour)
+============================================================
+FALSE
+============================================================
+============================================================
+TEST 21: if_in (T)
+============================================================
+TRUE
+TRUE
+TRUE
+============================================================
+============================================================
+TEST 22: if_in (F)
+============================================================
+FALSE
+FALSE
+============================================================
+============================================================
+TEST 23: map_inline
+============================================================
+c
+b\par 
+a
+c
+b\par 
+a
+aa
+bb\par 
+cc
+============================================================
+============================================================
+TEST 24: map_function
+============================================================
+c
+b\par 
+a
+c
+b\par 
+a
+aa
+bb\par 
+cc
+============================================================
+============================================================
+TEST 25: map_variable
+============================================================
+c
+b\par 
+a
+Final: [a]
+c
+b\par 
+a
+Final: [a]
+aa
+bb\par 
+cc
+Final: [cc]
+============================================================
+============================================================
+TEST 26: pop
+============================================================
+c
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {b\par }
+>  {a}.
+b\par 
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {a}.
+a
+The comma list \l_tmpa_clist is empty
+> .
+============================================================
+\q_no_value 
+The comma list \l_tmpa_clist is empty
+> .
+============================================================
+a
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {b,c}.
+b,c
+The comma list \l_tmpa_clist is empty
+> .
+============================================================
+============================================================
+TEST 27: gpop
+============================================================
+local->c.
+global->.
+The comma list \g_tmpa_clist contains the items (without outer braces):
+>  {b\par }
+>  {a}.
+local->b\par .
+global->.
+The comma list \g_tmpa_clist contains the items (without outer braces):
+>  {a}.
+local->a.
+global->.
+The comma list \g_tmpa_clist is empty
+> .
+============================================================
+local->\q_no_value .
+global->.
+The comma list \g_tmpa_clist is empty
+> .
+============================================================
+============================================================
+TEST 28: remove_duplicates
+============================================================
+b\par ,c\par ,a\par 
+b\par ,c\par ,a\par ,c\par ,b\par ,a\par 
+! LaTeX3 Error: Inconsistent local/global assignment
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Global assignment to a local variable '\l_tmpa_clist'.
+b\par ,c\par ,a\par 
+b\par ,c\par ,a\par 
+============================================================
+============================================================
+TEST 29: remove_all
+============================================================
+b\par ,c\par ,c\par ,b\par 
+b\par ,c\par ,a\par ,c\par ,b\par ,a\par 
+b\par ,c\par ,c\par ,b\par 
+b\par ,c\par ,c\par ,b\par 
+============================================================
+============================================================
+TEST 30: set_from_seq
+============================================================
+macro:->{h,},f g,e,\par \foo ,a
+macro:->{h,},f g,e,\par \foo ,a
+macro:->
+macro:->{h,},f g,e,\par \foo ,a
+============================================================
+Defining \l_foo_clist on line ...
+============================================================
+TEST 31: clist_item
+============================================================
+|a|b|c ||d|||d||c |b|a||
+|a|b|c ||d|||d||c |b|a||
+============================================================
+============================================================
+TEST 32: map check empties
+============================================================
+[aa]
+[aa]
+[bb\par ]
+[cc]
+[aa]
+[aa]
+[bb\par ]
+[cc]
+[aa]
+[aa]
+[bb\par ]
+[cc]
+[aa]
+[aa]
+[bb\par ]
+[cc]
+[aa]
+[aa]
+[bb\par ]
+[cc]
+[aa]
+[aa]
+[bb\par ]
+[cc]
+Final: [cc]
+============================================================
+============================================================
+TEST 33: clist show
+============================================================
+The comma list contains the items (without outer braces):
+>  {\a }
+>  {,\b }
+>  {c##}
+>  {\par }
+>  {d \e }.
+<recently read> }
+l. ...}
+The comma list contains the items (without outer braces):
+>  {a}
+>  {a}
+>  {a}.
+<recently read> }
+l. ...}
+The comma list contains the items (without outer braces):
+>  {a}
+>  {a}
+>  {a}
+>  {{####}\c_space_tl }.
+<recently read> }
+l. ...}
+The comma list contains the items (without outer braces):
+>  {a}
+>  {a}
+>  {a}
+>  {##}
+>  {a}
+>  {a}
+>  {a}
+>  {##}.
+<recently read> }
+l. ...}
+============================================================

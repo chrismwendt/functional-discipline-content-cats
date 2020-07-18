@@ -1,0 +1,303 @@
+%
+% Copyright (C) 2011,2012,2014,2017-2020 The LaTeX3 Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+% Leave some padding so that the line numbers
+% of the tests don't change later on.
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\begin{document}
+\START
+\AUTHOR{Joseph Wright}
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST{Rotate~boxes}{
+  \hbox_set:Nn \l_tmpa_box {aaa}
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 0 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 45 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 90 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 135 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 180 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 225 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_rotate:Nn \l_tmpa_box { 315 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST{Scale~boxes}{
+  \hbox_set:Nn \l_tmpa_box {aaa}
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 1 } { 1 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { -1 } { 1 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 1 } { -1 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 0.5 } { 1 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 1 } { 0.5 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 2 } { 2 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_scale:Nnn \l_tmpa_box { 0.1 } { 10 }
+    \box_show:N \l_tmpa_box
+  \group_end:
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST{Resize~boxes}{
+  \hbox_set:Nn \l_tmpa_box {ggg}
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 1cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { -1cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 1cm } { -1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 0.5cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 1cm } { 0.5cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 2cm } { 2cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 0.1cm } { 10cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST{Resize~boxes~proportionally}{
+  \hbox_set:Nn \l_tmpa_box {ggg}
+  \group_begin:
+    \box_resize_to_ht:Nn \l_tmpa_box { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht:Nn \l_tmpa_box { -1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht:Nn \l_tmpa_box { 0.5cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht:Nn \l_tmpa_box { 2cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht_plus_dp:Nn \l_tmpa_box { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht_plus_dp:Nn \l_tmpa_box { -1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht_plus_dp:Nn \l_tmpa_box { 0.5cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_ht_plus_dp:Nn \l_tmpa_box { 2cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd:Nn \l_tmpa_box { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd:Nn \l_tmpa_box { -1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd:Nn \l_tmpa_box { 0.5cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd:Nn \l_tmpa_box { 2cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 1cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { -1cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 1cm } { -1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 0.5cm } { 1cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 1cm } { 0.5cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 2cm } { 2cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+  \group_begin:
+    \box_resize_to_wd_and_ht:Nnn \l_tmpa_box { 0.1cm } { 10cm }
+    \box_show:N \l_tmpa_box
+  \group_end:
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { Resize~boxes~automatically }
+  {
+    \hbox_set:Nn \l_tmpa_box { ggg }
+    \group_begin:
+      \box_autosize_to_wd_and_ht:Nnn \l_tmpa_box { 1cm } { 1cm }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_autosize_to_wd_and_ht_plus_dp:Nnn \l_tmpa_box { 1cm } { 1cm }
+      \box_show:N \l_tmpa_box
+    \group_end:
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { Trim~boxes }
+  {
+    \hbox_set:Nn \l_tmpa_box { \rule [ -10pt ] { 10pt } { 20pt } }
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 0pt } { 0pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 5pt } { 0pt } { 0pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 0pt } { 5pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 5pt } { 0pt } { 5pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 5pt } { 0pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 0pt } { 0pt } { 5pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 5pt } { 0pt } { 5pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 15pt } { 0pt } { 0pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_trim:Nnnnn \l_tmpa_box { 0pt } { 0pt } { 0pt } { 15pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+  }
+
+\TEST { Viewport~boxes }
+  {
+    \hbox_set:Nn \l_tmpa_box { \rule [ -10pt ] { 10pt } { 20pt } }
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -10pt } { 10pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 5pt } { -10pt } { 10pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -10pt } { 5pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 5pt } { -10pt } { 5pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -5pt } { 10pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -10pt } { 10pt } { 5pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -5pt } { 10pt } { 5pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { 5pt } { 10pt } { 10pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+    \group_begin:
+      \box_set_viewport:Nnnnn \l_tmpa_box { 0pt } { -10pt } { 10pt } { -5pt }
+      \box_show:N \l_tmpa_box
+    \group_end:
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\END

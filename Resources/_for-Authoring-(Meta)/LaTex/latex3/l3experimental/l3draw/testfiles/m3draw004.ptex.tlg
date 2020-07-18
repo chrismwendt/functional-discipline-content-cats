@@ -1,0 +1,647 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: \l_draw_default_linewidth_dim 
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(285.52756+0.0)x57.90552
+.\hbox(285.52756+0.0)x57.90552
+..\glue 0.5
+..\hbox(0.0+0.0)x0.0, shifted -0.5
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.99626 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 2: \draw_linewidth:n 
+============================================================
+> \box...=
+\hbox(285.52756+0.0)x57.90552
+.\hbox(285.52756+0.0)x57.90552
+..\glue 0.5
+..\hbox(0.0+0.0)x0.0, shifted -0.5
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::0.99626 setlinewidth}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 3: \draw_dash_pattern:nn 
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::[] 0 setdash}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::[5.6693 5.6693] 0 setdash}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::[5.6693 5.6693] 2.83464 setdash}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 4: \draw_cap_ ...
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::0 setlinecap}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::2 setlinecap}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::1 setlinecap}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 5: \draw_join_ ...
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::2 setlinejoin}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::0 setlinejoin}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::1 setlinejoin}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 6: \draw_miterlimit:n 
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::1 setmiterlimit}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::2 setmiterlimit}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps::10 setmiterlimit}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 7: \draw_color:n 
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps:SDict begin /color.fc {} def end}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+....\special{color pop}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps:SDict begin /color.fc {} def end}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::newpath}
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps:SDict begin /color.fc {} def end}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::stroke}
+....\special{ps::newpath}
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps:SDict begin /color.fc {} def end}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+....\special{color pop}
+....\special{color pop}
+....\special{color pop}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 8: \draw_color_fill:n 
+============================================================
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{ps:SDict begin /color.fc {1.0 0.0 0.0 setrgbcolor} def end}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::newpath}
+....\special{ps:SDict begin /color.fc {1.0 0.0 0.0 setrgbcolor} def end}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::stroke}
+....\special{ps::newpath}
+....\special{ps:SDict begin /color.fc {1.0 0.0 0.0 setrgbcolor} def end}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================
+============================================================
+TEST 9: \draw_color_stroke:n 
+============================================================
+! Undefined control sequence.
+<to be read again> \__draw_color_reset: 
+                                        \__draw_color_reset: \__draw_color_r...
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<to be read again> ...reset: \__draw_color_reset: 
+                                                  \__draw_color_reset: 
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<recently read> ...or_reset: \__draw_color_reset: 
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+> \box...=
+\hbox(284.92755+0.0)x57.30551
+.\hbox(284.92755+0.0)x57.30551
+..\glue 0.2
+..\hbox(0.0+0.0)x0.0, shifted -0.2
+...\special{ps::[begin]}
+...\special{ps::@beginspecial}
+...\special{ps::SDict begin /color.fc {} def end}
+...\special{ps::0.3985 setlinewidth}
+...\special{color push gray 0}
+...\special{ps:SDict begin /color.fc {} def end}
+...\special{ps::0 setlinecap}
+...\special{ps::0 setlinejoin}
+...\special{ps::10 setmiterlimit}
+...\special{ps::[] 0 setdash}
+...\hbox(0.0+0.0)x0.0
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::newpath}
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps::28.34647 28.34647 0 0 moveto dup 0 rlineto exch 0 exch rlineto ne\ETC.}
+....\special{ps::gsave}
+....\special{ps::color.fc}
+....\special{ps::fill}
+....\special{ps::grestore}
+....\special{ps::stroke}
+....\special{ps::newpath}
+....\special{color push rgb 1.0 0.0 0.0}
+....\special{ps::0 0 moveto}
+....\special{ps::28.34647 283.46457 lineto}
+....\special{ps::56.69292 0 lineto}
+....\special{ps::stroke}
+....\special{ps::newpath}
+...\special{ps::@endspecial}
+...\special{ps::[end]}
+...\special{color pop}
+! OK.
+<argument> \l_tmpa_box 
+l. ...  }
+============================================================

@@ -1,0 +1,79 @@
+%
+% Copyright (C) 2011-2014,2018,2020 The LaTeX3 Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+
+
+\begin{document}
+
+\START
+\AUTHOR{LaTeX3 Project}
+\ExplSyntaxOn
+
+\TESTEXP { Dimension~expressions~with~potentially~no~units }
+  {
+    \exp_not:f { \dim_to_decimal:n { 1 pt } } \NEWLINE
+    \exp_not:f { \dim_to_decimal:n { 1 bp } } \NEWLINE
+    \exp_not:f { \dim_to_decimal:n { 3 pt + 4 pt } } \NEWLINE
+  }
+
+\TEST { Setting~a~dimension~if~smaller/bigger }
+  {
+    \dim_zero:N \l_tmpa_dim
+    \dim_set:Nn \l_tmpa_dim { \dim_min:nn \l_tmpa_dim { 1pt } }
+      \TYPE { \dim_use:N \l_tmpa_dim }
+    \dim_zero:N \l_tmpa_dim
+    \dim_set:Nn \l_tmpa_dim { \dim_max:nn \l_tmpa_dim { 1pt } }
+      \TYPE { \dim_use:N \l_tmpa_dim }
+    \dim_zero:N \l_tmpa_dim
+    \dim_set:Nn \l_tmpa_dim { \dim_max:nn \l_tmpa_dim { -1pt } }
+      \TYPE { \dim_use:N \l_tmpa_dim }
+    \dim_zero:N \l_tmpa_dim
+    \dim_set:Nn \l_tmpa_dim { \dim_min:nn \l_tmpa_dim { -1pt } }
+      \TYPE { \dim_use:N \l_tmpa_dim }
+  }
+
+\TESTEXP { Strip~big~point~unit }
+  {
+    \exp_not:f { \dim_to_decimal_in_bp:n { 1.1234 pt } } \NEWLINE
+    \exp_not:f { \dim_to_decimal_in_bp:n { 1.1234 bp } } \NEWLINE
+    \exp_not:f { \dim_to_decimal_in_bp:n { 3 pt + 4 pt } } \NEWLINE
+  }
+
+\TESTEXP { Convert~to~pt }
+  {
+    \exp_not:f { \dim_to_decimal:n { 1.1234 pt } } \NEWLINE
+    \exp_not:f { \dim_to_decimal:n { 1.1234 bp } } \NEWLINE
+    \exp_not:f { \dim_to_decimal:n { 3 pt + 4 pt } } \NEWLINE
+  }
+
+\TESTEXP { Convert~to~unit }
+  {
+    \exp_not:f { \dim_to_decimal_in_unit:nn { 1.1234 pt } { 1bp + .1234bp } } \NEWLINE
+    \exp_not:f { \dim_to_decimal_in_unit:nn { 1.1234 bp } { 1.1234 pt } } \NEWLINE
+    \exp_not:f { \dim_to_decimal_in_unit:nn { 3 pt + 4 pt } { 2pt * 2 } } \NEWLINE
+  }
+
+% We don't care about the output of each of those "bad" conversions
+% since they show internals of the various functions.  The conversions
+% are bad because there are multiple units.
+\TEST { Bad~conversions }
+  {
+    \tl_set:Nf \l_tmpa_tl { \dim_to_decimal:n { 4 pt pt } }
+    \tl_set:Nf \l_tmpa_tl { \dim_to_decimal_in_bp:n { 4 pt pt } }
+    \tl_set:Nf \l_tmpa_tl { \dim_to_decimal:n { 4 pt pt } }
+    \tl_set:Nf \l_tmpa_tl { \dim_to_decimal_in_unit:nn { 4 pt pt } { 3 pt pt } }
+  }
+
+\END
+
+
+

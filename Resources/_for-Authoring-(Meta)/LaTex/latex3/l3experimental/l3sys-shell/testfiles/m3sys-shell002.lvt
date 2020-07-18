@@ -1,0 +1,21 @@
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\RequirePackage{l3sys-shell}
+
+\ExplSyntaxOn
+
+\START
+
+\TEST { File~Listing }
+  {
+    \OMIT
+    \sys_shell_split_ls:nN { *002.lvt } \l_tmpa_seq
+    \TIMO
+    \seq_show:N \l_tmpa_seq
+  }
+
+\ExplSyntaxOff
+
+\END

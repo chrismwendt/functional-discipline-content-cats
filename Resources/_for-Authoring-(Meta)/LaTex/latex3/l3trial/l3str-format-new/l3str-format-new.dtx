@@ -1,0 +1,1411 @@
+% \iffalse meta-comment
+%
+%% File: l3str-format-new.dtx (C) Copyright 2014-2018 The LaTeX3 Project
+%%
+%% It may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License (LPPL), either version 1.3c of this
+%% license or (at your option) any later version.  The latest version
+%% of this license is in the file
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% This file is part of the "l3str-format-new bundle" (The Work in LPPL)
+%% and all files in that bundle must be distributed together.
+%%
+%% The released version of this bundle is available from CTAN.
+%%
+%% -----------------------------------------------------------------------
+%%
+%% The development version of the bundle can be found at
+%%
+%%    http://www.latex-project.org/svnroot/experimental/trunk/
+%%
+%% for those people who are interested.
+%%
+%%%%%%%%%%%
+%% NOTE: %%
+%%%%%%%%%%%
+%%
+%%   Snapshots taken from the repository represent work in progress and may
+%%   not work or may contain conflicting material!  We therefore ask
+%%   people _not_ to put them into distributions, archives, etc. without
+%%   prior consultation with the LaTeX3 Project.
+%%
+%% -----------------------------------------------------------------------
+%
+%<*driver|package>
+\RequirePackage{expl3}
+%</driver|package>
+%<*driver>
+\documentclass[full]{l3doc}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3str-format-new} package\\ LaTeX3 String Formatting^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX3 Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Released 2018-04-30}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{Keys for string formatting}
+%
+% This module provides tools to turn various datatypes into strings.
+% The formatting can be controlled by many options, given as key--value
+% pairs.
+%
+% \begin{function}{width}
+%   \begin{syntax}
+%     |width| = \meta{non-negative integer}
+%   \end{syntax}
+%   Minimum width after formatting.
+% \end{function}
+%
+% \begin{function}{fill}
+%   \begin{syntax}
+%     |fill| = \meta{character}
+%   \end{syntax}
+%   The \meta{character} used to reach the minimum \meta{width} if
+%   needed.
+% \end{function}
+%
+% \begin{function}{alignment}
+%   \begin{syntax}
+%     |alignment| = \Arg{character}
+%   \end{syntax}
+%   The \meta{character} can be |<| for left-alignment, |^| for
+%   centering, |>| for right-alignment, or |=| for inserting the filling
+%   characters between the sign and body of the formatted material.
+%   Note that a value of |=| must be given within braces:
+%   |alignment={=}|.
+% \end{function}
+%
+% \begin{function}{style}
+%   \begin{syntax}
+%     |style| = \meta{character}
+%   \end{syntax}
+%   The \meta{character} should be one of |efg| for floating points.
+% \end{function}
+%
+% \begin{function}{precision}
+%   \begin{syntax}
+%     |precision| = \meta{non-negative integer}
+%   \end{syntax}
+%   Number of significant digits/characters.
+% \end{function}
+%
+% \subsection{Keys for numeric types}
+%
+% \begin{function}{+}
+%   \begin{syntax}
+%     |+| = \meta{string}
+%   \end{syntax}
+%   The \meta{string} will be inserted in front of positive numbers.
+%   The default value is empty.  This \meta{string} is also used
+%   for~$+0$, unless the key |0-sign| is given.  The same \meta{string}
+%   is used for $+\infty$, unless the key |inf-sign| is given.
+% \end{function}
+%
+% \begin{function}{-}
+%   \begin{syntax}
+%     |-| = \meta{string}
+%   \end{syntax}
+%   The \meta{string} will be inserted in front of (non-zero) negative
+%   numbers.  The default value is~|-|.  This \meta{string} is also used
+%   for~$-0$ unless the key |-0-sign| is given, and for $-\infty$ unless
+%   the key |-inf-sign| is given.
+% \end{function}
+%
+% \begin{function}{+0-sign, -0-sign, +inf-sign, -inf-sign, nan-sign}
+%   \begin{syntax}
+%     |+0-sign| = \meta{string}
+%   \end{syntax}
+%   The \meta{string} is used as the \meta{sign} of $+0$, $-0$,
+%   $+\infty$, $-\infty$, or \texttt{nan} respectively.  The key
+%   |+0-sign| applies to both the integer~$0$ and the floating
+%   point~$+0$.  If those keys are not given, the default for |+0-sign|
+%   is the value of |+|, for |-0-sign| is |-|, for |+inf-sign| is |+|,
+%   for |-inf-sign| is |-|, and for |nan-sign| is empty.
+% \end{function}
+%
+% \begin{function}{0-body, inf-body, nan-body}
+%   \begin{syntax}
+%     |0-body| = \meta{string}
+%   \end{syntax}
+%   Controls the formatting of $\pm 0$, $\pm\infty$, or \texttt{nan}.
+%   Formatting $\pm 0$ yields the sign |+0-sign| or |-0-sign| followed
+%   by |0-body| (default depends on the \meta{style}).  Formatting
+%   $\pm\infty$ yields the sign |+inf-sign| or |-inf-sign| followed by
+%   |inf-body| (default: |inf|).  Formatting \texttt{nan} yields the
+%   sign |nan-sign| followed by |nan-body| (default: |nan|).
+% \end{function}
+%
+% \subsection{Other syntaxes}
+%
+% \begin{function}{python}
+%   Not implemented anymore.
+%   \begin{syntax}
+%     |python| = [[\meta{fill}]\meta{alignment}]
+%     [\meta{sign}] [\meta{width}] [.\meta{precision}] [\meta{style}]
+%   \end{syntax}
+%   Each $[\ldots]$ denotes an independent optional part.  The syntax
+%   follows that of Python's \texttt{format} built-in function
+%   \begin{itemize}
+%     \item \meta{fill} can be any character: it is assumed to be
+%       present whenever the second character of the \meta{format
+%         specification} is a valid \meta{alignment} character.
+%     \item \meta{alignment} can be |<|~(left alignment), |>|~(right
+%       alignment), |^|~(centering), or |=|~(insert padding between sign
+%       and body).
+%     \item \meta{sign} is allowed for numeric styles; it can be
+%       |+|~(show a sign for positive and negative numbers), |-|~(only
+%       put a sign for negative numbers), or a space~(show a space or
+%       a~|-|).
+%     \item \meta{width} is the minimum number of characters of the
+%       result: if the result is naturally shorter than this
+%       \meta{width}, then it is padded with copies of the character
+%       \meta{fill}, with a position depending on the choice of
+%       \meta{alignment}.  If the result is naturally longer, it is not
+%       truncated.
+%     \item \meta{precision}, whose presence is indicated by a period,
+%       can have different meanings depending on the style.
+%     \item \meta{style} is one character, which controls how the given
+%       data should be formatted.  The list of allowed \meta{styles}
+%       depends on the type.
+%   \end{itemize}
+% \end{function}
+%
+% \begin{function}{C}
+%   Uses C |printf| syntax.  Not implemented.
+% \end{function}
+%
+% \section{Formatting various data-types}
+%
+% \begin{function}[EXP]{\tl_format:Nn, \tl_format:cn, \tl_format:nn}
+%   \begin{syntax}
+%     \cs{tl_format:nn} \Arg{token list} \Arg{format specification}
+%   \end{syntax}
+%   Converts the \meta{token list} to a string according to the
+%   \meta{format specification}.  The \meta{style}, if given, must
+%   be~|s|.  If \meta{precision} is given, all characters of the string
+%   representation of the \meta{token list} beyond the first
+%   \meta{precision} characters are discarded.
+% \end{function}
+%
+% \begin{function}[EXP]{\seq_format:Nn, \seq_format:cn}
+%   \begin{syntax}
+%     \cs{seq_format:Nn} \Arg{sequence} \Arg{format specification}
+%   \end{syntax}
+%   Converts each \meta{item} in the \meta{sequence} to a string using
+%   \cs{tl_format:nn} \Arg{item} \Arg{format specification}, and
+%   concatenates the results.
+% \end{function}
+%
+% \begin{function}[EXP]{\int_format:nn}
+%   \begin{syntax}
+%     \cs{int_format:nn} \Arg{intexpr} \Arg{format specification}
+%   \end{syntax}
+%   Evaluates the \meta{integer expression} and converts the result to a
+%   string according to the \meta{format specification}.  The
+%   \meta{precision} must not be given.  The \meta{style} can be |b| for
+%   binary output, |d| for decimal output (this is the default), |o| for
+%   octal output, |X| for hexadecimal output (using capital letters).
+% \end{function}
+%
+% \begin{function}[EXP]{\fp_format:nn}
+%   \begin{syntax}
+%     \cs{fp_format:nn} \Arg{fpexpr} \Arg{format specification}
+%   \end{syntax}
+%   Evaluates the \meta{floating point expression} and converts the
+%   result to a string according to the \meta{format specification}.
+%   The \meta{precision} defaults to $6$.  The \meta{style} can be
+%   \begin{itemize}
+%     \item |e| for scientific notation, with one digit before and
+%       \meta{precision} digits after the decimal separator, and an
+%       integer exponent, following |e|;
+%     \item |f| for a fixed point notation, with \meta{precision} digits
+%       after the decimal separator and no exponent;
+%     \item |g| for a general format, which uses style |f| for numbers
+%       in the range $[10^{-4}, 10^{\meta{precision}})$ and style |e|
+%       otherwise, then trims trailing zeros and a trailing decimal dot.
+%   \end{itemize}
+% \end{function}
+%
+% \section{Possibilities, and things to do}
+%
+% \begin{itemize}
+%   \item Provide a token list formatting \meta{style} which keeps the
+%     last \meta{precision} characters rather than the first
+%     \meta{precision}.
+%   \item Use the correct rounding mode.
+% \end{itemize}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3str-format} implementation}
+%
+%    \begin{macrocode}
+%<*initex|package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<@@=str>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*package>
+\ProvidesExplPackage{l3str-format-new}{2018-04-30}{}
+  {L3 Experimental formatting as strings}
+%</package>
+%    \end{macrocode}
+%
+% \subsection{Helpers}
+%
+% \begin{macro}[EXP]{\use:nf}
+%    \begin{macrocode}
+\cs_generate_variant:Nn \use:nn { nf }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\tl_if_single_token:oTF}
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_if_single_token:nTF { o }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Key--value pairs}
+%
+% \begin{macro}[EXP]{\@@_format_keyval_strip_do:nn}
+% \begin{macro}[EXP]{\@@_format_keyval_strip:n}
+% \begin{macro}[EXP]{\@@_format_keyval_strip:wn}
+%   \cs{@@_format_keyval_strip_do:nn} receives |{| \cs{q_mark} \meta{token
+%       list} |}| as its first argument, trims spaces from both ends of
+%   the \meta{token list}, and
+%   removes one set of braces, then feeds the result to its second
+%   argument as a brace group.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_keyval_strip_do:nn #1
+  {
+    \tl_trim_spaces_apply:oN { \use_none:n #1 }
+      \@@_format_keyval_strip:n
+      \q_stop
+  }
+\cs_new:Npn \@@_format_keyval_strip:n #1 { \@@_format_keyval_strip:wn #1 }
+\cs_new:Npn \@@_format_keyval_strip:wn #1 \q_stop #2 { #2 {#1} }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_keyval_parse:NNn}
+% \begin{macro}[EXP]
+%   {
+%     \@@_format_keyval_loop:NNw,
+%     \@@_format_keyval_split:wwwNNw,
+%     \@@_format_keyval_item:Nww,
+%     \@@_format_keyval_pair:Nwww,
+%     \@@_format_keyval_many:ww
+%   }
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_keyval_parse:NNn #1#2#3
+  {
+    \@@_format_keyval_loop:NNw #1#2 \q_mark
+    #3 , \q_recursion_tail , \q_recursion_stop
+  }
+\cs_new:Npn \@@_format_keyval_loop:NNw #1#2#3 ,
+  {
+    \exp_args:No \quark_if_recursion_tail_stop:n { \use_none:n #3 }
+    \@@_format_keyval_split:wwwNNw #3 \q_mark
+    , \@@_format_keyval_many:ww =
+    , \@@_format_keyval_pair:Nwww #2 =
+    , \@@_format_keyval_item:Nww #1 \q_stop
+    \@@_format_keyval_loop:NNw #1#2 \q_mark
+  }
+\cs_new:Npn \@@_format_keyval_split:wwwNNw #1 = #2 = #3 , #4#5#6 \q_stop
+  { #4 #5 #1 = \q_mark #2 = #3 \q_stop }
+\cs_new:Npn \@@_format_keyval_item:Nww #1#2 \q_mark , #3 \q_stop
+  {
+    \tl_if_blank:oF { \use_none:n #2 }
+      { \@@_format_keyval_strip_do:nn {#2} {#1} }
+  }
+\cs_new:Npn \@@_format_keyval_pair:Nwww #1#2 = #3 \q_mark , #4 \q_stop
+  {
+    \@@_format_keyval_strip_do:nn {#3}
+      { \@@_format_keyval_strip_do:nn {#2} #1 }
+  }
+\cs_new:Npn \@@_format_keyval_many:ww
+    = \q_mark #1 \q_mark #2 \q_mark \q_stop
+  {
+    \__kernel_msg_expandable_error:nnn
+      { keyval } { extra-equals } { #1 #2 }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+\__kernel_msg_new:nnn { keyval } { extra-equals }
+  { Two~'='~in~'#1' }
+%    \end{macrocode}
+%
+% \subsection{Helpers for expandable values}
+%
+% \begin{macro}{\s_@@_format}
+%    \begin{macrocode}
+\cs_new_eq:NN \s_@@_format \scan_stop:
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_val_frame:n}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_frame:n #1
+  {
+    #1
+    \use_none_delimit_by_q_stop:w \s_@@_format \q_stop
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF,EXP]{\@@_format_val_if_set:n}
+% \begin{macro}[EXP]
+%   {\@@_format_val_if_set_auxi:nnn, \@@_format_val_if_set_auxii:nwNw}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_if_set:nTF #1#2 \s_@@_format #3 \q_stop
+  {
+    \@@_format_val_if_set_auxi:nnn {#1} #3 {#1} { }
+    \q_mark \use_i:nn \q_mark \use_ii:nn \q_stop
+    #2 \s_@@_format #3 \q_stop
+  }
+\cs_new:Npn \@@_format_val_if_set:nT #1#2 { \@@_format_val_if_set:nTF {#1} {#2} { } }
+\cs_new:Npn \@@_format_val_if_set:nF #1   { \@@_format_val_if_set:nTF {#1} { } }
+\cs_new:Npn \@@_format_val_if_set_auxi:nnn #1#2#3
+  {
+    \str_if_eq:nnTF {#1} {#2}
+      { \@@_format_val_if_set_auxii:nwNw }
+      { \@@_format_val_if_set_auxi:nnn {#1} }
+  }
+\cs_new:Npn \@@_format_val_if_set_auxii:nwNw #1#2 \q_mark #3#4 \q_stop {#3}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_format_val_do:nn, \@@_format_val_do:fn}
+% \begin{macro}[EXP]{\@@_format_val_do:nn}
+% \begin{macro}[EXP]{\@@_format_val_do_auxi:nn, \@@_format_val_do_auxii:nwn}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_format_val_do:nn #1#2 { T , F , TF }
+  {
+    \@@_format_val_if_set:nTF {#1}
+      { \@@_format_val_do:nn {#1} {#2} \prg_return_true: }
+      { \prg_return_false: }
+  }
+\cs_new:Npn \@@_format_val_do:nn #1#2 \s_@@_format #3 \q_stop
+  {
+    \@@_format_val_do_auxi:nn {#1} #3 {#1} { } \q_stop
+    #2 \s_@@_format #3 \q_stop
+  }
+\cs_new:Npn \@@_format_val_do_auxi:nn #1#2#3
+  {
+    \str_if_eq:nnTF {#1} {#2}
+      { \@@_format_val_do_auxii:nwn {#3} }
+      { \@@_format_val_do_auxi:nn {#1} }
+  }
+\cs_new:Npn \@@_format_val_do_auxii:nwn #1#2 \q_stop #3 { #3 {#1} }
+\cs_generate_variant:Nn \@@_format_val_do:nn { f }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_val_unset:n}
+% \begin{macro}[EXP]{\@@_format_val_unset_aux:n, \@@_format_val_unset_auxii:nnnww}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_unset:n #1
+  { \@@_format_val_if_set:nT {#1} { \@@_format_val_unset_aux:n {#1} } }
+\cs_new:Npn \@@_format_val_unset_aux:n #1#2 \s_@@_format #3 \q_stop
+  { \@@_format_val_unset_auxii:nnnww {#1} #3 \q_mark #2 \s_@@_format \q_stop }
+\cs_new:Npn \@@_format_val_unset_auxii:nnnww #1#2#3#4 \q_mark #5 \q_stop
+  {
+    \str_if_eq:nnTF {#1} {#2}
+      { #5 #4 \q_stop }
+      {
+        \@@_format_val_unset_auxii:nnnww
+          {#1} #4 \q_mark #5 {#2} {#3} \q_stop
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_val_set_if_new:nn, \@@_format_val_set_if_new:no}
+% \begin{macro}[EXP]{\@@_format_val_set:nn, \@@_format_val_set:no, \@@_format_val_set:ff}
+% \begin{macro}[EXP]{\@@_format_val_set_new_aux:nn}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_set_if_new:nn #1#2
+  {
+    \@@_format_val_if_set:nF {#1}
+      { \exp_args:No \@@_format_val_set_new_aux:nn { \tl_to_str:n {#1} } {#2} }
+  }
+\cs_new:Npn \@@_format_val_set:nn #1
+  {
+    \@@_format_val_unset:n {#1}
+    \exp_args:No \@@_format_val_set_new_aux:nn { \tl_to_str:n {#1} }
+  }
+\cs_new:Npn \@@_format_val_set_new_aux:nn #1#2#3 \s_@@_format #4 \q_stop
+  { #3 \s_@@_format {#1} {#2} #4 \q_stop }
+\cs_generate_variant:Nn \@@_format_val_set:nn { no , ff }
+\cs_generate_variant:Nn \@@_format_val_set_if_new:nn { no }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_val_set_eq:nnF}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_set_eq:nnF #1#2
+  {
+    \@@_format_val_if_set:nTF {#2}
+      {
+        \@@_format_val_do:nn {#2}
+          { \@@_format_val_set:nn {#1} }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_val_end:n}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_val_end:n #1#2 \s_@@_format #3 \q_stop {#1}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Defining keys for \pkg{str-format}}
+%
+% \begin{macro}[EXP]{\@@_format_parse:n}
+%   This must be called within a \cs{@@_format_val_frame:n}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_parse:n
+  { \@@_format_keyval_parse:NNn \@@_format_key:n \@@_format_key:nn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_key:n, \@@_format_key:nn}
+% \begin{macro}[EXP]{\@@_format_key_aux:nn}
+%   The \texttt{keyval} processing does not turn \meta{keys} to strings,
+%   and weird things would happen if they got expanded differently at
+%   various places in the code, so we turn \meta{keys} into strings
+%   right away.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_key:n #1 { \@@_format_key:nn {#1} { } }
+\cs_new:Npn \@@_format_key:nn #1
+  { \exp_args:No \@@_format_key_aux:nn { \tl_to_str:n {#1} } }
+\cs_new:Npn \@@_format_key_aux:nn #1#2
+  {
+    \cs_if_exist_use:cTF { @@_format / #1 :nn }
+      { {#1} {#2} }
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str-format } { unknown-key } {#1} {#2}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format/style:nn, \@@_format/fill:nn, \@@_format/alignment:nn}
+%   A few keys whose value must be a single character.  The
+%   \texttt{style} and \texttt{alignment} are subject to additional
+%   restrictions which depend on the type of variable hence are catered
+%   for later on.
+%    \begin{macrocode}
+\cs_new:cpn { @@_format / style :nn } #1#2
+  {
+    \tl_if_single_token:oTF { \tl_to_str:n {#2} }
+      {
+        \@@_format_val_set:ff { \str_head:n {#1} }
+          {
+            \tl_if_blank:oTF { \tl_to_str:n {#2} }
+              { \c_catcode_other_space_tl }
+              { \tl_to_str:n {#2} }
+          }
+      }
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str-format } { invalid-value } {#1} {#2}
+      }
+  }
+\cs_new_eq:cc { @@_format / fill :nn } { @@_format / style :nn }
+\cs_new_eq:cc { @@_format / alignment :nn } { @@_format / style :nn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format/width:nn, \@@_format/precision:nn}
+%   Keys with non-negative integer values.
+%    \begin{macrocode}
+\cs_new:cpn { @@_format / width :nn } #1#2
+  {
+    \@@_format_val_set:ff { \str_head:n {#1} } { \int_eval:n {#2} }
+    \@@_format_val_do:fn { \str_head:n {#1} } \int_compare:nNnT < 0
+      {
+        \@@_format_val_do:fn { \str_head:n {#1} }
+          {
+            \__kernel_msg_expandable_error:nnnn
+              { str-format } { invalid-value } {#1}
+          }
+      }
+  }
+\cs_new_eq:cc { @@_format / precision :nn } { @@_format / width :nn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]
+%   {
+%     \@@_format/+:nn, \@@_format/-:nn,
+%     \@@_format/+0-sign:nn, \@@_format/-0-sign:nn, \@@_format/0-body:nn,
+%     \@@_format/+inf-sign:nn, \@@_format/-inf-sign:nn, \@@_format/inf-body:nn,
+%     \@@_format/nan-sign:nn, \@@_format/nan-body:nn
+%   }
+%   Keys with string values.
+%    \begin{macrocode}
+\cs_new:cpn { @@_format / + :nn } #1#2
+  { \@@_format_val_set:no {#1} { \tl_to_str:n {#2} } }
+\cs_new_eq:cc { @@_format / - :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format / +  0-sign :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format / -  0-sign :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format /    0-body :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format / +inf-sign :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format / -inf-sign :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format /  inf-body :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format /  nan-sign :nn } { @@_format / + :nn }
+\cs_new_eq:cc { @@_format /  nan-body :nn } { @@_format / + :nn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format/sign:nn}
+%    \begin{macrocode}
+ % \cs_new:cpn { @@_format / sign :nn } #1#2
+ %   {
+ %     \str_case:nnF {#2}
+ %       {
+ %         {   } { \@@_format_key:nn { + } {   } }
+ %         { - } { \@@_format_key:nn { + } {   } }
+ %         { ~ } { \@@_format_key:nn { + } { ~ } }
+ %         { + } { \@@_format_key:nn { + } { + } }
+ %       }
+ %       {
+ %         \__kernel_msg_expandable_error:nnnn
+ %           { str-format } { invalid-value } {#1} {#2}
+ %       }
+ %   }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\__kernel_msg_new:nnn { str-format } { unknown-key }
+  { Unknown~key~'#1'~for~string~format. }
+\__kernel_msg_new:nnn { str-format } { invalid-value }
+  { Key~'#1'~given~invalid~value~'#2'. }
+\__kernel_msg_new:nnn { str-format } { invalid-style }
+  { The~style~'#1'~is~invalid~for~type~'#2'. }
+%    \end{macrocode}
+%
+% \subsection{Final alignment}
+%
+% \begin{macro}[EXP]{\@@_format_align:n, \@@_format_align:f}
+% \begin{macro}[EXP]
+%   {
+%     \@@_format_align_aux:nnnnn, \@@_format_align_<:nnnn, \@@_format_align_^:nnnn,
+%     \@@_format_align_>:nnnn , \@@_format_align_=:nnnn
+%   }
+%   Importantly, \cs{@@_format_align:n} ends with a call to \cs{@@_format_val_end:n},
+%   hence any further code in the same \cs{@@_format_val_frame:n} is ignored.
+%   The auxiliary \cs{@@_format_align_aux:nnnnn} receives the alignment type,
+%   followed by the target width, the padding character, the \meta{sign}
+%   and the \meta{body}.  Each of the other four auxiliaries receives
+%   the amount of padding required, the padding character, the
+%   \meta{sign}, and the \meta{body}.  For the alignment~|^|, if the
+%   number of padding characters is odd, we add one more after than
+%   before.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_align:n
+  {
+    \@@_format_val_do:nn { S }
+      {
+        \@@_format_val_set_if_new:no { f } { \c_catcode_other_space_tl }
+        \@@_format_val_do:nn { f }
+          {
+            \@@_format_val_do:nn { w }
+              {
+                \@@_format_val_set_if_new:nn { a } { < }
+                \@@_format_val_do:nn { a }
+                  { \@@_format_align_aux:nnnnn }
+              }
+          }
+      }
+  }
+\cs_generate_variant:Nn \@@_format_align:n { f }
+\cs_new:Npn \@@_format_align_aux:nnnnn #1#2#3#4#5
+  {
+    \@@_format_val_end:n
+      {
+        \exp_args:Nf \tl_to_str:n
+          {
+            \cs_if_exist:cTF { @@_format_align_#1:nnnn }
+              { \exp_args:Nc \exp_args:Nf { @@_format_align_#1:nnnn } }
+              {
+                \__kernel_msg_expandable_error:nnnn
+                  { str-format } { invalid-value } { alignment } {#1}
+                \exp_args:Nc \exp_args:Nf { @@_format_align_<:nnnn }
+              }
+              { \int_max:nn { 0 } { #2 - \str_count:n { #4 #5 } } }
+              {#3}
+              {#4}
+              {#5}
+          }
+      }
+  }
+\cs_new:cpn { @@_format_align_<:nnnn } #1#2#3#4
+  { \use:nf { #3 #4 } { \prg_replicate:nn {#1} {#2} } }
+\cs_new:cpn { @@_format_align_^:nnnn } #1#2#3#4
+  {
+    \use:nf
+      { \prg_replicate:nn { #1 - #1 / 2 } {#2} #3 #4 }
+      { \prg_replicate:nn { #1 / 2 } {#2} }
+  }
+\cs_new:cpn { @@_format_align_>:nnnn } #1#2#3#4
+  { \prg_replicate:nn {#1} {#2} #3 #4 }
+\cs_new:cpn { @@_format_align_=:nnnn } #1#2#3#4
+  { \use:nf {#3} { \prg_replicate:nn {#1} {#2} } #4 }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Floating point helper}
+%
+% \begin{macro}[EXP]{\@@_format_fp_split:nN}
+% \begin{macro}[EXP]
+%   {\@@_format_fp_split_auxi:Nwww, \@@_format_fp_split_auxii:NwwwnN}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_split:nN #1
+  {
+    \exp_last_unbraced:Nf \@@_format_fp_split_auxi:Nwww
+      { \fp_to_scientific:n {#1} } e 0 e \q_stop
+  }
+\cs_new:Npn \@@_format_fp_split_auxi:Nwww #1#2 e #3 e #4 \q_stop
+  {
+    \token_if_eq_charcode:NNTF - #1
+      { \@@_format_fp_split_auxii:NwwwnN }
+      { \@@_format_fp_split_auxii:NwwwnN + }
+      #1 #2 . . \q_stop
+    {#3}
+  }
+\cs_new:Npn \@@_format_fp_split_auxii:NwwwnN
+    #1#2 . #3 . #4 \q_stop #5#6 { #6 #1 #2 {#3} {#5} }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Floating point formatting}
+%
+% \begin{macro}[EXP]{\fp_format:nn}
+% \begin{macro}[EXP]{\@@_format_fp_dispatch:nnn}
+%   Parse the format specification~|#2| and set some default values:
+%   align to the right, precision~$6$, style~|g|.  Then evaluate the
+%   floating-point expression and dispatch depending on the style |e|,
+%   |f| or~|g|, as the rounding required by the \meta{precision}
+%   parameter depends on the style, and rounding can turn a non-zero
+%   finite floating point into $\pm 0$ or $\pm\infty$.
+%    \begin{macrocode}
+\cs_new:Npn \fp_format:nn #1#2
+  {
+    \@@_format_val_frame:n
+      {
+        \@@_format_parse:n {#2}
+        \@@_format_val_set_if_new:nn { a } { > }
+        \@@_format_val_set_if_new:nn { p } { 6 }
+        \@@_format_val_set_if_new:nn { s } { g }
+        \@@_format_val_do:nn { p }
+          {
+            \@@_format_val_do:nn { s }
+              {
+                \exp_args:Nf \@@_format_fp_dispatch:nnn
+                  { \fp_to_tl:n {#1} }
+              }
+          }
+      }
+  }
+\cs_new:Npn \@@_format_fp_dispatch:nnn #1#2
+  {
+    \cs_if_exist_use:cF { @@_format_fp_#2:nn }
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str-format } { invalid-style } {#2} { fp }
+        \@@_format_fp_g:nn
+      }
+    {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_fp_special:nF}
+% \begin{macro}[EXP]{\@@_format_fp_special_aux:nn}
+%   This function receives |inf|, |-inf| or |nan| and calls
+%   \cs{@@_format_align:n} after setting~|S| correctly.  The result does not
+%   depend on the \meta{style}.  For |inf|, the result is the value of
+%   |+inf-sign| (or of~|+|) followed by the value of |inf-body|.  Same
+%   for |-inf| with the keys |-inf-sign| and~|-| instead.  The sign of
+%   |nan| can only come from |nan-sign|.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_special:nF #1
+  {
+    \str_case:nnF {#1}
+      {
+        {  inf } { \@@_format_fp_special_aux:nn { + } { inf } }
+        { -inf } { \@@_format_fp_special_aux:nn { - } { inf } }
+        {  nan } { \@@_format_fp_special_aux:nn {   } { nan } }
+      }
+  }
+\cs_new:Npn \@@_format_fp_special_aux:nn #1#2
+  {
+    \@@_format_val_set_eq:nnF { S } { #1#2-sign }
+      {
+        \tl_if_empty:nF {#1}
+          { \@@_format_val_set_eq:nnF { S } {#1} { } }
+      }
+    \@@_format_val_do:nnF { #2-body } { \@@_format_align:n }
+      { \@@_format_align:n {#2} }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_fp_sign:N, \@@_format_fp_zero:NN}
+%   These two functions are always called one after the other, and do
+%   not depend on the \meta{style}.  The \meta{sign} is the value of the
+%   key |+| or~|-| (depending on~|#1|), where |+|~defaults to being
+%   empty and |-|~defaults to~|-|.  If the number is~$\pm 0$ and the
+%   corresponding key |+0-sign| or |-0-sign| is set, then that is used
+%   instead.  Once the sign~|S| is found, if the number is zero and the
+%   key |0-body| is set, its value is aligned using \cs{@@_format_align:n}.
+%   Otherwise carry on to the \meta{style}-specific code.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_sign:N #1
+  {
+    \@@_format_val_set_eq:nnF { S } {#1}
+      {
+        \token_if_eq_charcode:NNT - #1
+          { \@@_format_val_set:nn { S } { - } }
+      }
+  }
+\cs_new:Npn \@@_format_fp_zero:NN #1#2
+  {
+    \token_if_eq_charcode:NNT 0 #2
+      {
+        \@@_format_val_set_eq:nnF { S } { #1 0-sign } { }
+        \@@_format_val_do:nnF { 0-body } { \@@_format_align:n } { }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_fp_e:nn}
+% \begin{macro}[EXP]{\@@_format_fp_e_auxi:nn, \@@_format_fp_e_auxii:NNnnn}
+%   First filter out floating point numbers which are infinite or
+%   \texttt{nan}, as the rounding step would blow up.  For finite
+%   floating point numbers, the construction \cs{@@_format_fp_split:nN} |{#1}|
+%   \cs{use_iv:nnnn} extracts the (scientific notation) exponent
+%   of~|#1|, and we round to $1+|#2|$ significant figures.  If the
+%   \meta{precision} |#2| is negative or zero, we replace it by~$0$,
+%   hence we round to~$1$ significant figure.  Rounding may make the
+%   floating point infinite, so we filter this case out again (for
+%   instance, the largest finite number is rounded to $+\infty$ if
+%   \meta{precision} is less than~$15$).  Then split into a \meta{sign},
+%   a \meta{first digit} (zero only if the rounded floating point number
+%   is zero), \Arg{more digits}, an \Arg{exponent}, and keep the
+%   \Arg{precision}.  Using those five arguments, the \texttt{auxii}
+%   auxiliary finds the final \meta{sign}, filters out zero if needed,
+%   and constructs the result, which has the appropriate number of zeros
+%   so that there are |#5|~digits after the decimal dot (absent for zero
+%   precision), before calling \cs{@@_format_align:n}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_e:nn #1#2
+  {
+    \@@_format_fp_special:nF {#1}
+      {
+        \exp_args:Nf \@@_format_fp_e_auxi:nn
+          {
+            \fp_to_tl:n
+              {
+                round ( #1 , \int_max:nn {0} {#2}
+                  - \@@_format_fp_split:nN {#1} \use_iv:nnnn )
+              }
+          }
+          {#2}
+      }
+  }
+\cs_new:Npn \@@_format_fp_e_auxi:nn #1#2
+  {
+    \@@_format_fp_special:nF {#1}
+      { \@@_format_fp_split:nN {#1} \@@_format_fp_e_auxii:NNnnn {#2} }
+  }
+\cs_new:Npn \@@_format_fp_e_auxii:NNnnn #1#2#3#4#5
+  {
+    \@@_format_fp_sign:N #1
+    \@@_format_fp_zero:NN #1#2
+    \@@_format_align:f
+      {
+        \use:nf
+          { \int_compare:nNnTF {#5} > 0 { #2 . #3 } {#2} }
+          {
+            \prg_replicate:nn
+              { \int_max:nn { 0 } { #5 - \str_count:n {#3} } } { 0 }
+          }
+        e #4
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_fp_f:nn}
+% \begin{macro}[EXP]
+%   {\@@_format_fp_f_auxi:nn, \@@_format_fp_f_auxii:NNnnn, \@@_format_fp_f_auxiii:wwwn}
+%   Round to |#2| (absolute) decimal places, then filter out special
+%   cases.  Then, the \texttt{auxii} auxiliary constructs the correct
+%   sign and takes care of zeroes if needed.  The main case uses
+%   \cs{fp_to_decimal:n} for most of the work, simply taking care of
+%   putting/omitting the decimal dot and adding trailing zeros if
+%   needed.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_f:nn #1#2
+  {
+    \exp_args:Nf \@@_format_fp_f_auxi:nn
+      { \fp_to_tl:n { round ( #1 , \int_max:nn {0} {#2} ) } }
+      {#2}
+  }
+\cs_new:Npn \@@_format_fp_f_auxi:nn #1#2
+  {
+    \@@_format_fp_special:nF {#1}
+      { \@@_format_fp_split:nN {#1} \@@_format_fp_f_auxii:NNnnn {#2} }
+  }
+\cs_new:Npn \@@_format_fp_f_auxii:NNnnn #1#2#3#4#5
+  {
+    \@@_format_fp_sign:N #1
+    \@@_format_fp_zero:NN #1#2
+    \@@_format_align:f
+      {
+        \exp_last_unbraced:Nf \@@_format_fp_f_auxiii:wwwn
+          { \fp_to_decimal:n { #2.#3e#4 } } . . \q_stop {#5}
+      }
+  }
+\cs_new:Npn \@@_format_fp_f_auxiii:wwwn #1 . #2 . #3 \q_stop #4
+  {
+    \use:nf {#1}
+      {
+        \int_compare:nNnT {#4} > 0
+          {
+            \use:nf { . #2 }
+              { \prg_replicate:nn { #4 - \str_count:n {#2} } {0} }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_fp_g:nn}
+% \begin{macro}[EXP]{\@@_format_fp_g_auxi:nn, \@@_format_fp_g_auxii:NNnnn}
+%   The |g|~style starts like the |e|~style, but rounding to
+%   \meta{precision}~(|#2|) significant figures instead of $|#2|+1$.
+%   Once the special cases, signs and zeroes are taken care of, simply
+%   call \cs{fp_to_decimal:n} on inputs that are in the range $[10^{-4},
+%   10^{\meta{precision}})$ and otherwise use scientific notation.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_fp_g:nn #1#2
+  {
+    \@@_format_fp_special:nF {#1}
+      {
+        \exp_args:Nf \@@_format_fp_g_auxi:nn
+          {
+            \fp_to_tl:n
+              {
+                round ( #1 , \int_max:nn { 0 } { #2 - 1 }
+                  - \@@_format_fp_split:nN {#1} \use_iv:nnnn )
+              }
+          }
+          { \int_max:nn { 1 } {#2} }
+      }
+  }
+\cs_new:Npn \@@_format_fp_g_auxi:nn #1#2
+  {
+    \@@_format_fp_special:nF {#1}
+      { \@@_format_fp_split:nN {#1} \@@_format_fp_g_auxii:NNnnn {#2} }
+  }
+\cs_new:Npn \@@_format_fp_g_auxii:NNnnn #1#2#3#4#5
+  {
+    \@@_format_fp_sign:N #1
+    \@@_format_fp_zero:NN #1#2
+    \@@_format_align:f
+      {
+        \int_compare:nTF { -5 < #4 < #5 }
+          { \fp_to_decimal:n { #2.#3 e #4 } }
+          { \tl_if_empty:nTF {#3} {#2} { #2 . #3 } e #4 }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+\tex_endinput:D
+%    \end{macrocode}
+%
+% \subsection{Helpers}
+%
+% \begin{macro}[EXP]{\use:nf, \use:fnf}
+%   A simple variant.
+%    \begin{macrocode}
+\cs_generate_variant:Nn \use:nn { nf }
+\cs_generate_variant:Nn \use:nnn { fnf }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\tl_to_str:f}
+%   A simple variant.
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_to_str:n { f }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_if_digit:NTF}
+%   Here we expect |#1| to be a character with category other, or
+%   \cs{s_stop}.
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_format_if_digit:N #1 { TF }
+  {
+    \if_int_compare:w 9 < 1 #1 \exp_stop_f:
+      \prg_return_true: \else: \prg_return_false: \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]
+%   {\@@_format_put:nw, \@@_format_put:ow, \@@_format_put:fw}
+%   Put |#1| after an \cs{s_stop} delimiter.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_put:nw #1 #2 \s_stop { #2 \s_stop #1 }
+\cs_generate_variant:Nn \@@_format_put:nw { o , f }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP, TF]{\@@_format_if_in:nN}
+% \begin{macro}[EXP]{\@@_format_if_in_aux:NN}
+%   A copy of \cs{@@_if_contains_char:nNTF} to avoid relying on
+%   this weird internal string function.
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_format_if_in:nN #1#2 { TF }
+  {
+    \@@_format_if_in_aux:NN #2 #1
+      { #2 \prg_return_false: \exp_after:wN \prg_break: \else: }
+    \prg_break_point:
+  }
+\cs_new:Npn \@@_format_if_in_aux:NN #1#2
+  {
+    \if_charcode:w #1 #2
+      \prg_return_true:
+      \exp_after:wN \prg_break:
+    \fi:
+    \@@_format_if_in_aux:NN #1
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Parsing a format specification}
+%
+% \begin{macro}[EXP]{\@@_format_python:n}
+% \begin{macro}[EXP]
+%   {
+%     \@@_format_python_auxi:NN,
+%     \@@_format_python_auxii:nN,
+%     \@@_format_python_auxiii:nN,
+%     \@@_format_python_auxiv:nwN,
+%     \@@_format_python_auxv:nN,
+%     \@@_format_python_auxvi:nwN,
+%     \@@_format_python_auxvii:nN,
+%     \@@_format_python_end:nwn,
+%   }
+%   The goal is to parse
+%   \begin{equation*}
+%     \meta{format specification} = [[\meta{fill}]\meta{alignment}]
+%     [\meta{sign}] [\meta{width}] [.\meta{precision}] [\meta{style}]
+%   \end{equation*}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_python:n #1
+  {
+    \exp_last_unbraced:Nf \@@_format_python_auxi:NN
+      { \__kernel_str_to_other:n {#1} } \s_stop \s_stop {#1}
+  }
+\cs_new:Npx \@@_format_python_auxi:NN #1#2
+  {
+    \exp_not:N \@@_format_if_in:nNTF { < > = ^ } #2
+      { \exp_not:N \@@_format_python_auxiii:nN { #1 #2 } }
+      {
+        \exp_not:N \@@_format_python_auxii:nN
+          { \c_catcode_other_space_tl } #1 #2
+      }
+  }
+\cs_new:Npn \@@_format_python_auxii:nN #1#2
+  {
+    \@@_format_if_in:nNTF { < > = ^ } #2
+      { \@@_format_python_auxiii:nN { #1 #2 } }
+      { \@@_format_python_auxiii:nN { #1 ? } #2 }
+  }
+\cs_new:Npx \@@_format_python_auxiii:nN #1#2
+  {
+    \exp_not:N \@@_format_if_in:nNTF
+      { + - \c_catcode_other_space_tl }
+      #2
+      { \exp_not:N \@@_format_python_auxiv:nwN { #1 #2 } ; }
+      { \exp_not:N \@@_format_python_auxiv:nwN { #1 ? } ; #2 }
+  }
+\cs_new:Npn \@@_format_python_auxiv:nwN #1#2; #3
+  {
+    \@@_format_if_digit:NTF #3
+      { \@@_format_python_auxiv:nwN {#1} #2 #3 ; }
+      { \@@_format_python_auxv:nN { #1 {#2} } #3 }
+  }
+\cs_new:Npn \@@_format_python_auxv:nN #1#2
+  {
+    \token_if_eq_charcode:NNTF . #2
+      { \@@_format_python_auxvi:nwN {#1} 0 ; }
+      { \@@_format_python_auxvii:nN { #1 { } } #2 }
+  }
+\cs_new:Npn \@@_format_python_auxvi:nwN #1#2; #3
+  {
+    \@@_format_if_digit:NTF #3
+      { \@@_format_python_auxvi:nwN {#1} #2 #3 ; }
+      { \@@_format_python_auxvii:nN { #1 {#2} } #3 }
+  }
+\cs_new:Npn \@@_format_python_auxvii:nN #1#2
+  {
+    \token_if_eq_meaning:NNTF \s_stop #2
+      { \@@_format_python_end:nwn { #1 ? } #2 }
+      { \@@_format_python_end:nwn { #1 #2 } }
+  }
+\cs_new:Npn \@@_format_python_end:nwn #1 #2 \s_stop \s_stop #3
+  {
+    \tl_if_empty:nF {#2}
+      { \__kernel_msg_expandable_error:nnn { str } { invalid-format } {#3} }
+    #1
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Formatting token lists}
+%
+% \begin{macro}[EXP]{\tl_format:Nn, \tl_format:cn, \tl_format:nn}
+%   Call \cs{@@_format_tl:NNNnnNn} to read the parsed \meta{format
+%     specification}.  Then convert the result to a string.
+%    \begin{macrocode}
+\cs_new:Npn \tl_format:Nn { \exp_args:No \tl_format:nn }
+\cs_generate_variant:Nn \tl_format:Nn { c }
+\cs_new:Npn \tl_format:nn #1#2
+  {
+    \tl_to_str:f
+      {
+        \exp_last_unbraced:Nf \@@_format_tl:NNNnnNn
+          { \@@_format_python:n {#2} }
+          {#1}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_tl:NNNnnNn}
+%   \begin{quote}
+%     \cs{@@_format_tl:NNNnnNn} \meta{fill} \meta{alignment} \meta{sign}
+%     \Arg{width} \Arg{precision} \meta{style} \Arg{token list}
+%   \end{quote}
+%   First check that the \meta{alignment} is not |=|, and set the
+%   default alignment |?| to |<|.  Place the modified information after
+%   a trailing \cs{s_stop} for later retrieval.  Then check that there
+%   was no \meta{sign}.  The width will be useful later, store it after
+%   \cs{s_stop}.  Afterwards, store the precision, and the function
+%   \cs{@@_range_unsafe:nnn} that will be used to extract the first
+%   |#5| characters of the string.
+%   There is a need to use the \enquote{unsafe} function, as otherwise
+%   leading spaces would get stripped by |f|-expansion.  Finally, check
+%   that the \meta{style} is |?| or |s|.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_tl:NNNnnNn #1#2#3#4#5#6
+  {
+    \token_if_eq_charcode:NNTF #2 =
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str } { invalid-align-format } {#2} {tl}
+        \@@_format_put:nw { #1 < }
+      }
+      {
+        \token_if_eq_charcode:NNTF #2 ?
+          { \@@_format_put:nw { #1 < } }
+          { \@@_format_put:nw { #1 #2 } }
+      }
+    \token_if_eq_charcode:NNF #3 ?
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str } { invalid-sign-format } {#3} {tl}
+      }
+    \@@_format_put:nw { {#4} }
+    \tl_if_empty:nTF {#5}
+      { \@@_format_put:nw { \@@_range_unsafe:nnn { {1} {-1} } } }
+      { \@@_format_put:nw { \@@_range_unsafe:nnn { {1} {#5} } } }
+    \token_if_eq_charcode:NNF #6 s
+      {
+        \token_if_eq_charcode:NNF #6 ?
+          {
+            \__kernel_msg_expandable_error:nnnn
+              { str } { invalid-style-format } {#6} {tl}
+          }
+      }
+    \@@_format_tl_s:NNnnNNn
+    \s_stop
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_tl_s:NNnnNNn}
+%   \begin{quote}
+%     \cs{@@_format_tl_s:NNnnNNn} \cs{s_stop} \meta{function}
+%     \Arg{arguments} \Arg{width} \meta{fill} \meta{alignment}
+%     \Arg{token list}
+%   \end{quote}
+%   The \meta{function} and \meta{arguments} are built in such a way
+%   that |f|-expanding \meta{function} \Arg{other string}
+%   \meta{arguments} yields the piece of the \meta{other string} that we
+%   want to output.  The \meta{other string} is built from the
+%   \meta{token list} by |f|-expanding \cs{__kernel_str_to_other:n}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_tl_s:NNnnNNn #1#2#3#4#5#6#7
+  {
+    \exp_args:Nc \exp_args:Nf
+      { @@_format_align_#6:nnnN }
+      { \exp_args:Nf #2 { \__kernel_str_to_other:n {#7} } #3 }
+      { }
+      {#4} #5
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Formatting sequences}
+%
+% \begin{macro}[EXP]{\seq_format:Nn, \seq_format:cn}
+%   Each item is formatted as a token list according to the
+%   specification.  First parse the format and expand the sequence, then
+%   loop through the items.  Eventually, convert to a string.
+%    \begin{macrocode}
+\cs_new:Npn \seq_format:Nn #1#2
+  {
+    \tl_to_str:f
+      {
+        \@@_format_seq:ff
+          { \exp_after:wN \use_i:nn \exp_after:wN \exp_stop_f: #1 }
+          { \@@_format_python:n {#2} }
+      }
+  }
+\cs_generate_variant:Nn \seq_format:Nn { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_seq:nn, \@@_format_seq:ff}
+%   The first argument is the contents of a \texttt{seq} variable.  The
+%   second is a parsed \meta{format specification}.  Set up the loop.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_seq:nn #1#2
+  {
+    \@@_format_seq_loop:nnNn { } {#2}
+      #1
+      { ? \@@_format_seq_end:w } { }
+  }
+\cs_generate_variant:Nn \@@_format_seq:nn { ff }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_seq_loop:nnNn}
+%   \begin{quote}
+%     \cs{@@_format_seq_loop:nnNn} \Arg{done} \Arg{parsed format}
+%     \cs{__seq_item:n} \Arg{item}
+%   \end{quote}
+%   The first argument is the result of formatting the items read so
+%   far.  The third argument is a single token (\cs{__seq_item:n}),
+%   until we reach the end of the sequence, where |\use_none:n #3| ends
+%   the loop.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_seq_loop:nnNn #1#2#3#4
+  {
+    \use_none:n #3
+    \exp_args:Nf \@@_format_seq_loop:nnNn
+      { \use:nf {#1} { \@@_format_tl:NNNnnNn #2 {#4} } }
+      {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_seq_end:w}
+%   Pick the right piece in the loop above.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_seq_end:w #1#2#3#4 { \use_ii:nnn #3 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Formatting integers}
+%
+% \begin{macro}[EXP]{\int_format:nn}
+%   Evaluate the first argument and feed it to \cs{@@_format_int:nn}.
+%    \begin{macrocode}
+\cs_new:Npn \int_format:nn #1
+  { \exp_args:Nf \@@_format_int:nn { \int_eval:n {#1} } }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_int:nn}
+%   Parse the \meta{format specification} and feed it to
+%   \cs{@@_format_int:NNNnnNn}.  Then convert the result to a string
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_int:nn #1#2
+  {
+    \tl_to_str:f
+      {
+        \exp_last_unbraced:Nf \@@_format_int:NNNnnNn
+          { \@@_format_python:n {#2} }
+          {#1}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_int:NNNnnNn}
+%   \begin{quote}
+%     \cs{@@_format_int:NNNnnNn} \meta{fill} \meta{alignment}
+%     \meta{sign} \Arg{width} \Arg{precision} \meta{style} \Arg{integer}
+%   \end{quote}
+%   First set the
+%   default alignment |?| to |>|.  Place the modified information after
+%   a trailing \cs{s_stop} for later retrieval.  Then check the
+%   \meta{sign}: if the integer is negative, always put~|-|.  Otherwise,
+%   if the format's \meta{sign} is |~|, put a space (with category
+%   \enquote{other}); if it is~|+| put |+|; if it is |-| (default), put
+%   nothing, represented as a brace group.  The width |#4| will be
+%   useful later, store it after \cs{s_stop}.  Afterwards, check that
+%   the \meta{precision} was absent.  Finally, dispatch depending on the
+%   \meta{style}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_int:NNNnnNn #1#2#3#4#5#6#7
+  {
+    \token_if_eq_charcode:NNTF #2 ?
+      { \@@_format_put:nw { #1 > } }
+      { \@@_format_put:nw { #1 #2 } }
+    \int_compare:nNnTF {#7} < 0
+      { \@@_format_put:nw { - } }
+      {
+        \str_case:nnF {#3}
+          {
+            { ~ } { \@@_format_put:ow { \c_catcode_other_space_tl } }
+            { + } { \@@_format_put:nw { + } }
+          }
+          { \@@_format_put:nw { { } } }
+      }
+    \@@_format_put:nw { {#4} }
+    \tl_if_empty:nF {#5}
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str } { invalid-precision-format } {#5} {int}
+      }
+    \str_case:nnF {#6}
+      {
+        { ? } { \@@_format_int:NwnnNNn \use:n }
+        { d } { \@@_format_int:NwnnNNn \use:n }
+        { b } { \@@_format_int:NwnnNNn \int_to_bin:n }
+        { o } { \@@_format_int:NwnnNNn \int_to_oct:n }
+        { X } { \@@_format_int:NwnnNNn \int_to_Hex:n }
+      }
+      {
+        \__kernel_msg_expandable_error:nnnn
+          { str } { invalid-style-format } {#6} { int }
+        \@@_format_int:NwnnNNn \use:n
+      }
+    \s_stop {#7}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_format_int:NwnnNNn}
+%   \begin{quote}
+%     \cs{@@_format_int:NwnnNNn} \meta{function} \cs{s_stop}
+%     \Arg{width} \Arg{sign} \meta{fill} \meta{alignment} \Arg{integer}
+%   \end{quote}
+%   Use the |format_align| function corresponding to the
+%   \meta{alignment}, with the following arguments:
+%   \begin{itemize}
+%     \item the string formed by combining the sign |#4| with the result
+%       of converting the absolute value of the \meta{integer} |#7|
+%       according to the conversion function |#1|;
+%     \item the \meta{width};
+%     \item the \meta{fill} character.
+%   \end{itemize}
+%    \begin{macrocode}
+\cs_new:Npn \@@_format_int:NwnnNNn #1#2 \s_stop #3#4#5#6#7
+  {
+    \exp_args:Nc \exp_args:Nf
+      { @@_format_align_#6:nnnN }
+      { #1 { \int_abs:n {#7} } }
+      {#4}
+      {#3} #5
+  }
+%    \end{macrocode}
+% ^^A todo: note similarity with  \@@_format_tl_s:NNnnNNn
+% \end{macro}
+%
+% \subsection{Messages}
+%
+% All of the messages are produced expandably, so there is no need for
+% an extra-text.
+%    \begin{macrocode}
+\__kernel_msg_new:nnn { str } { invalid-format }
+  { Invalid~format~'#1'. }
+\__kernel_msg_new:nnn { str } { invalid-align-format }
+  { Invalid~alignment~'#1'~for~style~'#2'. }
+\__kernel_msg_new:nnn { str } { invalid-sign-format }
+  { Invalid~sign~'#1'~for~style~'#2'. }
+\__kernel_msg_new:nnn { str } { invalid-precision-format }
+  { Invalid~precision~'#1'~for~style~'#2'. }
+\__kernel_msg_new:nnn { str } { invalid-style-format }
+  { Invalid~style~'#1'~for~type~'#2'. }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</initex|package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

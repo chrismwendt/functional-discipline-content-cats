@@ -1,0 +1,66 @@
+%
+% Copyright (C) 2014,2018-2020 The LaTeX3 Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+
+
+
+% Leave some padding so that the line numbers
+% of the tests don't change later on.
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\START
+\AUTHOR{Bruno Le Floch, Joseph Wright}
+\ExplSyntaxOn
+
+\OMIT
+\tl_new:N  \filea
+\tl_new:N  \fileb
+\tl_set:Nn \filea { filetest.txt }
+\tl_set:Nn \fileb { NotAFile.xxx.yyy.zzz }
+\tl_new:N \l_A_tl
+\tl_new:N \l_B_tl
+\tl_new:N \l_C_tl
+\cs_new_nopar:Npn \test_wrapping:
+  { \int_set:Nn \tex_newlinechar:D { `, } }
+\cs_new:Npn \test_newline: { , }
+% Ugly, makes sure lines are not too long
+% to avoid LuaTeX line-wrapping differences.
+\TIMO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { Get~a~file }
+  {
+    \test_wrapping:
+    \file_get:nnN { \filea } { } \l_A_tl
+    \file_get:nnN { \filea } { \ExplSyntaxOff } \l_B_tl
+    \file_get:nnN { \filea }
+      {
+        \ExplSyntaxOff
+        \int_set:Nn \tex_endlinechar:D { -1 }
+      }
+      \l_C_tl
+    \TYPE
+      {
+        | \tl_to_str:N \l_A_tl | \test_newline:
+        | \tl_to_str:N \l_B_tl | \test_newline:
+        | \tl_to_str:N \l_C_tl | \test_newline:
+      }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST { Get~a~non-existent~file  }
+  {
+    \tl_set:Nn \l_A_tl { A }
+    \file_get:nnN { \fileb } { \ERROR } \l_A_tl
+    \TYPE { | \tl_to_str:N \l_A_tl | }
+  }
+
+\END

@@ -1,0 +1,205 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Joseph Wright
+============================================================
+TEST 1: \keys_set_known:nn 
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+"value"
+============================================================
+============================================================
+TEST 2: \keys_set_known:nnN 
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+"value"
+> \l_tmpa_tl=key-three={other-value},key-four.
+============================================================
+============================================================
+TEST 3: \keys_set_known:nnnN 
+============================================================
+Defining key module/sub/key-one on line ...
+Defining key module/sub/key-two on line ...
+"value"
+> \l_tmpa_tl=sub/key-three={other-value},sub/key-four.
+"value"
+! LaTeX3 Error: The key 'module/sub/key-three' is not inside the 'foo' path.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The key 'module/sub/key-three' cannot be expressed relative to path 'foo'.
+! LaTeX3 Error: The key 'module/sub/key-four' is not inside the 'foo' path.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The key 'module/sub/key-four' cannot be expressed relative to path 'foo'.
+> \l_tmpa_tl=={other-value}.
+============================================================
+============================================================
+TEST 4: \keys_set_known:nnN nesting
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+"foo"
+> \l_tmpa_tl=.
+> \l_tmpb_tl=.
+> \l_tmpa_tl=.
+> \l_tmpb_tl=key-three={foo}.
+> \l_tmpa_tl=key-three={key-two=foo}.
+> \l_tmpb_tl=key-three={foo}.
+> \l_tmpa_tl=key-three={key-four=foo}.
+> \l_tmpb_tl=key-three={foo}.
+============================================================
+============================================================
+TEST 5: \keys_set_filter:nnn 
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+Defining key module/key-three on line ...
+Defining key module/key-four on line ...
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+"value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+"value"
+"other-value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+"value"
+"other-value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+============================================================
+============================================================
+TEST 6: \keys_set_filter:nnnN 
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+Defining key module/key-three on line ...
+Defining key module/key-four on line ...
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+> \l_tmpa_tl=key-one={value},key-three={other-value}.
+"value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+> \l_tmpa_tl=key-three={other-value}.
+"value"
+"other-value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+> \l_tmpa_tl=.
+"value"
+"other-value"
+""
+! LaTeX3 Error: The key 'module/key-five' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'module' does not have a key called 'module/key-five'.
+Check that you have spelled the key name correctly.
+> \l_tmpa_tl=.
+============================================================
+============================================================
+TEST 7: \keys_set_groups:nnn 
+============================================================
+Defining key module/key-one on line ...
+Defining key module/key-two on line ...
+Defining key module/key-three on line ...
+Defining key module/key-four on line ...
+"value"
+"other-value"
+"other-value"
+============================================================
+============================================================
+TEST 8: Nesting setting
+============================================================
+! LaTeX3 Error: The key 'empty-module/key-two' is unknown and is being
+(LaTeX3)        ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The module 'empty-module' does not have a key called 'empty-module/key-two'.
+Check that you have spelled the key name correctly.
+The comma list \l_tmpa_clist is empty
+> .
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 9: \keys_if_exist:nnTF 
+============================================================
+TRUE
+FALSE
+TRUE
+FALSE
+============================================================
+============================================================
+TEST 10: \keys_if_choice_exist:nnnTF 
+============================================================
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+============================================================
+============================================================
+TEST 11: \keys_show:nn 
+============================================================
+The key module/key-one has the properties:
+>  code  =>  \TYPE {"#1"}.
+<recently read> }
+l. ...  }
+The key module/key-two has the properties:
+>  code  =>  \tl_set:Nn \l_tmpa_tl {#1}.
+<recently read> }
+l. ...  }
+The key module/key-three is undefined.
+> .
+<recently read> }
+l. ...  }
+The key module-a/key-one is undefined.
+> .
+<recently read> }
+l. ...  }
+============================================================

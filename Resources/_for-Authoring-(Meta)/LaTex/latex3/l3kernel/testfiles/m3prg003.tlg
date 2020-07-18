@@ -1,0 +1,240 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson
+============================================================
+TEST 1: Basics
+============================================================
+\c_true_bool 
+\c_false_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_false_bool 
+\c_true_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+============================================================
+============================================================
+TEST 2: Triplet combinations I
+============================================================
+\c_true_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+============================================================
+============================================================
+TEST 3: Triplet combinations II
+============================================================
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_false_bool 
+============================================================
+============================================================
+TEST 4: Triplet combinations III
+============================================================
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_false_bool 
+\c_false_bool 
+\c_false_bool 
+============================================================
+============================================================
+TEST 5: Triplet combinations IV
+============================================================
+\c_true_bool 
+\c_true_bool 
+\c_true_bool 
+\c_false_bool 
+\c_true_bool 
+\c_false_bool 
+\c_true_bool 
+\c_false_bool 
+============================================================
+============================================================
+TEST 6: Eager evaluation
+============================================================
+! Undefined control sequence.
+<argument> 2\expectedError 
+l. ...}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+\c_true_bool 
+============================================================
+============================================================
+TEST 7: XOR
+============================================================
+\c_false_bool 
+\c_true_bool 
+\c_true_bool 
+\c_false_bool 
+FALSE
+TRUE
+TRUE
+FALSE
+============================================================
+============================================================
+TEST 8: bool_set
+============================================================
+! Undefined control sequence.
+<argument> 2\expectedError 
+l. ...}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+TRUE
+Defining \c_A_bool on line ...
+FALSE
+============================================================
+============================================================
+TEST 9: Basics of not logic-code
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================
+============================================================
+TEST 10: More not testing
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================
+============================================================
+TEST 11: Not again
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================
+============================================================
+TEST 12: nested not
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================
+============================================================
+TEST 13: Not outside brackets
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================
+============================================================
+TEST 14: Not outside brackets with nesting
+============================================================
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+pass
+============================================================

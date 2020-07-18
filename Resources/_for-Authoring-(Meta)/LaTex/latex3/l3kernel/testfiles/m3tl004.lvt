@@ -1,0 +1,77 @@
+%
+% Copyright (C) 2010-2012,2015,2018 The LaTeX3 Project
+%
+\documentclass{minimal}
+\input{regression-test}
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\begin{document}
+
+\START
+\AUTHOR{Will Robertson}
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TESTEXP{tl_if_single}{
+  \tl_if_single:nTF {~}                   ?F
+  \tl_if_single:nTF {Z}                   T?
+  \tl_if_single:nTF {$}                   T?
+  \tl_if_single:nTF {#}                   T?
+  \tl_if_single:nTF {^}                   T?
+  \tl_if_single:nTF {_}                   T?
+  \tl_if_single:nTF {^^65}                T?
+  \tl_if_single:nTF {\bar}                T?
+  \tl_if_single:nTF {\if}                 T?
+  \tl_if_single:nTF {\fi}                 T?
+  \tl_if_single:nTF {\bgroup}             T?
+  \tl_if_single:nTF {\egroup}             T?
+  \tl_if_single:nTF {\ifx}                T?
+  \NEWLINE
+  \tl_if_single:nTF {}                    ?F
+  \tl_if_single:nTF {ZZ}                  ?F
+  \tl_if_single:nTF {\bar\bar}            ?F
+  \tl_if_single:nTF {\ifx z}              ?F
+  \tl_if_single:nTF {z \ifx}              ?F
+  \tl_if_single:nTF {\egroup\bgroup}      ?F
+  \tl_if_single:nTF {\fi\fi\fi}           ?F
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST{bug~fixes~for~tl_replace}{
+  \tl_new:N  \g_my_tl
+  \tl_gset:Nn \g_my_tl {aabono}
+  \tl_greplace_once:Nnn \g_my_tl {bonobo} {whatever}
+  \tl_log:N \g_my_tl
+  \tl_gput_right:Nx \g_my_tl
+    { \prg_replicate:nn { 10 } { \exp_not:N \prg_do_nothing: } }
+  \tl_greplace_all:Nnn \g_my_tl { \prg_do_nothing: } { \x }
+  \tl_log:N \g_my_tl
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TESTEXP{Trim~spaces}{
+  \TYPE { \tl_trim_spaces:n { ~ a b ~ c ~ } } \NEWLINE
+  \TYPE { \tl_trim_spaces:n { ~ \use:n ~ { a b ~ c  ~ } ~ } } \NEWLINE
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST{Trim~spaces:N}{
+  \tl_set:Nx \l_tmpa_tl
+    {
+      \prg_replicate:nn {5} {~}
+      \exp_not:n { {\abc #} }
+      \prg_replicate:nn {5} {~}
+    }
+  \tl_trim_spaces:N \l_tmpa_tl
+  \exp_args:NV \iow_term:n \l_tmpa_tl
+}
+
+\END
+

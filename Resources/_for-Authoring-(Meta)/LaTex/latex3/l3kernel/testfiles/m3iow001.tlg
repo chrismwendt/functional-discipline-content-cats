@@ -1,0 +1,83 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Joseph Wright
+============================================================
+TEST 1: Name a stream
+============================================================
+Defining \testa on line ...
+Defining \testb on line ...
+! LaTeX3 Error: Control sequence \testa already defined.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+LaTeX has been asked to create a new control sequence '\testa' but this name
+has already been used elsewhere.
+The current meaning is:
+  \mathchar"10
+Defining \testa on line ...
+! LaTeX3 Error: Control sequence \testb already defined.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+LaTeX has been asked to create a new control sequence '\testb' but this name
+has already been used elsewhere.
+The current meaning is:
+  \mathchar"10
+Defining \testb on line ...
+============================================================
+============================================================
+TEST 2: Open a write
+============================================================
+\test=\write...
+============================================================
+============================================================
+TEST 3: Close a write
+============================================================
+============================================================
+============================================================
+TEST 4: Write now
+============================================================
+============================================================
+============================================================
+TEST 5: Write to log
+============================================================
+abcd
+\l_test_tl 
+============================================================
+============================================================
+TEST 6: Write to terminal
+============================================================
+abcd
+\l_test_tl 
+============================================================
+============================================================
+TEST 7: Write at shipout
+============================================================
+============================================================
+============================================================
+TEST 8: Write at shipout
+============================================================
+============================================================
+============================================================
+TEST 9: Close iow
+============================================================
+(testwrite.log) (testwrite.log
+test
+)
+============================================================
+============================================================
+TEST 10: Wrapping text
+============================================================
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhii
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiij
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijj
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjk
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjkk
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjkkl
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjkkll
+abcdefghijklmnopqrstuvwxyzABCDE FGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjkkllm
+abcdefghijklmnopqrstuvwxyzABCDE
+AABBCCDDEEFFGGHHIIJJKKLFGHJIKLMNOPQRZTUVWXYZaabbccddeeffgghhiijjkkllmm
+============================================================

@@ -1,0 +1,114 @@
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\RequirePackage{l3draw}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\AUTHOR{Joseph Wright}
+
+\ExplSyntaxOn
+
+\cs_set_protected:Npn \test:n #1
+  {
+    \hbox_set:Nn \l_tmpa_box
+      {
+        \draw_begin:
+        #1
+        \draw_path_moveto:n { 0cm , 0cm }
+        \draw_path_lineto:n { 1cm, 10cm }
+        \draw_path_lineto:n { 2cm , 0cm }
+        \draw_path_use_clear:n { stroke }
+        \draw_end:
+      }
+    \box_show:N \l_tmpa_box
+  }
+
+\START
+
+\TEST { \l_draw_default_linewidth_dim }
+  {
+    \test:n { }
+    \dim_set:Nn \l_draw_default_linewidth_dim { 1pt }
+    \test:n { }
+  }
+
+\TEST { \draw_linewidth:n }
+  {
+    \test:n { \draw_linewidth:n { 1pt } }
+  }
+
+\TEST { \draw_dash_pattern:nn }
+  {
+    \test:n { \draw_dash_pattern:nn { } { 0 } }
+    \test:n { \draw_dash_pattern:nn { 0.2cm , 0.2cm } { 0 } }
+    \test:n { \draw_dash_pattern:nn { 0.2cm , 0.2cm } { 0.1cm } }
+  }
+
+\TEST { \draw_cap_... }
+  {
+    \test:n { \draw_cap_butt: }
+    \test:n { \draw_cap_rectangle: }
+    \test:n { \draw_cap_round: }
+  }
+
+\TEST { \draw_join_... }
+  {
+    \test:n { \draw_join_bevel: }
+    \test:n { \draw_join_miter: }
+    \test:n { \draw_join_round: }
+  }
+
+\TEST { \draw_miterlimit:n }
+  {
+    \test:n { \draw_miterlimit:n { 1 } }
+    \test:n { \draw_miterlimit:n { 2 } }
+    \test:n { \draw_miterlimit:n { 10 } }
+  }
+
+\TEST { \draw_color:n }
+  {
+    \test:n { \draw_color:n { red } }
+    \test:n
+      {
+        \draw_color:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fill }
+        \draw_color:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fillstroke }
+        \draw_color:n { red }
+      }
+  }
+
+\TEST { \draw_color_fill:n }
+  {
+    \test:n
+      {
+        \draw_color_fill:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fill }
+        \draw_color_fill:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fillstroke }
+        \draw_color_fill:n { red }
+      }
+  }
+
+\TEST { \draw_color_stroke:n }
+  {
+    \test:n
+      {
+        \draw_color_stroke:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fill }
+        \draw_color_stroke:n { red }
+        \draw_path_rectangle:nn { 0 , 0 } { 1cm , 1cm }
+        \draw_path_use_clear:n { fillstroke }
+        \draw_color_stroke:n { red }
+      }
+  }
+
+\END

@@ -1,0 +1,49 @@
+%
+% Copyright (C) 2017-2020 The LaTeX Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+
+\begin{document}
+\START
+\AUTHOR{Bruno Le Floch}
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST { prop~from_keyval }
+  {
+    \prop_set_from_keyval:Nn \l_tmpa_prop
+      { \a = b , ~ \c ~ = ~ { ~ \d = e ~ } , , = , { = } = , ~ { } ~ = { , } , }
+    \prop_log:N \l_tmpa_prop
+    \prop_gset_from_keyval:Nn \g_tmpa_prop
+      { \a = b , ~ \c ~ = ~ { ~ \d = e ~ } , , = , { = } = , ~ { } ~ = { , } , }
+    \prop_log:N \g_tmpa_prop
+    \prop_const_from_keyval:Nn \c_A_prop
+      { \a = b , ~ \c ~ = ~ { ~ \d = e ~ } , , = , { = } = , ~ { } ~ = { , } , ~ {\a} = Z }
+    \prop_log:N \c_A_prop
+  }
+
+\TEST { prop~from_keyval~invalid }
+  {
+    \prop_set_from_keyval:Nn \l_tmpa_prop
+      { { = } , a = = b , { } , = = }
+    \prop_log:N \l_tmpa_prop
+    \prop_gset_from_keyval:Nn \g_tmpa_prop
+      { { = } , a = = b , { } , = = }
+    \prop_log:N \g_tmpa_prop
+    \prop_const_from_keyval:Nn \c_B_prop
+      { { = } , a = = b , { } , = = }
+    \prop_log:N \c_B_prop
+  }
+
+\END
+

@@ -1,0 +1,78 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: predefined property lists
+============================================================
+The property list \c_empty_prop is empty
+> .
+The property list \l_tmpa_prop is empty
+> .
+The property list \l_tmpb_prop is empty
+> .
+The property list \g_tmpa_prop is empty
+> .
+The property list \g_tmpb_prop is empty
+> .
+The property list \l_tmpa_prop is empty
+> .
+The property list \l_tmpb_prop is empty
+> .
+The property list \g_tmpa_prop contains the pairs (without outer braces):
+>  {a}  =>  {aa}.
+The property list \g_tmpb_prop contains the pairs (without outer braces):
+>  {b}  =>  {bb}.
+============================================================
+============================================================
+TEST 2: prop_if_exist
+============================================================
+TRUE
+TRUE
+FALSE
+TRUE
+TRUE
+FALSE
+============================================================
+============================================================
+TEST 3: prop_get:NnNTF
+============================================================
+TRUE: macro:->3
+FALSE: macro:->3
+TRUE: macro:->a
+TRUE: macro:->3
+macro:->
+The property list \l_tmpa_prop contains the pairs (without outer braces):
+>  {}  =>  {a}
+>  {a}  =>  {aa}
+>  {aa}  =>  {aaa}
+>  {1}  =>  {2}
+>  {2}  =>  {3}.
+============================================================
+============================================================
+TEST 4: prop_pop:NnNTF
+============================================================
+TRUE: macro:->3
+FALSE: macro:->3
+TRUE: macro:->a
+FALSE: macro:->a
+macro:->
+The property list \l_tmpa_prop contains the pairs (without outer braces):
+>  {}  =>  {a}
+>  {a}  =>  {aa}
+>  {aa}  =>  {aaa}
+>  {1}  =>  {2}
+>  {2}  =>  {3}.
+============================================================
+============================================================
+TEST 5: prop_gpop:NnNTF
+============================================================
+TRUE: macro:->3
+FALSE: macro:->3
+TRUE: macro:->a
+FALSE: macro:->a
+macro:->
+The property list \g_tmpa_prop contains the pairs (without outer braces):
+>  {a}  =>  {aa}
+>  {aa}  =>  {aaa}
+>  {1}  =>  {2}.
+============================================================

@@ -1,0 +1,58 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: count
+============================================================
+> \clist_count:n {a,b,c}=3.
+> \clist_count:n {}=0.
+> \exp_args:Nf \clist_count:n {\prg_replicate:nn {9}{ }}=0.
+> \exp_args:Nf \clist_count:n {\prg_replicate:nn {9}{{},}}=9.
+============================================================
+============================================================
+TEST 2: const
+============================================================
+Defining \c_a_clist on line ...
+The comma list \c_a_clist contains the items (without outer braces):
+>  {a}
+>  {b}
+>  {c}.
+Defining \c_b_clist on line ...
+The comma list \c_b_clist is empty
+> .
+Defining \c_c_clist on line ...
+The comma list \c_c_clist is empty
+> .
+Defining \c_d_clist on line ...
+The comma list \c_d_clist contains the items (without outer braces):
+>  {}
+>  {}
+>  {}
+>  {}
+>  {}
+>  {}
+>  {}
+>  {}
+>  {}.
+============================================================
+============================================================
+TEST 3: const
+============================================================
+a
+b
+c
+Bingo!
+This is what follows.
+============================================================
+============================================================
+TEST 4: clist_if_empty:n
+============================================================
+TRUE
+FALSE
+FALSE
+FALSE
+TRUE
+TRUE
+TRUE
+FALSE
+============================================================

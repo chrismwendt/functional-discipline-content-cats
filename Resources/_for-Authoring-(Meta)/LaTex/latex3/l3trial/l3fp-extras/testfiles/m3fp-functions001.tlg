@@ -1,0 +1,21 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: Declaring a function
+============================================================
+Defining \__fp_parse_word_foo:N on line ...
+(foo(3, foo(3), A))^(2)
+============================================================
+============================================================
+TEST 2: Defining fourthroot
+============================================================
+Defining \__fp_parse_word_fourthroot:N on line ...
+Defining \__fp_parse_word__i:N on line ...
+Defining \__fp_parse_word_a:N on line ...
+Defining \__fp_parse_word_a:N on line ...
+2
+0.5
+(1.)^(0.25)
+1
+============================================================

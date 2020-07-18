@@ -1,0 +1,98 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson
+============================================================
+TEST 1: New bool
+============================================================
+Defining \mybool on line ...
+Defining \mybool2 on line ...
+> \mybool=\char"0.
+> \mybool2=\char"0.
+============================================================
+Defining \myboola on line ...
+Defining \myboolb on line ...
+============================================================
+TEST 2: Not new bool
+============================================================
+NOT OKAY:
+! LaTeX3 Error: Control sequence \myboola already defined.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+LaTeX has been asked to create a new control sequence '\myboola' but this name
+has already been used elsewhere.
+The current meaning is:
+  \char"0
+Defining \myboola on line ...
+============================================================
+============================================================
+TEST 3: Set true/false
+============================================================
+TRUE
+FALSE
+! LaTeX3 Error: Inconsistent local/global assignment
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Global assignment to a local variable '\myboolb'.
+A:
+TRUE
+B:
+FALSE
+============================================================
+A:
+FALSE
+B:
+FALSE
+============================================================
+! LaTeX3 Error: Inconsistent local/global assignment
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Global assignment to a local variable '\myboolb'.
+A:
+TRUE
+B:
+TRUE
+! LaTeX3 Error: Inconsistent local/global assignment
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+Global assignment to a local variable '\myboolb'.
+> \myboola=true.
+> \myboola=false.
+> \myboolb=false.
+============================================================
+============================================================
+TEST 4: Boolean conditionals
+============================================================
+TRUE
+FALSE
+TRUE
+FALSE
+============================================================
+============================================================
+TEST 5: More while loops
+============================================================
+0
+1
+2
+3
+4
+5
+============================================================
+0
+1
+2
+3
+4
+5
+============================================================
+NO
+============================================================
+6
+============================================================

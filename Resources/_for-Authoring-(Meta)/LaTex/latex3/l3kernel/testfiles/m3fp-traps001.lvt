@@ -1,0 +1,168 @@
+%
+% Copyright (C) 2012,2015,2017,2018 The LaTeX3 Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\begin{document}
+\START
+\AUTHOR{Bruno Le Floch}
+\ExplSyntaxOn
+% In this test file we use \iow_term:x because \TYPE produces a group
+% which hides all flag_raise operations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp ~ flags }
+  {
+    \flag_if_raised:nTF { fp_invalid_operation } { \ERROR } { \FALSE }
+    \exp_args:Nx \use_none:n { \flag_raise:n { fp_invalid_operation } }
+    \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_invalid_operation }
+    \flag_if_raised:nTF { fp_invalid_operation } { \ERROR } { \FALSE }
+    {
+      \iow_term:x { \fp_to_tl:n { 0 * inf } }
+      \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+    }
+    \flag_if_raised:nTF { fp_invalid_operation } { \ERROR } { \FALSE }
+    \iow_term:x { \fp_to_decimal:n { nan } }
+    \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp_trap:nn ~ error ~ recovery }
+  {
+    \fp_trap:nn { foo } { bar }
+    \fp_trap:nn { invalid_operation } { bar }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp_trap:nn ~ invalid ~ operation }
+  {
+    \flag_if_raised:nTF { fp_invalid_operation } { \ERROR } { \FALSE }
+    \iow_term:x { \fp_to_tl:n { 0 * inf } }
+    \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_invalid_operation }
+    {
+      \fp_trap:nn { invalid_operation } { error }
+      \iow_term:x { \fp_to_tl:n { 0 * inf } }
+      \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { invalid_operation } { flag }
+      \iow_term:x { \fp_to_tl:n { 0 * inf } }
+      \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { invalid_operation } { none }
+      \iow_term:x { \fp_to_tl:n { 0 * inf } }
+      \flag_if_raised:nTF { fp_invalid_operation } { \ERROR } { \FALSE }
+    }
+    \iow_term:x { \fp_to_tl:n { 0 * inf } }
+    \flag_if_raised:nTF { fp_invalid_operation } { \TRUE } { \ERROR }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp_trap:nn ~ division ~ by ~ zero }
+  {
+    \flag_if_raised:nTF { fp_division_by_zero } { \ERROR } { \FALSE }
+    \iow_term:x { \fp_to_tl:n { 1 / 0 } }
+    \flag_if_raised:nTF { fp_division_by_zero } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_division_by_zero }
+    {
+      \fp_trap:nn { division_by_zero } { error }
+      \iow_term:x { \fp_to_tl:n { 1 / 0 } }
+      \flag_if_raised:nTF { fp_division_by_zero } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { division_by_zero } { flag }
+      \iow_term:x { \fp_to_tl:n { 1 / 0 } }
+      \flag_if_raised:nTF { fp_division_by_zero } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { division_by_zero } { none }
+      \iow_term:x { \fp_to_tl:n { 1 / 0 } }
+      \flag_if_raised:nTF { fp_division_by_zero } { \ERROR } { \FALSE }
+    }
+    \iow_term:x { \fp_to_tl:n { 1 / 0 } }
+    \flag_if_raised:nTF { fp_division_by_zero } { \TRUE } { \ERROR }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp_trap:nn ~ overflow }
+  {
+    \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+    \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_overflow }
+    {
+      \fp_trap:nn { overflow } { none }
+      \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+      \flag_if_raised:nTF { fp_overflow } { \ERROR } { \FALSE }
+    }
+    {
+      \fp_trap:nn { overflow } { flag }
+      \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+      \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { overflow } { error }
+      \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+      \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    }
+    \flag_clear:n { fp_overflow }
+    \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+    \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_overflow }
+    \iow_term:x { \fp_to_tl:n { exp(1e5678) } }
+    \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    \fp_trap:nn { overflow } { error }
+    \flag_clear:n { fp_overflow }
+    \iow_term:x { \fp_to_tl:n { 1e9999 * 1e9999 } }
+    \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_overflow }
+    \iow_term:x { \fp_to_tl:n { exp(1e5678) } }
+    \flag_if_raised:nTF { fp_overflow } { \TRUE } { \ERROR }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TEST { fp_trap:nn ~ underflow }
+  {
+    \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+    \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_underflow }
+    {
+      \fp_trap:nn { underflow } { none }
+      \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+      \flag_if_raised:nTF { fp_underflow } { \ERROR } { \FALSE }
+    }
+    {
+      \fp_trap:nn { underflow } { flag }
+      \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+      \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    }
+    {
+      \fp_trap:nn { underflow } { error }
+      \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+      \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    }
+    \flag_clear:n { fp_underflow }
+    \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+    \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_underflow }
+    \iow_term:x { \fp_to_tl:n { exp(-1e5678) } }
+    \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    \fp_trap:nn { underflow } { error }
+    \flag_clear:n { fp_underflow }
+    \iow_term:x { \fp_to_tl:n { 1e-9999 * 1e-9999 } }
+    \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+    \flag_clear:n { fp_underflow }
+    \iow_term:x { \fp_to_tl:n { exp(-1e5678) } }
+    \flag_if_raised:nTF { fp_underflow } { \TRUE } { \ERROR }
+  }
+
+\END

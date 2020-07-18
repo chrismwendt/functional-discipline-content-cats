@@ -1,0 +1,115 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: LaTeX3 Project
+============================================================
+TEST 1: Creating new fps
+============================================================
+Defining \l_A_fp on line ...
+! LaTeX3 Error: Control sequence \l_A_fp already defined.
+For immediate help type H <return>.
+ ...                                              
+l. ...}
+This is a coding error.
+LaTeX has been asked to create a new control sequence '\l_A_fp' but this name
+has already been used elsewhere.
+The current meaning is:
+  macro:->\s__fp \__fp_chk:w 00\s__fp_exact ;
+Defining \l_A_fp on line ...
+Defining \l_B_fp on line ...
+Defining \g_A_fp on line ...
+Defining \g_B_fp on line ...
+> \l_A_fp=0.
+> \g_A_fp=0.
+> \l_B_fp=0.
+============================================================
+============================================================
+TEST 2: Set fp
+============================================================
+> \l_A_fp=123.456.
+> \l_B_fp=-123.456.
+> \g_A_fp=3.
+> \g_B_fp=-0.
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Premature end in fp expression.
+l. ...}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+> \l_A_fp=0.
+> \l_B_fp=nan.
+> \l_A_fp=-0.001.
+> \l_B_fp=().
+> \l_A_fp=1.23456789e20.
+> \l_A_fp=1.23456789e-15.
+> \l_A_fp=0.
+> \l_B_fp=0.
+> \g_A_fp=3.
+> \g_B_fp=-0.
+============================================================
+============================================================
+TEST 3: Zero fp
+============================================================
+> \l_A_fp=1.234.
+> \g_A_fp=1.234.
+> \l_A_fp=0.
+> \g_A_fp=0.
+> \l_A_fp=1.234.
+> \g_A_fp=0.
+============================================================
+============================================================
+TEST 4: Set fps equal
+============================================================
+> \l_B_fp=0.
+> \g_B_fp=0.
+> \l_B_fp=123.456.
+> \g_B_fp=123.456.
+> \l_B_fp=0.
+> \g_B_fp=123.456.
+============================================================
+============================================================
+TEST 5: Addition
+============================================================
+> \l_A_fp=1.
+> \l_A_fp=101.
+> \l_A_fp=101.99.
+> \l_A_fp=102.
+> \l_A_fp=-2898.123.
+> \l_A_fp=7101.877.
+> \l_A_fp=99.123456.
+> \l_A_fp=-39900.876544.
+> \l_A_fp=99.123456.
+> \l_A_fp=1000000000.
+> \l_A_fp=2000000000.
+> \l_A_fp=-1.234.
+> \l_A_fp=0.
+> \l_A_fp=10000.
+> \g_A_fp=-0.001.
+> \g_A_fp=-1.
+> \l_A_fp=0.
+> \g_A_fp=-1.
+============================================================
+============================================================
+TEST 6: Subtraction
+============================================================
+> \l_A_fp=1.
+> \l_A_fp=-99.
+> \l_A_fp=-99.99.
+> \l_A_fp=-100.
+> \l_A_fp=-100.0004.
+> \l_A_fp=2900.1226.
+> \l_A_fp=-7099.8774.
+> \l_A_fp=99.123456.
+> \l_A_fp=40099.123456.
+> \l_A_fp=-1000000000.
+> \l_A_fp=-2000000000.
+> \l_A_fp=-2000000000.
+> \l_A_fp=-1.234.
+> \l_A_fp=0.
+> \g_A_fp=-0.001.
+> \g_A_fp=-1.
+> \l_A_fp=0.
+> \g_A_fp=-1.
+============================================================

@@ -1,0 +1,56 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: Mapping
+============================================================
+|\ExplSyntaxOff |
+|Thisfileisneededbym3file001.lvt,m3ior001.lvtandm3ior002.lvt:|
+|Pleaseleaveitalone!|
+|\ExplSyntaxOn |
+4 lines
+|\ExplSyntaxOff|
+|This file is needed by m3file001.lvt, m3ior001.lvt and m3ior002.lvt:|
+|Please leave it alone!|
+|\ExplSyntaxOn|
+4 lines
+============================================================
+============================================================
+TEST 2: Mapping with newline at end-of-file
+============================================================
+Defining \testwrite on line ...
+\testwrite=\write...
+|Foobarbaz|
+||
+2 lines
+|Foobar baz|
+||
+2 lines
+============================================================
+============================================================
+TEST 3: Mapping variable with newline at end-of-file
+============================================================
+|macro:->Foobarbaz|
+|macro:->|
+2 lines
+Last one: []
+|macro:->Foobar baz|
+|macro:->|
+2 lines
+Last one: []
+Same one: []
+============================================================
+============================================================
+TEST 4: Open read stream with conditional
+============================================================
+Defining \anothertestior on line ...
+FALSE
+! LaTeX3 Error: File 'thisfiledoesnotexist' not found.
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+The requested file could not be found in the current directory, in the TeX
+search path or in the LaTeX search path.
+TRUE
+> \l_tmpa_tl=\ExplSyntaxOff.
+============================================================

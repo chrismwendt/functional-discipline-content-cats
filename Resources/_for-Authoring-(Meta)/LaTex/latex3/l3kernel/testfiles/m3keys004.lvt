@@ -1,0 +1,323 @@
+% Copyright (C) 2013-2015,2018-2020 The LaTeX3 Project
+
+
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+
+\begin{document}
+\START
+\AUTHOR{Joseph Wright}
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST { \keys_set_known:nn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .code:n = { \TYPE { " #1 " } } ,
+        key-two .code:n = { \TYPE { " #1 " } }
+      }
+    \keys_set_known:nn { module }
+      { key-one = value , key-three = other-value , key-four }
+  }
+
+\TEST { \keys_set_known:nnN }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .code:n = { \TYPE { " #1 " } } ,
+        key-two .code:n = { \TYPE { " #1 " } }
+      }
+    \keys_set_known:nnN { module }
+      { key-one = value , key-three = other-value , key-four }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+  }
+
+\TEST { \keys_set_known:nnnN }
+  {
+    \keys_define:nn { module / sub }
+      {
+        key-one .code:n = { \TYPE { " #1 " } } ,
+        key-two .code:n = { \TYPE { " #1 " } }
+      }
+    \keys_set_known:nnnN { module / sub }
+      { key-one = value , key-three = other-value , key-four }
+      { module }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \keys_set_known:nnnN { module / sub }
+      { key-one = value , key-three = other-value , key-four }
+      { foo }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+  }
+
+\TEST { \keys_set_known:nnN nesting }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .code:n =
+          { \keys_set_known:nnN { module } {#1} \l_tmpb_tl } ,
+        key-two .code:n = { \TYPE { " #1 " } }
+      }
+    \keys_set_known:nnN { module }
+      {
+        key-one = { key-two = foo }
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \tl_log:N \l_tmpb_tl
+    \keys_set_known:nnN { module }
+      {
+        key-one = { key-three = foo }
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \tl_log:N \l_tmpb_tl
+    \keys_set_known:nnN { module }
+      {
+        key-three = { key-two = foo }
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \tl_log:N \l_tmpb_tl
+    \keys_set_known:nnN { module }
+      {
+        key-three = { key-four = foo }
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \tl_log:N \l_tmpb_tl
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\TEST { \keys_set_filter:nnn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one   .code:n   = { \TYPE { " #1 " } } ,
+        key-two   .code:n   = { \TYPE { " #1 " } } ,
+        key-three .code:n   = { \TYPE { " #1 " } } ,
+        key-four  .code:n   = { \TYPE { " #1 " } } ,
+        key-one   .groups:n = { a }     ,
+        key-two   .groups:n = { b , c } ,
+        key-three .groups:n = { a , c } ,
+      }
+    \keys_set_filter:nnn { module }
+      { a }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_filter:nnn { module }
+      { c , d }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_filter:nnn { module }
+      { e }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_filter:nnn { module }
+      { }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+  }
+
+\TEST { \keys_set_filter:nnnN }
+  {
+    \keys_define:nn { module }
+      {
+        key-one   .code:n   = { \TYPE { " #1 " } } ,
+        key-two   .code:n   = { \TYPE { " #1 " } } ,
+        key-three .code:n   = { \TYPE { " #1 " } } ,
+        key-four  .code:n   = { \TYPE { " #1 " } } ,
+        key-one   .groups:n = { a }     ,
+        key-two   .groups:n = { b , c } ,
+        key-three .groups:n = { a , c } ,
+      }
+    \keys_set_filter:nnnN { module }
+      { a }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \keys_set_filter:nnnN { module }
+      { c , d }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \keys_set_filter:nnnN { module }
+      { e }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+    \keys_set_filter:nnnN { module }
+      { }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+      \l_tmpa_tl
+    \tl_log:N \l_tmpa_tl
+  }
+
+
+\TEST { \keys_set_groups:nnn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one   .code:n   = { \TYPE { " #1 " } } ,
+        key-two   .code:n   = { \TYPE { " #1 " } } ,
+        key-three .code:n   = { \TYPE { " #1 " } } ,
+        key-four  .code:n   = { \TYPE { " #1 " } } ,
+        key-one   .groups:n = { a }     ,
+        key-two   .groups:n = { b , c } ,
+        key-three .groups:n = { a , c } ,
+      }
+    \keys_set_groups:nnn { module }
+      { a }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_groups:nnn { module }
+      { c , d }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_groups:nnn { module }
+      { e }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+    \keys_set_groups:nnn { module }
+      { }
+      {
+        key-one   = value       ,
+        key-three = other-value ,
+        key-four                ,
+        key-five = unknown-value
+      }
+  }
+
+\TEST { Nesting ~ setting }
+  {
+    \OMIT
+      \keys_define:nn { empty-module } { }
+      \keys_define:nn { module }
+        {
+          key-one .code:n = { \keys_set:nn { empty-module } { key-two } }
+        }
+    \TIMO
+    \keys_set_known:nnN { module } { key-one } \l_tmpa_clist
+    \clist_show:N \l_tmpa_clist
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\OMIT
+  \keys_define:nn { module }
+    {
+      key-one .code:n = { \TYPE { " #1 " } } ,
+      key-two .code:n = { \TYPE { " #1 " } }
+    }
+\TIMO
+
+\TESTEXP { \keys_if_exist:nnTF }
+  {
+    \keys_if_exist:nnT { module } { key-one }   { \TRUE }  \NEWLINE
+    \keys_if_exist:nnT { module } { key-three } { \ERROR } \NEWLINE
+    \keys_if_exist:nnF { module } { key-one }   { \ERROR } \NEWLINE
+    \keys_if_exist:nnF { module } { key-three } { \FALSE } \NEWLINE
+    \keys_if_exist:nnTF { module } { key-one }   { \TRUE } { \ERROR }  \NEWLINE
+    \keys_if_exist:nnTF { module } { key-three } { \ERROR } { \FALSE } \NEWLINE
+  }
+
+\OMIT
+  \keys_define:nn { module }
+    {
+      key-one .choice: ,
+      key-one / a .code:n = { },
+      key-one / b .code:n = { },
+    }
+  \tl_set:Nn \l_tmpa_tl { key-one }
+  \tl_set:Nn \l_tmpb_tl { a }
+\TIMO
+
+\TESTEXP { \keys_if_choice_exist:nnnTF }
+  {
+    \keys_if_choice_exist:nnnT { module } { key-one } { a } { \TRUE }  \NEWLINE
+    \keys_if_choice_exist:nnnT { module } { key-one } { c } { \ERROR } \NEWLINE
+    \keys_if_choice_exist:nnnT { module } { key-two } { b } { \ERROR } \NEWLINE
+    \keys_if_choice_exist:nnnF { module } { key-one } { a } { \ERROR }  \NEWLINE
+    \keys_if_choice_exist:nnnF { module } { key-one } { c } { \FALSE } \NEWLINE
+    \keys_if_choice_exist:nnnF { module } { key-two } { b } { \FALSE } \NEWLINE
+    \keys_if_choice_exist:nnnTF { module } { key-one } { a } { \TRUE }  { \ERROR } \NEWLINE
+    \keys_if_choice_exist:nnnTF { module } { key-one } { c } { \ERROR } { \FALSE } \NEWLINE
+    \keys_if_choice_exist:nnnTF { module } { key-two } { b } { \ERROR } { \FALSE } \NEWLINE
+    \keys_if_choice_exist:nnnTF { module } { \l_tmpa_tl } { a }          { \ERROR } { \FALSE } \NEWLINE
+    \keys_if_choice_exist:nnnTF { module } { key-one }    { \l_tmpb_tl } { \ERROR } { \FALSE } \NEWLINE
+  }
+
+\TEST { \keys_show:nn }
+  {
+    \keys_define:nn { module }
+      {
+        key-one .code:n   = { \TYPE { " #1 " } } ,
+        key-two .tl_set:N = \l_tmpa_tl
+      }
+    \keys_show:nn { module } { key-one }
+    \keys_show:nn { module } { key-two }
+    \keys_show:nn { module } { key-three }
+    \keys_show:nn { module-a } { key-one }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\END

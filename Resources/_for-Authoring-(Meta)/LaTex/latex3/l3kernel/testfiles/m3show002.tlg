@@ -1,0 +1,232 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: TL
+============================================================
+> \l_tmpa_tl=abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g .
+<recently read> }
+l. ...  }
+> abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g
+abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g abcde\\g .
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: SEQ
+============================================================
+The sequence \l_tmpa_seq contains the items (without outer braces):
+>  {xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\
+xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\
+xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ xy\\ }
+>  {ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD
+efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD
+efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD
+efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD
+efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD
+efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi ABCD efghi }.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 3: CLIST
+============================================================
+Defining \l_my_very_very_very_very_very_very_long_clist on line ...
+The comma list \l_my_very_very_very_very_very_very_long_clist contains the
+items (without outer braces):
+>  {abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij
+abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij
+abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij}
+>  {2}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 4: PROP
+============================================================
+The property list \l_tmpa_prop contains the pairs (without outer braces):
+>  {the key1 the key1 the key1 the key1 the key1 the key1 the key1 the key1
+the key1 the key1 the key1 the key1 the key1 the key1 the key1 the key1 the
+key1 the key1 the key1 the key1 the key1 the key1 the key1 the key1 the key1
+the key1 the key1 the key1 the key1 the key1 the key1 the key1 the key1 the
+key1 the key1 the key1 the key1 the key1 the key1 the key1 }  =>  {val1}
+>  {key2}  =>  {the val2 the val2 the val2 the val2 the val2 the val2 the val2
+the val2 the val2 the val2 the val2 the val2 the val2 the val2 the val2 the
+val2 the val2 the val2 the val2 the val2 the val2 the val2 the val2 the val2
+the val2 the val2 the val2 the val2 the val2 the val2 the val2 the val2 the
+val2 the val2 the val2 the val2 the val2 the val2 the val2 the val2 }.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 5: CS
+============================================================
+> \tmp:w=\long macro:#1 abcdefghi jklmnopqr stuvwxyz abcdef ghi jklmn
+opqrstuvwxyz #2->Abc def, ghijkl m! No, pqrst-uv-wxyzab. Cdefghi jkl. Mnopqrst
+uvw xyz. Abc def, ghijkl m! No, pqrst-uv-wxyzab. Cdefghi jkl. Mnopqrst uvw
+xyz. Abc def, ghijkl m! No, pqrst-uv-wxyzab. Cdefghi jkl. Mnopqrst uvw xyz. .
+<recently read> }
+l. ...  }
+> \aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=alignment tab
+character &.
+<recently read> }
+l. ...  }
+> \aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=alignment
+tab character &.
+<recently read> }
+l. ...  }
+> 
+\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=alignment
+tab character &.
+<recently read> }
+l. ...  }
+> 
+\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=alignment
+tab character &.
+<recently read> }
+l. ...  }
+> &=alignment tab character &.
+<recently read> }
+l. ...  }
+> :=the letter :.
+<recently read> }
+l. ...  }
+> \\=\long macro:->\test .
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 6: COFFIN
+============================================================
+Size of coffin \l_tmpa_coffin:
+> ht = 12.0pt
+> dp = 0.0pt
+> wd = 3.33333pt
+Poles of coffin \l_tmpa_coffin:
+>  l  =>  {0pt}{0pt}{0pt}{1000pt}
+>  hc  =>  {1.66666pt}{0pt}{0pt}{1000pt}
+>  r  =>  {3.33333pt}{0pt}{0pt}{1000pt}
+>  b  =>  {0pt}{0.0pt}{1000pt}{0pt}
+>  vc  =>  {0pt}{6.0pt}{1000pt}{0pt}
+>  t  =>  {0pt}{12.0pt}{1000pt}{0pt}
+>  B  =>  {0pt}{0pt}{1000pt}{0pt}
+>  H  =>  {0pt}{0pt}{1000pt}{0pt}
+>  T  =>  {0pt}{0pt}{1000pt}{0pt}.
+<recently read> }
+l. ...  }
+Size of coffin \l_tmpb_coffin:
+> ht = 12.0pt
+> dp = 0.0pt
+> wd = 15.0pt
+Poles of coffin \l_tmpb_coffin:
+>  l  =>  {0pt}{0pt}{0pt}{1000pt}
+>  hc  =>  {7.5pt}{0pt}{0pt}{1000pt}
+>  r  =>  {15.0pt}{0pt}{0pt}{1000pt}
+>  b  =>  {0pt}{0.0pt}{1000pt}{0pt}
+>  vc  =>  {0pt}{6.0pt}{1000pt}{0pt}
+>  t  =>  {0pt}{12.0pt}{1000pt}{0pt}
+>  B  =>  {0pt}{0pt}{1000pt}{0pt}
+>  H  =>  {0pt}{0pt}{1000pt}{0pt}
+>  T  =>  {0pt}{12.0pt}{1000pt}{0pt}.
+<recently read> }
+l. ...  }
+Size of coffin \l_tmpa_coffin:
+> ht = 12.0pt
+> dp = 11.0pt
+> wd = 19.66666pt
+Poles of coffin \l_tmpa_coffin:
+>  l  =>  {0pt}{0pt}{0pt}{1000pt}
+>  hc  =>  {9.83333pt}{0pt}{0pt}{1000pt}
+>  r  =>  {19.66666pt}{0pt}{0pt}{1000pt}
+>  b  =>  {0pt}{-11.0pt}{1000pt}{0pt}
+>  vc  =>  {0pt}{0.5pt}{1000pt}{0pt}
+>  t  =>  {0pt}{12.0pt}{1000pt}{0pt}
+>  B  =>  {0pt}{-11.0pt}{1000pt}{0pt}
+>  H  =>  {0pt}{0pt}{1000pt}{0pt}
+>  T  =>  {0pt}{1.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -l  =>  {0.0pt}{0.0pt}{0pt}{1000pt}
+>  \l_tmpa_coffin -hc  =>  {1.66666pt}{0.0pt}{0pt}{1000pt}
+>  \l_tmpa_coffin -r  =>  {3.33333pt}{0.0pt}{0pt}{1000pt}
+>  \l_tmpa_coffin -b  =>  {0.0pt}{0.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -vc  =>  {0.0pt}{6.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -t  =>  {0.0pt}{12.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -B  =>  {0.0pt}{0.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -H  =>  {0.0pt}{0.0pt}{1000pt}{0pt}
+>  \l_tmpa_coffin -T  =>  {0.0pt}{0.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -l  =>  {4.66666pt}{-11.0pt}{0pt}{1000pt}
+>  \l_tmpb_coffin -hc  =>  {12.16666pt}{-11.0pt}{0pt}{1000pt}
+>  \l_tmpb_coffin -r  =>  {19.66666pt}{-11.0pt}{0pt}{1000pt}
+>  \l_tmpb_coffin -b  =>  {4.66666pt}{-11.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -vc  =>  {4.66666pt}{-5.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -t  =>  {4.66666pt}{1.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -B  =>  {4.66666pt}{-11.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -H  =>  {4.66666pt}{-11.0pt}{1000pt}{0pt}
+>  \l_tmpb_coffin -T  =>  {4.66666pt}{1.0pt}{1000pt}{0pt}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 7: KEYS
+============================================================
+The key test/text has the properties:
+>  code  =>  \tl_set:Nn \l_tmpa_tl {#1}.
+The key test/expanded has the properties:
+>  code  =>  \tl_gset:Nx \l_tmpb_tl {#1}.
+============================================================
+============================================================
+TEST 8: CHAR
+============================================================
+> 11.
+<recently read> }
+l. ...  }
+> 97.
+<recently read> }
+l. ...  }
+> 65.
+<recently read> }
+l. ...  }
+> 28993.
+<recently read> }
+l. ...  }
+> 999.
+<recently read> }
+l. ...  }
+> 11.
+<recently read> }
+l. ...  }
+> 97.
+<recently read> }
+l. ...  }
+> 65.
+<recently read> }
+l. ...  }
+> 29025.
+<recently read> }
+l. ...  }
+> 1000.
+<recently read> }
+l. ...  }
+> 6.
+<recently read> }
+l. ...  }
+> 0.
+<recently read> }
+l. ...  }
+> 0.
+<recently read> }
+l. ...  }
+> 35.
+<recently read> }
+l. ...  }
+> 1000.
+<recently read> }
+l. ...  }
+============================================================

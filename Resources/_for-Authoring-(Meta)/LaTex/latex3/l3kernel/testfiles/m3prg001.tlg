@@ -1,0 +1,92 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Will Robertson
+============================================================
+TEST 1: Vertical and horizontal mode (expect YES NO NO YES)
+============================================================
+YES
+NO
+NO
+YES
+============================================================
+============================================================
+TEST 2: Inner mode (expect YES YES YES YES)
+============================================================
+YES
+YES
+YES
+YES
+============================================================
+============================================================
+TEST 3: Replicate
+============================================================
+YES
+[]
+YESYESYESYESYESYESYES
+TRUE
+============================================================
+============================================================
+TEST 4: Replication negative FAIL
+============================================================
+! Undefined control sequence.
+<argument> \LaTeX3 error: 
+                           Negative argument for \prg_replicate:nn.
+l. ...}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+! Undefined control sequence.
+<argument> \ERROR 
+l. ...}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+============================================================
+============================================================
+TEST 5: While loops
+============================================================
+1
+2
+3
+4
+5
+============================================================
+1
+2
+3
+4
+5
+============================================================
+============================================================
+TEST 6: While loops false to begin
+============================================================
+============================================================
+6
+============================================================
+============================================================
+TEST 7: Until loops
+============================================================
+1
+2
+3
+4
+5
+6
+============================================================
+1
+2
+3
+4
+5
+6
+============================================================
+============================================================
+TEST 8: Until loops false to begin
+============================================================
+============================================================
+7
+============================================================

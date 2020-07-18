@@ -1,0 +1,35 @@
+%
+% Copyright (C) 2017,2018 LaTeX3 Project
+%
+
+\documentclass{minimal}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation , log-functions }
+\ExplSyntaxOff
+
+\RequirePackage{xparse}
+
+\START
+\AUTHOR{Bruno Le Floch}
+
+\RequirePackage{xfp}
+
+\TEST{fpeval}
+  {
+    \TYPE{|\fpeval{1.23456789+2.020202}|}
+    \TYPE{|\fpeval{sin(pi)}|}
+    \TYPE{|\fpeval{foobar}|}
+  }
+
+\TEST{inteval}
+  {
+    \TYPE{|\inteval{123456789+2020202}|}
+    \TYPE{|\inteval{-125/10}|}
+    \TYPE{|\inteval{foobar}|}
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\END

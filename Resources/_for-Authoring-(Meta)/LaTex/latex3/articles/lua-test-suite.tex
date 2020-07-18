@@ -1,0 +1,850 @@
+\documentclass[final]{ltugboat}
+
+\makeatletter
+\def\thepage{%
+  \ifnum\value{page}>1000
+    \textit{?\@arabic{\numexpr\the\c@page-1000\relax}}%
+  \else
+       \arabic{page}%
+  \fi}
+\makeatother
+
+
+\usepackage{url}
+\usepackage{fancyvrb}
+\usepackage{ifmtarg}
+\usepackage{microtype}
+
+\begin{document}
+\title{\texttt{l3build}\Dash A modern Lua test suite for~\TeX~programming}
+  \date{2014-09-26}
+
+\author{Frank Mittelbach}
+\address{Mainz, Germany}
+
+\author{Will Robertson}
+\address{School of Mechanical Engineering, The University of Adelaide, Australia}
+
+\author{The~\LaTeX3 team}
+\netaddress{http://www.latex-project.org}
+
+
+
+\newcommand\drivername{build.lua}
+\newcommand\makename{l3build.lua}
+\newcommand\execname{texlua \drivername}
+\newcommand\compdirname{test/}
+
+\newcommand\pdfTeX{pdf\TeX}
+\newcommand\luaTeX{Lua\TeX}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+Regression tests are an important tool in any moderately complex
+programming environment.  They allow the programmer to make extensive
+changes to their code while providing confidence that something that
+used to work still does.  Extensive regression test suites have been
+an essential component of the maintenance and development of \LaTeXe{}
+and \LaTeX3.
+
+A regression test suite is typically composed of a number of
+individual files that contain one or more testable units of the code
+being tested. A testable unit might be either a certain computation
+with an expected outcome, a series of logic tests, or\Dash in
+particular for \TeX{}-based code\Dash material that is typeset and
+intended to achieve some particular formatting.
+
+During code development and before any new code is released to the
+public, this test suite can be compiled to ensure that any changes to
+the code have not introduced bugs or changed the behaviour compared to
+previous versions.
+As bugs in the code are reported, minimal examples demonstrating the
+bug often form test files of their own, showing that the bug has been
+fixed and won't re-occur.
+
+As \TeX{}-based code operates in at least three different `modes'
+(mouth, stomach, and output), regression testing is more complex than
+simply asserting the outcome of certain programming logic.  As part of
+the work of the \LaTeX3 project, a new Lua-based testing environment
+has been written to support ongoing development.  This testing
+environment, presented at the 2014 \tug\ conference in
+Portland~\cite{Mittelbach:l3buildtalk}, is suitable for use by the
+general \TeX{} community.
+
+
+\section{History}
+
+The ideas for a regression test suite for \LaTeX{} date back to the
+early nineties\footnote{As with many ideas in the \TeX{} world, this one too
+  can be partly traced back to Don Knuth, who already provided his own
+  regression test for \TeX{} a decade
+  earlier~\cite{Knuth:1984:TTT}.} when \LaTeX\,2.09 existed in various
+incompatible flavours around the world due to its limitations in
+properly supporting font selection, complex mathematics, and languages
+other than English.  Because of that situation \LaTeXe{} was designed
+and implemented to reunite the different format and to provide a
+stable platform for future \LaTeX{} development.
+
+However, to successfully introduce \LaTeXe{} as an accepted successor
+of \LaTeX\,2.09 it was essential to win over the huge \LaTeX{} user
+base and provide them with a system that was as stable and upward
+compatible as possible. Thus existing user interfaces should be
+preserved and typesetting should provide identical output except in
+those cases where bug fixes or deliberate design decisions resulted in
+changes.
+
+To achieve this we devised a validation mechanism that could be used
+to ensure that interfaces behave as expected and typesetting results
+do not change even though the underlying code gets modified. With
+this in place the \LaTeX3 Project Team together with additional
+volunteers set out to create a large number of test files and
+verify them against the current \LaTeX\,2.09
+implementation. Figure~\ref{fig:volunteers} shows the original request
+for volunteers (exhibiting a severe underestimation of the amount of
+work involved); see also \cite{Mittelbach:TB18-4-309} for a more extensive
+description of this endeavor.
+
+This effort resulted in something like 200 test files
+that were then used to assure ourselves that the new \LaTeXe{}
+implementation was faithfully supporting all interfaces\Dash it was one
+of the key factors that ensured the new system became an accepted replacement
+for \LaTeX\,2.09 within a reasonably short period.
+
+\begin{figure}
+\centering
+\fbox{\begin{minipage}{.9\linewidth}
+\raggedright\hbadness=10000
+\textbf{Validating \LaTeX\,2.09}\\[\smallskipamount]
+%
+Writing test files for regression testing: checking bug fixes and
+improvements to verify that they don't have undesirable side
+effects; making sure that bug fixes really correct the problem
+they were intended to correct; testing interaction with various
+document styles, style options, and environments. We~would
+like three kinds of validation files:
+\begin{enumerate}
+\item General documents.
+\item Exhaustive tests of special environments/modules such as
+tables, displayed equations, theorems, floating figures,
+pictures, etc.
+\item Bug files containing tests of all bugs that are supposed to
+be fixed (as well as those that are not fixed, with comments
+about their status).
+\end{enumerate}
+A procedure for processing validation files has been devised;
+details will be furnished to anyone interested in this task.
+Estimated time required: 2 to 3 weeks, could be divided~up.
+\end{minipage}}
+\caption{Original request for volunteers}\label{fig:volunteers}
+\end{figure}
+
+Once in place this regression test suite was augmented over time and
+now contains roughly 350 test files altogether. Whenever a bug was
+found and fixed we added a new test file that would exhibit the undesired behavior
+if that bug would somehow resurface through later changes.
+
+Though not
+perfect (after all we introduced a number of bugs that initially were
+not caught by the regression test suite), the approach served us very
+well and prevented a number of horrible mistakes that would otherwise
+have made it into public releases of~\LaTeX.
+
+\subsection{The needs in the '90s}
+
+With the initial regression test suite we solved a number of burning
+problems. First of all we wanted to be confident that the code and the
+documented user interfaces worked as expected. Whenever we recoded
+an internal function the test suite would automatically alert us if that
+resulted in any noticeable changes at the user level or in downright
+bugs.
+
+Furthermore \LaTeXe{} came with much more documentation and the
+tests included compiling and checking the documentation files for
+errors and
+missing
+references.% just seemed to flow better this way
+
+In addition the Makefiles that ran the tests also included goals to
+build the distribution automatically.  Compared to \LaTeX\,2.09,
+which consisted of very few files, the format for \LaTeXe{} was
+generated from many source \texttt{.dtx} files, so the housekeeping
+complexity was greatly increased.
+
+Another issue we had to tackle was that the code was no longer
+maintained by a single person but by developers living in different
+places around the world and using different operating systems and
+installations. So the regression suite had to function with different
+installations without creating spurious differences.
+
+Finally all tasks had to work without user intervention or manual work because
+only in that case will such a system be used on a regular basis
+and thus benefits be realized.
+
+
+\subsection{The general approach}
+
+Designing a test system for verifying \TeX's typesetting behavior is
+not easy\Dash how do you test for correctness and how do you ensure
+that the tests are repeatable over time and in different places?
+
+The approach we came up with was to build test files that generate
+suitable data in their \texttt{.log} files. Suitable data would be, for
+example,
+the state of counters or dimensions produced with \cs{showthe}, data
+written with \cs{typeout}, and box content shown with
+\cs{showbox}. Some of the tracing parameters of \TeX{} could be used to
+verify paragraph building or page breaking decisions, but something
+like \cs{tracingall} would be inadvisable, as that would show the
+internal coding and not the expected functionality.
+
+The result of running such a test file would then be manually verified
+and stored away as a certified result. However, as many readers will
+already be aware,
+\LaTeX's \texttt{.log} files contain a lot of irrelevant data, some of
+which differs from run to run and some of which differs when running
+on different installations. So to make this approach workable we
+introduced a cleanup step in which we modified the result files
+removing irrelevant material and normalized some of the remaining
+parts. Of course one has to be careful not to sanitize too far, but we
+found a number of things necessary or at least advisable, including
+\begin{itemize}
+\item  shortening file path info to avoid differences between
+installations
+\item drop empty lines (different \TeX{} implementations put
+in different numbers of these)
+\item drop line numbers in `\texttt{on line <num>}' to avoid differences
+ just because extra lines got introduced in a test file.
+\end{itemize}
+Putting it all together we ended up with a system consisting of
+test files (with the extension \texttt{.lvt}), certified result files
+to compare against (extension \texttt{.tlg}) and a fairly complex
+Makefile and a number of Perl scripts used to run the different
+tasks. These tasks included running the test suite, producing the
+documentation and generating the distribution (ready to be shipped to
+\CTAN). It also contained a number of special functions such as
+unpacking and locally installing the code, cleaning up the source
+directories, checking individual test files, and % Oxford comma necessary for comprehension
+producing a new
+\texttt{.tlg} file for a given test file.
+
+
+\subsection{The new needs (in the new century)}
+
+As mentioned above, the initial system served us well, when moving
+from \LaTeX\,2.09 to \LaTeXe{} and then throughout the '90s, which
+had very active \LaTeXe{} development with releases produced at
+half-year intervals.% bad break but not sure what to do
+
+In this century, development of the core of the \LaTeXe{} kernel has slowed
+to a minimum (releases are now only every couple of years and the
+changes are small) % avoid repeating "minim*"
+while it has intensified in other areas such as
+actively progressing the development of the \LaTeX3 programming
+language \texttt{expl3}. With this new focus, newly important requirements for a
+regression test system became apparent.
+
+Instead of a single distribution we now had to deal with a growing
+number of distributions: core \LaTeXe{} and its packages, Babel (with
+a different release cycle), \texttt{expl3} and possibly smaller and
+larger distributions of third party code that also wanted to benefit
+from a functional regression test system.
+
+Windows and \MacOSX\ became the operating systems of choice for several
+developers and the Makefile approach of the original test suite did not
+work on Windows and only with modifications on \MacOSX.
+
+Last but not least, a number of new \TeX-based engines matured and people
+now wanted to use \LaTeX{} and friends not only on \pdfTeX{} but also
+on these new engines all of which provided additional capabilities.
+These new engines showed a number of subtle differences when adding
+data to the \texttt{.log} file, or due to extended capabilities showed
+additional data (such as extra nodes in listings). Furthermore the new
+engines still have bugs and a number of them showed up when we
+initially ran test files and compared their output with the certified
+\texttt{.tlg} data.
+
+Thus testing became a multi-dimensional problem: one had to verify
+test results with several engines and it had to work on multiple
+operating systems. Furthermore new code sources posed new or different
+requirements for building a distribution or doing the testing and
+we soon found that the original approach made a number of hardwired
+decisions that were no longer applicable if the system was used with a
+distribution different from \LaTeXe{}.
+
+For a short while we tried to accommodate the need for Windows support
+by using a set of \texttt{.bat} files in parallel with the Makefile
+approach but obviously that was doomed to failure, being impractical to
+maintain. Another avenue we explored was switching to a fully
+Perl-based approach (using Cons) but that again didn't work well with
+Windows and furthermore it would have been a solution not available
+out of the box on any \TeX{} installation.
+
+Eventually, we decided to apply the same principle used
+long ago with \texttt{docstrip.tex}: use the scripting language with
+some operating system capabilities that is available out of the box on
+all \TeX{} installations. Back then the answer was that only \TeX{} itself
+fit that bill and so \TeX{} became the tool to build style files,
+etc., from \texttt{.dtx} sources. However, while \TeX{} as such is too
+limited to be used for scripting a regression test system, we now had
+\luaTeX{} as an engine that offers a full-fledged Lua interpreter\Dash
+and these days \luaTeX{} is part of all modern \TeX{} installations.
+
+Moving to Lua (or \texttt{texlua} to be precise) means that the test
+and distribution system is now not tied to either the operating system
+(as the script runs on Windows and Unix variants) or to third-party
+tools (as Lua is available as part of a modern \TeX{} system).
+
+\[
+\centerline{$--*--$}
+\]
+
+\noindent In the remaining sections of this article we describe the new system
+and how it can be applied to support arbitrary code within the \TeX{}
+world.
+
+\section{Overview of the new system}
+\label{sec:overview}
+
+To illustrate, a hypothetical package will be described that
+uses the new system:
+consider a package \textsf{abc} with a collection of source
+files in the following layout.
+\begin{Verbatim}
+  abc/
+      abc.dtx
+      abc.ins
+      build.lua
+      README
+      testfiles/
+                test1.lvt
+                test1.tlg
+                ...
+                support/
+                        abc-test.cls
+\end{Verbatim}
+What is added in addition to the normal source files is a short Lua
+script, normally called \texttt{\drivername}.  Test files and their
+certified results are located in the folder `\texttt{testfiles/}'
+with extensions \texttt{.lvt} and \texttt{.tlg}, respectively.  The files in
+\texttt{support/} (if any) are used when running the test files.
+
+Upon
+running the test suite, a new folder `\texttt{build}' is created in
+which the package is unpacked, support files are copied across, and
+each test file is run in turn and compared to its original
+\texttt{.tlg} file. Directories and file names are adjustable and
+other setups are possible; the above structure is simply the default.
+
+
+\subsection{Modes of testing}
+
+The best way to perform regression tests for \TeX{} programming is to
+use the \texttt{.log} file; only here
+can box content be tested, not just logical and
+programmatic constructs.  Box
+content is essential for checking from the very highest level that
+code changes do not result in different typeset output.
+
+\TeX{} programming can be either \emph{expandable} or not.
+Code that is expected to be
+expandable should be tested as such.  This can be done by evaluating it within something like \cs{typeout} (in the case of \LaTeX). For non-expandable tests one should output
+their results to the \texttt{.log} once they have been evaluated.
+%
+As mentioned earlier there are also a number of \TeX{} tracing parameters
+and commands like \cs{showbox}, \cs{showlists}, or \cs{showthe} that
+can be used to generate relevant test data in the \texttt{.log}~file.
+
+To aid in producing a structured test suite we provide a number of
+commands for use in the test files.  The \cs{TYPE} command is used to write
+material to the \texttt{.log} file; it works like \cs{typeout}, but it
+allows `long' input.
+%
+A variety of commands, following, then use \cs{TYPE} to output strings
+to the \texttt{.log} file.
+\begin{itemize}
+\item
+\cs{SEPARATOR} inserts a long line of \texttt{=} symbols to break up
+the output.
+\item
+\cs{TRUE}, \cs{FALSE}, \cs{YES}, \cs{NO} insert text strings for
+standardized comparison.
+\item
+\cs{ERROR} is not defined but is commonly used to indicate a code path
+that should never be reached.
+\end{itemize}
+To produce individual tests we offer the commands \cs{TEST} and
+\cs{TESTEXP}. These commands take two arguments: a title
+and the actual test body.  \cs{TESTEXP} executes the body within a
+\cs{TYPE} command to test expandability but with \cs{TEST} you are
+responsible for generating test output using \cs{TYPE}, \cs{TRUE},
+etc.\ as it is intended to be used for non-expandable tests.
+Both  commands  surround the generated output with \cs{SEPARATOR}s and
+display the title and a test number. Here is an example:
+\begin{Verbatim}
+\begin{TEST}{stepping counters}
+ {
+  \setcounter{chapter}{2}
+  \setcounter{section}{5}
+  \setcounter{subsection}{4}
+  \stepcounter{chapter}%
+  \TYPE{\arabic{chapter}-%
+    \arabic{section}-\arabic{subsection}}
+  \SEPARATOR
+  \refstepcounter{section}
+  \TYPE{\arabic{chapter}-%
+    \arabic{section}-\arabic{subsection}}
+ }
+\end{Verbatim}
+This test will then produce the following output, as in standard \LaTeX{} only
+a counter directly ``within'' is reset to zero (e.g., the
+\texttt{subsection} counter is not touched when \texttt{chapter} is stepped):
+\begin{Verbatim}
+==========================================
+TEST 8: stepping counters
+==========================================
+3-0-4
+==========================================
+3-1-0
+==========================================
+\end{Verbatim}
+(Assuming it's the eighth test in the file.)
+
+
+
+%\section{Use of the regression test system}
+\section{Setting up the regression test system}
+
+Consider the case that a \LaTeX\ package consists of one or more
+\texttt{.dtx} files in a flat directory structure.  By default,
+to set up a regression test suite, you would create a driver file
+named `\texttt{\drivername}' and sub-folder named
+`\texttt{testfiles/}' to contain the test files.  An example driver
+file is shown in Section~\ref{sec:example}.
+
+The test files can be called basically anything (but should be logical
+in some way), and by default have the extension \texttt{.lvt}.  These are
+accompanied by a pre-saved \texttt{.tlg} file which contains the
+`results' of the test file to be checked against subsequent
+compilation of that test. If a test file has different results for
+different engines it is possible to ``certify'' \texttt{.tlg} files for
+each engine; those then have extensions such as \texttt{.luatex.tlg}.
+
+
+\subsection{Creating and checking test output}
+
+The first time a \texttt{.lvt} test file is written, it will need to
+be compiled to obtain the necessary \texttt{.tlg} output for future
+tests.  This is performed with:
+\begin{quote}\ttfamily
+\execname~save~\meta{test name}
+\end{quote}
+(To produce an engine-specific \texttt{.tlg} file an additional
+\meta{engine} argument can be given.)  This task can be re-run as
+many times as necessary until the test file demonstrates the necessary
+behaviour being tested.
+%
+At this point,
+\begin{quote}\ttfamily
+\execname~check~\meta{test name}
+\end{quote}
+will then re-run the \texttt{.lvt} file and compare the result to the
+original \texttt{.tlg} output.
+If no \meta{test name} is specified all tests in the test directory are run. Presuming no code has changed to
+affect the output of the tests, the console output of this task will show the name of the test files being processed followed by the line:
+\begin{quote}\ttfamily
+~~All checks passed
+\end{quote}
+If only one test file is run the usual console output from the \TeX{} compilation is also shown otherwise it is suppressed.
+
+These compilations take place in the subdirectory
+`\texttt{build/test}', and if a test fails, a diff file is deposited
+there with the information about what has changed in the output of the
+test file. Also deposited there are the full \texttt{.log} files  for each \meta{engine} (i.e., without modifications from the cleanup step) which can be helpful to debug complex issues.
+
+\divide\abovecaptionskip by2
+\subsection{An example driver file}
+\label{sec:example}
+
+For a simple setup such as shown in the overview in
+Section~\ref{sec:overview}, the driver file (\texttt{\drivername}) is
+quite simple.  An example of such a driver file is shown in
+Figure~\ref{fig:driver}; it need do little more than inform the build
+system of the name of the package and perhaps set some flags or change
+some defaults if they are not adequate.
+
+The main script is \texttt{l3build.lua}, which is automatically
+found in the \texttt{texmf} tree (via \texttt{kpsewhich}) and then
+loaded.  Thus, there is no need to hard-wire locations in the driver
+file and it will work on different installations.
+
+\begin{figure}
+\begin{Verbatim}[frame=single,fontsize=\small]
+#!/ usr/bin/env texlua
+
+ -- Build script for abc package
+
+ module = "abc"
+
+ -- variable overwrites (if needed)
+
+ -- call standard script
+
+ kpse.set_program_name ("kpsewhich")
+ dofile (kpse.lookup ("l3build.lua"))
+\end{Verbatim}
+\caption{Driver file for a hypothetical \textsf{abc} package}
+\label{fig:driver}
+\end{figure}
+
+
+\begin{figure}
+\begin{Verbatim}[frame=single,fontsize=\small]
+\documentclass{breqn-test}
+\input{regression-test}
+\usepackage{breqn}
+\begin{document}
+\START
+\AUTHOR{Will Robertson}
+\begin{dmath}
+a+b+c+d+e+f+g+h+i+j+k+l+m+
+  n+o+p+q+r+s+t+u+v+w+x+y+z
+\end{dmath}
+\showoutput
+\end{document}
+\end{Verbatim}
+\caption{Example test from \textsf{breqn}}
+\label{fig:breqn}
+\end{figure}
+
+\subsection{The structure of test files}
+
+As mentioned previously, the method of using the \texttt{.log} file
+allows various types of tests to be conducted.  The most simple test
+might load a package and execute some commands to produce a small
+amount of typeset output.  A complete example of such a test is shown
+in Figure~\ref{fig:breqn}.  Some points to note:
+\begin{enumerate}
+\item The first line, \verb|\input{regression-test}| loads the
+  necessary settings and commands to format the \texttt{.log} file
+  properly for testing.
+
+\item It is not necessary to load a special document class (most
+  tests use \texttt{article} or \texttt{minimal}), but a package
+  author may wish to adjust page margins, etc., without repeating the
+  commands for each test. Such a special test class or package could
+  then be kept in the \texttt{support/} directory.
+
+\item The test begins proper at \cs{START}\Dash everything before that point
+  in the \texttt{.log} file will be ignored. This prevents, for example,
+  package version numbers displayed while the preamble is
+  processed from becoming part of the test.
+%
+  The \cs{AUTHOR} declaration is an
+  optional way of indicating who might know how to fix the problem
+  should the test begin failing.
+
+\item In this example \cs{showoutput} generates the actual test data
+  by generating a symbolic representation of the page content in the
+  \texttt{.log} file.
+
+\item A slightly modified version of \verb|\end{document}| finishes
+  the test document. Alternatively, one can end the test file with
+  \cs{END} which avoids the final processing done by
+  \verb|\end{document}| and thus prevents unwanted material from
+  becoming part of the test data. In this example \cs{END} cannot be
+  used as that would stop the run immediately without producing a page\Dash
+  which is our goal here.
+
+\end{enumerate}
+Not shown is the \cs{OMIT} \dots \cs{TIMO} construction, which puts
+flags into the \texttt{.log} file between which no test comparisons
+will be made.  This can be used around code that generates variable
+log information that is known to be irrelevant for the test. For
+example, statements like \cs{newlength} or \cs{newcounter} write some
+tracing information into the \texttt{.log} that shows the allocated
+register number. If the code gets revised these numbers might change
+and thereby unnecessarily invalidate the test result.
+
+\cs{OMIT} can also be used before \verb|\end{document}| if you
+need the final processing to happen, but want to ensure that nothing
+written at that time becomes part of the test.
+
+
+An example of a more structured test from the \LaTeX3 test suite is
+shown in Figure~\ref{fig:nonexp}.  Here, a number of different tests
+are contained within a single file, and a few of these are included in
+the example.  The content of the test is not really important here (it is
+testing aspects of the integer module from \texttt{expl3}) but it does
+show a few best practices.
+
+\cs{OMIT}/\cs{TIMO} is used to hide the register allocation numbers
+from \verb|\int_new:N|. The first test then exercises integer addition
+and subtraction which is not expandable (therefore \cs{TEST} together
+with \cs{TYPE} is used) and it consists in fact of several small
+tests. The expected results are written as comments into the test file
+which is helpful in case it ever fails.
+
+Converting integers is supposed to be expandable so \cs{TESTEXP} is
+used for the second test. The same is true for the case selection
+commands. Here the test output is generated by \cs{YES} or \cs{NO}.
+
+Can you guess the test results, even if you are not familiar with the
+\texttt{expl3} language? They are shown in Figure~\ref{fig:results}.
+
+
+\begin{figure}
+\begin{Verbatim}[frame=single,fontsize=\small]
+\documentclass{minimal}
+\input{regression-test}
+\RequirePackage{expl3}
+\begin{document}
+\START
+\AUTHOR{Frank Mittelbach, LaTeX3 Project}
+\ExplSyntaxOn
+
+\OMIT
+\int_new:N \l_testa_int
+\int_new:N \g_testa_int
+\TIMO
+
+\TEST { adding~and~subtracting }
+  {
+    \int_zero:N \l_testa_int
+    \int_add:Nn \l_testa_int { 5 * 7 }
+    \int_add:Nn \l_testa_int { 15 }
+ % we hope for a value of 50
+    \TYPE { \int_use:N \l_testa_int }
+    \int_sub:Nn \l_testa_int { 3 * 5 }
+ % we hope for a value of 35
+    \TYPE { \int_use:N \l_testa_int }
+    \int_gzero:N \g_testa_int
+    {
+      \int_gadd:Nn \g_testa_int
+                  { (2 + 13) / (2 * 3) }
+      \int_gadd:Nn \g_testa_int { 3 }
+ % we hope for a value of 6
+      \TYPE { \int_use:N \g_testa_int }
+      \int_gsub:Nn \g_testa_int { 5 * 5 }
+    }
+ % we hope for a value of -19
+    \TYPE { \int_use:N \g_testa_int }
+  }
+
+\TESTEXP { converting~from~and~to~base }
+  {
+    \int_to_base:nn { 17 } { 8 }  ~
+    \int_from_base:nn { 21 } { 8 }
+  }
+\TESTEXP{ Case~statements }
+  {
+    \int_case:nnn
+      { -1 + 1 }
+      { {    -1 } {  \NO }
+        { 3 - 3 } { \YES } }
+    { \NO }
+  \NEWLINE
+  \int_case:nnn
+    { 7 - 2 }
+    { { -1 + 3 } { \NO } }
+    { \YES }
+  }
+% more tests here omitted
+\END
+\end{Verbatim}
+\caption{Expandable and non-expandable tests}
+\label{fig:nonexp}
+\end{figure}
+
+
+\begin{figure}
+\begin{Verbatim}[frame=single,fontsize=\small]
+=============================================
+TEST 1: adding and subtracting
+=============================================
+50
+35
+6
+-19
+=============================================
+
+=============================================
+TEST 2: converting from and to base
+=============================================
+21 17
+=============================================
+
+=============================================
+TEST 3: Case statements
+=============================================
+YES
+YES
+=============================================
+\end{Verbatim}
+\caption{Test results}
+\label{fig:results}
+\end{figure}
+
+\subsection{Options}
+
+While the examples shown previously demonstrate the behaviour in the standard
+setup, the new build system provides significantly greater
+flexibility. This is achieved by providing a large number of
+variables that can be (re)set as necessary in the driver file.
+%
+For example, the new system supports building complex distributions
+consisting of
+several modules in different directories with dependencies between
+them. You can also control if the processing should happen in a
+sandbox or if it is allowed to draw any support files needed for the
+tests (e.g., extra packages or classes) from the \acro{TDS} tree.
+The latter is the default as this is better for most distributions.
+%
+For details consult the documentation in~\cite{L3Project:l3build}.
+
+There is one option that one may have to modify even for simple setups:
+\texttt{checkruns}. This controls the number of times each test file
+is run; to speed up processing it defaults to~\texttt{1}. If,
+however, the codes require multiple runs to function (e.g., if you
+test material that is passed through the \texttt{.aux} file) you have
+to set this variable to \texttt{2} or higher to ensure that your tests
+actually work correctly.
+
+
+
+
+\section{Operating the system}
+
+As indicated earlier the system does a bit more than managing a set
+of test files, so here is a short description of the main tasks that
+can be executed once the setup is in place. Each task takes zero or
+more arguments as described below and is executed by running the
+driver file (default \texttt{build.lua}) through a Lua interpreter
+(\texttt{texlua}) and passing it the task name and any further
+argument as necessary, e.g.,
+\begin{quote}\ttfamily
+\execname~check~\meta{test name}
+\end{quote}
+would run the check on \meta{test name} using all engines.
+%\pagebreak[3]
+So here is the list of available tasks:
+\begin{description}
+\item[\texttt{check} \meta{name} \meta{engine}] \hfil \parskip=0pt Without
+  arguments, runs all test files found in the directory that contains
+  the \texttt{.lvt} files. It reports progress by displaying each test
+  file name currently processed (but otherwise hides any \TeX{} output
+  to avoid cluttering the screen) and at the end displays a summary
+  indicating success or failure.
+
+  If \meta{name} is specified, it will run only the tests for that
+  \texttt{.lvt} file, and if additionally given an \meta{engine} name will
+  run only the test for that specific engine. In either case it will
+  show everything on the screen, which is helpful if the run shows
+  abnormal behaviour (especially if it ends up in an endless loop and
+  never returns for some reason).
+
+\item[\texttt{clean} ] Cleans up the source tree, removing
+  temporary files and directories.
+
+\item[\texttt{ctan} ] Runs all tests, typesets all
+  documentation and if there are no errors, generates a
+  \texttt{.zip} file suitable for uploading to \CTAN.
+
+\item[\texttt{doc} ] Typesets all documentation (by default
+  \texttt{.dtx} files), thus checking them for trivial processing errors.
+
+\item[\texttt{install} ] This installs the distribution in the local
+  tree of the user.
+
+\item[\texttt{save} \meta{name} \meta{engine}] This generates (or
+  regenerates) the \texttt{.tlg} file for \meta{name}. If additionally
+  supplied an \meta{engine} argument it generates a specific
+  \texttt{.tlg} as discussed above.
+
+  It is the responsibility of the developer to verify that the data
+  placed into the \texttt{.tlg} produces the desired result, i.e., is
+  actually correct. Once produced or updated with \texttt{save}, the
+  output is considered certified and will be used to verify future check
+  runs!
+
+%\item[\texttt{unpack} ]
+\end{description}
+
+
+
+\section{Acknowledgements}
+
+The original test suite system was a joint effort by the whole
+\LaTeX{} project team at that time, i.e.,
+%
+Frank Mittelbach,
+Rainer Sch\"opf,
+David Carlisle,
+Michael Downes,
+Alan Jeffrey, and
+Chris Rowley.
+%
+We also had significant help when writing the initial set of test files from a
+number of volunteers, in particular Daniel Flipo and Chris Martin.
+
+Around 2008 Rainer replaced the Makefile approach used for \LaTeXe{}
+by Cons (a Perl-based solution) as the Makefile got so complex over
+time that it was difficult to manage.
+
+For the \LaTeX3 development we stayed with Make as the requirements
+of the \texttt{expl3} distribution were initially much simpler.
+
+Joseph Wright wrote a first set of \texttt{.bat} files for
+\texttt{expl3}, as by then many developers worked on Windows. Modelled
+after this, Frank replaced the Cons solution for \LaTeXe{} in 2013.
+
+Finally in 2014 Joseph then implemented most of the new Lua-based
+system and it is now successfully used to manage the \LaTeX3
+(\texttt{expl3}) distribution as well as several smaller package
+distributions. The \LaTeXe{} distribution will follow shortly.
+
+\nocite{*}
+
+\iffalse  % easier to include the bbl for TUB
+\bibliographystyle{plain}
+\bibliography{\jobname}
+\else
+%\SetBibJustification{\small \advance\itemsep by .9pt } %\raggedright}
+\SetBibJustification{\advance\itemsep by 2pt \raggedright}
+\smallskip
+\begin{thebibliography}{1}
+
+\bibitem{Knuth:1984:TTT}
+Donald~E. Knuth.
+\newblock A torture test for {\TeX}.
+\newblock Report STAN-CS-84-1027, 1984.
+
+\bibitem{Mittelbach:TB18-4-309}
+Frank Mittelbach.
+\newblock {{A} regression test suite for {\LaTeXe}}.
+\newblock {\em TUGboat}, 18(4):309--311, December 1997.
+\newblock \url{http://tug.org/TUGboat/tb18-4/tb57mitt.pdf}
+
+\bibitem{Mittelbach:l3buildtalk}
+Frank Mittelbach.
+\newblock A modern regression test suite for \TeX\ programming, July 2014.
+\newblock Talk given at \tug\ conference in Portland. Video and slide material
+  available at \url{http://www.latex-project.org/papers}.
+
+\bibitem{L3Project:l3build}
+{\LaTeX3}~Project.
+\newblock The \textsf{l3build} package: Checking and building packages,
+September 2014.\\
+\newblock \url{http://ctan.org/pkg/l3build}
+
+\end{thebibliography}
+\fi
+
+%\bigskip
+\makesignature
+
+\end{document}
+

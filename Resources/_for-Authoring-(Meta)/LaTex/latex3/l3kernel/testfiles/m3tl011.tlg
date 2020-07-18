@@ -1,0 +1,105 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Joseph Wright
+============================================================
+TEST 1: Awkward heads
+============================================================
+""
+""
+""
+""
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"a"
+"{a}"
+"{a}"
+"a"
+"\q_stop "
+"\q_stop "
+"a"
+"\q_stop "
+"a"
+"\iffalse "
+"\fi "
+============================================================
+============================================================
+TEST 2: Awkward tails
+============================================================
+""
+""
+" "
+""
+""
+"{b}"
+"{b}{c}"
+"{b}"
+"b"
+"{b}c"
+"b{c}"
+""
+"b"
+""
+"b"
+""
+"{{b}}"
+" {b}"
+""
+"\q_stop "
+"\q_stop "
+"a"
+"\q_stop b"
+""
+""
+============================================================
+============================================================
+TEST 3: f-type expansion of heads
+============================================================
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl=a.
+> \l_tmpa_tl={a}.
+> \l_tmpa_tl={a}.
+> \l_tmpa_tl=a.
+============================================================
+============================================================
+TEST 4: f-type expansion of tails
+============================================================
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=.
+> \l_tmpa_tl={b}.
+> \l_tmpa_tl={b}{c}.
+> \l_tmpa_tl={b}.
+> \l_tmpa_tl=b.
+> \l_tmpa_tl={b}c.
+> \l_tmpa_tl=b{c}.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=b.
+> \l_tmpa_tl=.
+> \l_tmpa_tl=b.
+> \l_tmpa_tl=.
+> \l_tmpa_tl={{b}}.
+> \l_tmpa_tl={b}.
+============================================================

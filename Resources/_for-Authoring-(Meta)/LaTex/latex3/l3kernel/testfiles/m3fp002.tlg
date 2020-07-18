@@ -1,0 +1,160 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+============================================================
+TEST 1: fp_set, fp_gset
+============================================================
+! LaTeX3 Error: The variable \l_boom_fp has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_boom_fp { ... }
+without first having:
+  \tl_new:N \l_boom_fp
+LaTeX will create the variable and continue.
+> \l_tmpa_fp=234.
+> \l_tmpb_fp=432.
+> \l_tmpa_fp=123.
+> \l_tmpb_fp=321.
+> \g_tmpa_fp=123.
+> \g_tmpb_fp=321.
+============================================================
+============================================================
+TEST 2: fp_set_eq, fp_gset_eq
+============================================================
+! LaTeX3 Error: The variable \l_boom_fp has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_boom_fp { ... }
+without first having:
+  \tl_new:N \l_boom_fp
+LaTeX will create the variable and continue.
+> \l_tmpa_fp=inf.
+> \l_tmpb_fp=-inf.
+> \l_tmpa_fp=3.141592653589793.
+> \l_tmpb_fp=2.718281828459045.
+> \g_tmpa_fp=3.141592653589793.
+> \g_tmpb_fp=2.718281828459045.
+============================================================
+============================================================
+TEST 3: fp_add, fp_gadd
+============================================================
+! LaTeX3 Error: The variable \l_boom_fp has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_boom_fp { ... }
+without first having:
+  \tl_new:N \l_boom_fp
+LaTeX will create the variable and continue.
+! Undefined control sequence.
+<argument> \l_boom_fp 
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+> \l_tmpa_fp=357.
+> \l_tmpb_fp=753.
+> \l_tmpa_fp=123.
+> \l_tmpb_fp=321.
+> \g_tmpa_fp=123.
+> \g_tmpb_fp=321.
+============================================================
+============================================================
+TEST 4: fp_sub, fp_gsub
+============================================================
+! LaTeX3 Error: The variable \l_boom_fp has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_boom_fp { ... }
+without first having:
+  \tl_new:N \l_boom_fp
+LaTeX will create the variable and continue.
+! Undefined control sequence.
+<argument> \l_boom_fp 
+l. ...  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+> \l_tmpa_fp=-357.
+> \l_tmpb_fp=-753.
+> \l_tmpa_fp=-123.
+> \l_tmpb_fp=-321.
+> \g_tmpa_fp=-123.
+> \g_tmpb_fp=-321.
+============================================================
+============================================================
+TEST 5: fp_if_exist
+============================================================
+FALSE
+! LaTeX3 Error: The variable \l_boom_fp has not been declared on line ....
+For immediate help type H <return>.
+ ...                                              
+l. ...  }
+This is a coding error.
+Checking is active, and you have tried do so something like:
+  \tl_set:Nn \l_boom_fp { ... }
+without first having:
+  \tl_new:N \l_boom_fp
+LaTeX will create the variable and continue.
+TRUE
+TRUE
+TRUE
+============================================================
+============================================================
+TEST 6: fp_show
+============================================================
+> \c_pi_fp=3.141592653589793.
+<recently read> }
+l. ...  }
+> \c_inf_fp=inf.
+<recently read> }
+l. ...  }
+> \c_minus_inf_fp=-inf.
+<recently read> }
+l. ...  }
+> \c_nan_fp=nan.
+<recently read> }
+l. ...  }
+> \c_minus_zero_fp=-0.
+<recently read> }
+l. ...  }
+> \c_zero_fp=0.
+<recently read> }
+l. ...  }
+> \c_one_fp=1.
+<recently read> }
+l. ...  }
+> pi=3.141592653589793.
+<recently read> }
+l. ...  }
+> inf=inf.
+<recently read> }
+l. ...  }
+> -inf=-inf.
+<recently read> }
+l. ...  }
+> nan=nan.
+<recently read> }
+l. ...  }
+> -0=-0.
+<recently read> }
+l. ...  }
+> 0=0.
+<recently read> }
+l. ...  }
+============================================================

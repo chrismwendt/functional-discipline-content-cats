@@ -1,0 +1,17 @@
+%
+% Copyright (C) 2017,2018 The LaTeX3 Project
+%
+
+\documentclass{article}
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+\RequirePackage{l3precom}
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\START
+\AUTHOR{Bruno Le Floch}
+\RequirePackage{l3ldb}
+\END

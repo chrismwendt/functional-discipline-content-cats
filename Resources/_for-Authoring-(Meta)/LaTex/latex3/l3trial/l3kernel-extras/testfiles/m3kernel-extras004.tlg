@@ -1,0 +1,90 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+Author: Bruno Le Floch
+Defining \group_after_set:NNo on line ...
+============================================================
+TEST 1: group_after_set various types
+============================================================
+Defining \g_group_after_2_tl on line ...
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {a}
+>  {ba}
+>  {b}.
+<recently read> }
+l. ...  }
+> \l_tmpa_dim=2.0pt.
+<recently read> }
+l. ...  }
+> \l_tmpa_int=255.
+<recently read> }
+l. ...  }
+> \l_tmpa_tl=abcabc.
+<recently read> }
+l. ...  }
+The comma list \l_tmpa_clist contains the items (without outer braces):
+>  {a}
+>  {ba}
+>  {b}.
+<recently read> }
+l. ...  }
+> \l_tmpa_dim=2.0pt.
+<recently read> }
+l. ...  }
+> \l_tmpa_int=255.
+<recently read> }
+l. ...  }
+> \l_tmpa_tl=abcabc.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: group_after_set with integers
+============================================================
+> \l_tmpa_int +\l_tmpb_int =123123.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =234234.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =987987.
+<recently read> }
+l. ...  }
+Defining \g_group_after_3_tl on line ...
+> \l_tmpa_int +\l_tmpb_int =876876.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =765765.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =765765.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =9009.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =8008.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =7007.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =7007.
+<recently read> }
+l. ...  }
+> \l_tmpa_int +\l_tmpb_int =234234.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 3: group_insert_after
+============================================================
+> \foo:=\long macro:->foo.
+<recently read> }
+l. ...  }
+> abc.
+<recently read> }
+l. ...  }
+> \foo:=undefined.
+<recently read> }
+l. ...  }
+============================================================

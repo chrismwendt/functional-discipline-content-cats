@@ -1,0 +1,383 @@
+% \iffalse
+%
+%% File l3fp-functions.dtx (C) Copyright 2012-2018 The LaTeX3 Project
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% This file is part of the "l3trial bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/latex3/latex3
+%
+% for those people who are interested.
+%
+%<*driver|package>
+\RequirePackage{expl3}
+%</driver|package>
+%<*driver>
+\documentclass[full]{l3doc}
+\usepackage{amsmath}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \title{^^A
+%   The \pkg{l3fp-functions} package\\ Floating point functions^^A
+% }
+%
+% \author{^^A
+%  The \LaTeX3 Project\thanks
+%    {^^A
+%      E-mail:
+%        \href{mailto:latex-team@latex-project.org}
+%          {latex-team@latex-project.org}^^A
+%    }^^A
+% }
+%
+% \date{Released 2018-04-30}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{l3fp-functions} implementation}
+%
+%    \begin{macrocode}
+%<*initex|package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<@@=fp>
+%    \end{macrocode}
+%
+% \subsection{Previously in \pkg{l3fp}: defining new \pkg{l3fp} functions}
+%
+% \begin{macro}[EXP]{\fp_function:Nw}
+%   Parse the argument of the function~|#1| using
+%   \cs{@@_parse_operand:Nw} with a precedence of~$16$, and pass the
+%   function and argument to \cs{@@_function_apply:nw}.
+%    \begin{macrocode}
+\cs_new:Npn \fp_function:Nw #1
+  {
+    \exp_after:wN \@@_function_apply:nw
+    \exp_after:wN #1
+    \exp:w
+      \@@_parse_operand:Nw \c_@@_prec_func_int \@@_parse_expand:w
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\fp_new_function:Npn}
+% \begin{macro}{\@@_new_function:NNnnn, \@@_new_function:Ncfnn}
+% \begin{macro}{\@@_function_args:Nwn}
+%   Save the code provided by the user in the control sequence
+%   |\__fp_user_#1|.  Define |#1| to call \cs{@@_function_apply:nw}
+%   after parsing one operand using \cs{@@_parse_operand:Nw} with
+%   precedence~$16$.  The auxiliary \cs{@@_function_args:Nwn} receives
+%   the user function and the number of arguments (half of the number of
+%   tokens in the parameter text~|#2|), followed by the operand (as a
+%   token list of floating points).  It checks the number of arguments,
+%   and applies the user function to the arguments (without the outer
+%   brace group).
+%    \begin{macrocode}
+\cs_new_protected:Npn \fp_new_function:Npn #1#2#
+  {
+    \@@_new_function:Ncfnn #1
+      { @@_user_ \cs_to_str:N #1 }
+      { \int_eval:n { \tl_count:n {#2} / 2 } }
+      {#2}
+  }
+\cs_new_protected:Npn \@@_new_function:NNnnn #1#2#3#4#5
+  {
+    \cs_new:Npn #1
+      {
+        \exp_after:wN \@@_function_apply:nw \exp_after:wN
+          {
+            \exp_after:wN \@@_function_args:Nwn
+            \exp_after:wN #2
+            \int_value:w #3 \exp_after:wN ; \exp_after:wN
+          }
+        \exp:w
+          \@@_parse_operand:Nw \c_@@_prec_func_int \@@_parse_expand:w
+      }
+    \cs_new:Npn #2 #4 {#5}
+  }
+\cs_generate_variant:Nn \@@_new_function:NNnnn { Ncf }
+\cs_new:Npn \@@_function_args:Nwn #1#2; #3
+  {
+    \int_compare:nNnTF { \tl_count:n {#3} } = {#2}
+      { #1 #3 }
+      {
+        \__kernel_msg_expandable_error:nnnnn
+          { kernel } { fp-num-args } { #1() } {#2} {#2}
+        \c_nan_fp
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[EXP]
+%   {
+%     \@@_function_apply:nw,
+%     \@@_function_store:wwNwnn,
+%     \@@_function_store_end:wnnn
+%   }
+%   The auxiliary \cs{@@_function_apply:nw} is called after parsing an
+%   operand, so it receives some code~|#1|, then the operand ending
+%   with~|@|, then a function such as \cs{@@_parse_infix_+:N} (but not
+%   always of this form, see comparisons for instance).  Package the
+%   operand (an array) into a token list with floating point items: this
+%   is the role of \cs{@@_function_store:wwNwnn} and
+%   \cs{@@_function_store_end:wnnn}.  Then apply \cs{@@_parse:n} to the
+%   code~|#1| followed by a brace group with this token list.  This
+%   results in a floating point result, which is then correctly parsed
+%   as the next operand of whatever was looking for one.  The trailing
+%   \cs{s_@@_expr_mark} is used as a special infix operator to indicate
+%   that the next token has already gone through \cs{@@_parse_infix:NN}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_function_apply:nw #1#2 @
+  {
+    \@@_parse:n
+      {
+        \@@_function_store:wwNwnn #2
+          \s_@@_expr_mark \@@_function_store:wwNwnn ;
+          \s_@@_expr_mark \@@_function_store_end:wnnn
+        \s_@@_expr_stop { } { } {#1}
+      }
+    \s_@@_expr_mark
+  }
+\cs_new:Npn \@@_function_store:wwNwnn
+    #1; #2 \s_@@_expr_mark #3#4 \s_@@_expr_stop #5#6
+  { #3 #2 \s_@@_expr_mark #3#4 \s_@@_expr_stop { #5 #6 } { { #1; } } }
+\cs_new:Npn \@@_function_store_end:wnnn
+    #1 \s_@@_expr_stop #2#3#4
+  { #4 {#2} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Declaring functions}
+%
+% \begin{macro}{\fp_new_function:n}
+% \begin{macro}[aux]{\@@_new_function:n}
+%    \begin{macrocode}
+\cs_new_protected:Npn \fp_new_function:n #1
+  { \exp_args:No \@@_new_function:n { \tl_to_str:n {#1} } }
+\cs_new_protected:Npn \@@_new_function:n #1
+  {
+    \@@_id_if_invalid:nTF {#1}
+      { \__kernel_msg_error:nnn { fp } { invalid-identifier } {#1} }
+      {
+        \cs_if_exist:cT { @@_parse_word_#1:N }
+          {
+            \__kernel_msg_error:nnn
+              { kernel } { fp-id-already-defined } {#1}
+            \cs_undefine:c { @@_parse_word_#1:N }
+            \cs_undefine:c { @@_#1_o:w }
+          }
+        \@@_function_set_parsing:Nn \cs_gset_eq:NN {#1}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}[aux]
+%   {\@@_function_set_parsing:Nn, \@@_function_set_parsing_aux:NNn}
+%    \begin{macrocode}
+\cs_new:Npn \@@_function_set_parsing:Nn #1#2
+  {
+    \exp_args:NNc \@@_function_set_parsing_aux:NNn #1
+      { @@_parse_word_#2:N } {#2}
+  }
+\cs_new:Npn \@@_function_set_parsing_aux:NNn #1#2#3
+  {
+    \cs_set:Npx \@@_tmp:w
+      {
+        \exp_not:N \@@_parse_function:NNN
+        \exp_not:N \@@_function_o:w
+        \exp_not:c { @@_#3_o:w }
+      }
+    \cs_if_eq:NNF #2 \@@_tmp:w
+      {
+        \cs_if_exist:NTF #2
+          {
+            \__kernel_msg_warning:nnnn
+              { kernel } { fp-id-used-elsewhere } {#3} { function }
+            #1 #2 \@@_tmp:w
+          }
+          {
+            \cs_new_eq:NN #2 \scan_stop: % to declare the function
+            #1 #2 \@@_tmp:w
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[aux, EXP]{\@@_function_o:w}
+%    \begin{macrocode}
+\cs_new:Npn \@@_function_o:w #1#2 @
+  {
+    \cs_if_exist:NTF #1
+      { #1 #2 @ }
+      {
+        \exp_after:wN \s_@@_symbolic
+        \exp_after:wN \@@_symbolic_chk:w
+        \exp_after:wN \@@_function_o:w
+        \exp_after:wN #1
+        \exp_after:wN ,
+        \exp_after:wN {
+          \exp:w \exp_end_continue_f:w
+          \@@_exp_after_array_f:w #2 \s_@@_expr_stop
+          \exp_after:wN
+        }
+        \exp_after:wN ;
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Defining functions by their expression}
+%
+% \begin{variable}{\l_@@_function_arg_int}
+%   Labels the arguments of a function being defined.
+%    \begin{macrocode}
+\int_new:N \l_@@_function_arg_int
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\fp_set_function:nnn}
+% \begin{macro}[aux]{\@@_set_function:Nnnn}
+%   \begin{syntax}
+%     \cs{fp_set_function:nnn} \Arg{identifier}
+%       \Arg{comma-list of variables} \Arg{expression}
+%   \end{syntax}
+%   Defines the \meta{identifier} to stand for a function which expects
+%   some arguments defined by the \meta{comma-list of variables}, and
+%   evaluates to the \meta{expression}.
+%    \begin{macrocode}
+\cs_new_protected:Npn \fp_set_function:nnn #1
+  {
+    \exp_args:NNo \@@_set_function:Nnnn \cs_set_eq:cN
+      { \tl_to_str:n {#1} }
+  }
+\cs_new_protected:Npn \@@_set_function:Nnnn #1#2#3#4
+  {
+    \@@_id_if_invalid:nTF {#2}
+      { \__kernel_msg_error:nnn { fp } { invalid-identifier } {#2} }
+      {
+        \cs_if_exist:cF { @@_parse_word_#2:N }
+          { \@@_function_set_parsing:Nn \cs_set_eq:NN {#2} }
+        \group_begin:
+          \int_zero:N \l_@@_function_arg_int
+          \exp_args:No \clist_map_inline:nn { \tl_to_str:n {#3} }
+            {
+              \int_incr:N \l_@@_function_arg_int
+              \exp_args:Nx \@@_clear_variable:n
+                { _ \tex_romannumeral:D \l_@@_function_arg_int }
+              \fp_clear_variable:n {##1}
+              \cs_set_nopar:cpx { l_@@_variable_##1_fp }
+                {
+                  \exp_not:N \s__fp_symbolic
+                  \exp_not:N \@@_symbolic_chk:w
+                  \exp_not:N \@@_function_arg_o:w
+                  \int_use:N \l_@@_function_arg_int
+                  ########1 , { } ;
+                }
+            }
+          \cs_set:Npn \@@_function_arg_o:w ##1 @
+            {
+              \exp_after:wN \s_@@_symbolic
+              \exp_after:wN \@@_symbolic_chk:w
+              \exp_after:wN \@@_function_arg_o:w
+              \tex_romannumeral:D
+              \@@_exp_after_symbolic_loop:N ##1
+                { , \tex_romannumeral:D \use_none:nn }
+              \exp_after:wN \c_zero_int
+              \exp_after:wN { \exp_after:wN } \exp_after:wN ;
+            }
+          \fp_set:Nn \l_@@_symbolic_fp {#4}
+          \use:x
+            {
+              \exp_not:n { \cs_gset:Npn \@@_tmp:w ##1 }
+                { \exp_not:o { \l_@@_symbolic_fp } }
+            }
+          \use:x
+            {
+              \exp_not:n { \cs_gset:Npn \@@_tmp:w ##1 @ }
+                {
+                  \exp_not:N \@@_exp_after_symbolic_f:nw
+                  \exp_not:n { { \exp_after:wN \exp_stop_f: } }
+                  \exp_not:o { \@@_tmp:w { . , {##1} } }
+                }
+            }
+        \group_end:
+        #1 { @@_#2_o:w } \@@_tmp:w
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[aux, EXP]
+%   {
+%     \@@_function_arg_o:w,
+%     \@@_function_arg_few:w,
+%     \@@_function_arg_get:w
+%   }
+%    \begin{macrocode}
+\cs_new:Npn \@@_function_arg_o:w #1. #2
+  {
+    \if_meaning:w @ #2
+      \exp_after:wN \@@_function_arg_few:w
+    \fi:
+    \if_int_compare:w #1 = 1 \exp_stop_f:
+      \exp_after:wN \@@_function_arg_get:w
+    \fi:
+    \@@_use_i_until_s:nw
+      {
+        \exp_after:wN \@@_function_arg_o:w
+        \int_value:w \int_eval:n { #1 - 1 } .
+      }
+      #2
+  }
+\cs_new:Npn \@@_function_arg_few:w #1 @ { \exp_after:wN \c_nan_fp }
+\cs_new:Npn \@@_function_arg_get:w #1#2#3; #4 @
+  {
+    \@@_exp_after_array_f:w #3; \s_@@_expr_stop
+    \exp_after:wN \exp_stop_f:
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% ^^A todo: add check for number of args
+%
+%    \begin{macrocode}
+\__kernel_msg_new:nnn { fp } { num-args }
+  { Function~#1~received~#2~arguments,~not~#3. }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</initex|package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex
