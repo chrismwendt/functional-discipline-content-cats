@@ -1,0 +1,205 @@
+\documentclass{tac}
+
+% Prepared using tac.cls and diagxy (if you do not have diagxy, compiling this will require commenting lines 165-168)
+% PLEASE READ comments in the text below
+% PLEASE NOTE: source files for submission to TAC require a comment like the following
+%              giving style, packages used, TeX implementation
+% TAC style, 2 pp, Xy-pic ver 3.7, MikTeX version 3.1
+
+
+% NOTE: packages used should be the first part of the preamble
+
+\usepackage{xy}
+% diagxy loads xy, so the line preceding is redundant
+
+\input diagxy
+
+\def\xypic{\hbox{\rm\Xy-pic}}
+
+% The TAC hyperref setup should be reloaded after other packages
+
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{allcolors=[rgb]{0.1,0.1,0.4}}
+
+% NOTE: TAC preamble macros come next...
+
+\author{Michael Barr, Geoff Cruttwell, and Robert Rosebrugh}
+
+% NOTE: that \thanks is outside the \author macro, unlike article style...
+
+\thanks{We would like to thank Donald Knuth, Leslie Lamport, Kris
+Rose, and all the others who make high quality math typesetting
+possible.}
+
+\address{Department of Mathematics and Statistics, McGill University\\
+ 805 Sherbrooke St. W, Montreal, QC, Canada H3A 2K6\\[5pt]
+ Department of Mathematics and Computer Science, Mt. Allison
+University\\67 York St., Sackville, NB, Canada E4L 1E6\\
+}
+
+
+\title{A \textsl{TAC} sampler}
+
+% NOTE: this is required...
+
+\copyrightyear{2020}
+
+% NOTE: the next three are optional in this style (but are required for TAC publication)
+
+\keywords{TAC, diagrams}
+\amsclass{00A00}
+
+% NOTE: that \CR here provides a vertical listing
+\eaddress{barr@math.mcgill.ca\CR rrosebrugh@mta.ca}
+
+
+% NOTE: author macros  BEGIN here
+%       (they are all actually used in the article!!)
+% *PLEASE* note the begin and end of author macros in the source file
+
+\def\xypic{\hbox{\rm\Xy-pic}}
+
+% examples of proclamation macros follow - these define environments like \begin{thm} ... \end{thm}
+% by default they are italic, but roman proclamations for remarks, examples are also available
+% with \newtheoremrm{}{}
+
+\newtheorem{thm}{Theorem}
+% note that \newtheorem{theorem}{Theorem} and several others are already in tac.sty
+\newtheorem{theorem}{Theorem} 
+\newtheorem{lem}{Lemma}
+
+% note rm This is useful for remarks and examples
+\newtheoremrm{rem}{Remark}
+
+% TAC has a \proof environment, with abbreviations following; note also \mathrmdef{} and \mathbfdef{}
+
+\let\pf\proof
+\let\epf\endproof
+\mathrmdef{Hom}
+\mathbfdef{Set}
+
+% author macros END here
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+ This is distributed as a sampler to illustrate good \textsl{TAC} style.
+\end{abstract}
+
+% NOTE: it is good practice to \label all headings (and proclamations) immediately
+
+\section{Introduction}\label{sec-Introduction}
+
+This note includes samples of what we consider good \textsl{TAC} style.  
+There are no explicit skips nor any other explicit formatting
+instructions in the \LaTeX\ code; these should be left to the journal style.  For the same
+reason, the \LaTeX\ code has no explicit numbering of headings or proclamations of
+Theorems and so forth. However, they \emph{are} labelled to allow
+logical references in the code, such as to Theorem \ref{thm-easy-style}. 
+Moreover, TAC style uses the hyperref package to create links to citations like 
+\cite{LUG} and to internal references like Lemma \ref{lem-latex-2e}. 
+Reference links work \emph{only} if \verb.\label.'s are used. All links are coloured a dark blue without boxing. 
+Though permitted, external links are strongly deprecated because of their impermanence.
+
+\emph{Please note that there are additional comments in the source file \texttt{sample.tex}
+for this sampler that you are urged to consult. You should \textbf{also} consult
+the on-line author instructions on the {\sl TAC} web site.}
+
+\section{Main results}\label{sec-Main-results}
+
+%NOTE: more verbosely, the next line could use \begin{lem} ... \end{lem}
+
+\lem\label{lem-latex-2e} All papers must be in \LaTeX, version 2e.\endlem
+
+\pf Otherwise the editors would have to do a lot of work to prepare the
+paper for publication.
+\epf
+
+
+\thm\label{thm-easy-style} The {\sl TAC} style is easy to use.\endthm
+
+\pf
+Sectioning is the same as in \LaTeX\ article style;
+proclamations such as definitions and theorems are easily specified
+by macros such as \verb.\newtheorem{thm}{Theorem}.;
+it is easy to use \verb.\mathrmdef{Hom}. to define a macro \verb.\Hom. that produces
+roman $\Hom$ when used in math mode.  Similarly \verb.\mathbfdef{Set}. gives $\Set$
+in bold.
+\epf
+
+% NOTE: If you use \cite at the beginning of a theorem-like environment,
+% it must come immediately after the theorem and before any label.
+
+\thm[\cite{LUG}]\label{thm-Lamport-1986}  The following are equivalent
+\begin{enumerate}
+\item Lists are best done with listing macros such as enumerate;
+
+\item you will never have to renumber anything if you use automatic
+numbering of lists and other things.
+\end{enumerate}
+
+\epf\endthm
+
+\begin{rem}\label{rem-about-roman}
+For proclaimed matter that should be set in Roman we use the {\sl TAC} macros \verb.\newtheoremrm{}{}..
+\end{rem}
+
+\section{Further comments}\label{sec-Further-comments}
+
+
+\begin{list}{}{}
+\item[$\bullet$] Source files should include \emph{all} and
+\emph{only} author macros that are actually used. \item[$\bullet$]
+Be sure to use macros for multicharacter identifiers, such as
+\verb.\Hom. above. 
+\item[$\bullet$] Be sure to distinguish between
+$<$ and $\langle$ and similarly between $>$ and $\rangle$.  Not
+only does the former character look wrong as a tuple delimiter,
+but the spacing is completely wrong. 
+\item[$\bullet$] For diagrams, use \xypic\ or diagxy.% , or Paul Taylor's diagram package.
+They can be used together since diagxy is built on top of
+\xypic. A syntax example from the diagxy manual is
+\begin{verbatim}
+$$\bfig
+  \square/>>`>`>` >->/[A`B`C`D;e`f`g`m]
+  \morphism(500,500)|m|/.>/<-500,-500>[B`C;h]
+\efig$$
+\end{verbatim}
+which makes a familiar diagram:
+% NOTE: If you do not have XY-pic and diagxy installed you will have to comment out
+%       the next four lines.
+
+$$\bfig
+ \square/>>`>`>` >->/[A`B`C`D;e`f`g`m]
+ \morphism(500,500)|m|/.>/<-500,-500>[B`C;h]
+\efig$$
+\item[$\bullet$] Although we accept most reasonable bibliographical styles, the
+ following is the one we most strongly recommend.  It results in an 
+ [\emph{author, year}] entry in the paper, rather than uninformative numbers in
+ brackets. It allows use of e.g. \verb.\cite{LUG}. and the code for this article is:
+\begin{verbatim}
+\refs
+
+\bibitem [Lamport, 1986]{LUG} L. Lamport, Latex User's Guide \&
+Reference Manual. Addison-Wesley (fifth edition), 1986.
+
+\endrefs
+\end{verbatim}
+\end{list}
+
+ % Note: Although we accept most reasonable bibliographical styles, the
+ % following is the one we most strongly recommend.  It results in the
+ % author, year entry in the paper, rather than uninformative numbers in
+ % brackets.
+
+\refs
+
+\bibitem [Lamport, 1986]{LUG} L. Lamport, Latex User's Guide \&
+Reference Manual. Addison-Wesley (fifth edition), 1986.
+
+\endrefs
+
+
+
+\end{document}

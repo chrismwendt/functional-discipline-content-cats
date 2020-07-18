@@ -1,0 +1,81 @@
+<!-- Modified 2005-03-24 by Robert Rosebrugh -->  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>
+Adjunction models for call-by-push-value With stacks
+</title>
+<link REL="stylesheet" TYPE="text/css" href="../../../tac.css">
+</head>
+<body>
+<h1>
+Adjunction models for call-by-push-value with stacks
+</h1><h2>
+Paul Blain Levy
+</h2>
+
+<p> 
+Call-by-push-value is a "semantic machine code", providing a set of simple
+primitives from which both the call-by-value and call-by-name paradigms are
+built. We present its operational semantics as a stack machine, suggesting a
+term judgement of stacks. We then see that CBPV, incorporating these stack
+terms, has a simple categorical semantics based on an adjunction between
+values and stacks.  There are no coherence requirements.
+
+</p> <p> 
+We describe this semantics incrementally. First, we introduce locally indexed
+categories and the opGrothendieck construction, and use these to give the
+basic structure for interpreting the three judgements: values, stacks and
+computations. Then we look at the universal property required to interpret
+each type constructor. We define a model to be a strong adjunction with
+countable coproducts, countable products and exponentials.
+
+</p> <p> 
+We see a wide range of instances of this structure: we give examples for
+divergence, storage, erratic choice, continuations, possible worlds and games
+(with or without a bracketing condition), in each case resolving the strong
+monad from the literature into a strong adjunction.  And we give ways of
+constructing models from other models. 
+
+</p> <p> 
+Finally, we see that call-by-value and call-by-name are interpreted within
+the Kleisli and co-Kleisli parts, respectively, of a call-by-push-value
+adjunction. 
+
+</p>
+
+<p> Keywords:  
+call-by-push-value, adjunction, CK-machine, monad,
+denotational semantics, indexed category, continuations, possible worlds,
+game semantics, call-by-name, call-by-value
+</p>
+
+<p>
+2000 MSC: 
+18C50
+</p>
+
+<p><i>Theory and Applications of Categories,</i>
+<font face="times new roman"> Vol. 14, 2005, 
+No. 5, pp 75-110.</font><br><br>
+
+<a href="http://www.tac.mta.ca/tac/volumes/14/5/14-05.dvi">
+         http://www.tac.mta.ca/tac/volumes/14/5/14-05.dvi</a><br>
+<a href="http://www.tac.mta.ca/tac/volumes/14/5/14-05.ps">
+         http://www.tac.mta.ca/tac/volumes/14/5/14-05.ps</a><br>
+<a href="http://www.tac.mta.ca/tac/volumes/14/5/14-05.pdf">
+         http://www.tac.mta.ca/tac/volumes/14/5/14-05.pdf</a><br>
+<a href="ftp://ftp.tac.mta.ca/pub/tac/html/volumes/14/5/14-05.dvi">
+         ftp://ftp.tac.mta.ca/pub/tac/html/volumes/14/5/14-05.dvi</a><br>
+<a href="ftp://ftp.tac.mta.ca/pub/tac/html/volumes/14/5/14-05.ps">
+         ftp://ftp.tac.mta.ca/pub/tac/html/volumes/14/5/14-05.ps</a><br>
+</p>
+
+<a href ="../../../index.html">
+TAC Home
+</a>
+
+
+</body></html>
+
+

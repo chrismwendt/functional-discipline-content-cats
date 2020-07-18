@@ -1,0 +1,35 @@
+/*Created by Matt Graves; modified 2003/1/9*/
+/*This is the style sheet for the journal TAC */
+body
+{
+background-color: #FFFFFF;
+}
+
+
+h1,h2,h3,h4,h5,hr,p,ls,ul,ol,code,pre,center
+{
+color:#111166; 
+}
+
+dd,dt{
+color:#111166
+}
+
+h3
+{
+font-size: 130%;
+color:#111166;
+}
+
+
+a:link    {color:#1F1FAA}
+a:link    {text-decoration: none}/*these lines remove underlines from links*/
+a:visited {color:#2222DD}
+a:visited {text-decoration: none}
+a:active  {color:#3333FF}
+a:active  {text-decoration: none}
+a:hover   {color:#3333FF}
+a:hover   {text-decoration: underline}
+
+
+/*BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#996630" ALINK="#990000" VLINK="#000066" this is the old "style" */

@@ -1,0 +1,1141 @@
+<!-- Modified: 2020-02-18 by Geoff Cruttwell -->
+<!-- 2020-02-18 change: required use of tac.cls -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>
+Theory and Applications of Categories - Author Information
+</title>
+<link REL="stylesheet" TYPE="text/css" href="tac.css">
+</head>
+<BODY>
+
+<H1>
+<i>
+Theory and Applications of Categories
+</i><br>
+</h1>
+<h2>
+AUTHOR INFORMATION
+</h2>
+
+
+<p>
+<b>Before submitting</b> an article, authors are requested to <b>read and
+follow,</b> the
+<a href="#format">
+Format for Submission
+</a> below.
+</p>
+
+<p>
+Authors may submit an article in pdf <b>compiled from TeX source</b>
+to any member of the
+<a href="geninfo.html#edlist">
+Editorial Board
+</a>
+except the Managing Editor or Associate Managing Editor.
+Authors must <b>copy every article submission to the Managing Editor</b>
+at <tt>tac@mta.ca</tt>. When an Editor receives a submission they will
+acknowledge. If an acknowledgment is not received in a timely fashion,
+be sure to enquire with the Editor concerned.
+</p>
+
+<p>
+After acceptance of an article by an Editor,
+TeX source code and a compiled PDF must be
+submitted to the journal at <tt>tac@mta.ca</tt>.
+Requirements for submission of source code are described below
+and must be followed before submitting code for the final version of an
+accepted article.
+</p>
+
+<p>
+All papers published have been carefully refereed and acceptance of an
+article by an Editor indicates that the high standards of the journal
+have been met. <b>An article may be submitted to only one Editor. </b>
+</p>
+
+<p>
+Accepted papers will be
+<a href="#archiv">
+archived
+</a>
+<a name="archivreturn">
+electronically
+</a>
+by the journal.
+There are several complete
+<a href="geninfo.html#mirror">
+mirrors
+</a>
+of the journal's contents.
+</p>
+
+
+<p>
+Authors retain ownership of copyright to their work, subject to
+appropriate use of the work by the journal. For details consult the
+<!-- revised 2017-06-01 -->
+<a href="consent.html">
+Consent to Publish Agreement,
+</a>
+to which authors must agree before an accepted paper is published.
+</p>
+
+
+<!-- replaced per Editors decision October 2007, on Nov 29 2008
+
+The final accepted version of a paper is the form that will be in the
+archive; the author will not be able to make any changes, except: <br>
+- errata and additions can be attached to the end and, where appropriate,
+footnote(s) may be added to the main text calling attention to these
+addendums; <br>
+- references which mention pre-publication versions may be updated to final
+bibliographic form.
+
+(i) errata may be added and, where appropriate, footnote(s) will be added
+to the main text calling attention to these;<br>
+(ii) references which mention pre-publication versions may be updated to
+final bibliographic form.
+</p>
+<p>
+In the case of any change under (i) or (ii), the originally posted article
+will be replaced with a dated revision that refers to the change. The
+originally posted version of the article will also be maintained by the
+journal with a link on its web site.
+</p>
+
+-->
+
+<p>
+The final accepted version of an article will be
+permanently maintained in the archive without change, except as
+follows:<br>
+</p>
+
+<p>
+<b>TAC Erratum or Correction Procedures</b>
+</p>
+
+<ol>
+
+<li> For a small correction in an article (or the appending of a short
+erratum) that does not affect pagination, TAC will replace the posted
+article with a new version. The new version will have a footnote on the
+article first page giving its posting date. Any previous version will
+remain accessible by a link on the article's web abstract page.
+</li>
+
+<li> If an author requests a change to their originally posted article
+that would affect pagination, TAC will post an erratum or correction as a
+separate number in the current annual volume. TAC will replace the
+originally posted article with a new version. The new version will have a
+footnote on the article first page giving its posting date, and a
+forward reference to the separately posted erratum. Any previous version
+will remain accessible by a link on the article's web abstract
+page. That page will also contain a forward link to the erratum.
+</li>
+
+<li> If the Managing Editor judges it advisable, the erratum or correction
+may be submitted to the original Transmitting Editor.
+</li>
+
+<li> A substantive change under 1. or new number published under 2. will
+be announced to the subscriber list.
+</li>
+
+</ol>
+<p></p>
+<hr>
+
+<a name="format"></a>
+<h3>
+FORMAT FOR SUBMISSION
+</h3>
+
+<p>
+It is the author's responsibility to provide the
+transmitting editor with a compiled (pdf) version of an
+article.<br>
+<b>The Editors require final submissions to be formatted with LaTeX 2e AND use the <a href="style/tac.cls">
+tac.cls</a> style file (new for 2020!).</b> <br>
+Source code which does not meet these conditions will be
+returned to the author for revision.
+</p>
+
+<p>
+<b>
+Please note first:
+</b>
+<ol>
+
+<li>
+TAC uses a <b>12 point</b> style. You must compose your article
+at that size.
+</li>
+
+<li>
+It will assist the editors if
+authors ensure that their files use lines of limited length,
+preferably no more than 72 characters.
+</li>
+
+
+<li>
+An article will be published <b><i>only in the journal's
+style</i></b>.  Authors must submit source code
+which uses the
+<i>
+<a href="style/tac.cls">
+tac.cls
+</a>
+</i>
+style file (see item 8. below for a sample using this style).
+<b><i>
+Do not modify the TAC class file. Author macros which interfere
+with the journal style will be deleted.</i></b> Authors must take
+account of this in submitting TeXscripts. For example, the amsthm
+package is incompatible with the journal's style since it changes
+proclamations.
+
+<li>
+<b>Do not alter the page dimensions.</b> That includes not changing
+\textwidth,\textheight, etc. Do not load a package, such as the geometry
+package, that does it for you.
+</li>
+
+</li>
+
+<li>
+
+Articles are published in pdf format only.  TAC uses PdfLaTeX to typeset
+articles. Ensure that your source compiles with PdfLaTeX.  Graphics may be
+included. Nevertheless, it is strongly recommended that <i>category theory
+diagrams are composed with a macro package</i> noted in the Source File
+Checklist, item 3.  below.
+
+</li>
+
+<li>
+To accommodate external indexing, <b>you must include at least one <a href="https://zbmath.org/classification/">AMS
+2020 Subject Classification</a> </b> and a <i>few</i> <b>keywords</b> in your
+source file.
+</li>
+
+
+<li>
+The TAC style uses the hyperref package to create links to citations and
+internal references. Reference links work only if <tt>\label</tt>'s are
+used. Links are coloured a dark blue without boxing.
+Authors may introduce external links, but
+<i>they are deprecated because of their impermanence. </i>
+External links will not be revised.
+</li>
+
+<li>
+<b>
+Example <i>TAC</i> source file:
+</b>
+A source file illustrating use of the
+author version
+<i>
+<a href="style/tac.cls">
+tac.cls
+</a>
+</i>
+of the journal's style is called
+<i>
+<a href="style/sample.tex">
+sample.tex.
+</a>
+</i>
+Its compiled version is
+<i>
+<a href="style/sample.pdf">
+sample.pdf.
+</a>
+</i>
+<!--Using tac.cls before final submission
+of an article will greatly reduce the delay from acceptance to
+publication, and the editors reserve the right to return source code
+composed in other formats.-->
+</li>
+
+<li>
+Be sure to comply with <b>all</b> items in the
+<b>
+Source File Checklist
+</b>
+below.
+</li>
+</ol>
+
+<p>
+<b>
+Brief hints for using
+<i>
+<a href="style/tac.cls">
+tac.cls
+</a>
+</i>
+</b>
+<br>
+The style for <i>Theory and Applications of Categories</i> is
+based on the LaTeX article class. It was created by
+Michael Barr and TAC authors. Thus, your LaTeX source code
+using tac.cls will be nearly identical
+to code you would produce in using the article class. The few
+exceptions concern the title, abstract, proclamation of theorems,
+propositions etc., and the references.
+<i>
+For more detail on the points below, especially if you
+are submitting your source code to <i>TAC</i>
+for the first time, <b>please</b> look at the items
+following the Source File Checklist.
+</i>
+</p>
+<p>
+<i>Title and abstract:</i>
+<br>
+The title of the paper and of sections should be typeset
+with the first letter capitalized and no other caps except for proper
+names.
+There are several required macros which are similar to those of LaTeX
+article style:
+<br>
+\title, \author, \address, \eaddress, \keywords, \amsclass
+<br>
+You may use multiple author names and addresses. Use \\ to obtain a new
+line; \amsclass refers to the <a href="https://zbmath.org/classification/">AMS 2020 Subject Classification</a>.  You may use square brackets in the title argument to denote a running title separate from the full title of the paper.
+
+Optional title macros are
+<br>
+\thanks, \dedication
+<br>
+Please note that \thanks is not part of \author (in contrast to the
+article class.)
+</p><p>
+Remember that the macros above should be in the preamble (that is, before
+\begin{document}). They are called by \maketitle which must immediately
+follow \begin{document}.
+</p>
+<p>
+
+The text of your abstract must immediately follow \maketitle and begin
+with \begin{abstract} and end with
+\end{abstract}. Because the abstract will be rendered in html on the
+journal's web pages, it is strongly recommended that use of
+<i>mathematical symbols in the abstract is minimized.</i>
+Citations in the abstract will be
+deleted when it appears on the journal's web page. In any case, an
+abstract should never include citations - it is meant to be available and
+readable independently of the article.
+
+</p>
+<p>
+<i>Proclamations and proofs:</i>
+<br>
+<b>Do not</b> use hand-coded formatting commands, such as forced line
+or page breaks, nor forced vertical or horizontal spacing.
+<b>Do</b> use standard latex
+environments (e.g., theorem-like environments, sub-sectioning commands,
+enumerate or itemize environements).
+
+In TAC style, proclamations are handled using the \subsection counters and
+you should <i>always use</i> \label's to ensure correct internal
+references. The macros for proclamations come in
+pairs, for example
+<br>
+\theorem, \endtheorem
+<br>
+Pre-defined macro pairs are available for:
+<br>
+\theorem, \proposition, \corollary, \lemma, \definition, \remark, \example
+<br>
+The latter <i>two</i> macros result in roman type, not italic.
+In TAC style definitions are set in italic.
+See below for adding your own proclamation names.
+<!--
+You may abbreviate, for example
+<br>
+\let\thm\theorem <br>
+\let\endtheorem\eth <br>
+<br>
+-->
+</p>
+<p>
+The text of proofs should begin with \proof, and end with \endproof
+(the latter provides a `Halmos bar'.)
+</p>
+<p>
+<i>References</i><br>
+
+The reference list environment begins with <br>
+
+\begin{references} or \begin{references*} <br>
+
+depending on whether the Harvard e.g. [Eileberg-Mac Lane, 1945] or a
+numerical reference style is desired.
+
+<!--You may substitute
+<br>
+\references, \references*
+<br>
+closed with \endreferences(*) for the environment declaration.
+-->
+</p>
+<p>
+Finally, the class file has some very useful macros for dealing with
+new math operations, math roman elements like `hom' and multi-line
+displays. See the documentation below, or in the class file.
+
+</p>
+<h3>
+Source File Checklist
+</h3>
+
+<ol>
+<li>
+A TeX source file and a compiled pdf must be sent to the Managing Editor
+after acceptance.
+
+<p>
+</li>
+
+<li>
+The source file <b>must begin with a comment</b> which includes the
+following information:<br>
+the number of pages, any diagram macro package
+used, any non-standard fonts, the implementation of TeX used in preparation
+of the source file. An example is
+<p>
+<code>
+% 12 pp, Xy-pic ver 3.9, MikTeX version 3.2
+</code>
+<p>
+</li>
+
+<li>The source file must use the style file <a href="style/tac.cls">tac.cls</a>.
+<p>
+</li>
+
+
+<li>
+The source code for an article <b>must</b> be submitted as a
+<b>single</b> source file and include the bibliography.
+For example, authors must not submit a separate .bbl file.
+
+<p>
+<b>
+<i>All</i> author macros must be included <i>at the beginning of the
+source file.</i>
+</b>
+Any macro that is <b>not actually used
+<i>should be deleted</i></b> from the source file. Packages used should be
+loaded at the beginning of the source file.
+Do not use \def in your personal macros. Use \newcommand or \renewcommand,
+instead.
+
+</p>
+
+<p>
+The exception to including macros is
+<a href="#diagram"> diagram macro
+</a>
+<a name="diagramreturn"> packages.</a>
+The preferred diagram macro packages are those authored by
+Rose and Moore (xypic) and Michael Barr (diagxy macros for xypic). For
+visual reasons we prefer native xypic or diagxy to the xymatrix package.
+See <a href="style/diagxy-xymatrix.pdf">diagxy-xymatrix.pdf</a>
+for a consideration of the differences.
+The author is responsible to ensure that the current version of
+a macro package has been used.
+</p>
+<p>
+</p>
+
+<li>
+Articles <b>must</b> include an <b>Abstract</b> in English of not more
+than 200 words. Because the abstract will be rendered in html on the
+journal's web pages, it is strongly recommended that use of mathematical
+symbols in the abstract be minimized. Citations in the abstract will be
+deleted when it appears on the journal's web page. An abstract should
+never include citations in any case - it is meant to be available and
+readable independently of the article.
+
+
+<p></p>
+
+<li>
+<b><a href="https://zbmath.org/classification/">AMS 2020 Subject Classification</a> </b> and a few
+<b>keywords</b> must be included with the source file.
+<p>
+</li>
+<li>
+Please also read and <b>observe</b> the following <b>instructions</b>
+and recommendations.
+<dl>
+<dt>
+<a href="#fonts">Fonts</a>
+<dt>
+<a href="#sourcestyle">Source file style</a>
+<dt>
+<a href="#references">Reference and bibliography styles</a>
+<dt>
+<a href="#avoidableerrors">Avoidable Errors</a>
+<dt>
+<a href="#finalpoint">A final point</a>
+</dl>
+</li>
+</ol>
+
+
+
+<a name="fonts"></a>
+<h3>Fonts</h3>
+<p>
+Authors should note that the <b>base font size</b> is 12 point.
+Avoid use of elements which depend on
+another base font size. This is another reason to
+<b>avoid absolute moves</b> such as `\vskip 10 pt'.
+Remember that the journal's pagination will differ from yours.
+As a general rule less, but more logical,  formatting is better.
+</p>
+<p>
+Authors are
+<em>
+<b>strongly</b>
+</em>
+encouraged to use only fonts from the
+standard TeX distribution (cmr etc.), AMS symbol fonts (msym...) or the
+Xy-pic fonts. They should be aware that use of
+<b>non-standard fonts can
+interfere with successful dissemination</b> of their work.
+</p>
+
+
+<a name="sourcestyle"></a>
+<h3>Source file style</h3>
+<p>
+<b>
+LaTeX 2e is the required format.
+</b>
+Non-LaTeX 2e source code will be returned to the author for
+revision. <!--If not using TAC style, <b>do use a 12 point style file</b>.-->
+</p>
+
+<p>
+The LaTeX 2e class file for TAC authors is
+<i>
+<a href="style/tac.cls">
+tac.cls.
+</a>
+</i>
+<!--Using this class before final submission
+of an article will greatly reduce the delay from acceptance to publication.-->
+</p>
+
+<h4>
+Logical formatting
+</h4>
+
+<p>
+The most important
+advice for a <i>TAC</i> author (or for any electronic journal,
+or even any journal that accepts TeXscripts) is to
+<i>use logical, rather than physical formatting.</i>
+That is, instead of beginning a section by writing
+<pre><code>
+\medskip
+\noindent{\bf 4.3 The main theorem.}
+</code>
+</pre>
+<p>
+just write
+</p>
+<pre><code>
+\section{The main theorem}\label{mainth}
+</code></pre>
+<p>
+(The \label will be explained below.)  Instead of writing
+</p>
+<pre><code>
+\smallskip
+\noindent{\sc Theorem A}{\it ...}
+</code></pre>
+<p>
+write
+</p>
+<pre><code>
+\begin{theorem}\label{thmA} ... \end{theorem}
+</code></pre>
+<p>
+(shorter forms as will be explained later).
+</p>
+<p>
+You should <i>never</i> put explicit skips and kerns into your paper.
+Suppose, for example, you want to go on to a new topic and want to leave
+a little space.  The preferable way is to write
+<pre><code>
+\subsubsection*{}
+</code></pre>
+<p>
+which will have exactly that effect.  In fact, it is probably always
+appropriate to start a new subsection in such a case.  Except
+in very long papers, we discourage the use of three indexing levels.
+<p>
+<p>
+<em>
+The point is to use symbolic formatting and let the journals put in
+their own style.
+</em>
+<p>
+All versions of LaTeX provide definitions for \section, \subsection, and
+\subsubsection.  It even goes further, but these should be enough for
+nearly all papers.  They do not provide definitions for \begin{theorem}
+and the like.  But the <em>TAC</em> style files provide
+a \newtheorem macro that
+is used as follows.  Place at the beginning of your paper, the
+following:
+<pre><code>
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+ ... (whatever is needed)
+</code></pre>
+<p>
+The first parameter is what you will call it in your TeXscript and the
+second what it will be called in your paper.  So you can just as well
+write
+</p>
+<pre><code>
+\newtheorem{thm}{Theorem}
+...
+</code></pre>
+<p>
+and then you can enclose your theorems in \begin{thm}...\end{thm} or
+even \thm...\endthm.  Beware that you lose certain error checking with the
+latter form.
+Note that the text of proclamations is usually set in emphasized (italic)
+type but roman text can be obtained using the \newtheoremrm macro. Examples
+of this usage are the predefined \remark and \example macros.
+</p>
+
+
+<!-- Revised this far 2017-12-14 -->
+<p>
+A theorem (or any theorem-like environment), whether introduced by
+\theorem or by \begin{theorem} may have an optional argument that is
+material to be set in upright font and enclosed in square brackets.
+This is normally used to give credit, but may also be used for naming
+the theorem.  For example,
+</p>
+
+<pre><code>
+\theorem[Fermat's last theorem] For any integers ...\endtheorem
+</code></pre>
+<p>
+will result in
+</p>
+
+<pre><code>
+THEOREM [Fermat's last theorem] For any integers ...
+</code></pre>
+
+<p>
+and
+</p>
+
+<pre><code>
+\theorem[Fermat's last theorem \cite{w94}] For any integers
+...\endtheorem
+</code></pre>
+
+<p>
+might result in
+</p>
+
+<pre><code>
+THEOREM [Fermat's last theorem [Wiles, 1994]] For any integers ...
+</code></pre>
+
+<p>
+A few points should be noted.  If the parenthetical material
+itself contains brackets, then it must be enclosed in braces.  For
+example,
+</p>
+
+<pre><code>
+\theorem[Fermat's last theorem {\cite[Theorem 4.7]{w94}}] For any
+integers ...\endtheorem
+</code></pre>
+
+<p>
+will result in only one pair of brackets in the output, not two.
+Nothing (in particular no \label) may intervene between \theorem or
+\begin{theorem} and this parenthetical remark.  A \label can follow this
+argument with no change in functionality.
+</p>
+
+<p>
+
+TAC uses the <tt>\subsection</tt> counter to assign numbering to proclaimed items (like definitions
+and theorem statements).  Thus they, and numbered subsections, are numbered sequentially within a
+section. Some authors may prefer numbering of proclaimed items within a subsection, and for this
+the <tt>\thirdleveltheorems</tt> macro is available.  For the (usually short) articles without
+sections, authors may use <tt>\firstlevel theorems</tt>.
+
+</p>
+
+
+<h4>Multi-character identifiers</h4>
+
+<p>
+All TeX users should be aware that it is absolutely standard in
+mathematical typography that single characters should be in
+italics and multi-character identifiers should be in
+upright type.  That is how the reader tells Hom from H times o times m
+(even if s/he hasn't consciously learned the rule).
+
+<p>
+In order to make this
+easy to implement, TAC provides a number of useful macros that authors are free to use.
+The first group all have the same syntax and provide an easy way to
+create macros that produce characters or strings in different fonts.
+They are:<br>
+<tt>
+\mathrmdef<br>
+\mathbfdef<br>
+\mathssbxdef<br>
+\mathfkdef<br>
+\mathzcdef<br>
+\mathcaldef<br>
+\mathrsfsdef<br>
+\mathopdef<br>
+\mathopsldef<br>
+</tt>
+</p>
+<p>
+
+The syntax:  If you say
+  <tt>\mathrmdef{Hom}</tt>
+  you create a macro named <tt>\Hom</tt> that sets Hom in roman type with the
+usual spacing of a word.  If, instead you say
+  <tt>\mathrmdef[hom]{Hom}</tt>
+  you get a macro named \hom that produces Hom, just as above.
+If you use that instead of just Hom, the results will look much better.
+Using just Hom in math mode will result in an italic font and ugly
+spacing that is more appropriate to a ternary product.
+</p>
+<p>
+
+The semantics: <tt>\mathrmdef</tt> is as described; <tt>\mathbfdef</tt> produces bold
+characters; <tt>\mathssbxdef</tt> produces characters in an extra bold sans serif
+font; <tt>\mathfkdef</tt> makes fraktur producing macros; <tt>\mathzcdef</tt> produces Zapf
+Chancery, (a useful script font that includes both upper and lower case
+letters so that <tt>\mathzcdef{Set}</tt> makes a macro \Set that gives Set in
+that font); <tt>\mathrsfsdef</tt> defines a macro that uses Ralph Smith fancy
+script; <tt>\mathcaldef</tt> gives the standard calligraphic forms; finally
+<tt>\mathopdef</tt> makes \mathop{}s, explained below, using roman
+character, while <tt>\mathopsldef</tt> does the same using slant characters
+(almost, but not quite the same as italic).
+</p>
+<p>
+
+Perhaps the only place <tt>\mathop</tt> is clearly explained is in the <i>TeXBook</i>
+(The description in <i>The LaTeX Companion</i> is just wrong; <tt>\mathop</tt> is
+used only to define large operators).  If you define a macro such as
+<tt>\lim</tt> as a mathop, which you can by the TAC macro <tt>\mathopdef{lim}</tt> or in
+standard plain (or LaTeX for that matter by
+<tt>\def\lim{\mathop{\rm lim}}</tt>
+you have defined a macro that sets "lim" in roman type, leaves a
+<tt>\thinspace</tt> after it (unless followed by a "(" or other token of type
+<tt>\mathopen</tt>) and, in display mode only, puts any subscript underneath
+instead of to the right.  However, this last can be overruled.  If you
+type <tt>\lim\limits_{whatever}</tt>, even online, the result is to put the
+"whatever" underneath, while if you type <tt>\lim\nolimits_{whatever}</tt>, even
+in a display, the effect is to subscript the "whatever" on the right.
+(If you are interested, these names mean "limitswitch" and
+"nolimitswitch".)
+</p>
+<p>
+
+Two more comments: the macros defined using these defining macros can be
+used in either math mode or not.  Also, they add space after themselves
+unless followed by punctuation marks or certain other symbols (like
+braces).  So if you define, say, <tt>\mathzcdef[Asc]{A}</tt>, you can say, "Let
+\Asc be a category" and you will get no complaint that you were not in
+math mode and there will be a space after the script "A".  If you have
+defined <tt>\mathrmdef[nbd]{neighbourhood}</tt>, then you cannot say <tt>\nbd s</tt> to
+get the plural since the space will be added, but either <tt>\nbd{s}</tt> or
+<tt>\nbd{}s</tt> will work fine.
+
+</p>
+
+<h4>Multi-line displays</h4>
+
+
+<p>
+Another useful macro that we supply is <tt>\mld</tt>.  It is used in a display as
+follows:<br>
+<tt>
+$$\mld formula1& formula2\\formula3\\formula4\\...$$
+</tt><br>
+and produces a multi-line display formatted as<br>
+<pre><tt>
+           formula1  formula2
+                     formula3
+                     formula4
+                     ...
+</tt></pre>
+<p>
+Only one <tt>&</tt> is to be used and it can occur anywhere except that if
+formula1 is empty, you should use <tt>\mld{}&</tt>.  This is a bug that might be
+fixed some day.
+</p>
+
+
+
+
+<a name="references"></a>
+<h3>References and bibliography styles</h3>
+<p>
+When you want to refer to Theorem A (which will not be called that in
+the <em>TAC</em> style) of Section 4.3, refer to it as Theorem~\ref{thmA} of
+Section~\ref{mainth}.  The labels you use are totally arbitrary, of
+course, so long as they are not reused in the same paper.
+<em>
+Use of
+symbolic labels allows you to insert or delete material without having
+to renumber everything
+</em>
+or to wind up with sections or theorems bis.  The
+~, by the way, is an unbreakable space so that the theorem or section
+number does not get separated from the word Theorem or Section.  This is
+considered poor style, although it is not terribly important.  It is
+also an element of good style to capitalize the words Section and
+Theorem when followed by an explicit reference.  However, they are not
+capitalized in such phrases as "next section" and "the main theorem".
+
+
+<p>
+If BiBTeX is used with LaTeX, <b>bibliographies must be BiBTeXed</b>
+and any .bbl files included in the source file. No .bib files will be
+accepted.
+</p>
+<p>
+References may use the standard BiBTeX styles or
+the two bibliography styles that <em>TAC</em> supports.
+<em>
+We recommend the first TAC style</em>. It is much more useful for
+the reader since it puts citations like
+[Grothendieck, 1957] in your text (you can probably already guess the
+reference) and the reference in the form
+<pre><code>
+\item A. Grothendieck (1957), Sur quelques points d'alg\'ebre homologique, T\^ohoku
+Math. J. \em{3}, 120-221.
+</code></pre>
+<p>
+You get the first style by preceding your references with
+</p>
+<pre><code>
+\begin{references}
+</code></pre>
+<p>
+and ending the list of \items with
+</p>
+<pre><code>
+\end{references}
+</code></pre>
+<p>
+The second style is traditional and puts [4] into your
+paper with the reference in the traditional form
+</p>
+<pre><code>
+\item A. Grothendieck, Sur quelques points d'alg\'ebre homologique, T\^ohoku
+Math. J. \em{3} (1957), 120-221.
+</code></pre>
+<p>
+To obtain it use
+</p>
+<pre><code>
+\begin{references*}
+
+ \item ...
+
+\end{references*}
+</code></pre>
+<p>
+except you will almost surely want to use \bibitem, allowing you to put
+in a symbolic label.
+</p>
+<p>
+A useful package that also implements the recommended first style
+above is natbib with the square-bracket option invoked with:</br></br>
+<tt>  \usepackage[square]{natbib} </tt> </br></br>
+and then replace every <tt>\cite</tt> by:</br>
+<tt> \citep </tt> to produce  [Author, year] </br>
+<tt> \citet </tt>  to produce  Author [year]  </br>
+<tt> \citeyearpar </tt>  to produce  [year]  </br></br>
+The package is found at </br></br>
+<a href="https://ctan.org/pkg/natbib">
+https://ctan.org/pkg/natbib
+</a>
+
+</p>
+
+
+<a name="avoidableerrors"></a>
+<h3>Avoidable errors </h3>
+<p>
+There are two mistakes made by many users of TeX that appear in print
+over and over and are easy to avoid.
+</p>
+<p>
+The first is to have multicharacter identifiers
+<em>slanted (like math symbols)</em>, rather than in upright type.
+This refers to names like sin, cos,...
+but also Hom, Tor, Id, ker, Im, ....  The <em>TAC</em> style files provide macros
+that can automate this, as noted above.
+</p>
+
+<p>
+The second error is to use &lt; ... &gt; for angle brackets.  You have no idea
+how bad this will look.  The &lt; and &gt; produce the wrong shape for angle
+brackets, but mainly they produce the wrong spacing and the results can
+be ludicrous, especially if an = follows &gt; or precedes &lt;.  The official
+way to do this is to say \langle and \rangle.  Many papers in
+<em>TAC</em> use these angle brackets extensively and make little or no use of
+the inequality signs.  If this is your case, we recommend the following.
+At the top of your paper, put:
+</p>
+<pre><code>
+\mathcode`\<="4268 %left delimiter
+\mathcode`\>="5269 %right delimiter
+\mathchardef\gt="313E %relation
+\mathchardef\lt="313C %relation
+</code></pre>
+<p>
+The effect of the first two lines is to make &lt; and &gt; into \langle and
+\rangle, respectively, so that you can use them freely.  The third and
+fourth lines allow you to use \lt and \gt for the inequality signs.
+This is <b>not</b> done in the <em>TAC</em> styles because an author has the right to
+use &lt; and &gt; for the inequalites if desired.
+</p>
+
+
+<a name="finalpoint"></a>
+<h3>A final point</h3>
+<p>
+<em>
+Although these instructions are specific to TAC, they should go a long
+way towards making your papers usable by any journal that is serious
+about using author-supplied TeX.
+</em>
+</p>
+
+<p>
+Return to
+<a href="index.html">
+Main Page.
+</a>
+</p>
+
+
+<hr>
+
+<h3>
+<a name="archiv">
+ARCHIVE POLICY
+</a>
+</h3>
+
+<p>
+1. The primary archive of Theory and Applications of
+Categories(<em>TAC</em>) is a set of electronic files in TeX source, dvi,
+pdf and pk font formats. The source files contain all articles accepted in
+<em>TAC</em> and any macro files required to typeset them. The dvi files
+are those produced from the articles by the TeX program (version 3.14).
+Font files to allow printing of accepted articles must also be maintained.
+This archive is the property of the Editorial Board of <em>TAC</em> and is
+maintained by the Managing Editor.
+</p>
+
+<p>
+2. A secondary electronic archive of <em>TAC</em> is maintained by
+The National Library of Canada
+at
+<a href ="http://epe.lac-bac.gc.ca/100/201/300/tac/index.html">
+http://epe.lac-bac.gc.ca/100/201/300/tac/index.html
+</a>
+as part of its
+Electronic Collection.
+</p>
+
+<!--
+<p>
+
+3. A paper copy of the typeset version of each article accepted in
+<em>TAC</em> is provided to the Mount Allison University Library
+for archiving.
+</p>
+-->
+<p>
+<a href="#archivreturn">
+Return to Information for Authors.
+</a>
+</p>
+
+
+<!--
+<hr>
+<H3>
+<a name="style">
+CLASS FILES
+</a>
+</h3>
+
+<p>
+The class file  for the journal is:<br>
+<a href="style/tac.cls">
+<code>tac.cls</code>
+</a><br>
+It was modified from the LaTeX article style by Michael Barr
+and <em>TAC</em> authors.
+<p>
+
+<p>
+Also available are
+<a href="style/styhint.txt">
+brief hints
+</a>
+on how to use the style files.
+Please consult that page <i>only</i> in conjunction with the full
+Format for Submission above.
+</p>
+
+<p>
+<b>Note:</b>
+The
+LaTeX 2.09
+style file for the journal is no longer being maintained
+<a href="style/tac.sty">
+LaTeX 2.09
+</a><br>
+</p>
+<p>
+<a href="#stylereturn">
+Return to Format for Submission
+</a>
+
+</p>
+-->
+
+
+<hr>
+
+<H3>
+<a name="diagram">
+LaTeX MACROS FOR DIAGRAMS
+</a>
+</H3>
+
+<p>
+The links here are to macro packages (and their documentation)
+intended to facilitate creation of category theory diagrams in LaTeX.
+</p>
+
+<!--
+<p>
+The links below are to appropriate directories at
+a CTAN (Comprehensive TeX Archive
+Network) site.
+Try
+<A HREF="ftp://
+ftp.tex.ac.uk/tex-archive">
+<i>
+ftp.tex.ac.uk/tex-archive
+</i>
+</a> or
+<A HREF="http://www.dante.de">
+<i>
+www.dante.de
+</i>
+</a>
+-->
+
+The packages are:
+
+<p>
+Michael Barr's front-end for XY-pic. It uses syntax similar to
+his now obsolete package based on the LaTeX
+picture mode and, in the opinion of the <i>TAC</i> Managing Editor,
+provides the most attractive output for typeset
+categorical diagrams.
+It is at <br>
+<i><A HREF="http://www.math.mcgill.ca/barr/papers/#tex">
+http://www.math.mcgill.ca/barr/papers/#tex
+</a></i>
+<br>
+There are two advantages to diagxy over xymatrix. First, simple diagrams,
+e.g. triangles, are predefined. Second, the user has precise control
+over positioning and spacing. You do not have to choose between
+ill-fitting nodes and extra long arrows.
+
+<!--
+<p>
+
+Francis Borceux' package based on matrices at <br>
+<i><a href="ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/borceux">
+ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/borceux
+</a></i>
+-->
+
+<p>
+Kris Rose and Ross Moore's xypic package is at<br>
+<i><A HREF="ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/xypic">
+ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/xypic
+</a></i>
+
+</p>
+<p>
+
+See <a href="style/diagxy-xymatrix.pdf">diagxy-xymatrix.pdf</a> for a consideration of the
+differences.
+</p>
+
+<!--
+<p>
+Paul Taylor's package is at<br>
+<i><A HREF="ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/taylor">
+ftp://ftp.dante.de/tex-archive/macros/generic/diagrams/taylor
+</a></i>
+-->
+
+<p>
+<a href="#diagramreturn">
+Return to Format for submission.
+</a>
+</p>
+
+<hr>
+
+<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="valid-html401-blue.gif"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+  </p>
+
+<p>
+ <a href="http://jigsaw.w3.org/css-validator/check/referer">
+  <img
+       src=" valid-css-blue.gif"
+       alt="Valid CSS!" >
+ </a>
+</p>
+
+
+</body>
+</html>
+
+

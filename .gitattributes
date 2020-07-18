@@ -1,1 +1,10 @@
 Resources/Blogs/Math3ma.pdf filter=lfs diff=lfs merge=lfs -text
+in filter=lfs diff=lfs merge=lfs -text
+JS filter=lfs diff=lfs merge=lfs -text
+with filter=lfs diff=lfs merge=lfs -text
+Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse.zip filter=lfs diff=lfs merge=lfs -text
+Resources/eBooks/Functional filter=lfs diff=lfs merge=lfs -text
+Programming filter=lfs diff=lfs merge=lfs -text
+Resources/eBooks/Functional[[:space:]]Programming[[:space:]]in[[:space:]]JS[[:space:]]with[[:space:]]Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse.zip filter=lfs diff=lfs merge=lfs -text
+Resources/eBooks/Functional[[:space:]]Programming[[:space:]]in[[:space:]]JS[[:space:]]with[[:space:]]Categories/functional-programming-in-js-with-categories-BookandVideoLectures-extras.zip filter=lfs diff=lfs merge=lfs -text
+Resources/People/Emily[[:space:]]Riehl/mergedvideo.ogv filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,49 @@
+Consent to Publish Agreement
+
+This Agreement is by and between THEORY AND APPLICATIONS OF CATEGORIES 
+("Journal") and _____________________________________("Author"). 
+In consideration of the following mutual undertakings, it is agreed:
+
+1. Author has created a work entitled
+____________________________________________________________ (the "Work")
+and owns the copyright to the Work.
+
+
+2. Author hereby grants to the Journal a worldwide, irrevocable,
+fully-paid up, royalty-free license to publish the Work in the Journal,
+its electronic archive, its paper archive, or any collection of the
+Journal's works in any form or media whatsoever. The Journal shall have
+the right to include the Work as part of its collection available through
+any third party, and to accept and retain payment for this. The Author
+agrees that the Journal is further authorized to grant permission to copy
+the Work for non-commercial purposes. This permission includes making
+copies for private or educational use.
+
+
+3. Author agrees that any other publication of the Work in any other form
+or media in the same or substantially the same form shall include an
+acknowledgment of prior publication in the Journal and include the year,
+volume and number of the Work in the Journal.
+
+
+4. Author warrants that s/he has the full power and authority to enter
+into this Agreement and to grant the rights granted in this Agreement.
+Where the Author is more than one person, one of them may sign this form
+and warrants that all such persons agree to be bound by this Agreement.
+The Author also warrants that the Work does not libel anyone, nor infringe
+anyone's copyright.
+
+5. Journal undertakes to publish the Work by placing it on the Journal's 
+server, and to maintain copies of the Work in accordance with its Archive 
+Policy.
+
+
+AUTHOR:_________________________________________ DATE: _________________ 
+
+For Theory and Applications of Categories: 
+
+___________________________________________ DATE: __________________ 
+
+(Based on the Author's Agreement form of the Electronic Journal of 
+Combinatorics. Used by permission. Last revised 2017-06-01.)
+
