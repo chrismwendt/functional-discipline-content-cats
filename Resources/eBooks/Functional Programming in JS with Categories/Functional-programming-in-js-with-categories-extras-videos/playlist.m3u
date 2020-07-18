@@ -1,0 +1,41 @@
+#EXTM3U
+#EXTINF:386,1. Functors.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/1.%20Functors.mp4
+#EXTINF:211,2. Id pattern matching.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/2.%20Id%20pattern%20matching.mp4
+#EXTINF:253,3. Maybe.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/3.%20Maybe.mp4
+#EXTINF:257,4. Maybe pattern matching.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/4.%20Maybe%20pattern%20matching.mp4
+#EXTINF:131,5. Pattern matching and Polymorhism.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/5.%20Pattern%20matching%20and%20Polymorhism.mp4
+#EXTINF:346,6. Promise.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/6.%20Promise.mp4
+#EXTINF:357,7. Lazy.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/7.%20Lazy.mp4
+#EXTINF:548,8. Pattern matching on native Array.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/8.%20Pattern%20matching%20on%20native%20Array.mp4
+#EXTINF:196,9. Maybe Functor Example.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/9.%20Maybe%20Functor%20Example.mp4
+#EXTINF:223,10. Either.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/10.%20Either.mp4
+#EXTINF:232,11. Either Functor Example.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Functors/11.%20Either%20Functor%20Example.mp4
+#EXTINF:205,1. Identity Monad.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/1.%20Identity%20Monad.mp4
+#EXTINF:182,2. Maybe Monad.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/2.%20Maybe%20Monad.mp4
+#EXTINF:240,3. Maybe Monad Example.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/3.%20Maybe%20Monad%20Example.mp4
+#EXTINF:203,4. Either Monad.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/4.%20Either%20Monad.mp4
+#EXTINF:245,5. Either Monad Example.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/5.%20Either%20Monad%20Example.mp4
+#EXTINF:341,6. Is Promise a Monad.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/6.%20Is%20Promise%20a%20Monad.mp4
+#EXTINF:378,7. Promise Functor Example.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/7.%20Promise%20Functor%20Example.mp4
+#EXTINF:269,8. Promise Monad Example 1.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/8.%20Promise%20Monad%20Example%201.mp4
+#EXTINF:269,9. Promise Monad Example 2.mp4
+file:///Users/brian/dev_space/Web/JavaScript/Books/Functional%20Programming%20in%20JS%20with%20Categories/functional-programming-in-js-with-categories-69220-extras/videolectures/864/jscourse/Monads/9.%20Promise%20Monad%20Example%202.mp4
