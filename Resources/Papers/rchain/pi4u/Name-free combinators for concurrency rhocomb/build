@@ -1,0 +1,11 @@
+rm -f rhocomb.aux
+rm -f rhocomb.bbl
+rm -f rhocomb.blg
+rm -f rhocomb.log
+rm -f rhocomb.out
+rm -f rhocomb.pag
+pdflatex rhocomb
+bibtex rhocomb
+pdflatex rhocomb
+bibtex rhocomb
+pdflatex rhocomb

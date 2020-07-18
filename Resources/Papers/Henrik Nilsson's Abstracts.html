@@ -1,0 +1,2644 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<html>
+
+<head>
+<title>Henrik Nilsson's Abstracts</title>
+</head>
+
+<body BACKGROUND="Pics/Temple.jpg">
+
+<h1>Abstracts and BibTeX entries</h1>
+
+<h3><a name="aadebug1993abstr">Lazy algorithmic debugging: ideas for
+practical implementation</a></h3>
+
+<p>Lazy functional languages have non-strict semantics and are purely
+declarative, i.e. they support the notion of referential transparency
+and are devoid of side effects. Traditional debugging techniques are,
+however, not suited for lazy functional languages since computations
+generally do not take place in the order one might expect. Since
+algorithmic debugging allows the user to concentrate on the
+declarative aspects of program semantics, and will semi-automatically
+find functions containing bugs, we propose to use this technique for
+debugging lazy functional programs. Our earlier work showed that this
+is a promising approach. However, the current version of our debugger
+has severe implementational problems, e.g. too large trace size and
+too many questions asked. This paper suggests a number of techniques
+for overcoming these problems, at least partially. The key techniques
+are immediate strictification and piecemeal tracing.</p>
+
+<a name="aadebug1993bibtex"></a>
+<pre>
+@InProceedings{Nilsson1993,
+  author =       "Henrik Nilsson and Peter Fritzson",
+  title =        "Lazy Algorithmic Debugging: Ideas for Practical
+                 Implementation",
+  editor =       "Peter Fritzson",
+  volume =       "749",
+  series =       "Lecture Notes in Computer Science",
+  pages =        "117--134",
+  booktitle =    "Automated and Algorithmic Debugging",
+  year =         "1993",
+  address =      "Link\"{o}ping, Sweden",
+  month =        may
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="jfp1994abstr">Algorithmic debugging for lazy functional
+languages</a></h3>
+
+<p>Lazy functional languages have non-strict semantics and are purely
+declarative, i.e. they support the notion of referential transparency
+and are devoid of side effects. Traditional debugging techniques are,
+however, not suited for lazy functional languages since computations
+generally do not take place in the order one might expect. Since
+algorithmic debugging allows the user to concentrate on the
+declarative aspects of program semantics, and will semi-automatically
+find functions containing bugs, we propose to use this technique for
+debugging lazy functional programs. Because of the non-strict
+semantics of lazy functional languages, arguments to functions are in
+general partially evaluated expressions. The user is, however, usually
+more concerned with the values that these expressions represent. We
+address this problem by providing the user with a strictified view of
+the execution trace whenever possible. In this paper we present an
+algorithmic debugger for a lazy functional language based on
+strictification and some experience in using it. A number of problems
+with the current implementation of the debugger, e.g. too large trace
+size and too many questions asked, are also discussed and some
+techniques for overcoming these problems, at least partially, are
+suggested, the key techniques being immediate strictification and
+piecemeal tracing.</p>
+  
+<a name="jfp1994bibtex"></a>
+<pre>
+@Article{Nilsson1994,
+  author = 	 "Henrik Nilsson and Peter Fritzson",
+  title = 	 "Algorithmic Debugging for Lazy Functional Languages",
+  journal =	 "Journal of Functional Programming",
+  year =	 1994,
+  volume =	 4,
+  number =	 3,
+  pages =        "337--370",
+  month =	 jul
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="lic1994abstr">A declarative approach to debugging for lazy
+functional languages</a></h3>
+
+<p>Debugging programs written in lazy functional languages is difficult,
+and there are currently no realistic, general purpose debugging tools
+available. The basic problem is that computations in general do not
+take place in the order one might expect. Furthermore, lazy
+functional languages to a large extent free programmers from concerns
+regarding operational issues such as evaluation order, i.e. they are
+declarative. Debugging should therefore take place at the same, high
+level of abstraction. Thus, we propose to use algorithmic debugging
+for lazy functional languages, since this technique allows the user to
+focus on the declarative semantics of a program.</p>
+
+<p>However, algorithmic debugging is based on tracing, and since the
+trace reflects the operational behaviour of the traced program, the
+trace should be transformed to abstract away these details if we wish
+to debug as declaratively as possible. We call this transformation
+strictification, because it makes the trace more like a trace from a
+strict language.</p>
+
+<p>In this thesis, we present a strictifying algorithmic debugger for
+a small lazy functional language, and some experience from using it.
+We also discuss its main shortcomings, and outline a number of ideas
+for building a more realistic debugger. The single most pressing
+problem is the size of a complete trace. We propose to use a piecemeal
+tracing scheme to overcome this, by which only a part of the trace is
+stored at any one time, other parts being created on demand by
+re-executing the program.</p>
+
+<a name="lic1994bibtex"></a>
+<pre>
+@MastersThesis{Nilsson1994b,
+  author = 	 "Henrik Nilsson",
+  title = 	 "A Declarative Approach to Debugging for Lazy
+		  Functional Languages",
+  school = 	 "Department of Computer and Information Science,
+                 {Link\"{o}ping} University",
+  year = 	 1994,
+  address =	 "S-581 83, {Link\"{o}ping}, Sweden",
+  month =	 sep,
+  type =	 "{L}icentiate {T}hesis {N}o. 450"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="aadebug1995abstr">The architecture of a debugger for lazy
+functional languages</a></h3>
+
+<p>Debugging programs written in lazy functional languages is difficult, and
+there are currently no realistic, general purpose debugging tools available.
+The basic problem is that computations in general do not take place in the
+order one might expect. Furthermore, lazy functional languages are
+`declarative'. Hence it is advantageous if debugging takes place at the same,
+high level of abstraction. Thus, we propose to base debugging on what we call
+Evaluation Dependence Trees (EDT), which reflect the declarative semantics of
+the programs rather than operational concerns such as evaluation order. This
+in turn naturally suggests a two level debugger architecture where the lower
+level generates the EDT and the upper level allows the user to investigate
+it. The main advantage of this is flexibility: components realizing the two
+levels may be chosen independently to suit the debugging problem at hand.</p>
+
+<a name="aadebug1995bibtex"></a>
+<pre>
+@InProceedings{Sparud1995,
+  author = 	 "Jan Sparud and Henrik Nilsson",
+  title = 	 "The Architecture of a Debugger for Lazy Functional
+		  Langauges",
+  editor =	 "Mireille Ducass\'{e}",
+  booktitle =	 "Proceedings of {AADEBUG '95}, 2nd International
+		  Workshop on Automated and Algorithmic Debugging",
+  year =	 1995,
+  organization = "{IRISA}, Campus Universitaire de Beaulieu, 35042 Rennes,
+		  Cedex, France",
+  address =	 "Saint-Malo, France",
+  month =	 may
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="tr1996-23abstr">The evaluation dependence tree: an execution record
+for lazy functional debugging</a></h3>
+
+<p>Lazy functional languages are declarative and allow the programmer to write
+programs where operational issues such as the evaluation order are left
+implicit. This should be reflected in the design of debuggers for such
+languages to avoid burdening the programmer with operational details, e.g.
+concerning the actual evaluation order. Conventional debugging techniques tend
+to focus too much on operational aspects to be suitable in this context. A
+record of the execution that only captures the declarative aspects of the
+execution, leaving out operational details, would be a viable basis for
+debugging lazy functional programs. Various declarative debugging tools could
+then be developed on top of such records. In this paper we propose a structure
+which we call the Evaluation Dependence Tree (EDT) for this purpose, and we
+describe two different construction methods. Performance problems are
+discussed along with possible solutions, and some performance figures from
+experiments in a realistic context are given.</p>
+
+<a name="tr1996-23bibtex"></a>
+<pre>
+@TechReport{Nilsson1996,
+  author = 	 "Henrik Nilsson and Jan Sparud",
+  title = 	 "The Evaluation Dependence Tree: an Execution Record
+		  for Lazy Functional Debugging",
+  institution =  "Department of Computer and Information Science,
+                 {Link\"{o}ping} University",
+  year = 	 1996,
+  type =	 "Research Report",
+  number =	 "{LiTH-IDA-R-96-23}",
+  address =	 "S-581 83, {Link\"{o}ping}, Sweden",
+  note =         "This is an extended version of \cite{Nilsson97}.",
+  month =	 aug
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="ase1997abstr">The evaluation dependence tree as a basis for
+lazy functional lazy functional debugging</a></h3>
+
+<p>
+Lazy functional languages are declarative and allow the programmer to write
+programs where operational issues such as the evaluation order are left
+implicit. This should be reflected in the design of debuggers for such
+languages to avoid burdening the programmer with operational details, e.g.
+concerning the actual evaluation order. Conventional debugging techniques tend
+to focus too much on operational aspects to be suitable in this context. A
+record of the execution that only captures the declarative aspects of the
+execution, leaving out operational details, would be a viable basis for
+debugging lazy functional programs. Various declarative debugging tools could
+then be developed on top of such records. In this paper we propose a structure
+which we call the Evaluation Dependence Tree (EDT) for this purpose, and we
+describe two different construction methods. Performance problems are
+discussed along with possible solutions.
+</p>
+
+<a name="ase1997bibtex"></a>
+<pre>
+@Article{Nilsson1997,
+  author = 	 "Henrik Nilsson and Jan Sparud",
+  title = 	 "The Evaluation Dependence Tree as a Basis for Lazy
+		  Functional Debugging",
+  journal =	 "Automated Software Engineering",
+  year =	 1997,
+  volume =	 4,
+  number =	 2,
+  pages =	 "121--150",
+  month =	 apr
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="phd1998abstr">Declarative debugging for lazy functional
+languages</a></h3>
+
+<p>
+Lazy functional languages are declarative and allow the programmer to write
+programs where operational issues such as the evaluation order are left
+implicit. It is desirable to maintain a declarative view also during debugging
+so as to avoid burdening the programmer with operational details, for
+example concerning the actual evaluation order which tends to be difficult to
+follow. Conventional debugging techniques focus on the operational behaviour
+of a program and thus do not constitute a suitable foundation for a
+general-purpose debugger for lazy functional languages. Yet, the only
+readily available, general-purpose debugging tools for this class of languages
+are simple, operational tracers.
+</p>
+
+<p>
+This thesis presents a technique for debugging lazy functional programs
+declaratively and an efficient implementation of a declarative debugger for a
+large subset of Haskell. As far as we know, this is the first implementation
+of such a debugger which is sufficiently efficient to be useful in practice. 
+Our approach is to construct a declarative trace which hides the operational
+details, and then use this as the input to a declarative (in our case
+algorithmic) debugger.
+</p>
+
+<p>
+The main contributions of this thesis are:
+
+<ul>
+<li>
+A basis for declarative debugging of lazy functional programs is developed
+in the form of a trace which hides operational details. We call this kind of
+trace the Evaluation Dependence Tree (EDT).
+</li>
+<li>
+We show how to construct EDTs efficiently in the context of implementations
+of lazy functional languages based on graph reduction. Our implementation
+shows that the time penalty for tracing is modest, and that the space cost
+can be kept below a user definable limit by storing one portion of the EDT
+at a time.
+</li>
+<li>
+Techniques for reducing the size of the EDT are developed based on declaring
+modules to be trusted and designating certain functions as starting-points
+for tracing.
+</li>
+<li>
+We show how to support source-level debugging within our framework. A large
+subset of Haskell is handled, including list comprehensions.
+</li>
+<li>
+Language implementations are discussed from a debugging perspective, in
+particular what kind of support a debugger needs from the compiler and the
+run-time system.
+</li>
+<li>
+We present a working reference implementation consisting of a compiler for a
+large subset of Haskell and an algorithmic debugger. The compiler generates
+fairly good code, also when a program is compiled for debugging, and the
+resource consumption during debugging is modest. The system thus
+demonstrates the feasibility of our approach. The implementation is
+available via Internet.
+</li>
+</ul>
+</p>
+<p>
+<i>This work has been supported by the Swedish National Board for Industrial
+and Technical Development (NUTEK).</i>
+</p>
+
+<a name="phd1998bibtex"></a>
+<pre>
+@PhdThesis{Nilsson1998,
+  author = 	 "Henrik Nilsson",
+  title = 	 "Declarative Debugging for Lazy Functional Languages",
+  school = 	 "Department of Computer and Information Science,
+                 {Link\"{o}pings universitet}",
+  year = 	 1998,
+  address =	 "S-581 83, {Link\"{o}ping}, Sweden",
+  month =	 may,
+  type =	 "{PhD} thesis"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="icfp1999abstr">Tracing piece by piece: affordable debugging for
+lazy functional languages</a></h3>
+<p>
+The advantage of lazy functional languages is that programs may be written
+declaratively without specifying the exact evaluation order. The ensuing order
+of evaluation can however be quite involved which makes it difficult to debug
+such programs using traditional, operational techniques. A solution is to
+trace the computation in a way which focuses on the declarative aspects and
+hides irrelevant operational details. The main problem with this approach is
+the immense cost in time and space of tracing large computations. Dealing with
+these performance issues is thus the key to practical, general purpose
+debuggers for lazy functional languages. In this paper we show that computing
+partial traces on demand by re-executing the traced program is a viable way to
+overcome these difficulties. This allows any program to be traced using only a
+fixed amount of extra storage. Since it takes a lot of time to build a
+complete trace, most of which is wasted since only a fraction of a typical
+trace is investigated during debugging, partial tracing and repeated
+re-execution is also attractive from a time perspective. Performance figures
+are presented to substantiate our claims.
+</p>
+<p>
+<i>This work has been supported by the Swedish National Board for Industrial
+and Technical Development (NUTEK) and by the Wenner-Gren Foundations,
+Stockholm, Sweden.</i>
+</p>
+
+<a name="icfp1999bibtex"></a>
+<pre>
+@InProceedings{Nilsson1999,
+  author = 	 "Henrik Nilsson",
+  title = 	 "Tracing piece by piece: affordable debugging for
+		  lazy functional languages",
+  pages =	 "36--47",
+  booktitle =	 "Proceedings of the 1999 {ACM SIGPLAN} international
+		  conference on Functional programming",
+  year =	 1999,
+  publisher =	 "{ACM} Press",
+  address =	 "Paris, France",
+  month =	 sep
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="ftjp2000abstr">From executable formal specification to Java property
+verification</a>
+</h3>
+
+<p>
+In this extended abstract, we describe our work on an executable, dynamic
+semantic specification for a significant subset of Java, including exceptions
+and multi-threading. The dynamic semantics is expressed in natural semantics
+using the formalism Typol. A dedicated, graphical, programming environment has
+been generated from the dynamic semantics and a specification of the Java
+syntax using the Centaur environment, thus allowing the semantics to be tested
+extensively on real Java programs. This in turn allowed many errors to be
+fixed, and we now believe that the specification is reasonably correct. The
+next step is to formally prove the correctness of central aspects of the
+semantics. We focus on multi-threading aspects and their interaction with the
+control flow (e.g. exceptions). While this is work in progress, we sketch such
+a proof in this extended abstract.
+</p>
+
+<a name="ftjp2000bibtex"></a>
+<pre>
+@InProceedings{Attali2000a,
+  author = 	 "Isabelle Attali and Denis Caromel and Henrik Nilsson
+                  and Marjorie Russo",
+  title = 	 "From Executable Formal Specification to {J}ava Property
+                  Verification",
+  booktitle = 	 "Second {ECOOP} Workshop on Formal Techniques for Java
+                  Programs",
+  pages =	 "1--7",
+  year =	 2000,
+  organization = "{INRIA} Sophia Antipolis",
+  address =	 "Sophia Antipolis, France",
+  month =	 jun,
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="cardis2000abstr">Smart tools for Java cards</a></h3>
+<p>
+This article describes a Java Card programming environment which to a large
+extent is generated from formal specifications of the syntax and semantics of
+Java Card, the JCRE (Java Card Runtime Environment), and the Java Card
+APIs. The resulting environment consists of a set of tightly integrated and
+somewhat smart tools, such as a Java specific structure editor and a simulator
+which allows an application to be tested before being downloaded to a
+card. Furthermore, the simulator analyses the applet in question in order to
+find out the structure of the accepted commands. This information is then used
+to automatically adapt the GUI of the simulator.
+</p>
+<p>
+<i>This work was partially financed by Bull. Henrik Nilsson was supported by
+a post doctoral grant from the Wenner-Gren Foundations, Stockholm, Sweden.</i>
+</p>
+
+<a name="cardis2000bibtex"></a>
+<pre>
+@InProceedings{Attali2000b,
+  author = 	 "Isabelle Attali and Denis Caromel and Carine Courbis and
+                  Ludovic Henrio and Henrik Nilsson",
+  title = 	 "Smart Tools for {J}ava Cards",
+  editor =	 "Josep Domingo-Ferrer and David Chan and Anthony Watson",
+  booktitle =	 "Smart Card Research and Advanced Applications",
+  year =	 2000,
+  publisher =	 "Kluwer Academic Publishers",
+  month =	 sep,
+  note =	 "Proceedings of the {IFIP} Fourth Working Conference
+		  on Smart Card Research and Advanced Applications
+		  ({CARDIS} 2000), {HP} Labs, Bristol, {UK}"
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="cn2001abstr">An integrated development environment for Java Card</a>
+</h3>
+
+<p>
+This article describes a Java Card programming environment which to a large
+extent is generated from formal specifications of the syntax and semantics of
+Java Card, the JCRE (Java Card Runtime Environment), and the Java Card
+APIs. The resulting environment consists of a set of tightly integrated and
+somewhat smart tools, such as a Java specific structure editor and a simulator
+which allows an application to be tested before being downloaded to a
+card. Furthermore, the simulator analyses the applet in question in order to
+find out the structure of the accepted commands. This information is then used
+to automatically adapt the GUI of the simulator.
+</p>
+<p>
+<i>This work was partially financed by Bull. Henrik Nilsson was supported by
+a post doctoral grant from the Wenner-Gren Foundations, Stockholm, Sweden.</i>
+</p>
+
+<a name="cn2001bibtex"></a>
+<pre>
+@Article{Attali2001,
+  author =       "Isabelle Attali and Denis Caromel and Carine Courbis and
+                  Ludovic Henrio and Henrik Nilsson",
+  title =        "An Integrated Development Environment for {Java Card}",
+  journal =      "Computer Networks",
+  pages =        "391--405",
+  year =         2001,
+  volume =       36,
+  number =       4,
+  month =        jul
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="jfp2001abstr">How to look busy while being as lazy as ever:
+the implementation of a lazy functional debugger</a>
+</h3>
+
+<p>
+This article describes the implementation of a debugger for
+lazy functional languages like Haskell. The key idea is to construct a
+declarative trace which hides the operational details of lazy
+evaluation. However, to avoid excessive memory consumption, the trace is
+constructed one piece at a time, as needed during a debugging session, by
+automatic re-execution of the program being debugged. This article gives a
+fairly detailed account of both the underlying ideas and of our
+implementation. It also presents performance figures which demonstrate the
+feasibility of the approach.
+</p>
+<p>
+<i>This work has been supported by the Swedish Board for Industrial and
+Technical Development (NUTEK) and by the Wenner-Gren Foundations, Stockholm,
+Sweden.</i>
+</p>
+
+<a name="jfp2001bibtex"></a>
+<pre>
+@Article{Nilsson2001,
+  author =       "Henrik Nilsson",
+  title =        "How to Look Busy while Being as Lazy as Ever: The
+                  Implementation of a Lazy Functional Debugger",
+  journal =      jfp,
+  year =         2001,
+  volume =       11,
+  number =       6,
+  pages =        "629--671",
+  month =        nov
+}
+</pre>
+
+<p><hr></p>
+
+<p><hr></p>
+
+<h3>
+<a name="FRPInC++2002abstr">FRP in C++ and its application</a>
+</h3>
+
+<p>
+Functional Reactive Programming (FRP) is a framework for
+constructing interactive applications in a declarative manner.   FRP
+augments a host programming language to express time flow in a
+simple, semantically uniform manner.  FRP
+has been demonstrated in domains such as animation, vision, robotics
+and other control systems.  In this paper we present an implementation
+of the FRP programming style using C++ as a host language.   There are
+two primary technical challenges: the implementation of signals
+in a manner faithful to the FRP semantic model and the use of the C++
+type system, the template mechanism and operator overloading in
+particular, to achieve the same degree of type safety operator re-use
+that the Haskell type system provides.  The resulting FRP
+implementation thus retains the essential &ldquo;look and feel&rdquo; of
+previous FRP implementations while also offering seamless
+interoperation with C++ code.
+
+We demonstrate FRP/C++ in a complete human-guided robot 
+navigation system that integrates vision, control, and human-machine
+interfaces.  This system shows that the high-level semantic model
+expressed by FRP can be captured conveniently in C++ and provide the
+same declarative programming style found in the Haskell based
+implementations of FRP without compromising type safety.
+</p>
+
+<a name="FRPInC++2002bibtex"></a>
+<pre>
+@Unpublished{Dai2002,
+  author =       "Xiangtian Dai and Gregory Hager and Henrik Nilsson",
+  title =        "{FRP} in {C++} and Its Application",
+  note =         "2002. Unpublished."
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="hw2002abstr">Functional reactive programming, continued</a>
+</h3>
+
+<p>
+Functional Reactive Programming (FRP) extends a host programming language with
+a notion of time flow. Arrowized FRP (AFRP) is a version of FRP embedded in
+Haskell based on the arrow combinators. AFRP is a powerful synchronous
+dataflow programming language with hybrid modeling capabilities, combining
+advanced synchronous dataflow features with the higher-order lazy functional
+abstractions of Haskell. In this paper, we describe the AFRP programming style
+and our Haskell-based implementation. Of particular interest are the AFRP
+combinators that support dynamic collections and continuation-based switching. 
+We show how these combinators can be used to express systems with an evolving
+structure that are difficult to model in more traditional dataflow languages.
+</p>
+
+<a name="hw2002bibtex"></a>
+<pre>
+@InProceedings{Nilsson2002a,
+  author =       "Henrik Nilsson and Antony Courtney and John Peterson",
+  title =        "Functional Reactive Programming, Continued",
+  booktitle =    "Proceedings of the 2002 {ACM SIGPLAN} {H}askell
+                  Workshop ({H}askell'02)",
+  pages =        "51--64",
+  year =         2002,
+  address =      "Pittsburgh, Pennsylvania, USA",
+  publisher =    "{ACM} Press",
+  month =        oct
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="ppdp2002abstr">System presentation - Functional reactive robotics: an
+excercise in principled integration of domain-specific languages</a>
+</h3>
+
+<p>
+Software for (semi-) autonomous robots tends to be a complex combination of
+components from many different application domains such as control theory,
+vision, and artificial intelligence. Components are often developed using
+their own domain-specific tools and abstractions. System integration can thus
+be a significant challenge, in particular when the application calls for a
+dynamic, adaptable system structure in which rigid boundaries between the
+subsystems are a performance impediment. We believe that, by identifying
+suitably abstract notions common to the different domains in question, it is
+possible to create a broader framework for software integration and to recast
+existing domain-specific frameworks in these terms. This approach simplifies
+integration and leads to improved reliability. In this paper, we show how
+Functional Reactive Programming (FRP) can serve as such a unifying framework
+for programming vision-guided, semi-autonomous robots and illustrate the
+benefits this approach entails. The key abstractions in FRP, reactive
+components describing continuous or discrete behavior in a declarative style,
+are first class entities, allowing the resulting systems to exhibit a dynamic,
+adaptable structure which we regard as especially important in the area of
+autonomous robots.
+</p>
+
+<a name="ppdp2002bibtex"></a>
+<pre>
+@InProceedings{Pembeci2002,
+  author =       "Izzet Pembeci and Henrik Nilsson and Greogory Hager",
+  title =        "System Presentation -- Functional Reactive Robotics: An
+                  Exercise in Principled Integration of Domain-Specific
+                  Languages",
+  pages =        "168--179",
+  booktitle =    "Principles and Practice of Declarative Programming
+                  ({PPDP'02})",
+  year =         2002,
+  address =      "Pittsburgh, Pennsylvania, USA",
+  month =        oct
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="padl2003abstr">Functional hybrid modeling</a>
+</h3>
+
+<p>
+The modeling and simulation of physical systems is of key importance
+in many areas of science and engineering, and thus can benefit from
+high-quality software tools. In previous research we have demonstrated
+how <i>functional programming</i> can form the basis of an expressive
+language for <i>causal</i> hybrid modeling and simulation. There is a
+growing realization, however, that a move toward <i>non-causal</i>
+modeling is necessary for coping with the ever increasing size and
+complexity of modeling problems. Our goal is to combine the strengths
+of functional programming and non-causal modeling to create a
+powerful, strongly typed <i>fully declarative modeling language</i>
+that provides modeling and simulation capabilities beyond the current
+state of the art. Although our work is still in its very early stages,
+we believe that this paper clearly articulates the need for improved
+modeling languages and shows how functional programming techniques can
+play a pivotal role in meeting this need.
+</p>
+
+<a name="padl2003bibtex"></a>
+<pre>
+@InProceedings{Nilsson2003a,
+  author =       "Henrik Nilsson and John Peterson and Paul Hudak",
+  title =        "Functional Hybrid Modeling",
+  booktitle =    "Proceedings of {PADL'03}: 5th International Workshop on
+                  Practical Aspects of Declarative Languages",
+  pages =        "376--390",
+  year =         2003,
+  volume =       2562,
+  series =       "Lecture NOtes in Computer Science",
+  address =      "New Orleans, Lousiana, USA",
+  month =        jan,
+  publisher =    "Springer"
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="afp2002abstr">Arrows, robots, and functional reactive programming</a>
+</h3>
+
+<p>
+<i>Functional reactive programming</i>, or FRP, is a paradigm for
+programming <i>hybrid systems</i> -- i.e., systems containing a
+combination of both continuous and discrete components -- in a
+high-level, declarative way.  The key ideas in FRP are its notions of
+continuous, time-varying values, and time-ordered sequences of
+discrete events.
+
+<i>Yampa</i> is an instantiation of FRP as a domain-specific language
+embedded in Haskell.  This paper describes Yampa in detail, and shows
+how it can be used to program a particular kind of hybrid system: a
+<i>mobile robot</i>.  Because performance is critical in robotic
+programming, Yampa uses <i>arrows</i> (a generalization of monads) to
+create a disciplined style of programming with time-varying values
+that helps ensure that common kinds of time- and space-leaks do not
+occur.
+
+No previous experience with robots is expected of the reader, although
+a basic understanding of physics and calculus is assumed.  No
+knowledge of arrows is required either, although we assume a good
+working knowledge of Haskell.
+</p>
+
+<a name="afp2002bibtex"></a>
+<pre>
+@InProceedings{Hudak2003,
+  author =       "Paul Hudak and Antony Courtney and Henrik Nilsson
+                  and John Peterson",
+  title =        "Arrows, Robots, and Functional Reactive Programming",
+  booktitle =    "Summer School on Advanced Functional Programming 2002, 
+                  Oxford University",
+  year =         2003,
+  volume =	 2638,
+  series =       "Lecture Notes in Computer Science",
+  pages =        "159--187"
+  publisher =    "Springer-Verlag"
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="icfp2003abstr">Functional Automatic Differentiation with Dirac
+Impulses</a>
+</h3>
+
+<p>
+Functional Reactive Programming (FRP) is a framework for reactive programming
+in a functional setting. FRP has been applied to a number of domains, such as
+graphical animation, graphical user interfaces, robotics, and computer vision.
+Recently, we have been interested in applying FRP-like principles to hybrid
+modeling and simulation of physical systems. As a step in that direction, we
+have extended an existing FRP implementation, Yampa, in two new ways that make
+it possible to express certain models in a very natural way, and reduces the
+amount of work needed to put modeling equations into a suitable form for
+simulation. First, we have added Dirac impulses that allow certain types of
+discontinuities to be handled in an easy yet rigorous manner. Second, we have
+adapted automatic differentiation to the setting of Yampa, and generalized it
+to work correctly with Dirac impulses. This allows derivatives of piecewise
+continuous signals to be well-defined at all points. This paper reviews the
+basic ideas behind automatic differentiation, in particular Jerzy
+Karczmarczuk's elegant version for a lazy functional language with
+overloading, and then considers the integration with Yampa and the addition of
+Dirac impulses.
+</p>
+
+<a name="icfp2003bibtex"></a>
+<pre>
+@InProceedings{Nilsson2003b,
+  author =       "Henrik Nilsson",
+  title =        "Functional Automatic Differentiation with {D}irac Impulses",
+  booktitle =    "Proceedings of the Eighth {ACM} {SIGPLAN} International
+                  Conference on Functional Programming",
+  pages =        "153--164",
+  year =         2003,
+  address =      "Uppsala, Sweden",
+  month =        aug,
+  publisher =    "{ACM} Press"
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="hw2003abstr">The Yampa Arcade</a>
+</h3>
+
+<p>
+Simulated worlds are a common (and highly lucrative) application domain that
+stretches from detailed simulation of physical systems to elaborate video game
+fantasies. We believe that Functional Reactive Programming (FRP) provides just
+the right level of functionality to develop simulated worlds in a concise,
+clear and modular way. We demonstrate the use of FRP in this domain by
+presenting an implementation of the classic &quot;Space Invaders&quot; game in
+Yampa, our most recent Haskell-embedded incarnation of FRP.
+</p>
+
+<a name="hw2003bibtex"></a>
+<pre>
+@InProceedings{Courtney2003b,
+  author =       "Antony Courtney and Henrik Nilsson and John Peterson",
+  title =        "The {Y}ampa Arcade",
+  booktitle =    "Proceedings of the 2003 {ACM SIGPLAN} {H}askell
+                  Workshop ({H}askell'03)",
+  pages =        "7--18",
+  year =         2003,
+  address =      "Uppsala, Sweden",
+  publisher =    "{ACM} Press",
+  month =        aug
+}
+</pre>
+
+<p><hr></p>
+
+<h3>
+<a name="hw2004abstr">Haskell '04: Proceedings of the 2004 ACM SIGPLAN
+workshop on Haskell</a>
+</h3>
+
+<p>
+It is my great pleasure to welcome you to the ACM SIGPLAN 2004 Haskell
+Workshop. The purpose of the Haskell Workshop is to discuss experience with
+Haskell, and possible future developments for the language. The scope of the
+workshop includes all aspects of the design, semantics, theory, application,
+implementation, and teaching of Haskell.The 2004 Haskell Workshop takes place
+on 22 September, 2004, in Snowbird, Utah, USA, in affiliation with the 2004
+International Conference on Functional Programming (ICFP'04). The call for
+papers attracted 27 submissions. Each paper was evaluated by at least three
+international referees. During a five-day electronic meeting, the program
+committee selected nine of the submissions for presentation at the workshop as
+full papers based on the referee reports. The program committee also selected
+a student paper for a short presentation. Additionally, two tool
+demonstrations, the abstracts of which are included in these proceedings, were
+selected from five proposals. The 2004 workshop program also includes the
+annual The Future of Haskell discussion.
+</p>
+
+<a name="hw2004bibtex"></a>
+<pre>
+@Proceedings{Nilsson2004,
+  title = 	 "{H}askell '04: Proceedings of the 2004 {ACM SIGPLAN}
+                   workshop on {H}askell",
+  year = 	 2004,
+  editor =	 "Henrik Nilsson",
+  address =	 "Snowbird, Utah, USA",
+  publisher =	 "ACM",
+  annote =	 "ISBN: 1-58113-850-4"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="icfp2005abstr">Dynamic Optimization for Functional Reactive
+Programming using Generalized Algebraic Data Types</a></h3>
+
+<p>
+A limited form of dependent types, called Generalized Algebraic Data Types
+(GADTs), has recently been added to the list of Haskell extensions supported
+by the Glasgow Haskell Compiler. Despite not being full-fledged dependent
+types, GADTs still offer considerably enlarged scope for enforcing important
+code and data invariants statically. Moreover, GADTs offer the tantalizing
+possibility of writing more efficient programs since capturing invariants
+statically through the type system sometimes obviates entire layers of dynamic
+tests and associated data markup. This paper is a case study on the
+applications of GADTs in the context of Yampa, a domain-specific language for
+Functional Reactive Programming in the form of a self-optimizing, arrow-based
+Haskell combinator library. The paper has two aims. Firstly, to explore what
+kind of optimizations GADTs make possible in this context. Much of that should
+also be relevant for other domain-specific embedded language implementations,
+in particular arrow-based ones. Secondly, as the actual performance impact of
+the GADT-based optimizations is not obvious, to quantify this impact, both on
+tailored micro benchmarks, to establish the effectiveness of individual
+optimizations, and on two fairly large, realistic applications, to gauge the
+overall impact. The performance gains for the micro benchmarks are
+substantial. This implies that the Yampa API could be simplified as a number
+of "pre-composed" primitives that were there mainly for performance reasons
+are no longer needed. As to the applications, a worthwhile performance gain
+was obtained in one case whereas the performance was more or less unchanged in
+the other.
+</p>
+
+<a name="icfp2005bibtex"></a>
+<pre>
+@InProceedings{Nilsson2005a,
+  author = 	 "Henrik Nilsson",
+  title = 	 "Dynamic Optimization for Functional Reactive
+                  Programming using Generalized Algebraic Data Types",
+  booktitle = 	 "Proceedings of the Tenth {ACM} {SIGPLAN} International
+                  Conference on Functional Programming (ICFP'05)",
+  pages =	 "54--65"
+  year =	 2005,
+  address =	 "Tallinn, Estonia",
+  month =	 sep,
+  publisher =	 "{ACM} Press"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="wgp2006abstr"></a>Type-theoretic design patterns</h3>
+
+<p>
+The development of design patterns in object-oriented programming aims at
+capturing good software design in a reusable generic form. However, design
+patterns are not expressible in conventional object-oriented programming
+languages. To address this shortcoming, we need to model and understand design
+patterns precisely. We achieve this by identifying operators characterising
+the most fundamental design patterns in a way that enables the construction of
+object-oriented programs with provable structural and behavioural properties. 
+We use dependent-type theory to define a simplified, functional model of
+object-oriented programming. Design patterns are modelled in this setting as
+operators on object signatures and implementations. We present examples of
+several basic design operators and design patterns modelled in this setting
+and show how properties of their composition can be proven.
+</p>
+
+<a name="wgp2006bibtex"></a>
+<pre>
+@InProceedings{Rypacek2006,
+  author = 	 "Ond\v{r}ej Ryp\'{a}\v{c}ek and Roland Backhouse and Henrik
+                  Nilsson",
+  title = 	 "Type-theoretic design patterns",
+  booktitle = 	 "Proceedings of the 2006 ACM SIGPLAN Workshop on Generic
+                  Programming",
+  pages =	 "13--22",
+  year =	 2006,
+  address =	 "Portland, Oregon",
+  month =	 sep,
+  publisher =	 "{ACM} Press"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="eoolt2007abstr"></a>Functional Hybrid Modeling from an
+Object-Oriented Perspective</h3>
+
+<p>
+The modeling and simulation of physical systems is of key importance in many
+areas of science and engineering, and thus can benefit from high-quality
+software tools. In previous research we have demonstrated how functional
+programming can form the basis of an expressive language for causal hybrid
+modeling and simulation. There is a growing realization, however, that a move
+toward non-causal modeling is necessary for coping with the ever increasing
+size and complexity of modeling problems. Our goal is to combine the strengths
+of functional program ming and non-causal modeling to create a powerful,
+strongly typed fully declarative modeling language that provides modeling and
+simulation capabilities beyond the current state of the art: in particular,
+support for highly structurally dynamic systems. Additionally, we think our
+approach could serve as a semantical framework for studying modeling and
+simulation languages supporting structural dynamism, and maybe even as a core
+language in systems where the surface syntax is more conven tional. Although
+our work is still in its very early stages, we believe that this paper clearly
+articulates the need for improved modeling languages and shows how functional
+programming techniques can play a pivotal role in meeting this need.
+</p>
+
+<a name="eoolt2007bibtex"></a>
+<pre>
+@Article{Nilsson2007c,
+  author =       "Henrik Nilsson and John Peterson and Paul Hudak",
+  title =        "Functional Hybrid Modeling from an Object-Oriented
+                  Perspective",
+  journal =      "Simulation News Europe",
+  year =         2007,
+  volume =       17,
+  number =       2,
+  pages =        "29--38",
+  month =        sep,
+  annote =       "ISSN 0929-2268"
+}
+</pre>
+
+<!--
+<pre>
+@InProceedings{Nilsson2007,
+  author = 	 "Henrik Nilsson and John Peterson and Paul Hudak",
+  title = 	 "Functional Hybrid Modeling from an Object-Oriented
+                  Perspective",
+  booktitle = 	 "Proceedings of the 1st International Workshop on
+                  Equation-Based Object-Oriented Languages and Tools",
+  pages =	 "71--87",
+  year =	 2007,
+  editor =	 "Peter Fritzson and Fran\c{c}ois Cellier and Christoph
+                  Nytsch-Geusen",
+  number =	 24,
+  series =	 "Link{\"o}ping Electronic Conference Proceedings",
+  publisher =	 "Link{\"o}ping University Electronic Press",
+  annote =	 "ISSN (print) 1650-3686, ISSN (online) 1650-3740"
+}
+</pre>
+-->
+
+
+<p><hr></p>
+
+<h3><a name="tfpvol7abstr"></a>Trends in Functional Programming Volume 7</h3>
+
+<p>
+This is Volume 7 of Trends in Functional Programming (TFP). It contains a
+refereed selection of the papers that were presented at TFP 2006: the Seventh
+Symposium on Trends in Functional Programming. which took place in Nottingham,
+19-21 April, 2006.
+</p>
+
+<p>
+TFP is an international forum for researchers from all functional programming
+communities spanning the entire width of topics in the field. Its goal is to
+provide a broad view of current and future trends in functional programming in
+a lively and friendly setting, thus promoting new research directions related
+to the field of functional programming and the relationship between functional
+programming and other fields of computer science.
+</p>
+
+<p>
+True to the spirit of TFP, the selection of papers in this volume covers a
+wide range of topics, including dependently typed programming, generic
+programming, purely functional data structures, function synthesis,
+declarative debugging, implementation of functional programming languages, and
+memory management. A particular emerging trend is that of dependently typed
+programming, reflected by a number of papers in the present selection and by
+the co-location of TFP and Types 2006.
+</p>
+
+<a name="tfpvol7bibtex"></a>
+<pre>
+@Proceedings{Nilsson2007b,
+  title = 	 "Trends in Functional Programming Volume 7",
+  year = 	 2007,
+  editor =	 "Henrik Nilsson",
+  publisher =	 "Intellect",
+  annote =	 "ISBN: 9781841501888"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="padl2008abstr"></a>Switched-On Yampa: Declarative Programming
+of Modular Synthesizers</h3>
+
+<p>
+In this paper, we present an implementation of a modular synthesizer in
+Haskell using Yampa. A synthesizer, be it a hardware instrument or a pure
+software implementation, as here, is said to be <i>modular</i> if it provides
+sound-generating and sound-shaping components that can be interconnected in
+arbitrary ways. Yampa, a Haskell-embedded implementation of Functional
+Reactive Programming, supports flexible, purely declarative construction of
+hybrid systems. Since music is a hybrid continuous-time and discrete-time
+phenomenon, Yampa is a good fit for such applications, offering some
+unique possibilities compared to most languages targeting music or audio
+applications. Through the presentation of our synthesizer application, we
+demonstrate this point and provide insight into the Yampa approach to
+programming reactive, hybrid systems. We develop the synthesizer gradually,
+starting with fundamental synthesizer components and ending with an
+application that is capable of rendering a standard MIDI file as audio with
+respectable performance.
+</p>
+
+<a name="padl2008bibtex"></a>
+<pre>
+@InProceedings{Giorgidze2008,
+  author = 	 "George Giorgidze and Henrik Nilsson",
+  title = 	 "Switched-On {Y}ampa: Declarative Programming of Modular
+                  Synthesizers",
+  booktitle = 	 "Practical Aspects of Declarative Languages (PADL) 2008",
+  pages =	 "282--298",
+  year =	 2008,
+  editor =	 "Paul Hudak and David S. Warren",
+  volume =	 4902,
+  series =	 "Lecture Notes in Computer Science",
+  address =	 "San Francisco, CA, USA",
+  month =	 jan,
+  publisher =	 "Springer-Verlag"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="eoolt2008abstr"></a>Type-Based Structural Analysis for Modular
+Systems of Equations</h3>
+
+<p>
+This paper investigates a novel approach to a type system for modular systems
+of equations; i.e., equation systems constructed by composition of individual
+equation system fragments. The purpose of the type system is to ensure, to the
+extent possible, that the composed system is solvable. The central idea is to
+attribute a structural type to equation system fragments that reflects which
+variables occur in which equations. In many instances, this allows over- and
+underdetermined system fragments to be identified separately, without first
+having to assemble all fragments into a complete system of equations. The
+setting of the paper is equation-based, non-causal modelling, specifically
+Functional Hybrid Modelling (FHM). However, the central ideas are not tied to
+FHM, but should be applicable to equation-based modelling languages in
+general, like Modelica, as well as to applications featuring modular systems
+of equations outside the field of modelling and simulation.
+</p>
+
+<a name="eoolt2008bibtex"></a>
+
+<pre>
+@Article{Nilsson2009,
+  author = 	 "Henrik Nilsson",
+  title = 	 "Type-Based Structural Analysis for Modular Systems of
+		  Equations",
+  journal = 	 "Simulation News Europe",
+  year = 	 2009,
+  volume =	 19,
+  number =	 1,
+  pages =	 "17--28",
+  month =	 apr,
+  annote =	 "ISSN 0929-2268"
+}
+</pre>
+
+<!--
+<pre>
+@InProceedings{Nilsson2008,
+  author = 	 "Henrik Nilsson",
+  title = 	 "Type-Based Structural Analysis for Modular Systems of
+		  Equations",
+  booktitle = 	 "Proceedings of the 2nd International Workshop on
+		  Equation-Based Object-Oriented Languages and Tools",
+  pages =	 "71--81",
+  year =	 2008,
+  editor =	 "Peter Fritzson and  Fran\c{c}ois Cellier and David Broman",
+  number =	 29,
+  series =	 "Link{\"o}ping Electronic Conference Proceedings",
+  address =	 "Paphos, Cyprus",
+  month =	 jul,
+  publisher =	 "Link{\"o}ping University Electronic Press",
+  annote =	 "ISSN (print) 1650-3686, ISSN (online) 1650-3740"
+}
+</pre>
+-->
+
+<p><hr></p>
+
+<h3><a name="tfp2008abstr">Optimisation of Dynamic, Hybrid Signal Function
+Networks</a></h3>
+
+<p>
+Functional Reactive Programming (FRP) is an approach to reactive programming
+where systems are structured as networks of functions operating on signals. 
+FRP is based on the synchronous data-flow paradigm and supports both
+continuous-time and discrete-time signals (hybrid systems). What sets FRP
+apart from most other languages for similar applications is its support for
+systems with dynamic structure and for higher-order data-flow constructs. This
+raises a range of implementation challenges. This paper contributes towards
+advancing the state of the art of FRP implementation by studying the notion of
+signal change and change propagation in a setting of hybrid signal function
+networks with dynamic structure. To sidestep some problems of certain previous
+FRP implementations that are structured using arrows, we suggest working with
+a notion of composable, multi-input and multi-output signal functions. A clear
+conceptual distinction is also made between continuous-time and discrete-time
+signals. We then show how establishing change-related properties of the signal
+functions in a network allows such networks to be simplified (static
+optimisation) and can help reducing the amount of computation needed for
+executing the networks (dynamic optimisation). Interestingly, distinguishing
+between continuous-time and discrete-time signals allows us to characterise
+the change-related properties of signal functions more precisely than what we
+otherwise would have been able to, which is helpful for optimisation.
+</p>
+
+<a name="tfp2008bibtex"></a>
+<pre>
+@InProceedings{Sculthorpe2009a,
+  author = 	 "Neil Sculthorpe and Henrik Nilsson", 
+  title = 	 "Optimisation of Dynamic, Hybrid Signal Function Networks",
+  booktitle = 	 "{T}rends in {F}unctional {P}rogramming Volume 9 ({TFP'08})",
+  pages =        "97--112",
+  year =	 2009,
+  editor =	 "Marco Moraz{\'{a}}n and Pieter Koopman and Peter Achten",
+  publisher =	 "Intellect"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="ifl2008abstr">Embedding a Functional Hybrid Modelling
+Language in Haskell</a></h3>
+
+<p>
+In this paper we present the first investigation into the implementation of a
+Functional Hybrid Modelling language for non-causal modelling and simulation
+of physical systems. In particular, we present a simple way to handle connect
+constructs: a facility for composing model fragments present in some form in
+most non-causal modelling languages. Our implementation is realised as a
+domain-specific language embedded in Haskell. The method of embedding employs
+quasiquoting, thus demonstrating the effectiveness of this approach for
+languages that are not suitable for embedding in more traditional ways. Our
+implementation is available on-line, and thus the first publicly available
+prototype implementation of a Functional Hybrid Modelling language.
+</p>
+
+<a name="ifl2008bibtex"></a>
+<pre>
+@InProceedings{Giorgidze2011b,
+  author = 	 "George Giorgidze and Henrik Nilsson", 
+  title = 	 "Embedding a Functional Hybrid Modelling Language in
+                  {H}askell",
+  booktitle = 	 "Implementation and Application of Functional Languages:
+                  20th International Symposium, {IFL} 2008,
+                  Revised Selected Papers",
+  pages =        "138--155",
+  year =	 2011,
+  editor =       "Sven-Bodo Scholz and Olaf Chitil",
+  volume =       "5836",
+  series =       "Lecture Notes in Computer Science",
+  publisher =    "Springer-Verlag",
+  isbn =         "978-3-642-24451-3",
+  doi =          "978-3-642-24451-3"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="gottingen2009abstr">New eyes on visual habituation in locust: an
+experiment description language for integrative neuroscience.</a></h3>
+
+<p>
+Neuroscientists have a vast array of instruments at their disposal to examine
+the function of neural tissue. For example, to investigate visuomotor
+integration, one can combine in vivo intracellular voltage recordings with
+visual presentations, focal stimulation of nerves and behavioural observation. 
+While this technological diversity holds enormous promise, it introduces its
+own set of complexities: how does one control these instruments and ensure
+that they are configured to perform the experiments most likely to shed light
+on the hypothesis under consideration? We have developed a domain-specific
+programming language for describing experiments in cellular and sensory
+neuroscience. This language aims to let scientists with little programming
+experience focus on creating a specification of what should be done in an
+experiment and in the subsequent analyses. We can build complex experiments by
+combining elementary tasks including animations, sounds, extracellular or
+intracellular recordings and injection of somatic current waveforms. We have
+written a series of computer programs to execute these experiments on living
+animals, or on simulated networks of neurons. These programs allow us to
+directly compare models and experiments by automatically running the same
+protocol in vivo and in silico. The results of these trials are stored in a
+relational database together with the experiment description, information
+about the animal, and any other available metadata, and are retrieved with a
+simple custom-built query language.
+</p>
+
+<p>
+We have used this new way of conducting experiments to reexamine the response
+of the descending contralateral movement detector (DCMD) in the locust to
+looming visual stimuli. The locust is a well- established experimental
+preparation which permits the study of cross-modal sensorimotor integration. 
+We have measured the kinetics of habituation in the DCMD firing rate response
+to repeated presentations of similar looming stimuli, and the dependence of
+this time course on the stimulus amplitude. We have also investigated the
+influence of auditory stimuli on the visual looming response and the
+timecourse of its habituation. Finally, we aim to investigate the effect of
+manipulations of the looming object visual presentation, such as priming
+portions of the visual field, on the DCMD response. These experiments show how
+complex multi-modal protocols can be simply defined in an experiment
+description language and can reliably be carried out repeatedly in a living
+animal.
+</p>
+
+<a name="gottingen2009bibtex"></a>
+<pre>
+@Misc{Nielsen2009,
+  author =	 "Nielsen, Thomas A. and Nilsson, Henrik and Matheson, Tom",
+  title =	 "New eyes on visual habituation in locust: an experiment
+                  description language for integrative neuroscience",
+  howpublished = "Poster T14-7C presented at G{\"o}ttingen Meeting of the
+                  German Neuroscience Society",
+  month =	 mar,
+  year =	 2009
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="tfp2009abstr">Braincurry: A domain-specific language for
+integrative neuroscience</a></h3>
+
+<p>
+This paper describes Braincurry, a domain-specific, declarative language for
+describing and analysing experiments in neuroscience. Braincurry has three
+goals: to allow experiments and data analysis to be described in a way that is
+sufficiently abstract to serve as a <em>definition</em>; to facilitate
+carrying out experiments by <em>executing</em> such descriptions; and to be
+directly <em>usable by end users</em>: neuroscientists. We adopted an
+experimental and incremental approach to the design and implementation of
+Braincurry, focusing on the neurophysiological response to visual stimuli in
+locusts as a test case. Braincurry is currently implemented as an embedding in
+Haskell, which is a highly effective tool for this kind of exploratory
+language design. The declarative nature of Haskell and its flexible syntax
+fitted with our goals. We discuss the requirements for a realistic language
+meeting the above goals, describe the current Braincurry design and how it may
+be generalised, and explain how some particularly challenging hard real-time
+requirements were met.
+</p>
+
+<a name="tfp2009bibtex"></a>
+<pre>
+@InProceedings{Nielsen2010b,
+  author = 	 "Nielsen, Thomas A. and Matheson, Tom and Nilsson, Henrik",
+  title = 	 "{B}raincurry: A domain-specific language for integrative
+                  neuroscience",
+  booktitle = 	 "Trends in Functional Programming Volume 10 ({TFP 2009},
+                  Revised Selected Papers)",
+  year =	 2010,
+  editor =       "Horv{\'{a}}th, Zolt{\'{a}}n and Zs{\'{o}}k, Vikt{\'{o}}ria
+                  and Koopman, Pieter",
+  pages =        "161--176",
+  month =	 sep,
+  publisher =	 "Intellect",
+  isbn =         "978-18-41-50405-6"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="modelica2009abstr">Higher-Order Non-Causal Modelling and
+Simulation of Structurally Dynamic Systems</a></h3>
+
+<p>
+This paper explores a novel approach to the implementation of non-causal
+modelling and simulation languages supporting highly structurally dynamic
+systems. One reason the support for structural dynamics is limited in present
+mainstream non-causal modelling and simulation languages is that they are
+designed and implemented on the assumption that symbolic processing of models
+and ultimately compilation of simulation code takes place prior to simulation. 
+We seek to lift that restriction, without sacrificing efficiency, by
+exploiting just-in-time (JIT) compilation to allow new simulation code,
+reflecting structural changes, to be generated as the simulation progresses. 
+Our work is carried out in a framework called Functional Hybrid Modelling that
+supports higher-order modelling, as higher-order modelling lends itself
+naturally to expressing structural dynamism. However, the central ideas of the
+paper should be of general interest in the area of structural dynamism. The
+paper provides an in-depth description of the implementation techniques we
+have developed as well as a performance evaluation.
+</p>
+
+<a name="modelica2009bibtex"></a>
+<pre>
+@InProceedings{Giorgidze2009b,
+  author = 	 "George Giorgidze and Henrik Nilsson",
+  title = 	 "Higher-Order Non-Causal Modelling and Simulation of
+                  Structurally Dynamic Systems",
+  booktitle = 	 "Proceedings of the 7th International {M}odelica
+                  {C}onference",
+  pages =        "208--218",
+  year =	 2009,
+  series =	 "Link{\"o}ping Electronic Conference Proceedings",
+  address =	 "Como, Italy",
+  month =	 sep,
+  publisher =	 "Link{\"o}ping University Electronic Press"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="icfp2009abstr">Safe Functional Reactive Programming through
+Dependent Types</a></h3>
+
+<p>
+Functional Reactive Programming (FRP) is an approach to reactive programming
+where systems are structured as networks of functions operating on signals.
+FRP is based on the synchronous data-flow paradigm and supports both
+continuous-time and discrete-time signals (hybrid systems). What sets FRP
+apart from most other languages for similar applications is its support for
+systems with dynamic structure and for higher-order reactive constructs.
+
+Statically guaranteeing correctness properties of programs is an attractive
+proposition. This is true in particular for typical application domains for
+reactive programming such as embedded systems. To that end, many existing
+reactive languages have type systems or other static checks that guarantee
+domain-specific properties, such as feedback loops always being well-formed.
+However, they are limited in their capabilities to support dynamism and
+higher-order data-flow compared with FRP. Thus, the onus of ensuring
+such properties of FRP programs has so far been on the programmer as
+established static techniques do not suffice.
+
+In this paper, we show how dependent types allow this concern to be addressed.
+We present an implementation of FRP embedded in the dependently-typed language
+Agda, leveraging the type system of the host language to craft a
+domain-specific (dependent) type system for FRP. The implementation constitutes
+a discrete, operational semantics of FRP, and as it passes the Agda type,
+coverage, and termination checks, we know the operational semantics is total,
+which means our type system is safe.
+</p>
+
+<a name="icfp2009bibtex"></a>
+<pre>
+@InProceedings{Sculthorpe2009b,
+  author = 	 "Neil Sculthorpe and Henrik Nilsson",
+  title = 	 "Safe Functional Reactive Programming through Dependent
+                  Types",
+  booktitle = 	 "Proceedings of the Fourteenth {ACM} {SIGPLAN} International
+                  Conference on Functional Programming (ICFP'09)",
+  pages =	 "23--34",
+  year =	 2009,
+  address =	 "Edinburgh, Scotland",
+  month =	 sep,
+  publisher =	 "{ACM} Press"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="wflp2010abstr">Mixed-level Embedding and JIT Compilation for an
+Iteratively Staged DSL</a></h3>
+
+<p>
+This paper explores how to implement an <em>iteratively staged</em>
+domain-specific language (DSL) by embedding into a functional language. The
+domain is modelling and simulation of physical systems where models are
+expressed in terms of non-causal differential-algebraic equations; i.e., sets
+of constraints solved through numerical simulation. What sets our language
+apart is that the equational constraints are <em>first class entities</em>
+allowing for an evolving model structure characterised by <em>repeated
+generation</em> of updated constraints. Hence iteratively staged. Our DSL can
+thus be seen as a combined functional and constraint programming language,
+albeit a two-level one, with the functional language chiefly serving as a meta
+language. However, the two levels do interact throughout the simulation. The
+embedding strategy we pursue is a mixture of deep and shallow, with the deep
+embedding enabling just-in-time (JIT) compilation of the constraints as they
+are generated for efficiency, while the shallow embedding is used for the
+remainder for maximum leverage of the host language. The paper is organised
+around a specific DSL, but our implementation strategy should be applicable
+for iteratively staged languages in general. Our DSL itself is further a novel
+variation of a declarative constraint programming language.
+</p>
+
+<a name="wflp2010bibtex"></a>
+<!--
+Obsolete, use the one below:
+<pre>
+@InProceedings{Giorgidze2010a,
+  author = 	 "George Giorgidze and Henrik Nilsson",
+  title = 	 "Mixed-level Embedding and {JIT} Compilation for an
+                  Iteratively Staged {DSL}",
+  booktitle = 	 "Proceedings of the 19th {W}orkshop on {F}unctional and
+                  (Constraint) {L}ogic {P}rogramming ({WFLP'10})",
+  pages =        "19--34",
+  year =	 2010,
+  address =	 "Madrid, Spain",
+  month =	 jan
+}
+</pre>
+-->
+
+<pre>
+@InProceedings{Giorgidze2011a,
+  author = 	 "George Giorgidze and Henrik Nilsson",
+  title = 	 "Mixed-level Embedding and {JIT} Compilation for an
+                  Iteratively Staged {DSL}",
+  booktitle = 	 "Proceedings of the 19th {W}orkshop on {F}unctional and
+                  (Constraint) {L}ogic {P}rogramming ({WFLP 2010})",
+  pages =        "48--65",
+  year =	 2011,
+  editor =	 "Mari\~{n}o, Julio",
+  volume =       "6559",
+  series =       Lecture Notes in Computer Science,
+  publisher =	 Springer-Verlag
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="incfuk2010abstr"></a>A functional calculus of physiological
+evidence (poster)</h3>
+
+<p>
+Thomas A Nielsen(1,2), Henrik Nilsson(2), Tom Matheson(1)
+<ul>
+<li>
+1. Department of Biology, Leicester University
+</li>
+<li>
+2. School of Computer Science, University of Nottingham
+</li>
+</ul>
+
+How should we best describe neuroscience experiments and simulations
+in order for them to be executed, analysed and communicated
+effectively? Currently, there are two options: as a configuration file
+for some generic experimental system, or as a program expressed in a
+conventional programming language. Configuration files tend to be easy
+to write and read, but are inflexible and only allow a narrow scope of
+experiments. Programs in conventional languages, on the other hand,
+are flexible, but hard to write and even harder to understand, thus
+making them a very poor fit for communicating the ideas of experiments
+and for formally reason about them. Here, we show that functional
+reactive programming offers a powerful formalism for
+neurophysiological experimentation: first, its concepts of signals and
+events are flexible enough to represent many physiological
+observations. Second, functions, signals and events are first-class
+entities allowing a high level of abstraction. For instance, signal
+transformers and event detectors can be composed within the language
+from higher-order functions. Third, by focusing on equations and eschewing
+side effects such as variable mutation and state, FRP is declarative, i.e.
+expressed in terms of what the essential idea of the experiment
+is as opposed to the mechanical details of how to carry out the
+experiment. This makes the descriptions much easier to understand, thus
+making them an effective tool for communicating experimental setups,
+and facilitates analysis. We demonstrate how signals, events and
+durations allow us to structure an experiment on visually evoked spike
+recordings from insects. We analyse these data with a hierarchical
+Bayesian model that uses all the recorded spikes rather than
+relying on point estimators such as averaging or histogram binning of
+spike times. Since temporal durations can be nested, the hierarchical
+models can be directly defined in terms of the reactive types we have
+introduced.
+</p>
+
+<a name="incfuk2010bibtex"></a>
+<pre>
+@Misc{Nielsen2010a,
+  author =	 "Nielsen, Thomas A. and Nilsson, Henrik and Matheson, Tom",
+  title =	 "A functional calculus of physiological evidence",
+  howpublished = "Poster presented at the International Neuroinformatics
+                  Coordinating Facility (INCF) UK Node Congress, Edinburgh,
+                  February 1 - 3, 2010",
+  month =	 feb,
+  year =	 2010
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="jfpvol20-5+6abstr">Journal of Functional Programming: Special
+Issue Dedicated to ICFP 2008</a></h3>
+
+<p>
+The 13th ACM SIGPLAN International Conference on Functional Programming (ICFP)
+was held in Victoria, British Columbia, Canada, in September 2008. Peter
+Thiemann chaired the program committee. After the conference, the authors of a
+selection of the presented papers were invited to submit extended versions of
+their work for this special issue of Journal of Functional Programming
+dedicated to ICFP 2008. All submitted papers were reviewed by at least three
+referees, including at least one expert, following the standard JFP
+procedures. In the end, four papers were accepted. These cover a broad range
+of topics and, taken together, we think they represent well the scope of ICFP
+2008.
+</p>
+
+<a name="jfpvol20-5+6bibtex"></a>
+<pre>
+@Proceedings{Thiemann2010,
+  editor =       "Peter Thiemann and Henrik Nilsson",
+  year =         2010,
+  month =        nov,
+  title =        "Journal of Functional Programming: Special Issue Dedicated 
+                  to ICFP 2008",
+  volume =       "20(5--6)"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="tfp2010abstr">Static balance checking for first-class modular
+systems of equations</a></h3>
+
+<p>
+Characterising a problem in terms of a system of equations is common to many
+branches of science and engineering. Due to their size, such systems are often
+described in a modular fashion by composition of individual equation system
+fragments. Checking the balance between the number of variables (unknowns) and
+equations is a common approach to early detection of mistakes that might
+render such a system unsolvable. However, current approaches to modular
+balance checking have a number of limitations. This paper investigates a more
+flexible approach that in particular makes it possible to treat equation
+system fragments as true first-class entities. The central idea is to record
+balance information in the type of an equation fragment. This information can
+then be used to determine if individual fragments are well formed, and if
+composing fragments preserves this property. The type system presented in this
+paper is developed in the context of Functional Hybrid Modelling (FHM). 
+However, the key ideas are in no way specific to FHM, but should be applicable
+to any language featuring a notion of modular systems of equations.
+</p>
+
+<a name="tfp2010bibtex"></a>
+<pre>
+@InProceedings{Capper2011,
+  author = 	 "John Joseph Capper and Henrik Nilsson",
+  title = 	 "Static Balance Checking for First-Class Modular Systems of
+                  Equations",
+  booktitle = 	 "Trends in Functional Programming: 11th International
+                  Symposium, TFP 2010, Norman, OK, USA, May 2010, 
+                  Revised Selected Papers",
+  editor =       "Rex Page and Zolt{\'{a}}n Horv{\'{a}}th
+                  and Vikt{\'{o}}ria Zs{\'{o}}k",
+  pages =	 "50--65",
+  year =	 2011,
+  volume =	 6546,
+  series =	 "Lecture Notes in Computer Science,
+  publisher =	 "Springer-Verlag",
+  isbn =         "Print: 978-3-642-22940-4; Online: 978-3-642-22941-1",
+  doi =          "10.1007/978-3-642-22941-1_4"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="eurosim2010abstr">Exploiting structural dynamism in Functional
+Hybrid Modelling for simulation of ideal diodes</a></h3>
+
+<p>
+Current main-stream non-casual modelling and simulation languages, like
+Modelica, are designed and implemented on the assumption that model causality
+remains fixed during simulation. This simplifies the language design and
+facilitates the generation of efficient simulation code. In particular,
+simulation code can be generated once and for all, at compile time. However,
+for hybrid models, the assumption of fixed causality is very limiting: there
+are many examples, including simple ones, that cannot be simulated. A
+half-wave rectifier with an ideal diode and an in-line inductor is one such
+example. Functional Hybrid Modelling is a new approach to non-causal modelling
+where models are first-class entities and structural dynamism is supported by
+switching among model configurations. Fixed causality is thus \emph{not}
+assumed. Continuous simulation remains efficient thanks to just-in-time
+generation of simulation code at structural changes and the use of a standard,
+industrial-strength solver. Re-generation of code at each structural change of
+course incurs an overhead, but this is typically modest. In this paper we
+demonstrate how Functional Hybrid Modelling makes it possible to simulate
+electrical circuits with ideal diodes in a straightforward manner. We consider
+both a half-wave rectifier and a significantly more challenging full-wave
+rectifier.
+</p>
+
+<a name="eurosim2010bibtex"></a>
+<pre>
+@InProceedings{Nilsson2010,
+  author = 	 "Henrik Nilsson and George Giorgidze",
+  title = 	 "Exploiting Structural Dynamism in {F}unctional {H}ybrid
+                  {M}odelling for Simulation of Ideal Diodes",
+  booktitle = 	 "Proceedings of the 7th EUROSIM Congress on Modelling and
+                  Simulation",
+  year =	 2010,
+  address =	 "Prague, Czech Republic",
+  month =	 sep,
+  publisher =	 "Czech Technical University Publishing House",
+  isbn =	 "978-80-01-04589-3"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="hosc2011abstr">Keeping calm in the face of change: Towards
+optimisation of FRP by reasoning about change</a></h3>
+
+<p>
+Functional Reactive Programming (FRP) is an approach to reactive programming
+where systems are structured as networks of functions operating on signals
+(time-varying values). FRP is based on the synchronous data-flow paradigm and
+supports both (an approximation to) continuous-time and discrete-time signals
+(hybrid systems).What sets FRP apart from most other languages for similar
+applications is its support for systems with dynamic structure and for
+higher-order reactive constructs.
+</p>
+
+<p>
+This paper contributes towards advancing the state of the art of FRP
+implementation by studying the notion of signal change and change propagation
+in a setting of structurally dynamic networks of n-ary signal functions
+operating on mixed continuous-time and discretetime signals. We first define
+an ideal denotational semantics (time is truly continuous) for this kind of
+FRP, along with temporal properties, expressed in temporal logic, of signals
+and signal functions pertaining to change and change propagation. Using this
+framework, we then show how to reason about change; specifically, we identify
+and justify a number of possible optimisations, such as avoiding recomputation
+of unchanging values. Note that due to structural dynamism, and the fact that
+the output of a signal function may change because time is passing even if the
+input is unchanging, the problem is significantly more complex than standard
+change propagation in networks with static structure.
+</p>
+
+<a name="hosc2011bibtex"></a>
+<pre>
+@Article{Sculthorpe2011b,
+  author = 	 "Neil Sculthorpe and Henrik Nilsson",
+  title = 	 "Keeping Calm in the Face of Change: Towards Optimisation of
+		  {FRP} by Reasoning about Change",
+  journal = 	 "Journal of Higher-Order and Symbolic Computation",
+  year = 	 2011,
+  volume =	 23,
+  number =	 2,
+  pages =	 "227--271",
+  issn =         "Print: 1388-3690; Electronic:1573-0557",
+  doi =          "10.1007/s10990-011-9068-x"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="tldi2012abstr">Towards a formal semantics for a structurally
+dynamic noncausal modelling language</a></h3>
+
+<p>
+Modelling and simulation languages are evolving rapidly to support modelling
+of systems of ever increasing size and complexity. A relatively recent
+development in the area of physical modelling is the noncausal modelling
+languages. They support a declarative, highly modular modelling approach,
+promoting the reuse of components. Modelica is a prime example of this class
+of languages. However, the mainstream representatives of this class of
+languages provide limited support for higher-order modelling and structurally
+dynamic systems. Moreover, the semantics of this class of languages remains a
+relatively unexplored area. Functional Hybrid Modelling (FHM) is a novel
+approach to noncausal, hybrid modelling that aims to address these concerns. 
+In this paper, we give a semantics to the discrete part of a simple FHM
+language expressed in dependent type theory. We use Normalisation by
+Evaluation to produce a type-preserving and terminating normalisation
+procedure, the latter property being particularly important for FHM as highly
+structurally dynamic systems are supported by computing new system
+configurations during simulation. Furthermore, our implementation has been
+carefully structured to allow continuous aspects of the semantics to be
+described separately, in whatever way is deemed appropriate, while retaining
+the ability to describe precisely how a system evolves in response to discrete
+events.
+</p>
+
+<a name="tldi2012bibtex"></a>
+<pre>
+@InProceedings{Capper2012,
+  author = 	 "John Joseph Capper and Henrik Nilsson",
+  title = 	 "Towards a Formal Semantics for a Structurally Dynamic
+                  Noncausal Modelling Language",
+  booktitle = 	 "Types in Language Design and Implementation",
+  pages =	 "39--50",
+  year =	 2012,
+  address =	 "Philadelphia, PA, USA",
+  month =	 jan,
+  publisher =	 "{ACM} Press",
+  isbn =         "978-1-4503-1120-5",
+  doi =          "10.1145/2103786.2103792"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="padl2012abstr">Node-Based Connection Semantics for Equation-Based
+Object-Oriented Modeling Languages</a></h3>
+
+<p>
+Declarative, Equation-Based Object-Oriented (EOO) modeling languages, like
+Modelica, support modeling of physical systems by composition of reusable
+component models. An important application area is modeling of cyber-physical
+systems. EOO languages typically feature a connection construct allowing
+component models to be assembled into systems much like physical components
+are. Different designs are possible. This paper introduces, formalizes, and
+validates an approach based on explicit nodes that expressly is designed to
+work for functional EOO languages supporting higher-order modeling. The
+paper also considers Modelica-style connections and explains why that design
+does not work for functional EOO languages, thus mapping out the design space
+</p>
+
+<a name="padl2012bibtex"></a>
+<pre>
+@InProceedings{Broman2012,
+  author=        "David Broman and Henrik Nilsson",
+  title =        "Node-Based Connection Semantics for Equation-Based
+                  Object-Oriented Modeling Languages",
+  booktitle =    "Proceedings of the Fourteenth International Symposium on
+                  {P}ractical {A}spects of {D}eclarative {L}anguages ({PADL}
+                  2012)",
+  series =       "Lecture Notes in Computer Science",
+  volume =       7149,
+  year =         2012,
+  pages =        "258--272", 
+  publisher =    "Springer"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="rsif2012abstr">A formal mathematical framework for physiological
+observations, experiments and analyses</a></h3>
+
+<p>
+Experiments can be complex and produce large volumes of heterogeneous data,
+which make their execution, analysis, independent replication and
+meta-analysis difficult. We propose a mathematical model for experimentation
+and analysis in physiology that addresses these problems. We show that
+experiments can be composed from time-dependent quantities, and be expressed
+as purely mathematical equations. Our structure for representing physiological
+observations can carry information of any type and therefore provides a
+precise ontology for a wide range of observations. Our framework is concise,
+allowing entire experiments to be defined unambiguously in a few equations. In
+order to demonstrate that our approach can be implemented, we show the
+equations that we have used to run and analyse two non-trivial experiments
+describing visually stimulated neuronal responses and dynamic clamp of
+vertebrate neurons. Our ideas could provide a theoretical basis for developing
+new standards of data acquisition, analysis and communication in
+neurophysiology.
+</p>
+
+<a name="rsif2012bibtex"></a>
+<pre>
+@Article{Nielsen2012,
+  author = 	 "Nielsen, Thomas A. and Nilsson, Henrik and Matheson, Tom",
+  title = 	 "A formal mathematical framework for physiological
+                  observations, experiments and analyses",
+  journal = 	 "Journal of The Royal Society Interface",
+  year = 	 2012,
+  volume =	 9,
+  number =	 70,
+  pages =	 "1040--1050",
+  month =	 may,
+  doi =          "10.1098/rsif.2011.0616"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="tfp2012abstr">Haskell gets argumentative</a></h3>
+
+<p>
+Argumentation theory is an interdisciplinary field studying how conclusions
+can be reached through logical reasoning. The notion of argument is completely
+general, including for example legal arguments, scientific arguments, and
+political arguments. Computational argumentation theory is studied in the
+context of artificial intelligence, and a number of computational
+argumentation frameworks have been put forward to date. However, there is a
+lack of concrete, high level realisations of these frameworks, which hampers
+research and applications at a number of levels. We hypothesise that the lack
+of suitable domain-specific languages in which to formalise argumentation
+frameworks is a contributing factor. In this paper, we present a formalisation
+of a particular computational argumentation framework, Carneades, as a case
+study with a view to investigate the extent to which functional languages are
+useful as a means to realising computational argumentation frameworks and
+reason about them.
+</p>
+
+<a name="tfp2012bibtex"></a>
+<pre>
+@Inproceedings{Gijzel2013a,
+  author =       "{\noopsort{Gijzel}}van Gijzel, Bas and Nilsson, Henrik",
+  title =        "{H}askell Gets Argumentative",
+  booktitle =    "Trends in Functional Programming: 13th International
+                  Symposium, TFP 2012, St Andrews, UK, June 2012, Revised
+                  Selected Papers",
+  pages =        "215--230",
+  year  =        2013,
+  volume =	 7829,
+  series =       "Lecture Notes in Computer Science",
+  publisher =    "Springer"
+}
+</pre>
+
+
+<p><hr></p>
+
+<h3><a name="eoolt2013abstr">Proceedings of the 5th International Workshop on
+Equation-Based Object-Oriented Modelling Languages and Tools
+(EOOLT 2014)</a></h3>
+
+<p>
+It is my great pleasure to welcome you to EOOLT 2013, the 5th International
+Workshop on Equation-Based Object-Oriented Languages and Tools! Equation-based
+modeling and simulation languages with hybrid capabilities (that is,
+supporting both continuous-time and discrete-time aspects) enable high-level
+reuse and integrated modeling capabilities for physical systems, embedded
+systems software, as well as their combination. They thus offer considerable
+advantages for many application areas, including complex cyber-physical
+systems. Consequently, this class of languages has gained significant and
+increasing attention over the last decade. Examples include Modelica, SysML,
+VHDL-AMS, and Simulink/Simscape. EOOLT is a forum for researchers with
+interests in all aspects of equation-based modeling languages and their
+supporting tools, including design, implementation, open issues limiting their
+expressiveness or usefulness, novel applications, and their relation to other
+approaches broadly addressing similar needs, such as synchronous and
+actor-oriented languages.
+</p>
+
+<a name="eoolt2013bibtex"></a>
+<pre>
+@Proceedings{Nilsson2013,
+  title =        "Proceedings of the 5th International Workshop on
+                  {E}quation-Based {O}bject-{O}riented Modelling {L}anguages
+                  and {T}ools ({EOOLT} 2013)",
+  year =         2013,
+  editor =       "Henrik Nilsson",
+  number =       84,
+  series =       "Link{\"o}ping Electronic Conference Proceedings",
+  address =      "Nottingham, UK",
+  month =        apr,
+  publisher =    "Link{\"o}ping University Electronic Press",
+  annote =       "ISSN (print): 1650-3686; ISSN (online): 1650-3740;
+                  ISBN (print): 978-91-7519-621-3;
+                  ISBN (online): 978-91-7519-617-6"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="ifl2013abstr">Towards a framework for the implementation and
+verification of translations between argumentation models</a></h3>
+
+<p>
+Argumentation theory is concerned with studying the nature of arguments in the
+most general sense, including for example scientific, legal, or even
+completely informal arguments. There are two main approaches. Abstract
+argumentation is completely generic, making no specific assumptions about the
+structure of arguments. Structured argumentation, on the other hand, does
+adopt a predetermined structure pertaining to the domain of discourse. 
+Structured argumentation models have seen a recent surge, with new
+developments in both general frameworks and more domain-specific approaches. 
+Yet, in contrast to the abstract approach, there is a distinct lack of
+implementations of structured argumentation models. We believe a key reason
+for this is the lack of suitable implementation frameworks. Building on
+previous work, this paper attempts to tackle this problem by applying
+functional programming techniques. We show how to implement one structured
+argumentation framework (Carneades) and one abstract framework (Dung) in this
+way, and then proceed to show how to implement a translation from the former
+into the latter, one of the first such implementations. Ultimately, we hope
+our work will evolve into a domain-specific language for implementation of
+argumentation frameworks. But even at this stage, the paper demonstrates the
+benefits of functional programming as a tool for argumentation theory.
+</p>
+
+<a name="ifl2013bibtex"></a>
+<pre>
+@Inproceedings{Gijzel2013b,
+  author =       "{\noopsort{Gijzel}}van Gijzel, Bas and Nilsson, Henrik",
+  title =        "Towards a framework for the implementation and verification
+		  of translations between argumentation models",
+  booktitle =    "Proceedings of the 25th symposium on {I}mplementation
+                  and {A}pplication of {F}unctional {L}anguages ({IFL} 2013)",
+  pages =        "93--103",
+  year =         2013,
+  month =        aug,
+  publisher =    "{ACM}"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="hosc2013abstr">Structural types for systems of equations: Type
+refinements for structurally dynamic first-class modular systems of equations
+</a></h3>
+
+<p>
+Characterising a problem in terms of a system of equations is common
+to many branches of science and engineering. Due to their size, such
+systems are often described in a modular fashion by composition of
+individual equation system fragments. Checking the balance between the
+number of variables (unknowns) and equations is a common approach to
+early detection of mistakes that might render such a system
+unsolvable. However, current approaches to modular balance checking
+have a number of limitations. This paper investigates a more flexible
+approach that makes it possible to treat equation system fragments as
+true first-class entities. Furthermore, the approach handles so-called
+structurally dynamic systems, systems whose behaviour changes
+discretely and abruptly over time. The central idea is to record
+balance information in the type of an equation fragment. This
+information can then be used to determine if individual fragments are
+well formed, and if composing fragments preserves this property. The
+type system presented in this paper is developed in the context of
+Functional Hybrid Modelling (FHM). However, the key ideas are in no
+way specific to FHM, but should be applicable to any language
+featuring a notion of modular systems of equations, including systems
+with first-class components and structural dynamism.
+</p>
+
+<a name="hosc2013bibtex"></a>
+<pre>
+@Article{Capper2013,
+  author = 	 "John Joseph Capper and Henrik Nilsson",
+  title = 	 "Structural types for systems of equations: 
+                  Type refinements for structurally dynamic first-class
+                  modular systems of equations",
+  journal = 	 "Higher-Order and Symbolic Computation",
+  year = 	 2013,
+  month =	 oct,
+  issnprint =    "1388-3690",
+  issnonline =   "1573-0557",
+  doi =          "10.1007/s10990-013-9099-6"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="patat2014abstr">An Investigation Into the Use of Haskell for
+Dynamic Programming (Extended Abstract)</a></h3>
+
+<p>
+This paper investigates the potential benefits offered by adopting a
+declarative approach, as embodied by modern functional languages with mature
+implementations, for prototyping algorithms for solving combinatorial
+optimisation problems. For this class of problems there are usually many
+different options for the core algorithms, supporting data structures and
+other implementation aspects. Thus tools that allow different alternatives to
+be tried out quickly, focusing on the essence of the problem, and as
+unencumbered as possible by implementation detail, would be very useful. As a
+case study , we consider dynamic programming algorithms. These have many uses
+in scheduling and timetabling: either directly, or as a component within other
+methods such as column generation. Our findings suggest that off-the-shelf,
+leading functional languages can indeed offer a range of compelling advantages
+in this particular problem domain, while yielding a performance that is
+adequate for verifying and evaluating the implemented algorithms as such.
+</p>
+
+<a name="patat2014bibtex"></a>
+<pre>
+@InProceedings{McGillicuddy2014a,
+  author = 	 "David McGillicuddy and Parkes, Andrew J. and Henrik Nilsson",
+  title = 	 "An Investigation Into the Use of {H}askell for Dynamic
+                  Programming ({E}xtended {A}bstract)",
+  booktitle = 	 "Proceedings of the 10th International Conference on the
+                  {P}ractice and {T}heory of {A}utomated {T}imetabling
+                  ({PATAT} 2014)",
+  editor =       "{\"O}zcan, Ender and Burke, Edmund K. and McCollum, Barry",
+  year =	 2014,
+  pages =        "508--511",
+  address =	 "York, UK",
+  month =	 aug,
+  annote =       "ISBN: 978-0-9929984-0-0"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="farm2014abstr">Proceedings of the 2nd ACM SIGPLAN International
+Workshop on Functional Art, Music, Modeling & Design (FARM 2014)</a></h3>
+
+<p>
+It is our great pleasure to welcome you to FARM 2014, the 2nd ACM SIGPLAN
+International Workshop on Functional Art, Music, Modelling and Design! FARM
+gathers together people from across disciplines who are harnessing functional
+techniques in the pursuit of creativity and expression. Functional Programming
+has emerged as a mainstream software development paradigm, and its artistic
+and creative use is booming. A growing number of software toolkits, frameworks
+and environments for art, music and design now employ functional programming
+languages and techniques. FARM is a forum for exploration and critical
+evaluation of these developments, for example
+</p>
+
+<a name="farm2014bibtex"></a>
+<pre>
+@Proceedings{Nilsson2014c,
+  title = 	 "Proceedings of the 2nd {ACM SIGPLAN} {I}nternational
+                  {W}orkshop on {F}unctional {A}rt, {M}usic, {M}odeling \&
+                  {D}esign ({FARM} 2014)",
+  year = 	 2014,
+  editor =	 "Henrik Nilsson and Alex McLean and Mike Sperber",
+  address =	 "Gothenburg, Sweden",
+  month =	 sep,
+  publisher =	 "{ACM} {P}ress"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="comma2014abstr">A principled approach to the implementation of
+argumentation models</a></h3>
+
+<p>
+Argumentation theory combines philosophical concepts and computational models
+to deliver a practical approach to reasoning that handles uncertain
+information and possibly conflicting viewpoints. This paper focuses on the
+structured approach to argumentation that incorporates domain specific
+knowledge and argumentation schemes. There is a lack of implementations and
+implementation methods for most structured models. This paper shows how taking
+a principled approach, using the programming language Haskell, helps
+addressing this problem. We construct a framework for developing structured
+argumentation models and translations between models (given
+intertranslatability of models). We furthermore provide a methodology to
+quickly test and formally prove desirable properties of such implementations
+using a theorem prover. We demonstrate our approach on the Carneades
+argumentation model and Dung's abstract argumentation frameworks, implementing
+both the models and a translation from Carneades into AFs. We then provide
+implementations of correspondence properties and an initial formalisation of
+Dung's AFs into a theorem prover. The final result is a verified pipeline from
+the structured model Carneades into existing efficient SAT-based
+implementations of Dung's AFs
+</p>
+
+<a name="comma2014bibtex"></a>
+<pre>
+@Inproceedings{Gijzel2014,
+  author =       "{\noopsort{Gijzel}}van Gijzel, Bas and Nilsson, Henrik",
+  title =        "A principled approach to the implementation of argumentation
+                  models",
+  booktitle =    "Proceedings of the {F}ifth {I}nternational {C}onference on
+                  {C}omputational {M}odels of {A}rgument ({COMMA} 2014)",
+  address =      "Dundee, Scotland",
+  month =        sep,
+  year =         2014,
+  pages =        "293--300",
+  editor =       "Parsons, Simon and Oren, Nir and Reed, Chris and
+                  Cerutti, Federico",
+  volume =       266,
+  series =       "Frontiers in Artificial Intelligence and Applications",
+  publisher =    "IOS Press",
+  doi =          "10.3233/978-1-61499-436-7-293"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="ppdp2014abstr">Declarative Game Programming (Distilled
+Tutorial)</a></h3>
+
+<p>
+Video games are usually not programmed very declaratively. There are a number
+of reasons for this, from low-level efficiency concerns, via the nature of
+commonly employed programming languages, libraries, and frameworks, to the
+conceptual nature of such games, with state and effects being omnipresent.
+However, by structuring games in terms of time-varying values and
+transformations on such values, it is possible to design and implement video
+games in a more declarative way. This tutorial shows how this can be achieved
+through Functional Reactive Programming (FRP) by implementing the high-level
+parts of a 2D game akin to the classical game Breakout. The tutorial uses the
+Haskell-embedded FRP implementation Yampa and bindings to SDL (Simple
+DirectMedia Layer) to obtain game play and visual standards typical of the 2D
+genre; for example, as seen in many currently popular games for smartphones
+and tablets.
+</p>
+
+<a name="ppdp2014bibtex"></a>
+<pre>
+@InProceedings{Nilsson2014a,
+  author = 	 "Henrik Nilsson and Ivan Perez",
+  title = 	 "Declarative Game Programming ({D}istilled {T}utorial)",
+  booktitle = 	 "Proceedings of the 16th International Symposium on
+                  {P}rinciples and {P}ractice of {D}eclarative {P}rogramming
+                  ({PPDP} 2014)",
+  year =	 2014,
+  address =	 "Canterbury, UK",
+  month =	 sep,
+  publisher =	 "{ACM} {P}ress"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="eoolt2014abstr">Declarative Modelling for Bayesian Inference by
+Shallow Embedding</a></h3>
+
+<p>
+A common problem across science and engineering is that aspects of models have
+to be estimated from observed data. An instance of this familiar to control
+engineers is system identification. Bayesian inference is a principled way to
+estimate parameters: exploiting Bayes~ theorem, an equational probabilistic
+model is &ldquo;inverted&rdquo;, yielding a probability distribution for the
+unknown parameters given the observations. This paper presents Ebba, a
+declarative language for proba- bilistic modelling where models can be used
+both &ldquo;forwards&rdquo; for probabilistic computation and
+&ldquo;backwards&rdquo; for parameter estimation. The novel aspect of Ebba is
+its implementation: a shallow, arrows-based, embedding. This provides a clear
+semantical account and ensures that only models that support estimation can be
+expressed. As arrow-like notions have proved useful in modelling dynamical
+systems, this might also suggest an approach to an integrated language for
+modelling dynamical systems and parameter estimation
+</p>
+
+<a name="eoolt2014bibtex"></a>
+<pre>
+@InProceedings{Nilsson2014b,
+  author = 	 "Henrik Nilsson and Nielsen, Thomas A.",
+  title = 	 "Declarative Modelling for {B}ayesian Inference by Shallow
+                  Embedding",
+  booktitle = 	 "Proceedings of the 6st International Workshop on
+                  Equation-Based Object-Oriented Modeling Languages and Tools
+                  ({EOOLT} 2014)",
+  pages =        "39--42",
+  year =	 2014,
+  address =	 "Berlin, Germany",
+  month =	 oct,
+  publisher =	 "{ACM} {P}ress",
+  doi =	         "10.1145/2666202.2666208"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="haskell2015abstr">Bridging the GUI gap with reactive values and
+relations</a></h3>
+
+<p>
+There are at present two ways to write GUIs for functional code. One is to use
+standard GUI toolkits, with all the benefits they bring in terms of feature
+completeness, choice of platform, conformance to platform-specific
+look-and-feel, long-term viability, etc. However, such GUI APIs mandate an
+imperative programming style for the GUI and related parts of the application. 
+Alternatively, we can use a functional GUI toolkit. The GUI can then be
+written in a functional style, but at the cost of foregoing many advantages of
+standard toolkits that often will be of critical importance. This paper
+introduces a light-weight framework structured around the notions of reactive
+values and reactive relations . It allows standard toolkits to be used from
+functional code written in a functional style. We thus bridge the gap between
+the two worlds, bringing the advantages of both to the developer. Our
+framework is available on Hackage and has been been validated through the
+development of non-trivial applications in a commercial context, and with
+different standard GUI toolkits.
+</p>
+
+<a name="haskell2015bibtex"></a>
+<pre>
+@InProceedings{Perez2015b,
+  author = 	 "Ivan Perez and Henrik Nilsson",
+  title = 	 "Bridging the {GUI} Gap with Reactive Values and Relations",
+  booktitle =	 "Proceedings of the 8th {ACM SIGPLAN} Symposium on {H}askell
+		  ({H}askell'15)",
+  pages =        "47--58",
+  year =	 2015,
+  editor =       "Ben Lippmeier",
+  address =      "Vancouver, Canada",
+  publisher =	 "{ACM}",
+  doi =          "10.1145/2804302.2804316"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="farm2015abstr">Proceedings of the 3rd ACM SIGPLAN International
+Workshop on Functional Art, Music, Modeling & Design (FARM 2015)</a></h3>
+
+<p>
+There is long history of interplay between mathematics and arts. This is
+illustrated, among many other examples, by Escher's physical paradoxes and
+Xenakis' geometrical music. In the last decades, the arrival of computers have
+have helped developing these connections on an unprecedented scale: never
+before could abstract ideas so easily be turned into effective realizations.
+However, even creative users have classical needs in front of computers:
+accessibility, efficiency, reliability, reusability, to name but a few.
+</p>
+
+<p>
+Functional programming offers a unique combination of abstract
+mathematical elegance and efficient computerized rendering. It 
+allows, more so than any other programming approach, to set up bridges
+between artistic concepts and effective experiments, bridges between
+creative methodologies and simple user interfaces, bridges between
+free inspirations and robust realizations.
+</p>
+
+<p>
+By gathering researchers, practitioners, artists, designers and any others
+interested, the ACM Workshop on Functional Art, Music, Modeling, and
+Design, or, as we prefer to say, the FARM, aims at developing this
+interdisciplinary field. Work in this challenging area has already led
+to new language design, abstraction techniques, and execution models,
+as well as the use of old ideas in new, novel, and surprising ways. 
+</p>
+
+<p>
+Rigorous programming and artistic creativity can be combined efficiently, as
+brilliantly demonstrated all along his carrier by our colleague, friend, and
+FARM co-founder Paul Hudak, who sadly passed away earlier this year. Keeping
+the FARM active, we wish to share ideas, to look for common ground, and to
+encourage more activity. Through FARM we also hope to legitimize work in the
+field and facilitate potential collaboration among the participants.
+</p>
+
+<a name="farm2015bibtex"></a>
+<pre>
+@Proceedings{Janin2015a,
+  title = 	 "Proceedings of the 3rd {ACM SIGPLAN} {I}nternational
+                  {W}orkshop on {F}unctional {A}rt, {M}usic, {M}odeling \&
+                  {D}esign ({FARM} 2015)",
+  year = 	 2015,
+  editor =	 "David Janin and Henrik Nilsson",
+  address =	 "Vancouver, BC, Canada",
+  month =	 sep,
+  publisher =	 "{ACM} {P}ress"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="ifl2016abstr"></a>Polymonad programming in Haskell</h3>
+
+<p>
+Polymonads were recently introduced by Hicks et al. as a unified approach to 
+programming with different notions of monads. Their work was mainly focussed 
+on foundational aspects of the approach. In this article, we show how to 
+incorporate the notion of polymonads into Haskell, which is the first time
+this has been done in a full-scale language. In particular, we show 
+how polymonads can be represented in Haskell, give a justification of the 
+representation through proofs in Agda, and provide a plugin for the 
+Glasgow Haskell Compiler (GHC) that enables their use in practice. Finally, 
+we demonstrate the utility of our system by means of examples concerned with 
+session types and the parameterized effect monad. This work provides a common 
+representation of a number of existing approaches to generalized 
+monads in Haskell.
+</p>
+
+<a name="ifl2016bibtex"></a>
+<pre>
+@InProceedings{Bracker2016a,
+  author =       "Jan Bracker and Henrik Nilsson",
+  title =        "Polymonad Programming in {H}askell",
+  booktitle =    "Proceedings of the 27th symposium on {I}mplementation
+                  and {A}pplication of {F}unctional {L}anguages ({IFL} 2015)",
+  year =         2016,
+  pages =        "3:1--3:12",
+  address =      "Koblenz, Germany",
+  publisher =    "ACM",
+  isbn =         "978-1-4503-4273-5",
+  doi =          "10.1145/2897336.2897340",
+  url =          "http://doi.acm.org/10.1145/2897336.2897340"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="wrr2016abstr"></a>Tracking tracer motion in a 4-D electrical
+resistivity tomography experiment</h3>
+
+<p>
+A new framework for automatically tracking subsurface tracers in electrical
+resistivity tomography (ERT) monitoring images is presented. Using computer
+vision and Bayesian inference techniques, in the form of a Kalman filter, the
+trajectory of a subsurface tracer is monitored by predicting and updating a
+state model representing its movements. Observations for the Kalman filter are
+gathered using the maximally stable volumes algorithm, which is used to
+dynamically threshold local regions of an ERT image sequence to detect the
+tracer at each time-step. The application of the framework to the results of
+2-D and 3-D tracer monitoring experiments show that the proposed method is
+effective for detecting and tracking tracer plumes in ERT images in the
+presence of noise, without intermediate manual intervention.
+</p>
+
+<a name="wrr2016bibtex"></a>
+<pre>
+@Article{Ward2016a,
+  author =       "Ward, Wil O. C. and Wilkinson, Paul B.
+                  and Chambers, Jon E. and Nilsson, Henrik
+                  and Kuras, Oliver and Bai, Li",
+  title =        "Tracking tracer motion in a {4-D} electrical resistivity
+                  tomography experiment",
+  journal =      "Water Resources Research",
+  year =         2016,
+  volume =	 52,
+  number =	 5,
+  pages =        "4078--4094",
+  month =        may,
+  issn =         "1944-7973",
+  doi =          "10.1002/2015WR017958",
+  url =          "http://dx.doi.org/10.1002/2015WR017958"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="haskell2016aabstr"></a>Supermonads: One notion to bind them
+all</h3>
+
+<p>
+Several popular generalizations of monads have been implemented in Haskell.
+Unfortunately, because the shape of the associated type constructors do not
+match the standard Haskell monad interface, each such implementation provides
+its own type class and versions of associated library functions. Furthermore,
+simultaneous use of different monadic notions can be cumbersome as it in
+general is necessary to be explicit about which notion is used where.
+In this paper we introduce <i>supermonads</i>: an encoding of monadic notions
+that captures several different generalizations along with a version of the
+standard library of monadic functions that work uniformly with all of them. As
+standard Haskell type inference does not work for supermonads due to their
+generality, our supermonad implementation is accompanied with a language
+extension, in the form of a plugin for the Glasgow Haskell Compiler (GHC),
+that allows type inference for supermonads, obviating the need for manual
+annotations.
+</p>
+
+<a name="haskell2016abibtex"></a>
+<pre>
+@InProceedings{Bracker2016b,
+  author =       "Jan Bracker and Henrik Nilsson",
+  title =        "Supermonads: One Notion to Bind Them All",
+  booktitle =    "Proceedings of the 9th {ACM SIGPLAN} Symposium on {H}askell
+		  ({H}askell'16)",
+  year =         2016,
+  pages =        "158--169",
+  month =        sep,
+  address =      "Nara, Japan",
+  publisher =    "{ACM}",
+  isbn =         "978-1-4503-4434-0",
+  doi =          "10.1145/2976002.2976012"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="haskell2016babstr"></a>Functional reactive programming,
+refactored</h3>
+
+<p>
+Functional Reactive Programming (FRP) has come to mean many things. Yet,
+scratch the surface of the multitude of realisations, and there is great
+commonality between them. This paper investigates this commonality, turning it
+into a mathematically coherent and practical FRP realisation that allows us to
+express the functionality of many existing FRP systems and beyond by providing
+a minimal FRP core parameterised on a monad. We give proofs for our
+theoretical claims and we have verified the practical side by benchmarking a
+set of existing, non-trivial Yampa applications running on top of our new
+system with very good results.
+</p>
+
+<a name="haskell2016bbibtex"></a>
+<pre>
+@InProceedings{Perez2016a,
+  author =       "Ivan Perez and Manuel B{\"a}renz and Henrik Nilsson",
+  title =        "Functional Reactive Programming, Refactored",
+  booktitle =    "Proceedings of the 9th {ACM SIGPLAN} Symposium on {H}askell
+		  ({H}askell'16)",
+  year =         2016,
+  month =        sep,
+  pages =        "33--44",
+  address =      "Nara, Japan",
+  publisher =    "{ACM}",
+  isbn =         "978-1-4503-4434-0",
+  doi =          "10.1145/2976002.2976010"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="techrep2016abstr"></a>The Arpeggigon: Declarative
+Programming of A Full-Fledged Musical Application</h3>
+
+<p>
+There are many systems and languages for music that essentially are
+declarative, often following the synchronous dataflow paradigm. As these
+tools, however, are mainly aimed at artists, their application focus tends to
+be narrow and their usefulness as general purpose tools for developing musical
+applications limited, at least if one desires to stay declarative. This paper
+demonstrates that Functional Reactive Programming (FRP) in combination with
+Reactive Values and Relations (RVR) is one way of addressing this gap. The
+former, in the synchronous dataflow tradition, aligns with the temporal and
+declarative nature of music, while the latter allows declarative interfacing
+with external components as needed for full-fledged musical applications. The
+paper is a case study around the development of an interactive cellular
+automaton for composing groove-based music. It illustrates the interplay
+between FRP and RVR as well as programming techniques and examples generally
+useful for musical, and other time-aware, interactive applications.
+</p>
+
+<a name="techrep2016bibtex"></a>
+<pre>
+@TechReport{Nilsson2016b,
+  author =       "Henrik Nilsson and Guerric Chupin",
+  title =        "The {A}rpeggigon: Declarative Programming of A Full-Fledged
+                  Musical Application",
+  institution =  "University of Nottingham",
+  year =         2016,
+  month =        nov,
+  note =         "\verb!http://eprints.nottingham.ac.uk/38657!"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="padl2017abstr"></a>Funky Grooves: Declarative
+Programming of A Full-Fledged Musical Application</h3>
+
+<p>
+There are many systems and languages for music that essentially are
+declarative, often following the synchronous dataflow paradigm. As these
+tools, however, are mainly aimed at artists, their application focus tends to
+be narrow and their usefulness as general purpose tools for developing musical
+applications limited, at least if one desires to stay declarative. This paper
+demonstrates that Functional Reactive Programming (FRP) in combination with
+Reactive Values and Relations (RVR) is one way of addressing this gap. The
+former, in the synchronous dataflow tradition, aligns with the temporal and
+declarative nature of music, while the latter allows declarative interfacing
+with external components as needed for full-fledged musical applications. The
+paper is a case study around the development of an interactive cellular
+automaton for composing groove-based music.
+</p>
+
+<a name="padl2017bibtex"></a>
+<pre>
+@InProceedings{Nilsson2017a,
+  author =       "Henrik Nilsson and Guerric Chupin",
+  title =        "Funky Grooves: Declarative Programming of Full-Fledged
+                 Musical Applications",
+  booktitle =    "19th International Symposium on Practical Aspects of
+                 Declarative Languages (PADL 2017)",
+  pages =        "163--172",
+  year =         2017,
+  editor =       "Yuliya Lierler and Walid Taha",
+  volume =       10137,
+  series =       "Lecture Notes in Computer Science",
+  address =      "Paris",
+  month =        jan,
+  publisher =    "Springer",
+  isbn =         "ISBN 978-3-319-51675-2",
+  doi =          "10.1007/978-3-319-51676-9\_11"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="icfp2017abstr"></a>Testing and Debugging Functional Reactive
+Programming</h3>
+
+<p>
+Many types of interactive applications, including video games, raise
+particular challenges when it comes to testing and debugging. Reasons include
+de-facto lack of reproducibility and difficulties of automatically generating
+suitable test data. This paper demonstrates that certain variants of
+Functional Reactive Programming (FRP) implemented in pure functional languages
+can mitigate such difficulties by offering referential transparency at the
+level of whole programs. This opens up for a multi-pronged approach for
+assisting with testing and debugging that works across platforms, including
+assertions based on temporal logic, recording and replaying of runs (also
+from deployed code), and automated random testing using QuickCheck. 
+The approach has been validated on real, non-trivial games implemented
+in the FRP system Yampa through a tool providing a convenient Graphical 
+User Interface that allows the execution of the code under scrutiny to
+be controlled, moving along the execution time line, and pin-pointing of
+violations of assertions on PCs as well as mobile platforms.
+</p>
+
+<a name="icfp2017bibtex"></a>
+<pre>
+@Article{Perez2017a,
+  author =       "Ivan Perez and Henrik Nilsson",
+  title =        "Testing and Debugging Functional Reactive Programming",
+  journal =      "Proceedings {ACM} Programming Languages",
+  year =         2017,
+  volume =       1,
+  number =       1,
+  pages =        "Article 2, 27 pages",
+  month =        sep,
+  doi =          "https://doi.org/http://dx.doi.org/10.1145/3110246",
+  annote =       "2475-1421/2017/9-ART2"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="eoolt2017abstr">Abstract modelling: towards a typed declarative
+language for the conceptual modelling phase</a></h3>
+
+<p>
+Modelling languages have become an indispensable aid to practising engineers.
+They offer modelling at a high level of abstraction backed by features such as
+automatic simulation and even derivation of production code. However, partly
+because of the offered automation, modelling languages are limited to specific
+application areas: to our knowledge, no modelling language supports
+mathematical physics modelling in its full generality. Yet, when developing
+large, coupled, multiphysics models, there is a clear need for such an
+overarching language to ensure the coherence of the model as a whole, even if
+submodels ultimately are realised in modelling languages targeting specific
+domains or are pre-existing. In prior work, it was demonstrated how treating
+models as abstract objects in category theory offers one way to ensure
+coherence of key aspects for composite models. Type theory offers
+complementary approaches. This paper presents a first step towards a language
+supporting abstract modelling in mathematical physics with the aim of ensuring
+coherence of coupled multiphysics models early in the design process. To that
+end, following the approach of Functional Hybrid Modelling (FHM), we discuss
+how a language supporting quite general modelling equations can be realised as
+an embedding in Haskell. The appeal of the proposed approach is that only very
+few core concepts are needed, which greatly simplifies the semantics. The
+appeal of an embedded realisation as such is that much of the language
+infrastructure comes for free.
+</p>
+
+<a name="eoolt2017bibtex"></a>
+<pre>
+@InProceedings{Legatiuk2017a,
+  author =       "Dmitrii Legatiuk and Henrik Nilsson",
+  title =        "Abstract modelling: towards a typed declarative language
+		  for the conceptual modelling phase",
+  booktitle = 	 "Proceedings of the 8st International Workshop on
+                  Equation-Based Object-Oriented Modeling Languages and Tools
+                  ({EOOLT} 2017)",
+  pages =        "61--64",
+  year =         2017,
+  address =      "We{\ss}ling, Germany",
+  month =        dec,
+  publisher =    acm,
+  doi =          "10.1145/3158191.3158202"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="jfp2018abstr">Supermonads and superapplicatives</a></h3>
+
+<p>
+Monads, applicative functors, and related notions of computation have been
+instrumental both for the theoretical study of effects and for practical
+programming with effects in a pure setting. Some languages, notably Haskell,
+even provide dedicated support for programming with such notions. Over time,
+practical needs as well as theoretical investigations have given rise to a
+number of generalisations. Examples include constrained and indexed monads. 
+These generalisations may seem modest and obvious, but there are significant
+differences in terms of the categorical foundations. Further, language
+support is lacking, leading to mutually incompatible implementations with
+negative consequences for practical use. This raises the question exactly how
+these generalisations are related, and if there are unifying notions that can
+serve as a common foundation for implementation.
+In earlier work, as a partial answer, we introduced <i>supermonads</i>,
+a unifying notion for several popular generalisations of monads, along with
+language support for Haskell in the form of libraries and a type-checker
+extension. Building on that, this paper aims to provide a comprehensive answer
+by also introducing <i>superapplicatives</i>, extending the language
+support accordingly, and providing a detailed study of the categorical
+foundations for the various notions, culminating in unifying notions
+that show that supermonads and superapplicatives rest on sound theoretical
+foundations. The paper further provides examples and case
+studies illustrating the use of supermonads and superapplicatives in practice.
+</p>
+
+<a name="jfp2018bibtex"></a>
+<pre>
+@Article{Bracker2018a,
+  author =       "Jan Bracker and Henrik Nilsson",
+  title =        "Supermonads and superapplicatives",
+  journal =      jfp,
+  year =         2018,
+  note =         "Under consideration, submitted 12 December 2017"
+}
+</pre>
+
+<p><hr></p>
+
+<h3><a name="stancon2018abstr">Getting more out of Stan: some ideas from the
+Haskell bindings</a></h3>
+
+<p>
+Stan has emerged as the most practical and widely used probabilistic
+programming language for Bayesian computation. As the capabilities within Stan
+for further processing of results from probabilistic computations is limited,
+Stan is often used from a host language such as R or Python through
+bindings forming an API. However, the structure of these bindings is such that
+it for many purposes is necessary to replicate the probabilistic model twice:
+once in Stan for inference, and once in the host language for simulation and
+prediction. This duplication of work is undesirable for many reasons. This
+paper investigates a different approach to structuring Stan bindings that
+mitigating this problem. The central idea is a first-class representation of
+the Stan model in the host language, allowing models to be constructed
+programmatically and then used in different ways. The paper demonstrates the
+ideas in the context of Haskell, but the ideas are applicable to most
+host languages of interest.
+</p>
+
+<a name="stancon2018bibtex"></a>
+<pre>
+@InProceedings{Nielsen2018,
+  author =       "Nielsen, Thomas A. and Dominic Steinitz and Henrik Nilsson",
+  title =        "Getting more out of {S}tan: some ideas from the
+                  {H}askell bindings",
+  booktitle =    "StanCon 2018",
+  year =         2018,
+  address =      "Helsinki, Finland",
+  month =        aug
+}
+</pre>
+
+<p><hr><i>Last updated 2 October 2018.</i><p>
+
+</body>
+
+</html>
