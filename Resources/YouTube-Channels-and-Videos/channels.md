@@ -60,3 +60,9 @@ https://www.youtube.com/user/TheCatsters
 
 ## Dr. Martin J.M. Codrington
   - Channel: https://www.youtube.com/c/MJMCodrington/feed
+
+
+## Topos Channel
+
+### Programming with Categories Series
+   - List: https://www.youtube.com/playlist?list=PLhgq-BqyZ7i7MTGhUROZy3BOICnVixETS
