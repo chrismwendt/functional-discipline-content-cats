@@ -1,0 +1,28 @@
+name: "Check Doc Integration"
+
+on:
+  pull_request:
+    paths-ignore:
+    - 'docs/**'
+    - 'templates/**'
+    - '**.md'
+
+jobs:
+  check-doc-integration:
+
+    env:
+      BASEDIR: ${{github.workspace}}/..
+      JAVA_OPTS: -Xms512m -Xmx1024m
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Check Doc Integration
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+        ./scripts/check-doc-integration.sh $BRANCH_NAME

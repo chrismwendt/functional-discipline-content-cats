@@ -1,0 +1,10 @@
+{
+  "extends": ["szh"],
+  "rules": {
+    "no-use-before-define": 0,
+
+    "fp/no-mutating-assign": 0,
+    "fp/no-rest-parameters": 0,
+    "fp/no-unused-expression": 1
+  }
+}

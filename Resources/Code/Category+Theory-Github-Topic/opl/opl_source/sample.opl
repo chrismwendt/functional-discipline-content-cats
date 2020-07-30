@@ -1,0 +1,46 @@
+require
+  algebra prop
+  define foo : prop @ A
+import lib1 only box A
+import lib2 
+  apply box boxy := A
+  only box B
+import lib3 qualified apply
+  algebra X := prop
+provide
+  define P : prop @ A
+where
+
+module X :=
+  import lib3
+    apply define foo := A
+    only box B
+  where
+    box Foo
+    box Foo := int =[]= bool
+end
+
+module Y :=
+  box Bar
+  box Bar := bool bool =[]= bool bool
+end
+
+box A := int bool =[]= int bool
+
+define W : A A -> int bool =[]= int bool
+define W := wiring
+  internal
+    i1 : (int bool =[]= int bool)[x y =[]= a b] plug x <- i2.a, y <- e.y
+    i2 : A[x y =[]= a b] plug x <- e.x, y <- i2.b
+  external
+    e : A[x y =[]= a b] plug a <- i1.a, b <- i2.b
+end
+
+define C : A A A A -> A
+define C := W[l r => r l] <- W W
+
+define P : prop @ A
+define P := prop C <- foo foo foo foo
+
+define UP := prop C <- foo _ foo _
+define P' := prop C <- foo _ foo _ <- foo foo

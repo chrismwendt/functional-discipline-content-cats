@@ -1,0 +1,47 @@
+\usepackage{xcolor, colortbl}
+\usepackage{booktabs}
+\usepackage[font=small,labelfont=bf,justification=centering]{caption}
+
+\setlength{\parskip}{0.9em}
+\renewcommand{\baselinestretch}{1.3}
+
+\arrayrulecolor{white}
+
+\lstset{%
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{black!10},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=true,
+  breakautoindent=true,
+  linewidth=\textwidth,
+  commentstyle=\color{black!12},
+  keywordstyle=\color{blue},
+  stringstyle=\color{green!50!black}
+}
+
+\captionsetup{width=.8\textwidth}
+\interfootnotelinepenalty=10000
+
+%
+\usepackage[shortlabels]{enumitem}
+\setlist[description]{%
+  topsep=12pt,
+  labelindent=0pt,
+  labelsep=0pt,
+  itemindent=0pt,
+  itemsep=12pt,
+  leftmargin=0pt
+}
+
+% Put a dot after description labels
+\renewcommand{\descriptionlabel}[1]{%
+  \hspace\labelsep \upshape\textbf{#1}.
+}
+
+% Get rid of the explicit \itemsep declaration in Pandoc's \tightlist command
+\providecommand{\tightlist}{\setlength{\parskip}{0pt}}

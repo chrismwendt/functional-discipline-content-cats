@@ -1,0 +1,29 @@
+category: the essence of composition
+
+category theory is more epistemology than ontology
+the similar structure we see reflected everywhere says more
+about our minds than outward nature
+
+computers can help us solve nontrivial problems
+
+id :: a -> a
+id x = x
+
+type variable a
+any type has id arrow to self
+
+category theory, maximally abstract:
+objects and arrows between them
+
+however, objects exist only to mark the ends of arrows
+
+monomorphism (cf. 1-1 injective fn)
+forall c . forall g, h :: c -> a .
+    f . g = g . h => g = h
+
+epimorphism (cf. onto surjective fn)
+forall c . forall g, h :: b -> c .
+    g . f = h . f => g = h
+
+however, an isomorphism (monic and epic) is NOT necessarily
+invertible, cf. a bijection

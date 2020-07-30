@@ -1,0 +1,115 @@
+monads
+
+   functions monads
+composition : kleisli arrow
+          . : >=> 
+and, similarly
+         id : pure (aka return)
+              >>=  (aka bind)
+
+but, (>=>) allows to compose fns whose
+output type is embellished with some context,
+or decisions may be made affecting
+how the computation proceeds
+
+(>=>) :: Monad m => (a -> m b) -> (b -> mc) -> (a -> m c)
+f >=> g = (\a -> let mb = f a
+                 in mb >>= g
+    then what must be (>>=), which we call bind,
+    (>>=) :: m b -> (b -> m c) -> m c
+ (or rather)
+    (>>=) :: m a -> (a -> m b) -> m b
+
+so monads are the interface
+    class Monad m where
+        (>>=) :: m a -> (a -> m b) -> m b
+        pure  :: a -> m a          (already given by applicative)
+
+functoriality follows from m being a monad
+(because fmap can be defined in terms of bind and pure)
+
+back to defining bind
+(>>=) :: m a -> (a -> m b) -> m b
+ma >>= f = ___ $ fmap f ma
+
+we know fmap f ma :: m (m b)
+but we wanted an (m b)
+now we need "___" a fn, sometimes called join,
+join :: Monad m => m (m a) -> m a
+
+class Functor m => Monad m where
+    join :: m (m a) -> m a
+    pure :: a -> m a                  (lifting a value)
+
+to summarize,
+>=> kleisli composition is \x.f x bind g  
+>>=    bind is join after fmap                 (μ . fmap f)
+return/pure is lifting a value into the monad  (η)
+
+wadler read eugenio moggi, now we have monads in haskell
+
+why are these so useful?
+we want pure functions
+but e.g.
+    IO, global state, side effects, exceptions, continuations
+    all are not pure functions
+we can not get things done and we
+    are just heating the cpu otherwise
+
+everything that can be computed using impure fns can be
+converted to pure calculations, encapsulating those effects
+into some embellishments
+
+monad laws
+    1. (left  id)   return >=> g    ≡ g
+    2. (right id)   f >=> return    ≡ f
+    3. (associat)   (f >=> g) >=> h ≡ f >=> (g >=> h)
+
+(the monad laws are not enforced by ghc)
+
+monad laws:
+kleisli composition
+form a category
+
+translating from haskell to categorical theoretic terms
+m is T          a  -> m a     
+pure is η       ↑
+join is μ       id.->T        (where .-> is a NT)
+
+η :: id .-> T
+μ :: T∘T .-> T   (or T² .-> T)
+
+consider T³ = T∘T² = μ.(μ∘I)    (where I is the id NT)
+            = T²∘T = (μ∘I).μ 
+this is the assoc monad law, similarly we can show l/r id
+
+so a monad is an functor T and two natural transformations μ η
+obeying the left id right id and associativity laws
+(note T must be an endofunctor, because it self-composes T²)
+
+some common monads and uses, partial functions / exceptions
+    IO
+    Maybe
+        join :: Maybe (Maybe a) -> Maybe a
+        join Just (Just a) = Just a
+        join _ = Nothing
+        (>>=) :: m a -> (a -> m b) -> m b
+        Nothing >>= f = Nothing
+        Just a  >>= f = f a
+            ...notice how this acts like exceptions,
+               if the first part fails (we have Nothing),
+                don't bother calling f, short-circuit
+        pure :: a -> Maybe a      
+        pure a = Just a
+            ...and, if we would want our exceptions to have an
+               error msg, we use the monad Either String | val
+    State
+        suppose we have f :: a->b
+            which we want to modify global state S
+        model as fs :: (a, s) -> (b, s)
+              or fs':: a -> (s -> (b, s))
+            this is a kleisli arrow from a to a functor on b,
+                newtype State s a = State (s -> (a, s))
+                    which is functorial on a
+
+

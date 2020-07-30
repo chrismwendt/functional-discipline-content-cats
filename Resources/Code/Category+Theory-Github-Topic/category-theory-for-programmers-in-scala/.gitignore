@@ -1,0 +1,7 @@
+*.class
+*.log
+target/
+.ensime*
+build
+_book
+node_modules

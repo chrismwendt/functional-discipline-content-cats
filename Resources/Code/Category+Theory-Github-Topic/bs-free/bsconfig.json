@@ -1,0 +1,27 @@
+{
+  "name": "bs-free",
+  "version": "0.7.0",
+  "refmt": 3,
+  "warnings": { "number": "-102" },
+  "sources": [{
+    "dir": "src",
+    "subdirs": true
+  }, {
+    "dir": "test",
+    "type": "dev"
+  }],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": false
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "bs-abstract"
+  ],
+  "bs-dev-dependencies": [
+    "bs-chai",
+    "bs-effects",
+    "bs-jsverify",
+    "bs-mocha"
+  ]
+}

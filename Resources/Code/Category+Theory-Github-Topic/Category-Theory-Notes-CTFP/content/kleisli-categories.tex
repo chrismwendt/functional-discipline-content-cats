@@ -1,0 +1,154 @@
+\section{Kleisli Categories}
+
+Managing side-effects, and separating concerns.
+
+\subsection{Writer Category}
+
+\begin{example}
+    To abstract concerns such as logging, it may be possible to utilize \textit{embellished} or \textit{decorated} functions.
+    
+    For instance, given the embellished function \mintinline{typescript}{isEven} which not only carries out the primary predicate functionality, it also produces a log message as output. Together, they are returned as a 2-tuple
+    \begin{minted}{typescript}
+function isEven(n: number): [bool, string] {
+    return [ n % 2 === 0, "isEven(number) called" ];
+}
+    \end{minted}
+    
+    Given another embellished function \mintinline{typescript}{negate} which also produces a log message
+    \begin{minted}{typescript}
+function negate(b: bool): [ bool, string ] {
+    return [ !b, "Negate(bool) called" ];
+}
+    \end{minted}
+    
+    Their composition would not be via \mintinline{hs}{negate . isEven} since their input output types mismatch; but, something like
+    \begin{minted}{typescript}
+function isOdd(n: number): [ bool, string ] {
+    const [ pred, log1 ] = isEven(n);
+    const [ neg, log2 ] = negate(pred);
+    return [ neg, log1 + log2 ];
+}
+    \end{minted}
+\end{example}
+
+\begin{definition}[Composing Embellished Functions]
+    The steps to composing such embellished functions are:
+    \begin{enumerate}
+        \item Execute embellished function of first morphism.
+        \item Extract first component of result pair, pass it to embellished function of second morphism.
+        \item Concatenate second component of first result and second component of second result.
+        \item Construct and return new pair with first component of final result with concatenated second components.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    In TypeScript, this would be implemented via something like
+    \inputminted{typescript}{content/code-listings/writer-compose.ts}
+    
+    Then the two embellished functions \mintinline{typescript}{negate} and \mintinline{typescript}{isEven} can now be composed
+    
+    \begin{minted}{typescript}
+const isOdd: number => Writer<bool> = 
+    composeW(isEven, negate);
+    \end{minted}
+\end{remark}
+
+\begin{remark}
+    In the case of \mintinline{typescript}{Writer}s, needing to compose them creates the need for identity morphisms.
+\end{remark}
+
+\begin{definition}[Identity Embellished Function]
+    The embellished identity function takes the form
+    \inputminted{typescript}{content/code-listings/writer-id.ts}
+\end{definition}
+
+\begin{remark}
+    It is possible to generalize such construction for arbitrary monoids. 
+    \begin{itemize}
+        \item Within \mintinline{hs}{compose} one would use \mintinline{hs}{mappend}.
+        \item Within \mintinline{hs}{identity} one would use the neutral element \mintinline{hs}{mempty}.
+    \end{itemize}
+\end{remark}
+
+\subsection{Writer in Haskell}
+
+\begin{definition}[Writer Type]
+    The \mintinline{hs}{Writer} \textit{type} can be defined as
+    \begin{minted}{hs}
+type Writer a = (a, String)
+    \end{minted}
+\end{definition}
+
+\begin{definition}[Writer Morphism]
+    Morphisms are functions with arbitrary type as source and some \mintinline{hs}{Writer} type as target.
+    \begin{minted}{hs}
+a -> Writer b
+    \end{minted}
+\end{definition}
+
+\begin{definition}[Writer Composition]
+    A \textit{composition operator} (the \enquote{\textit{fish}} operator) is defined as
+    \begin{figure}[H]
+        \centering
+        \inputminted{hs}{content/code-listings/fish.hs}
+        \caption{Composition (fish) operator.}
+        \label{fig:fish-operator}
+    \end{figure}
+    
+    Notice that the composition operator has:
+    \begin{itemize}
+        \item Two functions as \textit{input}:
+        \begin{enumerate}
+            \item \mintinline{hs}{(a -> Writer b)}
+            \item \mintinline{hs}{(b -> Writer c)}
+        \end{enumerate}
+        \item Returning a function as \textit{output}:
+        \begin{enumerate}
+            \item \mintinline{hs}{(a -> Writer c)}
+        \end{enumerate}
+    \end{itemize}
+    
+    Then the composition operator is defined as
+    \begin{figure}[H]
+        \centering
+        \inputminted{hs}{content/code-listings/fish-def.hs}
+        \caption{Composition (fish) operator definition.}
+        \label{fig:fish-definition}
+    \end{figure}
+\end{definition}
+
+\begin{definition}[Writer Identity Morphism]
+    The \textit{identity morphism} for the \mintinline{hs}{Writer} category is known as the \mintinline{hs}{return} function, defined as
+    \begin{figure}[H]
+        \centering
+        \inputminted{hs}{content/code-listings/return.hs}
+        \caption{Writer category identity morphism, \mintinline{hs}{return}.}
+        \label{fig:return-writer}
+    \end{figure}
+\end{definition}
+
+\begin{example}
+    Let there be two embellished functions, \mintinline{hs}{isEven} and \mintinline{hs}{negate}, just like the previous definition in typescript. Let them be redefined in Haskell as
+    \inputminted{hs}{content/code-listings/embellished-functions-iseven-negate.hs}
+    
+    Then they can be composed to give
+    \inputminted{hs}{content/code-listings/embellished-composition-isodd.hs}
+\end{example}
+
+\subsection{Kleisli Categories}
+
+\begin{definition}[Kleisli Category]
+    The \textit{Kleisli} category is based on a \textit{monad}. It has:
+    \begin{itemize}
+        \item \textit{Types} as \textit{objects}.
+        \item \textit{Morphisms} from type $A$ to type $B$ are functions with source of type $A$, and target of some type derived from $B$ via some embellishment.
+    \end{itemize}
+    
+    Each Kleisli category has its own rules for composing embellished morphisms (and hence custom identity morphisms).
+\end{definition}
+
+\begin{remark}
+    The previous monad is the \textit{writer monad}, useful for logging execution of functions. Notice that it is a specialization of embedding effects in pure computations.
+    
+    The Kleisli category extends previous Set category to add additional power in representing composition of embellished functions, and their composition is not just piping output. How morphisms are composed is here an additional degree of freedom.
+\end{remark}

@@ -1,0 +1,29 @@
+engines:
+
+  hlint:
+    enabled: true
+
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - TODO
+      - FIXME
+      - HACK
+      - BUG
+
+  markdownlint:
+    enabled: true
+
+  shellcheck:
+    enabled: true
+
+ratings:
+  paths:
+  - "**.hs"
+  - "**.md"
+  - "**.sh"
+
+exclude_paths:
+  - "**.ggx"
+  - "**.png"

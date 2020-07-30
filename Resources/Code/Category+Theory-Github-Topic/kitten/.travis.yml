@@ -1,0 +1,8 @@
+language: cpp
+
+services:
+  - docker
+
+script:
+  - make env-format-check
+  - make env-test

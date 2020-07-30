@@ -1,0 +1,118 @@
+functoriality
+
+bifunctors, functor of two arguments
+maps morphisms from product of categories category CxD to category E
+in Hask this is just the category of (types,types) -> types
+
+another way to think of bifunctors is being a functor in
+both arguments separately
+
+class Bifunctor f where 
+    bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
+    bimap g h = first g . second h
+    first :: (a -> c) -> f a b -> f c b
+    first g = bimap g id
+    second :: (b -> d) -> f a b -> f a d
+    second = bimap id
+
+instances of bifunctor may equivalently be declared implementing bimap
+with defaults for first and second, implementing first and second
+with the default bimap, or all three according the appropriate relation
+
+product (pair) bifunctor
+
+instance Bifucntor (,) where
+    bimap :: (a -> c) -> (b -> d) -> (a,b) -> (c,d)
+    bimap f g (x, y) = (f x, g y)
+
+(,) a b = (a, b)
+
+coproduct bifunctor
+
+instance Bifunctor Either where
+    bimap f _ (Left x)  = Left (f x)
+    bimap _ g (Right y) = Right (g y)
+
+finally, the binary operator of monoidal categories are bifunctors
+
+given that functors compose, sum and product are functorial,
+then parameterized ADT's are functorial too
+
+consider these equivalent, under isomorphism, representations of Maybe
+
+data Maybe a = Nothing | Just a
+
+type Maybe a = Either (Const () a) (Identity a)
+
+maybe is a composition of the bifunctor either with two functors,
+Const () (partially applied bifunctor Const) and Identity
+
+this composition can be expressed as
+
+newtype BiComp bf fu gu a b = BiComp (bf (fu a) (gu b))
+
+
+where bf fu and gu are type constructors and a b are types
+bicomp will be a bifunctor in a and b
+    iff bf is a bifunctor and fu gu are functors
+we express this compiler precondition as typeclass instance declaration
+
+instance (Bifunctor bf, Functor fu, Functor gu) =>
+    Bifunctor (BiComp bf fu gu) where
+        bimap f1 f2 (BiComp x) = BiComp ((bimap (fmap f1) (fmap f2)) x)
+
+the compiler infers bimap from bf and fmaps fu, gu
+
+x has type
+bf (fu a) (gu b)
+and
+bimap :: (fu a -> fu a') -> (gu b -> gu b') ->
+    bf (fu a) (gu b) -> bf (fu a') (gu b')
+
+fortunately, functoriality of adt's can be automatically performed with
+a compiler extensino and adding deriving Functor to your data structure
+
+{-# LANGUAGE DeriveFunctor #-}
+
+data Maybe a = Nothing | Just a
+    deriving Functor
+
+(ghc is also smart enough to automatically derive other
+type classes such as Eq and your own instances)
+
+composition (>=>) and id (return) can produce fmap in kleisli categories
+fmap f = id >=> (\x -> return (f x))
+
+haskell derivefunctor implements fmap for a given type constructor
+preserving identity uniquely
+
+contravariant functors (cf. [covariant] functors)
+
+these are mappings of categories that invert the direction of morphisms
+a contravariant functor is just a covariant functor from C_op
+
+class Contravariant f where
+    contramap :: (b -> a) -> (f a -> f b)
+
+profunctors
+
+(->) is contravariant in its first argument and covariant in the second
+if the target category is Set, this is called a profunctor
+    C_op x D -> Set
+
+class Profunctor p where
+    dimap :: (a -> b) -> (c -> d) -> p b c -> p a d
+    dimap f g = lmap f . rmap g
+    lmap :: (a -> b) -> p b c -> p a c
+    lmap f = dimap f id
+    rmap :: (b -> c) -> p a b -> p a c
+    rmap = dimap id
+
+profunctor instances may be implemented similarly as bifunctors defaults
+
+instance Profunctor (->) where
+    dimap ab cd bc = cd . bc . ab
+    lmap = flip (.)
+    rmap = (.)
+
+profunctors are applied in ends and coends, and lenses

@@ -1,0 +1,67 @@
+function types
+
+internal and external hom-sets
+
+in the category Set every hom-set is also in Set,
+e.g. function types
+unlike other categories' external hom-sets
+
+a function object from a to b is the object a⇒b with the morphism
+eval :: ((a⇒b) x a) -> a)
+where
+g :: z x a -> b
+and unique morphism
+h :: z -> a⇒b
+the factorization holds
+g = eval . (h x id)
+
+this object always exists in Set (and not necessarily in other C),
+isomorphic to homset Set(a,b)
+
+g and h are curried versions of each other
+
+an internal hom-object, or function object can be thought of as
+the exponential between two objects a and b
+b^a  (a->b)
+
+this can be seen as memoized maps between values (for finite sets)
+or just data structures to lookup pairs from the argument(s) to result(s)
+e.g. Int^2 (Bool x Int)
+for inifinite types (lists, strings, trees...) can be done by lazy memoization
+
+cartesian closed categories (such as Set) require
+1. terminal object
+2. product of any pair of objects
+3. exponential for any pair of objects
+
+the terminal can be thought of as product of zero, or zeroth power of objects
+
+powers of one 1^a are the partial application of const with unit
+first powers a^a  is just selecting some element () -> a
+exponentials of sums
+a^(b+c)= a^b * a^c (Either b c -> a)
+exponentials of exponentials
+a^(b^c) = a^bc (currying)
+exponentials of products
+(a x b)^c = a^c * b^c (c -> Either a b)
+
+Curry-Howard Isomorphism
+
+counter-example
+consider the proposition a v b -> a
+this is blatantly false given an a false and b true
+if we map this logical predicate into a function signature
+Either a b -> a
+we see likewise this function cannot be implemented
+a value of type a cannot be produced if f is called with Right b
+
+recall the absurd function (equivalently the false to unit's true)
+absurd :: Void -> a
+(false -> a)
+
+newtype Void = Void Void
+absurd (Void a) = absurd a
+this definition is valid but can never be called
+since we cannot provide the value needed to construct the same value
+
+

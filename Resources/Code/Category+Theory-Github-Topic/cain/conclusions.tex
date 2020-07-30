@@ -1,0 +1,156 @@
+\chapter{Conclusions}
+\label{chap:conclusions}
+
+\begin{epigraphs}
+\qitem{
+  ``What dreadful nonsense we \emph{are} talking!''
+}{---\textcite[255]{carroll-2004}}
+\qitem{
+  ``You may call it `nonsense' if you like, but \emph{I've} heard
+  nonsense, compared with which that would be as sensible as a
+  dictionary!''
+}{---\textcite[173]{carroll-2004}}
+\end{epigraphs}
+
+Our main objective with this project was to study some of the
+applications of category theory to functional programming,
+particularly in Haskell and Agda, and, more specifically, to describe
+and explain the concepts of category theory needed for conceptualizing
+and better understanding functors, polymorphism, monads, and algebraic
+data types, which we did in Chapters \ref{chap:functors},
+\ref{chap:naturals}, \ref{chap:monads}, and \ref{chap:algebras},
+respectively. In Chapter \ref{chap:categories}, we identified
+categories as the starting point for relating category theory to
+functional programming. In the case of algebraic data types and, more
+usefully, folds, we identified algebras and initial algebras over
+endofunctors as the required concepts for satisfying our main goal; in
+the case of functors, the notions of functor and endofunctor; in the
+case of monads, the concepts of monad and Kleisli triple; and, in the
+case of polymorphism or, more precisely, parametric polymorphism,
+natural transformations.
+
+Obviously, we did not cover all of category theory. For instance, we
+did not deal with concepts such as adjoints, epimorphisms, limits,
+monomorphisms, and universal constructions, which were listed in the
+project proposal, but did not answer our purpose. Having said that, we
+did cover the trinity of concepts category, functor, and natural
+transformation, which is the foundation of all category theory
+\parencite[vii]{maclane-1998}, and which creates an opportunity for a
+deeper understanding of the subject.
+
+Additionally, some of the applications of category theory to
+functional programming are not as straightforward as suggested here.
+For example, polymorphic functions actually correspond to lax natural
+transformations \parencite[350]{wadler-1989}, and algebraic data types
+in Haskell correspond to initial algebras and terminal coalgebras over
+endofunctors \parencite[§ 2]{vene-2000}, but such concepts go beyond
+the scope of this project. However, our use of category theory seems
+to be appropriate and useful, especially from the standpoint of
+functional programming.
+
+Although subjective, we believe that this project provides some
+interesting examples of how to take advantage of category theory in
+functional programming and programming in general, as well as a way to
+become a better programmer.
+
+Needless to say, the ideas of category theory might be difficult to
+understand at first. As a matter of fact,
+\textcite[25]{bird-demoor-1997} claim that ``one does not so much
+learn category theory as absorb it over a period of time.'' We claim
+that it is definitely worth it.
+
+\section{Future Work}
+\label{sec:future}
+
+All unanswered questions and concepts beyond the scope of this project
+could be considered as suggestions for future work. For instance, the
+questions of Haskell's and Agda's categories, the existence of initial
+algebras over endofunctors, and others. We describe some ideas which
+we find interesting and appropriate.
+
+\subsection{Adjoints}
+\label{sec:future-adjoints}
+
+Category theory is based on the concepts of categories, functors, and
+natural transformations. Even though these ideas are important, a
+fundamental notion of category theory is adjoints
+\parencite[11]{marquis-2013}, which ``arise everywhere''
+\parencite[vii]{maclane-1998}. Taking into account our approach, can
+we study the applications of adjoints with the purpose of better
+understanding functional programming? Based on \parencites[§
+  13]{barr-wells-2012}[79--81]{elkins-2009}[§~2.4]{pierce-1991}{rydeheard-1986-adjunctions}[§
+  6]{rydeheard-burstall-1988}, the answer seems to be yes. In
+addition, \textcite[§ 9]{awodey-2010} and
+\textcite[§~IV]{maclane-1998} seem to offer a good starting point.
+
+\subsection{Applicative functors}
+\label{sec:future-monoidals}
+
+Based on \parencite{mcbride-paterson-2008}, we identified and studied
+monoidal categories and functors in order to be able to understand
+applicative functors from a category-theoretical point of view. We
+could use our results in a future project, which seems to be a very
+relevant next step, particularly in the context of the ``current, and
+very likely to succeed,'' Haskell 2014 \texthaskell{Applicative =>
+  Monad}
+proposal\footnote{\url{http://www.haskell.org/haskellwiki/Functor-Applicative-Monad_Proposal}.},
+which adds an \texthaskell{Applicative} constraint to the
+\texthaskell{Monad} type class and promotes \texthaskell{join} to
+\texthaskell{Monad}, which we briefly discussed in Remark
+\ref{re:monad-bind}.
+
+\subsection{Categories}
+\label{sec:future-categories}
+
+In Section \ref{sec:category-haskell}, we described \hask, the
+category of Haskell types and functions, in order to be able to relate
+category theory to functional programming. We could use the
+\texthaskell{Category} type class instead
+\parencites[49--51]{yorgey-2009}[74--75]{elkins-2009}:
+\begin{codehaskell}
+class Category cat where
+  id  :: cat a a
+  (.) :: cat b c -> cat a b -> cat a c
+
+instance Category (->) where
+  id  = Prelude.id
+  (.) = (Prelude..)
+\end{codehaskell}
+Likewise, we could study Kleisli categories
+\parencite[59--60]{moggi-1991} in terms of this type class, which
+might be a more intuitive way to justify the Kleisli triple laws. In
+addition, the \texthaskell{Category} class would lead us to
+\texthaskell{Arrow}, which is a generalization of functions
+\parencite[51--57]{yorgey-2009}.
+
+\subsection{Folds}
+
+In Chapter \ref{chap:algebras}, we examined catamorphisms and their
+relation to the \texthaskell{foldr} function for lists. Can we apply
+the results of that chapter to \texthaskell{foldl} and folds in
+general? In particular, can we use algebras and initial algebras over
+endofunctors for conceptualizing the \texthaskell{Foldable}
+\parencite[44--47]{yorgey-2009} and \texthaskell{Traversable}
+\parencites[§ 3]{mcbride-paterson-2008}[47--49]{yorgey-2009} type
+classes?
+
+\subsection{Monoids}
+\label{sec:future-monoids}
+
+As an alternative to the ideas of Section \ref{sec:future-adjoints}, a
+``fundamental notion of category theory is that of a monoid''
+\parencite[vii]{maclane-1998}, as described in Example
+\ref{ex:category-monoid}. In Haskell, monoids are defined by the
+\texthaskell{Monoid} type class:
+\begin{codehaskell}
+class Monoid a where
+  mempty  :: a
+  mappend :: a -> a -> a
+\end{codehaskell}
+In connection with Remark \ref{re:monad-monoid} and Section
+\ref{sec:future-monoidals}, studying monoids and their relation to
+monads seems like a pertinent complement to this project. As basis for
+this study, we have identified \parencites[§
+  VII]{maclane-1998}[39--44]{yorgey-2009}.
+
+\clearemptydoublepage

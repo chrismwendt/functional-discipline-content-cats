@@ -1,0 +1,55 @@
+# Scala CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/sample-config/ for more details
+#
+version: 2
+jobs:
+  build_sbt:
+    docker:
+      - image: circleci/openjdk:11-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      # compiler, test & run
+      - run:
+          name: compile, test
+          command: |
+            sbt -mem 2048 xcoverage
+            sbt -mem 2048 xdup
+            bash <(curl -s https://codecov.io/bash) -t 551ffd9e-aac2-4eff-937c-d8bcca72bf38
+
+
+  build_template:
+    docker:
+      - image: circleci/openjdk:11-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx1536m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      # test & build
+      - run:
+          name: create, compile, test, run
+          command: |
+            cd docs
+            chmod u+x create-simple-project.sh
+            ./create-simple-project.sh
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_sbt
+      - build_template

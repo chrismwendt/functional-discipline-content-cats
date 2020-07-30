@@ -1,0 +1,23 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\subparagraph{\(\Field\to\Ring\)}
+\begin{proof}
+	The inclusion functor $\func{\iota}{\Field}{\Ring}$ is faithful: it must
+	take each morphism in the domain to itself in the codomain and is thus
+	injective. To show it is full, let $\func{f}{x}{y}$ be a field homomorphism
+	in $\Field$. It must take $f(0_x)=0_y$ and $f(1_x)=1_y$. Since we are only
+	concerned with morphisms between objects we know are fields in the domain
+	($\Field$) of the functor, we know that in the codomain ($\Ring$) every
+	morphism between $\iota x$ and $\iota y$ must also have that $\iota f(0_x) =
+	0_{\iota x}$ and $\iota f(1_x) = 1_{\iota y}$ (and respect the rest of the
+	ring homomorphism requirements). But then $\iota f$ must be a field
+	homomorphism, and is thus included in $\Field$.
+
+	The inclusion functor is not essentially surjective on objects however. There
+	is no object in $\Field$ that this functor takes to the zero ring (and the
+	zero ring is unique up to isomorphism). So, the inclusion map from
+	$\Field\to\Ring$ does not define an equivalence of categories.
+\end{proof}
+
+\end{document}

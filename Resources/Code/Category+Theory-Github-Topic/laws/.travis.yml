@@ -1,0 +1,17 @@
+dist: trusty
+sudo: false
+
+language: scala
+scala:
+  - 2.13.1
+
+jdk:
+  - openjdk8
+  - openjdk11
+  - openjdk12
+
+script:
+   - sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport && sbt ++$TRAVIS_SCALA_VERSION coverageAggregate
+
+after_success:
+   - bash <(curl -s https://codecov.io/bash)

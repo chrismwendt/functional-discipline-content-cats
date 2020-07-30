@@ -1,0 +1,21 @@
+.cabal-sandbox
+cabal.sandbox.config
+dist/
+_cache
+public
+.cabal-sandbox
+.stack-work
+thumb/
+thumbs.db
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+*~
+tags
+[._]*.un~

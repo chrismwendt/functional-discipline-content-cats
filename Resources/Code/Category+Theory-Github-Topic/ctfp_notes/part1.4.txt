@@ -1,0 +1,32 @@
+kleisli categories
+
+type Writer a = (a, String)
+
+composition of morphisms
+(>=>) :: (a -> Writer b) -> (b -> Writer c) -> (a -> Writer c)
+m1 >=> m2 =  \x ->
+    let (y, s1) = m1 x
+        (z, s2) = m2 y
+    in (z, s1 ++ s2)
+
+identify morphism for our Writer kleisli category
+return :: a -> Writer a
+return x = (x, "")
+
+upCase :: String -> Writer String
+upCase s = (map toUpper s, "upCase ")
+
+toWords :: String -> Writer [String]
+toWords s = (words s, "toWords ")
+
+process :: String -> Writer [String] 
+process = upCase >=> toWords
+
+Kleisli category - a category based on a monad
+    morphisms from A to B are functions which go from a
+    to some type derived from B using a particular embellishment
+
+this "writer monad" can be used for tracing the execution of functions
+it is an example of a more general way of embedding effects in pure fns
+we have an extra degree of freedom allowed by these effects,
+    defined by how the composition itself works

@@ -1,0 +1,13 @@
+* Professor Frisby's Mostly Adequate Guide to Functional Programming
+** TODO review & complete the exercise 
+*** Chapters
+**** DONE Maybe
+***** see MaybeSpecs
+**** DONE Either
+***** see EitherSpecs
+**** TODO IO monad
+**** DONE Task
+***** see TaskSpecs
+
+** DONE Use Ava for all unit tests
+** TODO Use webpack 

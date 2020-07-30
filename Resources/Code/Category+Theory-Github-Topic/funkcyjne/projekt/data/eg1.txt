@@ -1,0 +1,4 @@
+Use record syntax when a constructor has several fields and it's not obvious which field is which. If we make a 3D vector data type by doing data Vector = Vector Int Int Int, it's pretty obvious that the fields are the components of a vector. However, in our Person and Car types, it wasn't so obvious and we greatly benefited from using record syntax.
+
+Type parameters
+A value constructor can take some values parameters and then produce a new value. For instance, the Car constructor takes three values and produces a car value. In a similar manner, type constructors can take types as parameters to produce new types. This might sound a bit too meta at first, but it's not that complicated. If you're familiar with templates in C++, you'll see some parallels. To get a clear picture of what type parameters work like in action, let's take a look at how a type we've already met is implemented.

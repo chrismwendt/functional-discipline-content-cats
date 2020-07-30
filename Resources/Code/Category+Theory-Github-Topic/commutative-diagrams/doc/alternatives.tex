@@ -1,0 +1,39 @@
+It is only fair to mutely offer a comparison with mainstream packages,
+showing idiomatic code to draw the same diagram.
+
+Let \NiceURL
+  {\Xy-pic}
+  {http://texdoc.net/texmf-dist/doc/generic/xypic/xyrefer.pdf\#page=1}
+set the bar with a \emph{verbatim} extract from its manual.
+
+\input{alternatives-xypic}
+
+Here is an example adapted from \NiceURL
+  {\ttfamily\small pst-node}
+  {http://texdoc.net/texmf-dist/doc/generic/pst-node/pst-node-doc.pdf\#page=23}'s
+documentation.
+
+\input{alternatives-pstnode}
+
+Next one is refitted from the guide to \NiceURL
+  {\ttfamily\small\{tikz-cd\}}
+  {http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf\#page=3}.
+
+\input{alternatives-tikzcd}
+
+Finally, \textbf{\CoDi}.
+
+\begin{tcblisting}{snippet}
+\begin{codi}[tetragonal]
+  \obj { |(pb)| X \times_Z Y & X \\
+                           Y & Z \\ };
+  \obj [above left=of pb] {U};
+
+  \mor[swap] pb p:-> X f:-> Z;
+  \mor        * q:-> Y g:-> *;
+
+  \mor                       U   -> pb;
+  \mor      :[bend left=10]  * x:-> X;
+  \mor[swap]:[bend right=10] * y:-> Y;
+\end{codi}
+\end{tcblisting}

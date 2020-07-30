@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+
+# Jupyter
+.ipynb_checkpoints
+
+# Julia
+Manifest.toml
+*.jl.cov
+*.jl.*.cov
+*.jl.mem

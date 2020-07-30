@@ -1,0 +1,10 @@
+# Sublime Text workspace files
+*.sublime-workspace
+
+# ConTeXt
+*.log
+*.tuc
+*.pgf
+
+# PDF
+# *.pdf

@@ -1,0 +1,151 @@
+\documentclass[usenames, dvipsnames]{beamer}
+
+\beamertemplatenavigationsymbolsempty
+
+\usepackage[l2tabu, orthodox]{nag}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{centernot}
+
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{stmaryrd}
+
+\usepackage{parskip}
+\usepackage[export]{adjustbox}
+\usepackage{framed}
+
+\usepackage{graphicx}
+\usepackage{faktor}
+
+\usepackage{tikz-cd}
+
+\newtheorem{aufgabe}{Aufgabe}
+\newtheorem{proposition}{Proposition}
+\newtheorem{hilfssatz}{Hilfssatz}
+\newtheorem{satz}{Satz}
+\newtheorem{defle}{Definition und Hilfssatz}
+
+\MakeOuterQuote{"}
+
+\newcommand{\defiff}{\mathrel{\vcentcolon\Longleftrightarrow}}
+\newcommand{\compl}[1]{#1^\mathsf{c}}
+\newcommand{\cl}[1]{\mathsf{#1}}
+\newcommand{\co}[1]{\text{co-}\cl{#1}}
+\newcommand{\np}{\cl{NP}}
+\DeclareMathOperator{\opt}{OPT}
+\DeclareMathOperator{\alg}{\mathcal{A}}
+
+\newcommand\ccat\mathsf
+\newcommand\cat\mathcal
+\newcommand{\down}[1]{{\downarrow}#1}
+\newcommand{\p}[1]{\iftoggle{proofs}{#1}{}}
+\newcommand{\n}{\pgfmatrixnextcell}
+\newcommand\nat\Rightarrow
+
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\id}{id}
+
+\DeclarePairedDelimiterX\set[1]\lbrace\rbrace{\def\given{\;\delimsize\vert\;}#1}
+\DeclarePairedDelimiter\godel{\langle}{\rangle}
+\title{Der Einbettungssatz}
+\subtitle{Seminar Kategorientheorie}
+\author{Markus Himmel}
+\date{19. Juli 2018}
+
+\begin{document}
+	\begin{frame}
+		\maketitle
+	\end{frame}
+	\begin{frame}{Das Ziel\ldots}
+		\begin{satz}[von der volltreuen Einbettung]
+			Für jede kleine abelsche Kategorie existieren ein Ring $R$ und eine volltreue
+			und exakte Einbettung in die Kategorie $\ccat{Mod}_R$ der (links-)$R$-Moduln.
+		\end{satz}
+	\end{frame}
+	\begin{frame}{Schlachtplan}
+		\begin{hilfssatz}
+			Es sei $F\colon\cat{D}\to\ccat{Ab}^{\cat{A}}$ ein filtriertes Diagramm
+			linksexakter additiver Funktoren. Dann ist auch $\colim_{D\in\cat{D}} F(D)$
+			linksexakt und additiv.
+		\end{hilfssatz}\pause
+		\begin{definition}[Die Einbettung in $\ccat{Ab}$]
+			Wir definieren die Einbettung $U\colon\cat{A}\to\ccat{Ab}$ durch
+			$U\coloneqq \colim_{D\in\cat{D}}\cat{A}(\phi(D), {-})$.
+			Die Kategorie $\cat{D}$ und der Funktor $\phi\colon\cat{D}\to\cat{A}$ sind
+			noch zu konstruieren.
+		\end{definition}
+	\end{frame}
+	\begin{frame}{Wunschliste an $\cat{D}$ und $\phi$}
+		\begin{hilfssatz}
+			Ist $\cat{D}$ kofiltriert, so ist $U$ linksexakt.
+		\end{hilfssatz}\pause
+		\begin{hilfssatz}
+			Es sei $\cat{D}$ kofiltriert. Weiter besitze jeder Epimorphismus
+			$f\colon A\twoheadrightarrow\phi(D)$ in $\cat{A}$ die Darstellung $f = \phi(d)$, wobei
+			$d\colon D'\to D$ in $\cat{D}$. Dann erhält $U$ Epimorphismen.
+		\end{hilfssatz}\pause
+		\begin{hilfssatz}
+			Es sei $\cat{D}$ kofiltriert. Weiter gelte:
+			\begin{enumerate}
+				\item $\forall A\in\cat{A}\ \exists D\in\cat{D}: A=\phi(D)$;
+				\item $\phi(d)$ ist ein Epimorphismus in $\cat{A}$ für jeden Morphismus $d$ in $\cat{D}$.
+			\end{enumerate}
+			Dann ist $U$ treu.
+		\end{hilfssatz}
+	\end{frame}
+	\begin{frame}{Die halbe Miete}
+		\begin{satz}[von der treuen Einbettung]\label{abeb}
+			Jede kleine abelsche Kategorie lässt sich treu und exakt in die Kategorie
+			der abelschen Gruppen einbetten.
+		\end{satz}
+	\end{frame}
+	\begin{frame}{Fun Facts (1)}
+		\begin{hilfssatz}
+			Sind $D_1, D_2\in\cat{D}$ Objekte mit $D_1\leq D_2$, so ist die kanonische Faktorisierung
+			\[
+				\begin{tikzcd}
+					\phi(D_1) \arrow[r] \n \lim_{D_1<D\leq D_2}\phi(D)
+				\end{tikzcd}
+			\]
+			ein Epimorphismus.
+		\end{hilfssatz}
+	\end{frame}
+	\begin{frame}{Fun Facts (2)}
+		\begin{hilfssatz}
+			Es sei $D_0\in\cat{D}$ ein Objekt und $\Gamma\colon \down{D_0}\to\cat{A}$
+			ein Funktor, wobei für alle $D_1\leq D_2\leq D_0$ die Faktorisierung
+			\[
+				\begin{tikzcd}
+					\Gamma(D_1) \arrow[r] \n \lim_{D_1<D\leq D_2} \Gamma(D)
+				\end{tikzcd}
+			\]
+			ein Epimorphismus sei. Weiter sei $F\colon\cat{A}\to\ccat{Ab}$ ein exakter
+			Funktor und $\alpha_{D_0}\colon \cat{A}(\Gamma D_0, {-})\nat F$
+			eine natürliche Transformation. Dann besitzt $\alpha_{D_0}$ die
+			Faktorisierung
+			\[
+				\begin{tikzcd}
+					\cat{A}(\Gamma D_0, {-}) \arrow[Rightarrow]{r}{s_{D_0}} \n \colim_{D\leq D_0}\cat{A}(\Gamma D, {-}) \arrow[Rightarrow]{r}{\alpha} \n F.
+				\end{tikzcd}
+			\]
+			$s_{D_0}$ ist hierbei der kanonische Morphismus des Colimes.
+		\end{hilfssatz}
+	\end{frame}
+	\begin{frame}{Der letzte Schrei}
+		\begin{satz}[von der volltreuen Einbettung]
+			Für jede kleine abelsche Kategorie existieren ein Ring $R$ und eine volltreue
+			und exakte Einbettung in die Kategorie $\ccat{Mod}_R$ der (links-)$R$-Moduln.
+		\end{satz}
+	\end{frame}
+\end{document}

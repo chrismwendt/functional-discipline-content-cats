@@ -1,0 +1,49 @@
+%% formatting
+
+\usepackage{tgpagella}
+% \usepackage{fontspec}
+% EB Garamond (Initials - just for fun) - body text, old style, serif
+% Nimbus Roman - serifed
+% URW Gothic - geometric, title text
+% Libre Caslon Text - absurdly well spaced
+% FreeSerif - plays pretty nicely with math, looks like Times
+% Tinos - good alternative to FreeSerif, less TNR looking
+% \setmainfont[Ligatures=TeX]{Tinos}
+% \setmainfont[ Path=./
+            % , UprightFont     = *-regular
+            % , BoldFont        = *-bold
+            % , ItalicFont      = *-italic
+            % , BoldItalicFont  = *-bolditalic
+            % ]{texgyrepagella.otf}
+
+\usepackage{datetime2} % use yyyy--mm--dd date with \DTMtoday
+\usepackage{geometry}
+\geometry{
+  lmargin=4cm,
+  rmargin=4cm,
+  tmargin=3cm,
+  bmargin=3cm,
+}
+
+\renewcommand{\arraystretch}{1.2} % Make tables a little bigger
+% \usepackage{indentfirst}          % indent first \par after sections
+% \usepackage{parskip}              % don't indent anything
+\usepackage{enumitem}             % enumerate with A), b., c) styles
+\usepackage{hyperref}             % linked table of contents
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage[noabbrev, capitalize]{cleveref}
+\crefname{notation}{Notation}{Notations}
+\Crefname{notation}{Notation}{Notations}
+\crefname{rule}{Rule}{Rule}
+\Crefname{rule}{Rule}{Rule}
+
+% graphics
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{float} % image positioning

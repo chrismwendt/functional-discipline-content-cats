@@ -1,0 +1,99 @@
+limits and colimits
+
+consider product in terms of functors and NTs
+
+apexes of cones
+
+category of cones and limits
+    universal cone is the terminal object
+    there is a unique factorizing morphism from the apex
+        of any other cone to the universal cone apex
+    the universal cone apex we call the limit
+        the limit embodies the whole diagram properties
+        the limit is not guaranteed to exist
+
+picking the factorizing morphism
+    we want some special morphism in homset C(c, Lim D)
+    which satisifies the commutativity condition,
+        this will be a natural transformation
+    the functors related by the factorizing NT will be
+        mapping of c to C(c, Lim D)
+            this is a contravariant functor from C to Set
+        another mapping of C to Set, sets of cones
+            contravariant functor
+
+presheaves,
+    contravariant functors from any category C to Set
+
+a functor D from I to C has a limit Lim D iff
+    there is a natural isomorphism between functors
+        C(c, Lim D) ≃ Nat(∆c, D)
+    the naturality condition for this isomorphism
+    is exactly the commutativty condition for the cones
+
+(recall a natural isomorphism is a NT with every
+component a isomorphism, that is, an invertible morphism)
+
+examples of limits
+terminal object
+    a functor from an empty category selects no object,
+    so a cone shrinks to just the apex,
+    the universal cone is the lone apex
+equalizer
+    two object category with two parallel morphisms
+        f :: a -> b
+        g :: a -> b
+    add the apex c and two projections
+        p :: c -> a
+        q :: c -> b
+    we have two commuting triangles
+        q = f . p
+        q = g . p
+    this leaves us with the condition
+        f . p = g . p
+    notice, on the domain c,
+        p is the function making f and g equal
+    there may be other c' and p' giving equality,
+        but they all uniquely factor out through p
+pullback
+    consider a 3 obj category with shape a->b<-c (cospan)
+        f :: a -> b
+        g :: c -> b
+    a cone with apex d and morphisms
+        p :: d -> a
+        q :: d -> c
+        r :: d -> b
+    by commutativity, r is determined by the other morphisms
+    so we have the condition
+        g . q = f . p
+    so consider d as the pair from elements of a and c, where
+    f on the first component equals g on the second component
+    pullbacks can be useful for type inference
+
+colimits
+when you invert arrows in a cone, get a co-cone
+    the factorizing morphism of the colimit now flows
+    from the universal co-cone to any other co-cone
+
+the coproduct is a colimit of the product limit
+both embody the essence of a pair of objects in a different way
+
+the initial object is a colimit to the empty category diagram
+
+dual of the equalizer, coequalizer
+
+dual of the pullback is the colimit called the pushout
+based on the diagram 1<-2->3 (span) 
+
+continuity
+a continuous functor F from categories C to C' must in
+addition to morphisms, also preserve limits
+    every functor is almost continuous in the sense that
+        preserving the limit may not hold, because better
+        cones and factorizations not in C may be available in C'
+    a homfunctor, contravariant in fst and covariant in snd,
+        Cop × C -> Set, is a continuous functor
+
+
+
+

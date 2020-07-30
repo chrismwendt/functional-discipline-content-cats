@@ -1,0 +1,8 @@
+*.agdai
+build/
+tmp/
+*.agdai
+.vscode/
+.stack-work/
+dogfood/
+stack.yaml.lock

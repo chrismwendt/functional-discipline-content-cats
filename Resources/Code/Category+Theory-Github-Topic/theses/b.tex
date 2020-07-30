@@ -1,0 +1,61 @@
+\documentclass[b5paper]{book}
+\input{common}
+\setcounter{parsec}{1330} % TODO
+\setcounter{firstParsecF}{0}
+\externaldocument{a}
+\usepackage{subfiles}
+
+\makeindex
+
+% \title{\sffamily\color{darkblue}%
+%     Dagger and dilations
+%     \\\vskip.5em \normalsize in the category of von Neumann algebras}
+% \author{Bas E.~Westerbaan \\ \small \texttt{bas@westerbaan.name}}
+
+\begin{document}
+
+% \maketitle
+\input{btitle}
+
+\makeatletter\@starttoc{parsectoc}\makeatother
+
+\subfile{bintr}
+\subfile{dils}
+\subfile{eff}
+\subfile{boutlook}
+
+\backmatter
+\fancyfoot[CE]{}
+\fancyfoot[CO]{}
+\fancypagestyle{plain}{
+    \fancyfoot[CE]{}
+    \fancyfoot[CO]{}
+}
+
+\printindex
+
+\begingroup
+\renewcommand\chapter[2]{\backmattertitle{Bibliography}}
+\bibliography{main}{}
+\endgroup
+
+\bibliographystyle{plain}
+
+\input{bfinal}
+\input{bsols}
+
+\oldchapter{Errata}\label{errata}
+
+These are errata to the printed version of this thesis,
+    which have been corrected in this PDF.
+Additional errata will be published
+    on the arXiv under~\href{https://arxiv.org/abs/1803.01911}{1803.01911}.
+
+\input{berr}
+
+% Trick arXiv into running latex 4 times
+\message{Rerun to get citations correct.}
+
+\end{document}
+
+% vim: se ft=tex.latex :

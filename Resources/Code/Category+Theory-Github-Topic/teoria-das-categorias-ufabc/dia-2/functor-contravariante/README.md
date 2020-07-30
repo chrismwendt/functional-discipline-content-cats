@@ -1,0 +1,1 @@
+# 3. Implemente em sua linguagem favorita (exceto Haskell) o exemplo de Functor Contravariante para Ordenação de tipos compostos e encadeados. Comente no código se teve alguma vantagem em fazer uso desse Functor.

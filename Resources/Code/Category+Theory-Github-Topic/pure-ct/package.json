@@ -1,0 +1,16 @@
+{
+  "name": "pure-ct",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Exploring purescript",
+  "author": "Peter Vilja <ext-peter.vilja@f-secure.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peter-vilja/pure-ct.git"
+  },
+  "dependencies": {
+    "superagent": "^3.5.2"
+  },
+  "devDependencies": {}
+}

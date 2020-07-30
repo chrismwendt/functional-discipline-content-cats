@@ -1,0 +1,521 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc} %unnecessary except for maybe below
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{mathtools}
+%\usepackage{mathabx} %causes \begin document error when loaded
+\usepackage{stackengine}
+\usepackage{tipa}
+\usepackage{multicol}
+%\newcommand{\acts{\mathrel{\reflectbox{$\righttoleftarrow$}}}
+\setcounter{section}{1}
+\author{Todd Hagen}
+\title{Notes for \emph{Category Theory for the Sciences}\footnote{David Spivak, MIT Press, 2014}}
+\date{}
+\begin{document}
+\maketitle
+\section{The Category of Sets}
+A set $X$ is a subset of set $Y$ (i.e. $X \subseteq Y$) if each element in the subset is an element of the set. The null set ($\emptyset$ or $\varnothing$) and the set itself are subsets. 
+
+A function sends each element of a set to an element of another set. Every element of the domain must go to one element of the codomain, but not every element of the codomain has to be ``hit" and codomain elements may be the target of mapping from multiple domain elements. 
+
+A function may be represented by $\rightarrow$ to denote a function from one set to another. The symbol $\mapsto$ (``maps to") tells us where the functions sends a specific element of the domain to the codomain. For example, the squaring function $f: \mathbb{N} \rightarrow \mathbb{N}$ with $5 \mapsto 25$. 
+
+Elements of the codomain (the second set) with a mapping from the domain (the first set) via function $f$  are said to be \textit{in the image} of $f$. 
+\begin{equation*}
+\text{im}(f) \coloneqq \{y \in Y\ |\ \exists x \in X \text{ such that } f(x) = y\}
+\end{equation*} 
+The image of $f$ is always a subset of its codomain.
+\begin{equation*}
+\text{im}(f) \subseteq Y
+\end{equation*}
+
+Composable functions share elements of the codomain of the first and the domain of the second. e.g. $f: X \rightarrow Y$ and $g: Y \rightarrow Z$ for elements in im($f$) that are in $g$. Denoted $g \circ f: X \rightarrow Z$, or equivalently in \textit{diagrammatic order} as $f;g: X \rightarrow Z$.
+
+$x \in X$ can be \textit{represented} by the mapping of a function \smiley\ to $X$, denoted $x: \{ \smiley \} \mapsto X$. 
+
+*** The set of functions $X \rightarrow Y$ is denoted by Hom$_{\textbf{Set}}$($X,Y$) ***
+
+\textit{Identity function} on X denoted by id$_{X}$: $X \rightarrow X$, defined as for all $x \in X$ we have id$_{X}$($x$) = $x$.
+
+A function is an \textit{isomorphism} if it is \textit{invertible}, i.e. if there exists an isomorphism $f: X \stackrel{\cong}{\longrightarrow} Y$ there exists an \emph{inverse function} $g: Y \rightarrow X$ such that $g \circ f = $ id$_{X}$ and $f \circ g = $ id$_{Y}$. Sets with an isomorphism between them are called \emph{isomorphic sets}, denoted $X \cong Y$, which is often called a \emph{one-to-one correspondence}\footnote{DNA to RNA trascription is an isomorphism; protein production is a function from 3-nucleotide sequences to eukaryotic amino acids, but it is not an isomorphism ($4^{3}=64$ RNA triplets, for only 21 amino acids.)}. Two sets being isomorphic does not mean they can be treated the same; you need a specific isomorphism in hand, not merely the knowledge that an isomorphic function exists.
+
+Sequence notation: for any set $A$, $f: \underline{n} \rightarrow A$ which can be written as $f = (f(1),f(2),f(3) \ldots f(n))$ for the numeral set of size n, $\underline{n} \coloneqq \{ 1,2,3, \ldots ,n \}$. This just says that a set can be represented as a function from the numeral set to each element of the set.
+
+Cardinality of finite sets: a set A has cardinality n denoted $\left\vert{A}\right\vert = n$, if there exists an isomorphism $A \cong \underline{n}$. Note: a set contains each of its elements only once! Also, the composition of two isomorphisms is an isomorphism. Isomorphic sets have the came cardinality.
+
+\setcounter{subsection}{1}
+\subsection{Commutative diagrams}
+Diagram of sets and functions between them;  diagram commutes if, for e.g. three functions, two commute to the third---the two paths ``end up" at the same set through compared (commuted) functions.\footnote{e.g. in mechanics, using the Hamiltonian or Langrangian method to predict future states---the predicted future state is the same; the diagram mapping the approaches commutes.}
+
+\subsection{Ologs (ontological logs)}
+An olog is a map between math and various conceptual frameworks.
+Components of ologs:
+\begin{description}
+\item[type] An abstract concept (may have multiple parts). A type's label in an olog should be what you call an example of the class.
+\begin{itemize}
+\item begins with a/an
+\item distinction made is recognizable by olog's author
+\item instances of which can be documented
+\item be the common name that each instance would be called
+\item declare all variables, if there are multiple
+\end{itemize}
+
+\item[aspect] A way of viewing something, particularly a way of measuring or regarding. In ologs, this means aspects are functions:
+\begin{equation*}
+\text{aspect: thing to measure } \rightarrow \text{possible outcomes of measurement}
+\end{equation*}
+Aspects must be functional: often, either switching the direction of the arrow in the olog, or including an intermediary box(type), can turn nonfunctional relationships into proper aspects. Strictly based on functionality; ``unsound" relationships are a product of idiosyncratic worldviews (i.e. views of whoever is constructing the olog) and is not a fault of the aspect in question if it is valid.
+\begin{itemize}
+\item begins with a verb
+\item yields an English sentence when read type1-aspect-type2
+\item functional: each instance of source type should give rise to an instance of the target type.
+\item usefully describes the functional relationship.
+\end{itemize}
+Remember: invalid aspects may be converted by flipping the direction of the relationship or introducing a compound type in between the sets in question.
+
+\item[fact] A path equivalence in an olog (i.e. a commutative diagram within the olog); when two paths' functions commute.
+\begin{itemize}
+\item Can be written as $_{A}[f, g] \simeq _{A}[h, i]$ for starting type $A$ and aspects $f,g,h,i$.
+\end{itemize}
+
+\item[image] Recall that the image of a function is the subset of elements in the codomain ``hit" by the function. Image creates new types out of existing aspects; a function is defined first and the resulting type is derived from the function's image.
+
+\end{description}
+
+*Every part (boxes AND arrows) of an olog $\ell$ has an associated English phrase, denoted $\langle\langle \ell \rangle \rangle$.
+
+\section{Fundamental considerations in set}
+Products and coproducts; complex limits and colimits; universal properties.
+\subsection{Products and coproducts}
+\subsubsection{Products}
+Definition: the set of ordered pairs $(x,y)$ for $x \in X$ and $y \in Y$, denoted as $X \times Y$. 
+\begin{equation*}
+X \times Y = \{ (x,y)\ |\ x \in X,\ y \in Y \}
+\end{equation*}
+One can take the product of more than two sets.\footnote{\ldots which ties into the definition of limits and multidimensional space.
+e.g. Three dimensional space as $S \coloneqq \mathbb{R}^{3}$ 
+e.g. Spacetime as $S \times T \cong \mathbb{R}^{4}$}
+
+\begin{description}
+\item[projection function] Goes from a product to a component set of the product. Denoted by $\pi_{1}: X \times Y \rightarrow X$, $\pi_{2}: X \times Y \rightarrow Y$
+
+\end{description}
+The universal property of products: An abstract quality that characterizes a given construction---in products this is the existence of a set $A$ and unique function $A \rightarrow X \times Y$ with functions $f$ and $g$ to $X$ and $Y$ that themselves commute to $X \times Y$. Can be written as
+\begin{equation*}
+\langle f,g \rangle: A \rightarrow X \times Y, \text{\qquad where \qquad} \langle f,g \rangle(a) = (f(a),g(a))
+\end{equation*} 
+This function $\langle f,g \rangle$ is said to be \emph{induced} by functions $f$ and $g$. 
+
+\subsubsection{Ologging products}
+\begin{itemize}
+\item Canonical label for products goes like
+\begin{equation*}
+\langle \langle c \times d \rangle \rangle \coloneqq \text{``a pair } (x,y) \text{ where } x \text{ is } \langle \langle c  \rangle \rangle \text{ and } y \text{ is } \langle \langle d \rangle \rangle \text{"}
+\end{equation*}
+\item Projection functions are read as ``yields, as $x$" for the variable $x$ referred to in the projection.
+\item Induced function $\langle p, q \rangle : e \rightarrow c \times d$ can be read as 
+\begin{equation*}
+\text{``yields, insofar as } \langle \langle p  \rangle \rangle \langle \langle c  \rangle \rangle \text{ and } \langle \langle q  \rangle \rangle \langle \langle d  \rangle \rangle \text{,"}
+\end{equation*}
+\end{itemize}
+
+\subsubsection{Coproducts}
+A coproduct is the \emph{disjoint union} of sets, i.e. if an element is in either (or both), it is included in the coproduct. Elements in both sets are each included and labeled with which set they came from.
+Coproduct is denoted by $X \sqcup Y$. The coproduct form of a projection function is the \emph{inclusion function},
+\begin{equation*}
+i_1 : X \rightarrow X \sqcup Y \text{ and } i_2 : X \rightarrow X \sqcup Y
+\end{equation*}
+Universal property of coproducts: 
+For any set $A$ and functions $f: X \rightarrow A$ and $g: A \rightarrow Y$, there exists a unique function $X \sqcup Y \rightarrow A$ induced by $f$ and $g$
+\begin{equation*}
+\begin{cases}fg\end{cases}: X \sqcup Y \rightarrow A 
+\end{equation*}
+\begin{equation*}
+\begin{cases}fg\end{cases} \circ i_1 = f 
+\end{equation*}
+\begin{equation*}
+\begin{cases}fg\end{cases} \circ i_2 = g
+\end{equation*}
+The induced function also has to be unique. Assignment as follows guarantees the diagram commutes for the induced function,
+\begin{equation*}
+\begin{cases}fg\end{cases}(m) = 
+\begin{cases}
+f(x)& \text{if $m = i_1 x$} \\
+g(x)& \text{if $m = i_2 y$}
+\end{cases}
+\end{equation*}
+\emph{A slogan : any time behavior is determined by cases, a coproduct is involved.}
+
+\subsection{Finite limits in Set}
+\subsubsection{pullbacks}
+\begin{description}
+\item[fiber product] is the overlap in images of two functions on the same set. In a diagram, fiber product is denoted by $\lrcorner$
+\begin{equation*}
+X \times_Z Y \coloneqq \{ (x,y,z)\ |\ f(x) = z = g(y) \}
+\end{equation*}
+\item[pullback]``a pullback of $X$ and $Y$ over $Z$" --- any set $W$ for which we have an isomorphism $W \rightarrow X \times_Z Y$, i.e. an isomorphism between $W$ and the fiber product of $X$ and $Y$.
+Pullbacks may define new ideas from old. Taking the pullback of a diagram defines a new type combining the types (or the functions) that map on to another type.
+The universal property of pullbacks: analogous to product/coproduct---there exists a unique function to the fiber product of two sets under a third set. (see diagram 3.12)
+Pasting diagrams for pullback:
+\begin{equation}
+\end{equation}
+\item[preimage] denoted $f^{-1}(y)$
+\begin{equation*}
+f^{-1}(y) \coloneqq \{ x \in X\ |\ f(x) = y \}
+\end{equation*}
+The preimage is the set of elements of the first set in a function that map to the second set of the function.
+For any subset $Y \subseteq Y'$, the \emph{preimage of $Y'$ under $f$} is the set of any elements of $X$ that map into the \emph{subset} of $Y$, $Y'$.
+\end{description}
+***Remember: you can think of an element $y \in Y$ as a function, ***
+\begin{equation*}
+y: \{ \smiley \} \rightarrow Y
+\end{equation*}
+
+\subsubsection{Spans, experiments, matrices}
+\begin{description}
+\item[span] a set $R$ together with a functions $f, g$ for which $f: R \rightarrow A$ and $g: R \rightarrow B$. You can think of $A$ and $B$ as the set of observables from a set of experiments $R$ on these variables\footnote{e.g. $T$ is set of possible temps for a gas in a container, $P$ is the set of possible pressures; we have a span $T \leftarrow E \rightarrow P$ for experiment $E$ of changing the temperature and recording both temperature and pressure}.
+\emph{composite span} is the fiber product of two sets that span three sets(with one set in common between them). Provides a way to e.g. transparently combine data from multiple sources.
+Can be applied to the definition of matrices, as spans of the rows and columns. Composite spans can represent the multiplication of two matrices which share a length of one of their dimensions.
+\emph{bitartite graphs} can represent spans; for span $A \stackrel{f}{\leftarrow} R \stackrel{g}{\rightarrow} B$, each element of $A$ drawn as a dot on the left side, each element of $B$ drawn as a dot on the right, with arrows drawn between them to represent $r \in R$ connecting $f(r)$ to $g(r)$.
+\end{description}
+
+\subsubsection{Equalizers, terminal objects}
+\begin{description}
+\item[equalizer] of two functions\footnote{Can depict these functions by $X \underset{g}{\stackrel{f}{\rightrightarrows}} Y$} $f: X \rightarrow Y$ and $g: X \rightarrow Y$ is the subset of elements $x$ in $X$ for which $f(x) = g(x)$. Denoted by $Eq(f,g)$.
+Another equalizer diagram example:
+\begin{equation*}
+\text{\fbox{an input}} \underset{\xrightarrow{\text{according to experiment, yields}}}{\xrightarrow{\text{should, according to theory, yield}}} \fbox{\text{an output}}
+\end{equation*}
+The equalizer is the set of all inputs for which the theory and the experiment yield the same output.
+\item[terminal set] is a set $S$ for which there exists a unique function $X \rightarrow S$ for every set $X$. Has a similar kind of universal property to other constructions in this section (products, pullbacks, and equalizers)---for any other set $S'$ that might fill for $S$, there exists a unique map $S' \rightarrow S$.
+\end{description}
+
+\subsection{Finite colimits in Set}
+Equivalence relations (denoted $x \sim y$) on $X$ are elements of $R \subseteq X \times X$ (i.e. pairings of the elems in $X$) satisfying the following three properties:
+\begin{description}
+\item[reflexivity] $(x,x) \in R$;
+\item[symmetry] $(x,y) \in R$ iff $(y,x) \in R$;
+\item[transitivity] if $(x,z)$ and $(x,y)$ are in $R$, then $(x,z)\in R$.
+\end{description}
+Equivalence class (denoted by $\sim$) is subset $A \subseteq X$ both
+\begin{enumerate}
+\item nonempty (i.e. $A \neq \varnothing$)
+\item if $x$ in $A$ then $y$ is also in $A$ only if $x \sim y$. 
+\end{enumerate}
+An equivalence relation on $X$, $\sim$, defines the \emph{quotient of $X$ by $\sim$} as the set of equivalence classes of $\sim$. The quotient function $Q: X \rightarrow X/\sim$ sends $x \in X$ to the equivalence class containing it; we call $x$ a \emph{representative} of its equivalence class $y$ (which is in $X /\sim$).
+An example, for $R \subseteq \mathbb{Z} \times \mathbb{Z}$ :
+
+\begin{equation*}
+R = \{ (x,y))\ |\ \exists n \in \mathbb{Z}\ \text{such that}\ x + 7n = y \}
+\end{equation*}
+
+\begin{description}
+\item[reflexive?] Yes, because $x + 7 * (0) = x$.
+\item[symmetric?] Yes, $x + 7 * (n) = y$ iff $y + 7 * (-n) = x$
+\item[transitive?] Yes, $x + 7 * (n) = y$ and $y + 7 * (m) = z$ together imply $x + 7 * (n+m) = z$.
+\end{description}
+A \emph{partition of $X$} called $I$, \emph{the set of parts}, has elements $i$ for which the selection of a subset $X_i \subseteq X$ has the following two properties:
+\begin{itemize}
+\item Every element of $X$ is in some part. i.e. for all $x \in X$, there exists an $i \in I$ such that $x \in X_i$.
+\item No element can be found in two different parts
+\end{itemize}
+Can use partitions to define equivalence classes: $I$ can be the set of equivalence classes in an equiv relation; $X_i$ for each $i$ is the elements of that particular equivalence class.
+
+\emph{Generating equiv relations}:
+$X$ is a set, and $R \subseteq X \times X$ any subset.
+There exists a relation $S \subseteq X \times X$ such that:
+\begin{itemize}
+\item $S$ is an equiv relation
+\item $R\subseteq S$
+\item for any eq relation $S'$ such that $R\subseteq S'$, then $S\subseteq S'$.
+\end{itemize}
+$S'$ is called the eq relation generated by $R$.
+
+\setcounter{subsubsection}{1}
+\subsubsection{Pushouts}
+Gluing things together! When you don't want to double count elements as would be done in a coproduct.
+For a diagram $Y \stackrel{f}{\longleftarrow} W \stackrel{g}{\longrightarrow} X$,
+a \emph{pushout of $X$ and $Y$ over $W$} is any set $Z$ for which we have an isomorphism:
+\begin{equation*}
+X \sqcup_W Y \stackrel{\cong}{\longrightarrow} Z
+\end{equation*}
+$X \sqcup_W Y$ is the fiber sum---defined as the quotient of $X\sqcup W\sqcup Y$ by the eq relation $\sim$ generated by $w \sim f(w)$ and $w \sim g(w)$ for all $w \in W$.
+The functions from $X$ and $Y$ to $X \sqcup_W Y$ can be called inclusions(more properly: \emph{coprojections}) to be consistent with terminology for coproducts (but these functions are not injective).
+
+Universal property of pushouts:
+A pushout $X \sqcup_W Y$ together with inclusions $i_1$ and $i_2$ satisfies the property of:
+For any set with functions from $X$ and $Y$, there's a unique arrow 
+\begin{equation*}
+\left\{\begin{array}{@{} l c @{}}f  g \end{array}\right. : X \sqcup_W Y \rightarrow A
+\end{equation*}
+that makes everything commute,
+\begin{equation*}
+f = \left\{\begin{array}{@{} l c @{}}f  g \end{array}\right. \circ i_1
+\qquad \text{and} \qquad
+g = \left\{\begin{array}{@{} l c @{}}f  g \end{array}\right. \circ i_2
+\end{equation*}
+
+\subsubsection{Other finite colimits}
+\begin{description}
+\item[coequalizer] Given two parallel arrows $X \stackrel{f}\rightarrow Y$ and $X \stackrel{g}\rightarrow Y$, the coequalizer of f and g is the diagram of these parallel arrows with an additional arrow $q: Y \rightarrow Coeq(f,g)$, where we define
+\begin{equation}
+Coeq(f,g) \coloneqq Y/\sim, \qquad \text{where} \qquad f(x) \sim g(x)\ \text{for all } x\in X
+\end{equation}
+and $q$ is the quotient function $q: Y \rightarrow Y/\sim$.
+\end{description}
+
+
+\subsection{Other notions in Set}
+\subsubsection{Retractions}
+Given functions $f: X \rightarrow Y$ and $g: Y \rightarrow X$, and that $g\circ f = \text{id}_X$
+\begin{itemize}
+\item $f$ is called a \emph{retract section}.
+\item $g$ is called a \emph{retract projection}.
+\end{itemize}
+
+\subsubsection{Currying}
+Taking many inputs in a function can occur one at a time or all at once.\footnote{e.g. A material-specific force-extension curve is a curried form of a function taking a material and an extension and yielding a force.}
+
+\subsubsection{Arithmetic of sets}
+Some isomorphisms that exists for any sets $A$, $B$, and $C$:
+\begin{multicols}{2}
+\begin{itemize}
+\item $A + \text{\underline{0}} \cong A$
+\item $A + B \cong B + A$
+\item $(A + B) + C \cong A + (B + C)$
+\item $A \times \underline{0} \cong \underline{0}$
+\item $A \times \underline{1} \cong A$
+\item $A \times B \cong B \times A$
+\item $(A \times B) \times C \cong A \times (B \times C)$
+\item $A \times (B + C) \cong (A \times B) + (A \times C)$
+\item $A^{\underline{0}} \cong \underline{1}$
+\item $A^{\underline{1}} \cong A$
+\item $\underline{0}^{A} \cong \underline{0}$
+\item $\underline{1}^{A} \cong \underline{1}$
+\item $A^{B + C} \cong A^{B} \times A^{C}$
+\item $(A^{B})^{C} \cong A^{B \times C}$
+\item $(A \times B)^{C} \cong A^{C} \times B^{C}$
+\end{itemize}
+\end{multicols}
+\begin{center}
+***\qquad Except for one case: $\underline{0}^{\underline{0}}$\qquad ***
+\end{center}
+$\underline{0}^{\underline{0}}$ yields conflicting answers for
+\begin{enumerate}
+\item $A^{\underline{0}} \cong \underline{1}$
+\item $\underline{0}^{A} \cong \underline{0}$
+\end{enumerate}
+The correct answer, based on def's of $\underline{0}$ and $\underline{1}$, is that $\underline{0}^{\underline{0}} = \underline{1}$
+\emph{A slogan: any set is isomorphic to any other set with the same number of elements---functions that aren't isomorphisms can't be captured within the framework of numbers. Knowing that there exists an isom between two sets is inferior to having a specific isom in hand---a function can have a pretty arbitrary isom, or a very meaningful one.}
+
+\subsubsection{Subobjects and characteristic features}
+\begin{description}
+\item[power set]For any set $X$, the set of subsets of $X$. Denoted $\mathbb{P}(X)$.
+\item[simplicial complexes]A pair $(V,X)$, where $V$ is a set and $X \subseteq \mathbb{P}(V)$ is subset that is:
+\begin{itemize}
+\item Downward-closed: for every $u \in X$ and every $u'\subseteq u$, we have $u' \in X$, i.e. anything in the subsets of the elements in $X$ is an elemtent of $X$.
+\item Contains all atoms: for every $v \in V$, the singleton set $\{v\}$ is an element of $X$. Atoms are subsets of cardinality 1.
+\end{itemize}
+Elements of $X$ are called simplices (pl. of simplex).
+Set of simplices with cardinality $n + 1$ is denoted by $X_n$, because $X$ is composed of $n$-dimensional elements that together form an $(n+1)$-dimensional ``shape". Each $x \in X_n$ is called an $n$-simplex.
+\emph{Since $X$ contains all atoms (singleton sets), we have an isomorphism $X_0 \cong V$. Can call 0-simplices \emph{vertices}, and 1-simplices \emph{edges}.}\footnote{since $X_0 \cong V$, we can denote $(V,X)$ just by $X$.}
+Drawing simplicial complex $X$: put all vertices as dots, all $x \in X_1$(denoted as $\Delta^1$, the 1-simplex) as edges (they consist of $(v, v')$ and thus connect vertices), all $y \in X_2$ as filled-in triangles connecting $y = \{w,w',w''\}$.\footnote{Downward-closedness means all edges are also drawn in this step(?).}
+\item[subobject classifier] Denoted $\Omega$, defined for \textbf{Set} as the set $\Omega \coloneqq \{True, False\}$ and function $\{\smiley\} \rightarrow \Omega$ sending the unique element to $True$.
+A function $X$ to $\Omega = \{True, False\}$ is like ``roll call''--we are interested in the subset that calls $True$.
+\item[characteristic function] ``The characteristic function of $A$ in $X$'' is:
+\begin{equation*}
+\psi (A): X \rightarrow \Omega \qquad \text{by} \qquad \psi (i)(x)=
+\begin{cases}
+True & \text{if } x \in A \\
+False & \text{if } x \notin A
+\end{cases}
+\end{equation*}
+\end{description}
+
+\subsubsection{Surjections, injections}
+A definition using elements; more robustly defined using functions:
+\begin{center}
+$f: X \rightarrow Y$ is \ldots
+\end{center}
+\begin{description}
+\item[injective ($X \hookrightarrow Y$)] if for all $x,x' \in X$ , with $f(x) = f(x')$ we have $x = x'$. 
+\quad \emph{In functions}: iff $f$ is a monomorphism.
+\begin{description}
+\item[monomorphism] if for all sets $A$ and pairs of functions $g,g': A \rightarrow Y, \text{ if } f \circ\ g = f \circ\ g', \text{then } g = g'$.
+We can label monomorphisms in diagrams as: ``is''.
+\end{description}
+\item[surjective ($X \twoheadrightarrow Y$)] if for all $y \in Y$, there is some $x \in X$ s.t. $f(x) = y$.
+\quad \emph{In functions}: iff $f$ is a epimorphism.
+\begin{description}
+\item[epimorphism] if for all sets $B$ and pairs of functions $h,h': Y\rightarrow B,\text{ if } h \circ f = h' \circ f, \text{then } h = h'$.
+\end{description}
+\item[bijective ($X \stackrel{\cong}{\longrightarrow} Y$)] if $f$ is both injective and surjective.
+\quad \emph{In functions}: iff $f$ is both a monomorphism and an epimorphism---i.e. it is an isomorphism.
+\end{description}
+
+Fiber product squares link two sets, their fiber product, and the set the fiber product is ``over''. If there exists a monomorphism $g: A \rightarrow Y$, then the left-hand map $g': X \times_Y A \rightarrow X$ is also a monomorphism. 
+In the map for this, $g$ is any monomorphism, and $f: X \rightarrow Y$ is any map. 
+We can label $\langle\langle X \times_Y A \rangle\rangle \coloneqq ``\langle\langle X \rangle\rangle, \text{which } \langle\langle f \rangle\rangle \langle\langle A \rangle\rangle$''.
+
+\subsubsection{Multisets, relative sets, and set-indexed sets}
+Looking at categories other than \textbf{Set}.
+\begin{description}
+\item[multisets]contain a set of names and their multiplicities (positive finite number of occurrences). Spivak defines a multiset in the following way:
+A multiset $X$ is a sequence $X \coloneqq (Oc, N, \pi)$, where $Oc, N$ are the occurrences and names of the multiset, respectively, and $\pi: Oc \rightarrow N$ is surjective (all occurrences are named, so this makes sense) and called the \emph{naming function for $X$}.
+\begin{description}
+\item[naming function] a function $\pi$ from $Oc$ to $N$, $\pi: Oc \rightarrow N$, in a multiset.
+\end{description}
+A \emph{mapping from $X$ to $Y$} (for multisets $X$ and $Y$), is a pair of functions mapping $Oc$ and $N$ of $X$ to $Y$.
+\item[relative sets] A \emph{relative set over $N$} is a pair ($E,\pi$)
+such that $E$ is a set and $\pi: E\rightarrow N$. A mapping of relative sets is $f: (E,\pi)\rightarrow (E', \pi')$ for which $\pi = \pi' \circ f$.
+\item[indexed sets] for a set $A$, if we assign each element $a \in A$ a set $S_a$, then $S$ is an $A$-indexed set. Appropriate mappings between indexed sets preserve indices.
+\emph{an $A$ indexed set} is a collection of sets $S_a$, one for each $a \in A$, denoted for now as $(S_a)_{a \in A}$. Each $a$ is called an index.
+\emph{an $A$ indexed function $f_a$ from $(S_a)_{a \in A}$ to $(S'_a)_{a \in A}$} is a collection of functions $f_a: S_a \rightarrow S'_a$ for each element $a \in A$.
+\end{description}
+
+\section{Categories and functors, without admitting it}
+Organizing understanding of specific domains, e.g. (all of which are categories (coming in Ch. 5)):
+\begin{description}
+\item[monoids] organize thoughts about agents acting on objects.
+\item[groups] are monoids with agents only acting in reversible ways.
+\item[graphs] include nodes and arrows; flows and connections.
+\item[databases] are connection patterns for structuring information\footnote{Databases subsume everything else in Ch. 4.}.
+\end{description}
+The above and \textbf{Set} are all categories---which we can think of as a bunch of objects and a connection pattern between them.
+Categories(and Sets) have an interior and exterior view: each example \emph{is} a category, and there is a category \emph{of} that example.
+\textbf{This chapter talks about categories without yet generalizing their structure.}
+\subsection{Monoids}
+A slogan: the performance of a sequence of actions is itself an action.
+Monoids and groups are math structures for capturing the agent's perspective---what they can do, what happens when actions are performed in succession. Can be thought of as a set of actions and a formula for how sequences of these actions are themselves considered actions.
+
+\begin{description}
+\item[monoid] A sequence $(M,e,\star)$, $M$ is a set, $e$ is an element of $M$ (called the \emph{unit element}), and the \emph{multiplication formula}\footnote{This is ``multiplication'' only in the sense that it is a formula for taking two inputs and returns an output.} $\star: M \times M \rightarrow M$ such that the following \emph{monoid laws} hold\footnote{First form of each is called \emph{infix notation}.}:
+\begin{description}
+\item[Unit Law 1] $m \star e = m$\quad also written as\quad $\star(m,e) = m$
+\item[Unit Law 2] $e \star m = m$\quad also written as\quad $\star(e,m) = m$
+\item[Associativity Law] $(m \star n) \star p = m \star (n \star p)$\quad also written as\quad $\star(\star(m,n),p) = \star(m,(\star(n,p))$
+\end{description}
+\end{description}
+Example: additive monoid of addition, denoted usually as $(\mathbb{N}, 0, +)$. The three laws hold and thus we've given $\mathbb{N}$ the structure of a monoid.
+It's tempting to treat the set $M$ as the whole monoid if $e$ and $\pi$ are clear from context, but sets may have multiple monoidal structures. We can have an \emph{operation} on a set that is not the formula for any monoid (e.g. exponentiation of the natural numbers --- does not apply to any monoid), or an apparent formula may not even be an operation (e.g. exponentiation on $\mathbb{Z}$).
+\begin{description}
+\item[trivial monoid] The monoid with only one element, $M = (\{e\},e,\star)$, where $\star: \{e\} \times \{e\} \rightarrow \{e\}$. Sometimes denoted $\underline{1}$.
+\end{description}
+The order of taking a product doesn't matter in a monoid. A generalization of this is known as the \emph{coherence theorem}\footnote{can be found in Mac Lane's textbook.}.
+\begin{description}
+\item[list] For a set $X$, a pair $(n,f)$ where the \emph{length of the list} $n \in \mathbb{N}$, and the function $f: \underline{n} \rightarrow X$ where $\underline{n} = \{1,2,\ldots,n\}$.
+The \emph{empty list} has $\underline{n} = 0$ and may be denoted [ ].
+A \emph{singleton list} for elem $x \in X$ is the list $[x]$.
+The \emph{ith entry} of list $L = (n,f)$ for $i \in \mathbb{N}$ and $i \le n$, is the element $f(i) \in X$.
+The concatenation of two lists $L$ and $L'$ denoted $L++L'$ is the list $n+n':f++f'$, where $f++f':\underline{n + n'} \rightarrow X$ is given on $1 \le i \le n + n'$ by
+\begin{equation*}
+(f++f')(i) \coloneqq
+\begin{cases}
+f(i) & \text{if } 1 \le i \le n, \\
+f'(i - n) & \text{if } n+1 \le i \le n + n'
+\end{cases}
+\end{equation*}
+\qquad Concatenating any list $\ell$ with [ ] yields $\ell$.
+
+\item[free monoid] The \emph{free monoid generated by $X$} is
+\begin{equation*}
+F_X \coloneqq (\text{List}(X),[\ ], ++)
+\end{equation*}
+Where List($X$) is the list of elements in $X$, [ ] is the empty set, ++ is the concatenation function. $X$ is referred to as the set of \emph{generators} for the monoid $F_X$.
+
+\item[congruence] An equivalence relation $\sim$ on monoid $\mathcal{M} \coloneqq (M, e, \star)$ such that for any $m,m' \in M$ and any $n,n' \in M$, if $m \sim m'$ and $n \sim n'$, then $m \star n \sim m' \sim n'$. The following facts hold for $\mathcal{M}$:
+\begin{itemize}
+\item The congruence $S$ \emph{generated by relation $R \subseteq M \times M$} is the smallest congruence $S$ containing $R$.
+\item If $R = \varnothing$ and generates congruence $\sim$ then there is an isomorphism $M \stackrel{\cong}{\longrightarrow} (M/\sim)$.
+\item With $\sim$ as a congruence on $M$, there is a monoid structure $\mathcal{M}/\sim$ on the quotient set $M/\sim$ compatible with $\mathcal{M}$.
+\end{itemize}
+
+\item[presented monoid] For finite set $G$ and relation $R \subseteq \text{List}(G) \times \text{List}(G)$, the monoid \emph{presented by generators $G$ and relations $R$} is defined via:
+
+\begin{enumerate}
+\item the free monoid $F_G = (\text{List}(G),[ ], ++)$ generated by $G$.
+\item $\sim$ denotes the congruence $F_G$ generated by $R$
+\item define $\mathcal{M} \coloneqq F_G / \sim$.
+\end{enumerate}
+In the relation $R$, the elements $r \in R$ are of the form $r = (\ell,  \ell')$ for lists $\ell, \ell' \in \text{List}(G)$.
+\emph{A slogan: A presented monoid is a set of buttons to press, and some facts about when different sequences of presses have the same results.}
+
+\item[cyclic monoids] have a presentation involving only one generator.
+
+\item[monoid action] For monoid $(M,e,\star)$ and set $S$, an \emph{action of monoid $M$ on $S$} is a function
+\begin{equation*}
+\footnote{symbol is in mathabx which I can't load at the moment.} : M \times S \rightarrow S
+\end{equation*}
+for which the following laws hold:
+\begin{itemize}
+\item $e  s = s$\quad or in infix \quad $\alpha(e,s) = s$
+\item $m (n s) = (m \star n) s$\footnote{this is a ``left action". Right actions have the sides of the equation switched.}\quad or in infix \quad $\alpha(m, \alpha(n,s)) = \alpha(m \star n, s)$
+\end{itemize}
+Monoid actions as ologs.
+
+\item[finite state machine] denoted by $(\Sigma, S, s_0, \delta, F)$.
+\begin{enumerate}
+\item $\Sigma$, the input alphabet: a finite nonempty set of symbols.
+\item $S$, the state set: finite, nonempty set.
+\item $s_0$, the initial state, an element of $S$.
+\item $\delta$, the state-transition function; $\delta: \Sigma \times S \rightarrow S$.
+\item $F$, the set of final states; $F \subseteq S$.
+\end{enumerate}
+Giving $\delta$ is equivalent to an action of the free monoid List($\Sigma$) on $S$. \\\\
+\emph{A finite state machine is an action of a free monoid on a finite set.}
+
+\item[monoid homomorphism\footnote{For two monoids to be comparable their \emph{sets, unit elements, and multiplication formulas} should be similar; these are the components of a monoid.}] denoted by $f: \mathcal{M} \rightarrow \mathcal{M'}$ for homomorphism $f$ between monoids $\mathcal{M} \coloneqq (M, e, \star)$ and $\mathcal{M'} \coloneqq (M', e', \star')$.
+\\\\
+The following laws hold for $f$:
+\begin{itemize}
+\item $f(e) = e'$
+\item $f(m_1 \star m_2 = f(m_1) \star' f(m_2),\ \text{for all } m_1, m_2 \in M$
+\end{itemize}
+The set of homomorphisms between monoids is denoted by Hom$_\textbf{Mon} (\mathcal{M}, \mathcal{M'})$
+\end{description}
+
+
+
+
+
+
+
+
+\subsection{Groups}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Basic category theory}
+\section{Fundamental considerations of categories}
+\section{Categories at work}
+
+
+%%%%	below are notes to keep track of throughout reading CT4S	%%%%%
+\rule{\textwidth}{0.4pt}
+\begin{description}
+\item[universal properties] of...
+\begin{itemize}
+\item Products
+\item Coproducts
+\item Pullbacks
+\item Pushouts
+\end{itemize}
+\end{description}
+
+
+
+
+\end{document}

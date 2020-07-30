@@ -1,0 +1,96 @@
+#+SETUPFILE:   notes.org
+#+TITLE:       R Notes
+#+DATE:        2015-05-02
+#+DESCRIPTION: Notes I find useful as I learn and experiment with R.
+#+KEYWORDS:    learning, r, stats, programming
+#+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes
+
+* Vectors
+** c is for combine
+#+BEGIN_SRC R
+sentence <- c("this", "is", "a", "sentence")
+sentence                                     # [1] "this" "is" "a" "sentence"
+#+END_SRC
+** First index is 1, not 0
+#+BEGIN_SRC R
+sentence[1] # "this"
+#+END_SRC
+** Overwriting
+#+BEGIN_SRC R
+sentence[4] <- "silly"
+sentence               # [1] "this" "is" "a" "silly"
+#+END_SRC
+** Appending
+#+BEGIN_SRC R
+sentence[5] <- "example"
+sentence                 # [1] "this" "is" "a" "silly" "example"
+#+END_SRC
+** Getting multiple elements
+#+BEGIN_SRC R
+sentence[c(1, 5)] # [1] "this" "example"
+#+END_SRC
+** Ranges
+#+BEGIN_SRC R
+sentence[4:5]                          # [1] "silly" "example"
+sentence[4:5] <- c("cool", "language") # [1] "this" "is" "a" "cool" "language"
+#+END_SRC
+** Sequences
+#+BEGIN_SRC R
+5:9 == seq(5, 9) # [1] TRUE TRUE TRUE TRUE TRUE
+#+END_SRC
+*** With a step
+#+BEGIN_SRC R
+seq(2, 8, 2)     # [1] 2 4 6 8
+#+END_SRC
+** Named elements
+#+BEGIN_SRC R
+named <- 1:3
+names(named) <- c("this", "that", "the other")
+named                                          # this      that the other
+                                               #    1         2         3
+named["the other"] <- 42
+named["the other"] == named[3]                 # T
+named[3] == 42                                 # T
+#+END_SRC
+** Combining
+#+BEGIN_SRC R :results output graphics :file public_html/img/barplot_01.png :width 320 :height 320
+sails <- c(1:10,5:1,1:30,15:1,1:20,10:1)
+barplot(sails)
+#+END_SRC
+
+#+RESULTS:
+[[file:public_html/img/barplot_01.png]]
+
+[[./img/barplot_01.png]]
+** Basic arithmetic
+#+BEGIN_SRC R
+misfits <- c(1, 3, 8) # [1] 1 3 8
+misfits + 10          # [1] 11 13 18
+misfits - 10          # [1] -9 -7 -2
+misfits * 10          # [1] 10 30 80
+misfits / 10          # [1] 0.1 0.3 0.8
+#+END_SRC
+
+Sort of like Clojure's ~map~.
+
+#+BEGIN_SRC clojure
+(for [f [+ - * /]] (map #(f % 10) '(1 3 8)))
+#+END_SRC
+
+Keep in mind, it doesn't alter the original variable.
+
+#+BEGIN_SRC R
+misfits # [1] 1 3 8
+#+END_SRC
+** Scatter plots
+#+BEGIN_SRC R
+x <-
+#+END_SRC
+** na.rm
+#+BEGIN_SRC R
+a <- c(1, NA, 2, NA, 3) # [1] 1 NA 2 NA 3
+sum(a)                  # [1] NA
+sum(a, na.rm = TRUE)    # [1] 6
+#+END_SRC
+* Links
+- [[https://github.com/yurrriq/notes/blob/master/R.org?raw=true][R.org source]]

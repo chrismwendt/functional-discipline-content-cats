@@ -1,0 +1,33 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\paragraph{}
+\begin{exercise}
+	What is a functor between preorders, regarded as categories?
+\end{exercise}
+
+\begin{proof}
+	Recall that a preorder regarded as a category has objects that are the
+	elements of the underlying set of the preorder, and has morphisms that are
+	the related pairs.  Identities are the unique morphisms $(x,x)$, which exist
+	based on the reflexivity of the relation.  Note that if $(a,b)$ and $(b,c)$
+	are in the relation, the composition will be $(b,c)(a,b) = (a,c)$.\\ \\ What
+	do the properties of a functor between preorders $\sC$ (with relation $R$) and
+	$\sD$ (with relation $S$) tell us?  First, we know that $F1_x = 1_{Fx}$
+	for all $x \in \ob\sC$.  This implies that the morphism $(x,x)$ must be brought
+	to the morphism $(Fx,Fx)$.  This becomes redundant with the next step.
+	\\ \\ We also know that $F(\dom(f)) = \dom(Ff)$ for all $f \in \mor\sC$.  If
+	$f = (a,b)$, then $F(\dom(f)) = F(a)$ and thus $Ff$ must be a pair $(F(a),
+	z_1)$ for some $z_1 \in \ob\sD$.  Similarly, $F(\cod(f)) = \cod(Ff)$ implies
+	that if $f = (a,b)$, then $F(\cod(f)) = Fb$ and $Ff$ must be a pair
+	$(z_2,Fb)$.  Combining these, we get that $Ff$ for $f = (a,b)$ must be a
+	pair $(Fa,Fb)$.  This means that if $(a,b) \in R$  then $(Fa,Fb) \in
+	S$.  \\ \\ Thus, $F$ provides us a preorder homomorphism, as $F$ preserves
+	related pairs.  The final property to check for a functor is composable
+	pairs.  If two morphisms $f$ and $g$ are composable, then $F(fg) =
+	FfFg$.  This means $$F((b,c)(a,b)) = F(a,c) = (Fb,Fc)(Fa,Fb) =
+	(Fa,Fc),$$ which was already confirmed by the previous property.  Thus,
+	the functor is a preorder homomoprhism.
+\end{proof}
+
+\end{document}

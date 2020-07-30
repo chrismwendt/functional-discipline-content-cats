@@ -1,0 +1,364 @@
+\documentclass{beamer}
+
+\title{Coinduction in type theory:\\a topological connection}
+\author{Wojciech Kołowski}
+\date{17 June 2020}
+
+\usetheme{Darmstadt}
+
+\begin{document}
+
+\frame{\titlepage}
+\frame{\tableofcontents}
+
+\section{Review and critique}
+
+\begin{frame}{Review of approaches to coinduction}
+\begin{itemize}
+	\item So far we have seen two approaches to coinduction and bisimulation:
+	\item The LTS approach, in which a coinductive process is (re)presented using a particular kind of machine. This machine can be in any of a number of states and can transition between them by performing an appropriate action.
+	\item The categorical approach, in which we are interested in coalgebras of endofunctors. In the final coalgebra $(\nu F, \alpha)$ the ``coinductively'' defined object is the carrier $\nu F$, and $\alpha$ takes the object apart, splitting into its constituent parts (it can also be seen as performing some observations on $\nu F$). Corecursion is a consequence of finality.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The LTS approach: a critique 1/2}
+\begin{itemize}
+	\item I think that the LTS approach to coinduction and bisimulation is quite bad from the explanatory point of view, for a few reasons:
+	\item First, it obscures the very important duality between induction and coinduction, which everybody wants to learn about instantly upon seeing the name ``coinduction''.
+	\item Interlude: the right notion of equality for LTSes is of course graph isomorphism, as they are nothing more than labeled graphs -- static, immobile objects that prescribe actions and transitions, but don't act and don't transition.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The LTS approach: a critique 2/2}
+\begin{itemize}
+	\item Second, the idea of bisimulation is a bit ad hoc and circular.
+	\item Bisimulation was advertised in the book as the right notion of behavioural equality of LTSes, but it is in fact the right notion of equality for behaviours of LTSes. The behaviour of an LTS is its dynamic aspect -- where the actions and transitions take place.
+	\item However, to formally define such a notion of behaviour, we need coinduction in the first place (or else we will miss ``infinite'' phenomena). Thus, there is some kind of circularity in explaining coinduction using LTSes, even if only conceptual.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The categorical approach: a critique}
+\begin{itemize}
+	\item The categorical approach is much better, as it makes the duality between induction and coinduction more explicit and also doesn't give the false impression that coinduction is about automata.
+	\item However, it is not without faults:
+	\item By using the machinery of category theory it makes coinduction seem more magical and arcane than it really is. It is unlikely to be enlightening to ordinary programmers and people with category theory disability.
+	\item It makes the operational and computational aspects of corecursion less explicit.
+	\item It does not provide a nice syntax/notation for corecursive definitions (even though it does provide $\nu X. F(X)$ for objects) -- and that's very important! ``Notation is the tool of thought'', they say.
+\end{itemize}
+\end{frame}
+
+\section{An intuitive approach to coinduction}
+
+\begin{frame}{How to explain coinduction to 5 year olds}
+\begin{itemize}
+	\item I think that the most natural way of explaining coinduction is to refer to an informal version of the duality with induction, explain it in depth and then present lots of examples and exercises to build the right intuitions.
+	\item So, let's do just that! 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The duality}
+\begin{tabular}{ | p{3cm} | p{3cm} | p{3cm} | }
+	\hline
+	feature $\downarrow$ & induction & coinduction \\\hline
+	shape & sum (of products) & product (of sums) \\\hline
+	basic activity & construction & deconstruction (observation) \\\hline
+	derived activity & deconstruction (observation) & construction \\\hline
+	easy to define functions with & inductive domain & coinductive codomain \\\hline
+	such that every (co)recursive call & shrinks the principal argument & grows the result \\\hline
+	thus these functions are & terminating & productive \\\hline
+	evaluation & possibly eager & necessarily lazy \\\hline
+	term height as tree & necessarily finite & possibly infinite \\\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{A comparatory example}
+\begin{itemize}
+	\item How does the duality play out in practice? Let's see an example in Coq!
+	\item The code snippet with this example, named \texttt{Duality.v}, is available from the GitHub repo of this talk: \url{https://github.com/wkolowski/Seminar-Bisimulation-and-Coinduction}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Explaining the first half of the duality}
+\begin{itemize}
+	\item The first half of the table can be restated in terms of category theory and logic/type theory.
+	\item In categorical terms it means that inductives have a ``mapping-out'' universal property, i.e. they are colimits, whereas coinductives have a ``mapping-in'' universal property, i.e. they are limits.
+	\item In logical terms, we can say that inductives have positive polarity and coinductives have negative polarity. For nice explanations of polarity, see \url{https://existentialtype.wordpress.com/2012/08/25/polarity-in-type-theory/} and \url{http://noamz.org/talks/logpolpro.pdf}.
+	\item All of this can also be restated in less scary terms.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(Co)induction, (co)limits, positive and negative types 1/2}
+\begin{itemize}
+	\item Inductives are determined by ways of constructing their elements and the elimination principle is a derived notion whose purpose is to say ``the only things you can build come from the introduction principles (constructors)''.
+	\item Coinductives are determined by ways of observing their elements and the introduction principle is a derived notion whose purpose is to say ``the only things you can observe come from the elimination principles''.
+	\item For programmers this basically means that inductives are data (similar to the stuff stored in databases), whereas coinductives are interactive processes (like operating systems or web servers).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{(Co)induction, (co)limits, positive and negative types 2/2}
+\begin{itemize}
+	\item The type \texttt{bool} is an inductive type with two constructors \texttt{true} and \texttt{false}. Knowing this we can derive an elimination principle, which amounts to an \texttt{if-then-else} expression (but dependently typed!).
+	\item Imagine a type of web servers that can only handle requests for pictures of funny cats (this is the elimination principle). From this description we know that there must be something in the web server that is responsible for handling these requests and thus the derived introduction principle specifies all the possible ways of constructing that thing.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Explaining the second half of the duality}
+\begin{itemize}
+	\item The second half of the duality is quite clear and doesn't need to be demystified as much as the first, but there are two philosophical misconceptions to be addressed.
+	\item The first is about lazy and strict languages.
+	\item The second is about ``infinite loops''.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Laziness and strictness 1/3}
+\begin{itemize}
+	\item Inductives can be evaluated both lazily and eagerly, buth since they are data which is most often meant to be passed to some function for further processing, it makes more sense for them to be eager.
+	\item Because coinductives are possibly infinite, they can't be evaluated eagerly and thus any language that incorporates them will have some form of lazy evaluation.
+	\item We may think that inductive types are (or at least should) be ``eager'', whereas coinductive types are ``lazy''.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Laziness and strictness 2/3}
+\begin{itemize}
+	\item An interesting case is the product type, which can be defined both inductively and coinductively.
+	\item Elements of inductive products are constructed by pairing two things. The derived eliminator says that we can pattern match on the pair to get them back and then use them to construct something else.
+	\item Elements of coinductive products are eliminated using projections. The derived introduction rule says that we must provide everything that can be projected out, so it is pairing too.
+	\item Both product types are isomorphic, but inductive products are best thought of as ``eager products'', whereas coinductive products are best thought of as ``lazy products''.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Lazines and strictness 3/3}
+\begin{itemize}
+	\item \textbf{Laziness and strictness are properties of types, not of languages}
+	\item Haskell is usually said to be a ``lazy language'', but in reality it's just that its types are lazy by default. Given some strictness annotations we can define strict types or even mixed strict-lazy types.
+	\item OCaml or StandardML are usually said to be ``strict'' languages, but it's just that their types are strict by default. We can make the type \texttt{'a} lazy by turning it into a function type with unit domain: \texttt{unit -> 'a}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Termination and productivity 1/3}
+\begin{itemize}
+	\item In programmers' collective consciousness there is the term ``infinite loop'', usually applied to describe two kinds of programs.
+	\item The first kind looks like \texttt{while(true) $\lbrace$...$\rbrace$}. In such cases the ``infinite loop'' was programmed intentionally. Its purpose may be to, for example, implement a server that is waiting for requests.
+	\item The second kind looks like an ordinary loop, but the stopping condition will never be met. In such cases the ``infinite loop'' was programmed by mistake and thus is a bug.
+	\item This term would also be applied to describe an erroneous implementation of recursive factorial on integers with the base case missing, even though there isn't any kind of loop going on.
+	\item Note that this term is very one-sided -- terminating programs aren't called ``finite loops''.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Termination and productivity 2/3}
+\begin{itemize}
+	\item \textbf{The term ``infinite loop'' is considered harmful, because it conflates two separate notions: termination and productivity.}
+	\item Termination is a property that pertains only to recursive functions.
+	\item Each recursive call must shrink the input and may produce a part of the output.
+	\item Therefore all recursive functions terminate.
+	\item Productivity is a property that pertains only to corecursive functions.
+	\item Each corecursive call may do anything with the input and must produce a part of the output.
+	\item Therefore all corecursive functions are productive.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Termination and productivity 3/3}
+\begin{itemize}
+	\item To sum it up:
+	\item Bugged implementation of factorial on integers without the base case: recursive, nonterminating, not ok.
+	\item Correct implementation of factorial on natural numbers: recursive, terminating, ok.
+	\item Correct implementation of a web server that serves pictures of funny cats: corecursive, productive, ok.
+	\item A web server that hangs for some funny cat requests: corecursive, nonproductive, not ok.
+\end{itemize}
+\end{frame}
+
+\section{Coinduction in type theory}
+
+\begin{frame}{A closer look at the duality}
+\begin{itemize}
+	\item Earlier we said that for an inductive type $I$ it's easy to define functions of type $I \to X$, whereas for a coinductive type $C$ it's easy to define functions $X \to C$.
+	\item The induction principle for \texttt{nat} looks like this (in Coq): \texttt{forall P : nat -> Type, \\ P 0 -> (forall n : nat, P n -> P (S n)) -> \\ forall n : nat, P n}
+	\item The corecursion principle for \texttt{conat} looks like this (in Coq): \texttt{forall X : Type, (X -> option X) -> X -> conat}
+	\item The first trouble lies in names: ``induction principle'' vs ``corecursion principle''. Where is the coinduction principle?
+	\item The second trouble lies in the strong assymmetry between the two principles: they look nothing like each other's mirror images.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A different look at the induction principle}
+\begin{itemize}
+	\item To rescue the duality, we have to squint at the induction principle and reformulate it in terms more amenable to being dualized -- we need to split it into a recursion principle and a uniqueness principle.
+	\item The recursion principle consists of the recursor \texttt{rec} and its computation rules: \\
+	\texttt{rec : forall X : Type, X -> (X -> X) -> nat -> X} \\
+	\texttt{uniq1 : rec X z s 0 = z} \\
+	\texttt{uniq2 : rec X z s (S n) = s (rec X z s n)}
+	\item The uniqueness principle looks like this: if a function \texttt{f} satisfies the equations \\
+	\texttt{f 0 = z} \\
+	\texttt{f (S n) = s (f n)} \\
+	for some \texttt{z : X} and \texttt{s : X -> X}, and a function \texttt{g} also satisfies them, then \texttt{forall x : X, f x = g x}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The coinduction principle}
+\begin{itemize}
+	\item We can now state the coinduction principle (for conatural numbers) and see the duality in full glory.
+	\item The corecursion principle: there is a corecursor \texttt{corec} that satisfies some equations: \\
+	\texttt{corec : forall X, (X -> option X) -> X -> conat} \\
+	\texttt{pred (corec X p x) =\\
+	match p x with \\
+	| None => None \\
+	| Some x' => Some (corec X p x') \\
+	end}
+	\item Given two functions \texttt{f} and \texttt{g} that satisfy the same corecursive equation as \texttt{corec X f}, we have \\
+	\texttt{forall x : X, f x = g x}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Meaning of the coinduction principle}
+\begin{itemize}
+	\item Meaning of the corecursor is quite clear -- it's for making functions into coinductives. But what is the (hidden) meaning of the uniqueness principle?
+	\item To understand it, we need to notice that, even though it is a statement about \textbf{functions} into coinductives, in reality it says something about equality of \textbf{elements} of coinductives.
+	\item For conatural numbers, it states that two numbers are equal if they both have equal predecessors, and their predecessors have equal predecessors and so on.
+	\item For streams, it would state that two streams are equal if they have equal heads and their tails have equal heads and so on.
+	\item So, the uniqueness principle states that bisimilar numbers/streams/structures are equal.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Induction, recursion, uniqueness}
+\begin{itemize}
+	\item The recursion and uniqueness principles are independent -- they can't be derived from each other.
+	\item They can, however, be derived from the induction principle -- to prove \texttt{forall i : I, f i = g i} where \texttt{I} is an inductive type, just use induction.
+	\item For each case in the proof, we have the appropriate equations and inductive hypotheses, so it is straightforward.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Coinduction, corecursion, uniqueness}
+\begin{itemize}
+	\item The corecursion and uniqueness principles are independent too.
+	\item However, because (in Coq) we only have the corecursion principle, we can't derive the uniqueness principle in any way.
+	\item How to prove \texttt{forall x : X, f x = g x}, for \texttt{f g : X -> C} and \texttt{C} coinductive?
+	\item Because the equality type is inductive, we can't use corecursion and because we don't know anything about \texttt{X}, we can't do anything with it.
+	\item Therefore we are stuck without the uniqueness principle. In Coq, we can't prove bisimilar objects equal without assuming axioms.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{How to add (co)inductive types to type theory?}
+\begin{itemize}
+	\item We saw in earlier talks that in set theory, coinductive definitions are not a basic concept and have to be derived from the ZF axioms. Inductives aren't basic either.
+	\item What's the situation in Coq and type theory in general?
+	\item There are three approaches that I'm aware of: schematic definitions, W-types/M-types and universes of codes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Schematic definitions}
+\begin{itemize}
+	\item In Coq, (co)inductives come from schematic definitions using the keywords \texttt{(Co)Inductive}.
+	\item After issuing such a definition, appropriate rules for the defined type are added to the environment.
+	\item Pros: direct.
+	\item Cons: defining a (co)inductive type is a side effect! This can be seen in e.g. parameterized module in which we define a (co)inductive type. Then two modules defined by instantiating the parameters contain two copies of the same (co)inductive type which are different.
+	\item Another cons: schematic definitions are hard to formally describe and therefore they are usually found in implementations, not in papers.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{W-types, M-types}
+\begin{itemize}
+	\item Another approach to adding inductives/coinductives are the so called W-types/M-types respectively.
+	\item The idea is to add a single parameterized type \texttt{W} whose elements are well-founded trees.
+	\item The parameters control the shape of the trees -- the branching, types of non-recursive arguments etc. Particular inductive types can be recovered by instantiating \texttt{W} with the appropriate parameters.
+	\item The type \texttt{M} is dual to \texttt{W} and can be used to represent coinductives.
+	\item Pros: one ring to rule them all, simple to describe formally.
+	\item Cons: encodings using \texttt{W} and \texttt{M} have some overhead.
+	\item Cons: \texttt{W} and \texttt{M} are inherently higher-order, which means we need functional extensionality to prove things equal.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Universes of codes}
+\begin{itemize}
+	\item Another idea is to have an (inductive) type, whose elements are ``codes'', and a function that interprets these codes as real inductive/coinductive types.
+	\item This is basically a defunctionalization of \texttt{W} and \texttt{M}.
+	\item Pros: one ring to rule them all, first-order so no problems with functional extensionality, not an encoding.
+	\item Cons: harder to formally describe than \texttt{W} and \texttt{M}.
+	\item See the paper ``The gentle art of levitation'' for more: \url{http://jmchapman.io/papers/levitation.pdf}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Snippet}
+\begin{itemize}
+	\item Code snippets that illustrate how schematic definitions are side-effecting and how the definitions of \texttt{W} and \texttt{M} look like can be found in the file \texttt{SchematicWM.v}.
+\end{itemize}
+\end{frame}
+
+\section{Finite, infinite and searchable types}
+
+\begin{frame}{Drinker's paradox}
+\begin{itemize}
+	\item There's this well-known theorem of classical logic:
+	\item \textbf{In every non-empty bar, there is a person such that if this person drinks, then everybody drinks.}
+	\item This is usually presented to first-year students to make them confuse if-then implication with if-then causality.
+	\item If we rewrite $P \to Q$ as $\neg P \lor Q$, the theorem gets demystified: \textbf{in every nonempty bar there is a person that does not drink or everybody drinks.}
+	\item An algorithmically-minded person might wonder: how to find the (non)drinker? Is it even possible? After all, the bar may be infinite!
+	\item But remember that we are using classical logic -- we can find him using the Law of Excluded Middle.
+	\item How does this translate to constructive logic and functional programming?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Searchable types}
+\begin{center}
+	$\displaystyle \texttt{Searchable}(A) :\equiv \prod_{p : A \to \mathbf{2}} \left(\sum_{x : A} p(x) = true\right) + \left(\prod_{x : A} p(x) = false\right)$
+\end{center}
+\begin{itemize}
+	\item A type that satisfies the drinker's paradox statement is called \textbf{searchable}.
+	\item Spelled out explicitly: a type is searchable if, given any boolean predicate, we can either find an element that satisfies it or prove that there is no such element.
+	\item Drinker's Paradox says that in classical logic all types are searchable. But which types are searchable constructively?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Interlude: why should we care?}
+\begin{itemize}
+	\item Maybe you're wondering why you should care about searchable types.
+	\item Besides their evident utility when you're looking for something, there's a very nice theorem that may convince you.
+\end{itemize}
+\begin{theorem}
+	Let $A$ and $B$ be types. If $A$ is searchable and $B$ has decidable equality, then the function type $A \to B$ has decidable equality.
+\end{theorem}
+\begin{proof}
+	We have $f, g : A \to B$. To decide whether $f = g$ just search the domain $A$ for an $x : A$ that satisfies $f(x) \neq g(x)$. If you find one, $f \neq g$. Otherwise, $f = g$ (assuming functional extensionality)
+\end{proof}
+\end{frame}
+
+\begin{frame}{Which types are searchable?}
+\begin{itemize}
+	\item So, which types are searchable?
+	\item Certainly every finite type is searchable -- just check every element.
+	\item If $A$ and $B$ are searchable, so are $A + B$ and $A \times B$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Which types are not searchable?}
+\begin{itemize}
+	\item On the other hand, there are some types which should not be searchable, unless we assume excluded middle.
+	\item The most prominent such type is $\mathbb{N}$. We should have a strong feeling that it's impossible to search infinitely many elements in finite time.
+	\item So, without excluded middle we can't prove that infinite types are searchable, right?
+	\item \textbf{Yes we can (sometimes).}
+	\item Whether a type is searchable depends not only on the number of elements, but also on how the type is laid out as a space.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Searchability of the conaturals}
+\begin{itemize}
+	\item The most prominent infinite type that is searchable are the conatural numbers (like natural numbers, but defined coinductively).
+	\item A snippet with a Coq proof of their searchability is named \texttt{Searchability.v}
+	\item It is based on the paper \url{https://www.cs.bham.ac.uk/~mhe/papers/omniscient-journal-revised.pdf}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercises 1/2}
+\begin{itemize}
+	\item Ex. 1: remove the axiom \texttt{sim\_eq} from my Coq proof of searchability of the conaturals and prove a lemma to fill the hole.
+	\item Ex. 2: define a type of streams, its bisimilarity relation and its corecursion principle. Then prove that the uniqueness principle implies that bisimilar streams are equal.
+	\item Ex. 3: define the bisimilarity relation of \texttt{M}-types. Encode streams using \texttt{M}-types. Prove that the types of normal streams and \texttt{M}-encoded streams are isomorphic (i.e. there are functions going both ways, such that the composition result is bisimilar to the argument).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercises 2/2}
+\begin{itemize}
+	\item Ex. 4: for a type $A$ its subtypes can be represented by the type $\displaystyle \sum_{x : A} P(x)$ where $P : A \to \text{Prop}$ is a predicate. Are subtypes of searchable types searchable? If yes, give a Coq proof. If not, give a counterexample and find a notion of subtype such that subtypes of searchable types are searchable.
+	\item Grading: all or nothing. These exercises were designed to look very scary but in fact they are very easy :)
+\end{itemize}
+\end{frame}
+
+\end{document}

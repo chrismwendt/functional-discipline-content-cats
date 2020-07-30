@@ -1,0 +1,47 @@
+The name overwriting behaviour of the naming routine can be configured
+inside any \CoDi\ scope using the \lstinline!overwrite! key.
+
+\begin{lstlisting}
+/codi/overwrite = false | alias | true
+\end{lstlisting}
+
+The three available settings correspond to different naming priorities.
+A side by side comparison completely illustrates their meanings.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}
+\obj{ |[overwrite=false] (A')| A &     % names: A'    (default)
+      |[overwrite=alias] (B')| B &     % names: B', B
+      |[overwrite=true]  (C')| C \\ }; % names:     C
+\mor A' -> B';
+\mor B  -> C;
+\end{codi}
+\end{tcblisting}
+
+\hfill$\therefore$\hfill\null
+
+The default behaviour avoids overwriting explicit labels in order
+to give you a simple means of naming conflict resolution.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}[tetragonal]
+\obj {        A & |(A')| A \\
+       |(Z')| Z &        Z \\ };
+\mor A -> A';
+\mor Z -> Z';
+\end{codi}
+\end{tcblisting}
+
+Sometimes you might want an object to have both a literal and a
+semantic alias.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}
+\obj [overwrite=alias] { A & |(center)| B & |(right)| C \\ };
+\mor A -> B;
+\mor center -> right;
+\end{codi}
+\end{tcblisting}
+
+The hard overwriting behaviour ignores any label except generated
+ones; it exists for completeness and debugging purposes.

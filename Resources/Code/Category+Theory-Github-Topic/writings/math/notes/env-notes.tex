@@ -1,0 +1,391 @@
+% macros=mkvi    % https://wiki.contextgarden.net/MkVI
+
+\startenvironment *
+
+% mode=mkiv
+\mainlanguage[\getvariable{document}{language}]
+\version [\getvariable{document}{version}]
+
+% NOTE: export cannot deal with 'part's as of 2019-04-05
+% The math also needs a typesetting library. See the following:
+% https://tex.stackexchange.com/questions/545014/
+% https://tex.stackexchange.com/questions/43052/
+% \setupbackend [export=yes]    % export to other formats
+
+\setupcolors [state=start]       % otherwise you get greyscale
+\usecolors [x11]    % X11 colors, use \showcolor[x11] to get a list
+
+% See wiki/Command/setupinteraction
+\setupinteraction [
+	state=start,  % make hyperlinks active
+	menu=on,
+	click=yes,
+	style=normal,
+	color=\getvariable{document}{color-link-external},   % Seems like this is the only color working
+	contrastcolor=\getvariable{document}{color-link-internal},   % This is not working
+	openaction=FitWidth,    % Make the PDF open in 'fit width' mode
+	focus=standard,    % stop switching to 'fit page' mode when clicking an interdocument hyperlink
+	title=\getvariable{document}{title},
+	subtitle=\getvariable{document}{subtitle},
+	author=\getvariable{document}{author},
+	date=\getvariable{document}{date},
+	keyword=\getvariable{document}{keyword}]
+\setupinteractionscreen [option=bookmark]    % wiki/Command/setupinteractionscreen
+
+\placebookmarks
+	[part,chapter,section,subsection]    % creates bookmarks for the specified headers
+	[chapter]    % but opens only chapter ones by default
+
+\setuppapersize [A4] [A4]    % For US paper, use [letter][letter]
+% wiki/Layout
+\setuplayout [
+	topspace=4em,
+	backspace=6em,
+	% leftmargin=2em,
+	header=2em,
+	footer=2em,
+	height=middle,
+	width=middle]
+% \showframe    % show the layout
+
+% useful urls
+\useURL[author-personal-email][mailto:SudipSinha.Bappa@Gmail.com][][SudipSinha.Bappa@Gmail.com]
+\useURL[author-official-email][mailto:ssinha4@lsu.edu][][ssinha4@lsu.edu]
+\useURL[author-home][https://SudipSinha.GitHub.io][][homepage]
+
+% Headers and footers (wiki/Headers_and_Footers)
+% \setupfooter[style=\it]
+% \setupfootertexts[\date\hfill \ConTeXt\ template]
+\setuppagenumbering[location={header, right}, style=\bold]
+% TODO: Put section titles/numbers in headers
+
+
+% Formatting sections
+\setuphead [part] [
+	placehead=yes,    % This is needed to show the header
+	alternative=middle,    % Aligns the title at the horizontal center
+	before={\emptylines[16]},
+	numbercommand=\groupedcommand{}{\emptylines[2]},    % Puts space between the part label and the title.
+	color=\getvariable{document}{color-headings},
+	bodypartlabel=part,    % Puts the word "part" in the table of contents
+	style=\tfd\smallcaps,
+	header=empty, footer=empty]    % Empty headers and footers for part pages
+
+\setuphead [chapter] [
+	color=\getvariable{document}{color-headings},
+	alternative=margin,
+	style=\tfc\smallcaps]
+
+\setuphead [section] [
+	color=\getvariable{document}{color-headings},
+	alternative=margin,
+	style=\tfb]
+
+\setuphead [subsection] [
+	color=\getvariable{document}{color-headings},
+	alternative=margin,
+	style=\tfa]
+
+% Title for exercise sets.
+\definehead [exercises] [chapter] [
+	before=\hairline\blank,
+	after=\nowhitespace\hairline]
+
+
+
+\setupwhitespace[small]    % Set inter-paragraph spacing
+% % comment the next line to not indent paragraphs
+% \setupindenting[medium, yes]
+
+% Contents (https://www.contextgarden.net/Table_of_Contents)
+\setupcombinedlist [content] [list={part, chapter, section, exercises}]
+
+% Bibliography (https://www.contextgarden.net/Bibliography_mkiv)
+\usebtxdataset[../bibliographies/stochastics.bib]
+\usebtxdataset[../bibliographies/Itô.bib]
+\usebtxdataset[../bibliographies/Kuo-integral.bib]
+\usebtxdataset[../bibliographies/large-deviations.bib]
+\usebtxdataset[../bibliographies/combinatorics.bib]
+\usebtxdataset[../bibliographies/number-theory.bib]
+\usebtxdataset[../bibliographies/logic.bib]
+\usebtxdefinitions[apa]    % apa or aps
+% Use \cite[short][#key] to get XXX19 type citations
+
+% Diagrams
+\usemodule[tikz]
+\usetikzlibrary[cd]
+
+% Description environment
+\definedescription [dscr] [
+	headstyle=bold,
+	style=normal,
+	align=flushleft,
+	alternative=hanging,
+	width=broad,
+	margin=1em]
+
+% Highlighting
+\definehighlight [comment] [color=darkgray]
+\definehighlight [good] [color=darkgreen]
+\definehighlight [okay] [color=darkorange]
+\definehighlight [ugly] [color=orangered]
+
+% % Abbreviations
+% \definesynonyms[abbreviation][abbreviations][\infull]
+% % \setupsynonyms[style=cap]
+% \abbreviation{rv}{random variable}
+% \abbreviation{sp}{stochastic process}
+% \abbreviation{wlog}{without loss of generality}
+
+
+% Mathematics
+
+% Referencing equations using \ineq    % wiki/References
+\definereferenceformat [ineq] [left=(,right=),text={equation }]
+
+% I have not completely figured out a way to create a dot between \cdot and \bullet
+% The following might provide a way, but is too primitive.
+% The problem is that the scaling is about the bottom of the line.
+\def \argdotsub{\scale[factor=2]{∙}}    % wiki/Command/scale
+\def \argdotmid{\raisebox{0.125em}\vbox{\scale[factor=2]{∙}}}
+\def \argdotsup{\raisebox{0.125em}\vbox{\scale[factor=2]{∙}}}
+% \def \argdot{\raisebox{-0.2em}\vbox{\scale[factor=6]{⋅}}}
+% \def \argdotu{\raisebox{-0em}\vbox{\scale[factor=6]{⋅}}}
+% \def \argdot{\raisebox{-0.2em}\vbox{\scale[factor=6]{⋅}}}
+% \scale[scale=2]{\cdot}} + Z(\scale[sx=3, sy=2]{⋅})
+
+% Caution: spaces do not work between the elements)
+\def \delim#left#right#arguments{\left#left #arguments \right#right}
+
+% Intervals
+\def \intoo#arguments{\delim{(}{)}{#arguments}}
+\def \intoc#arguments{\delim{(}{]}{#arguments}}
+\def \intco#arguments{\delim{[}{)}{#arguments}}
+\def \intcc#arguments{\delim{[}{]}{#arguments}}
+
+% Brackets
+\def \brnd#arguments{\delim{(}{)}{#arguments}}
+\def \bcrl#arguments{\delim{\{}{\}}{#arguments}}
+\def \bsqr#arguments{\delim{[}{]}{#arguments}}
+\def \bngl#arguments{\delim{⟨}{⟩}{#arguments}}
+
+% Commonly used delimiters
+\def \inn#arguments{\delim{⟨}{⟩}{#arguments}}
+\def \pair#arguments{\delim{(}{)}{#arguments}}
+\def \norm#arguments{\delim{‖}{‖}{#arguments}}
+\def \abs#arguments{\delim{|}{|}{#arguments}}
+\def \floor#arguments{\delim{⌊}{⌋}{#arguments}}
+\def \ceil#arguments{\delim{⌈}{⌉}{#arguments}}
+
+% Logic
+\def \ntuple#arguments{\delim{⟨}{⟩}{#arguments}}
+\def \logicimpl[#structure][#satisfaction]#arguments{⊨_{#structure} #arguments \ \bsqr{#satisfaction}}
+\def \nlogicimpl[#structure][#satisfaction]#arguments{⊭_{#structure} #arguments \ \bsqr{#satisfaction}}
+
+% Complex
+\def \conj#arguments{\overline{#arguments}}
+
+% Algebra
+\def \linspan#arguments{\mfunction{span} \delim{\{}{\}}{#arguments}}
+\def \inv#arguments{#arguments^{-1}}
+
+% Differentials  (We cannot use space before differentials here because we might want to use μ(\d x).)
+\def \d{\text{d}}
+\def \D{\text{D}}
+
+% Topology
+\def \clsr#set{\overline{#set}}
+\def \intr#set{{#set}^°}
+% \def \intr[#set]{\mathring{#set}}
+\def \bdy[#set]{∂ #set}
+
+% Limits
+\definemathcommand [ess] [limop] {\mfunction{ess}}
+\definemathcommand [limsupm] [limop] {\overline{\lim}}
+\definemathcommand [liminfm] [limop] {\underline{\lim}}
+\definemathcommand [ℙlim] [limop] {ℙ\lim}
+\definemathcommand [Ltwolim] [limop] {L^2\lim}
+
+% Algebra
+\definemathcommand [ker] [nolop] {\mfunction{ker}}
+\definemathcommand [im] [nolop] {\mfunction{im}}
+
+% Arithmetic
+\definemathcommand [gcd] [nolop] {\mfunction{gcd}}
+\definemathcommand [lcm] [nolop] {\mfunction{lcm}}
+\definemathcommand [dim] [limop] {\mfunction{dim}}
+% \def \congruent[#modulus]{≡_{#modulus}}
+
+% Probability
+\definemathcommand [infinitelyoften] [nolop] {\,\mfunction{i.o.}}
+\definemathcommand [eventually] [nolop] {\,\mfunction{ev}}
+
+% Matrices
+\definemathmatrix
+	[rndmatrix]
+	[left={\,\left(\,},right={\,\right)\,}]
+
+
+% Styling for mathematical environments
+
+%  Randomized frame
+\startuseMPgraphic{background:mathematicalargumentframe}
+	path p;
+	for i = 1 upto nofmultipars :
+		p = (multipars[i]  topenlarged 1pt  bottomenlarged 1pt)  randomized 1pt;
+		fill p withcolor green + 0.9375 * white;    % hard to change (works: red, green, blue, white, lightgray + linear combinations)
+		draw p withcolor \MPvar{linecolor}
+		withpen pencircle scaled \MPvar{linewidth};
+	endfor;
+\stopuseMPgraphic
+
+\definetextbackground [mathematicalargumentframe] [
+	mp=background:mathematicalargumentframe,
+	location=paragraph,
+	rulethickness=0.5pt,
+	framecolor=green,    % hard to change (works: red, green, blue, white, lightgray)
+	width=broad,
+	leftoffset=4pt,
+	rightoffset=4pt,
+	before={\testpage[3]\blank[small]},
+	after={\blank[small]}]
+
+
+% Mathematical environments
+
+\definereferenceformat [eqref] [left=(, right=)]    % Referencing formulas
+
+\defineenumeration [mathematicalstatement] [
+	title=yes,    % now we can use title={}
+	% number=no,    % uncomment if statements shoud not be numbered
+	way=bychapter,    % eg wiki/Command/defineenumeration
+	prefix=chapter,    % eg wiki/Command/defineenumeration
+	headstyle=bold,
+	headcolor=\getvariable{document}{color-foreground},
+	width=fit,
+	alternative=hanging,  % top
+	hang=fit,
+	style=italic]
+
+\defineenumeration [mathematicalargument] [
+	title=yes,    % now we can use title={}
+	number=no,    % removes numbering
+	headstyle=italic,
+	titlestyle=italic,
+	style=normal,
+	headcolor=\getvariable{document}{color-foreground},
+	width=fit,
+	alternative=hanging,  % top
+	hang=fit,
+	before={\startmathematicalargumentframe},
+	after={\stopmathematicalargumentframe},
+	% before=,
+	% after=,
+	closesymbol={□}]
+
+\defineenumeration [definition] [mathematicalstatement] [
+	text=Definition,
+	list=all,
+	listtext={Definition }]
+
+\defineenumeration [lemma] [mathematicalstatement] [
+	text=Lemma,
+	list=all,
+	listtext={Lemma }]
+
+\defineenumeration [theorem] [mathematicalstatement] [
+	text=Theorem,
+	list=all,
+	listtext={Theorem }]
+
+\defineenumeration [corollary] [mathematicalstatement] [
+	text=Corollary,
+	list=all,
+	listtext={Corollary }]
+
+\defineenumeration [proposition] [mathematicalstatement] [
+	text=Proposition,
+	list=all,
+	listtext={Proposition }]
+
+\defineenumeration [remark] [mathematicalstatement] [
+	text=Remark,
+	list=all,
+	listtext={Remark }]
+
+\defineenumeration [example] [mathematicalstatement] [
+	text=Example,
+	list=all,
+	listtext={Example }]
+
+\defineenumeration [exercise] [mathematicalstatement] [
+	text=Exercise,
+	list=all,
+	listtext={Exercise }]
+
+\defineenumeration [proof] [mathematicalargument] [
+	text=Proof.]
+
+\defineenumeration [solution] [mathematicalargument] [
+	text=Solution.]
+
+
+% Tables
+\startsetups table
+	\setupTABLE [row] [1] [style=bold]
+	\setupTABLE [each] [each] [width=2em, height=2em, align={middle,midddle}, frame=off]
+	\setupTABLE [r] [1] [topframe=on, rulethickness=2bp]
+	\setupTABLE [r] [2] [topframe=on, rulethickness=0.5bp]
+	\setupTABLE [r] [last] [bottomframe=on, rulethickness=2bp]
+\stopsetups
+
+
+% Setup colors
+\setupbackgrounds[page][
+	background={color, backgraphics, foreground},
+	backgroundcolor=\getvariable{document}{color-background}]
+\startcolor[\getvariable{document}{color-foreground}]    % text color
+
+
+% Fonts
+% https://wiki.contextgarden.net/Protrusion
+\enableregime[utf]    % Enable Unicode fonts. Necessary for a lot of fonts.
+\setupcapitals[sc=yes]    % Enable Capital Letter use
+
+\usesymbols [fontawesome]    % https://fontawesome.com/icons
+\definefontfeature
+	[default]
+	[default]
+	[protrusion=quality, expansion=quality]
+\usetypescript [\getvariable{document}{font}]
+\setupbodyfont [reset, \getvariable{document}{font}, \getvariable{document}{fontsize}]
+
+\setupalign [hanging, hz, lesshyphenation, tolerant, stretch]
+
+
+% Page numbering (TeXSE/108676)
+% Roman numerals for front matter page numbering
+\definestructureconversionset [frontpart:pagenumber] [] [romannumerals]
+
+% Arabic numerals for body matter page numbering
+\startsectionblockenvironment [bodypart]
+	\setcounter [userpage] [1]
+\stopsectionblockenvironment
+
+
+% Title page
+\def \title {
+	\startalignment [center]
+	\emptylines[4]
+		{\tfd \getvariable{document}{title}}
+	\emptylines[2]
+		{\tfc \getvariable{document}{subtitle}}
+	\emptylines[4]
+		{\tfa \getvariable{document}{author}}
+	\emptylines[2]
+		{\tfa \getvariable{document}{date}}
+	\emptylines[4]
+	\stopalignment
+}
+
+\stopenvironment

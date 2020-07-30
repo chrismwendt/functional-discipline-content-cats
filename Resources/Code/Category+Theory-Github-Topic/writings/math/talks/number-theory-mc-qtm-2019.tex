@@ -1,0 +1,1785 @@
+%%%%%%%%%%%%%
+% Variables %
+%%%%%%%%%%%%%
+
+% Language
+\setvariables [document] [language=en]
+
+% Version and mode
+\setvariables [document] [version=final]    % {final, concept, temporary}
+\setvariables [document] [mode=presentation]    % {presentation, manuscript, handout}
+
+% Colors
+% https://coolors.co/app
+\setvariables [document] [color-link-external=royalblue]
+\setvariables [document] [color-link-internal=violetred]
+\setvariables [document] [color-background-0=white]
+\setvariables [document] [color-background-1=mistyrose]
+\setvariables [document] [color-background-2=whitesmoke]
+\setvariables [document] [color-foreground-0=deepskyblue4]
+\setvariables [document] [color-foreground-1=firebrick4]
+\setvariables [document] [color-foreground-2=darkslategray]
+\setvariables [document] [color-solution=pink]    % Change to pink to see
+
+% Fonts
+% Options: palatino, xitsbidi, euler
+\setvariables [document] [font=palatino]
+\setvariables [document] [fontsize-presentation=38pt]
+\setvariables [document] [fontsize-document=12pt]
+
+% Information
+\setvariables [document] [title={Number Theory notes}]
+\setvariables [document] [subtitle={Math Circle @ QTM in Emory University}]
+\setvariables [document] [author={Sudip Sinha}]
+\setvariables [document] [date={2019-07-27}]
+\setvariables [document] [keyword={mathematics, number theory, notes}]
+
+% Logo
+\setvariables [document] [logo=MC_Logo_Symbol_672x668.png]
+
+
+% Environment
+\environment env-talks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the document starts.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\starttext
+
+\startfrontmatter
+
+%%%%%%%%%%%%%%%%
+% Front matter %
+%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-0}]
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+
+% \startmode [handout]
+% \startcolumns
+% \stopmode
+
+
+% Introduction
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+\startmode [presentation]
+
+\startslide
+
+\startalign [middle]
+
+	{\tfd Number Theory 1}
+
+	\blank[2*line]
+
+	{\tfb \getvariable{document}{author}}
+
+	\blank[line]
+
+	{\tfa \getvariable{document}{date}}
+
+	\blank[2*line]
+
+	\color[\getvariable{document}{color-foreground-0}]{Math Circle @ QTM}
+
+\stopslide
+
+
+% Table of contents
+\startslide [title={Outline}]
+	\placecontent
+\stopslide
+
+\stopmode
+
+% \startmode [manuscript]
+
+% This presentation is going to be on two topics:
+% \startitemize[n,nowhite,after]
+% 	\item  Generalization of stochastic integrals developed primarily by Professor H.-H. Kuo
+% 	\item  Applications of generalization in large deviations theory
+% \stopitemize
+
+% \stopmode
+
+\stopfrontmatter
+
+
+
+\startbodymatter
+
+%%%%%%%%%%%%%%%%
+% Introduction %
+%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-0}]
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+\startsection [title={Introduction and Logic}, reference=sec:introduction-logic]
+
+\startmode [presentation]
+
+\startslide [title={Introduction and motivation}]
+
+	\startitemize [m]
+
+		\item  What is number theory?
+
+		\item  Why do we study number theory?
+
+		\item  Why do we want to \emph{prove} ideas?
+
+		\item  More importantly, what constitutes a \emph{proof}?
+
+		\item  Inductive vs deductive reasoning.
+	\stopitemize
+\stopslide
+
+\startslide[title={Inductive reasoning}]
+
+	\startitemize [4]
+
+		\item  \bold{Inductive reasoning} derives general propositions from specific examples.
+		
+		\item  \bold{Caution}: \emph{We can never be sure, our conclusion(s) can be wrong!} \frown
+
+		\item  \emph{Example} 1:
+			\startitemize [n, joinedup]
+				\item  We throw lots of things, very often.
+				\item  In all our experiments, the things fell down and not up.
+				\item  So we conclude that likely, things always fall down.
+			\stopitemize
+
+			\blank[big]
+			How we may be wrong:
+			\startitemize [n, joinedup]
+				\item  An iron nail under a big magnet moves up (given that it is sufficiently close).
+				\item  A helium balloon goes up. 
+			\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide[title={Inductive reasoning: problems}]
+
+	\startitemize [4]
+
+		\item  \emph{Example} 2:  You ask your parent for a candy and (s)he buys it for you. You ask for a fancy shoe, and (s)he buys it. Now you ask for a Lamborghini ….
+
+		\item  \emph{Example} 3 (\emph{Black swan}):  In the 16th century, it was believed (in Europe) that swans are always white. But in 1697, Dutch explorers led by Willem de Vlamingh became the first Europeans to see black swans, in Western Australia.
+
+		\item  \emph{Example} 4:  \m{\frac11 = 1, \frac22 = 1, \frac33 = 1, …}; so clearly \m{\frac{n}{n} = 1} for every integer \m{n}.
+
+		\item  \emph{Example} 5:  Illusions, e.g. drawings by \emph{M. C. Escher}.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Problems with inductive reasoning: Illusion \#1}]
+
+	\placefigure[fit]{Ascending and Descending, M. C. Escher}{\externalfigure[Escher_Ascending_and_Descending.jpg][height=0.7\textheight]}
+\stopslide
+
+\startslide [title={Problems with inductive reasoning: Illusion \#2}]
+
+	\placefigure[fit]{Waterfall, M. C. Escher}{\externalfigure[Escher_Waterfall.jpg][height=0.7\textheight]}
+\stopslide
+
+\startslide[title={Deductive reasoning}]
+
+	\startitemize [4]
+
+		\item  \bold{Deductive reasoning} is deriving a logically certain conclusion from one or more premises.
+
+		\item  We do \emph{NOT} question the premises. But \emph{if the premises are correct, then all conclusions are correct.} \smile
+
+		\item  \emph{Example}: Question: Do \m{\bf{Q_1}} and \m{\bf{Q_2}} \emph{imply} \m{\bf{Q_3}}?
+			\startitemize [5, joinedup]
+				\item  (\m{\bf{Q_1}})  All men are mortal. (First premise)
+				\item  (\m{\bf{Q_2}})  Socrates is a man. (Second premise)
+				\item  (\m{\bf{Q_3}})  Therefore, Socrates is mortal. (Conclusion)
+			\stopitemize
+
+		\item  \emph{Example}: Question: Does \m{\bf{P_1}} and \m{\bf{P_2}} \emph{imply} \m{\bf{P_3}}?
+			\startitemize [5, joinedup]
+				\item  (\m{\bf{P_1}})  Borogoves are mimsy whenever it is brillig.
+				\item  (\m{\bf{P_2}})  It is now brillig, and this thing is a borogove.
+				\item  (\m{\bf{P_3}})  Hence this thing is mimsy.
+			\stopitemize
+
+		\item  We do not \emph{need} an inherent \emph{meaning} of the terms.
+
+	\stopitemize
+\stopslide
+
+\startslide[title={Inductive vs deductive reasoning}]
+	\placetable[force, none]{}{%    % This centers the table
+	\starttabulate[|l|l|l|] 
+		\FL
+		\NC  Criteria  \VL  Inductive reasoning  \VL  Deductive reasoning  \NR
+		\FL
+		\NC  Basis  \VL  evidence  \VL  logic  \NR
+		\NC  Questions  \VL  everything (arguments and premises)  \VL  only the arguments, not premises  \NR
+		\NC  Direction  \VL  \emph{bottom-up}  \VL  \emph{top-down}  \NR
+		\NC  Natural to humans?  \VL  yes  \VL  no  \NR
+		\NC  Requires \emph{meaning}s of terms?  \VL  yes  \VL  no  \NR
+		\NC  Applicability  \VL  good in practice  \VL  good for theory  \NR
+		\NC  Examples  \VL  science, statistics and machine learning  \VL  logic, mathematics  \NR
+		\BL
+	\stoptabulate
+	}
+\stopslide
+
+\startslide [title={Logic}]
+
+	\startitemize [4]
+		
+		\item  \emph{Logic} is a \emph{language} to formalize deductive reasoning.
+
+		\item  Logic comprises of the following elements.
+		\startitemize [4]
+			\item  propositions
+			\item  connectives (not, and, or, implies, iff)
+			\item  quantifications (for all, there exists)
+			\item  values (true, false)
+			\item  a way to assign propositions to a value
+		\stopitemize
+
+		\item  \bold{Important}: \bad{The propositions in the following section are not necessarily true. Please be mindful.}
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Logic: elementary \emph{proposition}s}]
+
+	\startitemize [4]
+
+		\item  Elementary \emph{proposition}s, represented by \m{P, Q}, etc, are statements saying something.
+
+		\item  Examples:
+			\startitemize [5]
+				\item  \m{P_1} ≡ \m{n} is an integer
+				\item  \m{P_2} ≡ \m{n} is \emph{not} an integer
+				\item  \m{P_3} ≡ \m{2 n} is even
+				\item  \m{P_4} ≡ \m{n = \frac12}
+				\item  \m{Q_1} ≡ Socrates is a man
+				\item  \m{Q_2} ≡ Socrates is smart
+			\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Logic: compound \emph{proposition}s}]
+	
+	\startitemize [4]
+		\item  Compound \emph{proposition}s are elementary propositions connected by connectives.
+
+		\item  \emph{Connectives}: 
+		\startitemize [4, columns, joinedup]
+			\item  not (¬, or ∼): \comment{\m{¬ P} is called the negation of \m{P}.}
+			\item  and (∧)
+			\item  or (∨)
+			\item  implies (→, or ⟹)
+			\item  iff (↔, or ⟺, or ≡)
+		\stopitemize
+
+		\item  Examples:
+			\startitemize [m, joinedup]
+				\item  \m{(¬ P_1)}  ≡  not (\m{n} is an integer)  ≡  (\m{n} is \emph{not} an integer)
+				\item  \m{(P_1 ∨ P_2)}  ≡  (\m{n} is an integer) or (\m{n} is \emph{not} an integer)
+				\item  \m{(Q_1 ∧ Q_2)}  ≡  (Socrates is a man) and (Socrates is smart)
+				\item  \m{((¬ P_1) ↔ P_2)}  ≡  not (\m{n} is an integer)  if and only if (\m{n} is \emph{not} an integer)
+				\item  \m{(P_1 → P_3)}  ≡  (\m{n} is an integer) implies (\m{2 n} is even)
+				\item  \m{(P_4 → P_3)}  ≡  (\m{n = \frac12}) implies (\m{2 n} is even)
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\startslide [title={Truth tables}]
+	
+	\startitemize [4]
+		\item  Question: How do we find the value of a compound propositions?
+		\item  Exercise: Fill up the table. Think carefully about what the \quote{?}s should be. 
+		
+			\comment{For example, think about the statement: \quotation{If \m{2} is odd, then Sudip is can fly.}}
+	\stopitemize
+
+	\placetable[force, none]{}{%    % This centers the table
+	\starttabulate [|c|c|c|c|c|c|c|]
+		\FL
+		\NC  P  \NC  Q  \VL  (¬ P)  \NC  (P ∧ Q)  \NC  (P ∨ Q)  \NC  (P → Q)  \NC  (P ↔ Q)  \NR
+		\FL
+		\NC  T  \NC  T  \VL    \NC    \NC    \NC     \NC    \NR
+		\NC  T  \NC  F  \VL    \NC    \NC    \NC     \NC    \NR
+		\NC  F  \NC  T  \VL    \NC    \NC    \NC  ?  \NC    \NR
+		\NC  F  \NC  F  \VL    \NC    \NC    \NC  ?  \NC    \NR
+		\BL
+	\stoptabulate
+	}
+
+	\soln{If \m{P} is false, then the implication is automatically true.}
+
+\stopslide
+
+\startslide [title={Truth tables}]
+	
+	\placetable[force,none]{}{%    % This centers the table
+	\starttabulate [|c|c|c|c|c|c|c|c|]
+		\FL
+		\NC  P  \NC  Q  \VL  (¬ P)  \NC  (¬ Q)  \NC  (P ∧ Q)  \NC  (P ∨ Q)  \NC  (P → Q)  \NC  ((¬ Q) → (¬ P))  \NR
+		\FL
+		\NC  T  \NC  T  \VL  F  \NC   F  \NC  T  \NC  T  \NC  T  \NC  T  \NR
+		\NC  T  \NC  F  \VL  F  \NC   T  \NC  F  \NC  T  \NC  F  \NC  F  \NR
+		\NC  F  \NC  T  \VL  T  \NC   F  \NC  F  \NC  T  \NC  T  \NC  T  \NR
+		\NC  F  \NC  F  \VL  T  \NC   T  \NC  F  \NC  F  \NC  T  \NC  T  \NR
+		\BL
+	\stoptabulate
+	}
+
+	\placetable[force,none]{}{%    % This centers the table
+	\starttabulate [|c|c|c|c|c|c|]
+		\FL
+		\NC  P  \NC  Q  \VL  (P → Q)  \NC  (Q → P)  \NC  ((P → Q) ∧ (Q → P))  \NC  (P ↔ Q)  \NR
+		\FL
+		\NC  T  \NC  T  \VL  T  \NC  T  \NC  T  \NC  T  \NR
+		\NC  T  \NC  F  \VL  F  \NC  T  \NC  F  \NC  F  \NR
+		\NC  F  \NC  T  \VL  T  \NC  F  \NC  F  \NC  F  \NR
+		\NC  F  \NC  F  \VL  T  \NC  T  \NC  T  \NC  T  \NR
+		\BL
+	\stoptabulate
+	}
+
+	\startitemize [4, joinedup]
+		\item  Truth tables evaluate the values of the expression for each values of the elementary propositions.
+		\item  Two propositions are equivalent if their truth table outputs are the same.
+	\stopitemize
+
+\stopslide
+
+\startslide [title={Thinking \emph{logic}ally about mathematical statements}]
+
+	\startitemize [4]
+		
+		\item  Every mathematical statement can be broken down into their constituent propositions.
+
+		\item  Example
+			\startitemize [m]
+				\item  Original statement: if the product of two integers is even, then each of them is even.
+				\item  Analysis: if \color[darkgreen]{the product of two integers \m{n} and \m{m} is even}, then \color[blue]{\m{m} is even} and \color[orange]{\m{n} is even}.
+				\item  Writing this down logically.
+				\startitemize [5, joinedup]
+					\item  \m{P_1}  ≡  \color[darkgreen]{the product of two integers \m{n} and \m{m} is even}
+					\item  \m{P_2}  ≡  \color[blue]{\m{m} is even}
+					\item  \m{P_3}  ≡  \color[orange]{\m{n} is even}
+					\item  Statement ≡ \m{(P_1 → (P_2 ∧ P_3))}
+				\stopitemize
+				\item  Question: is the above statement true or false? How can you prove it?
+				\item  \comment{Note}:  The part before the implication is called the \important{antecedent}, and the part after is called the \important{consequent}. In this example, \m{P_1} is the antecedent and \m{(P_2 ∧ P_3)} is the consequent.
+			\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Quantifiers}]
+	
+	There are two quantifiers.
+
+	\startitemize [4]
+		
+		\item  Universal quantifier a.k.a. for every (∀).
+
+			Example 1: Every man has a head.
+
+			Example 2: Every natural number is even.
+
+		\item  Existential quantifier a.k.a. there exists (∃).
+
+			Example 1: There is a man who can survive without breathing for an hour.
+
+			Example 2: There exists a natural number which is the sum of its factors (except itself).
+
+	\stopitemize
+
+	Exercise: Analyze the following statements logically.
+
+	\startitemize[m]
+		
+		\item  Every odd number has a odd factor.
+
+		\item  (Fermat's last theorem)  No three positive integers \m{a}, \m{b}, and \m{c} satisfy the equation \m{a^n + b^n = c^n} for any integer value of \m{n} greater than 2.
+	\stopitemize
+\stopslide
+
+\startslide [title={Tautologies}]
+	
+	Let \m{P}, \m{Q}, and \m{R} be propositions. Verify the following using truth tables.
+	\startitemize [4, joinedup]		
+		\item  (idempotence)  \m{(P ↔ (P ∧ P))}, and \m{(P ↔ (P ∨ P))}.
+		\item  (commutativity)  \m{((P ∧ Q) ↔ (Q ∧ P))}, and \m{((P ∨ Q) ↔ (Q ∨ P))}.
+		\item  (associativity)  \m{(((P ∧ Q) ∧ R) ↔ (P ∧ (Q ∧ R)))}, and \m{(((P ∨ Q) ∨ R) ↔ (P ∨ (Q ∨ R)))}.
+		\item  (distributivity)  \m{((P ∨ (Q ∧ R)) ↔ ((P ∨ Q) ∧ (P ∨ R)))}, and \m{((P ∧ (Q ∨ R)) ↔ ((P ∧ Q) ∨ (P ∧ R)))}.
+		\item  (identity)  \m{((P ∧ T) ↔ P)}, \m{((P ∨ F) ↔ P)}; \m{((P ∧ F) ↔ F)}, \m{((P ∨ T) ↔ T)}.
+		\item  (involution)  \m{((¬(¬P)) ↔ P)}.
+		\item  (implication)  \m{((P → Q) ↔ ((¬ P) ∨ Q))}.
+		\item  \important{(de Morgan's laws)  \m{((¬(P ∧ Q)) ↔ ((¬ P) ∨ (¬ Q)))}, and \m{((¬(P ∨ Q)) ↔ ((¬ P) ∧ (¬ Q)))}.}
+		\item  \important{(contrapositive)  \m{((P → Q) ↔ ((¬ Q) → (¬ P)))}.}
+	\stopitemize
+
+	\blank[big]
+	\important{The \emph{converse} of \m{(P → Q)} is \m{(Q → P)}, and they have no relation to each other}.
+
+	Exercise: Find an example for which the proposition is true but its converse is not.
+\stopslide
+
+\startslide [title={Proof methods}]
+
+	\startitemize [4]
+		\item  \important{Direct proof} of \m{P → Q}: Start with \m{P} and logically arrive at \m{Q}.
+		\item  \important{Proof by contrapositive} of \m{P → Q}: Direct proof of \m{((¬ Q) → (¬ P))}.
+		\item  \important{Proof by contradition} of a general proposition \m{P}: Consider that \m{P} is false. Logically show that this leads to an absurdity.
+		\item  \important{Proof by induction} \comment{(more on this later)}.
+		\item  Proof by construction.
+		\item  Proof by exhaustion.
+		\item  Probabilistic proof.
+		\item  Combinatorial proof.
+		\item  Nonconstructive proof.
+		% \item  \comment{Proof by intimidation. (Do NOT try this at your home!)}
+	\stopitemize
+\stopslide
+
+\startslide [title={Guidelines for proofs}]
+
+	\comment{Note}: Proving a proposition is an art. There is no algorithms, only rules of thumb.
+	
+	\startitemize [4]
+		
+		\item  To prove an existential proposition \important{true}, we need to find just one instance (\emph{example}) for which the proposition is \important{true}.
+
+		\item  To prove an universal proposition \important{false}, we need to find just one instance (\emph{counterexample}) for which the statement is \important{false}.
+
+		\item  It is sometimes easier to prove the contrapositive of a proposition.
+
+		\item  To prove a uniqueness proposition, proofs by contradiction is usually more convenient.
+
+		\item  Sometimes it is pragmatic to break down a proof into two or more cases.
+	\stopitemize
+\stopslide
+
+\startslide [title={Product of odd numbers}]
+	
+	Before we use a term in mathematics, we try to define it as clearly as possible.
+
+	\startdefinition [title={Even and odd numbers}]
+		\color[\getvariable{document}{color-background-0}]{This is to introduce a blank line.}
+
+		An integer \m{n} is called \important{even} if there exists an integer \m{k} such that \m{n = 2k}.
+
+		An integer \m{n} is called \important{odd} if there exists an integer \m{k} such that \m{n = 2k + 1}.
+	\stopdefinition
+	
+	\startitemize [m]
+		\item  What can we say about the product of two odd numbers?
+
+			Prove your claim.
+		\item  If the product of two numbers is odd, can we say anything about the numbers?
+
+			Prove your claim.
+	\stopitemize
+\stopslide
+
+\stopmode
+
+\stopsection
+
+
+
+\startsection [title={Number systems}, reference=number-systems]
+
+\startmode [presentation]
+
+\startslide [title={Natural numbers and integers}]
+
+	\startitemize [m]
+		
+		\item  From ancient times, humans have been able to identify the natural numbers.
+			
+			In modern mathematics, the \emph{set} of natural numbers is represented by \m{ℕ = \bcrl[1, 2, 3, …]}.
+
+		\item  We can add/subtract, and multiply/divide any two natural numbers.
+
+		\item  Are these all the numbers there can be?
+
+		\item  Question: Are the natural numbers \important{closed} under addition/subtraction?
+
+			\comment{(Being closed with respect to an operation means that the result is also in the given set.)}
+			\startitemize [a, joinedup]				
+				\item  I had 4 objects, and I gave 4 objects to Luci. How many objects do I now have?
+				\item  I owed Luci 20 \$, but I have 4 \$ with me. How much do I have?
+			\stopitemize
+
+		\item  This gives rise to the integers, \m{ℤ = \bcrl[…, -2, -1, 0, 1, 2, …]}, which are \important{closed} under addition/subtraction.
+
+		\item  From now on, we shall forget about subtraction, because subtracting an integer is essentially adding the negative of that integer. 
+	\stopitemize
+\stopslide
+
+\startslide [title={Rational numbers}]
+	
+	\startitemize [m]
+
+		\item  Note that the set of natural numbers is contained within the set of integers.
+
+			In set theory, we say \quotation{\m{ℕ} is a \important{subset} of \m{ℤ}}, and denote this by \m{ℕ ⊂ ℤ}.
+		
+		\item  Are the integers closed with respect to multiplication/division?
+
+		\item  This gives rise to the set of rational numbers, \m{ℚ = \bcrl[\frac{p}{q} : p, q ∈ ℤ, q ≠ 0]}.
+
+		\item  And now we can forget about division since it is simply multiplication with the inverse of the number.
+
+		\item  Is that all we have?
+
+		\item  Let's go on a journey.
+	\stopitemize
+\stopslide
+
+\startslide [title={Time Travel adventures: Part 1}]
+
+	Date: around 550 BC
+
+	Place: Pythagoras's office in Samos, Greece
+
+	Stage: Pythagoras has recently claimed that he has proved a major equality about the sides of right-angled triangles. We go there to investigate his claims.
+
+	\blank[big]
+
+	Unfortunately, a lot of people have been trying do the same, so he has a filtering mechanism in place. We need to answer the following question to get in:
+	
+	\startitemize [m]
+	
+		\item  What is the area of a rectangle of dimensions \m{a × b}?
+		
+		\item  What is the area of a right angled triangle of base \m{b} and height \m{h}?
+
+			But of course, now he wants a proof of that fact.
+
+			\comment{(Remember that Pythagoras is a geometer, so he is very happy with a geometric proof.)}
+		
+		\item  What is the sum of angles of a triangle?
+	\stopitemize
+
+	Once we answer these question, we get to see Pythagoras's proof.
+\stopslide
+
+\startslide [title={Time Travel adventures: Part 1}]
+
+	Unfortunately, he believes that those who want to understand his work must themselves discover it. All he gives us is the following picture.
+
+	\important{On the other side is scribbled \m{a^2 + b^2 = c^2}.}
+
+	\placefigure[fit]{Pythagoras's art}{\externalfigure[Pythagoras_theorem.png][height=0.3\textwidth]}
+
+\stopslide
+
+\startslide [title={Length of hypotenuse of a right-angled triangle}]
+	
+	\startitemize [m]
+		
+		\item  Using the Pythagoras formula, Find the length of the hypotenuse of a right-angled triangle of base and height equaling 1.
+
+		\item  Is the above length rational?
+			
+			How can you be sure?
+	\stopitemize
+\stopslide
+
+\startslide [title={We start with a lemma}]
+	
+	\startlemma
+		Let \m{n} be an integer. The \m{n^2} is even iff \m{n} is even.
+	\stoplemma
+
+	\startproof
+		\comment{Note that this is a ⟺ statement. So we can break it into two parts.}
+
+		Before we look at the individual directions, let us note that when \m{p} is an integer, so are \m{p^2}, \m{2 p}, \m{2 p^2}, and \m{2 p^2 + 2p}.
+
+		\bold{(⟸)}
+		\comment{We use a direct proof for this direction.}
+
+		Since \m{n} is even, there is an integer \m{p} such that \m{n = 2p}. Now, \m{n^2 = (2 p)^2 = 4 p^2 = 2 (2 p^2)}, so \m{n^2} is even.
+
+		\bold{(⟹)}
+		\comment{We prove this by proving the contrapositive.}
+
+		Suppose \m{n} is \emph{not} even, that is, \m{n} is odd. Then we can write \m{n = 2 p + 1} for some integer \m{p}. Then \m{n^2 = (2 p + 1)^2 = 4 p^2 + 4 p + 1 = 2 (2 p^2 + 2 p) + 1}, so \m{n^2} is also odd.
+	
+	\stopproof
+
+	\comment{Remark: A \emph{lemma} is a proposition that leads to a bigger result, which are usually called \emph{theorems}. \emph{Corollaries} are applications or minor modifications of theorems that are themselves quite important. From a \emph{logic}al viewpoint, there is no difference between lemmas, propositions, theorems, or corollaries.}
+
+\stopslide
+
+\startslide [title={Rationality of \m{\sqrt2}}]
+	
+	\starttheorem [title={Euclid}]
+		\m{\sqrt2} is not rational.
+	\stoptheorem
+
+	\startproof
+		\comment{We prove this by contradiction.}
+
+		Suppose \m{\sqrt2} is rational. Then it can be written in the form \m{\frac{p}{q}}, where \m{p, q} are integers with \m{q ≠ 0}. Assume that \m{p} and \m{q} have no common factors, for if they do, we can reduce the fraction to its lowest terms and then call the numerator \m{p} and the denominator \m{q}.
+
+		Squaring and simplifying, we get
+		\placeformula[sqrt2-notin-Q]  \startformula
+			p^2 = 2 q^2 .
+		\stopformula
+		This means \m{p^2} is even. By the previous lemma, \m{p} is also even. Therefore, there exists an integer \m{r} such that \m{p = 2 r}, and so \m{p^2 = 4 r^2}.
+
+		Putting this in equation \eqref[sqrt2-notin-Q], we get \m{4 r^2 = 2 q^2}, which is the same as \m{2 r^2 = q^2}. This means that \m{q^2}, and thus \m{q}, is even.
+
+		But we had assumed that \m{p} and \m{q} have no common factors. Thus we have a contradiction. Therefore, our supposition must be wrong, and it must be that \m{\sqrt{2}} is not rational.
+	\stopproof
+\stopslide
+
+\startslide [title={Real numbers}]
+	
+	\startitemize [m]
+		
+		\item  We showed that if we desire closure with respect to solutions of algebraic equations, we end up with numbers which may not be rational.
+
+		\item  \emph{Algebraic} numbers are numbers that are solutions of algebraic equations. For example, \m{\sqrt{2}} is the solution of the algebraic equation \m{x^2 = 2}, and is thus algebraic.
+
+		\item  It can be shown that there are numbers that are not solutions of any algebraic equation. Such numbers are called \emph{transcendental} numbers. Example: \m{π}.
+
+		\item  All rational numbers are algebraic. But the converse is not true, e.g. \m{\sqrt{2}}.
+
+		\item  The set of all algebraic and transcendental numbers is called the set of \emph{real} numbers.
+
+		\item  The set of real numbers that are not rational is called the set of \emph{irrational} numbers.
+
+		\item  Closure with respect to square roots of negative number gives us an even bigger set, called the \emph{complex} numbers.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Geometric series}]
+	
+	\startproposition [title={Finite geometric series}]
+		The sum of the finite geometric series is given by the formula
+		\startformula
+			1 + r + r^2 + ⋯ + r^{n - 1} = \frac{1 - r^n}{1 - r}.
+		\stopformula
+	\stopproposition
+		
+	\startproof
+		\startformula \startalign[n=4, align={left, right, right, left}]
+			\NC  \text{Let }          \NC          S  = \NC  1 +  \NC  r + r^2 + ⋯ + r^{n - 1} ,  \NR
+			\NC  \text{so }           \NC         rS  = \NC       \NC  r + r^2 + ⋯ + r^{n - 1}  +  r^n . \NR
+			\NC  \text{Subtracting},  \NC  (1 - r) S  = \NC  1 - r^n .
+		\stopalign \stopformula
+	\stopproof
+
+	\startproposition [title={Infinite geometric series}]
+		For \m{\abs[r] < 1}, the sum of the infinite geometric series is given
+		\startformula
+			1 + r + r^2 + ⋯  = \frac{1}{1 - r}.
+		\stopformula
+	\stopproposition
+\stopslide
+
+\startslide [title={Exercises}]
+	
+	\startitemize [m]
+
+		\item  Prove that there exist positive integers \m{n} and \m{m} such that \m{n^2 + m^2 = 100}.
+			\soln{Hint: \m{3^2 + 4^2 = 5^2}.}
+		
+		\item  Assume that we have a rectangular box of dimensions \m{l × b × h}.
+			\startitemize [a, joinedup]
+				\item  What is the length of the diagonal?
+					\soln{\m{\sqrt{l^2 + b^2 + h^2}}.}
+				\item  By what factor must each side be scaled so that the length of the diagonal is doubled?
+					\soln{\m{2}.}
+			\stopitemize
+
+		\item  Represent the repeating decimals as rational numbers.
+			\startitemize [a, joinedup]
+				\item  \m{0.2222…}
+				\item  \m{42.2888…}
+				\item  \m{0.9999…}
+
+					\soln{Method 1: \m{n = 0.9 + 0.09 + 0.009 + ⋯ = 0.9(1 + 10^{-1} + 10^{-2} + ⋯) = 0.9 ⋅ \frac{1}{1 - 0.1} = 1}.}
+
+					\soln{Method 2: Let \m{n = 0.9999…}. Then \m{10 n = 9.9999…}. Subtracting, \m{9 n = 9}, so \m{n = 1}.}
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\stopmode
+
+\stopsection
+
+
+
+\startsection [title={Mathematical Induction}, reference=induction]
+
+\startmode [presentation]
+
+\startslide [title={Motivation}]
+	
+	Try to find expression for the following for an arbitrary natural number \m{n}.
+	\startitemize [m]
+		\item  \m{1 + 2 + 3 + ⋯ + n}
+		\item  \m{1 + 3 + 5 + ⋯ + (2n - 1)}
+	\stopitemize
+
+	I claim that \m{2^n > n} for every natural number \m{n}. Is it true? How can we prove it?
+\stopslide
+
+\startslide [title={Proving a fact for all natural numbers}]
+	
+	\startitemize [m]
+
+		\item  Mathematical induction is a proof method of deductive reasoning.
+
+			\important{Do not confuse it with inductive reasoning.}
+		
+		\item  Principle of mathematical induction. Suppose \m{P(n)} is a statement about the natural number \m{n}. Assume that we can establish both of the following
+			\startitemize [n, joinedup]
+				\item  (\important{base case})  prove \m{P(1)} is true, and
+				\item  (\important{inductive step}) for an arbitrary natural number \m{k}, if \m{P(k)} is true, then \m{P(k + 1)} is also true.
+			\stopitemize
+			Then \m{P(n)} is true for all natural numbers \m{n}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Proof of \m{2^n > n} using mathematical induction}]
+	
+	\startproposition
+		\m{2^n > n} for every natural number \m{n}. 
+	\stopproposition
+
+	\startproof
+		\comment{This is a proof by mathematical induction.}
+
+		Let \m{P(n) ≡ 2^n > n}.
+		
+		\bold{Base case}  \m{P(1) ≡ 2^1 > 1} is true.
+
+		\bold{Inductive step}  Suppose \m{P(k)} is true for some \m{k ∈ ℕ}. That is, suppose \m{2^k > k}.
+
+		We have to prove that \m{P(k + 1)} is true (\comment{using the supposition}).
+
+		From our supposition, multiplying both sides by 2, we get \m{2^{k + 1} > 2k}.
+
+		\comment{All we need to do now is to show that \m{2k ≥ k + 1}.}
+
+		Since \m{k ≥ 1}, \m{k + k ≥pp k + 1}. Therefore \m{2^{k + 1} > k + 1}.
+
+		We have shown that \m{P(k + 1)} is true. The concludes the inductive step.
+
+		By the principle of mathematical induction, \m{2^n > n} is true for every postive integer \m{n}.
+
+	\stopproof
+
+	\startexercise
+		Try to prove the motivating examples by mathematical induction.
+	\stopexercise
+
+\stopslide
+
+\startslide [title={Telescoping series}]
+	
+	\startexercise
+		Simplify each of the following sums to express it as a simple fraction:
+		\startitemize [i, joinedup]
+			\item  \m{\frac{1}{1 ⋅ 2} \soln{= \frac12}}
+			\item  \m{\frac{1}{1 ⋅ 2} + \frac{1}{2 ⋅ 3} \soln{= \frac23}}
+			\item  \m{\frac{1}{1 ⋅ 2} + \frac{1}{2 ⋅ 3} + \frac{1}{3 ⋅ 4} \soln{= \frac34}}
+			\item  \m{\frac{1}{1 ⋅ 2} + \frac{1}{2 ⋅ 3} + \frac{1}{3 ⋅ 4} + ⋯ + \frac{1}{n (n + 1)} \soln{= \frac{n}{n + 1}}}
+		\stopitemize
+		Prove your result.
+	\stopexercise
+
+	\startsolution
+		\startformula \startalign[n=7]
+			\NC  S  \NC  =  \NC  \frac{1}{1 ⋅ 2}  \NC  + \frac{1}{2 ⋅ 3}  \NC  + \frac{1}{3 ⋅ 4}  \NC  + ⋯  \NC  + \frac{1}{n (n + 1)}  \NR
+			\NC    \NC  =  \NC  \frac{2 - 1}{1 ⋅ 2}  \NC  + \frac{3 - 2}{2 ⋅ 3}  \NC  + \frac{4 - 3}{3 ⋅ 4}  \NC  + ⋯  \NC  + \frac{(n + 1) - n}{n (n + 1)}  \NR
+			\NC    \NC  =  \NC  \brnd[\frac11 - \frac12]  \NC  + \brnd[\frac12 - \frac13]  \NC  + \brnd[\frac13 - \frac14]  \NC  + ⋯  \NC  + \brnd[\frac1n - \frac{1}{n+1}]  \NR
+			\NC    \NC  =  \NC  1  -  \frac{1}{n+1}  \NC  =  \frac{n}{n + 1}
+		\stopalign \stopformula
+	\stopsolution
+\stopslide
+
+\stopmode
+
+\stopsection
+
+
+
+% \startsection [title={Probability}, reference=probability]
+
+% \startmode [presentation]
+
+% \startslide [title={Basics}]
+
+% 	\startitemize [m]
+		
+% 		\item  The sample space \m{S} is an enumeration of all possibilities.
+
+% 		\item  To each outcome in the sample space, we assign a probability.
+
+% 			If all the events are equally likely, the probability is \m{\frac{1}{\abs[S]}}.
+
+% 		\item  Expectation is the \emph{probability-weighted average} of the quantity we are interested in.
+
+% 		\item  Exercise: A game consists of tossing an unfair coins twice. The tails side weighs twice the heads side.
+% 			The payoffs are as in the following table
+% 			\starttabulate [∣c∣r∣]
+% 				\FL
+% 				\NC  Outcome  \NC  Payoff (USD)  \NR
+% 				\FL
+% 				\NC  (H, H)  \NC  27  \NR
+% 				\NC  (H, T)  \NC   9  \NR
+% 				\NC  (T, H)  \NC   0  \NR
+% 				\NC  (T, T)  \NC  -9  \NR
+% 				\BL
+% 			\stoptabulate
+% 			Draw a \emph{tree diagram} to represent the process and calculate the \emph{expected payoff} for the player.
+
+% 	\stopitemize
+% \stopslide
+
+% \startslide [title={Exercises}]
+	
+% 	\startitemize [m]
+		
+% 		\item  An experiment consist of tossing a fair coin three times. The number of heads is represented by \m{X}. What is the expectation of \m{X}?
+
+% 		\item  A new test for tuberculosis (TB) has been developed by MathCircle Pharma. A certain Mr. Sinha is wondering if he should get tested (his doctor feels that he has TB). Mr. Sinha cares only about money and wants to decide if he should get tested.
+
+% 		TB is relatively rare these days, so let’s say only 1\% of the population has the disease.  Also, the test for the disease is 99\% accurate. This means that if you have TB, there is a 99\% probability you will have a positive test, and if you do not have TB then there is a 99\% probability you will have a negative test.
+
+% 		\startitemize [a, joinedup]
+% 			\item  If he has TB and the test is positive, he will have to shell out 5000 USD for treatment.
+% 			\item  If he has TB and the test is negative, he will sue MathCircle Pharma for 100000 USD for misleading results.
+% 			\item  If he does not have TB and the test is positive, he will sue MathCircle Pharma for 10000 USD for misleading results.
+% 			\item  If he does not have TB and the test is negative, he will have to pay 100 USD to his doctor.
+% 		\stopitemize
+
+% 	\stopitemize
+
+% \stopslide
+
+% \stopmode
+
+% \stopsection
+
+
+
+\startsection [title={Primes}, reference=primes]
+
+\startmode [presentation]
+
+\startslide [title={Divisibility}]
+
+	\startdefinition
+		Let \m{a, d ∈ ℤ}. We say that \important{\m{d} divides \m{a}} if there exists \m{q ∈ ℤ} such that \m{a = q d}.
+
+		We write this as \important{\m{d ∣ a}}. If \m{d} does not divide \m{a}, we write \important{\m{d ∤ a}}.
+		
+		All integers that divide \m{a ∈ ℤ} are called \important{factor}s of \m{a}.
+	\stopdefinition
+	
+	Exercises
+	\startitemize [m]
+		
+		\item  Which of the following is/are true? Give reasons.
+			\startitemize[i, columns, three, joinedup]
+				\item  \m{13 ∣ 52}.  \soln{T (\m{52 = 4 ⋅ 13}).}
+				\item  \m{27 ∣ 9}.  \soln{F (\m{9 < 27}).}
+				\item  \m{-3 ∣ 9}.  \soln{T (\m{9 = (-3) ⋅ (-3)}).}
+			\stopitemize
+
+		\item  Let \m{a} be an integer. Is the following true? Prove your claim.
+			\startitemize [i, columns, three, joinedup]
+				\item  \m{a ∣ a}.  \soln{T (\m{a = 1 ⋅ a}).}
+				\item  \m{1 ∣ a}.  \soln{T (\m{a = a ⋅ 1}).}
+				\item  \m{a ∣ 0}.  \soln{T (\m{0 = 0 ⋅ a}).}
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\startslide [title={Properties of \m{∣}}]
+	Let \m{a, b, c, d, m, n, ∈ ℤ}. Check if the following are true. Prove your claim.
+	\startitemize[m]
+		
+		\item  If \m{a ∣ b} and \m{a ∣ (b + c)}, then \m{a ∣ c}.
+			\soln{T (\m{b = q_1 a} and \m{b + c = q_2 a}, so \m{c = (q_2 - q_1) a}).}
+		
+		\item  If \m{a ∣ b} and \m{c ∣ d}, then \m{a c ∣ b d}.
+			\soln{T (\m{b = q_1 a} and \m{d = q_2 c}, so \m{b d = (q_1 q_2) (a b)}).}
+		
+		\item  If \m{a b ∣ c}, then \m{a ∣ c} and \m{b ∣ c}.
+			\soln{T (\m{c = q a b}, so \m{c = (q b) a} and \m{c = (q a) b}).}
+		
+		\item  If \m{a ∣ c} and \m{b ∣ c}, then \m{a b ∣ c}.
+			\soln{F (\m{a = 2, b = 6, c = 6}).}
+		
+		\item  If \m{a ∣ b c}, then \m{a ∣ b} or \m{a ∣ c}.
+			\soln{F (\m{a = 6, b = 3, c = 2}).}
+		
+		\item  If \m{a ∣ b^2}, then \m{a ∣ b}.
+			\soln{F (\m{a = 4, b = 2}).}
+		
+		\item  (Transitivity)  If \m{a ∣ b} and \m{b ∣ c}, then \m{a ∣ c}.
+			\soln{T (\m{b = q_1 a} and \m{c = q_2 b}, so \m{c = (q_2 q_1) a}).}
+		
+		\item  (Linear combination)  If \m{d ∣ a} and \m{d ∣ b}, then \m{d ∣ (m a + n b)}.
+			
+			\soln{T (\m{a = q_1 d} and \m{b = q_2 d}, so \m{m a + n b = (m q_1 + n q_2) d}).}
+	
+	\stopitemize
+\stopslide
+
+\startslide [title={Primes}]
+	
+	\startdefinition
+		Let \m{p ∈ ℕ, p > 1}. Then \m{p} is called \important{prime} if its only positive factors are \m{1} and \m{p}.
+
+		A natural number \m{n > 1} is called \important{composite} if it is \emph{not} prime.
+	\stopdefinition
+
+	\starttheorem [title={prime factorization}]
+		Let \m{n > 1} be a natural number. Then \m{n} can be written as a product of one or more prime numbers.
+	\stoptheorem
+
+	Exercises
+	\startitemize [m]
+		
+		% \item  Let \m{p} and \m{q} be prime numbers. If \m{p ∣ q}, then \m{p = q}.
+
+		\item  \emph{Consecutive} integers are integers that differ by 1, such as 17 and 18.
+
+			\startitemize [a, joinedup]
+				\item  Find a pair of consecutive integers that are both prime. How many such pairs are there?
+				\item  Find a pair of consecutive integers that are both composite. How many such pairs are there?
+			\stopitemize
+		
+		\item  Prove that for all \m{n ≥ 2}, \m{n^3 + 1} is \emph{not} prime.
+
+		\item  Prove that every integer greater than \m{11} can be written as the sum of two composite numbers.
+	\stopitemize
+\stopslide
+
+\startslide [title={Counting primes}]
+	
+	\starttheorem [title={Euclid, ∼ 300 {\sc bc}}]
+		There are infinitely many primes.
+	\stoptheorem
+
+	\startproof
+		Suppose that \m{ℙ = \bcrl[p_1, p_2, …, p_n]} is a set of primes for some \m{n ∈ ℕ}.
+
+		Let \m{m = p_1 ⋅ p_2 ⋅ p_3 ⋅ ⋯ ⋅ p_n} and \m{q = m + 1}. Now, \m{q} is either a prime or it is not.
+
+		If it is a prime, we have one more prime than our original set.
+
+		If it is not a prime, it must be divisible by some prime \m{p}. If \m{p ∈ ℙ}, then it would divide both \m{m} and \m{m + 1}. Therefore it would divide the difference, that is, \m{p ∣ 1}, which is impossible. Therefore \m{p ∉ ℙ}.
+
+		Therefore a new prime can always be found to any given (finite) set of primes.
+	\stopproof
+
+	\startcorollary
+		Any two consecutive integers are coprime (have no common factor except 1).
+	\stopcorollary
+
+	\startremark
+		It is a common misconception that \m{q} is prime. For example, let \m{p_1 = 3} and \m{p_2 = 5}. Then \m{p_1 ⋅ p_2 + 1 = 16}, which is composite.
+
+		Even if one considers \m{n} smallest primes, it is not true. For example, \m{2 ⋅ 3 ⋅ 5 ⋅ 7 ⋅ 11 ⋅ 13 + 1 = 30031 = 59 ⋅ 509}.
+	\stopremark
+
+	\startremark
+		This is not a proof by contradiction. For more details, see \cite{HardyWoodgold2009}.
+	\stopremark
+
+\stopslide
+
+\startslide [title={Exercises}]
+	
+	\startitemize [m]
+		
+		\item  Let \m{n} be a natural number. Prove that every factor of \m{(n! + 1)} other than \m{1} is strictly greater than \m{n}.
+
+		\item  Let \m{n ≥ 3}. Prove that there exists a prime \m{p} such that \m{n < p < n!}.
+
+		\item  Find a million consecutive composite numbers. Explain your reasoning.
+
+			\comment{Think about \m{1000001! + j}, where \m{j = 2, 3, …, 1000002}.}
+	
+		\item  Consider the following numbers of the form \m{p^2 - 1}, where \m{p} is prime.
+
+			For example, \m{5^2 - 1 = 24, 7^2 - 1 = 48, 11^2 - 1 = 120}.
+
+			Each of these numbers is divisible by \m{12}.
+
+			Prove or provide a counterexample to the following statement:
+
+			If \m{p > 3} is prime, then \m{24 ∣ (p^2 − 1)}.
+
+			\soln{Firstly, \m{p^2 - 1 = (p - 1)(p + 1)}. Now, \m{p - 1, p, p + 1} are consecutive numbers, so one of them must be divisible by 3, and it cannot be \m{p}. So \m{3} is a factor of \m{p^2 - 1}. Moreover, \m{p - 1} and \m{p + 1} are consecutive even numbers, so one of them must be divisible by \m{4} and the other by \m{2}. Therefore \m{p^2 - 1} must be divisible by \m{2 ⋅ 3 ⋅ 4 = 24}.}
+
+	\stopitemize
+\stopslide
+
+\startslide [title={The prime number theorem}]
+	
+	\startdefinition
+		For every natural number \m{n}, define \m{π(n)} to be the number of primes less than or equal to \m{n}.
+	\stopdefinition
+
+	\startexample
+		\m{π(7) = 4}, because there are 4 primes less than or equal to \m{7}, namely \m{2, 3, 5, 7}.
+	\stopexample
+	
+	\starttheorem
+		\m{π(n) → \frac{n}{\log(n)}} as \m{n → ∞}.
+
+		\comment{Here \m{\log} is the natural logarithm function.}
+	\stoptheorem
+
+	\startremark
+		The prime number theorem tell us how the primes are distributed on a grand scale, but it does not tell us precisely which numbers will be prime and which will not.
+	\stopremark
+\stopslide
+
+\startslide [title={Landau's problems, 1912}]
+	
+	\startitemize [m]
+		
+		\item  \important{Goldbach's conjecture} states that every even integer greater than 2 can be expressed as the sum of two primes.
+
+		\item  A \emph{twin prime} is a prime number that is either 2 less or 2 more than another prime number — for example, either member of the \emph{twin prime pair} (41, 43). The \important{twin prime conjecture} states that there are infinitely many primes \m{p} such that \m{p + 2} is also prime.
+
+		\item  \important{Legendre's conjecture} states that there is a prime number between \m{n^2} and \m{(n + 1)^2} for every natural number \m{n}.
+
+		\item  The \important{near-square primes conjecture} states that there are infinitely many primes of the form \m{n^2 + 1}.		
+	\stopitemize  
+\stopslide
+
+\startslide [title={More conjectures}]
+	
+	\startitemize [m]
+		\item  A \emph{Mersenne prime} is a prime of the form \m{2^n − 1}, e.g. 
+			\startitemize[i, joinedup]
+				\item  Show that if \m{2^n - 1} is prime, then \m{n} has to be prime.
+				\item  Give a counterexample to show that the converse is not true.
+			\stopitemize
+			The \important{Mersenne prime conjecture} states that there are infinitely many Mersenne primes.
+
+		\item  A \emph{perfect number} is a positive integer that is equal to the sum of its proper positive divisors, e.g. 6, 28, 496. There are two questions.
+			\startitemize [i, joinedup]
+				\item  Are there infinitely many perfect numbers?
+				\item  Are there any odd perfect numbers?
+			\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Generating primes — some attempts}]
+	
+	\startitemize [m]
+		
+		\item  Trying to find a function.
+			\startitemize [i, joinedup]
+
+				\item  Fermat numbers: \m{F(n) = 2^{2^n} + 1}.
+
+					Euler showed that \m{F(5)} is composite after a century.
+
+				\item  Euler: \m{f(n) = n^2 + n + 41}.
+
+					Show that \m{f(40)} and \m{f(41)} are both composite.
+
+				\item  Mersenne numbers: For \m{p} prime, define \m{M(p) = 2^p - 1}.
+
+					Counterexample: \m{M(11)} is composite.
+			\stopitemize
+
+		\item  Trying to find a sequence which gives infinitely many primes.
+			\startitemize [i, joinedup]
+				
+				\item  \important{Near-square prime conjecture}: \m{g(n) = n^2 + 1}
+
+				\item  \important{Dirichlet prime number theorem}:  The sequence given by \m{D(n) = a n + b} has infinitely many prime numbers if \m{a} and \m{b} are coprime.
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\startslide [title={Status of research for primes}]
+	
+	\startitemize[m]
+		\item  Identifying primes: solved — AKS primality test \cite{AgrawalKayalSaxena2004}.
+		\item  Constructing primes: open.
+		\item  Fast factorization: open.
+		\item  Twin primes: substantial progress by Yitang Zhang in 2013, as well as by James Maynard, Terence Tao.
+	\stopitemize
+\stopslide
+
+\stopmode
+
+\stopsection
+
+
+
+\startsection [title={The Euclidean algorithm}, reference=sec:linear-diophantine-eqns]
+
+\startmode [presentation]
+
+\startslide [title={GCD and LCM}]
+
+	\startdefinition
+		Let \m{a, b ∈ ℤ, a ≠ 0 ≠ b}. The \important{greatest common divisor} (\m{\gcd}) of \m{a} and \m{b} is the largest \m{d ∈ ℕ} for which \m{d ∣ a} and \m{d ∣ b}. We write \m{d = \gcd(a, b)}.
+
+		Numbers whose \m{\gcd} is 1 are called \important{coprime}.
+
+		Let \m{a, b ∈ ℤ, a ≠ 0 ≠ b}. The \important{least common multiple} (\m{\lcm}) of \m{a} and \m{b} is the smallest \m{m ∈ ℕ} for which \m{a ∣ m} and \m{b ∣ m}. We write \m{m = \lcm(a, b)}.
+
+	\stopdefinition
+	
+	Exercises	
+	\startitemize [m]
+		
+		\item  Calculate the \m{\gcd} and \m{\lcm} of the following sets of numbers:
+			\startitemize [i, columns, joinedup]
+				\item  \m{\bcrl[1331, 2431]}
+				\item  \m{\bcrl[-60, 207]}
+				\item  \m{\bcrl[15, 20, 48]}
+				\item  \m{\bcrl[2^2 ⋅ 3^2 ⋅ 5^2, \ 5^3 ⋅ 11 ⋅ 17^2, \ 2 ⋅ 5^2 ⋅ 17]}
+			\stopitemize
+
+		\item  Let \m{n > 1} be an natural number. Calculate the \m{\gcd} and \m{\lcm} of the following sets of numbers:
+			\startitemize [i, columns, joinedup]
+				\item  \m{\bcrl[n, 3 n]}.
+				\item  \m{\bcrl[n, n + 1]}.
+				\item  \m{\bcrl[n^2 - 1, n + 1]}
+				\item  \m{\bcrl[n - 1, n + 1]} for \m{n} even.
+				\item  \m{\bcrl[n - 1, n + 1]} for \m{n} odd.
+			\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Exercises}]
+
+	\startitemize [m]
+		
+		\item  Let \m{x, y ∈ ℤ} and let \m{a ∈ ℕ}. Prove that \m{\gcd(ax, ay) = a · \gcd(x, y)}.
+
+		\item  Reason why \m{\lcm(a, b) ⋅ \gcd(a,b) = a · b}.
+
+		\item  You have to fill a \m{16 × 7} floor with square tiles. What is the largest size of tiles you can use?
+
+			Can you express your answer as a linear combination of \m{16} and \m{7}?
+
+			Can you draw a diagram of what you did?  \important{Please do this!}
+
+		\item  You have to fill a \m{64 × 28} floor with square tiles. What is the largest size of tiles you can use?
+		
+		\item  You have tiles of size \m{4 × 6}. What is the smallest square room you can fill with these tiles?
+
+	\stopitemize
+\stopslide
+
+\startslide [title={The Euclidean algorithm}]
+
+	\startdefinition [title={Euclidean algorithm}]
+		\startitemize [m, joinedup]
+			\item  Use Division Theorem to find \m{q_1} and \m{r_1} such that \m{a = q_1 b + r_1}.
+			\item[Euclidean-algo-iteration]  Let \m{a = b} and \m{b = r_1} and use the Division Theorem again to find \m{q_2} and \m{r_2} such that \m{b = q_2 r_1 + r_2}.
+			\item  Repeat Step \in[Euclidean-algo-iteration] until we get \m{r_k = 0}. Then the \m{\gcd} is \m{q_k}.
+		\stopitemize
+	\stopdefinition
+	
+	Exercise: Use the Euclidean algorithm to find the \m{\gcd} of \m{42823} and \m{6409}.
+	\soln{
+		\startformula  \startalign[n=4, align={right, right, right, right}]
+			\NC 42823 =  \NC  6 ⋅  \NC 6409 +  \NC 4369  \NR
+			\NC  6409 =  \NC  1 ⋅  \NC 4369 +  \NC 2040  \NR
+			\NC  4369 =  \NC  2 ⋅  \NC 2040 +  \NC  289  \NR
+			\NC  2040 =  \NC  7 ⋅  \NC  289 +  \NC   17  \NR
+			\NC   289 =  \NC 17 ⋅  \NC   17 +  \NC    0  \NR
+		\stopalign  \stopformula			  
+	}
+	Exercise: Use the Euclidean algorithm to find the \m{\gcd} of the following.
+	\startitemize [i, columns, three, joinedup]
+		\item  \m{\bcrl[2 k + 1, k]}.
+		\item  \m{\bcrl[7 k + 14, 3 k + 6]}.
+		\item  \m{\bcrl[n! + 1, (n + 1)! + 1]}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Expressing \m{\gcd} as linear combination}]
+	
+	\startexercise
+		Express \m{\gcd(42823, 6409)} as a linear combination of \m{42823} and \m{6409}.
+	\stopexercise
+
+	\startdefinition [title={Extended Euclidean algorithm}]
+		\startitemize[m, joinedup]
+			\item  Use the Euclidean algorithm to find the \m{\gcd}.
+			\item  For each line of the Euclidean algorithm, expresses the remainder as a linear combination.
+			\item  Using the right hand column, work backwards from the \m{\gcd} to successively express the \m{\gcd} as a linear combination of the starting integers.
+		\stopitemize
+	\stopdefinition
+
+	\bold{Steps 1 and 2}:
+	\startformula  \startalign[n=8, align={right, right, right, right, right, right, right, right}]
+		\NC 42823 =  \NC  6 ⋅  \NC 6409 +  \NC 4369  \qquad ⟺ \qquad  \NC 4369 =  \NC 42823  \NC - 6 ⋅  \NC 6409  \NR
+		\NC  6409 =  \NC  1 ⋅  \NC 4369 +  \NC 2040  \qquad ⟺ \qquad  \NC 2040 =  \NC  6409  \NC - 1 ⋅  \NC 4369  \NR
+		\NC  4369 =  \NC  2 ⋅  \NC 2040 +  \NC  289  \qquad ⟺ \qquad  \NC  289 =  \NC  4369  \NC - 2 ⋅  \NC 2040  \NR
+		\NC  2040 =  \NC  7 ⋅  \NC  289 +  \NC   17  \qquad ⟺ \qquad  \NC   17 =  \NC  2040  \NC - 7 ⋅  \NC  289  \NR
+		\NC   289 =  \NC 17 ⋅  \NC   17 +  \NC    0  \qquad ⟺ \qquad  \NC    0 =  \NC   289  \NC -17 ⋅  \NC   17  \NR
+	\stopalign  \stopformula
+\stopslide
+
+\startslide [title={Expressing \m{\gcd} as linear combination}]
+	\bold{Steps 3}:
+	\startformula  \startalign[n=8, align={right, right, right, right, right, right, right, right}]
+		\NC   17 =  \NC (+ 1)  \NC  2040 +  \NC (- 7)  \NC  289 =  \NC (+1) 2040 +  \NC (- 7)  \NC ((+1)  4369 + (-2) 2040)  \NR
+		\NC      =  \NC (- 7)  \NC  4369 +  \NC ( 15)  \NC 2040 =  \NC (-7) 4369 +  \NC ( 15)  \NC ((+1)  6409 + (-1) 4369)  \NR
+		\NC      =  \NC ( 15)  \NC  6409 +  \NC (-22)  \NC 4369 =  \NC (15) 6409 +  \NC (-22)  \NC ((+1) 42823 + (-6) 6409)  \NR
+		\NC      =  \NC (-22)  \NC 42823 +  \NC (147)  \NC 6409 . \quad \NC    \NC    \NC    \NR
+	\stopalign  \stopformula
+
+	\startlemma [title={Bézout's identity}]
+		Let \m{a, b ∈ ℤ} and \m{d = \gcd(a, b)}. Then there exists \m{m, n ∈ ℤ} such that \m{m a + n b = d}.
+	\stoplemma
+
+	\startproof
+		Follows directly from the extended Euclidean algorithm.
+	\stopproof
+\stopslide
+
+\startslide [title={Some key points about the Euclidean algorithm}]
+	
+	\startitemize [m]
+		
+		\item  It is fast. The number of steps required are at most \m{\log_2(ab)} to find \m{\gcd(a, b)}.
+
+			\comment{See code here: \goto{https://repl.it/@SudipSinha/GCDEuclid}[url(https://repl.it/@SudipSinha/GCDEuclid)].}
+
+		\item  The order of the arguments do not matter. \comment{(Why?)}
+
+		\item  We can express the \m{\gcd} as a linear combination of the arguments (Bézout's identity).
+
+			\comment{This is very useful (we will soon see why).}
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Solutions of equations}]
+
+	Do the following equations have a solution? If so, how many?
+	
+	\startitemize [m, columns]
+		
+		\item  \m{2 x + 2 y = 1}.
+
+		\item  \m{x + y = 1}.
+
+		\item  \m{x + y = 1, x - y = 1}.
+
+		\item  \m{x + y = 1, x - y = 1, 3 x + 2 y = 1}.
+
+		\item  \m{a x + b y = 1}.
+
+		\item  \m{x^2 + y^2 = 1}.
+
+		\item  \m{x^2 + y^2 = 1, x + y = 1}.
+
+		\item  \m{x^3 + y^3 + z^3 = 33}.
+
+			See \goto{this}[url(https://arxiv.org/abs/1903.04284)] and \goto{this}[url(http://www.ams.org/journals/mcom/2007-76-259/S0025-5718-07-01947-3/)].
+	
+	\stopitemize
+\stopslide
+
+\startslide [title={Linear Diophantine equations}]
+	
+	\startitemize [m]
+		
+		\item  René Descartes' unified geometry and algebra into what is known as \important{analytical geometry}.
+
+		\item  In 2D analytical geometry, equations of the form \m{a x + b y = c}, where \m{a, b, c ∈ ℝ} is given and \m{x, y ∈ ℝ} has to be found, represent a straight line in the \emph{Cartesian plane}. 
+
+			Every point that lies on the line satisfies the equation.
+
+			This equation has infinitely many solutions.
+
+		\item  What can we now say about the same equation if we have \m{a, b, c ∈ ℤ} and need \m{x, y ∈ ℤ}? This is called a \important{linear Diophantine equations} in two variables.
+
+		\item  In general, a \important{Diophantine equation} is a polynomial equation, usually in two or more unknowns, such that only integer solutions are sought or studied. These are named after the Greek mathematician/philosopher Diophantus of Alexandria (∼ 200 - 300 {\sc ad}).
+	\stopitemize
+\stopslide
+
+\startslide [title={Which linear Diophantine equations have solutions?}]
+	
+	\startlemma [title={Euclid's lemma}]
+		Let \m{a, b, d ∈ ℤ}. If \m{d ∣ a b} and \m{\gcd(d, a) = 1}, then \m{d ∣ b}.
+	\stoplemma
+
+	\startproof
+		Since \m{\gcd(d, a) = 1}, by Bézout's identity we can find \m{m, n ∈ ℤ} such that \m{1 = m d + n a}. This implies \m{b = m d b + n a b = (m b) d + n (a b)}. Since \m{d} divides both terms on the right hand side, \m{d} must divide \m{b}.
+	\stopproof
+
+	\starttheorem
+		Let \m{a, b, c ∈ ℤ}. Then the equation \m{a x + b y = c} has integral solutions iff \m{\gcd(a, b) ∣ c}.
+	\stoptheorem
+
+	\startproof
+		Let \m{d = \gcd(a, b)}. So \m{d ∣ a} and \m{d ∣ b}. That is, there exists \m{q_1, q_2 ∈ ℤ} such that \m{a = q_1 d} and \m{b = q_2 d}.
+
+		\bold{(⟹)}
+		Let \m{(x_0, y_0)} be a solution. Then \m{c = a x_0 + b y_0 = q_1 d x_0 + q_2 d y_0 = (q_1 x_0 + q_2 y_0) d}.
+
+		\bold{(⟸)}
+		Since \m{d ∣ c}, there exists \m{q_0 ∈ ℤ} such that \m{c = q_0 d}. Moreover, by Bézout's identity, there exists \m{m, n ∈ ℤ} such that \m{m a + n b = d}. Multiplying by \m{q_0}, we have \m{(q_0 m) a + (q_0 n) b = q_0 d = c}, so \m{(x, y) = (q_0 m, q_0 n)} is a solution.
+	\stopproof
+\stopslide
+
+\startslide [title={Towards a general solution}]
+	
+	\starttheorem [title={General solution from particular solution}]
+		Let \m{a, b, c ∈ ℤ}. If \m{(x_0, y_0)} be a particular solution to the linear Diophantine equation \m{a x + b y = c}, then the general solution is given by \m{\bcrl[{\brnd[x_0 + \frac{b}{d} k, y_0 - \frac{a}{d} k]}: k ∈ ℤ]}.
+	\stoptheorem
+
+	\startproof
+		Since \m{(x_0, y_0)} is a particular solution, \m{a x_0 + b y_0 = c}. If \m{(x, y)} is a general solution, we have
+		\m{a x + b y = c = a x_0 + b y_0}, which gives \m{a (x - x_0) = -b (y - y_0)}.
+		
+		Now, there exist coprime integers \m{r} and \m{s} such that \m{a = d r, b = d s}. Substituting these values into the last-written equation and canceling the common factor \m{d}, we find that %\m{r (x - x_0) = - s (y - y_0)}.
+		\placeformula[Diophantine-eqn-general-solution]  \startformula
+			r (x - x_0) = s (y_0 - y) .
+		\stopformula
+
+		Therefore, \m{r ∣ s (y_0 - y)}. Since \m{r} and \m{s} are coprime, Euclid's lemma gives us \m{r ∣ (y_0 - y)}, that is, \m{y = y_0 - r k} for some \m{k ∈ ℤ}. Substituting this in \eqref[Diophantine-eqn-general-solution], we get \m{x = x_0 + s k}. Now, we substitite \m{r = \frac{a}{d}} and \m{s = \frac{b}{d}} to get the general solution
+		\startformula
+			(x, y) ∈ \bcrl[{\brnd[x_0 + \frac{b}{d} k, y_0 - \frac{a}{d} k]}: k ∈ ℤ] .
+		\stopformula
+	\stopproof
+
+
+\stopslide
+
+\startslide [title={A simple problem}]
+	
+	For the first sixth of his life, Diophantus was a boy. After another twelfth of his life, Diophantus grew beard. One-seventh of this life after this, Diophantus married. Five years after his marriage, Diophantus’s son was born. Diophantus’s son died at a relatively young age. Four years after his son died, Diophantus himself died. The total number of years the son lived is one-half the total number of years Diophantus lived.
+
+	\blank
+
+	Write one or more equations that express the information in the riddle algebraically. Then solve the equation(s) to determine the following:
+	\startitemize [i, columns, joinedup]
+		\item  The total number of years Diophantus lived.
+		\item  The number of years Diophantus was a boy.
+		\item  The age at which Diophantus grew a beard.
+		\item  The age at which Diophantus got married.
+		\item  Diophantus’s age when his son was born.
+		\item  Diophantus’s age when his son died.
+	\stopitemize
+
+	\startexercise
+		Find the general solution of the Diophantine equation \m{42823 x + 6409 y = 17}.
+	\stopexercise
+
+	\startexercise
+		Find a solution of the Diophantine equation \m{6 x + 10 y + 45 z = 1}.
+	\stopexercise
+\stopslide
+
+\stopmode
+
+\stopsection
+
+
+
+\startsection [title={Modular arithmetic}, reference=sec:modular-arithmetic]
+
+\startmode [presentation]
+
+\startslide [title={Modular arithmetic}]
+
+	Modular arithmetic was developed by Carl Friedrich Gauss in his book Disquisitiones Arithmeticae, written in 1798 when he was 21 and first published in 1801 when he was 24 years old.
+
+	\startdefinition
+		Let \m{n ∈ ℕ} and \m{a, b ∈ ℤ}. If \m{n ∣ (a - b)}, then \m{a} and \m{b} are said to be \important{congruent modulo \m{n}}, symbolized by \m{a ≡ b \ (\mod n)} or \m{a ≡_n b}.
+
+		To \important{reduce \m{a} modulo \m{n}} means to find the remainder when \m{a} is divided by \m{n}.
+	\stopdefinition
+
+	\bold{Exercises}
+	\startitemize [m, joinedup]
+		
+		\item  Is \m{22 ≡_{12} 10}? Is \m{321 ≡_{12} 7}?
+
+		\item  Reduce \m{41} and \m{-39} modulo \m{10}.
+
+		\item  Find particular solutions (both positive and negative) of the congruence equations.
+
+			Can you also give general solutions?
+			\startitemize[i, columns, three, joinedup]
+				\item  \m{x ≡_{20} 15}  \soln{\m{\bcrl[15 + 20 k : k ∈ ℤ]}.}
+				\item  \m{x ≡_9 0}  \soln{\m{\bcrl[9 k : k ∈ ℤ]}.}
+				\item  \m{x ≡_{35} 37}  \soln{\m{\bcrl[2 + 35 k : k ∈ ℤ]}.}
+			\stopitemize
+	\stopitemize
+
+	\blank
+	\bold{Question}: How many ways can you write \m{37} in the form \m{q ⋅ 8 + r}, where \m{q, r ∈ ℤ}?
+
+	\bold{Revision}: Division theorem.
+\stopslide
+
+\startslide [title={Equivalent definitions}]
+	
+	\starttheorem
+		The following are equivalent.
+		\startitemize [i, joinedup]
+			\item[cong:definition]  \m{a ≡_n b}.
+			\item[cong:divisibility]  \m{n ∣ (a - b)}.
+			\item[cong:multiplication]  \m{∃ k ∈ ℤ} such that \m{a = b + k n}.
+			\item[cong:remainder]  \m{a} and \m{b} leave the same remainder when divided by \m{n}.
+		\stopitemize
+	\stoptheorem
+
+	\startproof
+		\bold{\in[cong:definition] ⟺ \in[cong:divisibility]}:\qquad
+			By definition.
+
+		\bold{\in[cong:divisibility] ⟺ \in[cong:multiplication]}:\qquad
+			\m{n ∣ (a - b)} mean \m{∃ k ∈ ℤ} such that \m{a - b = k n}, so \m{a = b + k n}. The other direction can be shown by going backward instead of forward.
+
+		\bold{\in[cong:multiplication] ⟺ \in[cong:remainder]}:\qquad
+			Let \m{∃ k ∈ ℤ} such that \m{a = b + k n}, and division theorem gives \m{b = q n + r} (\m{0 ≤ r < n}). Then \m{a = b + k n = (q n + r) + k n = (q + k) n + r}.
+
+			On the other hand, suppose we can write \m{a = q_1 n + r} and \m{b = q_2 n + r}, with the same remainder \m{r} (\m{0 ≤ r < n}). Then \m{a - b = (q_1 n + r) - (q_2 n + r) = (q_1 - q_2) n}, whence \m{n ∣ (a - b)}.
+	\stopproof
+\stopslide
+
+\startslide [title={Can the congruence relation be seen as equality?}]
+	
+	Let \m{n, k ∈ ℕ} and \m{a, b, c, d ∈ ℤ}.
+	Which of the following are true? Prove or give a counterexample.
+	\startitemize [m, joinedup]
+		
+		\item  (reflexivity)  \m{a ≡_n a}.
+			
+			\soln{T (\m{n ∣ 0}).}
+
+		\item  (symmetry)  If \m{a ≡_n b}, then \m{b ≡_n a}.
+
+			\soln{T (\m{a = b + k n ⟹ b = a + (-k) n}).}
+
+		\item  (transitivity)  If \m{a ≡_n b} and \m{b ≡_n c}, then \m{a ≡_n c}.
+
+			\soln{T (\m{a = b + k n} and \m{b = c + l n} ⟹ \m{a = c + (l + k) n}).}
+
+		\item  (addition)  If \m{a ≡_n b} and \m{c ≡_n d}, then \m{a + c ≡_n b + d}.
+
+			\soln{T (\m{a = b + k n} and \m{c = d + l n} ⟹ \m{a + c = (b + d) + (l + k) n}).}
+
+		\item  (multiplication)  If \m{a ≡_n b} and \m{c ≡_n d}, then \m{a c ≡_n b d}.
+
+			\soln{T (\m{a = b + k n} and \m{c = d + l n} ⟹ \m{ac - bd = ac - ad + ad - bd = a(c - d) + d(a - b)}).}
+
+		\item  (addition)  If \m{a ≡_n b}, then \m{a + c ≡_n b + c}.
+			\soln{T (\m{c ≡ c \ (\mod n ).})}
+
+		\item  (multiplication)  If \m{a ≡_n b}, then \m{a c ≡_n b c}.
+			\soln{T (\m{c ≡ c \ (\mod n ).})}
+
+		\item  (division)  If \m{a c ≡_n b c}, then \m{a ≡_n b}.
+			\soln{F (\m{2 · 4 ≡_6 2 · 1}, but \m{4 ≢_6 1}).}
+		
+		\item  (exponentiation)  If \m{a ≡_n b}, then \m{a^k ≡_n b^k}.
+			\soln{T (Induction on \m{k}, or use the identity: \m{a^k - b^k = (a - b) (a^{k - 1} + a^{k - 2} b + a^{k - 3} b^2 + ⋯ + b^{k - 1})}.)}
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Finding remainders}]
+	
+	\bold{Lesson}: Congruences \bad{cannot} be seen as equality relation.
+
+	Exercises
+	\startitemize [m]
+		
+		\item  Find the remainders when \m{2^{50}} and \m{41^{65}} are divided by \m{7}.
+			\comment{Hint: \m{2^3 = 8 ≡_7 1} and \m{41 ≡_7 -1}.}
+
+		\item  What is the remainder when the following sum is divided by \m{4}?
+			\startformula
+				1^5 + 2^5 + 3^5 + ⋯ + 99^5 + 100^5 .
+			\stopformula
+
+		\item  What is the remainder when the following sum is divided by \m{12}?
+			\startformula
+				1! + 2! + 3! + ⋯ + 99! + 100! .
+			\stopformula
+
+		\item  Prove the following.
+			\startitemize [i, columns, three, joinedup]
+				\item  \m{39 ∣ \brnd[53^{103} + 103^{53}]}.
+				\item  \m{7 ∣ \brnd[111^{333} + 333^{111}]}.
+				\item  \m{41 ∣ \brnd[2^{20} - 1]}.
+				\item  \m{89 ∣ \brnd[2^{44} - 1]}.
+				\item  \m{97 ∣ \brnd[2^{48} - 1]}.
+			\stopitemize
+
+		\item  For \m{n ∈ ℕ}, prove the following divisibility statements:
+			\startitemize [i, columns, joinedup]
+				\item  \m{13 ∣ \brnd[3^{n + 2} + 4^{2 n + 1}]}.
+				\item  \m{7 ∣ \brnd[5^{2 n} + 3 ⋅ 2^{5 n - 2}]}.
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\startslide [title={Division}]
+
+	\starttheorem
+		If \m{c a ≡_n c b}, then \m{a ≡_{\frac{n}{d}} b}, where \m{d = \gcd(c, n)}. 
+	\stoptheorem
+
+	\startproof
+		By hypothesis, we can write \m{c(a - b) = ca - cb = kn} for some integer \m{k}. Knowing that \m{\gcd(c, n) = d}, there exist coprime integers \m{r} and \m{s} satisfying \m{c = dr, n = ds}. When these values are substituted in the displayed equation and the common factor \m{d} canceled, the net result is \m{r (a - b) = k s}. Hence, \m{s ∣ r (a - b)} and \m{gcd(r, s) = 1}. Euclid's lemma yields \m{s ∣ (a - b)}, which may be recast as \m{a ≡_s b}; in other words, \m{a ≡_{\frac{n}{d}} b}. 
+	\stopproof
+
+	\startcorollary
+		If \m{c a ≡_n c b} and \m{\gcd(c, n) = 1}, then \m{a ≡_n b}. 
+	\stopcorollary
+
+	\startdefinition
+		Let \m{n ∈ ℕ} and \m{a ∈ ℤ}. Then the \important{multiplicative inverse} of \m{a} modulo \m{n} is an integer \m{x} such that \m{a x ≡_n 1}.
+	\stopdefinition
+
+	Solve the following congruences equations.
+	\startitemize [i, columns, three, joinedup]
+		\item  \m{x + 8 ≡_{10} 0}.
+		\item  \m{3 x ≡_{12} 0}.
+		\item  \m{7 + 3 x ≡_{10} 0}.
+		\item  \m{4 x + 6 ≡_{10} 0}.
+		\item  \m{1 + 8 x ≡_{10} 0}.
+		\item  \m{3 x ≡_5 1}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Equivalence relations}]
+	
+	\startdefinition
+		Any relation which is reflexive, symmetric, and transitive is called an \important{equivalence relation}.
+	\stopdefinition
+
+	\startexample
+		Congruence relation is an equivalence relation.
+	\stopexample
+
+	\startexercise
+		Give other examples and non-examples of equivalence relations.
+	\stopexercise
+
+	\startdefinition
+		A \important{partition} of a set is a grouping of the set's elements into non-empty, disjoint subsets.
+	\stopdefinition
+
+	\startexample
+		\startitemize[i, joinedup]
+			\item  Even and odd numbers partition the set of integers. It corresponds to the relation \m{≡_2}.
+			\item  The sets \m{[0] = \bcrl[3 k : k ∈ ℤ], [1] = \bcrl[3 k + 1: k ∈ ℤ], [2] = \bcrl[3 k + 2: k ∈ ℤ]} partition the set of integers. It corresponds to the relation \m{≡_3}.
+			\item  In general, the relation \m{≡_n} generates the partition \m{[0], [1], [2], …, [n - 1]}, where \m{[i] = \bcrl[i + k n: k ∈ ℤ]}.
+		\stopitemize
+	\stopexample
+
+	\starttheorem
+		There is a one-to-one correspondence between equivalence relations and set partitions.
+	\stoptheorem
+\stopslide
+
+\startslide [title={Congruence classes}]
+
+	\startdefinition
+		Let \m{n ∈ ℕ}. The \important{congruence classes modulo \m{n}} are the sets \m{[0]_n, [1]_n, [2]_n, …, [n - 1]_n}, where \m{[i]_n} represents all integers which when divided by \m{n} gives a remainder of \m{i}.
+
+		The set of all congruence classes for \m{n} is called the \important{ring of integers modulo \m{n}}, denoted by \m{ℤ/nℤ} or \m{ℤ_n}. That is, \m{ℤ/nℤ = ℤ_n = \bcrl[{[i]_n}: i ∈ \bcrl[0, …, {n - 1}]]}.
+	\stopdefinition
+
+	If \m{n} is obvious from the context, we will hide the subscript.
+
+	\blank
+
+	Using the results we proved in the third slide of this topic, we define the following \important{modular arithmetic relations}. \comment{Here \m{±} means that the relation holds both for addition and subtraction.}
+	
+	\startitemize [m, joinedup]
+		\item  \m{[a]_n ± [b]_n := [a ± b]_n}.
+		\item  \m{[a]_n ⋅ [b]_n := [a ⋅ b]_n}.
+		\item  \m{[a]_n ± b := [a ± b]_n}.
+		\item  \m{[a]_n ⋅ b := [a ⋅ b]_n}.
+		\item  \m{[a]_n^k := [a^k]_n}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Positional representations of numbers}]
+	
+	Numbers can be represented in various \important{positional} systems. These usually change the base from \m{10} to another number. Following is a list of commonly used bases. For more information \goto{see the Wikipedia article on positional notation}[url(https://en.wikipedia.org/wiki/Positional_notation)].
+
+	\startitemize [4]
+		
+		\item  Base \m{10} (\goto{decimal}[url(https://en.wikipedia.org/wiki/Decimal_notation)]): Used almost universally by humans (with exceptions).
+
+			Here \m{d_n ⋯ d_2 d_1 d_0 = d_n ⋅ 10^n + ⋯ + d_2 ⋅ 10^2 + d_1 ⋅ 10^1 + d_0 ⋅ 10^0}, where \m{d_i ∈ \bcrl[0, 1, …, 9], i ∈ \bcrl[0, …, n]}.
+
+		\item  Base \m{2} (\goto{binary}[url(https://en.wikipedia.org/wiki/Binary_numeral_system)]): Used to represent information in computers.
+
+			Minimum base required to represent numbers and other information.
+
+			Here \m{d_n ⋯ d_1 d_0 = d_n ⋅ 2^n + ⋯ + d_1 ⋅ 2^1 + d_0 ⋅ 2^0}, where \m{d_i ∈ \bcrl[0, 1], i ∈ \bcrl[0, …, n]}.
+
+		\item  Base \m{16} (\goto{hexadecimal}[url(https://en.wikipedia.org/wiki/Hexadecimal)]): Useful for computing.
+			Here \m{d_n ⋯ d_1 d_0 = d_n ⋅ 16^n + ⋯ + d_1 ⋅ 16^1 + d_0 ⋅ 16^0}, where \m{d_i ∈ \bcrl[0, …, 9, A, …, F], i ∈ \bcrl[0, …, n]}.
+
+		\item  Base \m{8} (\goto{octal}[url(https://en.wikipedia.org/wiki/Octal)]): Useful for computing.
+			Here \m{d_n ⋯ d_1 d_0 = d_n ⋅ 8^n + ⋯ + d_1 ⋅ 8^1 + d_0 ⋅ 8^0}, where \m{d_i ∈ \bcrl[0, …, 7], i ∈ \bcrl[0, …, n]}.
+
+		\item  Base \m{60} (\goto{Babylonian}[url(https://en.wikipedia.org/wiki/Babylonian_numerals)]): Used to write time and angles.
+	\stopitemize
+\stopslide
+
+\startslide [title={Tests of divisibility for \emph{decimal} numbers}]
+	
+	\startitemize [4]
+		
+		\item  \important{Test for \m{2}}: The number \m{n} must have \m{0, 2, 4, 6, 8} as the units digit.
+
+			\startproof
+				\m{n = d_n ⋯ d_1 d_0 = 10^n d_n + ⋯ + 10 d_1 + d_0 ≡_{2} d_0}, so \m{2 ∣ n ⟺ 2 ∣ d_0}.
+			\stopproof
+
+		\item  \important{Test for \m{5}}: The number \m{n} must have \m{0, 5} as the units digit.
+
+			\startproof
+				\m{n = d_n ⋯ d_1 d_0 = 10^n d_n + ⋯ + 10 d_1 + d_0 ≡_{5} d_0}, so \m{5 ∣ n ⟺ 5 ∣ d_0}.
+			\stopproof
+
+		\item  \important{Test for \m{3}} (similar for \m{9}): The number \m{n} must have its sum of digits divisbile by \m{3}.
+
+			\startproof
+				\m{n = d_n ⋯ d_1 d_0 = 10^n d_n + ⋯ + 10 d_1 + d_0 ≡_{3} d_n + ⋯ + d_1 + d_0}.
+			\stopproof
+
+		\item  \important{Test for \m{4}} (similar for \m{25}): The number \m{n} must have its last two digits divisible by \m{4}.
+
+			\startproof
+				\m{n = d_n ⋯ d_2 d_1 d_0 = 10^n d_n + ⋯ + 100 d_2 + 10 d_1 + d_0 ≡_{4} d_1 ⋅ 10 + d_0 = d_1 d_0}.
+			\stopproof
+
+		\item  \important{Tests for \m{2^n} and \m{5^n}}: The number \m{n} must have its last \m{n} digits divisible by \m{2^n} and \m{5^n}, respectively. \comment{Key idea: \m{10^n = 2^n 5^n}.}
+	\stopitemize
+\stopslide
+
+\startslide [title={Tests of divisibility for \emph{decimal} numbers}]
+	
+	\startitemize [4]
+		
+		\item  \important{Test for \m{11}}: The number \m{n} must have the difference of the sum of digits of even positions and odd positions divisible \m{11}.
+
+			\startproof
+				\m{n = d_n ⋯ d_2 d_1 d_0 = 10^n d_n + ⋯ + 10 d_1 + d_0 ≡_{11} (-1)^n d_n + ⋯ + d_2 - d_1 + d_0}.
+			\stopproof
+
+		\item  \important{Test for \m{7}}: The difference between twice the units digit of the number \m{n} and the number formed by the rest of the digits is divisible by 7. Repeat to get only one digit left.
+
+			\startproof
+				\m{n = 10 m + d_0 ≡_7 10 m + d_0 - 3 ⋅ 7 ⋅ d_0 = 10 (m - 2 d_0)}.
+			\stopproof
+
+		\item  \important{Test for \m{13}}: The sum of four times the units digit of the number \m{n} and the number formed by the rest of the digits must be divisible by 13. Repeat to get only two digits left.
+
+			\startproof
+				\m{n = 10 m + d_0 ≡_{13} 10 m + d_0 + 3 ⋅ 13 ⋅ d_0 = 10 (m + 4 d_0)}.
+			\stopproof
+	\stopitemize
+\stopslide
+
+\startslide [title={Systems of congruences and the Chinese remainder theorem}]
+	
+	\startexercise [title={Sunzi Suanjing, 3rd-century {\sc ad}}]
+		 There are certain things whose number is unknown. If we count them by threes, we have two left over; by fives, we have three left over; and by sevens, two are left over. How many things are there?
+	\stopexercise
+
+	We shall not see the theorem as it can be confusing. We will see how to apply it. A great explanation of using the Chinese remainder theorem is given in \goto{this video on YouTube}[url(https://www.youtube.com/watch?v=ru7mWZJlRQg)].
+
+	\important{Caution}: For the Chinese remainder theorem to be valid, the moduli must be pairwise coprime.
+
+	\blank
+
+	Solve the following systems of congruences.
+	\startitemize [i, joinedup]
+		\item  \m{x ≡_9 3, x ≡_{10} 7}.
+
+			\comment{Method 1: linear Diophantine equation.}
+
+			\comment{Method 2: Chinese remainder theorem.}
+		\item  \m{x ≡_3 2, x ≡_4 2, x ≡_5 1}.
+		\item  \m{x ≡_5 1, x ≡_7 2, x ≡_9 3, x ≡_{11} 4}.
+		\item  \m{x^3 ≡_{55} 3}. \comment{This can be broken down into \m{x^3 ≡_5 3, x^3 ≡_{11} 3}.}
+	\stopitemize
+\stopslide
+
+\stopmode
+
+\stopsection
+
+\stopbodymatter
+
+
+
+
+%%%%%%%%%%%%%%%
+% Back matter %
+%%%%%%%%%%%%%%%
+
+\startbackmatter
+
+% \startsubject [title={Appendix}, reference=sub:appendix]
+
+% \startmode [presentation]
+
+% \startslide [title={Counting sets}]
+
+% \stopslide
+
+\startslide
+	\startalign [middle]
+		\blank[4*line]
+		{\tfd Thank you!}
+	\stopalign
+\stopslide
+
+\stopsubject
+
+\startslide [title={Bibliography}]
+	\placelistofpublications
+\stopslide
+\stopmode
+\stopbackmatter
+
+\stoptext

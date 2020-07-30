@@ -1,0 +1,7 @@
+*.swp
+node_modules
+package-lock.json
+dist/main.js
+.venv/
+docs/_build/
+coverage/

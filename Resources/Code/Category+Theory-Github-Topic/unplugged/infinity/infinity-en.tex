@@ -1,0 +1,1473 @@
+\ifx\wholebook\relax \else
+
+\documentclass{article}
+
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
+
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[en]{../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{Infinity}
+
+\author{Liu Xinyu
+\thanks{{\bfseries Liu Xinyu} \newline
+  Email: liuxinyu95@gmail.com \newline}
+  }
+
+\maketitle
+\fi
+
+\markboth{Infinity}{Mathematics of Programming}
+
+\ifx\wholebook\relax
+\chapter{Infinity}
+\numberwithin{Exercise}{chapter}
+\fi
+
+\epigraph{I see it, but I don't believe it.}{ —— Georg Cantor, in a letter to Dedekind in 1877}
+
+% "I see it, but I don't believe it." -- Richard Dedekind
+
+\begin{wrapfigure}{R}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/circle-limit-IV-1960.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Escher, Circle limit IV (Heaven and Hell), 1960}
+ \label{fig:Circle-Limit-IV}
+\end{wrapfigure}
+
+Long time ago, our ancestor looked up at the starry sky, facing the vast galaxy, and asked, how big is the world we live in? As the intelligence being, our mind exceeds ourselves, exceeds our planet and universe. We keep thinking about the concept of infinity. People first abstracted numbers from concrete things. From three goats hunted, three fruits collected, three jars made, abstracted number three to represent any three things. At early time, the numbers were not big. They were enough to satisfy everyday life, hunting, and work. As civilization evolved, people started trading things. Varies numbering systems were developed to support the bigger and bigger numbers. At some time point, we came up with the question: what is the biggest number? There were two different opinions to it. Some people didn't think the question make sense. It's already big enough for numbers like thousands or millions in ancient time in everyday work and life. We needn't trouble ourselves with big numbers that would never being used. It's safe to consider for example, the number of sand-grains in the world is infinity. In ancient Greece, people thought ten thousands was a very big number, and named it `murias'. It finally changed to `myriad', means infinity\cite{De-linfini-2018}. In Buddhism, people also use `the sand in Ganges River' to indicate the numbers that are too large to count. In the Mahayana Buddhist classic work {\em The Diamond Sutra}, it said: ``If a virtuous man or woman filled a number of universes, as great as the number of sand-grains in all these rivers, with the seven treasures, and gave them all away in alms (dana), would his or her merit be great?'' Other people had different opinion. Ancient Greek mathematician, Archimedes believed, even the sands-grains that filled the whole universe, can be represented with a definite number. In his book, {\em The Sand-Reckoner}, Archimedes said:
+
+\begin{quotation}
+\itshape
+THERE are some, King Gelon, who think that the number of the sand is infinite in multitude; and I mean by the sand not only that which exists about Syracuse and the rest of Sicily but also that which is found in every region whether inhabited or uninhabited. Again there are some who, without regarding it as infinite, yet think that no number has been named which is great enough to exceed its multitude. And it is clear that they who hold this view, if they imagined a mass made up of sand in other respects as large as the mass of the Earth, including in it all the seas and the hollows of the Earth filled up to a height equal to that of the highest of the mountains, would be many times further still from recognising that any number could be expressed which exceeded the multitude of the sand so taken. But I will try to show you by means of geometrical proofs, which you will be able to follow, that, of the numbers named by me and given in the work which I sent to Zeuxippus, some exceed not only the number of the mass of sand equal in magnitude to the Earth filled up in the way described, but also that of a mass equal in magnitude to the universe.
+\end{quotation}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/Archimedes.eps}
+ \captionsetup{labelformat=empty}
+ \caption{The cover of {\em The Sand-Recokoner}. Archimedes Thoughtful by Domenico Fetti (1620)}
+ \label{fig:Archimedes}
+%\end{wrapfigure}
+\end{figure}
+
+Archimedes thought it {\em only} need $10^{63}$ sand-grains to fill the universe. The universe he meant was the sphere of the fixed star, which was about twenty thousands times the radius of the Earth. We know the observable universe is about 46.5 billion light-years nowadays, consist of around $3 \times 10^{74}$ atoms\footnote{Also said to have $10^{80}$ to $10^{87}$ elementary particles.}. Archimedes was definitely genius in ancient Greek time, he demonstrated how to quantify the `infinite big' things. There are many words in different languages serve as the unit for big numbers. The following table list these words in Chinese, they increase for every $10^4$(\cite{Noguchi2007}, pp31).
+
+\begin{center}
+% for Pinyin tones: \={a}, \'{a}, \v{}, \.{a}
+\begin{tabular}{|l|r|l|r|}
+\hline
+{\fontspec{\cnmainft}京}            & $10^{16}$ & {\fontspec{\cnmainft}载}            & $10^{44}$ \\
+\hline
+{\fontspec{\cnmainft}垓}(g\={a}i)   & $10^{20}$ & {\fontspec{\cnmainft}极}            & $10^{48}$ \\
+\hline
+{\fontspec{\cnmainft}秭}(z\v{i})    & $10^{24}$ & {\fontspec{\cnboldft}恒河沙}  & $10^{52}$ \\
+\hline
+{\fontspec{\cnmainft}穰}(r\'{a}ng)  & $10^{28}$ & {\fontspec{\cnmainft}阿僧祗}(zh\={i})  & $10^{56}$ \\
+\hline
+{\fontspec{\cnmainft}沟}            & $10^{32}$ & {\fontspec{\cnmainft}那由他}        & $10^{60}$ \\
+\hline
+{\fontspec{\cnmainft}涧}            & $10^{36}$ & {\fontspec{\cnmainft}不可思议}      & $10^{64}$ \\
+\hline
+{\fontspec{\cnmainft}正}            & $10^{40}$ & {\fontspec{\cnmainft}无量大数}      & $10^{68}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Many such words come from Buddhism, like `{\fontspec{\cnmainft}恒河沙}', means the sand-grain in Ganges River. It has 52 zeros after 1. Below table lists the unit words in English. Starting from one, there is a unit for every 1000 magnitude. Compare to 10000 magnitude step in Chinese, we can see the culture difference.
+
+\begin{center}
+\begin{tabular}{|l|r|l|r|l|r|}
+\hline
+thousand & $10^{3}$ & quattuordecillion & $10^{45}$ & octovigintillion & $10^{87}$ \\
+\hline
+million & $10^{6}$ & quindecillion & $10^{48}$ & novemvigintillion & $10^{90}$ \\
+\hline
+billion & $10^{9}$ & sexdecillion & $10^{51}$ & trigintillion & $10^{93}$ \\
+\hline
+trillion  & $10^{12}$ & septdecillion & $10^{54}$ & untrigintillion & $10^{96}$ \\
+\hline
+quadrillion  & $10^{15}$ & octodecillion & $10^{57}$ & duotrigintillion & $10^{99}$ \\
+\hline
+quintillion  & $10^{18}$ & novemdecillion & $10^{60}$ & \textbf{googol} & $10^{100}$ \\
+\hline
+sexillion    & $10^{21}$ & vigintillion & $10^{63}$ & & \\
+\hline
+septillion   & $10^{24}$ & unvigintillion & $10^{66}$ & & \\
+\hline
+octillion    & $10^{27}$ & duovigintillion & $10^{69}$ & & \\
+\hline
+noniliion  & $10^{30}$ & trevigintillion & $10^{72}$ & & \\
+\hline
+decillion  & $10^{33}$ & quattuorvigintillion & $10^{75}$ & & \\
+\hline
+undecillion   & $10^{36}$ & quinvigintillion & $10^{78}$ & & \\
+\hline
+duodecillion  & $10^{39}$ & sexvigintillion & $10^{81}$ & & \\
+\hline
+tredecillion  & $10^{42}$ & seprvigintillion & $10^{84}$ & & \\
+\hline
+\end{tabular}
+\end{center}
+
+The last unit, googol, was coined in 1920 by 9-year-old Milton Sirotta, nephew of U.S. mathematician Edward Kasner. It is written as the digit 1 followed by one hundred zeros. The internet company Google's name came from this word\cite{Wikipedia-Googol}.
+
+\section{The infinity concept}
+\index{Zeno} \index{Zeno's paradox}
+
+Whether there exists infinity that beyond all concrete numbers? It is not only a mathematical problem, but also a philosophical problem. Infinity also leads to the concept of infinitesimal (infinitely small). Ancient Greek philosopher, Zeno of Elea thought of a set of problems about infinity. Some of them are preserved in Aristotle's {\em Physics}. Among them, four paradoxes are most famous.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Achilles-paradox.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Achilles and the tortoise}
+ \label{fig:Achilles-paradox}
+%\end{wrapfigure}
+\end{figure}
+
+The first one is the most popular, named Achilles and the tortoise paradox. Achilles In Greek mythology, was a hero of the Trojan War He is the greatest of all the Greek warriors, and is the central character of Homer's {\em Iliad}. In this paradox, Achilles is in a footrace with the tortoise. Achilles allows the tortoise ahead start, for example 100 meters. Supposing that each racer starts running at some constant speed, one faster than the other. After some finite time, Achilles will have run 100 meters, bringing him to the tortoise's starting point. During this time, the tortoise has run a much shorter distance, say 2 meters. It will then take Achilles some further time to run that distance, by which time the tortoise will have advanced farther; and then more time still to reach this third point, while the tortoise moves ahead. Thus, whenever Achilles arrives somewhere the tortoise has been, he still has some distance to go before he can even reach the tortoise. as shown in figure \ref{fig:Achilles-paradox}. Although it contradicts our common sense in real life, the argument is so convincing. This paradox attracted many great minds for thousands of years. Lewis Carrol, and Douglas Hofstadter even took Achilles and the tortoise as figures in their literary works.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Dichotomy-paradox.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Dichotomy paradox}
+ \label{fig:Dichotomy-paradox}
+%\end{wrapfigure}
+\end{figure}
+
+The second one is called Dichotomy paradox. Atalanta is a character in Greek mythology, a virgin huntress. Suppose Atalanta wishes to walk to the end of a path. Before she can get there, she must get halfway there. Before she can get halfway there, she must get a quarter of the way there. Before traveling a quarter, she must travel one-eighth; before an eighth, one-sixteenth; and so on. This description requires one to complete an infinite number of tasks, which Zeno maintains is an impossibility. The paradoxical conclusion then would be that travel over any finite distance can neither be completed nor begun, and so all motion must be an illusion.
+
+The third one is called arrow paradox. Zeno states that for motion to occur, an object must change the position which it occupies. He gives an example of an arrow in flight. In any one (duration-less) instant of time, the arrow is neither moving to where it is, nor to where it is not. It cannot move to where it is not, because no time elapses for it to move there; it cannot move to where it is, because it is already there. In other words, at every instant of time there is no motion occurring. If everything is motionless at every instant, and time is entirely composed of instants, then motion is impossible. Whereas the first two paradoxes divide space, this paradox starts by dividing time—and not into segments, but into points.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Arrow-paradox.eps}
+ \caption{Arrow paradox}
+ \label{fig:Arrow-paradox}
+\end{figure}
+
+The fourth one is called the moving rows paradox, or stadium paradox. It's also about dividing time into atomic points. As shown in figure \ref{fig:Moving-rows-paradox}, there are three rows in the stadium. Each row being composed of an equal number of bodies. At the beginning, they are all aligned. At the smallest time duration, row A stays, row B moves to the right one space unit, while row $\Gamma$ moves to the left one space unit. To row B, row $\Gamma$ actually moves two space units. It means, there should be time duration that $\Gamma$ moves one space unit relative to $B$. And it is the half time of the smallest duration. Since the smallest duration is atomic, it involves the conclusion that half a given time is equal to that time.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.3]{img/Moving-rows-paradox.eps}
+ \caption{Moving rows paradox}
+ %\captionsetup{labelformat=empty}
+ \label{fig:Moving-rows-paradox}
+%\end{wrapfigure}
+\end{figure}
+
+Zeno's paradoxes are easy to understand. However, the conclusion is surprising. In our common sense, motion and time are so real. Achilles must be able to catch up the tortoise. However, it is hard to solve Zeno's paradox. From Aristotle to Bertrand Russel, from Archimedes to Herman Weyl, all proposed varies of solutions to Zeno's paradoxes\cite{Wikipedia-Zeno}.
+
+Zeno was ancient Greek philosopher. He was born in Elea, which was a Greek colony located in present-day southern Italy. Little is known for certain about Zeno's life. In the dialogue of Parmenides, Plato describes a visit to Athens by Zeno and Parmenides, at a time when Parmenides is ``about 65'', Zeno is ``nearly 40'', and Socrates is ``a very young man''. Assuming an age for Socrates of around 20 and taking the date of Socrates' birth as 469 BC gives an approximate date of birth for Zeno of 490 BC. Some less reliable details of Zeno's life are given by Diogenes Laërtius in his {\em Lives and Opinions of Eminent Philosophers}. It said Zeno was the adopted son of Parmenides. He was skilled to argue both sides of any question, the universal critic. And that he was arrested and perhaps killed at the hands of a tyrant of Elea\cite{HanXueTao16}.
+
+Zeno was the primary member of the Eleatics, which were a pre-Socratic school of philosophy founded by Parmenides in the early fifth century BC in the ancient town of Elea. It's another important school after Pythagoras. The Eleatics rejected the epistemological validity of sense experience, and instead took logical standards of clarity and necessity to be the criteria of truth. Of the members, Parmenides and Melissus built arguments starting from sound premises. Zeno, on the other hand, primarily employed the reductio ad absurdum, attempting to destroy the arguments of others by showing that their premises led to contradictions. Zeno is best known for his paradoxes, which Bertrand Russell described as ``immeasurably subtle and profound''.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/Zeno.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Zeno of Elea, About 490BC - 425BC}
+ \label{fig:Zeno-of-Elea}
+%\end{wrapfigure}
+\end{figure}
+
+Ancient Chinese philosophers developed equivalents to some of Zeno's paradoxes. From the surviving Mohist School of Names book of logic which states, in the archaic ancient Chinese script, ``a one-foot stick, every day take away half of it, in a myriad ages it will not be exhausted.''
+
+Zeno's paradoxes caused deep confusion to the ancient Greeks. The views about time, space, infinity, continuity, and movement are critical to the later philosophers and mathematicians even today. How to understand infinity, became a problem that must be solved by ancient Greek philosophers.
+
+\subsection{Potential infinity and actual infinity}
+\index{potential infinity} \index{actual infinity}
+
+Aristotle studied Zeno's paradoxes deeply. One of the most important contributions that Aristotle had made to to study of infinity is identifying a dichotomy between what Aristotle calls the {\em potential infinite} and the {\em actual infinite}. This work fundamentally influenced the later development of mathematics\cite{HanXueTao16}. Potential infinity is a process that never stops. It can be a group of ``things'' that continues without terminating, going on or repeating itself over and over again with no recognizable ending point. The obvious example is the group of natural numbers. No matter where you are while listing or counting out natural numbers, there always exists another number to proceed. Also, in Euclid geometry, a line with a starting point could extend on without end, but could still be potentially infinite because one can add on more length to a finite length to allow it to extend\footnote{Euclid avoided to use the term `infinitely extend' in his work. instead he said a line can be extended any long as needed. This is a common treatment in ancient Greece.}. The actual infinite involves  never-ending sets or ``things'' within a space that has a beginning and end; it is a series that is technically ``completed'' but consists of an infinite number of members. According to Aristotle, actual infinities cannot exist because they are paradoxical. It is impossible to say that you can always ``take another step'' or ``add another member'' in a completed set with a beginning and end, unlike a potential infinite. It is ultimately Aristotle’s rejection of the actual infinite that allowed him to refute Zeno’s paradox.
+
+Although Aristotle did disprove the existence of the actual infinite finally, and tended to reject a lot of major concepts in mathematics, the importance of mathematics was still never belittled in Aristotle’s eyes. Aristotle argued that actual infinity as it is not applicable to geometry and the universal, is not relevant to mathematics, making potential infinity all that actually is important.
+
+Aristotle's viewpoint to infinity is typical in ancient Greece. The dichotomy and controversy about potential infinity and actual infinity have been influential till today. Despite of these arguments, the ancient Greek mathematicians achieved amazing result with the potential infinity concept. One success story was that Euclid proved there are infinitely many prime numbers. It is considered one of the most beautiful proofs in history.
+
+\begin{proposition}[Euclid's Elements, Book IX, Proposition 20]
+Prime numbers are more than any assigned multitude of prime numbers\cite{Elements}.
+\end{proposition}
+
+Euclid indented to avoid using term like `infinitely many' when stated this proposition. Such treatment is very common in {\em Elements}. It's famous that Euclid uses reduction to absurdity in his proof. We explain it in modern language.
+
+\begin{proof}
+Suppose there are finite prime numbers $p_1, p_2, ..., p_n$. Euclid makes a new number:
+
+\[
+p_1 p_2 ... p_n + 1
+\]
+
+Which is the product of the $n$ prime numbers plus one. It is either prime or not.
+
+\begin{itemize}
+\item If it is prime, definitely, it does not equal to any one from $p_1$ to $p_n$, hence it's a new prime not in the list;
+\item If it is not prime, then it must have a prime factor $p$. However, no one from $p_1$ to $p_n$ divides this number. It means $p$ is different from any one from $p_1$ to $p_n$, hence it's a new prime beyond those in the list.
+\end{itemize}
+
+In both cases, we obtain a new prime number. It contradicts the assumption that there are finite prime numbers. Therefore, there are infinitely many prime numbers.
+\end{proof}
+
+From today's view point, Euclid obtained a kind of indirect `proof of existence'. By using proof by contradiction, he proved there are infinitely many prime numbers, but did not give a way to list them. It is quite natural in mathematical proofs now. However, it led to hotly debating about the fundamentals of mathematics in the late 19th and early 20th Century. We'll return to this topic in next chapter.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=1]{img/Aristotle.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Aristotle, 384BC - 322BC}
+ \label{fig:Aristotle}
+%\end{wrapfigure}
+\end{figure}
+
+\index{Aristotle}
+Aristotle was a great philosopher and polymath in ancient Greece. Along with his teacher Plato, he has been called the `Father of Western Philosophy'. Little is known about his life. Aristotle was born in the city of Stagira in Northern Greece in 384BC. His father died when Aristotle was a child, and he was brought up by a guardian. At the age of seventeen or eighteen, he joined Plato's Academy in Athens and remained there for 20 years until Plato died. This period of study in Plato's Academy deeply influenced Aristotle's life. Socrates was Plato's teacher, and Aristotle was taught by Plato. He soon became an outstanding scholar, and Plato called him ``the Spirit of the Academy''. But Aristotle is not a man who only admires authority without his own opinions. He studied hard, and even established a library for himself.
+
+Shortly after Plato died around 347BC, Aristotle left Athens. The traditional story about his departure records that he was disappointed with the Academy's direction after control passed to Plato's nephew. After that, he traveled around. In 343 BC, Aristotle was invited by Philip II of Macedon to become the tutor to his 13 years old son Alexander. Aristotle was appointed as the head of the royal academy of Macedon. During Aristotle's time in the Macedonian court, he gave lessons not only to Alexander, but also to two other future kings: Ptolemy and Cassander. It was under the influence of Aristotle that Alexander the Great cared about science and respected knowledge.
+
+In 335BC, Philip II died. Aristotle returned to Athens, establishing his own school there known as the Lyceum. Aristotle conducted courses at the school for the next twelve years. In this period in Athens, between 335 and 323 BC, Aristotle composed many of his works. He studied and made significant contributions to logic, metaphysics, mathematics, physics, biology, botany, ethics, politics, agriculture, medicine, dance and theatre. There was legend that Aristotle had a habit of walking while lecturing along the walkways covered with colonnades. It was for this reason that his school was named ``Peripatetic'' (an ancient Greek word, which means ``of walking'' or ``given to walking about''). Aristotle used the language that was much more obscure than Plato's Dialogue. Many of his works are based on lecture notes, and some are even the notes of his students. Aristotle was considered as the first author of textbooks in the western world.
+
+Following Alexander's death, anti-Macedonian sentiment in Athens was rekindled. In 322 BC, his enemies reportedly denounced Aristotle for impiety, prompting him to flee to his mother's family estate in Euboea. He said: ``I will not allow the Athenians to sin twice against philosophy'' – a reference to Athens's trial and execution of Socrates. He died on Euboea of natural causes later that same year, at the age of 63.
+
+More than 2300 years after his death, Aristotle remains one of the most influential people who ever lived. He contributed to almost every field of human knowledge in ancient time, and he was the founder of many new fields. Among countless achievements, Aristotle was the founder of formal logic, pioneered the study of zoology, and left every future scientist and philosopher in his debt through his contributions to the scientific method.
+
+\subsection{Method of exhaustion and calculus}
+\index{method of exhaustion}
+
+Some other ancient Greek mathematicians took the practical approach about infinity. They developed the method of exhaustion and made surprising achievements.
+
+The idea of exhaustion originated in the late 5th Century BC with Antiphon (About 480BC - 410BC), when he tried to solve one of the three classic geometric problems, square the circle\footnote{The other two are trisecting the angle, and doubling the cube. Given a circle, ancient Greeks attempted to seek the solution to draw a square that has the same area with only straightedge and compass. Many mathematicians attempted to solve this problem, but all failed until Galois developed theory to prove they were all impossible in 19th Century.}. To approximate the area of a circle, Antiphon started from an inscribed square, then repeatedly double the number of the sides to obtain octagons, hexagons... As the area of the circle gradually ``exhausts'', the side length of inscribed polygons gets smaller and smaller. Antiphon thought the polygon would eventually coincide with the circle. This is the idea of exhaustion. The method was made rigorous a few decades later by Eudoxus of Cnidus, who used it to calculate areas and volumes. The correctness of this method relies on the famous axiom of Eudoxus-Archimedes (or simply called axiom of Archimedes).
+
+\index{axiom of Archimedes}
+\begin{axiom}
+\normalfont
+\textbf{Axiom of Archimedes} Given two magnitudes $a$ and $b$, there exists some natural number $n$, such that $a \leq nb$.
+\end{axiom}
+
+Axiom of Archimedes is fundamental. We introduced Euclid algorithm to compute the greatest common measurement in chapter 2, however, we did not show if this algorithm always terminates. With axiom of Archimedes, we can prove that Euclid algorithm always terminates. Eudoxus stated ``Given two different magnitudes, for the larger one, subtract a magnitude larger than its half, then for the remaining, subtract another magnitude larger than its half, repeat this process, there must be some remaining less than the smaller one.'' This is the logic behind the method of exhaustion.
+
+By using the method of exhaustion, Eudoxus proved that: the volume of a pyramid is one-third the volume of a prism with the same base and altitude, and the volume of a cone is one-third that of the corresponding cylinder. These statements are summarized as propositions in the book 12 of Euclid's {\em Elements}\cite{HanXueTao16}.
+
+Archimedes greatly developed the method of exhaustion, and achieved the highest level amazing result. He calculated $\pi$, proved the formulas of circular area, surface area and volume of sphere, cone, and even found the method to calculate the area under the parabola curve. He was said to be the god of the mathematics in ancient Greece.
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.1]{img/FieldsMedal.jpg}
+ \captionsetup{labelformat=empty}
+ \caption{The Fields Medal carries a portrait of Archimedes.}
+ \label{fig:FieldsMedal}
+\end{wrapfigure}
+%\end{figure}
+
+\index{Archimedes}
+Archimedes (287BC - 212 BC) was a Greek mathematician, physicist, engineer, inventor, and astronomer. He was born in the seaport city of Syracuse, at that time a self-governing colony in Magna Graecia. Archimedes might have studied in Alexandria, Egypt in his youth. During his lifetime, Archimedes made his work known through correspondence with the mathematicians in Alexandria. Although few details of his life are known, he is considered the greatest mathematician of antiquity and one of the greatest of all time. various popular stories about him are widely circulated.
+
+The most widely known anecdote about Archimedes tells of how he uncovered a fraud in the manufacture of a golden crown commissioned by King Hiero II of Syracuse. The king had supplied the pure gold to be used, and Archimedes was asked to determine whether some silver had been substituted by the dishonest goldsmith. Archimedes had to solve the problem without damaging the crown, so he could not melt it down into a regularly shaped body in order to calculate its density. While taking a bath, he noticed that the level of the water in the tub rose as he got in, and realized that this effect could be used to determine the volume of the crown. Archimedes then took to the streets naked, so excited by his discovery that he had forgotten to dress, yelling ``Eureka!'' (Greek word meaning ``I have found [it]!''). The test was conducted successfully, proving that silver had indeed been mixed in. His discovery is the ``Archimedes' Principle'' that every middle school student must learn. Eureka was later used to describe the moment when inspiration was found.
+
+In 214BC, the Second Punic War Broke out. Legend has it that Archimedes created a giant parabolic mirror to deflect the powerful Mediterranean sun onto the ship's sails, setting fire to them. Archimedes also created a huge crane operated hook – the Claw of Archimedes – that was used to lift the enemy ships out of the sea before dropping them to their doom. After two-year-long siege, In 212 BC, the Romans captured Syracuse. The Roman force commander, Marcellus had ordered that Archimedes, the well-known mathematician should not be killed. Archimedes, who was now around 78 years of age, continued his studies after the breach by the Romans and while at home, his work was disturbed by a Roman soldier. The last words attributed to Archimedes are ``Do not disturb my circles!'' The soldier killed Archimedes despite orders that Archimedes should not be harmed. 137 years after his death, the Roman orator Cicero described visiting the tomb of Archimedes. It was surmounted by a sphere and a cylinder, which Archimedes had requested be placed on his tomb to represent his mathematical discoveries\footnote{A sphere has 2/3 the volume and surface area of its circumscribing cylinder including its bases.}.
+
+% Sphere: 4/3 pi r^3, Cylinder: pi r^2 * 2r = 2 pi r^3
+% ==> S : C = 4/3 / 2 = 2/3
+
+As an example, let us see how Archimedes calculated $\pi$ with the method of exhaustion around 250BC. Symbol $\pi$ represents the ratio of a circle's circumference to its diameter, sometimes it's referred to as Archimedes' constant.
+
+As shown in figure \ref{fig:pi-exhaustion}, Archimedes drew two regular polygons inside and outside a circle with diameter of 1. For a side of the inscribed polygon and the corresponding arc, the length of the arc is greater than the side because the straight line is the shortest between two points. Hence the circumference of the circle is greater than the inscribed polygon. Similarly, we can reason that the circumference of the circle is less than the circumscribed polygon. Since the diameter is 1, the circle's circumference equals to $\pi$. Hence the below relation holds:
+
+\[
+  C_i < \pi < C_o
+\]
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/pi-exhaustion.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{$\pi$ can be estimated by computing the perimeters of circumscribed and inscribed polygons.}
+ \label{fig:pi-exhaustion}
+%\end{wrapfigure}
+\end{figure}
+
+Where $C_i$ and $C_o$ are the circumferences of the inscribed and circumscribed polygons respectively. Successively increasing the number of sides approximates the range of $\pi$. Archimedes calculated the 96-sided regular polygon, he proved that $\dfrac{223}{71} < \pi < \dfrac{22}{7}$ (that is $3.1408 < \pi < 3.1429$). This upper bound of $\dfrac{22}{7}$ is widely used in western. The Chinese mathematician Zu Chongzhi, around 480AD, calculated that $3.1415926 < \pi < 3.1415927$ and suggested the approximations $\pi \approx \dfrac{355}{113} = 3.14159292035...$ by applying to a 12,288-sided polygon. This value remained the most accurate approximation of $\pi$ for the next 800 years.
+
+The method of exhaustion, developed in ancient time has limitation. Although rigorous, it demands specific approach for different problems. As a precursor to the methods of calculus, it's complex. Partially because ancient Greeks rejected irrational numbers, they had to make difference between geometric magnitudes and numbers. Another reason was because they attempted to avoid using infinity and infinitesimal.
+
+Ptolemy, the ancient Greek mathematician, astronomer, and geographer also made great achievement with the method of exhaustion. He developed a geocentric model to calculate the celestial motions. It was almost universally accepted until the scientific revolution. His Planetary Hypotheses presented a physical realization of the universe as a set of nested spheres, in which he used the epicycles of his planetary model to compute the dimensions of the universe. He estimated the Sun was at an average distance of 1,210 Earth radii, while the radius of the sphere of the fixed stars was 20,000 times the radius of the Earth.
+
+After Hellenistic period, the Greek civilization was destroyed by several forces. The Romans conquered Greece, Egypt, and the Near East. In 47BC, the Romans set fire to the Egyptian ships in the harbor of Alexandria; the fire spread and burned the library -- the most expensive ancient libraries. The emperor Theodosius (ruled 379 - 396) proscribed the pagan religions and in 392 ordered that their temples be destroyed, including the temple of Serapis in Alexandria, which housed the only remaining sizable collection of Greek works. Thousands of Greek books were burned by the Romans. Many other works written on parchment were expunged to rewrite Christianity works.
+
+The final blow to the Greek civilization was the conquest of Egypt by the uprising Arab empire in 640. The remaining books were destroyed on the ground that as Omar, the conqueror, put it, ``Either the books contain what we also have, in which case we don't have to read them, or they contain the opposite of what we believe, in which case we must not read them.'' And so for six months the baths of Alexandria were heated by burning rolls of parchment\cite{M-Kline-2007}.
+
+When read about such history, it always makes people sad and sigh. The tragedy of burning books in South America, in the Qin Empire, has been performed ever since ancient times. After capture of Egypt, the majority of the scholars migrated to Constantinople, which had become the capital of the Eastern Roman Empire. The Arabs absorbed the Greek works, translated and commented extensively to Greek knowledge. The `House of Wisdom' in Baghdad gradually became the academy centre in the world. After Medieval, Europeans translated the ancient Greek works from Arabic to Latin. Along with the Renaissance in Europe, not only arts and culture, but also mathematics and philosophy recovered and were greatly developed.
+
+German astronomer Johannes Kepler took the next important step after Archimedes atop method of exhaustion. When Nicolaus Copernicus began to think astronomy, the Ptolemaic theory had become somewhat more complicated. To explain the variations in speed and direction of the apparent motions, Ptolemy added epicycles, and other complex geometric tricks in his model. In Copernicus' time, the theory required a total of 78 circles to describe the motion of Sun, Moon, and the five planets. By moving the Sun to the centre, Copernicus was able to reduce the total number of circles (differents and epicycles) to 34. It was greatly simplified from the geocentric model. Kepler made more remarkable achievement. He inherited valuable observation data from the famous astronomer Tycho Brahe. He spent 8 years to analyze the observed data and false trails. Kepler's most famous and important results are known today as Kepler's three law of planetary motion. According to his first law, Kepler broke with the tradition of two thousand years that circle or sphere must be used to describe celestial motions. It states that each planet moves on an ellipse and that the sun is at one (common) focus of each of these elliptical paths. The other radical step Kepler made was he discovered that the planet does not move at a constant velocity. A line segment joining a planet and the Sun sweeps out equal areas during equal intervals of time. This is his second law. It explains that why a planet some times moves fast (close to the Sun) while some times moves slowly (far from the Sun). The third law states that, the square of the orbital period of a planet is directly proportional to the cube of the semi-major axis of its orbit. Such complex models required more powerful mathematical tool, the method of exhaustion is not convenient. Kepler then make simplification, and he used the new method on measuring the volume of containers such as wine barrels.
+
+The next important step was made by Descartes and Fermat. Through analytical geometry, numbers and geometry were bridged, and finally evolved to calculus by Issac Newton and Gottfried Whilhelm Leibniz. Infinitesimal is the central concept in calculus, and the integration involved sum of infinitely many such quantities. As a side word, John Wallis, the important contributor to calculus, introduced $\infty$ symbol for infinity in 1665.
+
+Although the logic foundation of calculus caused hotly debating, this new tool, representing the modern spirit of the western, broke the waves in its sail in the 18th Century. This was an era of heroes. The Bernoulli family, Euler, and Lagrange greatly developed calculus and infinite series, solved many hard problems in astronomy, mechanics, and fluid that people never imagined before.
+
+\section{Potential infinity and programming}
+Mathematicians came back to consider actual infinity when debating about how to make calculus rigorous. Before this topic, let us see how the idea of infinity is realized in programming. Computers can only use limited resources. Numbers are represented in binary forms suitable for computer. There are finite many binary bits, hence the numbers represented in computer are also bounded. A binary number of $m$ bits can represent numbers at maximum of $2^m - 1$, which is 11...1 of length $m$. The biggest 16 bits number is $2^{16} - 1 = 65535$. For this reason, if the number of elements in a set is also represented in binary, then the set can only contain finite many elements. In early days of programming, arrays were often used to hold multiple elements. To effectively use computer memories, the size of array need be determined before using. For example below statement in C programming language, declares an array that can hold 10 integers:
+
+\begin{verbatim}
+int a[10];
+\end{verbatim}
+
+There are two different concepts of numbers, ordinal number and cardinal number. In short, ordinal number is used to describe a way to arrange a collection of objects in order, one after another; while cardinal numbers, are used to measure the size of collections. We'll provide the formal definitions for them later. Both ordinals and cardinals are finite in traditional programming. They can't represent infinity directly. It was reasonable in the early days of computer science. The computer devices were very expensive, people never thought to deal with practice problems with infinity. As time goes on, the cost of computation resources keep decreasing. We are not satisfy with the way to predict the size of the collection before using it in programming. New tools, like dynamic array, were developed in some programming environments. They were known as containers, the size can be easily adjusted on-demand. However, even for dynamic containers, the elements are still finite many. It can not exceed the number representation limit. People developed the linked-list, as explained in chapter 1, elements are stored in node, and chained together. The last element points to a special empty node indicating the end. Given such a linked-list, we can start from its head, move to any node in it without need of knowing its cardinal. As far as the storage allows, a linked-list can be arbitrary long. It brings the chance to represent potential infinity.
+
+However, there is eventually a gap between linked-list and potential infinity. We consider natural numbers as potential infinity without terminating or `end point'. But when use linked-list to represent natural numbers, no matter how long the list is, for instance $n$, we have to store all numbers from 0 to $n$ in it. It only represents sequence of 0, 1, ..., $n$, but not the natural numbers, 0, 1, ..., $n$, ...
+
+\index{lazy evaluation}
+To model the potential infinity, people introduced concept of lazy evaluation. Instead of evaluate the value of an expression or variable, this evaluation strategy delays it until the value is needed. For the natural number example, any number $n$ has a successor $n+1$ according to Peano's axiom introduced in chapter 1, and the first natural number is 0. Hence we can define natural numbers as below:
+
+\[
+N = iterate(n \mapsto n + 1, 0)
+\]
+
+Where $iterate$ is defined as:
+
+\[
+iterate(f, x) = x : iterate(f, f(x))
+\]
+
+Let us see the first several steps when generate natural numbers. To make it simple, denote $succ(n) = n \mapsto n +1$
+
+\[
+\begin{array}{rcll}
+iterate(succ, 0) & = & 0 : iterate(succ, succ(0)) & \text{definition of } iterate\\
+                 & = & 0 : iterate(succ, 1) & succ(0) = 0 + 1 = 1 \\
+                 & = & 0 : 1 : iterate(succ, succ(1)) & \\
+                 & = & 0 : 1 : iterate(succ, 2) & \\
+                 & = & 0 : 1 : 2 : iterate(succ, 3) & \\
+                 & = & ... & \\
+\end{array}
+\]
+
+Without lazy evaluation, this process will repeat endlessly forever. It can not used to solve practical problems. We must change the link operation to lazy evaluation. One method is to leverage the $\lambda$ calculus introduced in chapter 2.
+
+\[
+x : xs = cons(x, () \mapsto xs)
+\]
+
+We often call the expression $() \mapsto exp$ as $delay(exp)$. It builds a function without argument, when evaluates (the function), gives the result $exp$.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/stream-cons.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{The next node pointed is a $\lambda$ expression. It will create a new node when force evaluation.}
+ \label{fig:stream-cons}
+%\end{wrapfigure}
+\end{figure}
+
+Therefore, when link $x$ and $xs$ together, the value of $xs$ won't be evaluated, but $xs$ itself will be wrapped in a $\lambda$ expression, and the evaluation is delayed to future time. With this modification, generation of natural numbers changes to:
+
+\[
+\begin{array}{rcll}
+iterate(succ, 0) & = & 0 : iterate(succ, succ(0)) & \text{definition of } iterate\\
+                 & = & cons(0, () \mapsto iterate(succ, succ(0))) & \text{lazy link} \\
+\end{array}
+\]
+
+The computation stops here. It won't go on. The result is a list. The first element is 0, while the next element is a $\lambda$ expression. If we want to obtain the successive element, we have to force the list evaluation.
+
+\[
+next(cons(x, e)) = e()
+\]
+
+When apply $next$ to $cons(0, () \mapsto iterate(succ, succ(0)))$, we obtain:
+
+\[
+\begin{array}{cll}
+  & next(cons(0, () \mapsto iterate(succ, succ(0)))) & \\
+= & iterate(succ, succ(0)) & \text{definition of } next\\
+= & iterate(succ, 1) & \text{definition of } succ\\
+= & 1 : iterate(succ, succ(1)) & \text{definition of } iterate\\
+= & cons(1, () \mapsto iterate(succ, succ(1))) & \text{lazy link}
+\end{array}
+\]
+
+The computation stops again. By repeatedly applying $next$ to $N$, we generate natural numbers one by one. People call this kind of model {\em stream}, and use it to represent potential infinity. We can easily define a function to fetch the first $m$ natural numbers from this potential infinite stream.
+
+\[
+\begin{array}{l}
+take\ 0\ \_\ = [] \\
+take\ n\ cons(x, e)\ = cons(x, take(n-1, e())) \\
+\end{array}
+\]
+
+For example, $take\ 8\ N = [0, 1, 2, 3, 4, 5, 6, 7]$. There are examples in the appendix of this chapter about how to define natural numbers with potential infinity in different programming languages.
+
+\begin{Exercise}
+\Question{In chapter 1, we realized Fibonacci numbers by folding. How to define Fibonacci numbers as potential infinity with $iterate$?}
+\Question{Define $iterate$ by folding.}
+\end{Exercise}
+
+\subsection{Coalgebra and infinite stream$\bigstar$}
+
+To model the stream of potential infinity, we need the coalgebra concept in category theory introduced in chapter 4. Readers are safe to skip this section in the following 2 pages, and directly read from the next section \textbf{Explore the actual infinity}. Let us first revisit coalgebra and F-morphism.
+
+\index{coalgebra}
+\begin{definition}
+\normalfont
+Let $\pmb{C}$ be a category, $\pmb{C} \arrowto{\mathbf{F}} \pmb{C}$ is an endo-functor of category $\pmb{C}$. For the object $A$ and morphism $\alpha$ in this category, arrow:
+
+\[
+  A \arrowto{\alpha} \mathbf{F} A
+\]
+
+forms a pair $(A, \alpha)$. It is called F-coalgebra, where $A$ is the carrier object.
+\end{definition}
+
+We can treat F-coalgebra as object. When the context is clear, we denote the object as a pair $(A, \alpha)$. The arrows between such objects are defined as the following:
+
+\begin{definition}
+\normalfont
+F-morphism is the arrow between F-coalgebra objects:
+
+\[
+  (A, \alpha) \longrightarrow (B, \beta)
+\]
+
+If the arrow $A \arrowto{f} B$ between the carrier objects make the below diagram commutes:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=3em, column sep=3em, minimum width=2em]{
+    A & \mathbf{F} A \\
+    B & \mathbf{F} B \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$\alpha$} (m-1-2)
+    (m-1-1) edge node [left] {$f$} (m-2-1)
+    (m-1-2) edge node [right] {$\mathbf{F}(f)$}   (m-2-2)
+    (m-2-1) edge node [below] {$\beta$} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+Which means $\beta \circ f = \mathbf{F}(f) \circ \alpha$
+\end{definition}
+
+F-coalgebra and F-morphism form F-coalgebra category $\pmb{CoAlg}(\mathbf{F})$. For F-algebra, we care about the initial algebra; symmetrically, for F-coalgebra, we care about the {\em final coalgebra}. Where the final coalgebra is the final object in F-coalgebra category, denoted as $(T, \mu)$. For any other algebra $(A, f)$, there exists unique morphism $m$, such that the below diagram commutes:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=3em, column sep=3em, minimum width=2em]{
+    \mathbf{F} T & \mathbf{F} A \\
+    T & A \\};
+  \path[-stealth]
+    (m-1-2) edge node [above] {$\mathbf{F}(m)$} (m-1-1)
+    (m-2-1) edge node [left] {$\mu$} (m-1-1)
+    (m-2-2) edge node [right] {$f$} (m-1-2)
+    (m-2-2) edge node [below] {$m$} (m-2-1);
+\end{tikzpicture}
+\end{center}
+
+From Lambek theorem, the final coalgebra is the fixed point for functor. The morphism $T \arrowto{\mu} \mathbf{F} T$ is an isomorphism, such that $\mathbf{F} T$ is isomorphic to $T$. The final coalgebra can be used to build infinite data structures.
+
+\index{anamorphism}
+We use catamorphism to evaluate the initial algebra. Symmetrically, we use anamorphism (prefix ana- means upward) to coevaluate the final coalgebra. For any coalgebra $(A, f)$, the unique arrow to the final coalgebra $(T, \mu)$ can be represented with the anamorphism as $\llb f \rlb$. The brackets do not look like bananas any more, but like a pair of lenses in optics. They are known as \textbf{lens brackets}. As shown in below diagram:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=3em, column sep=3em, minimum width=2em]{
+    T  & \mathbf{F} T \\
+    A  & \mathbf{F} A \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$\mu$} (m-1-2)
+    (m-2-1) edge node [left] {$\llb f \rlb$} (m-1-1)
+    (m-2-2) edge node [right] {$\mathbf{F}\ \llb f \rlb$}  (m-1-2)
+    (m-2-1) edge node [below] {$f$} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+\[
+  m = \llb f \rlb \text{，if and only if} \mu \circ m = \mathbf{F}(m) \circ f
+\]
+
+Let us see how anamorphism builds infinite stream. Anamorphism takes a coalgebra $A \arrowto{f} \mathbf{F} A$ and a carrier object $A$, it generates the fixed point of functor $\mathbf{F}$, which is $\mathbf{Fix}\ \mathbf{F}$. This fixed point is the final coalgebra. It has the form of infinite stream.
+
+\[
+\llb f \rlb = \mathbf{Fix} \circ \mathbf{F}\ \llb f \rlb \circ f
+\]
+
+We can also define the anamorphism as the function that returns the fixed point:
+
+\[
+\begin{array}{l}
+(A \to \mathbf{F} A) \arrowto{ana} (A \to \mathbf{Fix}\ \mathbf{F}) \\
+ana\ f = Fix \circ fmap\ (ana\ f) \circ f \\
+\end{array}
+\]
+
+As a concrete example, functor $\mathbf{F}$ is defined as:
+
+\begin{lstlisting}
+data StreamF E A = StreamF E A
+\end{lstlisting}
+
+Its fixed point is:
+
+\begin{lstlisting}
+data Stream E = Stream E (Stream E)
+\end{lstlisting}
+
+$\mathbf{StreamF}\ E$ is a normal functor, we intend to give it name of `stream'. The coalgebra of this functor is such a function, it transforms a `seed' $a$ of type $A$ to a pair, containing $a$, and the next seed.
+
+Coalgebra can generates varies of infinite streams. Here are two examples. The first example is Fibonacci numbers. We use $(0, 1)$ as the starting seed. To generate the next seed, we take the second value 1 in the pair as the first value in the new pair, and use $0 + 1$ as the second value in the new pair to form the new seed $(1, 0 + 1)$. Repeat this process, for seed $(m, n)$, we generate the next seed $(n, m + n)$. Written in coalgebra, we have the following definition:
+
+\[
+\begin{array}{l}
+(Int, Int) \arrowto{fib} \mathbf{StreamF}\ Int\ (Int, Int) \\
+fib (m, n) = \mathbf{StreamF}\ m\ (n, m + n)
+\end{array}
+\]
+
+In this definition, the carrier object $A$ is a pair of integers. With coalgebra, we can feed it into anamorphism to build the infinite stream of Fibonacci numbers. For functor $\mathbf{StreamF}\ E$, the type of the anamorphism is:
+
+\[
+(A \to \mathbf{StreamF}\ E\ A) \arrowto{ana} (A \to \mathbf{Stream}\ E)
+\]
+
+We can realize it as:
+
+\[
+\begin{array}{l}
+ana\ f = fix \circ f \\
+\text{where: } fix\ (StreamF\ e\ a) = Stream\ e\ (ana\ f\ a)
+\end{array}
+\]
+
+Apply the anamorphism to coalgebra $fib$ and the start pair $(0, 1)$ gives infinite stream that generates Fibonacci numbers:
+
+\[
+ana\ fib\ (0, 1)
+\]
+
+We can define a auxiliary function to take the first $n$ elements from the infinite stream:
+
+\begin{lstlisting}
+take 0 _ = []
+take n (Stream e s) = e : take (n - 1) s
+\end{lstlisting}
+
+The next example demonstrates how to generate infinite stream of prime numbers with the sieve of Eratosthenes method. The start seed is `all' the natural numbers with 1 being removed: 2, 3, 4, ... From this seed, we remove all the multiples of 2 to obtain the next seed, which is an infinite list start from 3 as 3, 5, 7, ... Next, we remove all the multiples of 3, and repeated this process. This method is defined as below coalgebra:
+
+\[
+\begin{array}{l}
+[Int] \arrowto{era} \mathbf{StreamF}\ Int\ [Int] \\
+era (p:ns) = \mathbf{StreamF}\ p\ \{ n\ |\ p \nmid n, n \in ns\} \\
+\end{array}
+\]
+
+Then feed it to anamorphism, we obtain the infinite stream that generates all prime numbers:
+
+\begin{lstlisting}
+primes = ana era [2...]
+\end{lstlisting}
+
+For list particularly, anamorphism is called unfold. Anamorphism and catamorphism are mutually inverse. We can turn the infinite stream back to list through catamorphism.
+
+\begin{Exercise}
+\Question{Use the definition of the fixed point in chapter 4, prove $Stream$ is the fixed point of $StreamF$.}
+\Question{Define $unfold$.}
+\Question{The fundamental theorem of arithmetic states that, any integer greater than 1 can be unique represented as the product of prime numbers. Given a text $T$, and a string $W$, does any permutation of $W$ exist in $T$? Solve this programming puzzle with the fundamental theorem and the stream of prime numbers.}
+\end{Exercise}
+
+\section{Explore the actual infinity}
+
+Aristotle's influence was profound. For more than two thousand years, mathematicians and philosophers had been thinking about concept of infinity. Most of them accepted the potential infinity. However, there were discordant views about actual infinity. For a long time, people believed the actual infinity was God, or only God mastered actual infinity. Many attempts to reason the actual infinity led to confusion and contradict result. Let all the natural numbers be actual infinity for example. Because natural numbers are separated by even numbers and odd numbers. They alternate in turns. It's natural to think that all even numbers are half of all natural numbers. However, doubling every natural number gives an even number; and dividing every even number by 2 gives a natural number vise versa. There is one to one correspondence between all the natural numbers and even numbers. Are these two actual infinities same? If not, which one has more? natural numbers or even numbers?
+
+\index{Galileo's paradox}
+Father of the modern science, Galileo Galilei made a similar paradox in his final scientific work {\em Two New Sciences} in 1636. Some numbers are squares, while others are not; therefore, all the numbers, including both squares and non-squares, must be more numerous than just the squares. And yet, for every number there is exactly one square, which forms the sequence 1, 4, 9, 16, 25, ... hence, there cannot be more of one than of the other. This paradox is known as Galileo's paradox.
+
+Not only numbers, people found similar paradox in Geometry. As shown in figure \ref{fig:circles-paradox}, For two circles with the same centre, every radius connects two points in each circle respectively, hence, there is one to one correspondence between the points in the bigger circle and the smaller circle. It indicates there are same many points in each circle. However, our common sense tells there must be more points in the bigger one.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/circles-paradox.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Every point in the big circle is corresponding to a point in the small circle.}
+ \label{fig:circles-paradox}
+%\end{wrapfigure}
+\end{figure}
+
+Because of these paradoxes, people accepted Aristotle's approach to avoid using actual infinity. Galileo concluded that the ideas of less, equal, and greater couldn't apply to infinite sets like natural numbers. People rejected terms of actual infinity, like ``all the natural numbers''.
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/Cantor.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Georg Cantor, 1845-1918}
+ \label{fig:Cantor}
+\end{wrapfigure}
+%\end{figure}
+
+About two hundred years after Galileo, German mathematician Cantor led people broke into the Kingdom of infinity. From these paradoxes, Cantor thought the key problem was our common sense assumption, that the whole must be larger than the part. Is it necessarily right? The development of modern science taught us our common view to things could be incomplete or wrong. The theory of relativity challenges our understanding to space and time -- the space we are living in is not necessarily the Euclidean space; Quantum mechanics challenges our common sense that the world is causal -- randomness rules the quantum world. When think out of the box, it will open up a new world we've never seen, resulting in fundamental development. This was exactly what Cantor did. If we accept the counter-intuitive result, that `the part can equal to the whole', then the door to the infinity is open. He established the importance of one-to-one correspondence between the members of two sets, and defined (actual) infinite sets.
+
+To compare two sets, Cantor defines if there is one to one correspondence between them, that every element in set $M$ has the unique corresponding element in set $N$, then the two sets are equinumerous. They have the same size or have the same number of elements\footnote{Remind the `isomorphic' concept introduced in chapter 3.}, denoting $M \cong N$. For finite sets, it is true obviously; when extends to infinite sets, it means there are same infinite many even numbers as the natural numbers! there are same infinite many square numbers as natural numbers; the points in smaller circle and the bigger circle of the same centre are equinumerous... Cantor's friend, Richard Dedekind even gave such a definition\footnote{known as Dedekind infinite set.} of infinite set in 1888: if some proper subset of a set is equinumerous to this set, then it is a infinite set.
+
+% Cardinality vs. cardinal number
+
+\subsection{Paradise of infinite kingdom}
+
+Let us have a glance view of the garden in infinite kingdom. David Hilbert told an interesting story in a lecture in 1924 (published in 2013) to help people understanding Cantor's infinite sets. It was popularized through George Gamow's 1947 book {\em One Two Three... Infinity}.
+
+In this story, there is a Grand hotel with infinite many rooms. It is fully occupied during the hot season. One evening, a tired driver has passed many ``No vacany'' hotels before reaching to this one. He goes to see if there might nonetheless be a room for him. The clerk, Hilbert said: ``No problem, we can make a room for you.'' He moved the guest in room 1 to room 2, then moved the guest in room 2 to room 3, and moved the guest in room 3 to room 4, ... He moved every one from current room to the next room. That freed up the first room for this new guest.
+
+The story goes on. On the second day, there comes a tour group of infinite many guests. Hilbert said: ``No problem, we can make rooms for every one.'' He moved the new guest who was in room 1 last night to room 2, then moved the guest in room 2 to room 4, and moved the guest in room 3 to room 6, ... He moved every one in room $i$ to room $2i$. Since the hotel has infinite many rooms, after moving, room 2, 4, 6, ... these even number rooms are occupied with the guests accommodated yesterday, while the room 1, 3, 5, ... these odd number rooms are freed up. There are infinite many odd numbers rooms that can accommodate every member in the tour group.
+
+The story does not end. On the third day, there comes infinite many tour groups of infinite many guests each. Can the magic Hilbert's hotel accommodate them all? Before seeing the answer, let us first revisit the story on the first two days.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Hilbert-hotel-1.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{First day of Hilbert's Grand hotel}
+ \label{fig:Hilbert-hotel-1}
+%\end{wrapfigure}
+\end{figure}
+
+As shown in figure \ref{fig:Hilbert-hotel-1}, on the first day, we move every guest to the next room to free up room 1. Essentially, we establish a 1-to-1 correspondence for shadowed circles between the two rows as $n \leftrightarrow n+1$. It reveals a counterintuitive fact that infinity plus one is infinity again. Hilbert's grand hotel can accommodate not only this one more guest, but also finite many $k$ new guests by repeating this arrangement $k$ times. It means:
+
+\bean
+\infty + 1 = \infty \\
+\infty + k = \infty \\
+\eean
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Hilbert-hotel-2.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Second day of Hilbert's Grand hotel}
+ \label{fig:Hilbert-hotel-2}
+%\end{wrapfigure}
+\end{figure}
+
+The solution for the second day is shown in figure \ref{fig:Hilbert-hotel-2}. We essentially establish a 1-to-1 correspondence between natural numbers and even numbers, hence free up infinite many odd number rooms. Then we establish another 1-to-1 correspondence between these empty rooms and the infinite many guests in the tour group, which is exactly the 1-to-1 correspondence between odd numbers and natural numbers. The second day story tells us, infinity plus infinity is infinity again.
+
+\[
+\infty + \infty = \infty
+\]
+
+It's natural to ask, although the symbols are same, does the infinity on the left hand equal to the infinity on the right hand? Can we compare between infinities for size? We'll see later, it was exactly this question, led Cantor to study infinity in depth. In Hilbert's Grand hotel story, we can establish 1-to-1 correspondence between all these infinities, hence they are all equinumerous. Such infinity that has 1-to-1 correspondence with natural numbers are called `countable infinity'.
+
+To solve the problem on the third day of Hilbert's Grand hotel, we need think about how to establish the 1-to-1 correspondence between the infinite many tour groups of infinity many guests and the infinity many rooms. One may come to the idea to arrange the guests in the first tour group to room 1, 2, 3, ... then arrange the guests in the second group to room $\infty + 1$, $\infty + 2$, ... However, this method does not work. We don't know which one are more numerous, the rooms or the guests before the arrangement. Consider how this process executes. The first guest in the second group will never know when the first group finishes accommodating, this guest has no way to determine which room should move to. Compare with the first day story, the new guest could immediately move to room 1 when the original guest moved to room 2, although the whole infinity accommodating process is endless. Same situation happened on the second day. When the original guest in room 1 moved to room 2, the first guest in the tour group could move to the freed up room 1 immediately. Next the original guest in room 2 moved to room 4, and the guest in room 3 moved to room 6, at this time, the second guest in the tour group could move to room 3...
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+  \draw[step=1, very thin, gray] (0, 0) grid (5, 5);
+  \draw[->] (-0.25, 0) -- (6, 0) coordinate (x axis);
+  \draw[->] (0, -0.25) -- (0, 6) coordinate (y axis);
+  \foreach \x in {0, 1, 2, 3, 4, 5}
+    \path (\x, -0.25) node[left] {\x};
+  \foreach \y in {1, 2, 3, 4, 5}
+    \path (-0.25, \y) node[below] {\y};
+  \foreach \i / \x / \y in {0/0/0, 1/1/0, 2/0/1, 3/0/2, 4/1/1, 5/2/0, 6/3/0, 7/2/1, 8/1/2, 9/0/3, 10/0/4}{
+    \path (\x, \y) coordinate (N\i);
+    \fill (N\i) circle (1pt) node[above right=3pt of N\i] {\i};
+  }
+  \foreach \i in {0,...,9} {
+    \pgfmathsetmacro{\j}{\i+1}
+    \draw[-latex, thick] (N\i) to (N\j);
+  }
+\end{tikzpicture}
+\caption{One solution to number the infinity of infinity}
+\label{fig:NNtoN}
+\end{figure}
+
+Figure \ref{fig:NNtoN} gives a numbering solution. For convenient purpose, we label the first guest 0, the second guest 1, the third guest 2, ... We label the guests already lived in the hotel as group 0, the first tour group 1, the second group 2, ... In this figure, every guest corresponds to a grid point. We also label the hotel rooms from 0.
+
+Now we arrange rooms in this order: assign the guest 0 in group 0 to room 0, the guest 1 in group 0 to room 1, the guest 0 in group 1 to room 2, the guest 0 in group 2 to room 3, the guest 1 in group 1 to room 4, ... Along the zig-zag path, we can assign room one by one, without missing any guests. Hence we establish a 1-to-1 correspondence between every guest in these infinite many groups and the infinity many rooms. Hilbert's Grand hotel surprisingly holds `two-dimensional' infinity\footnote{The traditional solution uses the Euclid's theorem, that there are infinite many prime numbers. Empty the odd numbered rooms by sending the guest in room $i$ to room $2^{i}$, then put the first group's guests in rooms $3^{n}$, the second group's guests in rooms $5^{n}$, ... put the $k$-th group's guests in rooms $p^n$, where $p$ is the $k$-th prime number. This solution leaves certain rooms empty, specifically, all odd numbers that are not prime powers, such as 15 or 847, will no longer be occupied.}.
+
+\begin{Exercise}
+\Question{We establish the 1-to-1 correspondence between the rooms and guests with the numbering scheme shown in \ref{fig:NNtoN}. For guest $i$ in group $j$, which room number should be assigned? Which guest in which group will live in room $k$?}
+\Question{For Hilbert's Grand hotel, there are multiple solutions for the problem on the third day. Figure \ref{fig:PWW-NNtoN} is the cover page of the book {\em Proof without word}. Can you give a numbering scheme based on this figure?
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.2]{img/PWW.eps}
+ \caption{From cover page of {\em Proof without word}}
+ \label{fig:PWW-NNtoN}
+\end{figure}
+}
+\end{Exercise}
+
+\subsection{One-to-one correspondence and infinite set}
+
+From Hilbert's Grand hotel story, we see the importance of the 1-to-1 correspondence in studying infinity. If there exists 1-to-1 correspondence between two sets, then they have the same cardinality. We can further use 1-to-1 correspondence to classify sets. As explained in chapter 3, for two sets $A$ and $B$, we establish a map $A \arrowto{f} B$, such that every element $x$ in $A$ is corresponding to an element $y$ in $B$ through $x \mapsto y = f(x)$. For sets, we call $f$ function. $y$ is the image of $x$, and $x$ is preimage. If there is exactly one preimage, such map is called {\em injective function}; if every element $y$ in $B$ has a preimage, then the map is called {\em surjective} or onto. If a map is both injective and surjective, it is called {\em bijective} or one-to-one correspondence. Figure \ref{fig:bijection} illustrates a bijection between two sets.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/bijection.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{1-to-1 correspondence between two sets.}
+ \label{fig:bijection}
+%\end{wrapfigure}
+\end{figure}
+
+Hilbert's Grand hotel gives surprising, counterintuitive properties of infinity. The set of natural numbers is equinumerous with its proper subsets like even and odd numbers. And the one dimensional natural number $n$ and two dimensional pair $(m, n)$ are also equinumerous. Starting from natural numbers, Cantor extended a series of infinite sets through 1-to-1 correspondence. for example:
+
+\begin{enumerate}
+\item \textbf{Integers}. We can establish the following 1-to-1 correspondence:
+
+\begin{tabular}{ccccccccc}
+0 & 1 & -1 & 2 & -2 & ... & $n$ & $-n$ & ... \\
+$\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & & $\updownarrow$ & $\updownarrow$ & \\
+0 & 1 &  2 & 3 &  4 & ... & $2n - 1$ & $2n$ & ... \\
+\end{tabular}
+
+Hence extend natural numbers to integers. From another view point, we essentially correspond odd numbers to positive integers, and even numbers to negative integers and zero. It tells that the integers and natural numbers are equinumerous.
+
+\item \textbf{Rationals}. A rational number can be expressed as the quotient or fraction $p/q$ of two integers, a numerator $p$ and a non-zero denominator $q$. On the third day of Hilbert's Grand hotel story, we established 1-to-1 correspondence between a pair $(p, q)$ and a natural number. We can adjust it a bit for rational number $p/q$. Put negative numbers aside for now, we skip whenever the second number $q$ is zero, or $p/q$ is reducible fraction (with common divisor). Then we re-use the method for integers, to cover the negative rational numbers as well. In this way, we construct rational numbers from natural numbers. Below table illustrates how the first several natural numbers correspond to rational numbers:
+
+\begin{tabular}{cccccccccc}
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & ... \\
+$\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & $\updownarrow$ & \\
+0 & 1 & $\dfrac{1}{2}$ & $-\dfrac{1}{2}$ & -1 & -2 & $-\dfrac{2}{3}$ & $-\dfrac{1}{3}$ & $\dfrac{1}{3}$ & ... \\
+\end{tabular}
+
+It tells us natural numbers and rational numbers are equinumerous.
+
+\index{algebraic numbers}
+\item \textbf{Algebraic numbers}. An algebraic number is a root of a non-zero polynomial in one variable with rational coefficients. Equivalently, by clearing denominators, we can loose the coefficients to integers. For example, $\sqrt{2}$ and $1 \pm \sqrt{3}i$ are algebraic numbers, while $\pi$ and $e$ are not.
+
+Given an algebraic equation
+
+\[
+a_0 x^n + a_1 x^{n-1} + ... + a_n = 0
+\]
+
+Where $a_0, a_1, ... a_n$ are integers, and $a_0 \neq 0$. All its roots are algebraic numbers. Define a positive integer:
+
+\[
+h = n + |a_0| + |a_1| + ... + |a_n|
+\]
+
+Which is the sum of the degree and coefficients of the equation. We name it as the height $h$ of the equation. For any algebraic equation, $h$ is a unique natural number. On the other hand, given a height $h$, there could be multiple equations. For example, the height of equations $x - 3 = 0$, $x^3 + 1 = 0$, $x^3 - 1 = 0$, $x^2 + x + 1 = 0$, $x^2 - x + 1 = 0$ are all 4. However, there are finite many equations for every $h$. Therefore, we can enumerate all algebraic equations: first list all equations of height $h=1$, then list the equations of height $h=2$, ... and repeated this process. The equations of the same heights can be list in arbitrary order. According to the fundamental theorem of algebra proved by Gauss, the number of roots equals to the equation degree $n$. Taking the multiplicity into consideration, the number of different roots is not greater than $n$. Hence there are finite many roots for equation of height $h$. Now we can enumerate all algebraic numbers.
+
+First, we enumerate all roots for equations of height $h=1$ (only one such equation $x = 0$), which is 0; then enumerate all roots for equations of height 2. Because different equations may have some same roots, we need skip any root if it has been enumerated before. In this way, we establish the 1-to-1 correspondence between algebraic numbers and natural numbers. Hence they are equinumerous. In other words, we can extend to all algebraic numbers from natural numbers.
+\end{enumerate}
+
+We'll meet a problem next. Can we extend natural numbers to real numbers? not only for normal irrationals, but also cover transcendental numbers like $\pi$ and $e$? Cantor and Dedekind made great breakthrough when studied this problem.
+
+\subsubsection{Cantor and Dedekind}
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/Cantor-1870.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Cantor, around 1870}
+ \label{fig:Cantor-1870}
+\end{wrapfigure}
+%\end{figure}
+
+\index{Cantor}
+Georg Cantor was a German mathematician, He created set theory, which has became a fundamental theory in mathematics. Cantor was born in 1845 in the western merchant colony of Saint Petersburg, Russia, and brought up in the city until he was eleven. His father was a successful merchant, and member of the Saint Petersburg stock exchange; his mother came from a family well-known of music. When his father became ill, the family moved to Germany Frankfurt in 1856. Cantor demonstrated exceptional skill in mathematics in school. But his father wanted Cantor to became ``a shining star in the engineering firmament.'' However, at the age of 17, Cantor had sought his father's permission to study mathematics at university and he was overjoyed when eventually his father consented\cite{HanXueTao16}.
+
+He entered the Polytechnic of Zürich in 1862, then moved to the University of Berlin in 1863. He attended lectures by Leopold Kronecker, Karl Weierstrass and Ernst Kummer. He spent the summer of 1866 at the University of Göttingen. Cantor was a good student, and he received his doctorate degree in 1867 with the dissertation on number theory. Cantor later took up a position at the University of Halle, where he spent his entire career.
+
+At that time, many mathematicians were trying to rebuild the rigorous logical foundation of analysis led by Weierstrass. Cantor was also influenced by this movement. He soon realized the importance to study real numbers as the basis of calculus, which became the beginning of set theory research.
+
+In 1872, he met and began a friendship with the young mathematician Richard Dedekind while on holiday in Switzerland. Even in Cantor's honeymoon in Harz mountains, Cantor spent much time in mathematical discussions with Dedekind. They started a long time correspondence between each other.
+
+In 1874, Cantor published his first revolutionary paper about set theory at the age of 29. It marked as the beginning of set theory as a branch of mathematics. With the extraordinary ingenuity, Cantor established set theory in the following ten years almost alone, leading the revolution of infinity in mathematics. However, he was not well recognized during his most creative period. He desired, but was not able to obtain a professor chair at the University of Berlin. He spent his career at the University of Halle, which was a infamous university with a meager salary. Cantor's theory was originally regarded as so counterintuitive – even shocking. People found paradoxes hidden in infinity sets (we'll introduce Russell's paradox in next chapter). Cantor's work encountered resistance from mathematical contemporaries. Among them, some were famous mathematicians, including his teacher, the leading mathematician in Berlin, Leopold Kronecker. He had a famous saying: ``God made the integers, all else is the work of man.'' He objected to Cantor's theory about infinity and transfinite numbers, said it was not mathematics but mysticism. Mathematics was headed for the madhouse under Cantor. Henri Poincaré, the famous French mathematician, known as ``The Last Universalist'', referred to Cantor's work as a ``disease'' from which mathematics would eventually be cured. Poincaré said, ``There is no actual infinite; the Cantorians have forgotten this, and that is why they have fallen into contradiction.'' Later Hermann Weyl, the great German mathematician criticized Cantor's hierarchy of infinities as ``fog on fog.'' Hermann Schwartz was originally a friend of Cantor, but he stopped the correspondence with Cantor as opposition to Cantor's ideas continued to grow. Mathematicians split to schools of empiricism, intuitionism, and constructivism in different ways, and fell into the controversy about the foundations of mathematics against Cantor.
+
+The tragedy was not the set theory, but Cantor went to the madhouse. Cantor suffered his first known bout of depression in May 1884. During the rest of his life, the depression recurred several times with different intensity, driving him from the community into the mental hospital refuge. In 1904 he was agitated by a paper presented by Julius König at the Third International Congress of Mathematicians. The paper was read in front of his daughters and colleagues. Cantor was shaken, and sent to hospital again. Cantor retired in 1913, living in poverty. In June 1917, he entered the sanatorium for the last time and continually wrote to his wife asking to be allowed to go home. Cantor died on January 6, 1918, in the sanatorium where he had spent the last year of his life.
+
+Cantor's set theory was publicly acknowledged and praised at the first International Congress of Mathematicians, held in Zurich in 1897. Adolf Hurwitz (1859 - 1919) openly expressed his great admiration of Cantor and proclaimed him as one by whom the theory of functions has been enriched. Jacques Hadamard expressed his opinion that the notions of the theory of sets were known and indispensable instruments. Over time, people gradually realized the importance of set theory. David Hilbert praised Cantor's work as ``the finest product of mathematical genius and one of the supreme achievements of purely intellectual human activity.'' The Continuum hypothesis, introduced by Cantor, was presented by Hilbert as the first of his twenty-three open problems in his address at the 1900 International Congress of Mathematicians in Paris. When Brouwer, the founder of intuitionism criticizing the paradoxes in set theory, Hilbert defended it by declaring, ``No one shall expel us from the paradise that Cantor has created.''
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=4]{img/Dedekind.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Richard Dedekind, 1831-1916}
+ \label{fig:Dedekind}
+\end{wrapfigure}
+%\end{figure}
+
+\index{Dedekind}
+Richard Dedekind was a German mathematician. He was born on October 6, 1831 in Brunswick Germany, where is the hometown of Gauss. His father was a professor, his mother was a daughter of a professor at the same university in Brunswick. When Dedekind was in school, mathematics was not his main interest. He studied science, in particular physics and chemistry. However, they became less than satisfactory to Dedekind with what he considered an imprecise logical structure and his attention turned towards mathematics. He entered the University of Göttingen in the spring of 1850 with a solid grounding in mathematics. He learned number theory from M A Stern, and physics from Wilhelm Weber. Gauss was still teaching, although mostly at an elementary level, and Dedekind became his last student. Dedekind did his doctoral work in four semesters under Gauss's supervision and submitted a thesis on the theory of Eulerian integrals. He received his doctorate from Göttingen in 1852.
+
+After that, Dedekind went to Berlin for two years of study, where he and Bernhard Riemann were contemporaries; they were both awarded the habilitation degrees in 1854. Dedekind was then qualified as a university teacher and he began teaching at Göttingen giving courses on probability and geometry. He studied for a while with Dirichlet, and they became good friends. About this time, Dedekind studied the work of Galois and he was the first to lecture on Galois theory. He also became one of the first people to understand the importance of the notion of groups for algebra and arithmetic.
+
+Dedekind was humble. Many of his achievements were unknown to the people at the time. For example, after Dirichlet's death, Dedekind wrote and published the famous book {\em Lectures on Number Theory} based on his notes from Dirichlet's lectures. Dedekind was so modest that he published the book under Dirichlet’s name, even after adding many additional results of his own in later editions. Unfortunately, Dedekind’s modesty hurt his career; he failed to get tenure at Göttingen and ended up on the faculty of a minor technical university(\cite{StepanovRose15} pp.140). -- Institute of Technology Brunswick in his hometown.
+
+Dedekind remained in Brunswick for the rest of his life, retiring on April 1, 1894. He lived his life as a professor in Brunswick.
+``In close association with his brother and sister, ignoring all possibilities of change or attainment of a higher sphere of activity. The small, familiar world in which he lived completely satisfied his demands: ... there he found sufficient leisure and freedom for scientific work in basic mathematical research. He did not feel pressed to have a more marked effect in the outside world: such confirmation of himself was unnecessary.''
+
+Dedekind made a number of highly significant contributions to mathematics and his work would change the style of mathematics into what is familiar to us today. While teaching calculus for the first time at Brunswick, Dedekind developed the notion now known as a Dedekind cut, now a standard definition of the real numbers. As well as his analysis of the nature of number, his work on mathematical induction, including the definition of finite and infinite sets, and his work in number theory, particularly in algebraic number fields, is of major importance. He introduced the notion of an ideal which is fundamental to ring theory (later introduced and extended by Hilbert and Emmy Noether). He also proposed an axiomatic foundation for the natural numbers, whose primitive notions were the number one and the successor function. The next year, Giuseppe Peano, citing Dedekind, formulated an equivalent but simpler set of axioms.
+
+Dedekind died on February 12, 1916. About his death, there was an interesting story. One day, Dedekind discovered in a ``Biography of Mathematicians'', that wrote: Dedekind died on September 4, 1897. To correct this error, he wrote a letter to the editor of the biography: ``According to my diary, I was very healthy on this day and talking with my lunch guest, dear friend Cantor, some interesting things, very enjoyable. "\cite{HanXueTao16}
+
+Even today, there are still different views regarding to Cantor and Dedekind's work. Dieudonné still considered Dedekind's work caused unnecessary confusions in 1980s. Not to mention the fierce divisions and debates at the beginning of the 20th Century. Most biographies and comments we see today are often too critical to Kronecker, Brouwer, and the mathematical philosophy of intuitionism they represented. They sympathize with Cantor, and enthusiastically praise the revolution of infinite sets and transfinite numbers. We recommend the rational readers have your own thoughts, but not be completely influenced by one-sided view or the other. Kronecker had a strong belief in mathematical philosophy. He emphasized that mathematics should deal only with finite numbers and with a finite number of operations. He was the first to doubt the significance of non-constructive existence proofs. We should not think that Kronecker's views of mathematics were totally eccentric. Although it was true that most mathematicians of his day would not agree with those views, and indeed most mathematicians today would not agree with them, they were not put aside. Kronecker's ideas were further developed by Poincaré and Brouwer, who placed particular emphasis upon intuition. Intuitionism stresses that mathematics has priority over logic, the objects of mathematics are constructed and operated upon in the mind by the mathematician, and it is impossible to define the properties of mathematical objects simply by establishing a number of axioms. Poincaré in his popular book {\em  Science and Hypothesis} stated that convention plays an important role in physics. His view came to be known as ``conventionalism''. He also believed that the geometry of physical space is conventional. His idea inspired Einstein when developed his theory of relativity.
+
+\subsubsection{Fibonacci numbers and Hamming numbers}
+
+Some programming environments support lazy evaluation by default. With them, we can perform complex computation directly on infinite streams. Below is a definition of natural numbers.
+
+\[
+N = 0 : map(succ, N)
+\]
+
+In this definition, $N$ is a infinite set of natural numbers. The first number is zero, from the second one, every number is the successor of the previous natural number, as described in the following table:
+
+\vspace{5mm}
+\begin{tabular}{|r|r|l|l|l|l|}
+\hline
+                 & $N$: & 0 & 1 & 2 & ... \\
+\hline
+                 & $map(succ, N)$: & $succ(0)$ & $succ(1)$ & $succ(2)$ & ... \\
+\hline
+$0 : map(succ, N)$: & 0 & 1 & 2 & 3 & ... \\
+\hline
+\end{tabular}
+\vspace{5mm}
+
+Based on this idea, below example code firstly defines the infinite set of natural numbers, then takes the first 10 numbers:
+
+\lstset{frame=single}
+\begin{lstlisting}
+nat = 0 : map (+1) nat
+
+take 10 nat
+[0,1,2,3,4,5,6,7,8,9]
+\end{lstlisting}
+
+Similarly, we can define Fibonacci numbers as an infinite set. Let $F$ be the set of all Fibonacci numbers. The first element is 0, the second is 1, every Fibonacci number after them are the sum of the previous two. We can make a table with the same method as we do for natural numbers:
+
+\vspace{5mm}
+\begin{tabular}{|r|r|l|l|l|l|l|l|l|l|}
+\hline
+  & $F$:  & 0 & 1 & 1 & 2 & 3 & 5 & 8 & ... \\
+\hline
+  & $F'$: & 1 & 1 & 2 & 3 & 5 & 8 & 13 & ... \\
+\hline
+0 & 1     & 1 & 2 & 3 & 5 & 8 & 13 & 21 & ... \\
+\hline
+\end{tabular}
+\vspace{5mm}
+
+Where the first row lists all Fibonacci numbers; the second row removes the first one, and lists the rest. We can also consider it is the result by shifting the first row to left by one cell; in the third row, every cell is the sum of the above two numbers in the same column. It also lists all Fibonacci numbers except for the first two: 0 and 1. We can prepend them to the left of the third row to obtain the definition of infinite Fibonacci numbers:
+
+\[
+F = \{0, 1\} \cup \{ x + y | x \in F, y \in F'\}
+\]
+
+Here is the corresponding example code:
+\begin{lstlisting}
+fib = 0 : 1 : zipWith (+) fib (tail fib)
+\end{lstlisting}
+
+\index{regular numbers} \index{Hamming numbers}
+Here is another example. In mathematics, regular numbers are defined as those numbers whose only prime divisors are 2, 3, and 5. In computer science, regular numbers are often called Hamming numbers, after Richard Hamming (American mathematician, ACM Turning award receiver, 1915-1998), who proposed the problem of finding computer algorithms for generating these numbers in ascending order. Here are the first several Hamming numbers.
+
+\[
+1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50, 54, 60, ...
+\]
+
+It's not trivial to write a program to generate Hamming numbers. While there exits an intuitive and efficient method by using infinite stream. Let $H$ be the infinite set of Hamming numbers. The first Hamming number is 1. For every number $x$ in $H$, $2x$ is still a Hamming number, define $H_2 = \{ 2x | x \in H \}$. It is also true for factor 3 and 5. Let us define $H_3 = \{ 3x | x \in H \}$ and $H_5 = \{ 5x | x \in H \}$ respectively. If we merge these three sets, $H_2, H_3$, and $H_5$ together, remove those duplicated numbers, and prepend 1, then we obtain the set of Hamming numbers again.
+
+\[
+\begin{array}{rcl}
+H & = & \{ 1 \} \cup H_2 \cup H_3 \cup H_5 \\
+  & = & \{ 1 \} \cup \{ 2x | x \in H \} \cup \{ 3x | x \in H \} \cup \{ 5x | x \in H \} \\
+\end{array}
+\]
+
+In programming, $\cup$ means merge two series $X = \{x_1, x_2, ...\}$ and $Y = \{y_1, y_2, ...\}$ in order, and drop the duplicated elements.
+
+\[
+X \cup Y =
+\begin{cases}
+x_1 < y_1 : & \{x_1, X' \cup Y \} \\
+x_1 = y_1 : & \{x_1, X' \cup Y' \} \\
+x_1 > y_1 : & \{y_1, X \cup Y' \} \\
+\end{cases}
+\]
+
+Here is an example code that summarizes above definition, and returns the 1,000,000th Hamming number.
+
+\begin{lstlisting}
+ham = 1 : map (*2) ham <> map (*3) ham <> map (*5) ham
+  where xxs@(x:xs) <> yys@(y:ys)
+    | x==y = x : xs <> ys
+    | x<y  = x : xs <> yys
+    | x>y  = y : xxs <> ys
+
+ham !! 1000000
+519312780448388736089589843750000000000000000000000000
+000000000000000000000000000000
+\end{lstlisting}
+
+\lstset{frame=none}
+
+\subsection{Countable and uncountable infinity}
+\index{countable set}
+From natural numbers, we've seen how to construct integers, rationals, and the algebraic numbers (including part of irrational numbers like radicals). We are able to establish 1-to-1 correspondence between all of them and natural numbers, hence they are all equinumerous. A set is called {\em countable} infinite set if it has the same cardinality as natural numbers. Are all infinite set countable? Are there any larger infinities? On November 29, 1873, Cantor wrote to his friend Dedekind a letter(\cite{Calvin-Clawson-1994}, pp. 198).
+
+\begin{quotation}
+\itshape
+May I ask you a question, which has a certain theoretical interest for me. but which I can't answer; may be you can answer it and would be so kind as to write to me about it. It goes as follows: take the set of all natural numbers $n$ and denote it $N$. Further, consider, say, the set of all positive real numbers $x$ and denote it $R$. Then the question is simply this: can $N$ be paired with $R$ in such a way that to every individual of one set corresponds to one and only one individual of the other? At first glance, one says to oneself, ``No, this is impossible, for $N$ consists of discrete parts and $R$ is a continuum.'' But nothing is proved by this objection. And much as I too feel that $N$ and $R$ do not permit such a pairing, I still cannot find the reason. And it is this reason that bothers me; maybe it is very simple.
+\end{quotation}
+
+\index{diagonal method}
+
+One week after on December 7, Cantor wrote again to Dedekind.
+
+\begin{quotation}
+\itshape
+Recently I had time to follow up a little more fully the conjecture which I mentioned to you; only today I believe I have finished the matter. Should I have been deceived, I would not find a more lenient judge than you. I thus take the liberty of submitting to your judgement what I have written, in all the incompleteness of a first draft.
+\end{quotation}
+
+Cantor proved it impossible to establish 1-to-1 correspondence between natural numbers and real numbers, hence real numbers are uncountable. December 7, 1873 was the day that set theory born. Cantor had given two proofs. The second one is the popular Cantor's {\em diagonal argument}.
+
+Cantor used the proof by contradiction method. Suppose the real numbers in open interval $(0, 1)$ are countable. There exits 1-to-1 correspondence to natural numbers. Then we can list all real numbers in this interval as a sequence $a_0, a_1, a_2, ..., a_n, ...$ in decimals. For any irrational number, its decimal format is endless non-repeating; For rational number, its decimal format can be infinitely repeating finite sequence of digits, for example $\dfrac{1}{3} = 0.333...$; for decimals with finite digits, we can append infinite many zeros, for example $\dfrac{1}{2} = 0.5000...$ All the real numbers in interval $(0, 1)$ can be list as below:
+
+\[
+\begin{array}{l}
+a_0 = 0.a_{00}a_{01}a_{02}a_{03}...\\
+a_1 = 0.a_{10}a_{11}a_{12}a_{13}...\\
+a_2 = 0.a_{20}a_{21}a_{22}a_{23}...\\
+a_3 = 0.a_{30}a_{31}a_{32}a_{33}...\\
+... \\
+a_n = 0.a_{n0}a_{n1}a_{n2}a_{n3}...\\
+... \\
+\end{array}
+\]
+
+Here is an important note: $a_0, a_1, a_2, ...$ are not necessarily ordered from small to big. Next we construct a number $b = 0.b_0b_1b_2b_3...b_n...$, where the $n$-th digit $b_n \neq a_{nn}$. To achieve this, we can simply make a rule, if $a_{nn} \neq 5$, then let $b_n = 5$, else let $b_n = 6$.
+
+\[
+b_n = \begin{cases}
+5 & : a_{nn} \neq 5 \\
+6 & : a_{nn} = 5 \\
+\end{cases}
+\]
+
+The constructed number $b$ must not equal to any number we list above. This is because at least the $n$-th digit is different. That the diagonal digits are different. We highlight them in bold font in the table.
+
+\[
+\begin{array}{l}
+a_0 = 0.\pmb{a_{00}}a_{01}a_{02}a_{03}...\\
+a_1 = 0.a_{10}\pmb{a_{11}}a_{12}a_{13}...\\
+a_2 = 0.a_{20}a_{21}\pmb{a_{22}}a_{23}...\\
+a_3 = 0.a_{30}a_{31}a_{32}\pmb{a_{33}}...\\
+... \\
+a_n = 0.a_{n0}a_{n1}a_{n2}a_{n3}...\pmb{a_{nn}}...\\
+... \\
+\end{array}
+\]
+
+Because we assume all numbers in interval $(0, 1)$ are enumerated without one missing. $b$ is obviously in this interval, but it does not equal to any $a_i$. The 1-to-1 correspondence missed $b$, hence lead to contradiction. As the result, we are not able to establish 1-to-1 correspondence between real numbers and natural numbers. This proof is called Cantor's diagonal argument.
+
+One may argue why can't add $b$ to the list of $a_0, a_1, a_2, ...$? Suppose after adding $b$ to the list, its position is the $m$-th number, we can construct another new number $c$, where its $m$-th digit does not equal to $b_m$. Hence we get another number not being included.
+
+\index{uncountable set}
+This proof is simple and easy. It tells a surprising result: the set of real numbers in interval $(0, 1)$ is uncountable! It is the first infinite set that people found more numerous than natural numbers\footnote{Courant and Robbins give another intuitive geometric proof in his popular book {\em What is mathematics}. Suppose the points in the unit line segment $(0, 1)$ can be enumerated as $a_1, a_2, a_3, ...$ We cover point $a_1$ with an interval of length 1/10, cover point $a_2$ with an interval of length 1/100, ... cover point $a_n$ with an interval of length $1/10^n$, and so on. Then the unit line segment (0, 1) will be completely covered (there can be overlaps) by these sub-intervals with lengths 1/10, 1/100, 1/1000, ... However, the total length of these sub-intervals, which is the sum of a geometric series, is $1/10 + 1/100 + 1/1000 + ... = 1/9 < 1$. It is impossible to cover the line segment of length 1 by an interval of total length 1/9, hence our assumption cannot hold, the points in the line segment are uncountable\cite{Courant1969}.}. As the next step, we establish a 1-to-1 correspondence: $y = \pi x - \dfrac{\pi}{2}$. It sends every real number in $(0, 1)$ to interval $(-\dfrac{\pi}{2}, \dfrac{\pi}{2})$ without any missing. We immediately conclude that the real numbers in this new interval are uncountable. As the final attack, we establish another 1-to-1 correspondence: $ y = tan(x)$. It sends every real number between $-\dfrac{\pi}{2}$ and $\dfrac{\pi}{2}$ to the infinite set of all real numbers without any missing\footnote{There is another geometric method to establish the 1-to-1 correspondence between the unit line segment to all real numbers. We bend the line segment to a semicircle of length 1, then draw an infinite line $L$ outside the circle. From any point $P$ in $L$, connect it with the centre of the circle, it must intersect with the arc at a point $Q$.}. With this proof, Cantor made his most important result: The set of real numbers is not countable. It is a higher level of infinity than countable sets. Cantor named it uncountable set, denoted as $C$.
+
+It reminds us the point in the line. In Euclid's {\em Elements}, a point is defined as ``A point is that which has no part.'', and line is consist of points. According to Hippasus's founding, there are irrational numbers in the line. In other words, rationals can't fully cover a line, while real numbers can. We'll give Dedekind cut in the next section to define a real number rigorously. The above proof tells us, the points in the unit line segment, the points in a line segment of any length, and the points in an infinite long line, which is the number axis, are all equinumerous. They are all uncountable sets. So as the points in circles of the same centre.
+
+It is also surprised when compare the rationals and irrationals. Given any two rational numbers, there are infinite many irrational numbers between them; given any two irrational numbers, there are also infinite many rational numbers between them. It seems they are equinumerous. While according to Cantor's finding, rational numbers are countable, but irrational numbers are uncountable. Irrationals are more numerous than rationals. Further, we've shown that algebraic numbers are countable, but the transcendental numbers like $\pi$ and $e$, are uncountable, they are more numerous than algebraic numbers.
+
+On the third day in Hilbert's Grand hotel story, we established 1-to-1 correspondence between one-dimension countable infinite numbers and two-dimension infinite grids, thus proved rational numbers are countable. Consider the points of real numbers in one-dimension line segment, and points in two-dimension plane, which are more numerous? or equinumerous? Cantor raised this question in a letter to Dedekind in January, 1874. He seemed sure the latter, the two-dimension square had more numerous points than one-dimension line segment. But was not able to prove it. Four years after that, Cantor surprised to find he was wrong. He managed to figure out an interesting 1-to-1 correspondence. He sent the proof to Dedekind, asking for review in June, 1877. In that letter, Cantor said ``I see it, but I don't believe it!'', the famous statement we quoted at the beginning of this chapter.
+
+Let us see how this 1-to-1 correspondence makes the world in a piece of sand. We are facing two infinite set of points. One is a unit square:
+
+\[
+E = \{ (x, y) | 0 < x < 1, 0 < y < 1\}
+\]
+
+The other is a unit ling segment $(0, 1)$. Take an arbitrary point $(x, y)$ in the unit square, represent both $x$ and $y$ in decimals (for finite decimal, like 0.5, write it in 0.4999... refer to the exercise of this section). Then group the fractional part after the decimal point, every group ends at the first none zero digits, for example:
+
+\[
+\begin{array}{lcccccc}
+x = 0.3 & 02 & 4 & 005 & 6 & ... \\
+y = 0.01 & 7 & 06 & 8 & 04 & ... \\
+\end{array}
+\]
+
+Next, we construct a number $z = 0.3\ 01\ 02\ 7\ 4\ 06\ 005\ 8\ 6\ 04\ ...$ by taking the group of digits from $x$ and $y$ in turns. For this example, first write down 0 and decimal point, then take the first group from $x$, which is 3, then take the first group from $y$, which is 01, next take the second group from $x$, which is 02, next take the second group from $y$, which is 7, ... number $z$ definitely belongs to the unit line segment. For every two different points in the square, their decimals of $x$ and $y$ must have different digits. Hence the corresponding $z$ are different. It means $(x, y) \mapsto z$ is an injection. On the other hand, for any point $z$ in the unit line segment, we can group the fractional part, then append all the odd groups after 0 and decimal point to form $x$, and use all the even groups to form $y$. Pair $(x, y)$ is a point in the unit square. It means $(x, y) \mapsto z$ is also a surjection, hence a bijection (1-to-1 correspondence). We prove that the points in the unit line and square have the same cardinality. Both are uncountable.
+
+Similarly, we can next prove that, not only line and plan have equinumerous points, but also they are equinumerous as the points in the three-dimension space, and even equinumerous as the points in $n$-dimension space.
+
+Before Cantor, there were only finite sets and ``the infinite'', which was considered a topic for philosophical, rather than mathematical, discussion. It was Cantor, that first time told us, there exist infinite sets of different sizes. Cantor did not stopped after differentiating the countable and uncountable infinities. He went on considering if there exist more numerous infinities. Along the `infinity of infinity' path, could we reach to the end point? Before answering these question, let us first see how Dedekind define real numbers with his genius idea.
+
+\begin{Exercise}
+\Question{Let $x = 0.9999....$, then $10x = 9.9999...$, subtract them gives $10x - x = 9$. Solving this equation gives $x = 1$. Hence $1 = 0.9999...$. Is this proof correct?}
+\end{Exercise}
+
+\subsection{Dedekind cut}
+\index{Dedekind cut}
+
+In order to make the foundation of calculus rigorous, mathematicians in the 19th Century went back to inspect the confusion concepts, like infinitesimal and infinite series, which were developed and used by Newton, Leibniz, Jacobi, and Euler. Through the work of Cauchy, Weierstrass and so on, the standard of rigour, including limit and convergence were setup. However, there was still a critical problem remaining, the concept of real numbers. The whole calculus is built on top of the continuity of real numbers, while it was lack of a satisfied definition of real number. People thought rationals could present line, but later found there were `gaps' between rational numbers. It was not completeness or continuous. While we demand line be completeness, continuous, without any gaps. What is the exactly meaning of continuity of line?
+
+When Dedekind was thinking how to teach differential and integral calculus, the idea of Dedekind cut came to him on November 24, 1858. He kept developing this idea, and published the result in 1872. Dedekind found although rationals were dense -- for any two rational numbers, no matter how they close to each other, there are other rational numbers in between -- they were not continuous. Consider a continuous number line, let us use an infinitely thin knife, the knife of thought, to cut the line into two parts(\cite{HanXueTao16} pp. 196).
+
+Because the line is continuous without any gaps, no matter how thin the knife, it must cut at a point, but not pass through a gap. (for the line of rationals, but not real numbers, then the knife may cut at a point, or may cut through a gap between two rational numbers, for example, cutting at position $\sqrt{2}$.) Suppose cut at point $A$, then $A$ is either on the left, or on the right. It can not be on the both sides, or not be on neither side. This point can not be divided or disappeared. In other words, since line is continuous, wherever it is cut into two parts, one must have an end point, while the other not.
+
+Dedekind defined a cut $(A_1, A_2)$, $A_1$ is called `closed downwards', and $A_2$ is `closed upwards'. Where all numbers in downwards $A_1$ is less than every number in upwards $A_2$. Such that $A_1$ represents the left half line of the cut, and $A_2$ represents the right half. For any such a cut, either $A_1$ has a greatest number, or $A_2$ has a smallest number. There must be one and only one case.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.6]{img/Dedekind-cut.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Define $\sqrt{2}$ with Dedekind cut}
+ \label{fig:Dedekind-cut}
+\end{figure}
+
+When apply Dedekind cut to all rational numbers, we can find that rationals are not continuous. For example, $A_1$ contains all rational numbers less than or equal to 2, and $A_2$ contains all rational numbers greater than 2, then this cut defines rational number 2. However for the negative example: the downwards $A_1$ contains all rational numbers that are negative, and the non-negative ones, but with their square less than or equal to 2; The upwards $A_2$ contains the rest rational numbers. We can find in this cut, there is no greatest number in the downwards, while there is no smallest number in the upwards too. It means there is a gap in rational numbers. When cut at this point, the knife will pass through. This cut actually defines a new number $\sqrt{2}$, and it is not a rational number, as shown in figure \ref{fig:Dedekind-cut}.
+
+Dedekind came to the idea that every real number $r$ divides the rational numbers into two subsets, namely those greater than $r$ and those less than $r$. Dedekind's brilliant idea was to represent the real numbers by such divisions of the rationals. Every cut of a rationals defines a real number. The cut through a gap (no greatest in $A_1$, and no smallest in $A_2$) is an irrational number; the cut at a point ($A_1$ has the greatest, or $A_2$ has the smallest) is a rational number. And real numbers contain both rationals and irrationals. Hence Dedekind cut defines real numbers. Every point in the number line is a real number. It also gives the foundation of the continuity of real numbers.
+
+From Hippasus found the irrational number, till Dedekind finally defined real numbers, It takes people two thousands years\footnote{In the same year of 1872, Weierstrass defined irrational numbers as limits of convergent series; Cantor also defined irrational numbers as convergent sequences of rational numbers. The theory of real numbers hence were established through these different paths.}. In the method of Dedekind cut, we always divide numbers into two finalized infinite parts, which are two infinite sets. This is the development and practice of actual infinity concept.
+
+\subsection{Transfinite numbers and continuum hypothesis}
+\index{power set}
+On the way to find more numerous infinity, Cantor firstly considered power set. For a given set $A$, power set is the set of all possible subset of $A$. For example $A = \{a, b\}$, then its power set contains $\{\phi, \{a\}, \{b\}, \{a, b\}\}$, total four elements. For a set of 3 elements, its power set contains 8 subsets. Generally, for a set of $n$ elements, because every element can be select or skip when building a subset, the size of its power set is $2^n$. It's obvious that power set has a greater cardinality than the original finite set.
+
+\index{Cantor's theorem}
+Cantor proved in 1891, that even for any infinite set, the power set has a strict greater cardinality than the original set. This result is called {\em Cantor's theorem} nowadays. The proof is not hard, we put it in the appendix of this chapter. This theorem is the key to open the door to infinite of infinite world. Cantor introduced notation $\aleph_0$ for the cardinality of countable infinite set, like natural numbers. $\aleph$ is the first Hebrew letter. The cardinality of the power set for countable infinite set is $2^{\aleph_0}$. According to Cantor's theorem, $\aleph_0 < 2^{\aleph_0}$, on top of that, we can repeatedly use power set to generate greater and greater infinities.
+
+\be
+\aleph_0, 2^{\aleph_0}, 2^{2^{\aleph_0}}, ...
+\ee
+
+\subsubsection{Transfinite numbers}
+\index{transfinite numbers}
+
+Cantor named the series of leveled infinite cardinal numbers as {\em transfinite cardinal numbers}. The story of Hilbert Grand hotel, actually demonstrates the arithmetic rules of transfinite numbers like $\aleph_0 + 1 = \aleph_0$, $\aleph_0 + k = \aleph_0 $, $\aleph_0 + \aleph_0 = \aleph_0$, ...
+
+\index{ordinal number}
+Besides power set, Cantor found another method to generate greater infinities. To understand this method, we need introduce the concept of ordinal number. It is defined recursively as below:
+
+\begin{enumerate}
+\item 0 is an ordinal number;
+\item If $a$ is an ordinal number, then $a \cup \{a\}$ is also an ordinal number, denoted $a + 1$. It is called the successor of $a$;
+\item If $S$ is a set of ordinals (its elements are all ordinal numbers), then $\cup S$ is an ordinal number;
+\item Any ordinal number is obtained from the above 3 steps.
+\end{enumerate}
+
+From this definition, we can list the first several ordinal numbers from 0 as the following:
+
+\[
+\begin{array}{l}
+0 \\
+1 = 0 \cup \{0\} \\
+2 = 1 \cup \{1\} = 0 \cup \{0\} \cup \{0 \cup \{0\}\} \\
+3 = 2 \cup \{2\} = 1 \cup \{1\} \cup \{1 \cup \{1\}\} = ... \\
+... \\
+\end{array}
+\]
+
+Where $\cup S$ is the union of all its elements, sometimes called as {\em infinitary union}. According to the first two items in the definition of ordinals, the natural numbers 0, 1, 2, 3, ..., $n$, ... are all ordinals. Let $\omega$ be the set of natural numbers, because all natural numbers are ordinals, hence $\omega$ is a set of ordinals. Consider its infinitary union:
+
+\[
+\cup \omega = \{0, 1, 2, ...\} = \omega
+\]
+
+According to the third item in ordinal definition, $\omega$ is also an ordinal. It is a {\em limit ordinal}\footnote{A nonzero ordinal that is not a successor is called a limit ordinal.}, and is the smallest infinite ordinal. We can append it to the end of natural numbers to form a new series:
+
+\[
+0, 1, 2, ..., \omega
+\]
+
+Start from $\omega$, repeatedly applying the second item in ordinal definition, gives a new ordinal series:
+
+\[
+\omega + 1, \omega + 2, \omega + 3, ..., \omega + n, ...
+\]
+
+Combine the above two series into one set, denoted as $\omega \cdot 2$. Its infinitary union is $\cup \omega \cdot 2 = \omega \cdot 2$, hence $\omega \cdot 2$ is also an ordinal, and it is a limit ordinal. From $\omega \cdot 2$, repeat the above process, we obtain an infinite of infinite ordinal series:
+
+\be
+\begin{array}{l}
+0, 1, 2, ..., n, ... \\
+\omega, \omega + 1, \omega + 2, ..., \omega + n, ... \\
+\omega \cdot 2, \omega \cdot 2 + 1, \omega \cdot 2 + 2, ..., \omega \cdot 2 + n, ... \\
+...\\
+\omega \cdot k, \omega \cdot k + 1, \omega \cdot k + 2, ..., \omega \cdot k + n, ... \\
+... \\
+\omega^2, \omega^2 + 1, \omega^2 + 2, ..., \omega^2 + n, ... \\
+...\\
+\omega^3, \omega^3 + 1, \omega^3 + 2, ..., \omega^3 + n, ... \\
+...\\
+\omega^\omega, \omega^\omega + 1, \omega^\omega + 2, ..., \omega^\omega + n, ... \\
+...\\
+\end{array}
+\label{eq:countable-ordinal-nums}
+\ee
+
+Except the first row is natural numbers, all the others are infinite ordinals, and the first one in every row is the limit ordinal. For the ordinals obtained by this method, they are far from what people could imagined before. It extends the natural numbers to a kingdom of infinite ordinals. What's more surprising, these ordinals are all countable! As a set, it has 1-to-1 correspondence with natural numbers. We'll soon see, there exist uncountable ordinals, further, there exit greater and greater infinite ordinal series one by one.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.3]{img/Omega-exp-omega}
+ %\captionsetup{labelformat=empty}
+ \caption{Infinite ordinals}
+ \label{fig:infinite-ordinals}
+\end{figure}
+
+Among these infinite ordinals, which one is the best as the cardinal number for infinite countable set? It's natural to select the smallest limit ordinal $\omega$. Let's give the formal definition for cardinal number:
+
+\index{cardinal number}
+\begin{definition}
+An ordinal $a$ is a cardinal if there is no ordinal $b < a$ with $ a \cong b$.
+\end{definition}
+
+In other words, ordinal $a$ is a cardinal, if for any ordinal $b < a$, the cardinality of $b$ is less than the cardinality of $a$. This definition tell us every natural numbers $n$ is a cardinal, and $\omega$ is also a cardinal. When use the ordinal $\omega$ as cardinal, we write it as $\aleph_0$, hence $\aleph_0 = \omega$. We've shown to use $\aleph_0$ as the cardinal for all infinite countable sets.
+
+Except $\omega$, although all rest ordinals in series \ref{eq:countable-ordinal-nums} are greater than $\omega$, their cardinals are same as $\omega$ (all equal to countable infinity). Hence they are not cardinals.
+
+In order to obtain greater cardinals, we form a new set contains all ordinals in series \ref{eq:countable-ordinal-nums}, denote it as $\omega_1$.
+
+\[
+\omega_1 = \{ a | a \text{ is ordinal, and} |a| \leq \aleph_0\}
+\]
+
+Where $|a|$ is the cardinal of $a$\footnote{To be accurate, we should use other notation for the cardinal of $A$, like $\overline{\overline{A}}$, or $\#A, card(A), n(A)$ etc.}. We can prove that $\omega_1$ is a cardinal, and it is the first uncountable cardinal. Then, we repeat this method, to expand a new infinite ordinal series from $\omega_1$:
+
+\[
+\omega_1, \omega_1 + 1, ..., \omega_1 \cdot 2, ..., \omega_1^2, ..., \omega_1^\omega, ...
+\]
+
+All elements in this series have the same cardinality. The smallest one is $\omega_1$, which also satisfies the cardinal definition. It is the second infinite cardinal $\aleph_1 = \omega_1$. Using the similar process to construct $\omega_1$, we can form another set:
+
+\[
+\omega_2 = \{ a | a \text{ is ordinal, and } |a| \leq \aleph_1\}
+\]
+
+It gives the third infinite cardinal $\aleph_2 = \omega_2$. Repeat this method, we can obtain a series of infinite cardinals. In summary, for any ordinal $a$, we can define the infinite cardinal $\aleph_a$, then form a set:
+
+\[
+\omega_{a+1} = \{ b | b \text{ is ordinal, and} |b| \leq \aleph_a\}
+\]
+
+It gives a cardinal greater than $\aleph_a$ as $\aleph_{a+1} = \omega_{a+1}$. For any ordinal $a$, there is a infinite cardinal $\aleph_a$. All these cardinals also form a series:
+
+\be
+\aleph_0, \aleph_1, \aleph_2, ..., \aleph_n, ..., \aleph_{\omega}, ...
+\ee
+
+From left to right, these cardinals become greater and greater, and there are not any other infinite cardinals between any two next $\aleph$s. The infinite ordinals and infinite cardinals are also called transfinite ordinals and transfinite cardinals, or transfinite numbers as a whole. Where will these more and more numerous transfinite numbers lead to? Cantor thought it must be god.
+
+People were surprised at transfinite numbers. Some praised Cantor's amazing innovation opened up a new world we've never seen before; Others criticized transfinite numbers were ``fog on fog'', Cantor was building a disease of mathematics need to be cured. Although there was hotly debating, transfinite number was one of the most amazing achievement of thought in the 19th Century.
+
+\subsubsection{Continuum hypothesis}
+\index{continuum hypothesis} \index{CH} \index{GCH}
+Cantor found two types of infinite cardinal series, one is power sets, the other is transfinite cardinals:
+
+\[
+\aleph_0, 2^{\aleph_0}, 2^{2^{\aleph_0}}, ...
+\]
+
+and
+
+\[
+\aleph_0, \aleph_1, \aleph_2, ...
+\]
+
+$\aleph_0$ is the cardinal of the infinite countable set. In previous section, we reasoned that, $\aleph_1$ is the next transfinite cardinals next to $\aleph_0$. However, according to Cantor's theorem of power set, we only know that $2^{\aleph_0}$ is more numerous than $\aleph_0$, but we do not know if it is more or less numerous than $\aleph_1$. Cantor conjectured $2^{\aleph_0} = \aleph_1$, that there wasn't any other transfinite cardinals between $\aleph_0$ and $2^{\aleph_0}$. Hence $2^{\aleph_0}$ is the first transfinite cardinal more numerous than infinite countable set.
+
+In 1847, Cantor proved $2^{\aleph_0} = C$. It means all subsets of natural numbers and real numbers have the same cardinality. Therefore, Cantor's conjecture essentially states that, there exists no set whose cardinality is strictly greater than that of natural numbers $\aleph_0$ and less than that of real numbers $C$. Because real numbers are often called continuum, this conjecture is called {\em Continuum Hypothesis}, abbreviated as CH.
+
+Continuum Hypothesis can be further extended. For any ordinal $a$, whether $2^{\aleph_a} = \aleph_{a+1}$ holds. This conjecture is called generalized continuum hypothesis, abbreviated as GCH.
+
+Cantor raised continuum hypothesis in a paper in 1878. He believed it to be true and tried for many years to prove it. Sometimes he thought he had proved it false, then the next day found his mistake. Again he thought he had proved it true only again to quickly find his error. His inability to prove the continuum hypothesis caused him considerable anxiety till his death in 1918.
+
+The problem, whether we can prove continuum hypothesis true or false became the first on David Hilbert's list of 23 important open questions that was presented at the International Congress of Mathematicians in the year 1900 in Paris.
+
+The continuum hypothesis came from the practical problems from geometry, mechanics, and physics. Hilbert expressed this view at the 2nd International Congress of Mathematics in 1900:
+
+\begin{quotation}
+\itshape
+But even this creative activity of pure thought is going on, the external world once again reasserts its validity, and by thrusting new questions upon us through the phenomena that occur, it opens up new domains of mathematical knowledge.
+\end{quotation}
+
+Because the continuum hypothesis is the most central open problem at the foundation of mathematical logic and axiomatic set theory, it has been studied by many great mathematicians for over hundred years. Although many significant progresses were made, it is not completely resolved. Kurt Gödel proved in 1938 that the negation of the continuum hypothesis, the existence of a set with intermediate cardinality, could not be proved in standard set theory (also known as Zermelo-Fraenkel axioms for set theory together with the axiom of choice or AC. Informally, AC says that given any collection of non-empty bins (even infinite), it is possible to make a selection of exactly one object from each bin. we'll introduce the details in next chapter). The second half of the independence of the continuum hypothesis, unprovability of the nonexistence of an intermediate-sized set, was proved in 1963 by Paul Cohen with a new powerful technique called {\em forcing}. There was an interesting story said that Cohen, the young US mathematician was not sure about his proof(\cite{HanXueTao16}, pp. 280). He came to Princeton and knocked on Gödel's house. Gödel was struggling with paranoia at the time. He slightly open the door, such that Cohen could pass his proof through. Then Cohen was shut out. Two days later, Gödel invited Cohen came in to drink tea, and finally accept his proof. Cohen was awarded a Fields Medal the next year.
+
+Gödel and Cohen proved, the continuum hypothesis is undecidable from ZFC set theory. We'll explain more about undecidable statement in next chapter. Continuum hypothesis is independence from the axioms in ZF system. Similar result also happens to the axiom of choice. Gödel and Cohen's result also tells that AC is undecidable from ZF system. Accepting AC gives the consistent mathematical system; while rejecting AC gives another consistent mathematical system. With the axiom of choice, accepting or rejecting continuum hypothesis all gives consistent mathematics respectively. Continuum hypothesis and the axiom of choice is independent to ZF set theory\cite{GCH}.
+
+\section{Infinity in art and music}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.15]{img/starry-night.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Vincent van Gogh, {\em The Starry Night}, Museum of Modern Art, New York}
+ \label{fig:starry-night}
+%\end{wrapfigure}
+\end{figure}
+
+Along with the thought and exploration, infinity also inspired art and music when people facing the vast galaxy, the sea, and the mystery nature.
+
+Among the countless art about sky, the {\em Starry Night} by Dutch post-impressionist artist, Vincent van Gogh is impressive. In his art work, Van Gogh's night sky is a field of roiling energy. Below the exploding stars, the village is a place of quiet order. Connecting Earth and sky is the flame like cypress, a tree traditionally associated with graveyards and mourning. Van Gogh said ``Looking at the stars always makes me dream.'' He painted in June, 1889, in the mental hospital at Saint-Rémy-de-Provence in France, just before sunrise, with the addition of an idealized village. Van Gogh stayed there for 108 days. During this period, he pictured about 150 oil canvas, and hundreds of sketches.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/Turner-Snow-Storm.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Joseph Mallord William Turner, {\em Snow Storm}, 1842, Tate Modern, London UK}
+ \label{fig:Turner-Snow-Storm}
+%\end{wrapfigure}
+\end{figure}
+
+{\em Snow Storm: Steam-Boat off a Harbour's Mouth} is a painting by English Romanticism artist J.M.W Turner. The picture may recall a particularly bad storm in January, 1842. In order to feel the power of sea, Turner got the sailors to tie him to the mast to observe. ``I was lashed for four hours. and I did not expect to escape, but I felt bound to record it if I did.'' However, the critical response to the painting was largely negative at the time, with one critic calling it ``soapsuds and whitewash''. Turner said: ``I did not paint it to be understood, but I wished to show what such a scene was like.'' As time going, people finally realized, as John Ruskin, the leading English art critic of the Victorian era said: ``It is one of the very grandest statements of sea-motion, mist and light, that has ever been put on canvas.''
+
+The thought and study of infinity soon became a problem in philosophy and theology from the concrete things in nature. In Ptolemy's model, the universe is realized as a set of nested spheres, with planets moving along them. The out most boundary is a sphere of fixed stars. By the medieval, the church had largely accepted this model developed by Aristotle and Ptolemy. People believed the Earth, created by God, was the centre of the universe, and the stellar sphere was bounded.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.3]{img/Flammarion.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Camille Flammarion, L'Atmosphere: Météorologie Populaire (Paris, 1888), pp. 163.}
+ \label{fig:Flamarion-woodcut}
+\end{figure}
+
+%% Camille Flammarion, L'Atmosphere: Météorologie Populaire (Paris, 1888), p. 163.
+
+%% The original caption bellow the picture translated to: "A medieval missionary (Bruno) tells that he has found the point where heaven and Earth meet...".
+
+%% The Flammarion Woodcut is an enigmatic woodcut by an unknown artist. It is referred to as the Flammarion Woodcut because its first documented appearance is in page 163 of Camille Flammarion's L'atmosphère: météorologie populaire (Paris, 1888), a work on meteorology for a general audience. The woodcut depicts a man peering through the Earth's atmosphere as if it were a curtain to look at the inner workings of the universe.
+
+A woodcut published in Paris in 1888, reflected how people understood the bounded universe at that time. The original caption bellow the picture translated to: ``A medieval missionary (Bruno) tells that he has found the point where heaven and Earth meet...'' If someone stands at the boundary of stellar sphere, can he raise his stick out to across the boundary of universe? It's hard to prevent him from doing that; but if he can, what is the space out side the physical world? This was the paradox of the universe boundary. To solve it, scholars in medieval refactored Aristotle's theory, and proposed an idea of progressive boundary. Others believed, if throw a spear outside the world boundary, it would enlarge the universe. The world of matter is bounded, but the boundary is surrounded by endless void.
+
+During the Renaissance, artists adopted mathematics and science into their works. Leonardo da Vinci had wide interest including architecture, anatomy, mathematics, and engineering. He intended to use perspective disciplines, and experiment different aesthetic proportions in his works. German Renaissance artist Albrecht Dürer studied human proportions and the use of transformations to a coordinate grid to demonstrate facial variation. His book {\em Four Books on Measurement} introduced both painting theory and research on geometric and perspective principles. Johannes Kepler and Gérard Desargues independently developed the concept of the ``point at infinity'' in projective geometry. Desargues developed an alternative way of constructing perspective drawings by generalizing the use of vanishing points to include the case when these are infinitely far away. He made Euclidean geometry, where parallel lines are truly parallel, into a special case of an all-encompassing geometric system.
+
+\index{Non-Euclidean geometry}
+It's the non-Euclidean geometry that brings a new view point to artists about infinity. Euclidean geometry is named after the ancient Greek mathematician Euclid. It has been the perfect example of axiom system and rigours reasoning for two thousand years. However, mathematicians addict to perfection continued questioning Euclid's fifth postulate. The first four are intuitive and obvious, for example: to draw a line from any point to any point; all right angles are equal to one another. However the fifth postulate is disparate complex. In Euclid's original formulation: ``If a straight line falls on two straight lines in such a manner that the interior angles on the same side are together less than two right angles, then the straight lines, if produced indefinitely, meet on that side on which are the angles less than the two right angles.'' This postulate is also known as ``parallel postulate'', because it is essentially equivalent to a simpler statement: for any given line and a point not on it, there is exactly one line through the point that does not intersect the line. People doubted if this postulate could be deduced from the first four. Actually, the fifth postulate hasn't been used in a large portion in Euclid's Elements. Many mathematicians attempted to prove the fifth postulate in the past two thousand years, but all failed. Italian mathematician Saccheri then tried to prove by contradiction. He assumed the fifth postulate is false, but he obtained a series of obscure results. Saccheri believed they were too strange, and Euclid's fifth postulate must be true.
+
+In 19th Century, German mathematician Carl Friedrich Gauss, Hungarian mathematician János Bolyai and the Russian mathematician Nikolai Ivanovich Lobachevsky separately realized it's not possible to establish such proof. Parallel postulate is independent to other postulates. And it can be replaced with other different ``parallel postulate''. Gauss did not published his result, people found his finding after Gauss died in 1885. Bolyai and Lobachevsky independently published treatises on non-Euclidean geometry around 1830. In this new geometry (known as hyperbolic geometry nowadays), Lobachevsky replaced Euclid's postulate: in a plane, given a line and a point not on it, there are multiple lines through a point that do not intersect the line. Then he developed a whole set of consistent results. Many of them are different from Euclidean geometry. For example, in the new geometry, the inner angle of a triangle is less than two right angles.
+
+German mathematician Bernhard Riemann, in 1854 constructed another new geometry that was different from both Euclid and Lobachevsky. He founded the field of Riemannian geometry, and the simplest of these is called elliptic geometry. It's non-Euclidean due to its lack of parallel lines. It means every two lines must intersect in a plane. In elliptic geometry, the inner angle of a triangle is greater than two right angles.
+
+Eugenio Beltrami, in 1868, showed that Euclidean geometry and hyperbolic geometry were equiconsistent so that hyperbolic geometry was logically consistent if and only if Euclidean geometry was. In 1871, Felix Klein defined a metric method to describe the non-Euclidean geometries. Klein's influence has led to the current usage of the term ``non-Euclidean geometry'' to mean either ``hyperbolic'' or ``elliptic'' geometry.
+
+%\begin{wrapfigure}{L}{0.4\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=1.0]{img/circle-limit-III-1959.eps}
+ \captionsetup{labelformat=empty}
+ \caption{M.C. Escher. Circle limit III, 1959}
+ \label{fig:circle-limit-3}
+\end{figure}
+%\end{wrapfigure}
+
+Non-Euclidean geometry brings us such possibility, that infinite space can be bounded. Poincaré, in his popular science book {\em Since and Hypothesis}, described a interesting world. The world is encapsulated in a infinite bounded sphere. The temperature at the centre is very high. Along the distance away from the centre, the temperature decrease in proportion. When arrive at the sphere surface, it decrease to absolute zero K. Let the radii of the world sphere be $R$, for a point with the distance to the centre as $r$, then the temperature is proportion to $R^2 - r^2$. In this special world, due to thermal expansion, object size is proportion to the temperature, the closer to the sphere boundary, the smaller. Because of this, if a citizen moving towards the sphere, the temperature decreases lower and lower. He also becomes smaller and smaller. The pace keeps slowing down. He will never reach to the boundary of this world, although this world is bounded. What Poincaré described is exactly a world ruled by a kind of hyperbolic geometries.
+
+Inspired by Poincaré, the Dutch artist M.C Escher painted a series of woodcuts, called circle limit to illustrate the bounded, infinite world. The angles, devils, and fishes all become smaller and smaller when close to the edge of the circle, hence they will never exceed this bounded, while infinite world.
+
+Not only in art, there are musics about infinity. In May, 1747, Johann Sebastian Bach visited Sanssouci Palace in Postdam. King Frederick II invited Bach to try out his new Silbermann pianos. Bach asked the King to give him a subject of Fugue, then immediately executed it without any preparation to the astonishment of all present. After his return to Leipzig, he composed the subject, which he had received from the King, in three and six parts, added several artificial passages in strict canon to it, and had it engraved, under the title of ``Musical Offering''. He sent a copy to the King on July 7. This collection of music is catalogued as BWV1079 nowadays. Among them there is a special piece with title ``Canon per Tonos''. It is called endlessly rising canon. It pits a variant of the king’s theme against a two-voice canon at the fifth. However, it modulates and finishes one whole tone higher than it started out at. It thus has no final cadence. Douglas Hofstadter, in his Pulitzer Prize book {\em Gödel, Escher, Bach: An Eternal Golden Braid}, wrote:
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/canon-endless.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Part of the endlessly rising canon}
+ \label{fig:canon-endless}
+%\end{wrapfigure}
+\end{figure}
+
+It has three voices. The uppermost voice sings a variant of the Royal Theme, while underneath it, two voices provide a canonic harmonization based on a second theme. The lower of this pair sings its theme in C minor (which is the key of the canon as a whole), and the upper of the pair sings the same theme displaced upwards in pitch by an interval of a fifth. What makes this canon different from any other, however, is that when it concludes-or, rather, seems to conclude-it is no longer in the key of C minor, but now is in D minor. Somehow Bach has contrived to modulate (change keys) right under the listener's nose. And it is so constructed that this "ending" ties smoothly onto the beginning again; thus one can repeat the process and return in the key of E, only to join again to the beginning. These successive modulations lead the ear to increasingly remote provinces of tonality, so that after several of them, one would expect to be hopelessly far away from the starting key. And yet magically, after exactly six such modulations, the original key of C minor has been restored! All the voices are exactly one octave higher than they were at the beginning, and here the piece may be broken off in a musically agreeable way. Such, one imagines, was Bach's intention; but Bach indubitably
+also relished the implication that this process could go on ad infinitum, which is perhaps why he wrote in the margin "As the modulation rises, so may the King's Glory." To emphasize its potentially infinite aspect\cite{GEB}.
+
+\begin{Exercise}
+\Question{Light a candle between two opposite mirrors, what image can you see? Is it potential or actual infinity?}
+\end{Exercise}
+
+\section{Appendix - Example programs}
+
+Define natural numbers with stream, take the first 15 numbers. Example program in Java 1.8
+
+\lstset{frame=single, language=Java}
+\begin{lstlisting}
+IntStream.iterate(1, i -> i + 1);
+
+IntStream.iterate(1, i -> i + 1)
+        .limit(15).forEach(System.out::println);
+\end{lstlisting}
+
+Example in Python 3
+
+\lstset{frame=single, language=Python}
+\begin{lstlisting}
+def naturals():
+    yield 0
+    for n in naturals():
+        yield n + 1
+\end{lstlisting}
+
+Define the infinite set of natural numbers recursively in Haskell.
+
+\lstset{frame=single, language=Haskell}
+\begin{lstlisting}
+nat = 1 : (map (+1) nat)
+
+take 15 nat
+\end{lstlisting}
+
+Define the infinite set of Fibonacci numbers recursively in Haskell, then fetch the 1500th Fibonacci number.
+
+\lstset{frame=single, language=Haskell}
+\begin{lstlisting}
+fib = 0 : 1 : zipWith (+) fib (tail fib)
+
+take 15 fib
+[0,1,1,2,3,5,8,13,21,34,55,89,144,233,377]
+
+fib !! 1500
+13551125668563101951636936867148408377786010712418497242133543153221487310
+87352875061225935403571726530037377881434732025769925708235655004534991410
+29242495959974839822286992875272419318113250950996424476212422002092544399
+20196960465321438498305345893378932585393381539093549479296194800838145996
+187122583354898000
+\end{lstlisting}
+
+Define the infinite stream of prime numbers with coalgebra in Haskell.
+
+\lstset{frame=single, language=Haskell}
+\begin{lstlisting}
+data StreamF e a = StreamF e a
+data Stream e = Stream e (Stream e)
+
+ana :: (a -> StreamF e a) -> (a -> Stream e)
+ana f = fix . f where
+  fix (StreamF e a) = Stream e (ana f a)
+
+takeStream 0 _ = []
+takeStream n (Stream e s) = e : takeStream (n - 1) s
+
+era (p:ns) = StreamF p (filter (p `notdiv`) ns)
+  where notdiv p n = n `mod` p /= 0
+
+primes = ana era [2..]
+
+takeStream 15 primes
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47]
+\end{lstlisting}
+
+\section{Appendix - Proof of Cantor's theorem}
+
+\begin{theorem}
+\textbf{Cantor's theorem}: For every set, $|S| < |2^S|$ holds. Where $|S|$ is the cardinality of $S$; $2^S$ is the power set of $S$, which contains all subsets of $S$.
+\end{theorem}
+
+\begin{proof}
+Our proof has two steps. The first step is to prove $|S| \leq |2^S|$. For any $x$, let $f(x) = \{x\}$, which is the singleton set of $x$. It's obvious that for different elements $x_1 \neq x_2$, the singleton sets are not identical $\{x_1\} \neq \{x_2\}$, which means $f(x_1) \neq f(x_2)$. Hence map $S \arrowto{f} 2^S$ is injective, we have:
+
+\[
+  |S| \leq |2^S|
+\]
+
+The second step is to prove $|S| \neq |2^S|$. Using the reduction to absurdity, suppose they are equal. Then there exists a 1-to-1 correspondence $S \arrowto{\phi} 2^S$, such that for every $x \in S$, its image $\phi(x) \in 2^S$ holds. It means $\phi(x)$ is some subset of $S$, hence $\phi(x) \subseteq S$. Now we ask whether $x$ belongs to $\phi(x)$? Either $x \in \phi(x)$, or $x \notin \phi(x)$. We put all $x$ that not belonging to $\phi(x)$ to form a new set $S_0$:
+
+\be
+S_0 = \{ x | x \in S, \text{and} x \notin \phi(x)\}
+\label{eq:def-s0}
+\ee
+
+Obviously, $S_0$ is a subset of $S$, which means $S_0 \subseteq S$. Hence $S_0 \in 2^S$. Because $\phi$ is bijection, there must exist some $x_0$, such that $\phi(x_0) = S_0$. According to the logical law of excluded middle, either $x_0 \in S_0$, or $x_0 \notin S_0$. Both must be one and only one is true.
+
+Let's see each case next. If $x_0 \in S_0$ holds, according to the definition of $S_0$ in (\ref{eq:def-s0}), we have $x_0 \notin \phi(x_0)$. But since $\phi(x_0) = S_0$, hence $x_0 \notin S_0$.
+
+If $x_0 \notin S_0$, because $S_0 = \phi(x_0)$, we have $x_0 \notin \phi(x_0)$. But according to the definition of $S_0$ in (\ref{eq:def-s0}), $x_0 \in S_0$ should hold.
+
+Hence no matter $x_0$ belongs to $S_0$ or not, both lead to contradiction. There cannot be 1-to-1 correspondence between $S$ and $2^S$ established. Therefore, $|S| \neq |2^S|$.
+
+Summarize the result in above two steps: $|S| \leq |2^S|$, and $|S| \neq |2^S|$, we prove the Cantor's theorem:
+
+\[
+  |S| < |2^S|
+\]
+\end{proof}
+
+It reminds us the popular Russel's paradox from the second part of the proof: Let $S$ be a set containing all sets that each not belong to itself, then does $S$ belong to itself? We'll introduce Russel's paradox and Gödel's incompleteness theorems in next chapter.
+
+% Mathematicians aren't satisfied because they know there are no solutions up to four million or four billion, they really want to know that there are no solutions up to infinity. -- Andrew Wiles
+
+\section{Appendix - Canon per tonos, The Music Offering by J.S. Bach}
+
+\includepdf[pages=-,
+nup=2x2
+, scale=0.85
+%,fitpaper=true
+]{img/bwv1079-canon-per-tonos.pdf}
+
+\ifx\wholebook\relax \else
+\begin{thebibliography}{99}
+
+\bibitem{De-linfini-2018}
+Jean-Pierre Luminet, Marc Lachièze-Rey. ``De l'infini - Horizons cosmiques, multivers et vide quantique''. DUNOD, 2016. ISBN: 9782100738380
+
+\bibitem{Noguchi2007}
+{\fontspec{\cnmainft}野口哲典. ``数学的センスが身につく練習帳''. ソフトバンククリエイティブ} 2007. ISBN: 9784797339314
+
+\bibitem{Wikipedia-Googol}
+Wikipedia. ``Googol''. \url{https://en.wikipedia.org/wiki/Googol}
+
+\bibitem{Wikipedia-Zeno}
+Wikipedia. ``Zeno's Paradoxes''. \url{https://en.wikipedia.org/wiki/Zeno's_paradoxes}
+
+\bibitem{HanXueTao16}
+{\fontspec{\cnmainft}韩雪涛 ``数学悖论与三次数学危机''. 人民邮电出版社.} 2016, ISBN: 9787115430434
+
+\bibitem{Elements}
+Euclid, Thomas Heath (Translator) ``Euclid's Elements (The Thirteen Books) ''. Digireads.com Publishing (December 26, 2017). ISBN-13: 978-1420956474
+
+\bibitem{M-Kline-2007}
+Morris Kline. ``Mathematics: The Loss of Certainty''. Oxford University Press, 1980. 0-19-502754-X.
+
+\bibitem{StepanovRose15}
+Alexander A. Stepanov, Daniel E. Rose ``From Mathematics to Generic Programming''. Addison-Wesley Professional; 1 edition (November 17, 2014) ISBN-13: 978-0321942043
+
+\bibitem{Calvin-Clawson-1994}
+Calvin C Clawson. ``The Mathematical Traveler, Exploring the Grand History of Numbers''. Springer. 1994, ISBN: 9780306446450
+
+\bibitem{GEB}
+Douglas R. Hofstadter ``Gödel, Escher, Bach: An Eternal Golden Braid''. Basic Books; Anniversary edition (February 5, 1999). ISBN: 978-0465026562
+
+\bibitem{GCH}
+{\fontspec{\cnmainft}张锦文，王雪生 ``连续统假设''. 世界数学名题欣赏丛书。辽宁教育出版社.} 1988. ISBN: 7-5382-0436-9/G$\cdot$445
+
+\bibitem{Courant1969}
+Richard Courant, Herbert Robbins, Reviewed by Ian Stewart. ``What Is Mathematics? An Elementary Approach to Ideas and Methods 2nd Edition''. Oxford University Press,  1996, ISBN: 978-0195105193.
+
+\bibitem{Poincare1}
+Henri Poincaré. ``Science and Hypothesis''. Franklin Classics. 2018. ISBN: 9780342349418
+
+\end{thebibliography}
+
+\expandafter\enddocument
+%\end{document}
+
+\fi

@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<article {% if page.feature-img %}class="feature-image"{% endif %}>
+  <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
+    <h1 class="title" {% if page.heading-dark %}style="color: #222"{% endif %}>{{ page.title }}</h1>
+    {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h2>{% endif %}
+    <p class="meta" {% if page.heading-dark %}style="color: #222"{% endif %}>
+      {{ page.date | date: "%B %-d, %Y" }}
+      {% if page.author %} - {{ page.author }}{% endif %}
+    </p>
+  </header>
+  <img src="{{ site.baseurl }}/{{ page.feature-img }}" alt="Feature image" width="0" height="0" />
+  <section class="post-content">{{ content }}</section>
+  {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+</article>
+
+<aside style="clear: both">
+  {% include gpgc_comments.html post_title=page.title %}
+</aside>
+
+<!-- Post navigation -->
+{% if site.theme_settings.post_navigation %}
+  {% include post_nav.html %}
+{% endif %}

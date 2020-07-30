@@ -1,0 +1,141 @@
+\startcomponent *
+
+\product  prd-functional-analysis
+
+\startchapter [title={Elementary ideas}]
+
+	A great source is \goto{Trace class operators and Hilbert-Schmidt operators by Jordan Bell}[url(https://individual.utoronto.ca/jordanbell/notes/traceclass.pdf)].
+
+	\startsection [title={Intuition}]
+		On a separable Hilbert space, we have
+		\startitemize [4, joinedup]
+			
+			\item  \m{T ∈ ℬ^∞ ⟺ λ ∈ ℓ^∞} (bounded)
+
+				\good{Example \m{I: ℓ^2 → ℓ^2: e_n ↦ e_n}.}
+			
+			\item  \m{T ∈ ℬ_0 ⟺ λ ∈ c_0}  (compact)
+
+				\good{Example \m{T: ℓ^2 → ℓ^2: e_n ↦ \frac{1}{\sqrt{n}} e_n}.}
+			
+			\item  \m{T ∈ ℬ^2 ⟺ λ ∈ ℓ^2}  (Hilbert-Schmidt)
+
+				\good{Example \m{T: ℓ^2 → ℓ^2: e_n ↦ \frac{1}{n} e_n}.}
+			
+			\item  \m{T ∈ ℬ^1 ⟺ λ ∈ ℓ^1}  (trace-class)
+
+				\good{Example \m{T: ℓ^2 → ℓ^2: e_n ↦ \frac{1}{n^2} e_n}.}
+			
+			\item  \m{T ∈ ℬ_{00} ⟺ λ ∈ c_{00}}  (degenerate or finite rank)
+
+				\good{Example \m{T: ℓ^2 → ℓ^2: e_n ↦ α_n e_n \m{𝟙_{[N]}(n)}} for \m{α_n ∈ ℂ} and \m{N ∈ ℕ}.}
+		\stopitemize
+	\stopsection
+
+	\startremark
+		Since the dual of \m{c_0} is \m{ℓ^1} and the dual of \m{ℓ^1} is \m{ℓ^∞}, we have \m{ℬ_0^* = ℬ^1} and \m{(ℬ^1)^* = ℬ^∞}. Similarly, \m{(ℬ^2)^* = ℬ^2}.
+	\stopremark
+
+	\starttheorem [title={Operator inclusions}]
+		\m{ℬ_{00} ⊂ ℬ^1 ⊂ ℬ^2 ⊂ ℬ_0 ⊂ ℬ^∞}
+	\stoptheorem
+	\startproof
+		\startitemize [4]
+			
+			\item  \m{ℬ_{00} ⊂ ℬ^1}  \qquad
+				Trivial
+
+			\item  \m{ℬ^1 ⊂ ℬ^2}  \qquad
+
+				
+			\item  \m{ℬ^2 ⊂ ℬ_0}  \qquad
+
+				
+			\item  \m{ℬ_0 ⊂ ℬ^∞}  \qquad
+				(\cite[authoryear][BMC2009], Proposition 4.6) If \m{T} is unbounded, we can find a sequence of unit vectors \m{(e_n)} such that \m{\norm{T e_n} ↗ ∞}. So \m{T e_n} cannot have a convergent subsequence, for if \m{T e_n → x}, then \m{\norm{T e_n} → \norm{x}}.
+				
+		\stopitemize
+	\stopproof
+
+	\startproposition
+		For \m{T ∈ ℬ^∞}, \m{\norm{T}_∞ = \sup\bcrl{\abs{\inn{Tx, y}}} : \norm{x} = 1, \norm{y} = 1}.
+	\stopproposition
+	\startproof
+		\startitemize
+
+			\sym{(≤)}  \qquad
+				Since \m{\norm{Tx}  =  \frac{\norm{Tx}^2}{\norm{Tx}}  =  \frac{\inn{Tx, Tx}}{\norm{Tx}}  =  \inn{Tx, \frac{Tx}{\norm{Tx}}}}, we have
+				\startformula
+					\norm{T}_∞  =  \sup\bcrl{\norm{Tx} : \norm{x} = 1}  ≤  \sup\bcrl{\abs{\inn{Tx, y}} : \norm{x} = 1, \norm{y} = 1} .
+				\stopformula
+			
+			\sym{(≥)}  \qquad
+				Since \m{\inn{Tx, y}  ≤  \norm{Tx} \norm{y}  ≤  \norm{T}_∞ \norm{x} \norm{y}}, we have
+				\startformula
+					\sup \bcrl{\abs{\inn{Tx, y}} : \norm{x} = 1, \norm{y} = 1}  ≤  \norm{T}_∞ .
+				\stopformula
+		\stopitemize
+	\stopproof
+
+	\startsection [title={Projection operators}]
+
+		\startproposition
+			\m{\norm{P}_∞ ≤ 1}.
+		\stopproposition
+		\startproof
+			Since \m{\norm{Px}^2 = \inn{Px, Px} = \inn{P^* P x, x} = \inn{P P x, x} = \inn{P x, x} ≤ \norm{Px} \norm{x}}, we have \m{\norm{P}_∞ ≤ 1}.
+		\stopproof
+	\stopsection
+
+	\startproposition
+		A projection operator is compact iff its image is finite dimensional.
+	\stopproposition
+	\startproof
+		\startitemize [joinedup]
+			
+			\sym{(⟹)}  \qquad
+				Let \m{P: H → H} be a projection operator, so that \m{P^2 = P}, or \m{P(P - I) = 0}.
+			
+			\sym{(⟸)}  \qquad
+				Since the image is finite dimensional, fix an orthonormal basis \m{e_1, …, e_n} of \m{\im T}.
+		\stopitemize
+	\stopproof
+
+\stopchapter
+
+
+
+\startchapter [title={Optimization}]
+	
+	\startsection [title={Duality in optimization is the same as duality in functional analysis}]
+
+		For an various intuitions of duality in optimization, see \goto{MSx223235}[url(https://math.stackexchange.com/questions/223235/please-explain-the-intuition-behind-the-dual-problem-in-optimization)].
+
+		Let \m{X} and \m{Y} be Banach spaces, and \m{X^*} and \m{Y^*} be their (algebraic?) duals.
+		Consider the two problems, with \m{ϕ_0, y_0} fixed. Here \m{(⋅, ⋅)} denotes the canonical duality pairing.
+
+		\startcolumns [n=2]
+		
+		\startformula \startalign
+			\NC  \max  \qquad  \NC  (ϕ_0, x)  \NR
+			\NC  \comment{\text{(Primal)}}  \qquad  \text{s.t.}  \qquad  \NC  T x ≤ y_0  \NR
+			\NC  \NC  \ \ \  x ≥ 0  \NR
+		\stopalign \stopformula
+		\startformula \startalign
+			\NC  \min  \qquad  \NC  (ψ, y_0)  \NR
+			\NC  \comment{\text{(Dual)}}  \qquad  \text{s.t.}  \qquad  \NC  T^* ψ ≥ ϕ_0  \NR
+			\NC  \NC  \quad  ψ ≥ 0  \NR
+		\stopalign \stopformula
+		\stopcolumns
+		
+		See the following diagram for more details.
+		
+		\starttikzcd [sep=tiny]
+			\NC  x \arrow[rrrrrrrr, darkblue, mapsto, "T"]  \NC  \NC  \NC  \NC  \NC  \NC  \NC  \NC  T x  \NR
+			x ∈  \NC  X \arrow[rrrrrrrr, darkblue, "T"]  \arrow[ddd, middlegreen, dash]  \NC  \NC  \NC  \NC  \NC  \NC  \NC  \NC  y_0 \arrow[ddd, middlegreen, dash]  \NC  ∋ T x, y_0  \NR
+			\NR  \NR
+			ϕ_0, T^* ψ ∈  \NC  X^*  \NC  \NC  \NC  \NC  \NC  \NC  \NC  \NC  y_0^*  \arrow[llllllll, red, "T^*"]  \NC  ∋ ψ  \NR
+			\NC  T^* ψ  \NC  \NC  \NC  \NC  \NC  \NC  \NC  \NC  ψ  \arrow[llllllll, red, mapsto, "T^*"]  \NR
+		\stoptikzcd
+	\stopsection
+\stopchapter

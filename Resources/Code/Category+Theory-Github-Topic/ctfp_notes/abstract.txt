@@ -1,0 +1,19 @@
+structures conditions
+
+──────────────────────────────────────────────────
+magma          x                         
+semigroupoid         x               
+category             x     x                   
+groupoid             x     x     x             
+──────────────────│─────│─────│──────│────────────
+      closed/total│assoc│ident│invert│commut
+──────────────────│─────│─────│──────│────────────
+semigroup      x     x                          
+monoid         x     x     x                
+group          x     x     x     x         
+abelian group  x     x     x     x     x        
+──────────────────────────────────────────────────
+
+group conditions also imply:
+    the identity element is unique
+    inverses are unique

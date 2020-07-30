@@ -1,0 +1,260 @@
+@import "tippy";
+
+.navigation:not(.navfoot) {
+    position: fixed;
+    bottom: 20px;
+    left: 100px;
+    padding: 15px;
+    background-color: #fff;
+    display: none;
+}
+
+
+.navigation.navfoot {
+    margin-top: 50px;
+    opacity: .5
+}
+
+
+body {
+    font-family: 'Computer Modern Serif', 'Times New Roman'!important;
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Computer Modern Serif', 'Times New Roman'!important;
+        font-weight: normal;
+    }
+    h2 {
+        margin-top: 80px;
+        font-size: 2em;
+    }
+    h3 {
+        font-weight: bold;
+        font-style: italic;
+        margin-top: 40px;
+    }
+    p, li {
+        line-height: 2em;
+        font-size: 21px;
+    }
+    * {
+    }
+    #revision {
+    }
+    .query {
+        border-radius: 3px;
+        padding: 0 40px;
+        border-width: 1px;
+        margin: 40px 0;
+    }
+    strong {
+        font-style: italic;
+    }
+    span.theorem_label {
+        font-style: italic;
+    }
+    a {
+        text-decoration: none;
+        color: #222;
+
+        &:hover {
+            color: #555;
+            background: none;
+        }
+
+        &.existingWikiWord {
+            color: #2A9B65;
+            &:hover {
+                color: #27704A;
+                background: none;
+            }
+            &:visited {
+                color: #27704A;
+                &:hover {
+                    color: #008;
+                }
+            }
+
+        }
+    }
+
+    div.clickDown .hide {
+        display: block;
+    }
+    img, svg {
+        margin: 40px auto;
+        display: block;
+    }
+    h1#pageName {
+        font-size: 3.5em;
+        margin-bottom: 50px;
+        margin-top: 10vh;
+        color: #000;
+        .webName {
+            display: none;
+        }
+        #svg_logo {
+            display:none;
+        }
+    }
+    .revisedby {
+        margin-top: 100px;
+    }
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+        padding: 0;
+    }
+    .maruku_toc {
+        p, li {
+            font-size: 18px;
+            a {
+                color: #555;
+                &.is-inview {
+                    color: #2A9B65;
+                    border-radius: 3px;
+                    border-bottom: 1px solid #2A9B65;
+                }
+            }
+        }
+    }
+
+    #side-toc {
+        ul {
+            padding-left: 20px;
+        }
+        p, li {
+            font-size: 15px;
+            line-height: 1.2em;
+            margin-top: 15px;
+            a {
+                color: #555;
+                &.is-inview {
+                    color: #2A9B65;
+                    border-radius: 3px;
+                    border-bottom: 1px solid #2A9B65;
+                }
+            }
+        }
+        background-color: #fff;
+        position: fixed;
+        left: 0;
+        top: 0;
+        max-width: 250px;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 0 20px;
+        padding-top: 20vh;
+        display: none;
+    }
+
+    .toc div {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    div.standout {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-left: 0;
+        border-right: 0;
+        padding: 20px;
+        border-left: 0;
+        margin:0;
+        background: none;
+    }
+    h1#contents {
+        display: none;
+    }
+}
+
+.tippy-tooltip-content {
+    max-width: 500px;
+    text-align: left;
+    padding: 20px
+}
+
+.maruku-equation {
+    font-size: 1.4em;
+}
+
+#toggle-sidebar {
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    font-size: .1em;
+    width: 50px;
+    cursor: pointer;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+    }
+
+}
+
+.rightHandSide {
+    border: 0!important;
+    background-color: #fff;
+    height: 100%;
+    overflow-y: auto;
+    padding-left: 2.5em!important;
+}
+
+.tippy-tooltip-content {
+    max-height: 450px;
+    overflow-y: auto;
+    .theorem_label {
+        font-style: italic;
+        font-size: 22px;
+    }
+}
+
+.progress-bar {
+  background-color: #2A9B65;
+  height: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+table {
+    border: 0;
+    margin: auto;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+
+#toc-trigger {
+    position: fixed;
+    top: 0;
+    left: 40px;
+    cursor: pointer;
+    svg {
+        fill: #aaa;
+    }
+    &:hover {
+        svg {
+            fill: #2A9B65;
+        }
+    }
+
+}
+
+#topnav-trigger {
+    position: fixed;
+    bottom: 0;
+    left: 40px;
+    cursor: pointer;
+    svg {
+        fill: #aaa;
+    }
+    &:hover {
+        path {
+            fill: #2A9B65;
+        }
+    }
+
+}

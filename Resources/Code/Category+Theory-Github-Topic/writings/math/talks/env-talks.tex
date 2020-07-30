@@ -1,0 +1,397 @@
+% macros=mkvi
+
+% Significant portions have been stolen from the following sources
+% https://www.tug.org/pracjourn/2006-2/schmitz/
+% https://www.tug.org/pracjourn/2006-4/mahajan/
+
+% Unit conversion: https://www.joomlasrilanka.com/web-design-development-blog/web-design-font-size-measurements-convert-points-pixelsems-percentages-web-designing/
+
+
+
+\startenvironment presentation
+
+
+\mainlanguage[\getvariable{document}{language}]
+
+\version[\getvariable{document}{version}]
+\enablemode[\getvariable{document}{mode}]
+
+\setupcolors[state=start]    % otherwise you get greyscale
+\usecolors[x11]    % X11 colors
+
+
+% See Wiki/command/setupinteraction
+\setupinteraction [
+	state=start,  % make hyperlinks clickable(active)
+	menu=on,
+	click=yes,
+	style=normal,
+	color=\getvariable{document}{color-link-external},
+	contrastcolor=\getvariable{document}{color-link-internal},
+	% openaction=ToggleViewer,    % Make the PDF open in 'Fit width' mode
+	focus=width,    % Make PDF links open in 'Fit width' mode
+	title=\getvariable{document}{title},
+	subtitle=\getvariable{document}{subtitle},
+	author=\getvariable{document}{author},
+	date=\getvariable{document}{date},
+	keyword=\getvariable{document}{keyword}]
+
+
+% General font setup
+% https://wiki.contextgarden.net/Protrusion
+% \loadtypescriptfile[mathdesign]
+\usesymbols[fontawesome]    % https://fontawesome.com/icons
+
+% Interesting: https://tex.stackexchange.com/questions/429621/context-how-to-install-and-use-new-opentype-math-fonts
+
+\definefontfeature
+	[default]
+	[default]
+	[protrusion=quality, expansion=quality]
+\setupalign [hanging, hz, lesshyphenation, tolerant, stretch]
+\setupbodyfont [\getvariable{document}{font}, \getvariable{document}{fontsize-document}]
+
+
+% Bibliography (https://www.contextgarden.net/Bibliography_mkiv)
+\usebtxdataset[../bibliographies/default.bib]
+\usebtxdataset[../bibliographies/logic.bib]
+\usebtxdataset[../bibliographies/number-theory.bib]
+\usebtxdataset[../bibliographies/combinatorics.bib]
+\usebtxdataset[../bibliographies/Itô.bib]
+\usebtxdataset[../bibliographies/Kuo-integral.bib]
+\usebtxdataset[../bibliographies/large-deviations.bib]
+\usebtxdefinitions[apa]    % apa or aps
+% Use \cite[short][#key] to get XXX19 type citations
+
+
+% Highlighting
+\definehighlight [comment] [color=darkgray]
+\definehighlight [good] [color=darkolivegreen4]
+\definehighlight [okay] [color=indianred]
+\definehighlight [bad] [color=orangered]
+\definehighlight [ugly] [color=lightred]
+\definehighlight [important] [color=darkblue]
+\definehighlight [soln] [color=\getvariable{document}{color-solution}]
+
+% Emoji
+\def \smile{\symbol[fontawesome][smile]}
+\def \meh{\symbol[fontawesome][meh]}
+\def \frown{\symbol[fontawesome][frown]}
+
+% Tables
+% https://source.contextgarden.net/tabl-tbl.mkiv TaBlE compatible specifications
+\setuptabulate[rulecolor=\getvariable{document}{color-foreground-0}]
+
+
+% Mathematics
+
+% I have not completely figured out a way to create a dot between \cdot and \bullet
+% The following might provide a way, but is too primitive.
+% The problem is that the scaling is about the bottom of the line.
+\def \argdotsub{\scale[factor=2]{∙}}    % wiki/Command/scale
+\def \argdotmid{\raisebox{0.125em}\vbox{\scale[factor=2]{∙}}}
+\def \argdotsup{\raisebox{0.125em}\vbox{\scale[factor=2]{∙}}}
+% \def \argdot{\raisebox{-0.2em}\vbox{\scale[factor=6]{⋅}}}
+% \def \argdotu{\raisebox{-0em}\vbox{\scale[factor=6]{⋅}}}
+% \def \argdot{\raisebox{-0.2em}\vbox{\scale[factor=6]{⋅}}}
+% \scale[scale=2]{\cdot}} + Z(\scale[sx=3, sy=2]{⋅})
+
+% Caution: spaces do not work between the elements)
+\def \delim[#arguments][#left][#right]{\left#left #arguments \right#right}
+
+% Intervals
+\def \intoo[#arguments]{\delim[#arguments][(][)]}
+\def \intoc[#arguments]{\delim[#arguments][(][]]}
+\def \intco[#arguments]{\delim[#arguments][[][]]}
+\def \intcc[#arguments]{\delim[#arguments][[][]]}
+
+% Brackets
+\def \brnd[#arguments]{\delim[#arguments][(][)]}
+\def \bcrl[#arguments]{\delim[#arguments][\{][\}]}
+\def \bsqr[#arguments]{\delim[#arguments][[][]]}
+\def \bngl[#arguments]{\delim[#arguments][⟨][⟩]}
+
+% Commonly used delimiters
+\def \inn[#arguments]{\delim[#arguments][⟨][⟩]}
+\def \norm[#arguments]{\delim[#arguments][‖][‖]}
+\def \abs[#arguments]{\delim[#arguments][|][|]}
+\def \floor[#arguments]{\delim[#arguments][⌊][⌋]}
+\def \ceil[#arguments]{\delim[#arguments][⌈][⌉]}
+
+% Algebra
+\def \linspan[#arguments]{\mfunction{span} \delim[#arguments][\{][\}]}
+\def \inv[#arguments]{#arguments^{-1}}
+
+% Differentials
+\def \d{\,\text{d}}
+\def \D{\,\text{D}}
+
+% Topology
+\def \clsr[#set]{\overline{#set}}
+\def \intr[#set]{{#set}^°}
+% \def \intr[#set]{\mathring{#set}}
+\def \bdy[#set]{∂ #set}
+
+% Limits
+\definemathcommand [ess] [limop] {\mfunction{ess}}
+\definemathcommand [limsupm] [limop] {\overline{\lim}}
+\definemathcommand [liminfm] [limop] {\underline{\lim}}
+\definemathcommand [ℙlim] [limop] {ℙ\lim}
+\definemathcommand [Ltwolim] [limop] {L^2\lim}
+
+% Algebra
+\definemathcommand [ker] [nolop] {\mfunction{ker}}
+\definemathcommand [im] [nolop] {\mfunction{im}}
+
+% Arithmetic
+\definemathcommand [gcd] [nolop] {\mfunction{gcd}}
+\definemathcommand [lcm] [nolop] {\mfunction{lcm}}
+\definemathcommand [dim] [limop] {\mfunction{dim}}
+% \def \congruent[#modulus]{≡_{#modulus}}
+
+% Probability
+\definemathcommand [infinitelyoften] [nolop] {\,\mfunction{i.o.}}
+\definemathcommand [eventually] [nolop] {\,\mfunction{ev}}
+
+
+% Matrices
+\definemathmatrix
+	[rndmatrix]
+	[left={\,\left(\,},right={\,\right)\,}]
+
+
+% Styling for mathematical environments
+
+%  Randomized frame
+\startuseMPgraphic{background:mathematicalargumentframe}
+	path p;
+	for i = 1 upto nofmultipars :
+		p = (multipars[i]  topenlarged 1pt  bottomenlarged 1pt)  randomized 1pt;
+		fill p withcolor green + 0.9375 * white;    % hard to change (works: red, green, blue, white, lightgray + linear combinations)
+		draw p withcolor \MPvar{linecolor}
+		withpen pencircle scaled \MPvar{linewidth};
+	endfor;
+\stopuseMPgraphic
+
+\definetextbackground [mathematicalargumentframe] [
+	mp=background:mathematicalargumentframe,
+	location=paragraph,
+	rulethickness=0.5pt,
+	framecolor=green,    % hard to change (works: red, green, blue, white, lightgray)
+	width=broad,
+	leftoffset=4pt,
+	rightoffset=4pt,
+	before={\testpage[3]\blank[small]},
+	after={\blank[small]}]
+
+
+% Mathematical environments
+
+\definereferenceformat [eqref] [left=(, right=)]    % Referencing formulas
+
+\defineenumeration [mathematicalstatement] [
+	title=yes,    % now we can use title={}
+	% number=no,    % uncomment if statements shoud not be numbered
+	way=bychapter,    % eg wiki/Command/defineenumeration
+	prefix=chapter,    % eg wiki/Command/defineenumeration
+	headstyle=bold,
+	headcolor=\getvariable{document}{color-foreground-0},
+	width=fit,
+	alternative=hanging,  % top
+	hang=fit,
+	style=italic]
+
+\defineenumeration [mathematicalargument] [
+	title=yes,    % now we can use title={}
+	number=no,    % removes numbering
+	headstyle=italic,
+	titlestyle=italic,
+	style=normal,
+	headcolor=\getvariable{document}{color-foreground-0},
+	width=fit,
+	alternative=hanging,  % top
+	hang=fit,
+	before={\startmathematicalargumentframe},
+	after={\stopmathematicalargumentframe},
+	% before=,
+	% after=,
+	closesymbol={□}]
+
+\defineenumeration [definition] [mathematicalstatement] [
+	text=Definition,
+	list=all,
+	listtext={Definition }]
+
+\defineenumeration [lemma] [mathematicalstatement] [
+	text=Lemma,
+	list=all,
+	listtext={Lemma }]
+
+\defineenumeration [theorem] [mathematicalstatement] [
+	text=Theorem,
+	list=all,
+	listtext={Theorem }]
+
+\defineenumeration [corollary] [mathematicalstatement] [
+	text=Corollary,
+	list=all,
+	listtext={Corollary }]
+
+\defineenumeration [proposition] [mathematicalstatement] [
+	text=Proposition,
+	list=all,
+	listtext={Proposition }]
+
+\defineenumeration [remark] [mathematicalstatement] [
+	text=Remark,
+	list=all,
+	listtext={Remark }]
+
+\defineenumeration [example] [mathematicalstatement] [
+	text=Example,
+	list=all,
+	listtext={Example }]
+
+\defineenumeration [exercise] [mathematicalstatement] [
+	text=Exercise,
+	list=all,
+	listtext={Exercise }]
+
+\defineenumeration [proof] [mathematicalargument] [
+	text=Proof.]
+
+\defineenumeration [solution] [mathematicalargument] [
+	text=Solution.]
+
+
+% Graphics
+\setupexternalfigures [directory={img}]
+
+% % Logo: Does not work (https://www.contextgarden.net/Layers)
+% \definelayer [Logo] [
+% 	location={right, top},
+% 	x=\paperwidth,
+% 	y=0mm,
+% 	hoffset=-5mm,
+% 	voffset=5mm]
+ 
+% \setlayer [Logo] {\framed[width=3cm, height=1cm, background=color,backgroundcolor=lightgray]{Logo}}
+
+% \setupbackgrounds[page][background=Logo]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is the markup for the presentation %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\startmode [presentation]
+\setuppapersize [HD] [HD]
+% \setupinteractionscreen[option=max]    % full screen mode (wiki/Command/setupinteractionscreen)
+% \showframe
+
+\setupbodyfont [\getvariable{document}{font}, \getvariable{document}{fontsize-presentation}]
+
+\setuplayout [
+	width=fit,
+	rightmargin=2em,
+	leftmargin=2em,
+	leftmargindistance=0em,
+	rightmargindistance=0em,
+	height=fit,
+	header=0em,
+	footer=0em,
+	backspace=4em,
+	topspace=0em,
+	bottomspace=0em,
+	% bottom=0.5em,
+	location=singlesided]
+
+% wiki/Command/setuphead
+\definehead [slide] [subject] [    % default formatting = subject formatting
+	% number=no,
+	page=yes,
+	style=\tfb,
+	alternative=middle,
+	before=,    % Negates the effect of setuphead [section].
+	aligntitle=yes]
+
+\setuplabeltext [section=Section~]
+\setuphead [section] [
+	header=empty,    % wiki/Command/setupheader
+	page=yes,
+	before={\emptylines[4]},    % wiki/Command/emptylines  % \blank[n*big] did not work
+	alternative=middle,
+	style=\tfd\bold\smallcaps]
+
+\stopmode
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % This is the markup for the manuscript %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \startmode[manuscript]
+
+% \setupframedtexts[location=middle,
+%                   before={\blank[line]},
+%                   after={\blank[line]}]
+
+% \definehead [slide] [subject] [
+% 	style=\tfb,
+% 	alternative=middle,
+% 	page=yes]
+
+% % \let\startslide\startslidedtext
+% % \let\stopslide\stopslidedtext
+
+% % \define[1]\slidetitle{
+% % 	\startalignment[middle]
+% % 		#1
+% % 	\stopalignment
+% % 	\blank[small]}
+
+% \setupbackgrounds[page][background={backgraphics,foreground}]
+
+% \stopmode
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % This is the markup for the handout %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \startmode [handout]
+% \setuppapersize [A4] [A4]
+
+% \setuplayout [width=fit,
+%               rightmargin=0cm,
+%               leftmargin=0cm,
+%               backspace=2em]
+
+% \setupframedtexts[location=left,
+%                   height=.75\textwidth,
+%                   width=\textwidth,
+%                   before={\blank[line]},
+%                   after={\blank[line]}]
+
+% \definehead [slide] [subject] [
+% 	style=\tfb,
+% 	alternative=middle,
+% 	page=yes]
+
+% % \let\startslide\startslidedtext
+% % \let\stopslide\stopslidedtext
+
+% % \define[1]\slidetitle{
+% % 	\startalignment[middle]
+% % 		#1
+% % 	\stopalignment
+% % 	\blank[small]}
+
+% \setupcolumns[2,distance=2mm]
+
+% \setupbackgrounds [page] [background={backgraphics,foreground}]
+
+% \stopmode
+
+\stopenvironment

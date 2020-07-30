@@ -1,0 +1,621 @@
+% Chapter II: Groups, first encounter
+\chapter{Groups, first encounter}
+
+\section{Definition of group}
+\begin{xca}
+Let $(G, \bullet)$ be a group with $e$ denoting the identity element of $G$. We
+construct a category $\mc{C}$ as follows:
+\begin{itemize}
+    \item $\opn{Obj}(\mc{C}) := \{ \ast \}$.
+    \item $\Hom_{\mc{C}}(\ast, \ast) := G$.
+    \item $1_{\ast} = e$.
+\end{itemize}
+Then, it is easy to check $\mc{C}$ is indeed a category. Also, since every
+element $g \in G$ has an inverse, every morphism $\ast \to \ast$ has an inverse.
+That is, every morphism $\ast \to \ast$ is an isomorphism. Thus, $\mc{C}$ is a
+groupoid. Hence, we conclude every group is the group of isomorphisms of a
+groupoid (with a single object.)
+
+In particular, we note every group is the group of automorphisms of some object
+in some category.
+\end{xca}
+
+\begin{xca}
+$(\Z, +), (\Q, +), (\R, +)$, and $(\C, +)$ are all groups with (additive)
+identity $0$.
+
+$(\Q^*, \cdot), (\R^*, \cdot)$, and $(\C^*, \cdot)$ are all groups, with
+(multiplicative) identity $1$.
+\end{xca}
+
+\begin{xca}
+For all elements $g, h$ of a group $G$, we note $(gh)(h^{-1} g^{-1}) =
+g(h h^{-1})g^{-1} = g 1_G g^{-1} = g g^{-1} = 1_G$, and $(h^{-1} g^{-1})(gh) =
+h^{-1}(g^{-1}g)h = h^{-1} 1_G h = h^{-1} h = 1_G$. Therefore, we conclude
+$(gh)^{-1} = h^{-1} g^{-1}$.
+\end{xca}
+
+\begin{xca}
+Suppose $g^2 = e$ for all elements $g$ of a group $G$. Then, $g^{-1} = g^{-1} e
+= g^{-1}(g^2) = (g^{-1} g) g = e g = g$. That is, every element $g$ of $G$ is
+its own inverse. Therefore, for all $g, h \in G$, $gh = g^{-1} h^{-1} =
+(hg)^{-1} = hg$, thereby implying $G$ is commutative.
+\end{xca}
+
+\begin{xca}
+Suppose the row corresponding to an element $g$ in the multiplication table of
+a group contains the same element in two different columns that correspond to
+(distinct) elements, $h_1$ and $h_2$, say. Then, $g h_1 = g h_2$, which, by
+cancellation on the left, implies $h_1 = h_2$, a contradiction. \\
+The argument is similar for any column of the multiplication table of the group.
+
+Hence, we conclude every row and column of the multiplication table of a group
+contains all elements of the group exactly once. \\
+
+The above statements can also be recast in the following form: \\
+Let $g$ be an element of a group $G$. Then, the mappings given by \[ h \mapsto
+gh \] and \[ h \mapsto hg, \] for all elements $h \in G$, are bijective.
+\end{xca}
+
+\begin{xca}
+($G$ has one element) This element must be the identity $1_G$. And, thus,
+there can be only one multiplication table for $G$: $1_G 1_G = 1_G$.
+
+($G$ has two elements) Let these elements be $1_G$ and $a$. Now, if $a a = a$,
+then by the cancellation property, $a = 1_G$, a contradiction. Thus, we must
+have $a a = 1_G$. Therefore, there is only one multiplication table for $G$:
+$1_G 1_G = 1_G, a a = 1_G$.
+
+($G$ has three elements) Let these distinct elements be $1_G, a, b$. Now, $a b
+\neq a$, for otherwise, by cancellation, $b = 1_G$, a contradiction. Similarly,
+$ab \neq b$. Thus, we must have $a b = 1_G$. That is, $a$ and $b$ are inverses
+of each other. Also, $a a \neq 1$, for otherwise, $a = a^{-1}$, which implies
+$a = b$, a contradiction. Again, $a a \neq a$, for otherwise, by cancellation,
+$a = 1_G$, a contradiction. Thus, $a a = b$. Similarly, $b b = a$. And, this
+exhausts all the possible cases for the multiplication table of $G$. Hence,
+there is only one multiplication table for $G$: $a b = 1_G, a a = b, b b = a$.
+
+The above thus shows there is only \emph{one} possible multiplication table for
+$G$ if $G$ has exactly 1, 2, or 3 elements.
+
+($G$ has four elements) Let these distinct elements be $1_G, a, b, c$. There
+are two possible choices for $ab$: $ab = 1_G$, or $ab = c$. Other choices for
+$ab$, \emph{viz.} $a$, or $b$, lead to contradictions. The two choices are:
+\begin{itemize}
+    \item ($ab = 1_G$) Now, $ac \neq c$, for otherwise, we get $a = 1_G$, a
+    contradiction. So, we must have $ac = b$, and thus, $aa = c$. Once we fill
+    in the (partially-completed) multiplication table with the above data, we
+    can fill in the rest of the multiplication table as follows. We can't have
+    $ba = b$, so we must have $ba = 1_G$, and hence, $ca = b$. Then, $bb = c$,
+    and $cb = a$, which forces $bc = a$, and $cc = 1_G$.
+
+    The completed multiplication table in this case is as follows:
+    \[
+    \begin{array}{c || c | c | c | c |}
+          & 1 & a & b & c \\
+        \hline \hline
+        1 & 1 & a & b & c \\
+        \hline
+        a & a & c & 1 & b \\
+        \hline
+        b & b & 1 & c & a \\
+        \hline
+        c & c & b & a & 1 \\
+        \hline
+    \end{array}
+    \]
+    A little bit of calculation shows $a^2 = c$, $a^3 = a^2 a = ca = b$, and
+    $a^4 = cc = 1_G$. Therefore, the above multiplication table can be entirely
+    rewritten in terms of $1_G$ and $a$ as follows:
+    \[
+    \begin{array}{c || c | c | c | c |}
+            & 1   & a   & a^2 & a^3 \\
+        \hline \hline
+        1   & 1   & a   & a^2 & a^3 \\
+        \hline
+        a   & a   & a^2 & a^3 & 1 \\
+        \hline
+        a^2 & a^2 & a^3 & 1   & a \\
+        \hline
+        a^3 & a^3 & 1   & a   & a^2 \\
+        \hline
+    \end{array}
+    \]
+    The above table is precisely the one for the \emph{cyclic group} $C_4$ of
+    order $4$.
+
+    \item ($ab = c$) The elements of the group are $1, a, b$, and $ab$. There
+    are two possible choices for $a^2$: $1$, or $b$. If $a^2 = b$, then we
+    have $b = a^2, ab = a^3$, which reduces to the previous case above. So, we
+    are left with the only case to consider: $a^2 = 1$. Then, this forces
+    $a(ab) = b$. Now, if $b^2 = a$, then this again reduces to the previous
+    case above (up to isomorphism.) So, we are left with only one case to
+    consider: $b^2 = 1$. Therefore, $b(ab) = a$. Filling up the rest of the
+    multiplication table, we finally obtain $(ab)a = b, (ab)b = a$, and $(ab)^2
+    = 1$.
+
+    So, the completed multiplication table looks as follows:
+    \[
+    \begin{array}{c || c | c | c | c |}
+           & 1  & a  & b  & ab \\
+        \hline \hline
+        1  & 1  & a  & b  & ab \\
+        \hline
+        a  & a  & 1  & ab & b \\
+        \hline
+        b  & b  & ab & 1  & a \\
+        \hline
+        ab & ab & b  & a  & 1 \\
+        \hline
+    \end{array}
+    \]
+\end{itemize}
+Hence, we conclude there are \emph{two} distinct tables, up to reordering the
+elements of $G$, if $G$ has exactly four elements.
+
+Using the tables above, it is also easy to verify all groups with $\le 4$
+elements are commutative.
+\end{xca}
+
+\begin{xca}
+(Prove Corollary 1.11) Let $g$ be an element of finite order, and let $N \in
+\Z$. We claim
+\[ g^N = e \iff N \text{ is a multiple of } |g|. \]
+
+Note, if $N = 0$, then the statement
+\[ g^0 = e \iff 0 \text{ is a multiple of } |g| \]
+holds, since both sides of the double implication are trivially true. Hence,
+the statement holds for $N = 0$.
+
+We now need prove our claim only for all $N \ne 0$.
+
+($\implies$) Suppose $g^N = e$, where $N \ne 0$. If $N > 0$, then by Lemma 1.10,
+$N$ is a multiple of $|g|$. And, if $N < 0$, then $g^{-N} = g^{-N} e = g^{-N}
+g^N = g^{-N + N} = g^0 = e$, and since $-N > 0$, again, by Lemma 1.10, $-N$ is
+a multiple of $|g|$. Hence, for all $N \ne 0$, $N$ is a multiple of $|g|$.
+
+($\impliedby$) Suppose $N$ is a multiple of $|g|$, where $N \ne 0$. Then, $N =
+n |g|$, for some $0 \ne n \in \Z$. Therefore, $g^N = g^{n|g|} = (g^{|g|})^n =
+e^n = e$.
+
+Hence, our original claim is proved.
+\end{xca}
+
+\begin{xca}
+Suppose $G$ is a finite abelian group with exactly one element $f$ of order $2$.
+That is, $f^2 = 1_G$. Then, $f^{-1} = f$, which means $f$ is its own inverse.
+Therefore, every element, other than $f$, of $G$, necessarily has an inverse
+that is not $f$. And, since the elements of the group commute, every
+(non-identity) term in $\prod_{g \in G} g$ can be placed next to its inverse,
+and all these pairs reduce to $1_G$, except $f$. Hence, $\prod_{g \in G} g =
+f$.
+\end{xca}
+
+\begin{xca}
+Let $G$ be a finite group, of order $n$, and let $m$ be the number of elements
+$g \in G$ of order exactly $2$. We claim $n-m$ is odd.
+
+First, note the identity element is the only element in a group with order $1$.
+Also, it is easy to check, for all non-identity elements $g \in G$,
+\[ |g| = 2 \iff g = g^{-1}. \] That is, elements with order $2$ are precisely
+the elements that are their own inverses (not counting the identity element.)
+This implies elements $g$ with order $> 2$ have inverses that are distinct from
+themselves. Thus, these elements come in pairs, which all have distinct
+components. So,
+\begin{align*}
+    |G| &= \sum_{|g| \in \Z^+} \text{ \# of elements with order } |g| \\
+        &= \sum_{|g| = 1} \bullet + \sum_{|g| = 2} \bullet + \sum_{|g| > 2}
+        \bullet \\
+        &= 1 + m + 2k,
+\end{align*}
+for some $k \in \N$. Therefore, $n - m = 2k + 1$, showing $n-m$ is indeed odd.
+
+In addition, if $n$ is even, then using the previous equation, it is easy to
+see $m = n - 2k + 1$ is odd, and hence $G$ necessarily contains elements of
+order 2.
+\end{xca}
+
+\begin{xca}
+Suppose the order of $g$ is odd. Then $|g| = 2n + 1$, for some $n \in \N$.
+Using Proposition 1.13, we have
+\begin{align*}
+    |g^2| &= \frac{\lcm(2, |g|)}{2} \\
+          &= \frac{\lcm(2, 2n + 1)}{2} \\
+          &= \frac{2(2n + 1)}{2} \\
+          &= 2n + 1
+\end{align*}
+We thus conclude $|g^2| = |g|$.
+\end{xca}
+
+\begin{xca}
+We claim for all $g, h$ in a group $G$, $|gh| = |hg|$.
+
+To that end, we first prove the following ancillary claim:
+\[ |aga^{-1}| = |g| \text{ for all } a, g \in G. \]
+
+Indeed, suppose $a, g$ are elements of a group $G$, and let $|g| = n$, where
+$n \in \Z^+$. Then, $(aga^{-1})^n = \underbrace{(aga^{-1}) \cdots
+(aga^{-1})}_{n \text{ times}} = a g^n a^{-1} = a 1_G a^{-1} = aa^{-1} = 1_G$.
+
+So, $m = |aga^{-1}|$ divides $n$. Now, suppose $m < n$. Then, $(aga^{-1})^m =
+1_G = (aga^{-1})^n$, which implies $a g^m a^{-1} = a g^n a^{-1}$, which by
+cancellation, $g^m = g^n$, which implies $g^{n-m} = 1_G$, which (since
+$n-m < n$) contradicts the assumption $|g| = n$. Therefore, $|aga^{-1}| = n =
+|g|$, which proves our ancillary claim.
+
+Now, using the previous result, we immediately conclude, for all $g, h$ in a
+group $G$, $|gh| = |gh1_G| = |gh(gg^{-1})| = |g(hg)g^{-1}| = |hg|$, and we are
+done.
+\end{xca}
+
+\begin{xca}
+In the group of invertible $2 \times 2$ matrices, consider
+\begin{center}
+    $g =
+    \left( \begin{array}{cc}
+        0 & -1 \\
+        1 & 0 \end{array} \right)$,
+    $h =
+    \left( \begin{array}{cc}
+        0  & 1 \\
+        -1 & -1 \end{array} \right)$.
+\end{center}
+We verify below $|g| = 4, |h| = 3$, and $|gh| = \infty$.
+
+It is easy to verify
+\begin{center}
+    $g^2 = \left( \begin{array}{cc}
+               -1 & 0 \\
+                0 & -1 \end{array} \right)$,
+    $g^3 = \left( \begin{array}{cc}
+        0 & 1 \\
+        -1 & 0 \end{array} \right)$, and
+    $g^4 = \left( \begin{array}{cc}
+        1 & 0 \\
+        0 & 1 \end{array} \right)$.
+\end{center}
+Therefore, $|g| = 4$.
+
+Again, it is easy to verify
+\begin{center}
+    $h^2 = \left( \begin{array}{cc}
+               -1 & -1 \\
+                1 & 0 \end{array} \right)$, and
+    $h^3 = \left( \begin{array}{cc}
+               1 & 0 \\
+               0 & 1 \end{array} \right)$.
+\end{center}
+Therefore, $|h| = 3$. \\
+
+Now, note
+\[
+gh = \left( \begin{array}{cc}
+          1 & 1 \\
+          0 & 1 \end{array} \right).
+\]
+Using induction on $n$, it is easy to show
+\[
+(gh)^n = \left( \begin{array}{cc}
+             1 & n \\
+             0 & 1 \end{array} \right),
+\]
+for all $n \in \Z^+$. Therefore, $(gh)^n \neq I_n$ for any positive integer
+$n$, where $I_n$ is the $n \times n$ (identity) diagonal matrix. Hence, $|gh| =
+\infty$.
+\end{xca}
+
+\begin{xca}
+Consider the cyclic group $C_4$ of order $4$, generated by $a$. Choose elements
+$g = a$ and $h = a^3$. Then, it is easy to verify $|g| = 4$ and $|h| = 4$.
+Therefore, $\lcm(|g|, |h|) = \lcm(4, 4) = 4$. And, $|gh| = |aa^3| = |a^4| =
+|e| = 1$. Also, $g$ and $h$ commute. Thus, we have an example wherein $g, h$
+commute but $|gh| = 1 \ne 4 = \lcm(|g|, |h|)$.
+\end{xca}
+
+\begin{xca}
+Suppose $g$ and $h$ commute \emph{and} $\gcd(|g|, |h|) = 1$. We claim $|gh| =
+|g||h|$.
+
+To that end, let $m = |g|$ and $n = |h|$, so that $\gcd(m, n) = 1$. By
+Proposition 1.14, $|gh|$ divides $\lcm(|g|, |h|) = \lcm(m, n) = mn/\gcd(m, n) =
+mn/1 = mn$. Let $N = |gh|$. So, $N \mid mn$.
+
+Now, $(gh)^N = 1$
+\begin{align*}
+    &\implies g^N = (h^{-1})^N \\
+    &\implies |g^N| = |(h^{-1})^N| \\
+    &\implies |g^N| = |h^N| \\
+    &\implies \frac{|g|}{\gcd(N, |g|)} = \frac{|h|}{\gcd(N, |h|)} \\
+    &\implies \frac{m}{\gcd(N, m)} = \frac{n}{\gcd(N, n)} \\
+    &\implies m \cdot \gcd(N, n) = n \cdot \gcd(N, m)
+\end{align*}
+Since $\gcd(m, n) = 1$, it follows $m \mid \gcd(N, m)$ and $n \mid \gcd(N, n)$.
+And, since $\gcd(N, m) \mid N$ and $ \gcd(N, n) \mid N$, it follows $m \mid N$
+and $n \mid N$, whence $mn \mid N$. But, $N \mid mn$, and so, $N = mn$. Thus,
+$|gh| = N = mn = |g||h|$, and this proves our claim.
+\end{xca}
+
+\begin{xca}
+%TODO: Chapter II - Exercise 1.15
+\end{xca}
+
+\section{Examples of groups}
+\begin{xca}
+One can associate an $n \times n$ matrix $M_{\sigma}$ with a permutation
+$\sigma \in S_n$ by letting the entry at $(i, (i)\sigma)$ be $1$ and letting
+all other entries be 0. For example, the matrix corresponding to the
+permutation
+\[
+\sigma =
+    \begin{pmatrix}
+        1 & 2 & 3 \\
+        3 & 1 & 2
+    \end{pmatrix}
+        \in S_3
+\]
+would be
+\[
+M_{\sigma} =
+    \begin{pmatrix}
+        0 & 0 & 1 \\
+        1 & 0 & 0 \\
+        0 & 1 & 0
+    \end{pmatrix}.
+\]
+We show that, with this notation, \[ M_{\sigma \tau} = M_{\sigma} M_{\tau} \]
+for all $\sigma, \tau \in S_n$, where the product on the right is the ordinary
+product of matrices.
+
+First, note $\sigma \tau \in S_n$, and so, $M_{\sigma \tau}$ is an $n \times n$
+matrix where the entry at $(i, (i)\sigma \tau)$ is $1$ and all other entries is
+$0$. And, $M_{\sigma} M_{\tau}$ is an $n \times n$ matrix whose entry at
+$(i, j)$ equals \[ \sum_{r=1}^{n} (M_{\sigma})_{i,r} (M_{\tau})_{r,j}, \] which
+equals $1$ (otherwise, $0$) iff $(M_{\sigma})_{i,r} = 1 = (M_{\tau})_{r,j}$ for
+some $1 \le r \le n$ iff $(i)\sigma = r$ and $(r)\tau = j$ for some $1 \le r \le
+n$ iff $((i)\sigma) \tau = j$ iff $(i)(\sigma \tau) = j$ iff the entry at
+$(i, (i)\sigma \tau)$ of $M_{\sigma \tau}$ equals $1$ and all other entries is
+$0$. We thus conclude $M_{\sigma \tau} = M_{\sigma} M_{\tau}$, and we are done.
+\end{xca}
+
+\begin{xca}
+Suppose $d \le n$. Then, consider the permutation $\sigma \in S_n$ given by
+\[ 1 \to 2 \to 3 \to \ldots \to d \to 1 \] and all positive integers $> d$
+being mapped to themselves. Then, clearly, $|\sigma| = d$. This shows $S_n$
+contains elements of order $d$.
+\end{xca}
+
+\begin{xca}
+For every positive integer $n$, an element $\sigma \in S_{\N}$ of order $n$ is
+given by the mapping \[ 1 \to 2 \to 3 \to \ldots \to n \to 1 \] such that
+$n+i$ is mapped to itself, for all positive integers $i \ge 1$.
+\end{xca}
+
+\begin{xca}
+%TODO - Chapter II: Ex 2.4
+\end{xca}
+
+\begin{xca}
+%TODO - Chapter II: Ex 2.5
+\end{xca}
+
+\begin{xca}
+%TODO - Chapter II: Ex 2.6
+\end{xca}
+
+\begin{xca}
+%TODO - Chapter II: Ex 2.7
+\end{xca}
+
+\begin{xca}
+%TODO - Chapter II: Ex 2.8
+\end{xca}
+
+\begin{xca}
+We verify `congruence mod $n$' is an equivalence relation. Indeed, let $n$ be a
+positive integer.
+
+(Reflexivity) For all $a \in \Z$, $n \mid (a - a)$, and so, $a \equiv a \mod n$.
+
+(Symmetry) For all $a, b \in \Z$, if $a \equiv b \mod n$, then $n \mid (b - a)$,
+which implies $n \mid (a - b)$, and thus, $b \equiv a \mod n$.
+
+(Transitivity) For all $a, b, c \in \Z$, if $a \equiv b \mod n$ and $b \equiv c
+\mod n$, then $n \mid (b - a)$ and $n \mid (c - b)$, and since $c - a = (c - b)
++ (b - a)$, $n \mid (c - a)$, and so, $a \equiv c \mod n$.
+
+And, we are done.
+\end{xca}
+
+\begin{xca}
+We claim $\Z/{n\Z}$ consists precisely of $n$ elements, for all positive
+integers $n$.
+
+Indeed, suppose $n$ is a positive integer. First, note the $n$ equivalence
+classes \[ [0]_n, [1]_n, \ldots, [n-1]_n \] are all distinct, for if $[i]_n =
+[j]_n$ for some $0 \le i < j < n$, then $n \mid (j-i)$, a contradiction, since
+$0 < j-i < n$.
+
+Next, note for any $a \in \Z$, by the Euclidean algorithm, $a = qn + r$, for
+some $q, r \in \Z$, where $0 \le r < n$. That is, $n \mid (a-r)$, and so,
+$a \equiv r \mod n$, and thus, $[a]_n = [r]_n$. That is to say, the equivalence
+class of any integer equals one of the $n$ equivalence classes stated above.
+
+Hence, we conclude $\Z/{n\Z}$ consists precisely of $n$ elements.
+\end{xca}
+
+\begin{xca}
+We show the square of every odd integer is congruent to $1$ modulo $8$.
+
+Indeed, consider $\Z/{8\Z}$. Suppose $a \in \Z$ is an odd integer. Then, $[a]_8$
+equals $[1]_8, [3]_8, [5]_8$, or $[7]_8$. But, $[1]_8^2 = [3]_8^2 = [5]_8^2 =
+[7]_8^2 = [1]_8$, which implies $[a]_8^2 = [1]_8$, and hence, $a^2 \equiv 1 \mod
+8$, and we are done.
+\end{xca}
+
+\begin{xca}
+We show there are no \emph{nonzero} integers $a, b, c$ such that $a^2 + b^2 =
+3c^2$.
+
+To that end, we study the solutions to the equation $[a]_4^2 + [b]_4^2 =
+3[c]_4^2$ in $\Z/{4\Z}$. First, note $[0]_4^2 = [0]_4, [1]_4^2 = [1]_4, [2]_4^2
+= [0]_4$, and $[3]_4^2 = [1]_4$. This implies $3[c]_4^2$ equals $[0]_4$ or
+$[3]_4$. Thus, any solutions to the equation above exist only when $[a]_4^2 +
+[b]_4^2 = [0]_4 = 3[c]_4^2$, and this is possible precisely when $a, b, c$ are
+all even.
+
+Now, assume, for the sake of contradiction, triples $(a, b, c)$ (where $a, b,
+c$ are all nonzero) exist that are solutions to the original equation $a^2 +
+b^2 = 3c^2$. Then, from the foregoing argument, $a, b, c$ must all be even. Let
+us restrict our attention, for the moment, only to positive integer solutions
+$c$. Using the well-ordering principle, there must exist a smallest $c$, such
+that with the corresponding $a$ and $b$, the triple $(a, b, c)$ is a solution
+to the original equation. Now, let $a = 2k, b = 2l$, and $c = 2m$, for some
+integers $k, l, m$. Therefore, $(2k)^2 + (2l)^2 = 3(2m)^2$, which implies
+$k^2 + l^2 = 3m^2$, which is of the same form as the original equation. But,
+this implies there exists some triple $(k, l, m)$ that is a solution to the
+original equation, where $m = c/2 < c$, thus contradicting the assumption that
+$c$ is the smallest positive integer such that $(a, b, c)$ (for some $a, b$) is
+a solution to the original equation.
+
+We obtain a similar result if we assume $c$ is a negative integer. Hence, we
+conclude there do not exist nonzero integers $a, b, c$, such that $a^2 + b^2 =
+3c^2$.
+\end{xca}
+
+\begin{xca}
+Suppose $\gcd(m, n) = 1$. Then, by Corollary 2.5, the class $[m]_n$ generates
+$\Z/{n\Z}$. Therefore, there exists some $a \in \Z$ such that $a[m]_n = [1]_n$,
+which implies $[am]_n = [1]_n$, and thus, $am \equiv 1 \mod n$, which implies
+$n \mid am - 1$. Therefore, there exists some integer $k$ such that $am - 1 =
+kn$, and thus, $am + (-k)n = 1$. We thus conclude there exist integers $a$ and
+$b = -k$ such that $am + bn = 1$.
+
+Conversely, suppose $am + bn = 1$ for some integers $a$ and $b$. Then, since
+$\gcd(m, n)$ divides both $m$ and $n$, $\gcd(m, n) \mid am + bn = 1$. This
+forces $\gcd(m, n) = 1$, and we are done.
+\end{xca}
+
+\begin{xca}
+(Analog of Lemma 2.2) If $a \equiv a' \mod n$ and $b \equiv b' \mod n$, then
+\[ ab \equiv a'b' \mod n. \]
+
+(Proof) Suppose $a \equiv a' \mod n$ and $b \equiv b' \mod n$. Then, $n \mid
+a' - a$ and $n \mid b' - b$, and since $a'b' - ab = a'(b' - b) + b(a' - a)$,
+$n \mid a'b - ab$, which implies $ab \equiv a'b' \mod n$. And, this completes
+our proof.
+
+The above statement shows if $[a]_n = [a']_n$ and $[b]_n = [b']_n$, then
+$[ab]_n = [a'b']_n$, thus showing the multiplication on $\Z/{n\Z}$ is a
+well-defined operation.
+\end{xca}
+
+\begin{xca}
+Let $n > 0$ be an odd integer.
+\begin{itemize}
+\item We show if $\gcd(m, n) = 1$, then $\gcd(2m + n, 2n) = 1$. We prove the
+contrapositive of our claim. Indeed, suppose $\gcd(2m + n, 2n) = d \ne 1$. Then,
+$d \mid 2m + n$ and $d \mid 2n$. Now, since $n$ is an odd integer, $2m + n$ is
+odd and $2n$ is even. Therefore, $d$ must be an odd integer, and since $d$ and
+$2$ are relatively prime, $d \mid n$. In addition, $d \mid 2m$, which implies
+$d \mid m$, and since $\gcd(m, n) \ge d$, $\gcd(m, n) \ne 1$, and we are done.
+
+\item Suppose $\gcd(r, 2n) = 1$. Then, $r$ must be an odd integer, and hence,
+$(r - n)$ is an even integer. Furthermore, there exist integers $a, b$ such that
+$ar + b(2n) = 1$, which implies \[ 2a\left(\frac{r - n}{2}\right) + (a + 2b)n =
+1. \] Therefore, $\gcd(\frac{r - n}{2}, n) = 1$, and we are done.
+
+\item We now show the function given by \[ [m]_n \mapsto [2m + n]_{2n} \] is a
+bijection between $(\Z/{n\Z})^*$ and $(\Z/{2n\Z})^*$.
+
+Indeed, note that since $\gcd(m, n) = 1$ implies $\gcd(2m + n, 2n) = 1$, the
+above mapping does define a function between $(\Z/{n\Z})^*$ and $(\Z/{2n\Z})^*$.
+
+(Injective) Suppose for any $[m_1]_n, [m_2]_n \in (\Z/{n\Z})^*$, $[2m_1 + n] =
+[2m_2 + n]$. Then, $2m_1 + n \equiv 2m_2 + n \mod 2n$, which implies $2n \mid
+(2m_2 + n) - (2m_1 + n)$, and thus, $2n \mid 2(m_2 - m_1)$, and so, $n \mid
+(m_2 - m_1)$, from which we conclude $m_1 \equiv m_2 \mod n$, and hence,
+$[m_1]_n = [m_2]_n$, thereby proving the aforesaid mapping is injective.
+
+(Surjective) Let $[2m + n]_{2n} \in (\Z/{2n\Z})^*$, where $m \in \Z$. Then,
+$\gcd(2m + n, 2n) = 1$, which, by one of the previous results, implies
+$\gcd(\frac{2m + n - n}{2}, n) = 1$, and thus, $\gcd(m, n) = 1$. Therefore,
+$[m]_n \in (\Z/{n\Z})^*$. Hence, $[m]_n$ in $(\Z/{n\Z})^*$ maps to
+$[2m + n]_{2n}$ in $(\Z/{2n\Z})^*$. Thus, the aforesaid function is surjective.
+
+Thus, from the foregoing arguments, it follows the defined function between
+$(\Z/{n\Z})^*$ and $(\Z/{2n\Z})^*$ is a bijection.
+
+~\\
+The number $\phi(n)$ of elements of $(\Z/{n\Z})^*$ is \emph{Euler's}
+$\phi$-\emph{function}. We have just proved if $n$ is odd, then $\phi(2n) =
+\phi(n)$.
+\end{itemize}
+\end{xca}
+
+\begin{xca}
+We show the last digit of $1238237^{18238456}$ is $1$. Working in $\Z/{10\Z}$,
+we first note $[1238237]_{10} = [1238230 + 7]_{10} = [1238230]_{10} + [7]_{10}
+= [0]_{10} + [7]_{10} = [0 + 7]_{10} = [7]_{10}$. Therefore, $[1238237]_{10}^4
+= [7]_{10}^4 = [7^2]_{10}^2 = [49]_{10}^2 = [-1]_{10}^2 = [1]_{10}$. Thus,
+$[1238237]_{10}^{4 \cdot 4559614} = [1]_{10}^{4559614}$. That is,
+$[1238237]_{10}^{18238456} = [1]_{10}$. Hence, $1238237^{18238456} \equiv 1
+\mod 10$, whence the last digit of $1238237^{18238456}$ is $1$.
+\end{xca}
+
+\begin{xca}
+Suppose $m \equiv m' \mod n$. Then, $[m]_n = [m']_n$
+\begin{align*}
+&\implies m \cdot [1]_n = m' \cdot [1]_n \\
+&\implies |m \cdot [1]_n| = |m' \cdot [1]_n| \\
+&\implies \frac{|[1]_n|}{\gcd(m, |[1]_n|)} = \frac{|[1]_n|}{\gcd(m', |[1]_n|)}
+\q (\text{by Proposition 1.13}) \\
+&\implies \frac{n}{\gcd(m, n)} = \frac{n}{\gcd(m', n)} \\
+&\implies \gcd(m, n) = \gcd(m', n).
+\end{align*}
+Hence, $\gcd(m, n) = 1$ iff $\gcd(m', n) = 1$.
+\end{xca}
+
+\begin{xca}
+% TODO - Chapter II: Ex 2.18
+\end{xca}
+
+\begin{xca}
+$(\Z/{5\Z})^* = \{ [1]_5, [2]_5, [3]_5, [4]_5 \}$ and its multiplication table
+is given below:
+\[
+\begin{array}{c || c  c  c  c |}
+          & [1]_5 & [2]_5 & [3]_5 & [4]_5 \\
+    \hline \hline
+    [1]_5 & [1]_5 & [2]_5 & [3]_5 & [4]_5 \\
+    \hline
+    [2]_5 & [2]_5 & [4]_5 & [1]_5 & [3]_5 \\
+    \hline
+    [3]_5 & [3]_5 & [1]_5 & [4]_5 & [2]_5 \\
+    \hline
+    [4]_5 & [4]_5 & [3]_5 & [2]_5 & [1]_5 \\
+    \hline
+\end{array}
+\]
+~\\
+$(\Z/{12\Z})^* = \{ [1]_{12}, [5]_{12}, [7]_{12}, [11]_{12} \}$, and its 
+multiplication table is given below:
+\[
+\begin{array}{c || c  c  c  c |}
+              & [1]_{12}  & [5]_{12}  & [7]_{12}  & [11]_{12} \\
+    \hline \hline
+    [1]_{12}  & [1]_{12}  & [5]_{12}  & [7]_{12}  & [11]_{12} \\
+    \hline
+    [5]_{12}  & [5]_{12}  & [1]_{12}  & [11]_{12} & [7]_{12} \\
+    \hline
+    [7]_{12}  & [7]_{12}  & [11]_{12} & [1]_{12}  & [5]_{12} \\
+    \hline
+    [11]_{12} & [11]_{12} & [7]_{12}  & [5]_{12}  & [1]_{12} \\
+    \hline
+\end{array}
+\]
+
+It is easy to see all the elements of $(\Z/{12\Z})^*$ have order $2$, whereas
+at least one element ($[2]_5, [3]_5$, to be precise) in $(\Z/{5\Z})^*$) have
+order greater than $2$. So, no reordering of elements in $(\Z/{12\Z})^*$ will
+make them match the elements in $(\Z/{5\Z})^*$.
+\end{xca}

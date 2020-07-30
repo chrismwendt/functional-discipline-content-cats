@@ -1,0 +1,130 @@
+natural transformations
+
+functions map within categories
+functors map between categories
+nat trans are mapping between functors
+
+for categories C, D functors F, G with objects a, Fa Ga
+we want to consider a transformation between functors F and G
+that is
+pick a morphism Fa -> Ga, α_a
+similarly for b in C we have, Fb -> Gb, α_b
+also a->b f, Fa->Fb Ff, Ga->Gb  Gf
+
+for a natural transformation to exist requires a relation between two Functors
+Naturality Condition
+α_b . Ff = Gf α_a
+
+or that α_b is determined in terms of α_a
+α_b = Gf α_a (Ff)⁻¹
+
+natural isomorphism (invertible NT)
+all of the components are invertible
+
+we can also say that a NT
+maps objects a (in C) to morphisms Fa -> Ga (in D)
+or
+maps morphisms to commuting diagrams (the nat cond)
+for some f, α_b . Ff = Gf α_a 
+
+alpha :: forall a. F a -> G a
+with NC
+alpha . fmap_F f = fmap_G f . alpha
+
+safeHead :: [a] -> Maybe a
+safeHead []   = Nothing
+safeHead x:xs = Just x
+         
+safeHead . fmap f (x:xs) = fmap f . safeHead (x:xs)
+proven equivalent optimization
+allows us to avoid mapping f on the whole list
+
+so if functors are containers
+where fmap modifies the contents without changing the container
+then NT, orthogonally
+repackages the container where the contents are never modified
+e.g.  in safeHead
+we are going from [] to Maybe
+without any regard to the a within
+
+the NT states it doesn't matter to first change functorial contents
+then repackage, or vice versa
+
+Identity is a functor, a->[a] is a NT
+Const is a functor, length :: [a]->Const Int a is a NT
+
+in general from ADT to ADT is a NT, because ADT in general are functors
+minding contravariant bifunctors etc
+which require the equivalent generalizations of NTs
+
+i.e.
+consider a->a (or (->) a a)
+which would be both covariant and contravariant in a,
+preventing implementing either fmap or contramap
+then
+(a->a) -> f a
+too cannot be a NT
+it is, however, a "dinatural transformation"
+
+2-category
+NT α β
+Functor F G H
+function f a->b
+
+F a->Fa
+G a->Ga
+H a->Ha
+
+α F->G
+β G->H
+
+α_a Fa->Ga
+β.α Fa->Ha
+Ff  Fa->Fb
+
+Hf . β.α_a = β.α_b . Ff = β_b . Gf . α_a
+
+functors between categories C and D
+[C,D] or D^C
+form a category whose morphisms are NTs, Cat seen as 2-category (cat of cats)
+0-cell objects
+1-cell functors
+2-cell NTs
+
+in Cat, homsets are categories, which is also an element of Cat
+this is similar to in Set, its own homsets are also elements of Set
+
+this gives us two senses of composition, vertical and horizontal
+vertical concerns functor objects between categories (NTs)
+horizontal are category objects (functors)
+
+the two compositions satisfy the interchange law
+(β' . α') o (β . α) = (β' o β) . (α' . α)
+(proof by a complicated but straightforward diagram)
+that is,
+there are two ways of getting from objects a to b in Cat
+via a functor or via a NT
+
+lastly, however, we can interpret the functor arrow as a NT,
+the id acting on the functor
+F o α
+for functor F, NT α
+since you cant compose a functor with a NT, this just means
+1_F o α
+
+bicategory
+equal up to isomorphism
+
+associator morphism
+left and right unitor morphism
+
+an action at one level of abstraction becomes an object at the next level
+thats the idea behind higher order functions
+
+groupoid: categories where all morphisms are invertible
+higher nCategories have coherence law problems
+consider nGroupoids
+∞Groupoids by comparison easier, this is HoTT
+
+
+

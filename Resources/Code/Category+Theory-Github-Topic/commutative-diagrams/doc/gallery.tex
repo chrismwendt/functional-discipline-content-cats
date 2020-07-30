@@ -1,0 +1,172 @@
+% \makeatletter
+% \newcommand\prev{\the\tikz@lastxsaved,\the\tikz@lastysaved}
+% \makeatother
+
+The remainder of the text is just commented examples.
+
+\clearpage
+
+\subsection{Snake}
+
+\begin{tcblisting}{gallery}
+\begin{codi}[tetragonal]
+  \obj{          & \ker a   & \ker b   & \ker c   &   \\
+                 & A        & B        & C        & 0 \\
+        |(0')| 0 & A'       & B'       & C'       &   \\
+                 & \coker a & \coker b & \coker c &   \\ };
+
+  \mor   (ker a) ->   (ker b) ->   (ker c);
+  \mor (coker a) -> (coker b) -> (coker c);
+  \mor       A  f :-> B  g :-> C -> 0;
+  \mor 0' -> A' f':-> B' g':-> C';
+
+  \mor[near start] (ker a) -> A a:-> A' -> (coker a);
+  \mor[near start] (ker b) -> B b:-> B' -> (coker b);
+  \mor[near start] (ker c) -> C c:-> C' -> (coker c);
+
+  \draw[/codi/arrows/crossing over, ->, rounded corners, >=stealth]
+    (ker c) -- ++( 0.6,0) -- ++(0,-1.55)
+            -- ++(-3.2,0) -- ++(0,-1.45) -- (coker a);
+\end{codi}
+\end{tcblisting}
+
+\clearpage
+
+\subsection{The fourth associahedron}
+
+\begin{tcblisting}{gallery}
+\begin{codi}
+% From the LaTeX preamble:
+%   \usepackage{newunicodechar}
+%   \newunicodechar{ı}{\mathbf 1}
+%   \newunicodechar{×}{\otimes}
+
+  \foreach [count=\n] \o in {
+      ((w×x)×y)×x,
+      (w×(x×y))×x,
+      w×((x×y)×x),
+      w×(x×(y×x)),
+      (w×x)×(y×x)
+    } \obj (\n) at (72*\n:7em) {\o};
+
+  \mor 1 "a_{w,x,y}×ı_z": -> 2
+           "a_{w,x×y,z}": -> 3
+         "ı_w×a_{x,y,z}": -> 4;
+  \mor *   "a_{w×x,y,z}": -> 5
+           "a_{w,x,y×z}": -> *;
+\end{codi}
+\end{tcblisting}
+
+\clearpage
+
+\subsection{Pullback \& pushout}
+
+\begin{tcblisting}{gallery}
+\begin{codi}[hexagonal]
+  \obj{ |(pb)| A \times_Z B & B \\
+               A            & Z \\ };
+  \obj[above left=of pb] {Q};
+
+  \mor[swap] pb p_1:-> A f:-> Z;
+  \mor        * p_2:-> B g:-> *;
+
+  \mor[swap]:[bend right] Q q_1:-> A;
+  \mor      :[bend left]  * q_2:-> B;
+  \mor [mid]:[dashed]     *   u:-> pb;
+\end{codi}
+\end{tcblisting}
+
+\begin{tcblisting}{gallery}
+\begin{codi}[hexagonal]
+  \obj{ Z &                   B \\
+        A & |(po)| A \sqcup_Z B \\ };
+  \obj[below right=of po] {Q};
+
+  \mor[swap] Z f:-> A i_1:-> po;
+  \mor       * g:-> B i_2:-> *;
+
+  \mor[swap]:[bend right]  A j_1:-> Q;
+  \mor      :[bend left]   B j_2:-> *;
+  \mor [mid]:[dashed]     po   u:-> *;
+\end{codi}
+\end{tcblisting}
+
+\clearpage
+
+\subsection{Complexes sequence}
+
+\begin{tcblisting}{gallery}
+\begin{codi}
+  \obj (M) {   & \vdots  & \vdots  & \vdots  &   \\
+             0 & A_{n+1} & B_{n+1} & C_{n+1} & 0 \\
+             0 & A_{n}   & B_{n}   & C_{n}   & 0 \\
+             0 & A_{n-1} & B_{n-1} & C_{n-1} & 0 \\
+               & \vdots  & \vdots  & \vdots  &   \\ };
+
+  \foreach \n/\row in {n+1/2, n/3, n-1/4}
+    \mor (M-\row-1) -> (A_{\n}) "\alpha_{\n}":-> (B_{\n})
+                                 "\beta_{\n}":-> (C_{\n}) -> (M-\row-5);
+
+  \foreach \l/\col/\q in {A/2/, B/3/', C/4/''}
+    \mor (M-1-\col) -> (\l_{n+1}) "\partial\q_{n+1}":-> (\l_{n})
+                                  "\partial\q_{n}"  :-> (\l_{n-1}) -> (M-5-\col);
+\end{codi}
+\end{tcblisting}
+
+\clearpage
+
+\subsection{Braid}
+
+% TODO: there's a bug here. If one does \begin{codi}[ l/.style={bend left}
+% TODO: (note the space before l) then it's not recognized. Investigate.
+\begin{tcblisting}{gallery}
+\begin{codi}[l/.style={bend left}, r/.style={bend right} ]
+  \obj [ hexagonal=horizontal side 6em angle 45, remove characters=H_\{q+\} ] {
+    H_{q+2}(X)   & H_{q+2}(X,Y) & H_{q+1}(Y,Z) & H_{q}(Z)     \\
+    H_{q+2}(Y)   & H_{q+2}(X,Z) & H_{q+1}(Y)   & H_{q+1}(X,Z) \\
+    H_{q+2}(Y,Z) & H_{q+1}(Z)   & H_{q+1}(X)   &              \\
+  };
+  
+  \mor :[blue]  2Y  -> 2X  l,-> 2XY   -> 1Y  -> 1X;
+  \mor :[green] 2Y  -> 2YZ r,-> 1Z    -> 1Y  -> 1YZ l,-> Z;
+  \mor :[cyan]  2X  -> 2XZ   -> 1Z  r,-> 1X  -> 1XZ   -> Z;
+  \mor :[red]   2YZ -> 2XZ   -> 2XY l,-> 1YZ -> 1XZ;
+\end{codi}
+\end{tcblisting}
+
+\clearpage
+
+\subsection{Hammock}
+
+\begingroup\catcode`~=12
+\begin{tcblisting}{gallery}
+\begin{codi}[x=4em, y=-3em, node distance=1 and 1,
+    sim/.style={sloped, auto,
+      edge node={node[every edge quotes][/velos/install quote
+        handler,"\sim", anchor=south, outer sep=-.15em]}
+    },
+    ~>/.style={->, sim},
+    <~/.style={<-, sim},
+    ../.style={line width=.25ex, dash pattern=on 0sp off .75ex, line cap=round},
+    remove characters=_\{\},
+    expand=full,
+  ]
+    
+  \foreach [count=\c] \col in {1, 2, 3, n}
+  \foreach [count=\r] \row in {K_{\col}, C_{0\col}, \vdots, C_{m\col}, L_{\col}}
+    \obj [name/.expanded={\ifnum\r=3 vdots\col\fi}] at (\c,\r) {\row};
+
+  \obj  [left=of vdots1] {X};
+  \obj [right=of vdotsn] {Y};
+
+  \foreach \col in {1, 2, 3, n}
+    \mor (K\col) ~> (C0\col) ~> (vdots\col) ~>  (Cm\col) ~> (L\col);
+  
+  \foreach \row in {K, C0, Cm, L} {
+    \mor (\row1) -> (\row2) <~ (\row3) .. (\row n);
+    \mor X <~ + -> Y;
+  }
+\end{codi}
+\end{tcblisting}
+\endgroup
+

@@ -1,0 +1,6 @@
+declarative and imperative programming
+
+what to do | how to do something
+global     | local approach to understanding
+
+category theory encorages a global or declarative approach

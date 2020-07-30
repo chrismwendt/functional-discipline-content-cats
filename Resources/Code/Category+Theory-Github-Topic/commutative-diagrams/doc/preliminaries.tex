@@ -1,0 +1,140 @@
+\TikZ\ is the only dependency of \CoDi.
+This ensures compatibility with most\footnote{\CoDi\ builds upon \TikZ, which builds upon  {\ttfamily\small pgf}, which after version 3.1 requires at least \hologo{eTeX} version 2. This is inconsequential except in the unlikely event you're using Knuth's original {\ttfamily\small tex} format.} \TeX\ flavours.
+Furthermore, it can be invoked both as a standalone and as a \TikZ\ library.
+Below are minimal working examples for the main dialects.
+
+\begin{figure}[H]
+  \begin{adjustwidth}{0sp}{-\marginparwidth-\marginparsep}
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\TeX\ package}
+      \begin{lstlisting}[gobble=8]
+
+        \input
+          {commutative-diagrams}
+
+        \codi
+          % diagram here
+        \endcodi
+        \bye
+      \end{lstlisting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\ConTeXt\ module}
+      \begin{lstlisting}[gobble=8]
+
+        \usemodule
+          [commutative-diagrams]
+        \starttext
+        \startcodi
+          % diagram here
+        \stopcodi
+        \stoptext
+      \end{lstlisting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\LaTeX\ package}
+      \begin{lstlisting}[gobble=8]
+        \documentclass{article}
+        \usepackage
+          {commutative-diagrams}
+        \begin{document}
+        \begin{codi}
+          % diagram here
+        \end{codi}
+        \end{document}
+      \end{lstlisting}
+    \end{subfigure}
+    \par
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\TeX\ (\TikZ\ library)}
+      \begin{lstlisting}[gobble=8]
+
+        \input{tikz}
+        \usetikzlibrary
+          [commutative-diagrams]
+
+        \tikzpicture[codi]
+          % diagram here
+        \endtikzpicture
+        \bye
+      \end{lstlisting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\ConTeXt\ (\TikZ\ library)}
+      \begin{lstlisting}[gobble=8]
+
+        \usemodule[tikz]
+        \usetikzlibrary
+          [commutative-diagrams]
+        \starttext
+        \starttikzpicture[codi]
+          % diagram here
+        \stoptikzpicture
+        \stoptext
+      \end{lstlisting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\marginparwidth}
+      \caption*{\LaTeX\ (\TikZ\ library)}
+      \begin{lstlisting}[gobble=8]
+        \documentclass{article}
+        \usepackage{tikz}
+        \usetikzlibrary
+          {commutative-diagrams}
+        \begin{document}
+        \begin{tikzpicture}[codi]
+          % diagram here
+        \end{tikzpicture}
+        \end{document}
+      \end{lstlisting}
+    \end{subfigure}
+  \end{adjustwidth}
+\end{figure}
+
+\begin{marginfigure}[0em]
+  % \caption*{\TikZ\ externalization}
+  \begin{lstlisting}[gobble=4]
+    \documentclass{article}
+  
+    \usepackage
+      {commutative-diagrams}
+    % Or, equivalently:
+    %\usepackage{tikz}
+    %\usetikzlibrary
+    %  {commutative-diagrams}
+    
+    \usetikzlibrary{external}
+    \tikzexternalize
+      [prefix=tikzpics/]
+      
+    \begin{document}
+    \begin{tikzpicture}[codi]
+      % diagram here
+    \end{tikzpicture}
+    \end{document}
+  \end{lstlisting}
+\end{marginfigure}
+  
+A useful \TikZ\ feature exclusive to \LaTeX\ is
+\NiceURL
+  {externalization}
+  {http://texdoc.net/texmf-dist/doc/generic/pgf/pgfmanual.pdf\#page=607}.
+It is an effective way to boost processing times by (re)\-compiling figures as
+external files only when strictly necessary.
+
+A small expedient is necessary to use it with \CoDi: diagrams must be wrapped in
+\lstinline|tikzpicture| environments endowed with the \lstinline|/tikz/codi| key.
+
+On the side is an example saving the pictures in the \lstinline|./tikzpics/| folder
+to keep things tidy.
+
+\hfill$\therefore$\hfill\null
+
+Basic knowledge of \TikZ\ is assumed. A plethora of excellent
+resources exist, so no crash course on the matter will be improvised
+here.
+Higher proficiency is not necessary, though recommended:
+it will make \CoDi\ a pliable framework instead of a black box.

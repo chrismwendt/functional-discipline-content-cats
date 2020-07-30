@@ -1,0 +1,50 @@
+categories great and small
+
+the set of morphisms from object a to object b in a category C
+is called a 'hom-set' C(a,b)
+
+monoids : closed set with id elem and associative binary operation
+
+we can define in haskell with the identity (neutral) element
+and the associative binary operation
+
+class Monoid m where
+    mempty :: m
+    mappend :: m -> m -> m
+
+instance Monoid String where
+    mempty = ""
+    mappend = (++)     -- list concat (Strings are [Char])
+
+instance Monoid Integer where
+    mempty = 0
+    mappend = (+)
+
+alternatively, the mul monoid over integers
+
+instance Monoid Integer where
+    mempty = 1
+    mappend = (*)
+
+however now consider the interpretion following from
+    mappend :: m -> (m -> m)
+or
+    mappend :: (m -> m) -> m
+in this sense,
+a monoid is instead a (mono-) single object category
+with a set of morphisms, f, g, (g . f), (g . f . id)
+or
+a monomorphism with id
+
+so, the Integer addition monoid would be
+0
+set of morphisms {...+1, +2, +3...}
+
+equivalently
+{...0,1,2...}
+(+)
+
+thus, elements of a hom-set can be seen both as
+morphisms, following composition
+    and
+points in a set

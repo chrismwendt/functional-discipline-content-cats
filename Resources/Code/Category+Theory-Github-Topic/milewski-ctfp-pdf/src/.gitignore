@@ -1,0 +1,17 @@
+*.aux
+*.cp*
+*.fn
+*.ky
+*.log
+*.pg
+*.toc
+*.tp
+*.vr
+*.vim
+*.idx
+*.ilg
+*.ind
+*.out
+*.swp
+*~
+ctfp.fdb_latexmk

@@ -1,0 +1,7 @@
+Delete the just Nth element of a list.
+This is tricky. AFAIK, there is no built-in function that does this. You have to split the list in two, remove the element from one list, and then join them back together, like this:
+let (ys,zs) = splitAt n xs in ys ++ (tail zs)
+(Related: tail xs removes the first element.)
+(Related: init xs removes the last element. Slow if the list is big.)
+Delete elements that meet some condition.
+Haskell has a function called filter which will do this for you. Beware though: it should really be named 'select' instead. For example, filter odd xs returns a list of odd numbers. That is, it deletes everything that is not odd.

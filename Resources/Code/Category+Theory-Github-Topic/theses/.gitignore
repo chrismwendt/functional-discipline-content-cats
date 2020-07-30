@@ -1,0 +1,17 @@
+*.log
+*.ilg
+*.aux
+*.make
+*.toc
+*.pdf
+*.dvi
+*.d
+*.fls
+*.idx
+*.ind
+*.ps
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+*.parsectoc

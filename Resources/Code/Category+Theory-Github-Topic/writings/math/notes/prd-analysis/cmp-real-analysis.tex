@@ -1,0 +1,83 @@
+\startcomponent *
+
+\product  prd-analysis
+
+
+\startchapter [title={Convergence of sequences and series}, reference=chp:convergence]
+
+	\startitemize [1, nowhite, after]
+		\item  We can only talk of \emph{convergence of sequences} in \emph{Hausdorff topological spaces}.
+		\item  We can only talk of \emph{series} in \emph{commutative groups}, because we need + to be defined.
+		\item  We can only talk of \emph{convergence of series} in \emph{commutative Hausdorff topological groups}.
+		\item  We can only talk of \emph{absolute convergence of series} in \emph{normed commutative Hausdorff topological groups}.
+		\item  This is from \goto{Wikipedia}[url(https://en.wikipedia.org/wiki/Series_(mathematics)#Calculus_and_partial_summation_as_an_operation_on_sequences)]. Let \m{S} be the vector space of sequences. Then the partial summation \m{∑: S → S, (a_n) ↦ \brnd{∑_{j = 1}^n a_j}} is a \emph{linear operator} on \m{S}, whose inverse is the finite difference operator, \m{Δ}. These behave as discrete analogs of integration and differentiation, only for series (functions of a natural number) instead of functions of a real variable. For example, the sequence \m{\brnd{1, 1, 1, …}} has series \m{\brnd{1, 2, 3, …}} as its partial summation, which is analogous to the fact that \m{∫_0^x 1 \,\d t = x}.
+		\item  Classification of convergence of series
+		\startitemize [n, nowhite, after]
+			\item  Pointwise or uniform convergence
+			\item  Absolute, unconditional and conditional convergence
+				\startitemize [1, nowhite, after]
+					\item  \emph{Absolute convergence} means \m{∑ \norm{a_n} < ∞}.
+					\item  \emph{Unconditional convergence} means all rearrangements of the series are convergent to the same value. That is, if \m{σ: ℕ → ℕ} is a permutation, then \m{∑_n a_n = ∑_n a_{σ(n)}}.
+
+						In complete spaces, absolute convergence ⟹ unconditional convergence, but the converse is not true in general. In finite dimensional spaces, the converse is true by Riemann rearrangement theorem. But the Dvoretzky--Rogers theorem asserts that every in infinite-dimensional Banach space admits an unconditionally convergent series that is not absolutely convergent. (see \goto{this Wikipedia article}[\url(https://en.wikipedia.org/wiki/Absolute_convergence#Rearrangements_and_unconditional_convergence)])
+					\item  \emph{Conditional convergence} means convergent but not absolutely convergent.
+				\stopitemize
+			\item  Depending on the space of values, for example, real number, arithmetic progression, trigonometric function, etc.
+		\stopitemize
+	\stopitemize
+
+\stopchapter
+
+
+\startchapter [title={Differentiation}, reference=chp:differentiation]
+
+	\startsection [title={Differentiation of functions with real powers}]
+		This idea is by Prof Sundar.
+
+		For each \m{n ∈ ℕ}, we can differentiate \m{f: ℝ → ℝ: x ↦ x^n} using the limit definition of the derivative, by using the factorization \m{(x + h)^n - x^n = (x + h - x) ∑_{j = 0}^{n - 1} h^j x^{n-1-j}}, which gives
+		\startformula
+			f'(x)  =  \lim_{h → 0} \frac{f(x + h) - f(x)}{h}
+				=  \lim_{h → 0} ∑_{j = 0}^{n - 1} (x+h)^j x^{n-1-j}
+				=  ∑_{j = 0}^{n - 1} x^j x^{n-1-j}
+				=  (n-1) x^{n-1} .
+		\stopformula
+		But this does not work for exponents \m{r ∈ ℝ} in general. How can we do it?
+
+		One needs to think outside the box for this. We cannot go by definition here. We note that \m{x^r = e^{r \log x}}. Now use chain rule.
+	\stopsection
+
+	\startsection [title={Example of \m{f ∈ C^∞ ∖ C^ω}}]
+		How does one construct an example of a function which is smooth but not analytic? The idea is to find \m{f ≠ 0} such that \m{f^{(n)}(0) = 0 \ ∀n}.
+
+		Note that the graph of \m{x ↦ x^n} around \m{x = 0} become flatter and flatter as \m{n → ∞}. Consider \m{f: ℝ → ℝ: x ↦ e^{-\frac{1}{x}} 𝟙_{x > 0}(x)}. Then \m{f'(x) = \frac{1}{x^2} e^{-\frac{1}{x}} 𝟙_{x > 0}(x)} (do the computations separately for \m{x > 0} and \m{x = 0}). In this way, \m{f'(0) = 0}. Continuing, we see that \m{f^{(n)}(0) = 0 \ ∀n}. Therefore, the sum \m{∑_n \frac{f^{(n)}(0)}{n!} x^n} converges to 0, which is not the same as \m{f}.
+
+		See also \goto{this Wikipedia article}[url(https://en.wikipedia.org/wiki/Non-analytic_smooth_function)].
+	\stopsection
+
+	\startsection[title={Taylor series for multivariate functionals}, reference=sec:taylor]
+
+		\starttheorem[title={Taylor}]
+			Let \m{Ω ⊆ ℝ^d} be an open set and \m{f: Ω → ℝ} be an infinitely differentiable function at the point \m{p ∈ Ω}. Then the Taylor series of \m{f} around \m{p} for \m{v ∈ T_p Ω} is given by
+			\startformula
+				T(p + v)  =  ∑_{n = 0}^∞  \frac{1}{n!} \brnd{{\inn{v, \D_v}}^n f}(p) ,
+				\quad \text{ where }  \inn{v, \D_v} = ∑_{j=1}^d v_j \frac{∂}{∂ v_j} .
+			\stopformula
+		\stoptheorem
+
+		\startproof
+			Is this a \m{ℝ} life, or is this just \m{i}maginary, caught in a landslide, no escape from \m{ℂ}. Open your eyes, look up to the sky and see. I'm trivial come, trivial go, little high, little low.
+
+			ToDo, really!
+		\stopproof
+
+		In the differential form, this becomes
+		\startformula
+			\d T(p)  =  ∑_{n = 1}^∞  \frac{1}{n!} \brnd{\inn{\d v, \D_v}^n f}(p)
+		\stopformula
+
+		There is another form with multi-indexes. But the above form seems way more natural to me. See more in \goto{this}[url(https://en.wikipedia.org/wiki/Taylor_series\#Taylor_series_in_several_variables)] and \goto{this}[url(https://en.wikipedia.org/wiki/Taylor's_theorem\#Taylor's_theorem_for_multivariate_functions)] Wikipedia articles.
+	\stopsection
+
+\stopchapter
+
+\stopcomponent

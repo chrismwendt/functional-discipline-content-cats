@@ -1,0 +1,38 @@
+Layouts can be laid over regular grids:
+
+\begin{lstlisting}
+/codi/layouts/tetragonal=base <length> height <length>
+  (@\hfill@) (default: base 4.5em height 2.8em)
+\end{lstlisting}
+
+\begin{lstlisting}
+/codi/layouts/hexagonal=<direction> side <length> angle <angle>
+  (@\hfill@) (default: horizontal side 4.5em angle 60)
+\end{lstlisting}
+
+When one of these keys is used the layout columns and rows will be
+spaced and offset in order to reproduce the grids given by diagram styles.
+
+\begin{tcblisting}{snippet, trim={2 and -1}}
+\begin{codi}
+  \obj [hexagonal=horizontal side 1.5em angle 60] {
+    A & B &   \\
+    C & D & E \\
+    F & G &   \\
+  };
+\end{codi}
+\end{tcblisting}
+
+\begin{tcblisting}{snippet, trim={2 and -1}}
+\begin{codi}
+  \obj [hexagonal=vertical side 1.5em angle 60] {
+    A & C & F \\
+    B & D & G \\
+      & E &   \\
+  };
+\end{codi}
+\end{tcblisting}
+
+Note that \emph{each row must have the same number of cells}%
+\footnote{this is different from the behaviour of, say, tables}
+or the spacing will be incorrect.

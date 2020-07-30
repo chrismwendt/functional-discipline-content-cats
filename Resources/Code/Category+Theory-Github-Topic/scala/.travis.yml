@@ -1,0 +1,18 @@
+language: scala
+group: travis_lts
+scala:
+  - 2.13.2
+
+addons:
+  apt:
+    update: true
+
+script:
+  - sbt xcoverage
+  - sbt xdup
+after_success:
+  - sbt coveralls
+
+cache:
+  directories:
+    - $HOME/.sbt

@@ -1,0 +1,18 @@
+.wy-side-nav-search {
+background: #65991d;
+border-color: #ff0000;
+}
+
+.wy-nav-top {
+background: #65991d;
+}
+
+.wy-form {
+color: #ff0000;
+border-color: #DFDFDF;
+border-radius: 2px;
+}
+
+input[type=text] {
+    border: 0px;
+}

@@ -1,0 +1,372 @@
+
+\chapter{Introduction}
+\begin{parsec}{1340}[bas-first-parsec]%
+\begin{point}{10}%
+This thesis is a mathematical study of quantum computing, concentrating
+    on two related, but independent topics.
+First up are \emph{dilations}, covered in chapter~\ref{chapter1}.
+    In chapter \ref{chapter2}
+    ``diamond, andthen, dagger''
+    we turn to the second topic: \emph{effectus theory}.
+Both chapters, or rather parts, can be read separately
+    and feature a comprehensive introduction of their own.
+For now, we focus on what they have in common.
+\begin{point}{20}%
+Both parts study the category of von Neumann algebras
+    (with ncpsu-maps\footnote{%
+        An abbreviation for \Define{n}ormal \Define{c}ompletely \Define{p}ositive contractive (i.e.~\Define{s}ub\Define{u}nital) linear maps.} between them).
+A von Neumann algebra is a model for a (possibly infinite-dimensional)
+    quantum datatype, for instance:
+\begin{center}
+    \begin{tabular}{lllll}
+        $M_2$ & a qubit &\quad\qquad& $M_3 \otimes M_3$ & an (ordered) pair of qutrits \\
+        $M_3$ & a qutrit && $\C^2$ & a bit \\
+        $M_2 \oplus M_3$ & a qubit or a qutrit &
+        & $\scrB(\ell^2)$ & quantum integers
+\end{tabular}
+\end{center}
+The ncpsu-maps between these algebras represent physical
+    (but not necessarily computable) operations
+        in the opposite direction
+        (as in the `Heisenberg picture'):
+\begin{enumerate}
+\item
+    \emph{Measure a qubit in the computational basis} \quad
+            ($\mathrm{qubit} \to \mathrm{bit}$)\\
+        $\C_2 \rightarrow M_2,$ \quad 
+        $(\lambda,\mu) \ \mapsto\ \lambda \ketbra{0}{0} + \mu \ketbra{1}{1}$,
+        \quad using braket notation\footnote{%
+            See e.g.~\cite[fig.~2.1]{nielsen2002quantum},
+            so here
+            $\ket{0}\equiv\begin{spmatrix}1 \\ 0 \end{spmatrix}$,
+            $\bra{0}\equiv\begin{spmatrix}1 & 0 \end{spmatrix}$,
+            $\ket{1}\equiv\begin{spmatrix}0 \\ 1 \end{spmatrix}$ and
+                $\ketbra{0}{0} = \begin{spmatrix} 1 & 0
+                \\ 0 & 0 \end{spmatrix}$.}
+\item
+    \emph{Discard the second qubit} \quad
+            ($\mathrm{qubit} \times \mathrm{qubit}\to \mathrm{qubit}$) \\
+        $M_2 \rightarrow M_2 \otimes M_2$, \quad
+        $a \ \mapsto \ a \otimes 1$
+\item
+    \emph{Apply a Hadamard-gate to a qubit} \quad
+            ($\mathrm{qubit} \to \mathrm{qubit}$) \\
+        $M_2 \rightarrow M_2$, \quad
+        $a \ \mapsto \ H^*a H $, \quad where~$H = \frac{1}{\sqrt{2}}\begin{spmatrix}
+            1 & 1 \\ 1 & -1
+        \end{spmatrix}$
+\item
+    \emph{Initialize a qutrit as 0} \quad
+            ($\mathrm{empty} \to \mathrm{qutrit}$) \\
+        $M_3 \rightarrow \C$, \quad
+        $a \ \mapsto \ \bra{0}a\ket{0}$
+\end{enumerate}
+\end{point}
+\spacingfix{}
+\begin{point}{30}%
+The first part of this thesis starts with a concrete question:
+    does the famous  Stinespring dilation theorem~\cite{stinespring},
+    a cornerstone of quantum theory,
+    extend to every ncpsu-map between von Neumann algebras?
+Roughly, this means that every ncpsu-map  splits
+    in two maps of a particularly nice form.
+We will see that indeed it does.
+The insights attained pondering this question lead naturally,
+        as they so often do in mathematics, to other new results:
+    for instance, we learn more about  the tensor product of
+    dilations (\sref{paschke-tensor})
+        and the pure maps associated to them (\sref{paschke-pure}).
+But perhaps the mathematically
+    most interesting by-catch of pondering the question
+    are the contributions (see \sref{overview-dils}) to the theory
+    of self-dual Hilbert C$^*$-modules over a von Neumann algebra,
+    which underlie these dilations.
+\end{point}
+\begin{point}{40}%
+In contrast to the first part of this thesis,
+    the second part starts
+    with the abstract (or rather: vague) question:
+    what characterizes the category of von Neumann algebras?
+The goal is to find a set of reasonable axioms
+    which pick out the category of von Neumann algebras
+    among all other categories.
+In other words: a reconstruction of quantum theory with categorical axioms
+    (presupposing von Neumann algebras are the right model of quantum theory).
+    Unfortunately, we do not reach this goal here.\footnote{%
+        Building on this thesis,
+            van de Wetering recently found a reconstruction
+            of finite-dimensional quantum theory~\cite{wetering,weteringeffthe}.}
+However, by studying von Neumann algebras
+    with this self-imposed restriction,
+    one is led to, as again is often the case in mathematics,
+    upon several new notions and results,
+    which are of independent interest,
+    such as, for instance,~$\diamond$-adjointness,
+    pure maps and the existence of their dagger.
+\end{point}
+\end{point}
+\begin{point}{50}{Twin theses}%
+A substantial part of the research presented here
+    has been performed in close collaboration with
+    my twin brother Abraham Westerbaan.
+Our results are interwoven to such a degree
+    that separating them is difficult
+    and, more importantly, detrimental to the clarity of presentation.
+Therefore we decided to write our theses as two consecutive volumes
+    (with consecutive numbering, more on that later).
+    Abraham's thesis~\cite{bram} is the first volume
+    and covers the preliminaries on von Neumann
+    algebras and, among other results, an axiomatization of
+        the sequential product~$b\mapsto \sqrt{a}b\sqrt{a}$.
+The present thesis is the second volume and builds upon
+    the results of Abraham's thesis,
+            in its study of dilations and effectus theory.
+Because of this clear division,
+    a significant amount of Abraham's original work appears in my thesis
+        and, vice versa, my work appears in his.
+However, the large majority of the
+        new results in each of our theses is our own.
+\end{point}
+\begin{point}{60}{Preliminaries}%
+For the first part of this thesis,
+    only knowledge is presumed of, what is considered to be,
+    the basic theory of von Neumann algebras.
+Unfortunately, this `basic theory' takes most introductory texts
+    close to a thousand pages to develop.
+This situation has led my twin brother to ambitiously
+     redevelop the basic theory of von Neumann algebras
+     tailored to the needs of our theses (and hopefully others
+     in the field).
+In his thesis, Abraham presents~\cite{bram}
+    a clear, comprehensive and self-contained development of the basic
+    theory of von Neumann algebras in less than 200 pages.
+For a traditional treatment,
+    I can wholeheartedly recommend the books of Kadison and Ringrose \cite{kr}.
+For the second part of this thesis,
+    only elementary category theory is required
+    as covered in any introductory text, like e.g.~\cite{awodey}.
+\end{point}
+\begin{point}{70}[bintr-example]{Writing style}%
+This thesis is divided into points,
+    each a few paragraphs long.
+Points are numbered with Roman numerals in the margin:
+    this is point~\sref{bintr-example}.
+Points  are organized into groups,
+    which are assigned Arabic numerals,
+    that appear at the start of the group in the margin.
+The group of this point is~\sref{bas-first-parsec}.
+Group numbers below~\sref{bas-first-parsec}
+    appear in my twin brother's thesis~\cite{bram}.
+Page numbers have been replaced by the
+    group numbers that appear on the spread.\footnote{%
+        A spread are two pages that are visible at the same time.}
+This unusual system allows for
+    very short references:
+    instead of writing `see Theorem 2.3.4 on page 123',
+    we simply write `see \sref{existence-paschke}'.
+Even better: `see the middle of the proof of Theorem 2.3.4 on page 123'
+    becomes the more precise `see \sref{paschke-uniqueness}'.
+
+Somewhat unconventionally, this thesis includes exercises.
+Most exercises replace straight-forward, but repetitive, proofs.
+Other exercises, marked with an asterisk *,
+    are harder and explore tangents.
+In both cases, these exercises are not meant to force the reader into the
+    role of a pupil, but rather to aid her, by reducing clutter.
+    Solutions to these exercises (page \pageref{sols})
+    and errata to the printed version of this text (page \pageref{errata}),
+    can be found at the end of this PDF.
+Possibly further errata will be made available
+    on the arXiv under~\href{https://arxiv.org/abs/1803.01911}{1803.01911}.
+\end{point}
+\begin{point}{80}{Advertisements}%
+This thesis is based on the publications~\cite{wwpaschke,westerbaan2016universal,cho2015quotient,statesofconvexsets}.
+During my doctoral research,
+    I also published the following papers,
+    which although somewhat related,
+    would've made this thesis too broad in scope if included.
+\begin{enumerate}
+    \item In \emph{A Kochen--Specker System has at least 22 Vectors} \cite{uijlen2016kochen},
+        Uijlen and I justify the title building upon the work
+        of Arends, Ouaknine and Wampler.
+\item 
+    In \emph{Unordered Tuples in Quantum Computation} \cite{bags}
+        Furber and I argue that~$M_3 \oplus \C$ is the right algebra
+        modeling an unordered pair of qubits.  Then we compute
+        the algebra for an unordered~$n$-tuple of~$d$-level systems.
+\item
+    In \emph{Picture-perfect QKD} \cite{kissinger2017picture}
+        Kissinger, Tull and I show how to graphically derive a security
+        bound on quantum key distribution using the continuity of Stinespring's dilation.
+\item
+    In \cite{schwabe2016solving}, Schwabe and I
+            work out the details of a quantum circuit
+            to break binary~$\mathcal{MQ}$ using Grover's algorithm.
+\end{enumerate}
+In the second part of this thesis,
+    we
+ use the notion of effectus (introduced by Jacobs \cite{newdirections}),
+    solely for studying quantum theory.
+Effectus theory, however, has more breadth to it,
+ see e.g.~\cite{jacobs2017quantum,
+cho2017disintegration,
+adams2015type,
+jacobs2016hyper,
+jacobs2017channel,
+jacobs2017formal,
+cho2017efprob,
+jacobs2017probability,
+jacobs2017recipe,
+jacobs2016effectuses,
+jacobs2016affine,
+jacobs2017distances,
+jacobs2015effect}.
+For a long, but comprehensive introduction, see \cite{effintro}.
+\begin{point}{90}%
+Next, I would like to mention some other recent approaches
+    to the mathematical study of quantum theory
+        which are related in spirit and of which I am aware.
+First, there are colleagues who also study particular categories
+    related to quantum theory.
+Spearheaded by Coecke and Abramsky \cite{abramsky2004categorical},
+    dozens of authors around Oxford
+    have developed insightful graphical calculi
+    by studying the category of Hilbert spaces
+    categorically \cite{coecke2017picturing}.
+Not explicitly categorically (but certainly in spirit)
+    is the work around operational probabilistic theories,
+    see e.g.~\cite{DAriano2016}.
+Besides these approaches (and that of effectus theory),
+    there are many other varied categorical forages
+    into quantum theory, e.g.~\cite{kornell2012,rennela2017infinite,staton,furber2013kleisli}.
+Then there are authors who pick out different structures from quantum theory
+    to study.
+Most impressive is the work of Alfsen and Shultz,
+    who studied and axiomatized the state
+    spaces of many operator algebras, including von Neumann algebras~\cite{alfsen2012}.
+Recently, the poset of commutative subalgebras of a fixed operator algebra
+    has received attention,
+    see e.g.~\cite{heunen2015domains,bert,heunen2012bohrification}.
+Finally,
+    tracing back to von Neumann himself,
+    the lattice of projections (representing sharp predicates)
+    and the poset of effects (fuzzy predicates),
+    has have been studied by many, see e.g.~\cite{dvurecenskij2013new}.
+\end{point}
+\end{point}
+\begin{point}{91}{About the cover}
+One of the most familiar structures
+    in operator algebras (the mathematical field of this thesis)
+    is perhaps the infinite-dimensional
+    Hilbert space~$\ell^2(\N)$.
+What would its unit sphere look like?
+The cover depicts an approximation:
+    a 12-dimensional spherical shell split into two.
+On the outside the pieces are completely reflective ---
+    on the inside they are dark blue and only mostly reflective.
+The pieces are sat between two (11-dimensional) hyperplanes
+    with a somewhat reflective checkerboard pattern.
+    The planes are cropped at a certain radius from the origin
+        turning them into \emph{hyperdisks}.
+The picture is rendered using a homebrew\footnote{%
+    Source code is available at~\url{https://github.com/westerbaan/ndpt}.}
+    \emph{path tracer},
+    which simulates how rays of light would bounce to end up
+    in the camera.
+The calculations involved (such as the one to determine how a ray bounces
+    from an~$n$-dimensional sphere)
+    are all conveniently expressed and performed using
+    inner products.
+The primary rays cast by the camera have the biggest presence
+    in the first three dimensions, only ten percent in the fourth,
+    five percent in the fifth et cetera.
+This causes more higher-dimensional oddities to appear in the image
+    where rays have travelled further or bounced farther in the
+    higher dimensions.
+\end{point}
+\begin{point}{100}{Funding}
+My research has been supported by the
+European Research Council under grant agreement \textnumero~320571.
+\end{point}
+\begin{point}{110}{Acknowledgments}%
+Progress in theoretical fields
+    is often dramatized
+    as the fruit of personal struggles of  \emph{einzelg\"angers}
+    grown in deep focus and isolation.
+But what is missing in this depiction is that
+    often the seeds were sown
+    in casual conversation among colleagues.
+I would like to acknowledge two seeds I'm aware of.
+First, it was Sam Staton who suggested looking at a universal property
+    for instruments, which led to quotients and comprehension.
+Secondly, Chris Heunen insisted,
+    against my initial skepticism,
+    that Stinespring's dilation must have a
+    universal property.
+I've also had the immense pleasure of discussing research with
+    Robin Adams,
+    Guillaume Allais,
+    Henk Barendregt,
+    Kenta Cho,
+    Joan Daemen,
+    Robert Furber,
+    Bart Jacobs,
+    Bas Joosten,
+    Martti Karvonen,
+    Aleks Kissinger,
+    Mike Koeman,
+    Hans Maassen,
+    Joshua Moerman,
+    Teun van Nuland,
+    Dusko Pavlovic,
+    Arnoud van Rooij,
+    Frank Roumen,
+    Marc Schoolderman,
+    Peter Schwabe,
+    Peter Selinger,
+    Alexandra Silva,
+    Michael Skeide,
+    Pawel Sobocinski,
+    Sean Tull,
+    Sander Uijlen,
+    Marloes Venema,
+    Abraham Westerbaan,
+    John van de Wetering and
+    Fabio Zanasi.
+I'm particularly grateful to Arnoud, Abraham and John
+    for proofreading this thesis.
+I'm honored to have been received by Dusko
+    for a two-month research visit,
+    on which he, Jason, Jon, Mariam, Liang-Ting, Marine, Muzamil, Pawel
+    and Peter-Michael made me feel at home on the other side of the planet.
+On this side of the planet,
+    it is hard to imagine a friendlier group of colleagues.
+I'm much obliged to Marko van Eekelen,
+    Wouter Geraedts,
+    Engelbert Hubbers,
+    Carlo Meijer and
+    Joeri de Ruiter
+    with whom I've performed security audits as a side-gig,
+    which allowed for an extension of my position.
+I'm grateful to my supervisor, Bart Jacobs,
+    who showed me a realistic optimism,
+    which is in such short supply these days.
+I'm touched by the patience of my friends, (extended) family and Annelies,
+    during the final stretch of writing this thesis.
+
+Last, but not least, I would like to share my deep appreciation
+    for the (under)graduate education
+    I've been fortunate enough to receive at the Radboud Universiteit.
+Only now, a few years later,
+    I can see how rare it is,
+    not only for its uncompromised treatment of the topics at hand,
+    but also for the personal attention to each student.
+Of all the great professors,
+Henk Barendregt,
+    Mai Gehrke, Arnoud van Rooij and Wim Veldman
+    have been of particular personal influence to me --- I owe them a lot.
+\end{point}
+\end{parsec}
+
+
+% vim: ft=tex.latex

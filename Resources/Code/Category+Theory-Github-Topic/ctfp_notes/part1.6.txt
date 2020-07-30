@@ -1,0 +1,62 @@
+simple algebraic data types
+
+Set, is a monoidal category, wrt both the product and coproduct
+
+a product type with named fields is called a record
+
+data Element = Element {
+      name      :: String
+    , symbol    :: String
+    , atomicNum :: Int
+}
+
+elemToTuple :: Element -> (String, String, Int)
+elemToTuple e = (name e, symbol e, atomicNum e)
+
+names of record fields also serve as functions to access these fields
+e.g.
+atomicNum :: Element -> Int
+
+data Maybe a = Nothing | Just a
+sum type could be equivalently encoded
+data Maybe a = Either () a
+
+distributive property shown in algebraic data types
+
+prodToSum :: (a, Either b c) -> Either (a, b) (a, c)
+prodToSum (x, e) =
+    case e of
+        Left  y -> Left  (x, y)
+        Right z -> Right (x, z)
+sumToProd :: Either (a, b) (a, c) -> (a, Either b c)
+sumToProd e =
+    case e of
+        Left  (x, y) -> (x, Left  y)
+        Right (x, z) -> (x, Right z)
+
+these two monoids form a semiring, its not a full ring
+because we cant define subtraction or division of types
+
+numbers types
+0       Void
+1       ()
+a*b     (a, b)
+a+b     data Either a b = Left a | Right b
+2=1+1   data Bool       = True | False
+1+a     data Maybe      = Nothing | Just a
+1/(1-a) data List       = Nil | Cons a (List a)
+
+list follows from
+y = 1 + a * y
+
+or we could just expand the series (1-x)^-1
+y = 1 + y + y*y + y*y*y ... (all lists of length 0..n)
+
+logic types
+false Void
+true  ()
+a&&b  (a, b)
+a||b  data Either a b = Left a | Right b
+
+this analogy is the basis of the
+curry-howard isomorphism between logic and type theory

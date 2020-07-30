@@ -1,0 +1,74 @@
+\begingroup\tcbset{trim/.default={3 and -1}}
+
+The second and last macro that \CoDi\ offers is \lstinline|\mor|.
+It can draw single or chained morphisms.
+
+\begin{lstlisting}
+\mor@opt@ <chain options> @/opt@<object>(@
+  \itshape\underbar{\textvisiblespace<morphism>\textvisiblespace<object>}@);(@
+  \marginpar{\scriptsize Whitespace marked as \textvisiblespace\ is mandatory.}@)
+\end{lstlisting}
+
+Source and target objects are referred to by their name.
+  
+\begin{lstlisting}
+<object>   := @nws@(<name>)@/nws@ (@
+  \marginpar{\scriptsize {\color{blue!80!black}Blue fragments} can be either enclosed in the shown delimiters, or a \TeX\ group (not idiomatic), or simply devoid of whitespace.}@)
+\end{lstlisting}
+
+Morphisms consist of one or more optional labels and an arrow.
+  
+\begin{lstlisting}
+<morphism> := @opt@<labels> : @/opt@<arrow>
+<labels>   := @nws@"<math>"@/nws@ XOR (@\underbar{[{\itshape "<math>", <label keylist>}]}@) (@
+  \marginpar{\scriptsize Alternatives are separated by $\vert$s.}@)
+<arrow>    := @nws@[<arrow keylist>]@/nws@
+\end{lstlisting}
+% <labels>   := @nws@"<math>"@/nws@ XOR @nws@[<label keylist>]@/nws@ XOR (@\underbar{[{\itshape <label keylist>}]}@)
+
+Global options can be given to both labels and arrows.
+
+\begin{lstlisting}
+<chain options> := [<label keylist>] @opt@: [<arrow keylist>]@/opt@
+\end{lstlisting}
+
+\hfill$\therefore$\hfill\null
+
+These rules allow for a label syntax that sprouts gracefully
+from the simplest to the most complex case.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}
+\obj { A & B & C \\ F & E & D \\ };
+\mor A -> B;
+\mor B f:-> C;
+\mor C \hat g:-> D;
+\mor D "h i":-> E;
+\mor E ["L", above]:-> F;
+\mor F ["m", near start]["n", swap]["o", near end]:-> A;
+\end{codi}
+\end{tcblisting}
+
+The same holds for arrow syntax.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}
+\obj { A & B & C \\ };
+\mor A -> B;
+\mor B [>-, dashed] C;
+\end{codi}
+\end{tcblisting}
+
+Global options can be used to minimize local ones
+and keep the code terse and readable.
+
+\begin{tcblisting}{snippet, trim}
+\begin{codi}
+\obj { A & B & C \\ F & E & D \\ };
+\mor [swap]:[bend left] B f:-> C g:>-> D h:>- E i:- B;
+\mor :[bend right] E x:-> F y:>-> A z:>- B;
+\mor [mid] B m:-> D;
+\end{codi}
+\end{tcblisting}
+
+\endgroup

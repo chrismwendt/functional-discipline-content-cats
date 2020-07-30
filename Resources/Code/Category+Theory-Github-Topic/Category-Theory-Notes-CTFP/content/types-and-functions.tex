@@ -1,0 +1,120 @@
+\section{Types and Functions}
+
+\begin{definition}[Types]
+    \textit{Types} are roughly analogous to \textit{sets of values} (with exceptions in circular definitions and inability to have a set of all sets).
+\end{definition}
+
+\begin{definition}[\textsc{Set} Category]
+    \Category{Set} is the category of \textit{sets}, with:
+    \begin{enumerate}
+        \item \textbf{Sets} as objects.
+        \item \textbf{Functions} as morphisms.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Bottom]
+    A special \textit{Bottom} value $\bot$ extends each type, corresponding to a \textit{non-terminating computation}.
+\end{definition}
+
+\begin{remark}
+    A function \mintinline{hs}{f :: Bool -> Bool} could return \mintinline{hs}{True}, \mintinline{hs}{False} or \mintinline{hs}{_|_} -- noting that the bottom value \mintinline{hs}{_|_} is a member of \textit{every} type.
+    
+    The bottom value can designate any run-time errors or non-terminating functions. It could be returned explicitly in Haskell via the \mintinline{hs}{undefined} expression. For instance, in
+    \inputminted{hs}{content/code-listings/bottom.hs}
+    
+    Both definitions are valid since the bottom value is a member of any type, i.e. both of  \mintinline{hs}{Bool} and of \mintinline{hs}{Bool -> Bool}.
+\end{remark}
+
+\begin{definition}[Partial Function]
+    A \textit{partial} function may return \textit{bottom} $\bot$.
+\end{definition}
+
+\begin{definition}[Total Function]
+    A \textit{total} function returns valid results for each possible argument (i.e. a surjection), and never returns \textit{bottom} $\bot$.
+\end{definition}
+
+\begin{remark}
+    The category of Haskell types is referred to as \Category{Hask} instead of \Category{Set} because of the special bottom value.
+\end{remark}
+
+\begin{definition}[Pure Function]
+    A \textit{pure} function returns the same result given the same input, with \textit{no side-effects}.
+\end{definition}
+
+\begin{definition}[Type Corresponding to Empty Set]
+    The type corresponding to an \textit{empty set} is the type \mintinline{hs}{Void} in Haskell.
+    \begin{itemize}
+        \item A function taking \mintinline{hs}{Void} can \textit{never} be called, as it requires providing a value of the type \mintinline{hs}{Void} which does not exist.
+        \item Such function has \textit{polymorphic return type} since anything could be returned.
+    \end{itemize}
+    
+    This function is called \mintinline{hs}{absurd} in Haskell
+    \inputminted{hs}{content/code-listings/absurd.hs}
+\end{definition}
+
+\begin{remark}
+    A Haskell type \mintinline{hs}{Void} represents \textit{falsity} with the type of \mintinline{hs}{absurd} corresponding to a vacuous implication which is false in its premise such that any conclusion can follow, in terms of Curry-Howard isomorphism.
+\end{remark}
+
+\begin{definition}[Type Corresponding to Singleton Set]
+    The \textit{singleton set} has only one possible value, which is the C++ \mintinline{cpp}{void}.
+    \begin{itemize}
+        \item Functions taking no arguments, i.e. C++ \mintinline{cpp}{void}, can always be called.
+        \item The type corresponding to a singleton set in Haskell is the \textit{unit}, with the corresponding constructor \mintinline{hs}{()}.
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Functions in Haskell taking the \textit{unit} value \mintinline{hs}{()} is effectively \textit{picking} a single element from the target type. For instance,
+    \inputminted{hs}{content/code-listings/unit-example.hs}
+    The function \mintinline{hs}{pickInt} selects the value \mintinline{hs}{44} from the set of possible values from \mintinline{hs}{Integer}.
+    
+    Then, functions of the form \mintinline{hs}{f :: () -> a} taking a unit input and picking some value from the set \mintinline{hs}{a} exists in one-to-one correspondence with elements of set \mintinline{hs}{a} -- i.e. an \textit{injection}.
+    
+    A function with a unit return type, given that it's an pure function, effectively \textit{discards} its argument. That is, a function of the form \mintinline{hs}{f :: a -> ()} maps each element in \mintinline{hs}{a} to the single value \mintinline{hs}{()} of that singleton set -- meaning that there exists exactly one of such function for each given type \mintinline{hs}{a}.
+    
+    Since the argument is discarded, its type does not matter and allows the function to be polymorphic in its input type (i.e. parametrically polymorphic). This function is given the name \mintinline{hs}{unit}, defined as
+    \inputminted{hs}{content/code-listings/unit.hs}
+\end{remark}
+
+\begin{definition}[Type Corresponding to a Two-Element Set]
+    A type corresponding to a \textit{two-element set} is the type \mintinline{hs}{Bool}.
+    
+    It is defined in Haskell as
+    \inputminted{hs}{content/code-listings/bool.hs}
+    
+    \begin{itemize}
+        \item Pure functions taking a \mintinline{hs}{Bool} input picks two values from the target type, either \mintinline{hs}{True} or \mintinline{hs}{False}.
+        \item Pure functions returning a \mintinline{hs}{Bool} are \textit{predicates}.
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    It is possible to draw morphisms between objects of a category where the objects are the types
+    \begin{enumerate}
+        \item \mintinline{hs}{Void}
+        \item \mintinline{hs}{()}
+        \item \mintinline{hs}{Bool}
+    \end{enumerate}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+            \mintinline{hs}{Void} \arrow[rr, bend left, "\mathtt{absurd}"] \arrow[rd, swap, bend right, "\mathtt{absurd}"]
+            &
+            & \mintinline{hs}{()} \arrow[ld, bend left, "\mathtt{value}"] \arrow[loop right, "\mathtt{unit}"] \\
+            & \mintinline{hs}{Bool} \arrow[ru, bend left, "\mathtt{unit}"] \arrow[loop below, "\mathtt{predicate}"]
+            & 
+        \end{tikzcd}
+        \caption{Morphisms between \mintinline{hs}{Void}, \mintinline{hs}{()} and \mintinline{hs}{Bool}.}
+        \label{fig:morphism-between-types}
+    \end{figure}
+    
+    What do these functions mean? Do they even exist?
+    \begin{itemize}
+        \item \mintinline{hs}{() -> ()}
+        \item \mintinline{hs}{Void -> Void}
+        \item \mintinline{hs}{() -> Void}
+        \item \mintinline{hs}{Bool -> Void}
+    \end{itemize}
+\end{remark}

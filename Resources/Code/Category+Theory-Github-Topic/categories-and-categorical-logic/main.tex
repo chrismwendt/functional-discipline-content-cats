@@ -1,0 +1,2268 @@
+%% Document type
+\documentclass[]{amsbook}
+
+%% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{exercise}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+
+%% User-defined commands
+\newcommand{\q}{\quad}
+\newcommand{\qq}{\qquad}
+\newcommand{\catname}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\oldemptyset}{\emptyset}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\List}{\texttt{List}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\opn}[1]{\operatorname{#1}}
+
+\newtheorem{prop}{Proposition}
+\newenvironment{solution}
+    {\begin{proof}[Solution]}{\end{proof}}
+
+
+\begin{document}
+\title{Introduction to Categories and Categorical Logic}
+\author{Vishal Lama}
+\date{\today}
+\maketitle
+\tableofcontents
+
+\chapter{Introduction to Categories and Categorical Logic}
+\section{Introduction}
+We say that a function $f: X \to Y$ is:\\~\\
+\begin{tabular}{ l l }
+    \emph{injective} & if $\forall x, x' \in X. f(x) = f(x') \implies x = x'$, \\
+    \emph{surjective} & if $\forall y \in Y. \exists x \in X. f(x) = y$, \\~\\
+    \emph{monic} & if $\forall g, h. f \circ g = f \circ h \implies g = h$
+    \q ($f$ is left cancellative),\\
+    \emph{epic} & if $\forall g, h. g \circ f = h \circ f \implies g = h$
+    \q ($f$ is right cancellative).
+\end{tabular}\\
+
+\begin{prop}
+    Let $f : X \to Y$. Then,
+    \begin{enumerate}
+        \item $f$ is injective $\iff f$ is monic.
+        \item $f$ is surjective $\iff f$ is epic.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We first show $(1)$.\\
+    ($\impliedby$) Suppose $f$ is monic. Fix a one-element set
+    $\boldsymbol{1} = \{ \bullet \}$. Then, note that elements $x \in X$ are in
+    1-1 correspondence with functions $\bar{x}: \boldsymbol{1} \to X$, defined
+    by $\bar{x}(\bullet) := x$. Then, for all $x, x' \in X$, we have\\~\\
+    \begin{tabular} { l l }
+        & $f(x) = f(x')$\\
+        $\implies$ & $f(\bar{x}(\bullet)) = f(\bar{x'}(\bullet))$\\
+        $\implies$ & $(f \circ \bar{x})(\bullet) = (f \circ \bar{x'})(\bullet)$\\
+        $\implies$ & $f \circ \bar{x} = f \circ \bar{x'}$\\
+        $\implies$ & $\bar{x} = \bar{x'}$ \q (since $f$ is monic) \\
+        $\implies$ & $\bar{x}(\bullet) = \bar{x'}(\bullet)$\\
+        $\implies$ & $x = x'$
+    \end{tabular}\\
+    This shows that $f$ is injective.\\
+
+    ($\implies$) Suppose $f$ is injective. Let $f \circ g = f \circ h$ for all
+    $g, h: A \to X$. Then, for all $a \in A$,\\
+    \begin{tabular} { l l }
+        & $(f \circ g)(a) = (f \circ h)(a)$\\
+        $\implies$ & $f(g(a)) = f(h(a))$\\
+        $\implies$ & $g(a) = h(a)$ \q (since $f$ is injective)\\
+        $\implies$ & $g = h$
+    \end{tabular}\\
+    This establishes that $f$ is monic. And, we are done.
+\end{proof}
+
+\setcounter{Exercise}{1}
+\begin{Exercise}
+    Show that $f: X \to Y$ is surjective iff it is epic.
+\end{Exercise}
+\begin{solution}
+    ($\implies$) Suppose $f: X \to Y$ is epic. And, assume, for the sake of
+    contradiction, $f$ is \emph{not} surjective. Then, there exists some $y_0
+    \in Y$, such that, for all $x \in X$, $f(x) \ne y_0$. Define mappings
+    $g, h: Y \to Y \cup \{ Y \}$ by:
+    \begin{center}
+        $g(y) := y$\\~\\
+        $h(y) :=
+        \begin{cases}
+        y & \text{if } y \ne y_0 \\
+        Y & \text{if } y = y_0
+        \end{cases}$
+    \end{center}
+    Note that $g \ne h$.\\
+    Then, for all $x \in X$, $(g \circ f)(x) = g(f(x)) = h(f(x)) = (h \circ f)
+    (x)$.
+    This implies $g \circ f = h \circ f$, which implies $g = h$, since $f$ is
+    epic. The last conclusion contradicts the fact that $g = h$. Thus, we
+    conclude $f$ is surjective.\\~\\
+    ($\impliedby$) Suppose $f: X \to Y$ is surjective. Then, for any $y \in Y$,
+    there exists an $x \in X$, such that $f(x) = y$. Now, assume, for all
+    $g, h: Y \to Z$, $g \circ f = h \circ f$. Then, for all $y \in Y$,
+    $g(y) = g(f(x)) = (g \circ f)(x) = (h \circ f)(x) = h(f(x)) = h(y)$, which
+    implies $g = h$, showing that $f$ is epic.\\
+    And, this completes our proof.
+\end{solution}
+
+\setcounter{Exercise}{4}
+\begin{Exercise}
+    Suppose $G$ and $H$ are groups (and hence monoids), and that $h: G \to H$
+    is a monoid homomorphism. Prove that $h$ is a group homomorphism.
+\end{Exercise}
+\begin{solution}
+    We need only show that $h$ preserves inverses. To that end,
+    suppose $g^{-1}$ is the inverse of $g \in G$. Then, $h(g) h(g^{-1}) =
+    h(g g^{-1}) = h(1_G) = 1_H = h(1_G) = h(g^{-1} g) = h(g^{-1}) h(g)$.
+    This establishes $h$ preserves inverses, and we are done.
+\end{solution}
+
+\begin{Exercise}
+    Check that $\catname{Mon}, \catname{Vect}_k, \catname{Pos}$, and
+    $\catname{Top}$ are indeed categories.
+\end{Exercise}
+\begin{solution}
+    ($\catname{Mon}$) The objects are monoids $(M, \cdot, 1_M)$, and morphisms
+    are monoid homomorphisms. Given monoid homomorphisms, $f: (M, \cdot, 1_M)
+    \to (N, \cdot, 1_N)$ and $g: (N, \cdot, 1_N) \to (P, \cdot, 1_P)$, the
+    function $g \circ f: (M, \cdot, 1_M) \to (P, \cdot, 1_P)$ is also a monoid
+    homomorphism, because for all $m, m' \in M$, we have $(g \circ f)(m m') =
+    g(f(m m')) = g(f(m) f(m')) = (g(f(m)) (g(f(m'))) = ((g \circ f)(m))
+    ((g \circ f)(m'))$. Also, for each monoid, the identity morphism is the
+    identity function. It is also easy to check that for all monoid
+    homomorphisms $f, g$ and $h$ with the appropriate domains and codomains,
+    $h \circ (g \circ f) = (h \circ g) \circ f$. This establishes that
+    $\catname{Mon}$ is indeed a category.
+
+    ($\catname{Vect}_k$) The objects are vector spaces over a field $k$, and
+    morphisms are linear maps between vector spaces. Suppose $f: U \to V$ and
+    $g: V \to W$ are linear maps. Then, for all $x, y \in U$, we have
+    $(g \circ f)(x + y) = g(f(x + y)) = g(f(x) + f(y)) = g(f(x)) + g (f(y)) =
+    (g \circ f)(x) + (g \circ f)(y)$. Also, for all $\alpha \in k$, we have
+    $(g \circ f)(\alpha x) = g(f(\alpha x)) = g(\alpha f(x)) = \alpha g(f(x))
+    = \alpha (g \circ f)(x)$. This establishes $g \circ f: U \to W$ is a
+    linear map as well. The identity map $1_U$ for any vector space $U$ is the
+    identity morphism. The associativity of linear maps and the identity axiom
+    follow from the property of functions. This shows that $\catname{Vect}_k$
+    is also a category.
+
+    ($\catname{Pos}$) The objects are partially ordered sets, and morphisms
+    are monotone functions between these sets. Suppose $h: P \to Q$ and
+    $g: Q \to R$ are monotone functions. Then, for all $x, y \in P$,
+    $x \le y \implies h(x) \le h(y) \implies g(h(x)) \le g(h(y)) \implies
+    (g \circ h)(x) \le (g \circ h)(y)$, which shows $g \circ h: P \to R$ is
+    a monotone function. The identity map is the identity morphism, and the
+    associativity and identity axioms are satisfied by the property of
+    functions. This establishes $\catname{Pos}$ is a category.
+
+    ($\catname{Top}$) The objects are topological spaces, and morphisms are
+    continuous maps between these spaces. Given continuous maps $f: (X, T_X)
+    \to (Y, T_Y)$ and $g: (Y, T_Y) \to (Z, T_Z)$, we can show that $g \circ f:
+    (X, T_X) \to (Z, T_Z)$ is also a continuous map. First, note that for any
+    $T \subset Z$, $x \in (g \circ f)^{-1}(T)$ iff $(g \circ f)(x) \in T$ iff
+    $g(f(x)) \in T$ iff $f(x) \in g^{-1}(T)$ iff $x \in f^{-1}(g^{-1}(T))$.
+    Thus,
+    \begin{center}
+        for all $T \subset Z, (g \circ f)^{-1}(T) = f^{-1}(g^{-1}(T))$.
+    \end{center}
+    Therefore, for any open set $T \in T_Z$, we have $g^{-1}(T) \in T_Y$,which
+    implies $f^{-1}(g^{-1}(T)) \in T_X$, which implies $(g \circ f)^{-1}(T)
+    \in T_X$ (by using the result above.) Hence, $g \circ f: (X, T_X) \to
+    (Z, T_Z)$ is a continuous map. The associativity and identity axioms follow
+    from the associativity and identity laws for functions. This establishes
+    $\catname{Top}$ is a category.
+\end{solution}
+
+\begin{Exercise}
+    Check carefully that monoids correspond exactly to one-object categories.
+    Make sure you understand the difference between such a category and
+    $\catname{Mon}$. (For example: how many objects does $\catname{Mon})$
+    have?)
+\end{Exercise}
+\begin{solution}
+    (\href{https://ncatlab.org/nlab/show/monoid#as_a_oneobject_category}
+    {Monoid as a one-object category}) Given a monoid $(M, \cdot, 1)$,
+    we can construct its corresponding category as follows. We write
+    $\catname{B}M$ for the corresponding category with a single object
+    $\bullet$, where $\catname{Hom}_{\catname{B}M}(\bullet, \bullet) := M$.
+    We note then that the composition map in $\catname{B}M$ is reflected in
+    the binary operation $\_ \cdot \_ : M \times M \to M$, where
+    $\mathbf{id}_{\bullet} := 1$. Then, the associative and identity laws for
+    the category $\catname{B}M$ follow directly from the associative and
+    identity laws, respectively, satisfied by the monoid $(M, \cdot, 1)$.
+    This shows any monoid can be seen or interpreted as a one-object category.
+\end{solution}
+
+\begin{Exercise}
+    Check carefully that preorders correspond exactly to categories in which
+    each homset has at most one element. Make sure you understand the
+    difference between such a category and $\catname{Pos}$. (For example: how
+    big can homsets in $\catname{Pos}$ be?)
+\end{Exercise}
+\begin{solution}
+    Let $(P, \le)$ be a preorder. Then, we define the corresponding category
+    $\catname{C}$ as follows. The objects of $\catname{C}$ are the elements of
+    the set $P$, and for all $x, y \in P$, we define a morphism $x \to y$ iff
+    $x \le y$. Then, for every object $x \in \catname{C}$, the identity
+    morphism $1_x: x \to x$ corresponds exactly to the reflexive property
+    $x \le x$ for all $x \in P$. Note that each homset in $\catname{C}$ has at
+    most one element. Also, for every $x \to y$ and $y \to z$ in $\catname{C}$,
+    $x \to z$ follows from the fact that $x \le y$ and $y \le z$ and the
+    transitivity of the $\le$ relation on $P$. This defines a composition map
+    for morphisms in $\catname{C}$. In addition, for all morphisms $x \to y$,
+    $y \to z$, and $z \to w$, their associativity follows immediately from the
+    transitivity of $\le$. Lastly, the unit laws also follow from the same
+    transitivity relation. Therefore, we conclude that every preorder
+    corresponds precisely to a category in which each homset has at most one
+    element.
+\end{solution}
+
+\setcounter{Exercise}{9}
+\begin{Exercise}
+    Show that the inverse, if it exists, is unique.
+\end{Exercise}
+\begin{solution}
+    Suppose $i: A \to B$ is an isomorphism, with inverse $j: B \to A$, in a
+    category $\catname{C}$. Suppose $j': B \to A$ is also an inverse of $i$.
+    Then, $j = 1_A \circ j = (j' \circ i) \circ j = j' \circ (i \circ j) =
+    j' \circ 1_B = j'$, and we are done.
+\end{solution}
+
+\begin{Exercise}
+    Show that $\cong$ is an equivalence relation on the objects of a category.
+\end{Exercise}
+\begin{solution}
+    Let $\catname{C}$ be some category.\\
+    (\emph{Reflexivity}) For any object $X \in \catname{C}$, $X \cong X$
+    follows from the fact that the identity morphism $1_X: X \to X$ is an
+    isomorphism.\\
+    (\emph{Symmetry}) If $X \cong Y$, then there exists an isomorphism $i: X
+    \to Y$. But, the inverse, $i^{-1}: Y \to X$, of $i$ is also an isomorphism.
+    Hence, $Y \cong X$.\\
+    (\emph{Transitivity}) Suppose $X \cong Y$ and $Y \cong Z$. Then, there
+    exist isomorphisms $i: X \to Y$ and $j: Y \to Z$. Then, we claim that
+    $j \circ i: X \to Z$ is also an isomorphism. Indeed, its trivial to show
+    that its inverse is the morphism $i^{-1} \circ j^{-1}: Z \to X$. This
+    implies $X \cong Z$.\\
+    We thus conclude that $\cong$ is an equivalence relation on the objects of
+    a category.
+\end{solution}
+
+\begin{Exercise}
+    Verify the claims that isomorphisms in $\catname{Set}$ correspond exactly
+    to bijections, in $\catname{Grp}$ to group isomorphisms, in $\catname{Top}$
+    to homeomorphisms, and in $\catname{Pos}$ to isomorphisms.
+\end{Exercise}
+\begin{solution}
+    ($\catname{Set}$) We claim the following:
+    \begin{enumerate}
+        \item $f: X \to Y$ is injective iff $f$ has a left inverse.
+        \item $f: X \to Y$ is surjective iff $f$ has a right inverse.
+    \end{enumerate}
+    We first show (1).
+
+    ($\implies$) Suppose $f: X \to Y$ has a left inverse, $g: Y \to X$, say.
+    Then, $g \circ f = 1_X$. Assume for any $x, x' \in X, f(x) = f(x')$. Then,
+    $x = 1_X(x) = (g \circ f)(x) = g(f(x)) = g(f(x')) = (g \circ f)(x') =
+    1_X(x') = x'$, which implies $f$ is injective.
+
+    ($\impliedby$) Suppose $f: X \to Y$ is injective. If $X$ is empty, then $f$
+    is an empty function corresponding to each $Y$. In this case, $1_X$ is also
+    an empty function, and we thus have $g \circ f = 1_X$ for any $g: Y \to X$.
+    That is, $f$ has a left inverse. On the other hand, if $X$ is nonempty,
+    choose some $x_0 \in X$. Define $g: Y \to X$ by
+    \begin{center}
+        $g(y) :=
+        \begin{cases}
+        x_0 & \text{if } y \in Y \setminus \mathbf{Im}(f) \\
+        f^{-1}(y) & \text{if } y \in \mathbf{Im}(f)
+        \end{cases}$
+    \end{center}
+    Then, for all $x \in X, (g \circ f)(x) = g(f(x)) = x = 1_X(x)$, which
+    implies $g \circ f = 1_X$, thus showing that $g$ is a left inverse of $f$.
+
+    We now show (2).
+
+    ($\implies$) Suppose $f: X \to Y$ has a right inverse, $g: Y \to X$, say.
+    Then, $f \circ g = 1_Y$. Therefore, for all $y \in Y$, $y = 1_Y(y) =
+    (f \circ g)(y) = f(g(y)) = f(x)$, where $x = g(y)$. This shows $f$ is
+    surjective.
+
+    ($\impliedby$) Suppose $f: X \to Y$ is surjective. Now, consider an indexed
+    family of nonempty sets $\{ f^{-1}(y)\}_{y \in Y}$. Then, using the axiom
+    of choice, we conclude there exists a function $g: Y \to X$, such that $g(y)
+    \in f^{-1}(y)$ for all $y \in Y$. Then, for all $y \in Y$, $(f \circ g)(y) =
+    f(g(y)) = y = 1_Y(y)$, which implies $f \circ g = 1_Y$, thus proving $f$ has
+    a right inverse.
+
+    Since in $\catname{Set}$ a bijection is a function which is both injective
+    and surjective, using (1) and (2), we immediately conclude that bijections
+    in $\catname{Set}$ correspond exactly to isomorphisms, and we are done.
+
+    In addition, in any category $\catname{C}$, if $f: X \to Y$ has both a left
+    inverse, $g: Y \to X$, say, and a right inverse, $h: Y \to X$, say, then
+    $g = h$. Indeed, $g = g \circ 1_Y = g \circ (f \circ h) = (g \circ f) \circ
+    h = 1_X \circ h = h$, and we are done.\\
+
+    % TODO
+    ($\catname{Grp}$)
+
+    % TODO
+    ($\catname{Top}$)
+
+    % TODO
+    ($\catname{Pos}$)
+\end{solution}
+
+\subsection*{Opposite Categories and Duality}
+Given a category $\catname{C}$, the opposite category $\catname{C}^{\mathbf{op}}$
+is given by taking the same objects as $\catname{C}$, and
+\begin{center}
+    $\catname{C}^{\mathbf{op}}(A, B) = \catname{C}(B, A)$.
+\end{center}
+
+Composition and identities are inherited from $\catname{C}$.\\
+If we have
+\begin{center}
+    $A \xrightarrow{f} B \xrightarrow{g} C$
+\end{center}
+in $\catname{C}^{\mathbf{op}}$, this means
+\begin{center}
+    $A \xleftarrow{f} B \xleftarrow{g} C$
+\end{center}
+in $\catname{C}$. Therefore, composition $ g \circ f$ is
+$\catname{C}^{\mathbf{op}}$ is defined as $f \circ g$ in $\catname{C}$. This
+leads to the \emph{\textbf{principle of duality}}: a statement $S$ is true
+about a category $\catname{C}$ iff its dual (\emph{i.e.} the one obtained
+from $S$ by reversing all the arrows) is true about $\catname{C}^{\mathbf{op}}$.
+For example, a morphism $f$ is monic in $\catname{C}^{\mathbf{op}}$ iff it is
+epic in $\catname{C}$. We say monic and epic are \emph{dual notions}.
+
+\setcounter{Exercise}{13}
+\begin{Exercise}
+    If $P$ is a preorder, for example $(\R, \le)$, describe $P^{\mathbf{op}}$
+    explicitly.
+\end{Exercise}
+\begin{solution}
+    An arrow $a \le_{P^{\mathbf{op}}} b$ in $P^{\mathbf{op}}$ is precisely the
+    arrow $b \le_P a$ in $P$. When $P = (\R, \le)$, $P^{\mathbf{op}}$ describes
+    the ``greater than or equal" preorder relation on $\R$.
+\end{solution}
+
+\subsection*{Subcategories}
+Let $\catname{C}$ be a category. Suppose we are given the collections
+\begin{center}
+    $\mathbf{Ob}(\catname{D}) \subseteq \mathbf{Ob}(\catname{C})$,\\
+    $\forall A, B \in \mathbf{Ob}(\catname{D}).
+    \catname{D}(A, B) \subseteq \catname{C}(A, B)$.
+\end{center}
+We say $\catname{D}$ is a \emph{\textbf{subcategory}} of $\catname{C}$ if
+it is itself a category. In particular, $\catname{D}$ is:
+\begin{itemize}
+    \item A \emph{\textbf{full}} subcategory of $\catname{C}$ if for any
+    $A, B \in \mathbf{Ob}(\catname{D})$, $\catname{D}(A, B) = \catname{C}(A, B)$.
+    \item  A \emph{\textbf{lluf}} subcategory of $\catname{C}$ if
+    $\mathbf{Ob}(\catname{D}) = \mathbf{Ob}(\catname{C})$.
+\end{itemize}
+For example, $\catname{Grp}$ is a full subcategory of $\catname{Mon}$, and
+$\catname{Set}$ is a lluf subcategory of $\catname{Rel}$.
+
+\setcounter{Exercise}{15}
+\begin{Exercise}
+    How many categories $\catname{C}$ with $\mathbf{Ob}(\catname{C}) =
+    \{ \bullet \}$ are there? (Hint: what do such categories correspond to?)
+\end{Exercise}
+\begin{solution}
+    Each such category corresponds to a monoid. So, there are as many such
+    categories as there are monoids.
+\end{solution}
+
+\subsection*{Exercises}
+\begin{enumerate}
+    \item Consider the following properties of an arrow $f$ in a category
+    $\catname{C}$.
+    \begin{itemize}
+        \item $f$ is \emph{split monic} if for some $g$, $g \circ f$ is an
+        identity arrow.
+        \item $f$ is \emph{split epic} if for some $g$, $f \circ g$ is an
+        identity arrow.
+    \end{itemize}
+    \begin{itemize}
+        \item[a.] Prove that if $f$ and $g$ are arrows such that $g \circ f$ is
+        monic, then $f$ is monic.
+        \item[b.] Prove that if $f$ is split epic then it is epic.
+        \item[c.] Prove that if $f$ and $g \circ f$ are iso then $g$ is iso.
+        \item[d.] Prove that if $f$ is monic and split epic then it is iso.
+        \item[e.] In the category $\catname{Mon}$ of monoids and monoid
+        homomorphisms, consider the inclusion map
+        \begin{center}
+            $i: (\N, +, 0) \to (\Z, +, 0)$
+        \end{center}
+        of natural numbers into the integers. Show that this arrow is both monic
+        and epic. Is it an iso?
+    \end{itemize}
+    The \textbf{Axiom of Choice} in Set Theory states that if
+    $\{ X_i \}_{i \in I}$ is a family of nonempty sets, we can form  a set
+    $X = \{ x_i \mid i \in I \}$, where $x_i \in X_i$ for all $i \in I$.
+    \begin{itemize}
+        \item[f.] Show that in $\catname{Set}$ an arrow which is epic is split
+        epic. Explain why this needs the Axiom of Choice.
+        \item[g.] Is is always the case that an arrow which is epic is split
+        epic? Either prove that it is, or give a counterexample.
+    \end{itemize}
+
+    \item Give a description of partial orders as categories of a special kind.
+\end{enumerate}
+\begin{solution}
+    \leavevmode
+    \begin{enumerate}
+        \item \leavevmode
+        \begin{itemize}
+            \item[a.] Suppose $f: A \to B$ and $g: B \to C$ such that
+            $g \circ f$ is monic. Assume, for all $i, j: Z \to A$,
+            $f \circ i = f \circ j$. Then, $(g \circ f) \circ i = g \circ
+            (f \circ i) = g \circ (f \circ j) = (g \circ f) \circ j$, which
+            implies $i = j$, since $g \circ f$ is monic. This implies $f$ is
+            monic, and we are done.
+            \item[b.] Suppose $f: A \to B$ is split epic. Then, there exists a
+            $g: B \to A$ such that $f \circ g = 1_B$. Assume, for all $i, j: B
+            \to C$, $i \circ f = j \circ f$. Then, $i = i \circ 1_B = i \circ
+            (f \circ g) = (i \circ f) \circ g = (j \circ f) \circ g = j \circ
+            (f \circ g) = j \circ 1_B = j$, which shows $f$ is epic.
+            \item[c.] Suppose $f: A \to B$ and $g: B \to C$ such that $f$ and
+            $g \circ f$ are iso. We claim that the inverse of $g$ is
+            $f \circ (g \circ f)^{-1}: C \to B$. Indeed, $g \circ (f \circ
+            (g \circ f)^{-1}) = (g \circ f) \circ (g \circ f)^{-1} = 1_C$, and
+            $(f \circ (g \circ f)^{-1}) \circ g = f \circ (g \circ f)^{-1} \circ
+            (g \circ f) \circ f^{-1} = f \circ f^{-1} = 1_B$, which establishes
+            $g$ is also an iso.
+            \item[d.] Suppose $f: A \to B$ is monic and split epic. The latter
+            implies $f$ has a right inverse, $g: B \to A$, say, where $f \circ g
+            = 1_B$. Note that $g \circ f: A \to A$ and $1_A: A \to A$. Now,
+            $f \circ (g \circ f) = (f \circ g) \circ f = 1_B \circ f = f = f
+            \circ 1_A$, which implies $g \circ f = 1_A$, since $f$ is monic
+            (left cancellative). Thus, $g$ is also a left inverse of $f$, and
+            hence, $f$ is iso.
+            \item[e.] It is easy to prove the inclusion map $\N \hookrightarrow
+            \Z$ is really a monoid homomorphism. Indeed, $i(0) = 0$, and, for all
+            $n_1, n_2 \in \N$, $i(n_1 + n_2) = n_1 + n_2 = i(n_1) + i(n_2)$.\\
+            Next, we show that $i$ is monic. Assume, for all monoid homomorphisms
+            $g, h: X \to \N$, $i \circ g = i \circ h$. Then, for all $x \in X$,
+            $(i \circ g)(x) = (i \circ h) (x)$, which implies $i(g(x)) = i(h(x))$,
+            which implies $g(x) = h(x)$, which implies $g = h$. This shows the
+            inclusion map is monic.\\
+            We now show the inclusion map is epic. First, assume, for all
+            monoid homomorphisms $g, h: (\Z, +, 0) \to (X, \star, 1_X)$,
+            $g \circ i = h \circ i$. Then, for all $n \in \N$, $(g \circ i)(n)
+            = (h \circ i)(n)$, which
+            implies $g(i(n)) = h(i(n))$, which implies $g(n) = h(n)$. We now
+            claim that for all $n \ge 1$, $g(-n) = h(-n)$. To that end, we use
+            induction on $n$. Note that $g(-1) = g(-1) \star 1_X = g(-1) \star
+            h(0) = g(-1) \star h(1 + (-1)) = g(-1) \star h(1) \star h(-1) = g(-1)
+            \star g(1) * h(-1) = g(-1 + 1) \star h(-1) = g(0) \star h(-1) = 1_X
+            \star h(-1) = h(-1)$. Now, assume the proposition holds for some
+            $n \ge 1$. Then, $g(-(n + 1)) = g(-n + (-1)) = g(-n) \star g(-1) =
+            h(-n) \star h(-1) = h(-n + (-1)) = h(-(n + 1))$. Hence, by induction,
+            $g(-n) = h(-n)$ for all $n \ge 1$. Combining the results from above,
+            we thus conclude $g(z) = h(z)$ for all $z \in \Z$. In other words,
+            $g = h$, which implies $i$ is epic.\\
+            Clearly, the inclusion map $\N \hookrightarrow \Z$ is not iso.
+            \item[f.] Suppose $f: X \to Y$ is epic in $\catname{Set}$. Then,
+            from an earlier result about $\catname{Set}$, we conclude $f$ is
+            surjective. Now, consider the family of nonempty sets
+            $\{ f^{-1}(b) \}_{b \in B}$. Each of the sets in the family is
+            nonempty, because $f$ is surjective. Therefore, using the Axiom of
+            Choice, we can choose some element from each nonempty set in the
+            family to construct a function $g: Y \to X$, given by $g(y) := x$
+            if $x \in f^{-1}(b)$. In addition, for all $y \in Y$, $(f \circ g)(y)
+            = f(g(y)) = y = 1_Y(y)$, which implies $f \circ g = 1_Y$. This shows
+            $f$ has a right inverse, thus proving $f$ is split epic.
+            \item[g.] It isn't always the case that an arrow which is epic is
+            split epic. For example, in the category $\catname{Mon}$, the
+            inclusion map $\N \hookrightarrow \Z$ is epic (as shown in (e)
+            above.) Now, if we assume that it is also split epic, then there
+            exists a monoid homomorphism $g: \Z \to \N$, such that $i \circ g =
+            1_{\Z}$. This implies $(i \circ g)(-1) = 1_{\Z}(-1)$, which implies
+            $i(g(-1)) = -1$, which implies $g(-1) = -1$, which implies $-1 \in
+            \N$, which is absurd. We thus conclude the aforesaid inclusion map
+            is \emph{not} split epic, even though it is epic. And this proves
+            our original claim.
+        \end{itemize}
+    \item Suppose $(P, \le)$ is a poset. Then, its corresponding category
+    $\catname{C}$ is defined as follows. The objects of $\catname{C}$ are the
+    elements of $P$, and for all $x, y \in P$, $x \to y$ iff $x \le y$. The
+    reflexivity of $\le$ corresponds to the identity arrows, and transitivity
+    to arrow composition. Note that there is at most one arrow for every pair
+    of objects in the category. Anti-symmetry of $\le$ corresponds to the fact
+    that the only isomorphisms in $\catname{C}$ are the identity arrows.
+    \end{enumerate}
+\end{solution}
+
+\section{Some Basic Constructions}
+\subsection*{Initial and Terminal Objects}
+An object $I$ in a category $\catname{C}$ is \emph{\textbf{initial}} if, for
+every object $A$, \emph{there exists a unique arrow} $I \to A$, which we write
+$\iota_{A}: I \to A$.
+
+An object $T$ in a category $\catname{C}$ is \emph{\textbf{terminal}} if, for
+every object $A$, \emph{there exists a unique arrow} $A \to T$, which we write
+$\tau_{A}: A \to T$.
+
+Note that initial and terminal objects are dual notions: $T$ is terminal in
+$\catname{C}$ iff it is initial in $\catname{C}^{\mathbf{op}}$. We sometimes
+write $\1$ for the terminal object and $\0$ for the initial object.
+
+\setcounter{Exercise}{17}
+\begin{Exercise}
+    Verify the following claims. In each case, identify the canonical arrows.
+    \begin{enumerate}
+        \item In $\catname{Set}$, the empty set is an initial object while any
+        one-element set $\{ \bullet \}$ is terminal.
+        \item In $\catname{Pos}$, the poset $(\emptyset, \emptyset)$ is an
+        initial object while $(\{ \bullet \}, \{ (\bullet, \bullet) \})$ is
+        terminal.
+        \item In $\catname{Top}$,  the space $(\emptyset, \{ \emptyset \})$ is
+        an initial object while $(\{ \bullet \}, \{ \emptyset, \{ \bullet \} \})$
+        is terminal.
+        \item In $\catname{Vect}_k$, the one-element space $\{ 0 \}$ is both
+        initial and terminal.
+        \item In a poset, seen as a category, an initial object is a least
+        element, while a terminal object is a greatest element.
+    \end{enumerate}
+\end{Exercise}
+\begin{solution}
+    \leavevmode
+    \begin{enumerate}
+       \item In $\catname{Set}$, for any set (object) $A$, the function
+       $(\emptyset, A, \emptyset)$ is the unique function (arrow) from
+       $\emptyset$ to $A$. Therefore, the empty set is (the) initial object in
+       $\catname{Set}$. And, for every set $A$, the function $A \to
+       \{ \bullet \}$ that maps every element of $A$ to $\bullet$ is the unique
+       function from $A$ to $\{ \bullet \}$. This establishes that any
+       one-element set is terminal in $\catname{Set}$.
+       \item For any poset $(P, \le)$, there exists a unique (empty) monotone
+       function $(\emptyset, \emptyset) \xrightarrow{(\emptyset, P, \emptyset)}
+       (P, \le)$. Hence, the poset $(\emptyset, \emptyset)$ is an initial object
+       in $\catname{Pos}$. And, for any poset $(P, \le)$, there exists a unique
+       monotone function $(P, \le) \to (\{ \bullet \}, \{ (\bullet, \bullet) \})$,
+       defined by $x \mapsto \bullet$ for all $x \in P$. Hence, $(\{ \bullet \},
+       \{ (\bullet, \bullet) \})$ is terminal in $\catname{Pos}$.
+       \item For any topological space $(X, T_X)$, the unique empty function
+       \begin{center}
+           $(\emptyset, \{ \emptyset \}) \xrightarrow{(\emptyset, X, \emptyset)}
+           (X, T_X)$
+       \end{center}
+       is continuous, since for every open set $T \in T_X$, its preimage under
+       the aforesaid function is the empty set, which is open. Hence,
+       $(\emptyset, \{ \emptyset \})$ is initial in $\catname{Top}$.\\
+       And, for any topological space $(X, T_X)$, the unique function
+       $(X, T_X) \to (\{ \bullet \}, \{ \emptyset, \{ \bullet \} \})$, defined by
+       $x \mapsto \bullet$ for all $x \in X$, is continuous, since the preimage
+       of $\emptyset$ under the aforesaid function is $\emptyset$, which is open,
+       and the preimage of $\{ \bullet \}$ is $X$, which is also open. Hence,
+       $(\{ \bullet \}, \{ \emptyset, \{ \bullet \} \})$ is terminal in
+       $\catname{Top}$.
+       \item Assuming the ground field is $k$, for any vector space $V$, the
+       unique linear map $\{ 0 \} \to V$, defined by $0 \mapsto 0_V$ is a unique
+       arrow from $\{ 0 \}$ to $V$ in $\catname{Vect}_k$. Also, the unique linear
+       map $V \to \{ 0\}$, defined by $v \mapsto 0$ for all $v \in V$, is a
+       unique arrow from $V$ to $\{ 0 \}$ in $\catname{Vect}_k$. This shows that
+       $\{ 0 \}$ is both initial and terminal in $\catname{Vect}_k$.
+       \item In a poset $(P, \le)$, seen as a category, if $\bot$ is an initial
+       object, then there exists a unique arrow $\bot \to p$ for all $p \in P$.
+       This implies $\bot \le p$ for all $p \in P$, when seen as a set. Hence,
+       an initial object in the category corresponding to $(P, \le)$ is a least
+       element in $P$. Arguing similarly, we conclude that a terminal object in
+       the category corresponding to $(P, \le)$ is a greatest element in $P$.
+   \end{enumerate}
+\end{solution}
+
+\begin{Exercise}
+    Identify the initial and terminal objects in $\catname{Rel}$.
+\end{Exercise}
+\begin{solution}
+    In $\catname{Rel}$, the empty set $\emptyset$ is both the initial object and
+    the terminal object. Indeed, for any set $A$, the empty relation $\emptyset$
+    ($\subseteq \emptyset \times A$) is a unique relation from $\emptyset$ to
+    $A$, and the empty relation $\emptyset$ ($\subseteq A \times \emptyset$) is
+    also a unique relation from $A$ to $\emptyset$.
+\end{solution}
+
+\begin{Exercise}
+    Suppose a monoid, viewed as a category, has either an initial or a terminal
+    object. What must the monoid be?
+\end{Exercise}
+\begin{solution}
+    The category corresponding to a monoid $(M, \cdot, 1_M)$ contains just a
+    single object. If this object is initial, then all morphisms must be the
+    identity morphism on this initial object, which implies $M = \{ 1_M \}$.
+    The argument is similar if the aforesaid object is terminal, which would
+    again imply $M = \{ 1_M \}$. Thus, in either case, the monoid must be the
+    trivial monoid.
+\end{solution}
+
+A fundamental fact about initial and terminal objects is that they are
+\emph{unique up to (unique) isomorphism}. This is characteristic of all such
+``universal" definitions. Hence, if initial objects exist in a category, we
+can speak of \emph{the} initial object. Similarly for terminal objects.
+
+\setcounter{Exercise}{21}
+\begin{Exercise}
+    Let $\catname{C}$ be a category with an initial object $\0$. For any object
+    $A$, show the following:
+    \begin{enumerate}
+        \item If $A \cong \0$, then $A$ is an initial object.
+        \item If there exists a monomorphism $f: A \to \0$, then $f$ is an iso,
+        and hence $A$ is initial.
+    \end{enumerate}
+\end{Exercise}
+\begin{solution}
+    \leavevmode
+    \begin{enumerate}
+        \item Suppose $A \cong \0$. Then, there exists an isomorphism $f: A
+        \xrightarrow{\sim} \0$. For any object $B$, there exists a unique
+        morphism $\iota_B: \0 \to B$, and hence, $\iota_B \circ f: A \to B$.
+        This proves the existence of a morphism $A \to B$ for any object $B$
+        in the category. We now show that such a morphism is indeed unique.
+        Let $g, h: A \to B$ be a pair of morphisms for any object $B$ in the
+        category $\catname{C}$. Then, we have
+        \begin{center}
+            $\0 \xrightarrow{f^{-1}} A \xrightarrow{g} B$
+        \end{center}
+        and
+        \begin{center}
+            $\0 \xrightarrow{f^{-1}} A \xrightarrow{h} B$.
+        \end{center}
+        Since $\0$ is initial, we must have $g \circ f^{-1} = h \circ f^{-1}$.
+        Therefore, $g = g \circ 1_A = g \circ (f^{-1} \circ f) = (g \circ f^{-1})
+        \circ f = (h \circ f^{-1}) \circ f = h \circ (f^{-1} \circ f) = h \circ
+        1_A = h$. This proves uniqueness, and we are done.
+        \item Suppose $A \xrightarrow{f} \0$ is a monomorphism. We claim
+        the unique arrow $\0 \xrightarrow{\iota_A} A$ is the inverse of $f$. To
+        that end, we show $\iota_A$ is both a left and a right inverse of $f$.
+        Indeed, $f \circ \iota_A : \0 \to \0$, and since $\0$ is initial, we
+        must have $f \circ \iota_A = 1_{\0}$, which implies $\iota_A$ is a
+        right inverse of $f$. Now, note $\iota_A \circ f: A \to A$ and
+        $1_A: A \to A$. Also, $f \circ (\iota_A \circ f) = (f \circ \iota_A)
+        \circ f = 1_{\0} \circ f = f = f \circ 1_A$, and since $f$ is left
+        cancellative, we have $\iota_A \circ f = 1_A$, which shows $\iota_A$ is
+        a left inverse of $f$. Thus, $f$ has both a left inverse and a right
+        inverse, implying it is iso, and hence, using the result obtained in (1)
+        above, we conclude $A$ is an initial object in $\catname{C}$.
+    \end{enumerate}
+\end{solution}
+
+\subsection*{Products and Coproducts}
+We can express a general notion of product that is meaningful in any category,
+such that, if a product exists, it is characterized uniquely up to unique
+isomorphism. Given a particular mathematical context (\emph{i.e.} a category),
+we can then verify if a product exists in that category. The concrete
+construction appropriate to the context will enter only into the proof of
+\emph{existence}; all of the useful \emph{properties} of a product follow from
+the general definition.
+
+\setcounter{Exercise}{23}
+\begin{Exercise}
+    Verify $\catname{Pair}(A, B)$ is a category, where $A$ and $B$ are arbitrary
+    objects in some category.
+\end{Exercise}
+\begin{solution}
+    Let $A$ and $B$ be some arbitrary objects in some category $\catname{C}$.
+    Now, given morphisms $f: (P, p_1, p_2) \to (Q, q_1, q_2)$ and $g: (Q, q_1,
+    q_2) \to (R, r_1, r_2)$ in $\catname{Pair}(A, B)$, it is easy to check that
+    $g \circ f: P \to R$ in $\catname{C}$. Also, we have
+    \begin{center}
+        $q_1 \circ f = p_1$, $q_2 \circ f = p_2$
+    \end{center}
+    and
+    \begin{center}
+        $r_1 \circ g = q_1$, $r_2 \circ g = q_2$
+    \end{center}
+    So, $r_1 \circ (g \circ f) = (r_1 \circ g) \circ f = q_1 \circ f = p_1$, and,
+    $r_2 \circ (g \circ f) = (r_2 \circ g) \circ f = q_2 \circ f = p_2$, which
+    implies $g \circ f: (P, p_1, p_2) \to (R, r_1, r_2)$ in $\catname{Pair}(A,B)$.
+    Associativity of morphisms in $\catname{Pair}(A, B)$ follows directly from
+    the associativity of morphisms in $\catname{C}$. Finally, for all
+    $(P, p_1, p_2)$ in $\catname{Pair}(A, B)$, the identity morphism $1_P: P \to
+    P$ is the identity morphism for $(P, p_1, p_2)$, since $p_1 \circ 1_P = p_1$
+    and $p_2 \circ 1_P = p_2$. And, this proves that $\catname{Pair}(A, B)$ is
+    indeed a category.
+\end{solution}
+
+We say $(A \times B, \pi_1, \pi_2)$ is a \emph{\textbf{product}} of $A$ and $B$
+if it is \emph{terminal} in $\catname{Pair}(A, B)$. Products are specified by
+triples $A \xleftarrow{\pi_1} A \times B \xrightarrow{\pi_2}$, where $pi_i$'s are
+called \emph{projections}. For economy (and if projections are obvious), we say
+$A \times B$ is the product of $A$ and $B$. We say a category $\catname{C}$ has
+\emph{\textbf{(binary) products}} if each pair of objects $A, B$ has a product
+in $\catname{C}$. Since, products are terminal objects, they are unique up to
+(unique) isomorphism.
+
+Unpacking the uniqueness condition from $\catname{Pair}(A, B)$ back to
+$\catname{C}$, we obtain the following more concise definition of products that
+we use in practice.\\
+
+(\textbf{Equivalent definition of product}) Let $A, B$ be objects in a category
+$\catname{C}$. A product of $A$ and $B$ is an object $A \times B$ together with
+a pair of arrows $A \xleftarrow{\pi_1} A \times B \xrightarrow{\pi_2} B$ such
+that for every triple $A \xleftarrow{f} C \xrightarrow{g} B$, there exists a
+\emph{unique} morphism
+\begin{center}
+    $\langle f, g \rangle : C \to A \times B$
+\end{center}
+such that the corresponding diagram commutes. That is,
+\begin{center}
+    $\pi_1 \circ \langle f, g \rangle = f$\\
+    $\pi_2 \circ \langle f, g \rangle = g$
+\end{center}
+We call $\langle f, g \rangle$ the \emph{pairing} of $f$ and $g$.
+
+\setcounter{Exercise}{25}
+\begin{Exercise}
+    Verify the following claims.
+    \begin{enumerate}
+        \item In $\catname{Set}$, products are the usual cartesian products.
+        \item In $\catname{Pos}$, products are cartesian products with the
+        pointwise order.
+        \item In $\catname{Top}$, products are cartesian products with the
+        product topology.
+        \item In $\catname{Vect}_k$, products are direct sums.
+        \item In a poset, seen as a category, products are \emph{greatest lower
+        bounds}.
+    \end{enumerate}
+\end{Exercise}
+\begin{solution}
+    \leavevmode
+    \begin{enumerate}
+        \item Let $A, B$ be arbitrary sets in $\catname{Set}$. We claim
+        $A \times B$ equipped with the canonical projection functions is the
+        cross product of $A$ and $B$. Indeed, given any $A \xleftarrow{f} C
+        \xrightarrow{g} B$, we show $\langle f, g \rangle : C \to A \times B$,
+        defined by
+        \begin{center}
+            $c \mapsto (f(c), g(c))$,
+        \end{center}
+        is the unique function that makes the following diagram commute:
+        \[
+        \begin{tikzcd}
+            & C \arrow[ddl, swap, "f"]
+                \arrow[dd, dashrightarrow, "{\langle f, g \rangle}" description]
+                \arrow[ddr, "g"] & \\
+            & & \\
+            A & A \times B \arrow[l, swap, "\pi_1"] \arrow[r, "\pi_2"] & B
+        \end{tikzcd}
+        \]
+        (\emph{Existence}) It is easy to check that $\langle f, g \rangle$ is
+        indeed a function from $C$ to $A \times B$.\\
+        (\emph{Commutativity}) For all $c \in C$, $(\pi_1 \circ \langle f, g
+        \rangle)(c) = f(c)$ and $(\pi_2 \circ   \langle f, g \rangle)(c) = g(c)$,
+        which imply the above diagram commutes.\\
+        (\emph{Uniqueness}) Suppose $h: C \to A \times B$ such that $\pi_1 \circ
+        h = f$ and $\pi_2 \circ h = g$. Then, for all $c \in C$, $(\pi_1 \circ
+        h)(c) = f(c)$ and $(\pi_2 \circ h)(c) = g(c)$, which imply $\pi_1(h(c)) =
+        f(c)$ and $\pi_2(h(c)) = g(c)$, which imply $h(c) = (f(c), g(c)) =
+        \langle f, g \rangle (c)$, thus proving $h = \langle f, g \rangle$, and
+        thereby, showing the uniqueness of $\langle f, g \rangle$.\\
+        Hence, $A \xleftarrow{\pi_1} A \times B \xrightarrow{\pi_2} B$ is the
+        cross product of $A$ and $B$.
+        \item Let $(P, \le)$ and $(Q, \le)$ be posets. Let $(P \times Q, \le)$ be
+        the cartesian product of $P$ and $Q$ with the pointwise order. That is,
+        for all $a, c \in P$ and $b, d \in Q$, $(a, b) \le (c, d)$ iff $a \le c$
+        and $b \le d$. We claim $(P \times Q, \le)$ equipped with the canonical
+        projection functions (which are monotone) is the cross product of $(P,
+        \le)$ and $(Q, \le)$. Given any $(P, \le) \xleftarrow{f} (R, \le)
+        \xrightarrow{g} (Q, \le)$, where $f, g$ are monotone functions, the
+        function $\langle f, g \rangle : (R, \le) \to (P \times Q, \le)$, defined
+        by
+        \begin{center}
+            $r \mapsto (f(r), g(r))$
+        \end{center}
+        is the unique monotone function that makes the following diagram commute:
+        \[
+        \begin{tikzcd}
+            & (R, \le) \arrow[ddl, swap, "f"]
+                \arrow[dd, dashrightarrow, "{\langle f, g \rangle}" description]
+                \arrow[ddr, "g"] & \\
+            & & \\
+            (P, \le) & (P \times Q, \le) \arrow[l, swap, "\pi_1"]
+            \arrow[r, "\pi_2"] & (Q, \le)
+        \end{tikzcd}
+        \]
+        (\emph{Existence}) It is easy to check that $\langle f, g \rangle$ is
+        indeed a set function from $R$ to $P \times Q$. And, for all $r_1, r_2
+        \in R$, if $r_1 \le r_2$, then $f(r_1) \le f(r_2)$ and $g(r_1) \le
+        g(r_2)$ (since $f, g$ are monotone), which implies $(f(r_1), g(r_1)) \le
+        (f(r_2), g(r_2))$, which implies $\langle f, g \rangle (r_1) \le
+        \langle f, g \rangle (r_2)$, which implies $\langle f, g \rangle$ is
+        monotone.\\
+        (\emph{Commutativity}) For all $r \in R$, we have
+        \begin{center}
+            $(\pi_1 \circ \langle f, g \rangle)(r) = f(r)$,\\
+            $(\pi_2 \circ \langle f, g \rangle)(r) = g(r).$
+        \end{center}
+        The above implies that the above diagram does commute.\\
+        (\emph{Uniqueness}) Suppose $h: (R, \le) \to (P \times Q, \le)$ is a
+        monotone function such that $\pi_1 \circ h = f$ and $\pi_2 \circ h = g$.
+        Then, for all $r \in R$, $\pi_1 \circ h (r)= f(r)$ and $\pi_2 \circ h
+        (r)= g(r)$, which imply $\pi_1(h(r)) = f(r)$ and $\pi_2(h(r)) = g(r)$,
+        which imply $h(r) = (f(r), g(r))$, which implies $h(r) = \langle f, g
+        \rangle (r)$, which implies $h = \langle f, g \rangle$, thus showing
+        that $\langle f, g \rangle$ with the commutativity property is indeed
+        unique.\\
+        Hence, we conclude the cartesian product $(P \times Q, \le)$ with the
+        pointwise order is the product of any posets $(P, \le)$ and $(Q, \le)$.
+        \item % TODO
+        \item % TODO
+        \item In a poset $(P, \le)$, seen as a category, the product $a \times b$
+        of two elements $a, b \in P$ is an element in $P$ satisfying $a \times b
+        \le a$ and $a \times b \le b$, such that for all elements $c \in P$, if
+        $c \le a$ and $c \le b$, then $c \le a \times b$. This is precisely the
+        definition of the \emph{greatest lower bound} of any two elements $a, b
+        \in P$, seen as a set. Therefore, products are greatest lower bounds in
+        posets.
+    \end{enumerate}
+\end{solution}
+
+The following proposition shows that the uniqueness of the pairing arrow can be
+specified purely equationally by the equation:
+\begin{center}
+    $\forall h: C \to A \times B.\, h = \langle \pi_1 \circ h, \pi_2 \circ h
+    \rangle$
+\end{center}
+
+\setcounter{prop}{26}
+\begin{prop}
+    For any triple $A \xleftarrow{\pi_1} A \times B \xrightarrow{\pi_2} B$, the
+    following statements are equivalent:
+    \begin{itemize}
+        \item[(I)] For any triple $A \xleftarrow{f} C \xrightarrow{g} B$, there
+        exists a unique morphism $\langle f, g \rangle : C \to A \times B$ such
+        that $\pi_1 \circ \langle f, g \rangle = f$ and $\pi_2 \circ \langle f,
+        g \rangle = g$.
+        \item[(II)] For any triple $A \xleftarrow{f} C \xrightarrow{g} B$, there
+        exists a morphism $\langle f, g \rangle : C \to A \times B$ such that
+        $\pi_1 \circ \langle f, g \rangle = f$ and $\pi_2 \circ \langle f, g
+        \rangle = g$, and moreover, for any $h: C \to A \times B$,  $h =
+        \langle \pi_1 \circ h, \pi_2 \circ h \rangle$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    ((I) $\implies$ (II)) Suppose (I) holds. Assume $A \xleftarrow{f} C
+    \xrightarrow{g} B$. Then, by (I), there exists a (unique) morphism $\langle
+    f, g \rangle : C \to A \times B$ such that $\pi_1 \circ \langle f, g \rangle
+    = f$ and $\pi_2 \circ \langle f, g \rangle = g$. Now, let $h: C \to A
+    \times B$. Note $A \xleftarrow{\pi_1 \circ h} C \xrightarrow{\pi_2 \circ h}
+    B$. Thus, by (I), there exists a unique morphism $\langle \pi_1 \circ h,
+    \pi_2 \circ h \rangle : C \to A \times B$ such that
+    \begin{center}
+        $\pi_1 \circ \langle \pi_1 \circ h, \pi_2 \circ h \rangle =
+        \pi_1 \circ h$,\\
+        $\pi_2 \circ \langle \pi_1 \circ h, \pi_2 \circ h \rangle =
+        \pi_2 \circ h$.
+    \end{center}
+    The above implies $h = \langle \pi_1 \circ h, \pi_2 \circ h \rangle$. This
+    proves (II).
+
+    ((II) $\implies$ (I)) Suppose (II) holds. Assume $A \xleftarrow{f} C
+    \xrightarrow{g} B$. Then, by (II), there exists a morphism $\langle f, g
+    \rangle : C \to A \times B$ such that $\pi_1 \circ \langle f, g \rangle =
+    f$ and $\pi_2 \circ \langle f, g \rangle = g$. We claim such a morphism is
+    unique. So, suppose $h: C \to A \times B$ such that $\pi_1 \circ h = f$ and
+    $\pi_2 \circ h = g$. Then, by (II), we have $h = \langle \pi_1 \circ h,
+    \pi_2 \circ h \rangle$, which implies $h = \langle f, g \rangle$. This
+    proves (I), and our proof is complete.
+\end{proof}
+
+\textbf{Cartesian product of morphisms.} Given $f_1 : A_1 \to B_1$ and $f_2 :
+A_2 \to B_2$, we define the \emph{cartesian product of morphisms} $f_1$ and
+$f_2$ by
+\begin{center}
+    $f_1 \times f_2 := \langle f_1 \circ \pi_1, f_2 \circ \pi_2 \rangle :
+    A_1 \times A_2 \to B_1 \times B_2$.
+\end{center}
+
+The following proposition provides some useful properties of products.
+
+\begin{prop}
+    For any $f: A \to B$, $g: A \to C$, $h: A' \to A$, and any $p: B \to B'$,
+    $q: C \to C'$, the following hold:
+    \begin{enumerate}
+        \item $\langle f, g \rangle \circ h = \langle f \circ h, g \circ h
+        \rangle$
+        \item $(p \times q) \circ \langle f, g \rangle = \langle p \circ f,
+        q \circ g \rangle$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+\leavevmode
+    \begin{enumerate}
+        \item Note $\langle f, h \rangle \circ h : A' \to B \times C$.
+        Therefore, by (II) of Proposition 27, $\langle f, h \rangle \circ h =
+        \langle \pi_1 \circ (\langle f, g \rangle \circ h), \pi_2 \circ
+        (\langle f, g \rangle \circ h) \rangle = \langle f \circ h, f \circ g
+        \rangle$.
+        \item $(p \times q) \circ \langle f, g \rangle = \langle p \circ \pi_1,
+        q \circ \pi_2 \rangle \circ \langle f, g \rangle = \langle p \circ
+        \pi_1 \circ \langle f, g \rangle, q \circ \pi_2 \circ \langle f, g
+        \rangle = \langle p \circ f, q \circ g \rangle$.
+    \end{enumerate}
+\end{proof}
+
+\textbf{General Products.} The notion of products can be generalized to
+arbitrary arities as follows. In a category $\catname{C}$, a product for a
+family of objects  $\{ A_i \}_{i \in I}$ is an object $P$ and morphisms
+\begin{center}
+    $p_i: P \to A_i$ ($i \in I$)
+\end{center}
+such that, for all objects $B$ and arrows
+\begin{center}
+    $f_i: B \to A_i$ ($i \in I$)
+\end{center}
+there is a \emph{unique} arrow $g: B \to P$ such that, for all $i \in I$, the
+following diagram commutes
+\[
+\begin{tikzcd}
+    B \arrow[rr, dashrightarrow, "g"] \arrow[ddr, swap, "f_i"]
+      & & P \arrow[ddl, "p_i"] \\
+    & & \\
+    & A_i &
+\end{tikzcd}
+\]
+Again, if such a product exists, it is unique up to (unique) isomorphism. We
+write $P = \prod_{i \in I} A_i$ for the product object, and $g = \langle f_i
+\mid i \in I \rangle$ for the unique morphism in the definition.
+
+\setcounter{Exercise}{28}
+\begin{Exercise}
+    What is the product of the empty family?
+\end{Exercise}
+\begin{solution}
+    The product of the empty family is an object $T$, such that for every object
+    with arrows to (non-existent) members of the empty family, there is a
+    unique arrow from that object to $T$ making the corresponding diagram
+    commute. Since there are no diagrams, this means there is a unique arrow
+    from every object to $T$, and this is precisely the definition of a
+    terminal object. Hence, the product of an empty family is a terminal object.
+\end{solution}
+
+\begin{Exercise}
+    Show that if a category has binary and nullary products, then it has all
+    finite products.
+\end{Exercise}
+\begin{solution}
+    Suppose $\catname{C}$ is a category with binary and nullary products. We
+    claim, for all $n \in \N$, $P_n = \prod_{i=1}^{n} A_i$ with the
+    corresponding projection functions $p_i: P \to A_i$, where $A_i$ is an
+    object in $\catname{C}$, exists. We use induction on $n$ to prove our
+    claim. (\emph{Base case}) For $n = 0$, $P$ is the nullary product, which
+    exists by assumption. (\emph{Inductive case}) Now, suppose a product
+    $P_n$ exists for some $n \ge 0$. Then, $P_{n+1} = \prod_{i=1}^{n+1} A_i =
+    \prod_{i=1}^{n} A_i \times A_{n+1} = P_n \times A_{i+1}$, which is a binary
+    product of objects, which exists due to the fact that $\catname{C}$ has
+    binary products and that $P_n$ exists (from our inductive hypothesis.)
+    Hence, by induction, $P_n$ exists for all $n \in \N$.
+\end{solution}
+~\\
+\emph{\textbf{Coproducts}}. The dual notion to products are coproducts.
+Formally, coproducts in a category $\catname{C}$ are just products in
+$\catname{C}^{\mathbf{op}}$, interpreted back in $\catname{C}$.
+
+Let $A, B$ be objects in a category $\catname{C}$. A \emph{coproduct} of $A$
+and $B$ is an object $A + B$ together with a pair of arrows $A \xrightarrow{i_A}
+A + B \xleftarrow{i_B} B$, such that for every triple $A \xrightarrow{f} C
+\xleftarrow{g} B$, there exists a unique morphism
+\begin{center}
+    $[f, g]: A + B \to C$
+\end{center}
+such that the following diagram commutes.
+\[
+\begin{tikzcd}
+    A \arrow[r, "i_A"] \arrow[ddr, swap, "f"] &
+        A + B \arrow[dd, dashed, "{[f, g]}" description] &
+        B \arrow[l, swap, "i_B"] \arrow[ddl, "g"] \\
+    & & \\
+    & C &
+\end{tikzcd}
+\]
+We call $i_A$ and $i_B$ \emph{injections} and $[f, g]$ the \emph{copairing} of
+$f$ and $g$. As with pairings, the uniqueness of copairings can be specified
+by an equation:
+\begin{center}
+    $\forall h: A + B \to C.\, h = [h \circ i_A, h \circ i_B]$
+\end{center}
+
+\setcounter{Exercise}{31}
+\begin{Exercise}
+    A coproduct in $\catname{Set}$ is given by \emph{disjoint union} of sets,
+    which can be defined concretely, \emph{e.g.} by
+    \begin{center}
+        $X + Y := (\{ 1 \} \times X) \bigcup (\{ 2 \} \times Y)$
+    \end{center}
+    We can define \emph{injections}
+    \begin{center}
+        $X \xrightarrow{i_X} X + Y \xleftarrow{i_Y} Y$\\
+        $i_X(x) := (1, x), \q i_Y(y) := (2, y)$.
+    \end{center}
+    Also, given functions $f: X \to Z$ and $g: Y \to Z$, we can define
+    \begin{center}
+        $[f, g]: X + Y \to Z$\\
+        $[f, g](1, x) := f(x), \q [f, g](2, y) := g(y)$.
+    \end{center}
+    Check that the above construction does yield coproducts in $\catname{Set}$.
+\end{Exercise}
+\begin{solution}
+    For all $x \in X$, $([f, g] \circ i_X)(x) = [f, g](i_X(x)) = [f, g](1, x) =
+    f(x)$, and, for all $y \in Y$, $([f, g] \circ i_Y)(y) = [f, g](i_Y(y)) =
+    [f, g](2, y) = g(y)$. Therefore, $[f, g] \circ i_X = f$ and $[f, g] \circ
+    i_Y = g$, proving that the corresponding diagram is indeed commutative. Let
+    $h: X + Y \to Z$ be such that $h \circ i_X = f$ and $h \circ i_Y = g$. Then,
+    for all $x \in X$ and $y \in Y$, $(h \circ i_X)(x) = f(x)$ and $(h \circ
+    i_Y)(y) = g(y)$, which imply $h(1, x) = [f, g](1, x)$ and $h(2, g) = [f, g]
+    (2, y)$, which imply $h = [f, g]$, thus showing $[f, g]$ is indeed unique.
+    This shows $X \xrightarrow{i_X} X + Y \xleftarrow{i_Y} Y$ as defined is a
+    coproduct of $X$ and $Y$, for any two objects $X, Y$ in $\catname{C}$.
+\end{solution}
+
+\begin{Exercise}
+    Verify the following claims:
+    \begin{enumerate}
+        \item In $\catname{Pos}$, disjoint unions (with the inherited orders)
+        are coproducts.
+        \item In $\catname{Top}$, topological disjoint unions are coproducts.
+        \item In $\catname{Vect}_k$, direct sums are coproducts.
+        \item In a poset, \emph{least upper bounds} are coproducts.
+    \end{enumerate}
+\end{Exercise}
+\begin{solution}
+\leavevmode
+    \begin{enumerate}
+        \item % TODO
+        \item % TODO
+        \item % TODO
+        \item In a poset $(P, \le)$, for any two elements $p, q \in P$, the
+        coproduct $p \times q$ is an element satisfying $p \le p \times q$ and
+        $q \le p \times q$, such that for any element $r \in P$, if $p \le r$
+        and $q \le r$ then $p \times q \le r$. Thus, $p \times q$ satisfies
+        precisely the definition of the least upper bound of $p$ and $q$. Hence,
+        least upper bounds in a poset are coproducts.
+    \end{enumerate}
+\end{solution}
+
+\begin{Exercise}
+    Dually to products, express coproducts as initial objects of a category
+    $\catname{Copair}(A, B)$ of $A, B$-copairings.
+\end{Exercise}
+\begin{solution}
+Let $A, B$ be objects in a category $\catname{C}$. An $A, B$-copairing is a
+triple $A \xrightarrow{p_1} P \xleftarrow{p_2} B$, where $P$ is an object in
+$\catname{C}$. A morphism of $A, B$-copairings $f: (P, p_1, p_2) \to
+(Q, q_1, q2)$ is a morphism $f: P \to Q$ in $\catname{C}$ such that the
+following diagram commutes
+\[
+\begin{tikzcd}
+    & Q & \\
+    & & \\
+    A \arrow[uur, "q_1"]
+      \arrow[r, swap, "p_1"] &
+    P \arrow[uu, swap, "f"] &
+    B \arrow[uul, swap, "q_2"]
+      \arrow[l, "p_2"]
+\end{tikzcd}
+\]
+Then, it is easy to check that $\catname{Copair}(A, B)$ is a category of
+$A, B$-copairings.
+
+We say $(A + B, i_A, i_B)$ is a \textbf{coproduct} of $A$ and $B$ if it is
+\emph{initial} in $\catname{Copair}(A, B)$.
+\end{solution}
+
+\subsection*{Pullbacks and Equalisers}
+We consider two further constructions of interest: \emph{pullbacks} and
+\emph{equalisers}.\\
+
+\textbf{Pullbacks}. Consider a pair of morphisms $A \xrightarrow{f} C
+\xleftarrow{g} B$. The \emph{\textbf{pullback}} of $f$ along $g$ is a pair
+$A \xleftarrow{p} D \xrightarrow{q} B$ such that $f \circ p = g \circ q$, and,
+for any pair $A \xleftarrow{p'} D' \xrightarrow{q'} B$ such that $f \circ p' =
+g \circ q'$, there exists a unique $h: D' \to D$ such that the following
+diagram commutes.
+\[
+\begin{tikzcd}
+    D' \arrow[drr, bend left, "q'"]
+       \arrow[ddr, bend right, "p'"]
+       \arrow[dr, dashed, "h"] & & \\
+    & D \arrow[r, "q"]
+        \arrow[d, swap, "p"]
+    & B \arrow[d, "g"] \\
+    & A \arrow[r, swap, "f"] & C
+\end{tikzcd}
+\]
+
+\emph{\textbf{Examples of pullbacks}}:
+\begin{itemize}
+    \item In $\catname{Set}$, the pullback of $A \xrightarrow{f} C
+    \xleftarrow{g} B$ is defined as a \emph{subset of the cartesian product}:
+    \begin{center}
+        $A \times_C B = \{ (a, b) \in A \times B \mid f(a) = g(b) \}$.
+    \end{center}
+    For example, consider a category $\catname{C}$ with
+    \begin{center}
+        $\text{Ar}(\catname{C}) \xrightarrow{\text{dom}} \text{Ob}(\catname{C})
+        \xleftarrow{\text{cod}} \text{Ar}(\catname{C})$.
+    \end{center}
+    Then, the pullback of \textbf{dom} along \textbf{cod} is the set of
+    \emph{composable morphisms, i.e.} pairs of morphisms $(f, g)$ in
+    $\catname{C}$ such that $f \circ g$ is well-defined.
+    \item In $\catname{Set}$ again, subsets (\emph{i.e.} inclusion maps) pull
+    back to subsets:
+    \[
+    \begin{tikzcd}
+        f^{-1}(U)
+            \arrow[r]
+            \arrow[dd, hook] &
+        U
+            \arrow[dd, hook] \\
+          & \\
+        X
+            \arrow[r, swap, "f"] &
+        Y
+    \end{tikzcd}
+    \]
+\end{itemize}
+
+\setcounter{Exercise}{36}
+\begin{Exercise}
+    Let $\catname{C}$ be a category with a terminal object $\1$. Show that, for
+    any $A, B \in \mathbf{Ob}(\catname{C})$, the pullback of $A
+    \xrightarrow{\tau_A} \1 \xleftarrow{\tau_B} B$ is the product of $A$ and $B$,
+    if it exists.
+\end{Exercise}
+\begin{solution}
+    Suppose $\catname{C}$ is a category with a terminal object $\1$. Assume, for
+    any $A, B \in \mathbf{Ob}(\catname{C})$, their product $A \xleftarrow{\pi_1}
+    A \times B \xrightarrow{\pi_2} B$ exists. We show that this product is the
+    pullback of $A \xrightarrow{\tau_A} \1 \xleftarrow{\tau_B} B$. First, note
+    $\tau_A \circ \pi_1 : A \times B \to \1$ and $\tau_B \circ \pi_w : A \times
+    B \to \1$, but since $\1$ is terminal, we have $\tau_A \circ \pi_1 = \tau_B
+    \circ \pi_2$. That is, the following diagram commutes.
+    \[
+    \begin{tikzcd}
+        A \times B
+        \arrow[r, "\pi_2"]
+        \arrow[d, swap, "\pi_1"] &
+        B
+        \arrow[d, "\tau_B"] \\
+        A
+        \arrow[r, swap, "\tau_A"] &
+        \1
+    \end{tikzcd}
+    \]
+    Now, for any pair $A \xleftarrow{f} C \xrightarrow{g} B$, we again have
+    $\tau_A \circ f = \tau_B \circ g$, since $\1$ is terminal. Also, there
+    exists a unique morphism $\langle f, g \rangle : C \to A \times B$ such
+    that $\pi_1 \circ \langle f, g \rangle = f$ and  $\pi_2 \circ \langle f, g
+    \rangle = g$, which implies the following diagram commutes.
+    \[
+    \begin{tikzcd}
+        C
+        \arrow[ddr, swap, bend right, "f"]
+        \arrow[drr, bend left, "g"]
+        \arrow[dr, dashed, "{\langle f, g \rangle}" description] & & \\
+        & A \times B
+        \arrow[r, "\pi_2"]
+        \arrow[d, swap, "\pi_1"] &
+        B
+        \arrow[d, "\tau_B"] \\
+        & A
+        \arrow[r, swap, "\tau_A"] &
+        \1
+    \end{tikzcd}
+    \]
+    And, this completes our proof.
+\end{solution}
+
+Just as for products, pullbacks can equivalently be described as terminal
+objects in suitable categories. Given a pair of morphisms $A \xrightarrow{f} C
+\xleftarrow{g} B$, we define an $(f, g)$-\emph{cone} to be a triple $(D, p, q)$
+such that the following diagram commutes.
+\[
+\begin{tikzcd}
+    D
+    \arrow[r, "q"]
+    \arrow[d, swap, "p"]
+    &
+    B
+    \arrow[d, "g"] \\
+    A
+    \arrow[r, swap, "f"]
+    &
+    C
+\end{tikzcd}
+\]
+A morphism of $(f, g)$-cones $h: (D_1, p_1, q_1) \to (D_2, p_2, q_2)$ is a
+morphism $h: D_1 \to D_2$ such that the following diagram commutes.
+\[
+\begin{tikzcd}
+    &
+    D_1
+    \arrow[dl, swap, "p_1"]
+    \arrow[d, "h"]
+    \arrow[dr, "q_1"]
+    & \\
+    A
+    &
+    D_2
+    \arrow[l, "p_2"]
+    \arrow[r, "q_2"]
+    &
+    B
+\end{tikzcd}
+\]
+We can thus form a category $\catname{Cone}(f, g)$. A pullback of $f$ along $g$,
+if it exists, is exactly a terminal object in $\catname{Cone}(f, g)$. This also
+shows the uniqueness of pullbacks up to unique isomorphism.
+~\\
+
+\textbf{Equalisers.} Consider a pair of parallel arrows
+\begin{tikzcd}
+    A \arrow[r, shift left, "f"]
+      \arrow[r, swap, shift right, "g"]
+      & B
+\end{tikzcd}.
+An \emph{\textbf{equaliser}} of $(f, g)$ is an arrow $e: E \to A$ such that
+$f \circ e = g \circ e$, and for any arrow $h: D \to A$ such that $f \circ h =
+g \circ h$, there is a unique arrow $\hat{h}: D \to E$ so that $h = e \circ
+\hat{h}$. That is, the following diagram commutes.
+\[
+\begin{tikzcd}
+    E \arrow[r, "e"]
+      & A \arrow[r, shift left, "f"]
+          \arrow[r, swap, shift right, "g"]
+          & B \\
+    D \arrow[u, dashed, "\hat{h}"]
+      \arrow[ur, swap, "h"]
+\end{tikzcd}
+\]
+
+As for products, the uniqueness of the arrow from $D$ to $E$ can be expressed
+equationally:
+\begin{center}
+    $\forall k : D \to E. \,\, \widehat{e \circ k} = k$.
+\end{center}
+
+\setcounter{Exercise}{38}
+\begin{Exercise}
+Why is $\widehat{e \circ k}$ well-defined for any $k: D \to E$? Prove that
+the above equation is equivalent to the uniqueness requirement.
+\end{Exercise}
+\begin{solution}
+~\\
+(Uniqueness requirement $\implies$ equation) Suppose the uniqueness requirement
+is satisfied. Assume $k: D \to E$. Then, $e \circ k : D \to A$. Therefore, there
+exists a unique $l : D \to E$ such that $e \circ l = e \circ k$. Now, note $l =
+k$ and $l = \widehat{e \circ k}$ (the latter from the satisfaction of the
+uniqueness requirement) both satisfy the previous equation, which implies $k =
+\widehat{e \circ k}$.\\
+(Equation $\implies$ uniqueness requirement) Suppose $\forall k : D \to E,
+\widehat{e \circ k} = k$. Let $h : D \to A$ such that $f \circ h = g \circ h$,
+and assume $\hat{h} : D \to E$ such that $e \circ \hat{h} = h$. We show such an
+arrow $\hat{h}$ is unique. To that end, suppose $l : D \to E$ such that $e \circ
+l = h$. Then, $\hat{h} = \widehat{e \circ l} = l$, which is what we set out to
+proof, and we are done.
+\end{solution}
+
+\emph{\textbf{Example of equaliser}}: In $\catname{Set}$, the equaliser of $f,
+g$ is given by the inclusion
+\begin{center}
+    $\{ x \in A \mid f(x) = g(x) \} \hookrightarrow A$.
+\end{center}
+This allows \emph{equationally defined subsets} to be defined as equalisers.
+For example, consider the pairs of maps
+\begin{tikzcd}
+    \R^2 \arrow[r, shift left, "f"]
+         \arrow[r, shift right, swap, "g"]
+         & \R,
+\end{tikzcd}
+where
+\begin{center}
+    $f : (x, y) \mapsto x^2 + y^2, \qq g : (x, y) \mapsto 1$.
+\end{center}
+Then, the equaliser is the unit circle as a subset of $\R^2$.\\
+
+\subsection*{Limits and Colimits}
+The notions introduced so far are all special cases of a general notion of
+\emph{limits} in categories, as well as the dual notion of \emph{colimits}.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | l |}
+    \hline
+    \textbf{Limits} & \textbf{Colimits} \\
+    \hline \hline
+    Terminal Objects & Initial Objects \\
+    Products & Coproducts \\
+    Pullbacks & Pushouts \\
+    Equalisers & Coequalisers \\
+    \hline
+\end{tabular}
+\caption{Examples of Limits and Colimits}
+\label{table: 1}
+\end{table}
+An import aspect of studying any kind of mathematical structure is to
+determine what limits and colimits the category of such structures has.
+
+\subsection*{Exercises}
+\leavevmode
+\begin{enumerate}
+    \item Give an example of a category where some pair of objects lacks a
+    product or coproduct.
+
+    \item (\emph{Pullback lemma}) Consider the following commutative diagram.
+    \[
+    \begin{tikzcd}
+        A \arrow[r, "f"]
+          \arrow[d, swap, "u"]
+          & B \arrow[r, "g"]
+              \arrow[d, "v"]
+          & C \arrow[d, "w"] \\
+        D \arrow[r, swap, "h"]
+          & E \arrow[r, swap, "i"]
+          & F
+    \end{tikzcd}
+    \]
+    Given that the right hand square $BCEF$ and the outer square $ACDF$ are
+    pullbacks, prove that the left hand square $ABDE$ is a pullback.
+
+    \item Consider $A \xrightarrow{f} C \xleftarrow{g} B$ with pullback
+    $A \xleftarrow{p} D \xrightarrow{q} B$. For each $A \xleftarrow{p'} D'
+    \xrightarrow{q'} B$ with $f \circ p' = g \circ q'$, let $\phi(p', q'): D'
+    \to D$ be the arrow dictated by the pullback condition. Express uniqueness
+    of $\phi(p', q')$ equationally.
+\end{enumerate}
+\begin{solution}
+\leavevmode
+\begin{enumerate}
+    \item In a discrete category with the naturals as objects, say, any pair
+    of natural numbers (objects) lacks either a product or a coproduct.
+
+    \item Suppose the following diagram is commutative.
+    \[
+    \begin{tikzcd}
+    A \arrow[r, "f"]
+      \arrow[d, swap, "u"]
+      & B \arrow[r, "g"]
+          \arrow[d, "v"]
+      & C \arrow[d, "w"] \\
+    D \arrow[r, swap, "h"]
+      & E \arrow[r, swap, "i"]
+      & F
+    \end{tikzcd}
+    \]
+    And, suppose the right hand square $BCEF$ and the outer square $ACDF$ are
+    pullbacks. We claim the left hand square $ABDE$ is a pullback. To that end,
+    let $D \xleftarrow{k} A' \xrightarrow{l} B$ such that $v \circ l = h \circ
+    k \, (\ast)$. Note $D \xleftarrow{k} A' \xrightarrow{g \circ l} C$ and that
+    $(i \circ h) \circ k = i \circ (v \circ l) = (w \circ g) \circ l = w \circ
+    (g \circ l)$. And, since $ACDF$ is a pullback, there exists a unique
+    morphism $p : A' \to A$ making the following diagram commute.
+    \[
+    \begin{tikzcd}
+        A' \arrow[ddr, swap, bend right, "k"]
+           \arrow[drrr, bend left, "g \circ l"]
+           \arrow[dr, dashed, "p"]
+           & & & \\
+        & A \arrow[r, "f"]
+            \arrow[d, swap, "u"]
+        & B \arrow[r, "g"]
+            \arrow[d, "v"]
+        & C \arrow[d, "w"] \\
+        & D \arrow[r, swap, "h"]
+        & E \arrow[r, swap, "i"]
+        & F
+    \end{tikzcd}
+    \]
+    Now, we need only show $f \circ p = l$.\\
+    Note $E \xleftarrow{h \circ k} A' \xrightarrow{g \circ l} C$, and $i \circ
+    (h \circ k) = (i \circ h) \circ k = (i \circ h) \circ (u \circ p) = (i
+    \circ h \circ u) \circ p = (w \circ g \circ f) \circ p = w \circ (g \circ
+    f \circ p) = w \circ (g \circ l)$. Since $BCEF$ is a pullback, there exists
+    a unique morphism $q : A' \to B$ such that
+    \begin{align*}
+        g \circ q &= g \circ l \\
+        v \circ q &= h \circ k
+    \end{align*}
+    Using $(\ast)$ and the commutativity of the above diagram, we see $q = l$
+    and $q = f \circ p$ both satisfy the above set of equations, which implies
+    $f \circ p = l$. Let $p' : A' \to A$ where $f \circ p' = l$ and $u \circ p'
+    = k$. Then, this implies the following diagram commutes.
+    \[
+    \begin{tikzcd}
+        A' \arrow[ddr, swap, bend right, "k"]
+        \arrow[drrr, bend left, "g \circ l"]
+        \arrow[dr, "p'"]
+        & & & \\
+        & A \arrow[r, "f"]
+        \arrow[d, swap, "u"]
+        & B \arrow[r, "g"]
+        \arrow[d, "v"]
+        & C \arrow[d, "w"] \\
+        & D \arrow[r, swap, "h"]
+        & E \arrow[r, swap, "i"]
+        & F
+    \end{tikzcd}
+    \]
+    Since $ACDF$ is a pullback, it implies $p' = p$, from which we conclude
+    $ABDE$ is indeed a pullback.
+
+    \item The uniqueness of $\phi(p', q')$ can be stated equationally as
+    follows:
+    \begin{center}
+        $\forall h: D' \to D. \,\, h = \phi(p \circ h, p \circ h)$.
+    \end{center}
+\end{enumerate}
+\end{solution}
+
+\section{Functors}
+Part of the ``categorical philosophy" is:
+\begin{center}
+    \emph{Don't just look at the objects; take the morphisms into account too}.
+\end{center}
+
+\subsection*{Basics}
+A ``morphism of categories" is a \emph{functor}.\\
+
+A \emph{\textbf{functor}} $F: \catname{C} \to \catname{D}$ is given by:
+\begin{itemize}
+    \item An object-map, assigning an object $FA$ of $\catname{D}$ to every
+    object $A$ of $\catname{C}$.
+    \item An arrow-map, assigning an arrow $Ff : FA \to FB$ of $\catname{D}$ to
+    every arrow $f: A \to B$ in such a way that composition and identities are
+    preserved:
+    \begin{center}
+        $F(g \circ f) = F(g) \circ F(f), \qq F1_A = 1_{FA}$.
+    \end{center}
+\end{itemize}
+
+We use the same symbol to denote object- and arrow-maps; in practice, this
+never causes confusion. Since functors preserve domains and codomains of arrows,
+for each pair of objects $A, B$ of $\catname{C}$, there is a well-defined map
+\begin{center}
+    $F_{A, B} : \catname{C}(A, B) \to \catname{D}(FA, FB)$.
+\end{center}
+
+The conditions expressing preservation of composition and identities are called
+\emph{functoriality}.\\
+
+\textbf{Examples of functors.}
+\begin{enumerate}
+    \item Let $(P, \le)$ and $(Q, \le)$ be preorders (seen as categories.) A
+    functor $F: (P, \le) \to (Q, \le)$ is specified by an object-map, $F: P \to
+    Q$, say, and an appropriate arrow-map. The arrow-map corresponds to the
+    condition:
+    \begin{center}
+        $\forall p_1, p_2 \in P. \,\, p_1 \le p_2 \implies F(p_1) \le F(p_2)$,
+    \end{center}
+    \emph{i.e.} to monotonicity of $F$. Moreover, the functoriality conditions
+    are trivial, since in the codomain $(Q, \le)$, all homsets are singletons.\\
+    Hence, a functor between preorders is just a monotone map.
+
+    \item Let $(M, \cdot, 1)$ and $(N, \cdot, 1)$ be monoids. A functor $F:
+    (M, \cdot, 1) \to (N, \cdot, 1)$ is specified by a trivial object-map (since
+    monoids are categories with a single object) and an arrow-map, $F: M \to N$,
+    say. The functoriality conditions correspond to
+    \begin{center}
+        $\forall m_1, m_2 \in M. \,\, F(m_1 \cdot m_2) = F(m_1) \cdot F(m_2),
+        \qq F(1) = 1$,
+    \end{center}
+    \emph{i.e.} to $F$ being a monoid homomorphism.\\
+    Hence, a functor between monoids is just a monoid homomorphism.
+\end{enumerate}
+
+\textbf{Other examples of functors.}
+\begin{itemize}
+    \item Inclusion of a subcategory, $\catname{C} \hookrightarrow \catname{D}$,
+    is a functor (by taking the identity map for object- and arrow-map.)
+
+    \item The \emph{covariant} powerset functor $\mc{P}: \catname{Set} \to
+    \catname{Set}$:
+    \begin{center}
+        $X \mapsto \mc{P}X, \q (f: X \to Y) \mapsto \mc{P}(f) :=
+        S \mapsto \{ f(x) \mid x \in S \}$.
+    \end{center}
+
+    \item $U: \catname{Mon} \to \catname{Set}$ is the `forgetful' or
+    `underlying' functor which sends a monoid to its set of elements,
+    `forgetting' the algebraic structure, and sends a homomorphism to the
+    corresponding function between sets. There are similar forgetful functors
+    for other categories of structured sets.
+
+    \item (\emph{Group theory examples}) The assignment of the commutator
+    sub-group of a group extends to a functor from $\catname{Grp}$ to
+    $\catname{Grp}$; and the assignment of the quotient by this normal
+    subgroup extends to a functor from $\catname{Grp}$ to $\catname{Ab}$ (the
+    category of abelian groups and group homomorphisms.)
+
+    \item (\emph{Homology}) The basic idea of algebraic topology is that there
+    are functorial assignments of algebraic objects (\emph{i.e.} groups) to
+    topological spaces, and variants of this idea (`(co)homology theories') are
+    pervasive throughout modern pure mathematics.
+\end{itemize}
+~\\
+
+\textbf{Functors `of several variables'}
+
+We can generalize the notion of a functor to a mapping from several domain
+categories to a codomain category. For this, we need the following definition.\\
+
+(\emph{\textbf{Product category}}) For categories $\catname{C}, \catname{D}$,
+define the \emph{\textbf{product category}} $\catname{C} \times \catname{D}$ as
+follows. An object in $\catname{C} \times \catname{D}$ is a pair of objects
+from $\catname{C}$ and $\catname{D}$, and an arrow in $\catname{C} \times
+\catname{D}$ is a pair of arrows from $\catname{C}$ and $\catname{D}$.
+Identities and arrow composition are defined componentwise:
+\begin{center}
+    $1_{(A, B)} := (1_A, 1_B), \qq (f, g) \circ (f', g') := (f \circ f',
+    g \circ g')$.
+\end{center}
+~\\
+A functor `of two variables', with domains $\catname{C}$ and $\catname{D}$, to
+$\catname{E}$ is simply a functor
+\begin{center}
+    $F: \catname{C} \times \catname{D} \to \catname{E}$.
+\end{center}
+~\\
+For example, there are evident projection functors
+\begin{center}
+    $\catname{C} \leftarrow \catname{C} \times \catname{D} \to \catname{D}$.
+\end{center}
+~\\
+
+\subsection*{Further Examples}
+Set-valued functors.
+
+Many important constructions arise as functors $F: \catname{C} \to
+\catname{Set}$. Here are some examples:
+\begin{itemize}
+    \item If $G$ is a group, a functor $F: G \to \catname{Set}$ is \emph{an
+    action of $G$ on a set}.
+
+    \item If $P$ is a poset representing time, a functor $F: P \to
+    \catname{Set}$ is a notion of \emph{set varying through time}. This is
+    related to \emph{Kripke semantics}, and to \emph{forcing arguments} in set
+    theory.
+
+    \item Recall $\mathbbm{2}_{\rightrightarrows}$ is the category
+    \begin{tikzcd}
+        \bullet \arrow[r, bend left]
+                 \arrow[r, bend right]
+                 & \bullet
+    \end{tikzcd}.
+    Then, functors $F: \mathbbm{2}_{\rightrightarrows} \to \catname{Set}$
+    correspond to \emph{directed graphs, i.e.} structures $(V, E, s, t)$, where
+    $V$ is a set of vertices, $E$ is a set of edges, and $s, t: E \to V$
+    specify the source and target vertices of each edge.
+\end{itemize}
+
+In the first example above, we note that for a group $(G, \cdot, 1)$, a functor
+$F: G \to \catname{Set}$ maps the unique object in the category corresponding
+to $G$ to a set $X$, and each element in $g \in G$ to an endofunction on $X$,
+$g \bullet \_ : X \to X$. Then, functoriality amounts to the
+conditions
+\begin{center}
+    $\forall g, h \in G. \,\, F(g \cdot h) = F(g) \circ F(h), \qq F(1) = 1_X$.
+\end{center}
+That is, for all $g, h \in G$ and all $x \in X$,
+\begin{center}
+    $(g \cdot h) \bullet x = g \bullet (h \bullet x), \qq 1 \bullet x = x$.
+\end{center}
+We therefore see $F$ defines a (\emph{left}) \emph{group action} of $G$ on $X$.
+
+\setcounter{Exercise}{44}
+\begin{Exercise}
+Verify that functors $F: \mathbbm{2}_{\rightrightarrows} \to \catname{Set}$
+correspond to directed graphs.
+\end{Exercise}
+\begin{solution}
+Let $\mathbbm{2}_{\rightrightarrows} := $
+\begin{tikzcd}
+    A \arrow[r, bend left, "f"]
+    \arrow[r, swap, bend right, "g"]
+    & B
+\end{tikzcd}
+Then, let any functor
+\begin{center}
+    $F: \mathbbm{2}_{\rightrightarrows} \to \catname{Set}$
+\end{center}
+map $A$ to $E$, the set of edges of a directed graph, and, $B$ to $V$, the set
+of vertices of the directed graph. Also, $F$ maps $f$ to the source function,
+and $g$ to the target function, where both the source and target functions
+have domain $E$ and codomain $V$. Then, it is easy to check $F$ is indeed
+functorial, and thus we conclude that each such $F$ corresponds to a directed
+graph, and we are done.
+\end{solution}
+
+\textbf{Example: Lists}\\
+Data-type constructors are functors. As a basic example, we consider lists.
+There is a functor
+\begin{center}
+    $\List : \catname{Set} \to \catname{Set}$
+\end{center}
+which takes a set $X$ to the set of all finite lists (sequences) of elements of
+$X$. $\List$ is functorial: its action on morphisms (\emph{i.e.} functional
+programs) is given by \emph{maplist}:\\
+\begin{center}
+    $\dps \frac{f: X \to Y}{\List(f): \List(X) \to \List(Y)}$\\~\\
+    $\List(f)[x_1, \ldots, x_n] := [f(x_1), \ldots, f(x_n)]$.
+\end{center}
+~\\
+We can upgrade $\List$ to a functor $\texttt{MList}: \catname{Set} \to
+\catname{Mon}$ by mapping each set $X$ to the monoid $(\List(X), \ast,
+\epsilon)$ and $f: X \to Y$ to $\List(f)$, as above. The monoid operation
+$\ast: \List(X) \times \List(X) \to \List(X)$ is list concatenation, and
+$\epsilon$ is the empty list. We call $\texttt{MList}(X)$ the
+\emph{\textbf{free monoid}} over $X$.\\
+
+\textbf{Products as functors}\\
+If a category $\catname{C}$ has binary products, then there is automatically a
+functor
+\begin{center}
+    $\_ \times \_ : \catname{C} \times \catname{C} \to \catname{C}$
+\end{center}
+which takes each pair $(A, B)$ to the product $A \times B$, and each $(f, g)$ to
+\begin{center}
+    $f \times g := \langle f \circ \pi_1, g \circ \pi_2 \rangle$.
+\end{center}
+Functoriality is demonstrated as follows
+\begin{align*}
+    (f \times g) \circ (f' \times g')
+    &= (f \times g) \circ \langle f' \circ \pi_1, g' \circ g' \rangle \\
+    &= \langle f \circ f' \circ \pi_1, g \circ g' \circ \pi_2 \rangle \\
+    &= (f \circ f') \times (g \circ g'), \\
+    1_A \times 1_B
+    &= \langle 1_A \circ \pi_1, 1_B \circ \pi_2 \rangle \\
+    &= \langle \pi_1 \circ 1_{A \times B}, \pi_2 \circ 1_{A \times B} \rangle \\
+    &= 1_{A \times B}.
+\end{align*}
+~\\
+
+\textbf{The category of categories}\\
+There is a category $\catname{Cat}$ whose objects are categories, and whose
+arrows are functors. Identities in $\catname{Cat}$ are given by identity
+functors:
+\begin{center}
+    $\text{Id}_{\mc{C}}: \mc{C} \to \mc{C} := A \mapsto A, \, f \mapsto f$.
+\end{center}
+
+Composition of functors is defined in the evident way. Note that if $F: \mc{C}
+\to \mc{D}$ and $G: \mc{D} \to \mc{E}$, then, for $f: A \to B$ in $\mc{C}$,
+\begin{center}
+    $G \circ F (f) := G(F(f)) : G(F(A)) \to G(F(B))$.
+\end{center}
+One usually makes some size restriction on the categories, so that\
+$\catname{Cat}$ does not contain itself.
+
+Note that product categories are products in $\catname{Cat}$. For any pair of
+categories $\mc{C}, \mc{D}$, set
+\begin{center}
+    $\mc{C} \xleftarrow{\pi_1} \mc{C} \times \mc{D} \xrightarrow{\pi_2} \mc{D}$
+\end{center}
+where $\mc{C} \times \mc{D}$ the product category (defined previously) and
+$\pi_i$'s the obvious projection functors. For any pair of functors $\mc{C}
+\xleftarrow{F} \mc{E} \xrightarrow{G} \mc{D}$, set
+\begin{center}
+    $\langle F, G \rangle : \mc{E} \to \mc{C} \times \mc{D} :=
+    A \mapsto (FA, GA), \q f \mapsto (Ff, Gf)$.
+\end{center}
+It is easy to check that $\langle F, G \rangle$ is indeed a functor. Moreover,
+satisfaction of the product diagram and uniqueness are shown exactly as in
+$\catname{Set}$.
+~\\
+
+\subsection*{Contravariance}
+By definition, the arrow-map of a functor $F$ is \emph{covariant}: it preserves
+the direction of arrows. That is, if $f: A \to B$, then $Ff: FA \to FB$. A
+\emph{contravariant} functor $G$ does exactly the opposite: it reverses the
+direction of arrows. That is, if $f: A \to B$, then $Gf: FB \to FA$. The
+following is a concise way to express contravariance.
+
+Let $\mc{C}, \mc{D}$ be categories. A \emph{\textbf{contravariant}} functor
+$G$ from $\mc{C}$ to $\mc{D}$ is a functor $G: \mc{C}^{\text{op}} \to \mc{D}$.
+(Equivalently, a functor $G: \mc{C} \to \mc{D}^{\text{op}}$.)
+
+More explicitly, a contravariant functor $G$ is given by an assignment of:
+\begin{itemize}
+    \item An object $GA$ in $\mc{D}$ to every object $A$ in $\mc{C}$.
+    \item An arrow $Gf: GB \to GA$ in $\mc{D}$ to every arrow $f: A \to B$ in
+    $\catname{C}$, such that
+    \begin{center}
+        $G(g \circ f) = G(f) \circ G(g), \qq G(1_A) = 1_{GA}$.
+    \end{center}
+\end{itemize}
+Note that functors of several variables can be covariant in some variables and
+contravariant in others, \emph{e.g.}
+\begin{center}
+    $F: \mc{C}^{\text{op}} \times \mc{D} \to \mc{E}$.
+\end{center}
+~\\
+
+\textbf{Examples of Contravariant Functors}
+\begin{itemize}
+    \item The contravariant powerset functor, $\mc{P}^{\text{op}}:
+    \catname{Set}^{\text{op}} \to \catname{Set}$, is given by:
+    \begin{center}
+        $\mc{P}^{\text{op}}(X) := \mc{P}(X)$,\\
+        $\mc{P}(f: X \to Y): \mc{P}(Y) \to \mc{P}(X) := T \mapsto
+        \{ x \in X \mid f(x) \in T \}$.
+    \end{center}
+
+    \item The dual space functor on vector spaces:
+    \begin{center}
+        $(\_)^* : \mathbf{Vect}_k^{\text{op}} \to \mathbf{Vect}_k :=
+        V \mapsto V^*$
+    \end{center}
+\end{itemize}
+
+The above are both examples of the following idea: Send an object $A$ into
+functions from $A$ into some fixed object. For example, the powerset can be
+written as $\mc{P}(X) = 2^X$, where we think of a subset in terms of its
+characteristic function.\\
+
+\textbf{Hom-functors}\\
+We now consider some fundamental examples of $\catname{Set}$-valued functors.
+Given a category $\mc{C}$ and an object $A$ of $\mc{C}$, two functors to
+$\catname{Set}$ can be defined:
+\begin{itemize}
+    \item The covariant Hom-functor at $A$,
+    \begin{center}
+        $\mc{C}(A, \_) : \mc{C} \to \catname{Set}$,
+    \end{center}
+    which is given by (recall that each $\mc{C}(A, B)$ is a set):
+    \begin{center}
+        $\mc{C}(A, \_)(B) := \mc{C}(A, B), \qq
+        \mc{C}(A, \_)(f: B \to C) := g \mapsto f \circ g$.
+    \end{center}
+~\\
+    We usually write $\mc{C}(A, \_)(f)$ as $\mc{C}(A, f)$. Functoriality
+    reduces directly to the basic category axioms: associativity of composition
+    and the unit laws for the identity.
+
+    \item There is also a contravariant Hom-functor,
+    \begin{center}
+        $\mc{C}(A, \_) : \mc{C}^{\text{op}} \to \catname{Set}$,
+    \end{center}
+    given by:
+    \begin{center}
+        $\mc{C}(A, \_)(B) := \mc{C}(B, A), \qq
+        \mc{C}(A, \_)(h: C \to B) := g \mapsto g \circ h$.
+    \end{center}
+\end{itemize}
+~\\
+Generalizing both of the above, we obtain a \emph{\textbf{bivariant}}
+Hom-functor,
+\begin{center}
+    $\mc{C}(\_, \_) : \mc{C}^{\text{op}} \times \mc{C} \to \catname{Set}$.
+\end{center}
+
+\setcounter{Exercise}{46}
+\begin{Exercise}
+    Spell out the definition of $\mc{C}(\_, \_): \mc{C}^{\text{op}} \times
+    \mc{C} \to \catname{Set}$. Verify carefully that it is a functor.
+\end{Exercise}
+\begin{solution}
+    We define $\mc{C}(\_, \_): \mc{C}^{\text{op}} \times \mc{C} \to
+    \catname{Set}$ as follows:
+    \begin{center}
+        For all $(A, B)$ in $\mc{C}^{\text{op}} \times \mc{C}$, $\mc{C}(\_,\_)
+        (A, B) := \mc{C}(A, B)$, and \\
+        for all $f: A' \to A$ and $g: B \to B'$, $\mc{C}(\_, \_)(f, g) =
+        h \mapsto g \circ h \circ f$, where $h \in \mc{C}(A, B)$.
+    \end{center}
+    Now, we show the above functor does satisfy the functoriality conditions.
+    Indeed, for all $(A, B), (A', B'), (A'', B'')$ in $\mc{C}^{\text{op}}
+    \times \mc{C}$, if $f: A' \to A, f': A'' \to A', g: B \to B', g': B' \to
+    B''$, then $\mc{C}(\_,\_)(f', g')
+    \circ \mc{C}(\_,\_)(f, g) = (h' \mapsto g' \circ h' \circ f') \circ
+    (h \mapsto g \circ h \circ f) = h \mapsto g' \circ (g \circ h \circ f)
+    \circ f' = h \mapsto (g' \circ g) \circ h \circ (f \circ f') = \mc{C}(\_,
+    \_)(f \circ f', g' \circ g)$. And, for any $(A, B)$ in $\mc{C}^{\text{op}}
+    \times \mc{C}$, we have $\mc{C}(\_, \_)(1_{(A, B)}) = \mc{C}(\_, \_)
+    (1_A, 1_B) = h \mapsto 1_B \circ h \circ 1_B = h \mapsto h = 1_{\mc{C}
+    (A, B)}$. And this establishes that $\mc{C}(\_, \_)$ as defined above is
+    indeed a functor.
+\end{solution}
+
+\subsection*{Properties of Functors}
+A functor $F: \mc{C} \to \mc{D}$ is said to be:
+\begin{itemize}
+    \item \emph{\textbf{faithful}} if each map $F_{A, B}: \mc{C}(A, B) \to
+    \mc{D}(FA, FB)$ is injective;
+
+    \item \emph{\textbf{full}} if each map $F_{A, B}: \mc{C}(A, B) \to
+    \mc{D}(FA, FB)$ is surjective;
+
+    \item an \emph{\textbf{embedding}} if $F$ is full, faithful, and injective
+    on objects;
+
+    \item an \emph{\textbf{equivalence}} if $F$ is full, faithful, and
+    \emph{essentially surjective, i.e.} for every object $B$ of $\mc{D}$, there
+    is an object $A$ of $\mc{C}$ such that $F(A) \cong B$;
+
+    \item an \emph{\textbf{isomorphism}} if there is a functor $G: \mc{D} \to
+    \mc{C}$ such that
+    \begin{center}
+        $G \circ F = 1_{\mc{C}}, \qq F \circ G = 1_{\mc{D}}$.
+    \end{center}
+\end{itemize}
+
+We say categories $\mc{C}$ and $\mc{D}$ are isomorphic, $\mc{C} \cong
+\mc{D}$, if there is an isomorphism between them. This is just the usual notion
+of isomorphism applied to $\catname{Cat}$.
+
+Some examples of functors with various properties are as follows:
+\begin{itemize}
+    \item The forgetful functor $U: \catname{Mon} \to \catname{Set}$ is
+    faithful, but not full. Note not all functions $f: M \to N$ yield an arrow
+    $f: (M, \cdot, 1) \to (N, \cdot, 1)$. Similar properties hold for other
+    forgetful functors.
+
+    \item The free monoid functor $\texttt{MList}: \catname{Set} \to
+    \catname{Mon}$ is faithful, but not full.
+
+    \item The product functor $- \times - : \mc{C} \times \mc{C} \to \mc{C}$
+    is generally neither faithful nor full.
+
+    \item There is an equivalence between $\catname{FDVect}_k$, the category
+    of finite dimensional vector spaces over the field $k$, and
+    $\catname{Mat}_k$, the category of matrices with entries in $k$. These
+    categories are very far from being isomorphic.
+\end{itemize}
+~\\
+\textbf{Preservation and Reflection}\\
+Let $P$ be a property of arrows. We say a functor $F: \mc{C} \to \mc{D}$
+\emph{preserves} $P$ if whenever $f$ satisfies $P$, so does $F(f)$. We say $F$
+\emph{reflects} $P$ if whenever $F(f)$ satisfies $P$, so does $f$.
+
+\setcounter{Exercise}{48}
+\begin{Exercise}
+Prove the following:
+\begin{enumerate}
+    \item All functors preserve isomorphisms, split monics, and split epics.
+    \item Faithful functors reflect monics and epics.
+    \item Full and faithful functors reflect isomorphisms.
+    \item Equivalences preserve monics and epics.
+    \item The forgetful functor $U: \catname{Mon} \to \catname{Set}$ preserves
+    products.
+\end{enumerate}
+\end{Exercise}
+\begin{solution}
+\leavevmode
+\begin{enumerate}
+    \item (Isomorphism) Suppose $f: A \to B$ in $\mc{C}$ is an isomorphism.
+    Then, $F(f) \circ F(f^{-1}) = F(f \circ f^{-1}) = F(1_B) = 1_{FB}$. And,
+    $F(f^{-1}) \circ F(f) = F(f^{-1} \circ f) = F(1_A) = 1_{FA}$. Thus, $F(f)$
+    is an isomorphism, and we are done.\\
+    (Split monic) Suppose $f: A \to B$ in $\mc{C}$ is split monic. Then, $f$
+    has a left inverse $g: B \to A$ such that $g \circ f = 1_A$. Therefore,
+    $F(g) \circ F(f) = F(g \circ f) = F(1_A) = 1_{FA}$, which implies $F(f)$
+    has a left inverse, from which we conclude $F(f)$ is split monic, and we
+    are done.\\
+    (Split epic) Suppose $f: A \to B$ in $\mc{C}$ is split epic. Then, $f$
+    has a right inverse $g: B \to A$ such that $f \circ g = 1_B$. Therefore,
+    $F(f) \circ F(g) = F(f \circ g) = F(1_B) = 1_{FB}$, which implies $F(f)$
+    has a right inverse, from which we conclude $F(f)$ is split epic, and we
+    are done.
+
+    \item (Monic) Suppose $F: \mc{C} \to \mc{D}$ is a faithful functor, and let
+    $f: A \to B$ in $\mc{C}$ such that $F(f)$ is monic. Assume $g, h: C \to A$
+    such that $f \circ g = f \circ h$. Then, $F(f \circ g) = F(f \circ h)$,
+    which implies $F(f) \circ F(g) = F(f) \circ F(h)$, which implies $F(g) =
+    F(h)$, since $F(f)$ is left-cancellative, and since $F$ is faithful, we
+    have $g = h$, showing $f$ is monic. Hence, we conclude faithful functors
+    preserve monics.\\
+    (Epic) Suppose $F: \mc{C} \to \mc{D}$ is a faithful functor, and let
+    $f: A \to B$ in $\mc{C}$ such that $F(f)$ is epic. Assume $g, h: B \to C$
+    such that $g \circ f = h \circ f$. Then, $F(g \circ f) = F(h \circ f)$,
+    which implies $F(g) \circ F(f) = F(h) \circ F(f)$, which implies $F(g) =
+    F(h)$, since $F(f)$ is right-cancellative, and since $F$ is faithful, we
+    have $g = h$, showing $f$ is epic. Hence, we conclude faithful functors
+    preserve epics.
+
+    \item Suppose $F: \mc{C} \to \mc{D}$ is a full and faithful functor, and
+    let $f: A \to B$ in $\mc{C}$ such that $F(f)$ is an isomorphism. Since $F$
+    is full, there exists some $g: B \to A$ such that $F(g) = F(f)^{-1}$.
+    Therefore, $F(f \circ g) = F(f) \circ F(g) = F(f) \circ F(f)^{-1} = 1_{FB}
+    = F(1_B)$, which implies $f \circ g = 1_B$, since $F$ is faithful.
+    Similarly, it is easy to check $F(g \circ f) = F(1_A)$, which implies
+    $g \circ f = 1_A$. Hence, $f$ is an isomorphism, and we are done.
+
+    \item (Monic) Suppose $F: \mc{C} \to \mc{D}$ is an equivalence. Then, $F$
+    is full, faithful, and essentially surjective. Let $f: A \to B$ in $\mc{C}$
+    be monic. Let $g', h': C' \to FA$ such that $F(f) \circ g' = F(f) \circ h'$.
+    That is, the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        C' \arrow[r, shift left, "g'"]
+           \arrow[r, shift right, swap, "h'"]
+           & FA \arrow[r, "F(f)"]
+                & FB
+    \end{tikzcd}
+    \]
+    We claim $F(f)$ is monic, \emph{i.e.} $F(f)$ is left-cancellative. To that
+    end, since $F$ is essentially surjective, there exists some $C_0$ in
+    $\mc{C}$ such that $F(C_0) \cong C'$. In other words, there exists an
+    isomorphism $k: F(C_0) \xrightarrow{\sim} C'$. In addition, since $F$ is
+    full, there exist $g, h: C_0 \to A$ in $\mc{C}$ such that $F(g) = g' \circ
+    k$ and $F(h) = h' \circ k$. That is, the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    F(C_0) \arrow[r, shift left, "F(g)"]
+    \arrow[r, shift right, swap, "F(h)"]
+    & FA \arrow[r, "F(f)"]
+    & FB
+    \end{tikzcd}
+    \]
+    Therefore, $F(f) \circ F(g) = F(f) \circ F(h)$, which implies $F(f \circ g)
+    = F(f \circ h)$, which implies $f \circ g = f \circ h$ (since $F$ is
+    faithful), which implies $g = h$, since $f$ is monic. Thus, $g' = g' \circ
+    1_{C'} = g' \circ (k \circ k^{-1}) = (g' \circ k) \circ k^{-1} = F(g) \circ
+    k^{-1} = F(h) \circ k^{-1} = (h' \circ k) \circ k^{-1} = h' \circ (k \circ
+    k^{-1}) = h' \circ 1_{C'} = h'$, which shows $F(f)$ is indeed
+    left-cancellative, and we are done.\\
+    (Epic) Suppose $F: \mc{C} \to \mc{D}$ is an equivalence. Then, $F$ is full,
+    faithful, and essentially surjective. Let $f: A \to B$ in $\mc{C}$ be epic.
+    We claim $F(f)$ is epic, \emph{i.e.} $F(f)$ is right-cancellative. To that
+    end, let $g', h': FB \to C'$ such that $g' \circ F(f) = h' \circ F(f)$,
+    \emph{i.e} the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        FA \arrow[r, "F(f)"]
+           & FB \arrow[r, shift left, "g'"]
+                \arrow[r, shift right, swap, "h'"]
+                & C'
+    \end{tikzcd}
+    \]
+    Since $F$ is essentially surjective, there exists some $C_0$ in $\mc{C}$
+    such that $C' \cong F(C_0)$. In other words, there exists an isomorphism
+    $k: C' \to F(C_0)$. And, since $F$ is full, there exist $g, h: B \to C_0$
+    such that $F(g) = k \circ g'$ and $F(h) = k \circ h'$. That is, the
+    following diagram commutes:
+    \[
+    \begin{tikzcd}
+    FA \arrow[r, "F(f)"]
+       & FB \arrow[r, shift left, "F(g)"]
+            \arrow[r, shift right, swap, "F(h)"]
+            & F(C_0)
+    \end{tikzcd}
+    \]
+    Therefore, $F(g) \circ F(f) = F(h) \circ F(f)$, which implies $F(g \circ f)
+    = F(h \circ f)$, which implies $g \circ f = h \circ f$ (since $F$ is
+    faithful), which implies $g = h$, since $f$ is epic. Thus, $g' = 1_{C'}
+    \circ g' = (k^{-1} \circ k) \circ g' = k^{-1} \circ (k \circ g') = k^{-1}
+    \circ F(g) = k^{-1} \circ F(h) = k^{-1} \circ (k \circ h') = (k^{-1} \circ
+    k) \circ h' = 1_{C'} \circ h' = h'$, which shows $F(f)$ is indeed
+    right-cancellative, and we are done.
+
+    \item % TODO: Exercise 49 - Part (5)
+\end{enumerate}
+\end{solution}
+
+\begin{Exercise}
+Show the following:
+\begin{enumerate}
+    \item Functors do not, in general, reflect monics or epics.
+    \item Faithful functors do not, in general, reflect isomorphisms.
+    \item Full and faithful functors do not, in general, preserve monics or
+    epics.
+\end{enumerate}
+\end{Exercise}
+\begin{solution}
+    % TODO: Exercise 50 - Parts (1), (2), and (3)
+\end{solution}
+
+\subsection*{Exercises}
+\leavevmode
+\begin{enumerate}
+    \item Consider the category $\catname{FDVect}_{\R}$ of finite dimensional
+    vector spaces over $\R$, and $\catname{Mat}_{\R}$ of matrices over $\R$.
+    Concretely, $\catname{Mat}_{\R}$ is defined as follows:
+    \begin{center}
+        $Ob(\catname{Mat}_{\R}) := \N$,\\
+        $\catname{Mat}_{\R}(n, m) := \{ M \mid M \text{ is an } n \times m
+        \text{ matrix with entries in } \R \}$.
+    \end{center}
+    Thus, objects are natural numbers, and arrows $n \to m$ are $n \times m$
+    real matrices. Composition is matrix multiplication, and the identity on
+    $n$ is the $n \times n$ identity matrix.\\
+    Now, let $F: \catname{Mat}_{\R} \to \catname{FDVect}_{\R}$ be the functor
+    taking each $n$ to the vector space $\R^n$ and each $M: n \to m$ to the
+    linear function
+    \begin{center}
+        $FM: \R^n \to \R^m := (x_1, \ldots, x_n) \mapsto [x_1, \ldots, x_n] M$
+    \end{center}
+    with the $1 \times m$ matrix $[x_1, \ldots, x_n] M$ considered as a vector
+    in $\R^m$. Show that $F$ is full, faithful, and essentially surjective, and
+    hence, $\catname{FDVect}_{\R}$ and $\catname{Mat}_{\R}$ are equivalent
+    categories. Are they isomorphic?
+
+    \item Let $\mc{C}$ be a category with binary products such that, for each
+    pair of objects $A, B$,
+    \begin{center}
+        $\mc{C}(A, B) \neq \emptyset \qq (*)$
+    \end{center}
+    Show that the product functor $F: \mc{C} \times \mc{C} \to \mc{C}$ is
+    faithful.\\
+    Would $F$ still be faithful in the absence of condition $(*)$?
+\end{enumerate}
+\begin{solution}
+\leavevmode
+\begin{enumerate}
+    \item %TODO: Exercises subsection 1.3.5 - (1)
+    \item %TODO: Exercises subsection 1.3.5 - (2)
+\end{enumerate}
+\end{solution}
+
+\section{Natural Transformations}
+Morphisms between functors are \emph{natural transformations}, just as functors
+are morphisms between categories.
+
+\subsection*{Basics}
+Let us define natural transformations.
+
+Let $F, G: \mc{C} \to \mc{D}$ be functors. A \emph{\textbf{natural
+transformation}}
+\begin{center}
+    $t: F \to G$
+\end{center}
+is a family of morphisms in $\mc{D}$ indexed by objects $A$ of $\mc{C}$,
+\begin{center}
+    $\{ t_A : FA \to GA \}_{A \in Ob(\mc{C})}$
+\end{center}
+such that for all $f: A \to B$, the following diagram commutes:
+\[
+\begin{tikzcd}
+    FA \arrow[r, "Ff"]
+       \arrow[d, swap, "t_A"]
+       & FB \arrow[d, "t_B"]\\
+    GA \arrow[r, swap, "Gf"]
+       & GB
+\end{tikzcd}
+\]
+This condition is known as \emph{naturality}.\\
+If each $t_A$ is an isomorphism, we say $t$ is a \emph{\textbf{natural
+isomorphism}}:
+\begin{center}
+    $t: F \xrightarrow{\cong} G$.
+\end{center}
+~\\
+\textbf{Examples of natural transformations:}
+\begin{itemize}
+    \item Let $\opn{Id}$ be the identity functor on $\catname{Set}$, and
+    $\times \circ \langle \opn{Id}, \opn{Id} \rangle$ be the functor taking
+    each set $X$ to $X \times X$ and each function $f$ to $f \times f$. Then,
+    there is a natural transformation $\Delta: \opn{Id} \to \times \circ
+    \langle \opn{Id}, \opn{Id} \rangle$ given by:
+    \begin{center}
+        $\Delta_X: X \to X \times X := x \mapsto (x, x)$.
+    \end{center}
+    Naturality amounts to asserting that, for any function $f: X \to Y$, the
+    following diagram commutes:
+    \[
+    \begin{tikzcd}
+        X \arrow[r, "f"]
+          \arrow[d, swap, "\Delta_X"]
+          & Y \arrow[d, "\Delta_Y"]\\
+        X \times X \arrow[r, swap, "f \times f"]
+                   & Y \times Y
+    \end{tikzcd}
+    \]
+    We call $\Delta$ the \emph{diagonal} transformation on $\catname{Set}$. In
+    fact, it is the \emph{only} natural transformation between these functors.
+
+    \item The diagonal transformation can be defined for any category $\mc{C}$
+    with binary products by setting, for each object $A$ in $\mc{C}$,
+    \begin{center}
+        $\Delta_A: A \to A \times A := \langle 1_A, 1_A \rangle$.
+    \end{center}
+    Projections also yield natural transformations. For example, the arrows
+    \begin{center}
+        $\pi_{1 (A, B)}: A \times B \to A$
+    \end{center}
+    specify a natural transformation $\pi_1: - \times - \to \pi_1$. Note that
+    $- \times -$, $\pi_1: \mc{C} \times \mc{C} \to \mc{C}$ are the functors for
+    product and first projection, respectively.
+
+    \item Let $\mc{C}$ be a category with terminal object $T$, and let $K_T:
+    \mc{C} \to \mc{C}$ be the functor mapping all objects to $T$ and all
+    arrows to $1_T$. Then, the canonical arrows
+    \begin{center}
+        $\tau_A : A \to T$
+    \end{center}
+    specify a natural transformation $\tau: \opn{Id} \to K_T$ (where $\opn{Id}$)
+    is the identity functor on $\mc{C}$.
+
+    \item Recall the functor $\List: \catname{Set} \to \catname{Set}$ that
+    takes a set $X$ to the set of finite lists with elements in $X$. We can
+    define the following natural transformations,
+    \begin{align*}
+        \texttt{reverse} &: \List \to \List,\\
+        \texttt{unit} &: \opn{Id} \to \List,\\
+        \texttt{flatten} &: \List \circ \List \to \List,
+    \end{align*}
+    by setting, for each set $X$,
+    \begin{align*}
+        \texttt{reverse}_X &: \List(X) \to \List(X) :=
+        [x_1, \ldots, x_n] \mapsto [x_n, \ldots, x_1]\\
+        \texttt{unit}_X &: X \to \List(X) := x \mapsto [x]\\
+        \texttt{flatten}_X &: \List(\List(X)) \to \List(X)\\
+        &:= [[x_1^1, \ldots, x_{n_1}^1], \ldots, [x_1^k, \ldots, x_{n_k}^k]
+        \mapsto [x_1^1, \ldots \ldots, x_{n_k}^k].
+    \end{align*}
+
+    \item Consider the functor $P := \times \circ \langle U, U \rangle$ with
+    $U: \catname{Mon} \to \catname{Set}$ being the forgetful functor. That is,
+    \begin{center}
+        $P: \catname{Mon} \to \catname{Set} := (M, \cdot, 1) \mapsto M \times M,
+        \, f \mapsto f \times f$.
+    \end{center}
+    Then, the monoid operation yields a natural transformation $t: P \to U$
+    defined by:
+    \begin{center}
+        $t_{(M, \cdot, 1)}: M \times M \to M := (m, m') \mapsto m \cdot m'$.
+    \end{center}
+    Naturality corresponds to asserting that, for any $f: (M, \cdot, 1) \to
+    (N, \cdot, 1)$, the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        M \times M \arrow[r, "f \times f"]
+                   \arrow[d, swap, "t_M"]
+                   & N \times N \arrow[d, "t_N"] \\
+        M \arrow[r, swap, "f"]
+          & N
+    \end{tikzcd}
+    \]
+    That is, for any $m_1, m_2 \in M$, $f(m_1) \cdot f(m_2) = f(m_1 \cdot m_2)$.
+
+    \item If $V$ is a finite dimensional vector space, then $V$ is isomorphic
+    to both its first dual $V^*$ and to its second dual $V^{**}$.\\
+    However, while it is naturally isomorphic to its second dual, there is no
+    natural isomorphism to the first dual. This was the original example that
+    motivated Samuel Eilenberg and Saunders Mac Lane to define the concept of
+    natural transformation; in this case, naturality captures \emph{basis
+    independence}.
+\end{itemize}
+
+\setcounter{Exercise}{51}
+\begin{Exercise}
+    Verify naturality of diagonal transformations, projections, and terminals,
+    for a category $\mc{C}$ with finite products.
+\end{Exercise}
+\begin{solution}
+    Suppose $\mc{C}$ is a category with finite products.
+
+    (Naturality of diagonal transformation) We show that for all objects $A, B$
+    in $\mc{C}$ and all arrows $f: A \to B$, the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        A \arrow[r, "f"]
+          \arrow[d, swap, "\Delta_A"]
+        & B \arrow[d, "\Delta_B"]\\
+        A \times A \arrow[r, swap, "f \times f"]
+                   & B \times B
+    \end{tikzcd}
+    \]
+    Note that $\Delta_A : A \to A \times A := \langle 1_A, 1_A \rangle$. Now,
+    $\Delta_B \circ f = \langle 1_B, 1_B \rangle \circ f = \langle 1_B \circ f,
+    1_B \circ f \rangle = \langle f, f \rangle$. And, $(f \times f) \circ
+    \Delta_A = (f \times f) \circ \langle 1_A, 1_A \rangle = \langle f \circ
+    1_A, f \circ 1_A \rangle = \langle f, f \rangle$, which shows $\Delta_B
+    \circ f = (f \times f) \circ \Delta_A$, thus proving the above diagram
+    commutes.
+
+    (Naturality of projection) We claim that for all $f: A \to B$ and $g: C
+    \to D$ in $\mc{C}$, the following diagram commutes.
+    \[
+    \begin{tikzcd}
+        A \times C \arrow[r, "f \times g"]
+                   \arrow[d, swap, "\pi_1"]
+                   & B \times D \arrow[d, "\pi_1"]\\
+        A \arrow[r, swap, "f"]
+          & B
+    \end{tikzcd}
+    \]
+    Indeed, $\pi_1 \circ (f \times g) = \pi_1 \circ \langle f \circ \pi_1,
+    g \circ \pi_2 \rangle = f \circ \pi_1$, thus establishing our claim.
+
+    (Naturality of terminal projection) Let $T$ be a terminal object in
+    $\mc{C}$. The fact that the canonical arrows $\tau_A: A \to T$ specify a
+    natural transformation is demonstrated by showing the following diagram
+    commutes:
+    \[
+    \begin{tikzcd}
+        A \arrow[r, "f"]
+          \arrow[d, swap, "\tau_A"]
+          & B \arrow[d, "\tau_B"]\\
+        T \arrow[r, swap, "1_T"]
+          & T
+    \end{tikzcd}
+    \]
+    Indeed, note $\tau_B \circ f: A \to T$ and $1_T \circ \tau_A: A \to T$, and
+    since $T$ is a terminal object, we must have $\tau_B \circ f = 1_T \circ
+    \tau_A$, thereby proving the above diagram commutes.
+\end{solution}
+
+\begin{Exercise}
+    Prove that the diagonal is the only natural transformation $\opn{Id} \to
+    \times \circ \langle \opn{Id}, \opn{Id} \rangle$ on $\catname{Set}$.
+    Similarly, prove that the first projection is the only natural
+    transformation $\times \to \pi_1$ on $\catname{Set}$.
+\end{Exercise}
+\begin{solution}
+    % TODO: Exercise (53)
+\end{solution}
+~\\
+
+\subsection*{Further Examples}
+Natural isomorphisms for products.
+
+Let $\mc{C}$ be a category with finite products, \emph{i.e.} binary products
+and a terminal object $\1$. Then, we have the following canonical natural
+isomorphisms.
+\begin{align*}
+    a_{A,B,C} &: A \times (B \times C) \xrightarrow{\sim}
+        (A \times B) \times C,\\
+    s_{A,B} &: A \times B \xrightarrow{\sim} B \times A\\
+    l_A &: \1 \times A \xrightarrow{\sim} A\\
+    r_A &: A \times \1 \xrightarrow{\sim} A.
+\end{align*}
+The first two isomorphisms assert the product is \emph{associative} and
+\emph{symmetric}, and the last two that $\1$ is its unit. These conditions
+form part of the definition of \emph{symmetric monoidal categories}.
+
+The above natural isomorphisms are defined explicitly by:
+\begin{align*}
+    a_{A,B,C} &:= \langle \langle \pi_1, \pi_1 \circ \pi_2 \rangle,
+        \pi_2 \circ \pi_2 \rangle,\\
+    s_{A,B} &:= \langle \pi_2, \pi_1 \rangle,\\
+    l_A &:= \pi_2\\
+    r_A &:= \pi_1.
+\end{align*}
+Since natural isomorphisms are a \emph{self dual} notion, similar natural
+isomorphisms can be defined if $\mc{C}$ has binary coproducts and an initial
+object.
+
+\begin{Exercise}
+    Verify that the above families of arrows are natural isomorphisms.
+\end{Exercise}
+
+\end{document}

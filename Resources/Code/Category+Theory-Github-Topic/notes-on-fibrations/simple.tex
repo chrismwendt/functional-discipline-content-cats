@@ -1,0 +1,87 @@
+
+\begin{definition}
+  \label{def:CT-structure}
+  A \emph{CT-structure} is a pair $(\mathbb{B},T)$ where $\mathbb{B}$
+  is a category with finite products, and $T \subseteq
+  \mathsf{Obj}(\mathbb{B})$ is a collection of types.
+\end{definition}
+
+A CT-structure $(\mathbb{B},T)$ should be thought of as a category of
+contexts $\mathbb{B}$ whose types draw their atomic elements from $T$.
+Given contexts $\Gamma,\Delta \in \mathsf{Obj}(\mathbb{B})$, their
+concatenation is defined as $(\Gamma,\Delta) = (\Gamma \times
+\Delta)$.
+
+\begin{definition}
+  \label{def:simple-total-cat}
+  ...
+\end{definition}
+
+
+\begin{definition}
+  \label{def:simple-fibration}
+  ...
+\end{definition}
+
+\begin{definition}
+  \label{def:lambda1-category}
+  The category $\mathcal{L}_1$ is defined as follows:
+  \begin{center}
+    \begin{tabular}{lll}
+      \textbf{Objects:}   & Contexts $\Gamma = x_1:T_1,\ldots,x_n:T_n$.\\
+      
+      \textbf{Morphisms:} & Let $\Gamma$ and $\Delta =
+      y_1:T_1,\ldots,y_n:T_n$ be contexts, then a morphism $\Gamma
+      \mto \Delta$ is a $n$-tuple,\\ & $([t_1],\ldots,[t_n])$, such
+      that $[t_i] = \{t \mid \text{$t$ differs from $t_i$ only by the
+        names of its free variables}\}$ \\ & is the equivalence
+      class of terms such that $\Gamma \vdash t_i : T_i$ holds for
+      each $1 \leq i \leq n$.  \\
+    \end{tabular}
+  \end{center}
+\end{definition}
+
+\begin{lemma}[Classifying Category for STLC]
+  \label{lemma:class-stlc}
+  $\mathcal{L}_1$ is indeed a category.
+\end{lemma}
+\begin{proof}
+  \textbf{(Identities)} Suppose $\Gamma = x_1:T_1,\ldots,x_i:T_i$ is a
+  context.  Then $\mathsf{id} = (x_1,\ldots,x_i) : \Gamma \mto
+  \Gamma$, because $\Gamma \vdash x_j : T_j$ for $1 \leq j \leq i$
+  each hold by the variable rules.
+
+  \ \\ \textbf{(Composition.)}  Suppose $\Gamma$, $\Delta =
+  y_1:T_1,\ldots,y_i:T_i$ and $\Phi = z_1:T'_1,\ldots,z_j:T'_j$ are
+  contexts, and $f = (t_1,\ldots,t_i) : \Gamma \mto \Delta$ and $g =
+  (t'_1,\ldots,t'_j) : \Delta \mto \Phi$ are morphisms.  Then define
+  their composition $f;g =
+  ([t_1/y_1]\cdots[t_i/y_i]t'_1,\ldots,[t_1/y_1]\cdots[t_i/y_i]t'_j):
+  \Gamma \mto \Phi$.
+
+  \ \\ \textbf{(Composition respects identities.)}. Suppose $\Gamma =
+  x_1:T_1,\ldots,x_i:T_i$ and $\Delta = y_1:T_1,\ldots,y_j:T_j$ are
+  contexts, and $f = (t_1,\ldots,t_j) : \Gamma \mto \Delta$ is a
+  morphism.  Then:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        id_{\Gamma};f
+        & = & ([x_1/x_1]\cdots[x_i/x_i]t_1,\ldots,[x_1/x_1]\cdots[x_i/x_i]t_j)\\
+        & = & (t_1,\ldots,t_j)\\
+        & = & f\\
+      \end{array}
+    \end{math}
+  \end{center}
+  and
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        f;id_{\Delta}
+        & = & ([t_1/y_1]\cdots[t_j/y_j]y_1,\ldots,[t_1/y_1]\cdots[t_j/y_j]y_j)\\
+        & = & (t_1,\ldots,t_j)\\
+        & = & f\\
+      \end{array}
+    \end{math}
+  \end{center}
+\end{proof}

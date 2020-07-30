@@ -1,0 +1,28 @@
+\section{Products and Coproducts}
+
+\begin{definition}[Universal Construction]
+    Defining objects in terms of their \textit{relationships} (i.e. \textit{morphisms}).
+\end{definition}
+
+\subsection{Initial Object}
+
+\begin{definition}[Initial Object]
+    The \textit{initial object} has a \textit{single} morphism going to \textit{any} object in the category.
+\end{definition}
+
+\begin{remark}
+    The definition does \textit{not} guarantee the uniqueness of the initial object, should it exist.
+    
+    It only guarantees the \textit{uniqueness up to isomorphism}.
+\end{remark}
+
+\begin{example}
+    In the category of sets and functions, the initial object is the empty set $\set{}$.
+    
+    The empty set corresponds to the Haskell \mintinline{hs}{Void} type, with the unique polymorphic function \mintinline{hs}{absurd}
+    \inputminted{hs}{content/code-listings/absurd.hs}
+    
+    This makes \mintinline{hs}{Void} the \textit{initial object} in the category of types.
+\end{example}
+
+

@@ -1,0 +1,68 @@
+products and coproducts
+
+initial object - object that has one and only one morphism
+going to any object in the category
+
+may not exist, may not be unique (up to isomorphism)
+
+e.g. initial object of poset is its least element
+
+absurd :: Void -> a
+Void (the empty set) is the initial object in the category of types
+
+terminal object - object with one and only one morphism
+coming to it from any object in the category
+
+this is the singleton () in the category of sets
+unit :: a -> ()
+unit _ = ()
+
+again, if it exists, unique given isomorphism
+
+consider
+yes :: a -> Bool
+yes _ = True
+
+no :: a -> Bool
+no _ = False
+
+but bool is not a terminal object in types, thus why
+uniqueness given isomorphism is required 
+
+morphism g is the inverse of f if their composition is the identity
+f . g = id = g . f
+
+a product of two objects a and b is the object c equipped with
+two projections such that for any other object c' with two projections
+there is a unique morphism m from c' to c that factorizes those projections
+
+the category of sets has product, the pair, or cartesian product
+
+factorizer :: (c -> a) -> (c -> b) -> (c -> (a, b))
+factorizer p q = \x -> (p x, q x)
+
+like every construction in category theory, the product has a dual,
+the coproduct, obtained by reversing the arrows
+
+a coproduct of two objects a and b is the object c equipped with
+two injections such that for any other object c' with two injections
+there is a unique morphism m from c to c' that factorizes those injections
+
+the category of sets has coproduct, the disjoint union
+(variant or tagged/discriminating union)
+
+data Contact = PhoneNum Int | EmailAddr String
+helpdesk :: Contact
+helpdesk = PhoneNum 2222222
+
+the canonical product (pair)
+(a, b) ... e.g. (Int, Bool)
+the canonical coproduct
+Either a b = Left a | Right b
+
+factorizer :: (a -> c) -> (b -> c) -> Either a b -> c
+factorizer i j (Left a)  = i a
+factorizer i j (Right b) = j b
+
+in Set, the category of sets,
+an isomorphism is the same as a bijection

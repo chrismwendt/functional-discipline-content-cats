@@ -1,0 +1,924 @@
+\documentclass[article]{aaltoseries}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz-cd} 
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{identifierColor}{rgb}{0.65,0.16,0.16}
+
+\lstset{
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{identifierColor},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2,
+  numbersep=5pt,
+  showspaces=false,
+}
+
+\begin{document}
+ 
+%=========================================================
+
+\title{Applications of Category Theory in Web Programming}
+
+\author{Patrik Vilja Peter Vilja} % Do _not_ add your student number
+
+\affiliation{\texttt{patrik.vilja@aalto.fi} \texttt{peter.vilja@aalto.fi}}
+
+\maketitle
+
+%==========================================================
+
+\begin{abstract}
+  Both category theory and Web applications have recently gained more
+  popularity. Category theory have been applied in many fields, such as in
+  design of functional programming languages, such as Haskell and PureScript,
+  and the Web programming trend is moving towards purely functional programming
+  languages. This paper introduces the basic concepts of the category theory
+  such as a definition of a category, functor and natural transformation. Web
+  programming concepts are reviewed from a categorical point of view. Complete
+  examples of how the concepts of category theory can be used to ease the
+  development and reasoning of Web based programs are presented and discussed.
+
+\vspace{3mm}
+\noindent KEYWORDS: category theory, category, morphism, composition, monad,
+functor, natural transfromation, web programming, purescript 
+
+\end{abstract}
+
+
+%============================================================
+
+\section{Introduction}
+
+  Category theory is a fairly recent field in mathematics introduced by S.
+  Eilenberg and S. Mac Lane in 1945 \cite{awodey2006category,
+    eilenberg1945general}. Concepts of category theory can be used in different
+  fields of mathematics and it provides a way to describe difficult problems
+  from an abstract point of view \cite{eilenberg1945general, mclarty2007last}.
+  It has applications in multiple fields such as in programming and
+  in separate fields of mathematics \cite{awodey2006category, jones1993glasgow,
+    reynolds1980using}.
+
+  Category theory has emerged from the urge to abstract over structure. We
+  humans interpret the world around us in terms of structures and patterns.
+  Category theory aims to generalize these structures and provide high-level
+  abstraction over them \cite{eilenberg1945general}. In general, category theory
+  hides the details of a structure thus similarities with different branches of
+  mathematics have been found \cite{lawvere1996adjointness}.
+
+  One of the core principles around category theory is composability
+  \cite{barr1990category}. With the rule of composability we can split a problem
+  into smaller understandable subproblems which can then be composed together to
+  solve the bigger problem. A category consists of objects and morphisms.
+  Objects and morphisms alone does not contain any details of a category, but
+  the composition of morphisms between objects describe the category
+  \cite{barr1990category, computational}. A composition of morphisms also has to
+  fulfill certain laws described later in this paper. In essence, any structure
+  that implements composability and identity can be seen as a category.
+  Additionally to a definition of a category, functors and natural transformations
+  are the main principles of category theory \cite{awodey2006category,
+    computational}. Commonly a category is described with commutative diagram
+  that contains only objects and morphisms.
+ 
+  This paper introduces how concepts of category theory can be used in Web
+  programming although some examples are not limited only to the Web programming.
+  The paper reviews basic operations in Web such as asynchronous execution, DOM
+  manipulation and user interaction from a categorical point of view with
+  concrete examples in PureScript. Advantages of category theory in Web
+  programming are weighted with the focus on simplicity and reasonability of a
+  program. Furthermore, subjects for future work are discussed.
+ 
+  The remainder of this paper is organized as follows. Section 2 introduces the
+  main concepts of category theory. Section 3 describes how these concepts can
+  be used in Web programming and Section 4 weights the results. Finally Section
+  6 presents conclusions.
+
+%============================================================
+
+\section{Category theory}
+Category theory consists of general concepts which can be applied across
+different fields of mathematics and in programming. These concepts are abstract
+and can present various abstract constructions. This section reviews
+basic concepts of category theory and shortly provides examples of existing
+implementations of these concepts in programming languages.
+
+%------------------------------------------------------------
+
+  \subsection{Category}
+  A category consists of objects and morphisms, also known as arrows, between
+  each pair of objects in the category \cite{barr1990category,
+    mac2013categories}. Morphisms has to have a source and a target called
+  \textbf{domain} (dom) and \textbf{codomain} (cod) \cite{awodey2006category,
+    barr1990category, mac2013categories}. They describe how objects are
+  connected in a category and there can be any number of morphisms between two
+  objects \cite{barr1990category, computational}. For example, two objects can
+  be connected with an infinite amount of morphisms or there could be no morphisms
+  between the objects. Morphisms with domain $a$ and codomain $b$ in a category
+  $C$ belong to a \textbf{hom-set} $hom_C(a, b)$ \cite{barr1990category,
+    mac2013categories}. A category can contain infinite amount of objects and
+  morphisms. In category theory, morphisms between objects describe the category
+  thus there is no restrictions to the internal structure of objects in a
+  category \cite{computational}. Identity, composability and abstraction
+  are important features of a category \cite{awodey2006category,
+    barr1990category}. A category can be thought as a graph with an identity
+  and composition properties, where morphisms (edges) connects objects (nodes)
+  \cite{barr1990category}.
+
+%------------------------------------------------------------
+
+  \subsubsection{Identity}
+    For every object $a$ in a category $C$ there has to exist an identity
+    morphism, also known as $id_a: a \rightarrow a$ \cite{mac2013categories,
+      computational}. For identity morphism domain and codomain are equal $dom(a)
+    = a = cod(a)$ \cite{mac2013categories}. Identity morphism $id_a$ acts as an
+    identity when morphisms are composed. Additionally, for every morphism $f$,
+    in a category $C$, there has to exist Left and Right identity. Thus we can
+    compose identity morphism to both sides of a composition with another
+    morphism. In Left identity we compose a morphism $f: a \rightarrow b$ with
+    an identity morphism $id_b$ such that $id_b \circ f = f$
+    \cite{barr1990category, computational}. The identity morphism $id_b$ has no
+    effect on the resulting composed morphism and thus $id_b \circ f$ and $f$
+    are equal. Similarly in Right identity we compose a morphism $g: a
+    \rightarrow b$ with an identity morphism $id_a$ such that $g \circ id_a = g$
+    \cite{barr1990category, computational}. Additionally the identity morphism
+    $id_a$ has no effect therefore $g \circ id_a$ and $g$ are equal.
+ 
+    An identity element can be stated with Left and Right identity as follows.
+    $f \circ id_a = f = id_b \circ f$ where $f: a \rightarrow b$, $id_a: a
+    \rightarrow a$ and $id_b: b \rightarrow b$ \cite{barr1990category, computational}.
+
+%------------------------------------------------------------
+
+  \subsubsection{Composability}
+    Composition is a property of a category \cite{barr1990category,
+      mac2013categories}. A category is described by compositions of morphisms
+    as objects and morphisms are primitives and do not contain any details of a
+    category. Morphisms need to be composable and the composition of morphisms
+    has to fulfill the laws of associativity \cite{barr1990category,
+      mac2013categories, computational}. Each pair of morphisms $f$ and $g$ with
+    $cod(f) = dom(g)$ must have a composition $g \circ f$ where $f: a
+    \rightarrow b$, $g: b \rightarrow c$ and $g \circ f: a \rightarrow c$
+    \cite{mac2013categories}. As morphisms need to be associative $h \circ (g
+    \circ f)$ must always be equal with $(h \circ g) \circ f$ where $f$ and $g$
+    are same as before and $h: c \rightarrow d$ \cite{awodey2006category,
+      barr1990category, eilenberg1945general, mac2013categories, computational}.
+ 
+    $Set_{Rel}$, for example, is a category which contains sets as
+    objects and relations between sets as morphisms where a relation is a subset
+    of cartesian product of two sets \cite{computational}. Also another slightly
+    different category is just a Set category where objects are sets and morphisms
+    are total functions \cite{barr1990category, computational}. A total function
+    is a function which is defined for all possible arguments. In programming, a
+    category is usually presented using types and morphisms with functions
+    \cite{computational}.
+
+% ------------------------------------------------------------
+
+  \subsubsection{Monomorphism, Epimorphism, Isomorphism}
+    In Set theory there exists properties of functions such as injection,
+    surjection and bijection. These properties can also be defined in terms of
+    category theory and they are defined for any category \cite{barr1990category}.
+
+    A morphism $f: B \rightarrow C$ in category $D$ is a \textbf{monomorphism}
+    if $\forall A.\,\forall g, h: A \rightarrow B.\,f \circ g = f \circ h
+    \Rightarrow g = h$ \cite{barr1990category, pierce1991basic}. In other words,
+    a morphism $f$ is a monomorphism if any two morphisms from any type $A$ to
+    $B$ composed with morphism $f$ are equal. Monomorphism is categorical
+    analogue to injective function in the Set theory in a category of Set
+    \cite{barr1990category, pierce1991basic}.
+
+    A morphism $f: A \rightarrow B$ in category $D$ is an \textbf{epimorphism}
+    if $\forall C.\,\forall g, h: B \rightarrow C.\,g \circ f = h \circ f
+    \Rightarrow g = h$ \cite{barr1990category, pierce1991basic}. In other words,
+    a morphism $f$ is an epimorphism if morphism $f$ composed with any two
+    morphisms from $B$ to any type $C$ are equal. Epimorphism is categorical
+    analogue to surjective function in the Set theory in a category of Set
+    \cite{barr1990category, pierce1991basic}.
+
+    A morphism $f: A \rightarrow B$ in category $D$ is an \textbf{isomorphism}
+    if there exists an inverse morphism $f^{-1}: B \rightarrow A$ and
+    compositions $f^{-1} \circ f$ and $f \circ f^{-1}$ equals $id_A$ and $id_B$
+    respectively \cite{barr1990category, pierce1991basic}. If isomorphism exists
+    between objects $A$ and $B$, they are \textbf{isomorphic}. Hereby, these two
+    objects are equal up to isomorphism \cite{pierce1991basic}. Commutative diagram
+    \ref{isomorphism} presents isomorphism between objects $a$ and $b$ in terms
+    of morphisms $f$, $f^{-1}$, $id_A$ and $id_B$.
+
+    \begin{equation}
+      \label{isomorphism}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        a \arrow[r, bend left, "f"]
+        \arrow[loop above, distance=2em, in=60, out=120, "id_a"]
+        & b \arrow[l, bend left, "f^{-1}"]
+        \arrow[loop above, distance=2em, in=60, out=120, "id_b"]
+      \end{tikzcd}
+    \end{equation}
+
+% ------------------------------------------------------------
+
+  \subsection{Universal construction} 
+    A mathematical construction has some properties that defines a structure.
+    Universal construction is used to define properties of structures in terms
+    of category theory. These properties are called as universal properties. As
+    category theory abstracts the details, all reasoning of universal properties
+    of some structure has to be done based on morphisms and their compositions.
+ 
+    Usually a category contains multiple objects that fulfill some properties and
+    structure. Universal construction picks the best candidate among these
+    objects. For every other candidate of object that holds the universal
+    property there exists an unique morphism from the candidate to the object that
+    has the universal property. In other word, the object that satisfies the given
+    universal property is an initial or terminal object in the category of all
+    candidates \cite{pierce1991basic}.
+  
+% ------------------------------------------------------------
+
+  \subsubsection{Initial object}
+    An object $a$ in category $C$ is \textbf{an initial object} if $\forall b \in
+    C.\,\exists f: a \rightarrow b$ (for every object $b$ in category $C$ there
+    exists a morphism $f$ from initial object $a$ to the object $b$) and every
+    two morphisms $f: a \rightarrow b$, $g: a \rightarrow b$ have to be
+    equal \cite{barr1990category, pierce1991basic}. In other words, there exists
+    exactly one morphism from $a$ to $b$. Commutative diagram \ref{initial} of an initial
+    object $a$ can be found below. A category can have multiple initial
+    objects. In category of Set the initial object is an universal construction
+    of an empty set $\emptyset$ in terms of category theory and it is the only initial
+    object for every Set \cite{barr1990category, pierce1991basic}.
+
+    \begin{equation}
+      \label{initial}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        & b \\
+        a \arrow[ur, "absurd"]
+        \arrow[loop right, distance=2em, "id_{a}"]
+        & 
+      \end{tikzcd}
+    \end{equation}
+
+% ------------------------------------------------------------
+
+  \subsubsection{Terminal object}
+    Terminal object of a category is the dual of initial object. An object $a$
+    in category $C$ is \textbf{a terminal object} if $\forall b \in C.\,\exists
+    f: b \rightarrow a$ (for every object $b$ in category $C$ there exists a
+    morphism $f$ from the object $b$ to the terminal object $a$) and for every
+    two morphisms $f: b \rightarrow a$, $g: b \rightarrow a$ have to be equal
+    \cite{barr1990category, pierce1991basic}. In other words, there exists
+    exactly one morphism from $b$ to $a$. Commutative diagram \ref{terminal} of
+    a terminal object $a$ can be found below. A category can have multiple terminal
+    objects. In category of Set the terminal object is an universal construction
+    of singleton set in terms of category theory. Furthermore, each singleton
+    set is a terminal object \cite{barr1990category, pierce1991basic}.
+
+    \begin{equation}
+      \label{terminal}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        & a \arrow[loop right, distance=2em, "id_{a}"] \\
+        b \arrow[ur, "unit_b"]
+        & Void \arrow[u, "unit_{void}"']
+      \end{tikzcd}
+    \end{equation}
+   
+% ------------------------------------------------------------
+
+  \subsection{Algebraic data types}
+    Algebraic data types such as product and coproduct defines a foundation to
+    structures such as tuples and records. Product and coproduct data types
+    obeys algebraic laws of identity, associativity and commutativity up to
+    isomorphism respectively \cite{barr1990category}. These two data types are
+    widely used in programming languages.
+
+% ------------------------------------------------------------
+
+  \subsubsection{Product}
+    In category theory a product is denoted as a cartesian product of a pair of
+    objects. A product of objects $A$ and $B$ is an object $A \times B$. The
+    object $A \times B$ has two projections $p : A \times B \rightarrow A$ and
+    $q : A \times B \rightarrow B$. In addition, universal construction defines
+    that there exists an unique morphism $m$ from every other candidate of $A
+    \times B$ object called $C$ to object $A \times B$ such that $p \circ m =
+    p'$ and $q \circ m = q'$. Where $p' : C \rightarrow A$ and $q' : C
+    \rightarrow B$ \cite{barr1990category, pierce1991basic}. In
+    other words, universal construction defines the $A \times B$ object in terms
+    of all other objects in the category that have morphisms to $A$ and $B$
+    objects thus object $A \times B$ is a terminal object in a category of all
+    product candidates. Morphisms and objects of product can be found below in
+    form of commutative diagram \ref{product}.
+
+    \begin{equation}
+      \label{product}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        & C \arrow[d, dashed, "m"]
+        \arrow[ddl, "p'"']
+        \arrow[ddr, "q'"]
+        & \\
+        & A \times B \arrow[dl, "p"]
+        \arrow[dr, "q"']
+        & \\
+        [-2em] A
+        &
+        & B
+      \end{tikzcd}
+    \end{equation}
+
+    Product is usually presented as a tuple in most programming languages and it
+    is denoted with parenthesis and comma. For example \lstinline|(a, b)| is a
+    common presentation of tuple. Product type is called an algebraic data type
+    as it behaves like a multiplication and it obeys algebraic laws up to
+    isomorphism. Product is symmetric up to isomorphism, types
+    \lstinline|(a, b)| and \lstinline|(b, a)| are not the same but they preserve
+    the same structure. An isomorphism between \lstinline|(a, b)| and \lstinline|(b, a)|
+    is commonly defined with a function called \lstinline|swap| and a product is
+    also associative up to isomorphism. Product type also has an unit type
+    \lstinline|()| up to isomorphism and thus it obeys algebraic laws of monoid
+    \cite{barr1990category}.
+
+% ------------------------------------------------------------
+
+  \subsubsection{Coproduct}
+    Coproduct is the dual of the product. It is also known as tagged union,
+    disjoint union, sum type or variant. The coproduct can be constructed by
+    inverting the morphisms of the product category. The coproduct is denoted as
+    $A \amalg B$ or $A + B$. The object $A \amalg B$ is constructed from two
+    injection morphisms $i : A \rightarrow A \amalg B$ and $j : B \rightarrow A
+    \amalg B$ that belongs to category $C$. In addition, universal construction
+    defines that there exists an unique morphism $m$ from $A \amalg B$ to every
+    other candidate of $A \amalg B$ called $C$, such that $m \circ i = i'$ and
+    $m \circ j = j'$. Where $i' : A \rightarrow C$ and $j' : B \rightarrow C$
+    \cite{barr1990category, pierce1991basic}. Object $A \amalg B$ is an initial
+    object in a category of all coproduct candidates \cite{pierce1991basic}.
+    Morphisms and objects of coproduct can be found below in form of commutative
+    diagram \ref{coproduct}.
+
+    \begin{equation}
+      \label{coproduct}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        A \arrow[dr, "i"]
+        \arrow[ddr, "i'"']
+        &
+        & B \arrow[dl, "j"']
+        \arrow[ddl, "j'"] \\
+        [-2em] & A \amalg B \arrow[d, dashed, "m"]
+        & \\
+        & C
+        &
+      \end{tikzcd}
+    \end{equation}
+
+    The coproduct is usually presented with sum types. Coproduct obeys algebraic
+    laws up to isomorphism and it can be seen as a sum. The coproduct is
+    symmetric, associative and it has unit up to isomorphism \cite{barr1990category}.
+    
+% ------------------------------------------------------------
+
+  \subsection{Functor}
+    Functors are mappings, also known as morphisms, between categories
+    \cite{barr1990category, mac2013categories, computational}. A functor $F: A
+    \rightarrow B$ preserves the structure of a category by having a mapping
+    from objects of a category $A$ to objects of a category $B$ ($F: a
+    \rightarrow F\, a$) and a mapping from morphisms of $A$ to morphisms of $B$
+    ($F: (f: a \rightarrow b) \rightarrow F\, f: F\, a \rightarrow F\, b$). The
+    mapping of objects and morphisms are presented in commutative diagram
+    \ref{functor}. The mappings must satisfy following rules to preserve
+    composition and identity morphisms.
+
+    \begin{itemize}
+      \item $F(g \circ f) = F\, g \circ F\, f$, when a category $A$ contains any
+        composition of any morphisms $g$ and $f$, $g \circ f$.
+      \item $F\, id_a = id_{F\, a}$
+    \end{itemize}
+
+    \begin{equation}
+      \label{functor}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        & a \arrow[d, "f"] \arrow[dl, "g\, \circ\, f"] \arrow[r, "F"] \arrow[loop, distance=2em, in=60, out=120, "id_a"]
+        &[5em] F\, a \arrow[d, "F\, f"'] \arrow[dr, "F\, (g\, \circ\, f)"]
+                   \arrow[loop, distance=2em, in=60, out=120, "F\, id_a"]
+        & \\
+        c
+        & b \arrow[l, "g"] \arrow[r, "F"]
+        & F\, b \arrow[r, "F\, g"]
+        & F\, c \\
+      \end{tikzcd}
+    \end{equation}
+
+    Therefore, a functor needs to preserve all connections between objects from
+    the source category, although there is no requirement for the resulting
+    target category to obtain the same amount of morphisms thus multiple
+    morphisms can be presented as a single morphism \cite{barr1990category,
+      computational}. More precisely a functor is called as a faithful
+    functor when the function between $hom_A(a, b)$ and $hom_B(F\, a, F\, b)$ for
+    each $a, b \in A$ is injective. Similarly, a functor is called as a full
+    functor when the function between $hom_A(a, b)$ and $hom_B(F\, a, F\, b)$ for
+    each $a, b \in A$ is surjective. A functor can also be full and faithful at
+    the same time.
+ 
+    Additionally a functor $F: A \rightarrow A$, which maps objects and
+    morphisms of a category $A$ to the same category, is called an
+    \textbf{endofunctor} \cite{barr1990category, computational}. In programming
+    languages functors are actually endofunctors. A functor can be composed to a
+    new functor, for example functors $F: A \rightarrow B$ and $G: B \rightarrow
+    C$ can be composed to a functor $G \circ F: A \rightarrow C$. A simple
+    example of a functor is a \lstinline|Maybe| functor which maps objects such
+    that \lstinline|a -> Maybe a| and morphisms with a function
+    \lstinline|map :: (a -> b) -> Maybe a -> Maybe b|.
+
+% ------------------------------------------------------------
+
+  \subsection{Natural transformation}
+    Natural transformation is a mapping between functors \cite{barr1990category,
+      mac2013categories, computational}. Whereas functors mapped objects and
+    morphisms between two categories a natural transformation maps the resulting
+    objects from functors together. Thus for two functors $F: A
+    \rightarrow B$ and $G: A \rightarrow B$ a natural transformation
+    $\alpha: F \rightarrow G$ maps each object in a category $A$ a morphism
+    between resulting objects $F\, a$ and $G\, a$ in $B$ from hom-set $hom_B(F\, a,
+    G\, a)$. More formally $\alpha_a: F\, a \rightarrow G\, a$. Additionally
+    natural transformation $\alpha$ has to follow naturality condition where for
+    every morphism $f: a \rightarrow b$ in a category $A$ there has to exist equal
+    compositions $\alpha_b \circ F\, f = G\, f \circ \alpha_a$
+    \cite{barr1990category, eilenberg1945general, computational}. That is, for
+    every two objects $a$ and $b$ in a category $A$ which are connected with at
+    least a single morphism we have the following commutative diagram
+    \ref{natural} with a naturality square that needs to commute.
+    
+    \begin{equation}
+      \label{natural}
+      \begin{tikzcd}[column sep=huge]
+        a \arrow[r, "F"] \arrow[d, "f"] \arrow[ddr, "G"]
+        &[7em] F\, a \arrow[dd, "\alpha_a"] \arrow[dr, "F\, f"]
+        & \\
+        b \arrow[rr, "F"] \arrow[ddrr, "G"]
+        &
+        & F\, b \arrow[dd, "\alpha_b"] \\
+        [-1.5em]
+        & G\, a \arrow[dr, "G\, f"]
+        & \\
+        [0.5em]
+        &
+        & G\, b \\
+      \end{tikzcd}
+    \end{equation}
+
+    Similarly to a functor a natural transformation has to preserve the
+    structure of a category. By definition the structure is preserved by
+    preserving morphism between the object $F\, a \rightarrow G\, a$ and having a
+    naturality square of every morphism between two objects in the source
+    category. Additionally, as functors, a natural transformation can collapse
+    morphisms from a category $A$ to a single morphism in category $B$. Natural
+    transformation can also be thought as a family of morphisms between functors.
+ 
+    In programming natural transformation is a polymorphic function, a function
+    which is parameterised by a type. For example two functors \lstinline|List|
+    and \lstinline|Maybe| transform objects and morphisms from a category to
+    another category and the natural transformation is the mapping between these
+    two functors. A natural transformation
+    \lstinline|safeHead :: [a] -> Maybe a| is a natural transformation between
+    \lstinline|List| and \lstinline|Maybe| functors that safely picks the first
+    element of a list. The naturality condition can be presented as
+    \lstinline|safeHead <<< fmap f (x:xs) = fmap f <<< safeHead (x:xs)|.
+
+% ------------------------------------------------------------
+    
+  \subsection{Monoid}
+    Monoids are semigroups with identity morphism. A monoid is a category with a
+    single object and at least an identity morphism \cite{awodey2006category,
+      barr1990category, mac2013categories, yorgey2012monoids}. Any morphisms
+    in a monoid can be composed together as the result is always the same
+    object. Thus morphisms in a monoid are endomorphisms which are morphisms
+    from an object to itself. Monoid has to have an associative binary operator,
+    for example multiplication $(a * b) * c = a * (b * c)$. Additionally a
+    monoid has an unit element $\exists u\,\forall a.\, B(a,u) = B(u,a) = a$ ($B$
+    is the binary operator) which does not have any effect in the binary
+    operation. For example, if the binary operator is a multiplication function
+    which operates on integers a unit element is 1.
+
+% ------------------------------------------------------------
+
+  \subsection{Monad}
+    Monad, also known as triple, is all about composition. It is an endofunctor
+    with two natural transformations $\eta : I_T \rightarrow T$ and $\mu : T^2
+    \rightarrow T$ where $T$ is an endofunctor in an arbitrary category $C$,
+    $T^2$ is a composition of a endofunctor with itself $T \circ T$ and $I_T$ is
+    an identity functor \cite{barr1990category, moggi1989computational}.
+    Therefore $\eta : I_T \rightarrow T$ means that $\eta$ is a natural
+    transformation from identity functor to an endofunctor $T$ and $\mu : T^2
+    \rightarrow T$ means that $\mu$ is a natural transformation from composition
+    of two endofunctors $T$ to an endofunctor $T$. Similarly to monoid $\eta$ is
+    an unit and $\mu$ is a multiplication transformation. Commutative diagram
+    \ref{eta} presents a natural tranformation $\eta$ and diagram \ref{mu} a natural
+    transformation $\mu$.
+    
+    \begin{equation}
+      \label{eta}
+      \begin{tikzcd}[column sep=huge]
+        C \arrow[r, bend left, "I_T", ""{name=A, below}]
+        \arrow[r, bend right, "T"{below}, ""{name=B}]
+        & C
+        \arrow[Rightarrow, from=A, to=B, "\eta"{right=4}]
+      \end{tikzcd}
+    \end{equation}
+
+    \begin{equation}
+      \label{mu}
+      \begin{tikzcd}[column sep=huge]
+        C \arrow[r, bend left, "T"]
+        \arrow[rr, bend right=30, "T^2", ""{name=A, below}]
+        \arrow[rr, bend right=100, "T"{below}, ""{name=B}]
+        & C
+        \arrow[r, bend left, "T"]
+        & C
+        \arrow[Rightarrow, from=A, to=B, "\mu"{right=4}]
+      \end{tikzcd}
+    \end{equation}
+
+    A monad has to satisfy identity laws. Left identity $I_T \circ T = T$, where
+    $T$ can be reached from $I_T \circ T$ with a natural transformation
+    $\mu \circ (\eta \circ T)$, and right identity $T \circ I_T = T$ where $T$
+    can be reached from $T \circ I_T$ with a natural transformation $\mu \circ
+    (T \circ \eta)$ \cite{mac2013categories, moggi1989computational}.
+    Commutative diagram \ref{identity} presents left and right identity laws.
+    Additionally a monad has to satisfy the law of associativity $\mu \circ (\mu
+    \circ T) = \mu \circ (T \circ \mu)$. When $T$ is composed with a natural
+    transformation such as $T \circ \mu$ the $T$ presents identity natural
+    transformation $I_T$ instead of endofunctor. Commutative
+    diagram \ref{associativity} presents the associativity law which monad needs
+    to fulfill.
+
+    \begin{equation}
+      \label{identity}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        I_T\, \circ\, T
+        \arrow[r, "\eta\, \circ\, T"]
+        \arrow[dr, equal]
+        & T^2
+        \arrow[d, "\mu"]
+        & T\, \circ\, I_T
+        \arrow[l, "T\, \circ\, \eta"{above}]
+        \arrow[dl, equal] \\
+        {}
+        & T
+        &
+      \end{tikzcd}
+    \end{equation}
+
+    \begin{equation}
+      \label{associativity}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        T^3 \arrow[r, "\mu\, \circ\, T"]
+        \arrow[d, "T\, \circ\, \mu"]
+        & T^2 \arrow[d, "\mu"] \\
+        T^2 \arrow[r, "\mu"]
+        & T
+      \end{tikzcd}
+    \end{equation}
+
+    In Haskell natural transformations $\eta$ and $\mu$ are known as
+    \lstinline|return| and \lstinline|join| and in PureScript they are known as
+    \lstinline|pure| and \lstinline|join|. \lstinline|Maybe|,
+    \lstinline|Either|, \lstinline|IO|, \lstinline|Reader|, \lstinline|Writer|
+    and \lstinline|State| are examples of popular monads used in programming.
+
+
+%============================================================
+
+\section{Applications in Web programming}
+
+Basic functional programming patterns use concepts of category theory under the
+hood. Categorical structures and patterns can be found all over Web
+programming. For example, in Web applications many operations, such as logging,
+DOM manipulation and XMLHttpRequests are achieved with side-effects. These
+impure actions can be encapsulated with concepts of category theory. Product and
+sum types, in turn, provide a structure to the data and patterns such as monads and
+functors enhance the data flow. This chapter presents how category
+theory can be applied in Web programming with PureScript.
+
+%------------------------------------------------------------
+  \subsection{Product and Coproduct}
+    In PureScript a product is defined as \lstinline|data Tuple a b| which has
+    two projections to extract data \lstinline|fst| and \lstinline|snd|. Product
+    can also be defined as a record and in general all records are just
+    extensions of a categorical product. An isomorphism between
+    \lstinline|Tuple a b| and \lstinline|Tuple b a| is defined with a function
+    called \lstinline|swap|.
+    
+    In PureScript canonical presentation of the coproduct is the sum type
+    \lstinline{data Either a b = Left a | Right b}. Where constructors
+    \lstinline|Left| and \lstinline|Right| correspond to coproduct injections.
+    All sum types can be seen as an extension of the coproduct. The value of a
+    sum type can be extracted with pattern matching.
+    
+    With product and coproduct we can construct algebraic properties as data
+    types. For instance, distributive property of multiplication $x\,*\,(y\,+\,z) =
+    x\,*\,y\,+\,x\,*\,z$ can be presented with algebraic data types as
+    \lstinline|Product x (Either y z) ~ Either (Product x y) (Product x z)| up
+    to isomorphism.
+
+    Moreover, almost every data structure can be defined with the help of
+    product and coproduct. For example a data type \lstinline|List|, defined as
+    \lstinline{data List a = Nil | Cons a (List a)}, uses both product and
+    coproduct types. Data constructor \lstinline|Cons| is an analogue to product
+    type and \lstinline|List| is a coproduct of either \lstinline|Nil| or \lstinline|Cons|.
+
+    
+%------------------------------------------------------------
+
+  \subsection{Functors}
+    Endofunctors such as \lstinline|Maybe| and \lstinline|Either| have many use
+    cases in Web programming. As a functor \lstinline|Maybe| maps values from a
+    category to either \lstinline|Nothing| or \lstinline|Just| and is
+    implemented simply as \lstinline{data Maybe a = Nothing | Just a}. Thus a
+    \lstinline|Maybe| is an ideal structure to describe existence of a value. In
+    Web programming values, such as user inputs, and features, such as HTML5
+    functions, might or might not exist which makes Web programs unsafe.
+    \lstinline|Maybe| can be used to describe the existence of a value and to enforce
+    proper error handling. For example picking the first element of an empty
+    list produces an undefined value which is likely to cause unwanted behavior
+    later in the execution chain. The first value of a \lstinline|List| can be
+    presented with the help of \lstinline|Maybe| endofunctor to enforce error
+    handling. A function \lstinline|safeHead :: Array a -> Maybe a| maps
+    \lstinline|a| to a type \lstinline|Maybe a|, which is an example of mapping
+    object from a category to a category of functors with an endofunctor as in
+    diagram \ref{mapping}.
+
+    \begin{equation}
+      \label{mapping}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        a \arrow[r, "Maybe"]
+        & Maybe\, a
+      \end{tikzcd}
+    \end{equation}
+
+    \lstinline|safeHead| function can be used for example when displaying the
+    first user from a list of users with function composition
+    \lstinline|safeHead <<< getUsers|, where \lstinline|getUsers| is defined as
+    \lstinline|getUsers :: () -> [User]|. Thus \lstinline|safeHead| is a mapping
+    between two categories \lstinline|User -> Maybe User| with \lstinline|Maybe|
+    endofunctor. The new type \lstinline|Maybe User| enforces to handle a case
+    where an empty array was returned from \lstinline|getUsers| and makes it
+    easier to reason about the program.
+
+    Previous examples have presented mapping of objects to objects inside
+    another category, but also morphisms are mapped. Diagram \ref{lifting}
+    presents how a morphism can be mapped with Maybe functor.
+
+    \begin{equation}
+      \label{lifting}
+      \begin{tikzcd}[row sep=huge, column sep=huge]
+        a \arrow[r, "Maybe"]
+        \arrow[d, "f"]
+        & Maybe\, a
+        \arrow[d, "map\, f"]
+        \\
+        b \arrow[r, "Maybe"]
+        & Maybe\, b
+      \end{tikzcd}
+    \end{equation}
+
+    Consider an Web application with a search field and a morphism
+    \lstinline|getUserByName :: String -> User|. When the search field is
+    submitted the \lstinline|getUserByName| function will be invoked and returns
+    a user. As before the user input can be mapped to \lstinline|Maybe|,
+    \lstinline|userInput :: Maybe String|, as there might not be any user input.
+    Now that the user input is of type \lstinline|Maybe String| the
+    \lstinline|getUserByName| cannot be used as such, but as functors need to
+    preserve structure a morphism can be lifted with
+    \lstinline|map :: Functor f => (a -> b) -> f a -> f b| and applied to the
+    \lstinline|userInput| as follows. 
+
+    \begin{lstlisting}[language=Haskell]
+      user :: Maybe User
+      user = map getUserByName userInput
+    \end{lstlisting}
+
+    Furthermore additional morphisms, such as getting the name of the user, can
+    be mapped by just lifting more functions with map as mapping an endofunctor
+    returns the same endofunctor.
+ 
+    In addition to mapping of objects and morphisms, a functor needs to preserve
+    identity and composition morphisms thus a function composition of any two
+    functions \lstinline|a| and \lstinline|b|, \lstinline|a <<< b|, can be
+    mapped multiple ways. For example, composition of functions
+    \lstinline|toUpper| and \lstinline|trim| can be mapped as
+    \lstinline|map toUpper <<< map trim| or \lstinline|map (toUpper <<< trim)|.
+    Functor laws provide a powerful tool to reason and refactor application code
+    as functions can be interchanged based on the laws.
+
+    In Web programming there often exists a requirement to communicate with
+    backend service(s). As a result responses from external services need to be
+    parsed in order to further process the data, the parsing might fail if the
+    given message was invalid. This can be avoided by mapping the message to
+    another category with \lstinline|Either| functor. Consider a case where JSON
+    string is parsed to further process the data with a mapping from
+    \lstinline|String -> Either String Json|. Functor \lstinline|Either|
+    contains either an error message of type \lstinline|String| or a
+    successfully parsed message of type \lstinline|Json|. Again knowing that
+    \lstinline|Either| is a functor, it follows certain laws and morphisms can
+    be lifted with \lstinline|map| function.
+
+
+%------------------------------------------------------------
+
+  \subsection{Natural Transformation}
+    As shown before functors can be used to reason and structure Web programs
+    but in order to compose functors there has to exist mappings between them.
+    Natural transformation can be used to transform a functor to a another
+    functor. Previously mapping of objects was presented with a function
+    \lstinline|safeHead :: Array a -> Maybe a|. If the function’s type signature
+    is changed to \lstinline|safeHead :: List a ~> Maybe a| there exists a
+    natural transformation between functors \lstinline|List| and
+    \lstinline|Maybe|. In categorical terms an object \lstinline|a| is mapped to
+    \lstinline|List a| with \lstinline|List| functor and to \lstinline|Maybe a| with
+    \lstinline|Maybe| functor and there exists a natural transformation between
+    \lstinline|List a| and \lstinline|Maybe a|.
+
+    Consider another example of natural transformation where data is searched
+    with endofunctor \lstinline|Maybe String| and asynchronous effect functor
+    \lstinline|Aff| which encapsulates the search request. In order to execute
+    the search request a natural transformation from
+    \lstinline|Maybe String -> Aff e a| has to exist.
+
+%------------------------------------------------------------
+
+  \subsection{Monads}
+    Function composition is a powerful tool to reason programs. Embellished
+    functions, which return a value wrapped inside an endofunctor, can be
+    composed with monads. The previously presented function
+    \lstinline|getUserByName :: String -> User| was used to showcase mapping of
+    morphisms with a functor. To be precise the type signature of the
+    \lstinline|getUserByName| function needs to be changed to
+    \lstinline|getUserByName :: String -> Maybe User| as a user might not be
+    found with every possible input value. Using this new function would lead
+    into a following scenario.
+ 
+    \begin{lstlisting}[language=Haskell]
+      user :: Maybe (Maybe User)
+      user = map getUserByName userInput
+    \end{lstlisting}
+ 
+    The user value would be a \lstinline|Maybe User| wrapped inside a
+    \lstinline|Maybe|. In category theory such a type is expressed as $T^2$. The
+    \lstinline|getUserByName| is now an embellished function and
+    \lstinline|Maybe| is a monad, thus monad’s natural transformation $\mu : T^2
+    \rightarrow T$ can be used to flatten the \lstinline|Maybe (Maybe User)|
+    structure into a \lstinline|Maybe User|. In PureScript the natural
+    transformation $\mu$ is called \lstinline|join|.
+ 
+    \begin{lstlisting}[language=Haskell]
+      user :: Maybe User
+      user = join $ map getUserByName userInput
+    \end{lstlisting} 
+
+    Additionally a \lstinline|bind :: forall a b. m a -> (a -> m b) -> m b|,
+    also known as \lstinline|>>=|, can be applied for more convenient syntax.
+ 
+    \begin{lstlisting}[language=Haskell]
+      user :: Maybe User
+      user = userInput >>= getUserByName
+    \end{lstlisting}
+
+%------------------------------------------------------------
+
+    \subsubsection{Eff and Aff Monad}
+      PureScript obeys laws of functional programming and it does not have
+      impure side-effects. In order to execute a side-effect, PureScript
+      presents a concept called effects. Some examples of side-effects are
+      console IO, random number generation, exceptions, local storage,
+      XMLHttpRequest and DOM manipulation.
+
+      \lstinline|Eff| monad enables pure execution context for side-effects.
+      With the help of effect monad the function \lstinline|getUserByName| can now
+      be rewritten to return the user data from local storage. The definition of
+      \lstinline|getUserByName| is updated to
+
+      \begin{lstlisting}[language=Haskell]
+        getUserByName :: forall eff. String 
+                        -> Eff (dom :: DOM | eff) (Maybe User)
+      \end{lstlisting}
+ 
+      \lstinline|Eff| type takes two type parameters from which the first is a
+      row of effects and the second describes the return type of the
+      \lstinline|Eff| monad. Here \lstinline|Eff| monad encapsulates side-effect
+      interaction with \lstinline|localStorage| which is defined as a part of
+      a DOM effect. As a result of the side-effect computation the function
+      \lstinline|getUserByName| returns \lstinline|Maybe User| just as before.
+ 
+      \lstinline|Eff| monad enables the modeling of side effects in type level.
+      As a benefit, used side-effects can be restricted in type level and
+      side-effectful computations can be easily distinguished from pure
+      computations. In addition, \lstinline|Eff| has all the benefits of a monad
+      category.
+ 
+      Some of the side-effects have an asynchronous nature. A common way to handle
+      an asynchronous computation is to introduce success and failure callbacks.
+ 
+      \begin{lstlisting}[language=Haskell]
+        getUserByName :: forall eff. String 
+                        -> (Error -> Eff (dom :: DOM | eff) Unit) 
+                        -> (User -> Eff (dom :: DOM | eff) Unit)
+                        -> Eff (dom :: DOM | eff) Unit
+      \end{lstlisting}
+ 
+      However, this method easily leads into situation called callback hell when
+      composing multiple asynchronous effects. Composition of asynchronous
+      effects can be solved with a continuation monad transformer called
+      \lstinline|ContT|. With the help of \lstinline|ContT|, \lstinline|Eff|
+      monad can be extended to \lstinline|Async| type.
+ 
+      \begin{lstlisting}[language=Haskell]
+        type Async eff = ContT Unit (Eff eff)
+      \end{lstlisting}
+
+      Now the function \lstinline|getUserByName| can be rewrited to fetch the
+      user over XmlHttpRequest.
+
+      \begin{lstlisting}[language=Haskell]
+        getUserByName :: forall eff. String 
+                        -> Async (http :: HTTP | eff) (Either Error User)
+      \end{lstlisting}
+ 
+      As in case of \lstinline|Eff| monad, the operation of asynchronous
+      side-effect is modeled in type level. In addition, \lstinline|Async|
+      enables composition of monadic effects through continuation transformer. A
+      popular library called purescript-aff introduces an alternative approach
+      to asynchronous computation, which avoids the use of monad transformers to
+      enable composition of async effects. An asynchronous effect monad called
+      \lstinline|Aff| aims to eliminate the callback hell and mimic synchronous
+      code with do notation, just as async keyword does in JavaScript.
+ 
+      Just as Haskell, a PureScript application does nothing without a
+      side-effect. The main function of an application is expecting an
+      \lstinline|Eff| monad. All other effects of an application has to be
+      composed with the main effect. That is why the ease of composition of
+      effects is essential part of PureScript application.
+
+%============================================================
+
+\section{Discussion}
+
+Category theory introduces a lot of reusable constructions to application
+development. Several common constructions have theoretical base in category
+theory. The benefits from well proven theories is indisputable except one could
+argue that the learning curve is too steep. Type level reasoning of a program is
+highly beneficial and usually confirms the correctness of the program. In
+general, a program is composed of smaller programs. The composition of atomic
+operations fits well into description of category theory, which is all about
+morphisms and their composition.
+ 
+Understanding categorical constructions is extremely beneficial to grasp the
+full potential of statically typed functional programming language. Also an
+ability to understand the correctness of a program results into high quality and
+reliable programs. The toolset of category theory is extremely useful, but the
+learning curve is really steep as the concepts of the theory are very abstract.
+However, one does not need to know all the concepts of category theory before
+achieving benefits from it. Also basic concepts of category theory are quite
+self-contained and to use one of them usually does not require deep
+understanding of an another concept. Higher abstraction concepts of category
+theory, in turn, require knowledge of basic concepts progressively.
+ 
+There exists a lot of studies about category theory, but there is a lack of
+studies about practical usage of category theory in Web programming. PureScript
+and its libraries are influenced by category theory. A further study might take
+a more detailed look into libraries of PureScript and find how they are
+influenced by category theory. For example, an user interface library called
+Halogen relies a lot on categorical structures such as free, lenses, monads,
+natural transformation, profunctors and functors. A further study might also
+focus on basic and more advanced concepts of category theory that were not
+mentioned in this paper.
+
+
+%============================================================
+
+\section{Conclusions}
+
+Modern statically typed functional programming languages are highly influenced
+by category theory. It has had a large impact on functional programming
+language semantics along with lambda calculus. Abstract properties of category
+theory can be found all over PureScript. These constructions provide enhanced
+reasoning and proven tools to everyday application development.
+ 
+Categorical constructions, presented in this paper, are just a tip of a
+iceberg of category theory. PureScript also relies on other categorical concepts
+which were not discussed in this paper. A computer scientist is not required to
+remember fine grained details of category theory in order to use functional
+programming language that builds on top of category theory, but understanding
+the concepts of category theory eases the learning curve.
+
+%============================================================
+
+\bibliographystyle{plain}
+\bibliography{ct}
+
+\end{document}

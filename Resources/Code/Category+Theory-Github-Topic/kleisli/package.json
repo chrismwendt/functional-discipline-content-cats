@@ -1,0 +1,27 @@
+{
+  "name": "kleisli",
+  "version": "0.1.4",
+  "description": "Kleisli",
+  "main": "dist/kleisli.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surovv/kleisli.git"
+  },
+  "scripts": {
+    "build": "webpack -p"
+  },
+  "author": "surovv",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-szh": "^0.0.3",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
+  }
+}

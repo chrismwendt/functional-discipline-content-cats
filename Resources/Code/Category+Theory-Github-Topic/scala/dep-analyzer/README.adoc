@@ -1,0 +1,98 @@
+= Dependency Analyzer
+Carlos Martin Garcia
+:toc: left
+:toclevels: 4
+:icons: font
+:sectnums:
+:tabsize: 4
+:docinfo1:
+:source-highlighter: prettify
+
+== TODOes
+
+- manage `java.io.FileNotFoundException`
+- manage `429 Too Many Requests` HTTP status code
+- close resources with _ZIO_ utility to avoid resource leaks, `bufferedSource.close`
+
+== Estudio
+
+The App has the following modules:
+
+- FileManager: access to filesystem
+- LogicManager: collection processing, filtering, statistics, regex, etc.
+- HttpManager: HTTP client
+- LoggingManager: logging app operations
+
+
+ZManaged example:
+
+ val depsManaged: ZManaged[HttpManager, Nothing, Unit] = ZManaged.make(getEnvironment())(_ => shutdown())
+
+
+Obtener dependencias mediante comandos bash
+
+ gw dep | \
+ grep -e '([0-9a-z\.-]*):([a-z-]*):([a-zA-Z0-9\.-]*)' | \
+ sed 's/[+\]---//g; s/|//g' | \
+ awk '{print $1}' | \
+ sort -u
+
+Regex
+
+([0-9a-z.]+):([0-9a-z-]+):([0-9.]+)?.*
+ 
+http://queirozf.com/entries/scala-regular-expressions-examples-reference
+
+ https://logback.qos.ch/manual/configuration.html
+
+Obtener dependencias y generar un archivo
+
+ gw dep --configuration default > /tmp/gradle-deps-default
+
+
+Lista de tareas previas al caso de uso:
+
+- sbt dependencyList > sbt-dependencies.log
+
+- regex para filtrar líneas con deps: ^[a-z]([a-z0-9-_\.]+:){2}([0-9A-Z-\.]+)
+
+- log con los positivos y negativos para verificar si la regex filtra correctamente
+
+- split del GAV por el caracter ":" (dos puntos)
+
+- añadir las deps a un Set para eliminar duplicados
+
+- obtener del repository todas las dependencias para el par (G,A)
+
+- obtener la última versión
+
+- consultar con maven central para verificar si ha cambiado
+
+- elaborar el report con las dependencias que tienen nueva versión
+
+
+== Secuencia
+
+. Se obtiene la colección de dependencias de un archivo de texto en el que cada línea de texto contiene un dependencia.
+. Se realiza el parsing de cada línea mediante una `regex` y se obtiene una colección de resultados coincidentes o no.
+. Se filtran los casos coincidentes de la colección anterior.
+. Se filtran las dependencias que pertenecen a determinados `groupId'.
+. Se consultan las versiones de la colección de dependencias final.
+. Se obtiene una colección de resultados que contiene la dependencia _local_ y la dependencia _remota_.
+
+== Create a ZIO Module
+
+https://zio.dev/docs/howto/howto_use_module_pattern
+
+. create `VersionManager` object.
+. create `VersionManager.Service[R]` trait.
+. create `VersionManager` trait.
+. create `VersionManagerLive` trait which extends `VersionManager`. Add collaborators if needed.
+. create `VersionManagerLive` object which extends `VersionManagerLive` trait
+. create an instance of `VersionManager.Service[Any]` trait and implement its definition.
+. create `VersionManagerHelper` object which extends `VersionManager.Service[VersionManager]`.
+
+== Links
+
+- ZIO Error Management: https://www.youtube.com/watch?v=mGxcaQs3JWI
+- Functional Concurrency in Scala with ZIO: https://www.youtube.com/watch?v=m5nas4Hndqo&t=

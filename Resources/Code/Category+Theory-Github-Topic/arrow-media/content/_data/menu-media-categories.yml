@@ -1,0 +1,20 @@
+tab:
+    - title: All Media
+      category: allPosts
+      url: /
+
+    - title: Tutorials
+      category: tutorials
+      url: /tutorials
+
+    - title: Videos
+      category: videos
+      url: /videos
+
+    - title: Articles
+      category: articles
+      url: /articles
+
+    - title: SlideDecks
+      category: slidedecks
+      url: /slidedecks

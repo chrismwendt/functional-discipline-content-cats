@@ -1,0 +1,153 @@
+\documentclass[a5paper]{article}
+\input{./exercise-header.tex}
+\begin{document}
+\title{Hatcher: Covering Spaces}
+\author{Langston Barrett}
+\date{Fall 2017}
+
+\begin{definition*}
+	A \textbf{covering space} of a topological space $(X,\tau)$ consists of the
+  following data:
+  \begin{itemize}
+    \itemsep0em
+    \item A space $(\widetilde{X},\widetilde{\tau})$,
+    \item a continuous map $p:\widetilde{X}\to X$,
+    \item and an open cover $\braces{U_\alpha}_{\alpha\in A}$ of $X$
+  \end{itemize}
+  subject to the condition that for all $\alpha\in A$, the preimage
+  $p^{-1}(U_\alpha)$ is a disjoint union of open sets in $\widetilde{X}$, each of
+  which is mapped homeomorphically onto $U_\alpha$ by $p$.
+\end{definition*}
+\problemnum{1}
+\begin{proposition*}
+	Let $\wt{X}$ be a covering space of $X$ with map $p:\widetilde{X}\to X$ and
+  open cover $\braces{U_\alpha}_{\alpha\in A}$. If $A$ is a subspace of $X$, then
+  $p^{-1}(A)$ is a covering space of $A$ with map $q:p^{-1}(A)\to A$
+  the restriction of $p$ and cover
+  $\braces{U_\beta}\coloneqq \braces{A\cap U_\alpha}_{\alpha\in A}$.
+\end{proposition*}
+\begin{proof}
+  Since $\braces{U_\alpha}$ covers $X$, it certainly covers $A$. Since the
+  intersection of an open set with $A$ is open in the subspace topology,
+  $\braces{U_\beta}$ is an open cover of $A$.
+
+  Consider the preimage $q^{-1}(U_\beta)$ for some $\beta$.
+  Since the restriction of continuous maps to a subspace is continuous,
+  $q^{-1}$ is continuous. Thus, $q^{-1}(U_\beta)$ is the disjoint union of open
+  sets in $p^{-1}(A)$ and each component is mapped homeomorphically onto
+  $U_\beta$ by $q$. We have given the required data and shown that it follows
+  the conditions, so $p^{-1}(A)$ is a covering space of $A$.
+\end{proof}
+
+\problemnum{2}
+
+\begin{lemma*}
+  The following is a basis for a disjoint union $\coprod_i B_i$:
+  \begin{equation*}
+    \caB \coloneqq \braces{\iota_j(U)|U\text{ is open in }B_j}
+  \end{equation*}
+  where $\iota_j:B_j\hookrightarrow \coprod_i B_i$ is the canonical inclusion.
+\end{lemma*}
+\begin{proof}
+	This is a restatement of the universal property of the coproduct.
+\end{proof}
+
+\begin{lemma*}
+  In $\Top$, finite products commute with arbitrary coproducts. Namely for all
+  spaces $A$ and a disjoint union $\coprod_i B_i$,
+  \begin{equation*}
+    A\times \coprod_i B_i\cong \coprod_i (A\times B_i)
+  \end{equation*}
+\end{lemma*}
+\begin{proof}
+  Recall that the coproduct is an indexed union, a set of pairs where the first
+  element of the pair is a ``tag'' indicating which set that item originated from.
+  \begin{align*}
+    \phi:A\times\coprod_i B_i &\longrightarrow \coprod_i (A\times B_i) \\
+    (a,(i,b))&\longmapsto (i,(a,b)) \\
+  \intertext{with inverse}
+    A\times\coprod_i B_i &\longleftarrow \coprod_i (A\times B_i):\phi^{-1} \\
+    (a,(i,b))&\longmapsfrom (i,(a,b)) 
+  \end{align*}
+  To prove continuity of a map into a space, it suffices to prove that the
+  inverse images of basis elements are open. As we have bases for both the
+  product and coproduct topologies, it suffices to show that 
+  $\phi^{-1}(j,U\times V)$ is open where $U$ is open in $A$ and $V$ is open in
+  $B_j$. From the definition of $\phi$ and $\phi^{-1}$, we obtain
+  \begin{equation*}
+    \phi^{-1}(j,U\times V) = (U,(j,V))
+  \end{equation*}
+  which is open by definition of the product topology. A similar argument shows
+  that $\phi^{-1}$ is continuous.
+\end{proof}
+
+\begin{proposition*}
+	If $\tilde{X}$, $p:\tilde{X}\to X$, $\braces{U_\alpha}$ and $\tilde{Y}$,
+  $q:\tilde{Y}\to Y$, $\braces{V_\beta}$ are covering spaces, then the product
+  $\tilde{X}\times\tilde{Y}$ covers $X\times Y$.
+\end{proposition*}
+\begin{proof}
+  If $(x,y)\in X\times Y$, then there exist $U_\alpha\ni x$ and $V_\beta\ni y$
+  in the open covers of $X$ and $Y$. Their product $U_\alpha\times V_\beta$
+  covers $(x,y)$ and is open in the product topology. Therefore, the pairwise
+  cartesian product of the open covers on $X$ and $Y$ defines an open cover on
+  $X\times Y$.
+
+  Let $\langle p,q \rangle:\widetilde{X}\times \widetilde{Y}\to X\times Y$ be
+  the product of maps $p$ and $q$, and consider the preimage
+  \begin{align*}
+    \langle p,q \rangle^{-1}(U_\alpha\times V_\beta)
+    &= \braces{(x,y)\in \wt{X}\times\wt{Y}\Big|\langle p,q \rangle(x,y)\in U_\alpha\times V_\beta} \\
+    &= \braces{(x,y)\in \wt{X}\times\wt{Y}\Big|(p(x),q(y))\in U_\alpha\times V_\beta} \\
+    &= \braces{(x,y)\in \wt{X}\times\wt{Y}\Big|p(x)\in U_\alpha\text{ and }q(y)\in V_\beta} \\
+    &= p^{-1}(U_\alpha)\times q^{-1}(V_\beta)
+  \end{align*}
+  By continuity of $p$ and $q$, this is an open set in the product topology on
+  $\wt{X}\times \wt{Y}$.
+  It remains to show that it is the disjoint union of sets
+  mapped homeomorphically onto $U_\alpha\times V_\beta$ by $\langle p,q \rangle$.
+  A slight generalization of the above lemma demonstrates that the inverse image
+  is indeed a disjoint union of open sets. The definition of
+  $\langle p,q \rangle$ ensures that the mapping is homeomorphic.
+\end{proof}
+
+\problemnum{3}
+
+% \begin{lemma*}
+% 	If $\wt{X}$ covers $X$ via $p:\wt{X}\to X$, then $p$ is an open map.
+% \end{lemma*}
+% \begin{proof}
+% 	Let $\wt{U}\subseteq\wt{X}$ be open. By the definition of a covering space,
+%   there is a distinguished open cover $\braces{U_\alpha}$ of $X$. Then
+%   $p(\wt{U})$ is the subset of a union of some of these covering sets.
+%   Additionally, the intersection
+% \end{proof}
+
+\begin{proposition*}
+	Let $\wt{X}$ be a covering space with map $\wt{X}\to X$ and suppose
+  $p^{-1}(x)$ is finite and nonempty for all $x\in X$. Then $X$ is compact
+  Hausdorff if and only if $\wt{X}$ is.
+\end{proposition*}
+\begin{proof}
+	($\Rightarrow$ Hausdorff) Assume $X$ is Hausdorff. Let $\wt{x},\wt{y}$ be
+  distinct points in $\wt{X}$ and let $x\coloneqq p(\wt{x})$
+  and $y\coloneqq p(\wt{y})$. Since $X$ is Hausdorff, there exist non-overlapping
+  neighborhoods $U$ of $x$ and $V$ of $y$. Call the intersections of these
+  neighborhoods with the open cover guaranteed by the covering space $U'$ and
+  $V'$, respectively. Then $p^{-1}(U')$ and $p^{-1}(V')$ are disjoint unions of
+  open and distinct sets in $\wt{X}$, and contain $\wt{x}$ and $\wt{y}$
+  respectively.
+
+	($\Leftarrow$ Hausdorff) Assume $\wt{X}$ is Hausdorff. Let $x,y$ be
+  distinct points in $X$. By the nonemptiness assumption, there exist
+  distinct $\wt{x},\wt{y}\in\wt{X}$ such that $p(\wt{x})=x$ and $p(\wt{y})=y$.
+  By the axioms of covering spaces, $p^{-1}(x)$ and $p^{-1}(y)$ are the disjoint
+  unions of open sets. Let $\wt{U}_x,\wt{U}_y$ be the open sets containing
+  $\wt{x}$ and $\wt{y}$, respectively. Since $\wt{X}$ is Hausdorff, there exist
+  non-overlapping open sets $\wt{U}_x'$ and $\wt{U}_y'$ contained within
+  $\wt{U}_x$ and $\wt{U}_y$, respectively. Since homeomorphisms are open maps,
+  $p(\wt{U}_x')$ and $q(\wt{U}_y')$ are open in $X$ and contain $x$ and $y$,
+  respectively. 
+\end{proof}
+
+\end{document}

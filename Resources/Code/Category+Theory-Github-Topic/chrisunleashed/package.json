@@ -1,0 +1,44 @@
+{
+  "name": "chrisunleashed.github.io",
+  "version": "1.0.0",
+  "description": "Site for Chris Unleashed",
+  "main": "index.html",
+  "browserslist": [
+    "ie >= 11",
+    "> 1%",
+    "last 2 versions"
+  ],
+  "config": {},
+  "scripts": {
+    "build": "webpack -p && bundle exec jekyll build -s . -d ./_site",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "eslint . --ext .js --ext .json --ignore-path .eslintignore",
+    "lint:yaml": "yamllint .travis.yml **/*.yml **/**/*.yml",
+    "postcommit": "git status",
+    "precommit": "npm test",
+    "start": "bundler exec jekyll serve -s . -d ./_site",
+    "test": "run-p lint:yaml",
+    "upgrade": "updtr -s exact"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisunleashed.github.io.git"
+  },
+  "author": "Chris Sundberg",
+  "contributors": [
+    "Chris Sundberg <chris.sundberg89@gmail.se>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/chrisunleashed.github.io/issues"
+  },
+  "homepage": "https://github.com/chrisunleashed.github.io#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "4.2.3",
+    "npm-run-all": "4.1.5",
+    "updtr": "3.1.0",
+    "yaml-lint": "1.2.4"
+  }
+}

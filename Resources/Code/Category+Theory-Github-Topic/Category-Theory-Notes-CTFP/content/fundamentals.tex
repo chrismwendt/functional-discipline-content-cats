@@ -1,0 +1,109 @@
+\section{Fundamentals}
+
+\begin{definition}[Category]
+    A \textit{category} contains:
+    \begin{enumerate}
+        \item \textbf{Objects}
+        \item \textbf{Arrows} which go between objects.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Arrow (morphism)]
+    Given two objects $A$ and $B$ from a category, an \textit{arrow} (or \textit{morphism}) $f$ goes from one to the other.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \node [phantomblock] (A) {$A$};
+            \node [phantomblock, right=2em of A] (B) {$B$};
+            \draw [->] (A) edge node [above] {$f$} (B);
+        \end{tikzpicture}
+        \caption{Arrow starting at $A$ and ending at $B$}
+        \label{fig:arrow}
+    \end{figure}
+\end{definition}
+
+\begin{remark}
+    Arrows can be thought of as \textit{functions}: a function taking an input of type \Code{int} and returning some value of type \Code{bool} can be considered as an arrow between $\MCode{int} \to \MCode{bool}$.
+\end{remark}
+
+\begin{definition}[Composition of Arrows]
+    Arrows (morphisms) can be \textit{composed}. Given the arrows $f$ and $g$ where
+    \begin{equation}
+        \begin{aligned}
+            A \xrightarrow{f} B \xrightarrow{g} C
+        \end{aligned}
+    \end{equation}
+    
+    Then their composition $g \circ f$ goes from $A$ to $C$.
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+            A \arrow[r, "f", swap] \arrow[rr, bend left, "g \circ f"] 
+            & B \arrow[r, "g", swap] 
+            & C
+        \end{tikzcd}
+        \caption{Composition of Arrows}
+        \label{fig:arrow-composition}
+    \end{figure}
+    
+    Such composition between two arrows must satisfy the two properties:
+    \begin{enumerate}
+        \item \textbf{Associativity}.
+        For any three composable arrows $f$, $g$, $h$, it is required that
+        \begin{equation}
+            h \circ (g \circ f) \equiv (h \circ g) \circ f \equiv h \circ g \circ f
+        \end{equation}
+        Allowing parentheses to be dropped.
+        \item \textbf{Identity}. For every object $A$ there exists an \textit{unit of composition}, which is an \textit{identity} arrow $id_A$ which loops back to the same object $A$. When the identity arrow $id_A$ is composed with any arrow $\gamma$ which begins or ends at $A$, then the result is $\gamma$. Given some arrow $f$ where $A \xrightarrow{f} B$ then
+        \begin{align}
+            f \circ id_A &= f \\
+            id_B \circ f &= f
+        \end{align}
+    \end{enumerate}
+    
+    Graphically,
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[t]{0.45\textwidth}
+            \centering
+            \begin{tikzcd}
+                A \arrow[r, "f", swap] \arrow[rrr, bend left, "h \circ g \circ f"]
+                & B \arrow[r, "g", swap]
+                & C \arrow[r, "h", swap]
+                & D
+            \end{tikzcd}
+            \caption{Associative Composition}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.45\textwidth}
+            \centering
+            \begin{tikzcd}
+                A \arrow[r, "f"] \arrow[loop left, "id_A"]
+                & B \arrow[loop right, "id_B"]
+            \end{tikzcd}
+            \caption{Identity Morphisms}
+        \end{subfigure}
+        \caption{Composition Properties}
+        \label{fig:composition-properties}
+    \end{figure}
+    
+\end{definition}
+
+\begin{remark}
+    The composition between $f$ and $g$ is denoted $g \circ f$ with $f$ applied first -- the order of composition is \textit{right-to-left}, with the rightmost arrow, $f$, applied first.
+    
+    In C, this is effectively
+    \inputminted{c}{content/code-listings/composition.c}
+    
+    In Haskell,
+    \inputminted{hs}{content/code-listings/composition.hs}
+    
+    Creating a new composed function from $f$ and $g$ in JavaScript
+    \inputminted{js}{content/code-listings/composition.js}
+    
+    Note that a new anonymous function taking an input \Code{x} is created, which is the composed function $g \circ f$.
+    
+    The identity morphism in Haskell is simply
+    \inputminted{hs}{content/code-listings/identity.hs}
+\end{remark}

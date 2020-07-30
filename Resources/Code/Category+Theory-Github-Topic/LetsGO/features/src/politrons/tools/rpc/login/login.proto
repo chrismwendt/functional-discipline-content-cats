@@ -1,0 +1,35 @@
+syntax = "proto3";
+package login;//You can specify in which package you wand the auto generated code.
+
+//Request message that we will use for the login of the user
+message LoginMessage {
+    string username = 1;
+    string password = 2;
+}
+
+//The user type message that we will use to create the user in [CreateUser] function+
+//and the response with User information in LoginUser
+message UserMessage {
+    string name = 1;
+    string age = 2;
+    string sex = 3;
+}
+
+/*
+Message type to cover the username and the UserMessage to create account of the user.
+*/
+message CreateUserMessage {
+    string username = 1;
+    UserMessage userMessage = 2;
+}
+
+/*
+Service to be implemented by the server side, and which functions it will be exposed to the client to be invoked.
+*/
+service Account {
+    rpc CreateUser (CreateUserMessage) returns (UserMessage) {
+    }
+
+    rpc LoginUser (LoginMessage) returns (UserMessage) {
+    }
+}

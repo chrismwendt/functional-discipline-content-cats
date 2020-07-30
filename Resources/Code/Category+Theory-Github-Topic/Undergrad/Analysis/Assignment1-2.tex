@@ -1,0 +1,133 @@
+\documentclass[20pt]{extarticle} %big fontsize
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+
+\begin{document}
+
+\paragraph{Question 1}
+\[ <a_n>\text{ is a real sequence; }\sigma_n := \frac{a_1+a_2+...+a_n}{n} \]
+\begin{enumerate}[label=\Roman*]
+	\item $\text{lim inf } a_n \leq \text{lim inf }\sigma_n  $ \\
+		If $a_n$ is unbounded below, then \text{lim inf }$a_n = -\infty \leq \text{lim inf }\sigma_n$
+		So, let $a_n$ be bounded below, thus LHS is a real number,
+		\[ m:= \text{lim inf }a_n \]
+		Now, if $a_n$ is constant, and equal to a,
+		\[ \forall n \in \mathbb{N} \text{ , inf} \{ a_i | i\geq n \} =a = \frac{na}{n} =\sigma_n\]
+		Otherwise, if $a_n$ is not constant, then,
+		\[ \exists i,j \in \mathbb{N} \text { such that(wlog) } a_i < a_j \]
+		Suppose if possible, lim inf $a_n=m> \text{ lim inf } \sigma_n$.
+		But, $ \forall n \in \mathbb{N} \text{ such that } n \geq i,j,$
+		\[\sigma_n= \frac{a_1 + ... +a_i+... + a_j + ... + a_n}{n}\]
+		\[\implies \sigma_n  \geq{\frac{(n-2)m+a_i+a_j}{n}} \geq \frac{(n-1)m+a_j}{n}>m\]
+		\text{ [ $\because m \leq a_i < a_j $ ] }
+		\[	\text{Hence, inf } \sigma_n \geq \frac{(n-1)m+a_j}{n} \]
+		\[		\implies \text{lim inf } \sigma_n \geq \lim_{n \to \infty} \frac{(n-1)m+a_j}{n}=m\]
+		\text{But this contradicts the initial assumption.}
+
+	\item \text{lim sup }$ a_n \geq \text{lim sup }\sigma_n$
+		If $a_n$ is unbounded above, then \text{lim sup }$a_n =  \infty \geq \text{lim sup }\sigma_n$ .\\
+
+		So, let $a_n$ be bounded above, thus LHS is a real number,
+		\[ M:= \text{lim sup }a_n \]
+		Now, if $a_n$ is constant, and equal to a,
+		\[ \forall n \in \mathbb{N} \text{ , sup} \{ a_i | i\geq n \} =a = \frac{na}{n} =\sigma_n\]
+		Otherwise, if $a_n$ is not constant, then,
+		\[ \exists i,j \in \mathbb{N} \text { such that(wlog) } a_i < a_j \]
+		Suppose if possible, lim sup $a_n=M< \text{ lim sup } \sigma_n$
+		But, \[ \forall n \in \mathbb{N} \text{ such that } n \geq i,j, \]
+		\begin{equation*}
+			\begin{split}
+				\sigma_n= \frac{a_1 + ... +a_i +...+ a_j + ... + a_n}{n} & \leq{\frac{(n-2)M+a_i+a_j}{n}}\\
+										    & \leq \frac{(n-1)M+a_j}{n}\\
+										    & <M \text{ [ $\because M \geq a_j > a_i $ ] }
+			\end{split}
+		\end{equation*}
+		\[	\text{Hence, inf } \sigma_n \leq \frac{(n-1)M+a_j}{n} \]
+		\[		\implies \text{lim inf } \sigma_n \leq \lim_{n \to \infty} \frac{(n-1)M+a_j}{n}=M\]
+		\text{But this contradicts the initial assumption.}
+\end{enumerate}
+
+
+\paragraph{Question 2}
+\[ \text{lim inf } \frac{a_{n+1}}{a_n} \leq \text{lim inf }(a_n)^\frac{1}{n} \leq \text{lim sup }(a_n)^\frac{1}{n} \leq \text{lim sup }\frac{a_{n+1}}{a_n} \]
+\begin{enumerate}[label=\Roman*]
+	\item Showing that $\text{lim inf } \frac{a_{n+1}}{a_n} \leq \text{lim inf }(a_n)^\frac{1}{n}$\\
+		Case 1: \text{lim inf } $ \frac{a_{n+1}}{a_n}=0 $
+		\[ \forall n \in \mathbb{N}, a_n > 0 \implies (a_n)^ \frac{1}{n}> 0 \]
+		\[ \text{ Thus } , \text{lim inf }(a_n)^ \frac{1}{n} \geq 0 = \text{lim inf } \frac{a_{n+1}}{a_n} 	 \]
+
+		Case 2: \text{lim inf } $ \frac{a_{n+1}}{a_n}= \infty $\\
+		So, for any $ a \in \mathbb{N},$
+		\[ \exists M_a \in \mathbb{N}: n\geq	M_a \implies \frac{a_{n+1}}{a_n}> a \]
+		Fix any a, and choose $n>M_a$. For any such n,
+		\[  \frac{a_{n+1}}{a_n}>a \implies a_{n+1} >aa_n  \]
+		\[ \implies a_n>aa_{n-1}> a^2a_{n-2}>...>a^{n-M}a_M \]
+		\[ \implies  (a_n)^ \frac{1}{n} > a( \frac{a_M}{a^M} )^	\frac{1}{n} \]
+		Now as for fixed $a$, $ \frac{a_M}{a^M} $ is constant,
+		\[ \lim_{n \to \infty} (\frac{a_M}{a^M})^{ \frac{1}{n} }=1 \implies \lim_{n \to \infty} a(\frac{a_M}{a^M})^{ \frac{1}{n} }=a\]
+		Thus, \[\forall \epsilon >0, \exists K \in \mathbb{N}: n>K \implies a(\frac{a_M}{a^M})^{ \frac{1}{n} }>a- \epsilon \]
+		And hence, in particular, $a(\frac{a_M}{a^M})^{ \frac{1}{n} }>a-1$ for any natural number $a$.
+		\[ (a_n)^ \frac{1}{n}  > a(\frac{a_M}{a^M})^{ \frac{1}{n} }> a-1 \implies \lim_{n \to \infty} (a_n)^ \frac{1}{n}= \infty  \]
+		\[ \therefore  \text{lim inf } \frac{a_{n+1}}{a_n} = \infty=\text{lim inf }(a_n)^\frac{1}{n}\]
+		Case 3: \text{lim inf } $ \frac{a_{n+1}}{a_n}= a \in \mathbb{R} $\\
+		So, $ \forall \epsilon > 0,  \exists M \in \mathbb{N}: n > M \implies \frac{a_{n+1}}{a_n} > a-\epsilon$
+		\[ a_n>(a-\epsilon) a_{n-1}>(a-\epsilon)^2 a_{n-2}>...>(a-\epsilon)^{n-M} a_M \]
+		\[ \implies (a_n)^ \frac{1}{n}>(a- \epsilon) (\frac{a_M}{a^M})^{ \frac{1}{n} }\]
+	But, as $\lim_{n \to \infty} (\frac{a_M}{a^M})^ \frac{1}{n}=1 $,\\
+	\[ (a_n)^ \frac{1}{n}>(a- \epsilon) (\frac{a_M}{a^M})^{ \frac{1}{n} }>(a-\epsilon)(1-\epsilon)=a-(1+a)\epsilon+ \epsilon^2 \]
+	\[ \implies  (a_n)^ \frac{1}{n}>a-(1+a)\epsilon \]
+		But as this holds for every $\epsilon >0$,
+		\[ \text{lim inf }(a_n)^ \frac{1}{n} \geq a-0= \text{lim inf } \frac{a_{n+1}}{a_n}  \]
+\newpage
+	\item  $\text{lim sup }(a_n)^\frac{1}{n} \leq \text{lim sup }\frac{a_{n+1}}{a_n}$\\
+		Case 1: \text{lim sup } $ \frac{a_{n+1}}{a_n}=\infty $\\
+		As \text{lim sup }$(a_n)^ \frac{1}{n} \leq \infty = \text{lim sup }\frac{a_{n+1}}{a_n}$,done\\
+
+		Case 2: \text{lim sup } $ \frac{a_{n+1}}{a_n}= -\infty $\\
+		\[ \text{lim sup }  \frac{a_{n+1}}{a_n}= -\infty \implies \lim_{n \to \infty} \frac{a_{n+1}}{a_n} = -\infty\]
+		But, as all $a_n$ are positive, so is their raito, and hence it cant be unbounded below. \\
+
+		Case 3: \text{lim sup } $ \frac{a_{n+1}}{a_n}= a \in \mathbb{R} $\\
+		So, $ \forall \epsilon > 0,  \exists M \in \mathbb{N}: n > M \implies \frac{a_{n+1}}{a_n} < a+\epsilon$
+		\[ a_n<(a+\epsilon) a_{n-1}<(a+\epsilon)^2 a_{n-2}<...<(a+\epsilon)^{n-M} a_M \]
+		Now, as $(\frac{a_M}{a^M})^{ \frac{1}{n} }$ is constant,
+		\[   	\exists K \in \mathbb{N}: n \geq K \implies  (\frac{a_M}{a^M})^{ \frac{1}{n} } <1+\epsilon\]
+		\[ \implies (a_n)^ \frac{1}{n}<(a+ \epsilon) (\frac{a_M}{a^M})^{ \frac{1}{n} } < (a+\epsilon)(1+\epsilon)=a+(a+1)\epsilon + \epsilon^2 \]
+		Thus,
+		\[\text{lim sup }(a_n)^ \frac{1}{n} \leq a+(a+1) \epsilon + \epsilon^2<a+(a+1)(1+\epsilon)\epsilon, \]
+	but as this holds for every $\epsilon>0$,
+		\[ \text{lim inf }(a_n)^ \frac{1}{n} \leq a= \text{lim inf } \frac{a_{n+1}}{a_n}  \]
+
+\end{enumerate}
+
+\paragraph{Question 3}
+\[\text{ $a_n$ \& $b_n$ are bounded, non-negative sequences; $a_n \rightarrow a >0 $   } \]
+As $a_n, b_n $ are bounded sequences, so is $a_n b_n$.\\
+Hence, L:=lim sup $a_n b_n $ and R:=lim sup $b_n$ are real numbers
+
+Now, as $a_n \rightarrow a$
+\[ \forall \epsilon > 0, \exists \delta_\epsilon \in \mathbb{N}:n>\delta \implies a-\epsilon < a_n < a + \epsilon   \]
+So, fix any \epsilon, hence,
+\[ (a- \epsilon)b_n < a_n b_n < (a+ \epsilon)b_n \]
+
+\[ \text{lim sup }a_n b_n = a \text{ lim sup }b_n \]
+
+
+\paragraph{Question 4}
+\begin{enumerate}[label=\Roman*]
+	\item lim inf $ \frac{a_{n+1}}{a_n}>1 \implies a_n \nrightarrow 0 \text{ and }  \text{lim sup } |a_n|>0   $
+	\item \text{lim sup}$ \frac{a_{n+1}}{a_n}<1 \implies a_x \rightarrow 0 \text{ where } a_n>0$
+	\item Some convergant sequences are:
+		\begin{enumerate}
+			\item	$a_n:=1$
+		\end{enumerate}
+	\item Some divergent sequences are: \begin{enumerate}
+		\item	$a_n := n$
+			\[\frac{  a_{n+1} }{  a_n  }= \frac{n+1}{n}=1+ \frac{1}{n} \]
+			This tends to 1 [ for $ \epsilon= \frac{1}{n} , \text{ take } \delta = \frac{1}{n+1}   $]\\
+			But the sequence diverges [ to $\infty$  ].
+	\end{enumerate}
+\end{enumerate}
+
+\end{document}

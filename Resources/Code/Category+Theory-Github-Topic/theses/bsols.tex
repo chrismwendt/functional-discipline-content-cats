@@ -1,0 +1,3539 @@
+\oldchapter{Solutions to exercises}\label{sols}
+\begin{solution}{physics-stinespring}%
+To prove the first statement,
+let~$\varphi \colon \scrB(\scrH) \to \scrB(\scrK)$ be any ncp-map.
+If~$\varphi=0$ then~$\scrK'=0$ and~$V=0$ does the job,
+        so for the other case, assume~$\varphi \neq 0$.
+    By~\sref{stinespring-theorem}
+        there is a Hilbert space~$\scrH'$,
+        a bounded operator~$W \colon \scrH \to \scrH'$ and an
+        nmiu-map~$\varrho \colon \scrB(\scrH) \to \scrB(\scrH')$
+        such that~$\varphi = \ad_W \after \varrho$.
+Clearly~$\varrho \neq 0$.
+    By~\sref{nmiu-between-type-I}
+        there is a Hilbert space~$\scrK'$
+        and a unitary~$U \colon \scrH' \to \scrH \otimes \scrK'$
+        with~$\varrho(A) = U^* (A \otimes 1) U$
+         for all~$A \in \scrB(\scrH)$.
+Define~$V \equiv UW$.
+    Then~$\varphi(A) = W^* \varrho(A) W = W^*U^* (A \otimes 1) UW
+        =  V^* (A \otimes 1 ) V$, as desired.
+
+Before we can continue with the second statement,
+    we need to understand the relationship
+    between quantum channels and ncpu-maps.
+This relationship is best understood with
+    predual characterization of von Neumann algebras
+    due to Sakai~\cite{sakai}, which we have been avoiding.
+The characterization is as thus:
+    a C$^*$-algebra~$\scrA$ is a von Neumann algebra
+    if and only if it is isomorphic to the dual of a Banach space.
+Then this Banach space is unique up-to-isomoprhism
+    as it must be isomorphic to the space of normal functionals on~$\scrA$
+    (denoted by~$\scrA_*$)
+    and is appropriately called the \emph{predual}~of~$\scrA$.
+Any normal linear map~$\varphi\colon \scrA \to \scrB$
+    between von Neumann algebras~$\scrA$ and~$\scrB$
+    yields a linear map~$\varphi_*\colon \scrB_* \to \scrA_*$
+    via~$\varphi_*(\omega) = \omega \after \varphi$.
+In the other direction, any linear map~$\varphi_* \colon \scrB_* \to \scrA_*$
+    gives rise to a normal linear map~$\varphi\colon \scrA \to \scrB$
+    by defining~$\varphi(a)(\omega) = \varphi_*(\omega)(a)$
+    where we identified~$\scrA \equiv (\scrA_*)^*$.
+Clearly~$\varphi$ is positive precisely
+    if~$\varphi_*$ maps positive functionals to positive functionals.
+
+A normal state~$\omega\colon \scrB(\scrH) \to \C$
+    is precisely of the form~$\omega(a) = \TR[\rho a]$ for some density
+        matrix~$\rho$ over~$\scrH$.
+Thus the predual of~$\scrB(\scrH)$ can be identified
+    with the set of trace-class operators over~$\scrH$.
+Let~$\varphi_*$ be a linear map from the density operators
+    on~$\scrH$ to those on~$\scrK$.
+The map~$\varphi_*$ is completely positive in its usual sense
+    if the corresponding map~$\varphi$ is completely positive.
+Furthermore~$\varphi$ is unital if and only if~$\varphi_*$
+    is trace-preserving.
+
+To prove the second statement,
+    let~$\Phi$ be any quantum channel
+    mapping density matrices over~$\scrH$ to those of~$\scrH$ again.
+(Note: in the printed version of the thesis
+    the exercise incorrectly
+    assumes~$\Phi$ to map density matrices over~$\scrH$
+    to those over some other Hilbert space~$\scrK$.)
+It follows from the previous, that there is a unique
+        ncpu-map~$\varphi\colon \scrB(\scrH) \to \scrB(\scrH)$ with
+\begin{equation*}
+    \TR[ \Phi(\rho) A] \ = \ \TR[\rho \varphi(A)]
+        \quad\text{for any density matrix~$\rho\in \scrB(\scrH)$}.
+\end{equation*}
+See also~\cite{tomamichel} for a more direct approach.
+By the first part if the exercise,
+    we know that there is a Hilbert space~$\scrK'$
+    and a bounded operator~$V \colon \scrH \to \scrH \otimes \scrK'$
+    with~$\varphi (A) = V^* (A \otimes 1) V$.
+Tracing back the definition of~$V$, we see that~$V$
+    is an isometry because~$\varphi$ is unital.
+Pick any orthonormal bases~$E$ and~$F$ of~$\scrH$ and~$\scrK'$
+    respectively.
+We may assume, without loss of generality,
+    that~$\scrK'$ is not zero-dimensional
+    by setting~$\scrK' =\C$ and~$V = 0$
+    in the case that~$\Phi = 0$.
+Pick any~$f_0 \in F$
+    and any unitary~$U\colon \scrH \otimes \scrK' \to \scrH \otimes \scrK'$
+    with~$U^* x \otimes f_0 = V x$,
+    which exists as~$V$ is an isometry.
+Now we compute
+\begin{align*}
+    \TR [\varphi(A) \rho ]
+    & \ = \ \TR[\rho V^* (A \otimes 1) V] \\
+    & \ = \ \sum_{e \in E} \langle V \rho e, (A \otimes 1) V e \rangle \\
+    & \ = \ \sum_{e \in E}
+    \bigl\langle U^* (\rho \otimes 1) \,e\otimes f_0 ,
+    \ (A \otimes 1) U^* \,e\otimes f_0 \bigr\rangle. \\
+\intertext{Inserting~$\ketbra{f_0}{f_0}$
+    in the previous,
+    we may sum over all~$f \in F$ and get}
+     \TR[\varphi(A) \rho] &\ = \ \sum_{\substack{e \in E \\ f\in F}}
+    \bigl\langle U^* (\rho \otimes \ketbra{f_0}{f_0}) \,e\otimes f ,
+    \ (A \otimes 1) U^* \,e\otimes f \bigr\rangle \\
+    & \ = \ \sum_{\substack{e \in E \\ f\in F}}
+    \bigl\langle
+    (U^* (e\otimes f)) , \ 
+    U^* (\rho \otimes \ketbra{f_0}{f_0})U \,
+    (A \otimes 1) \,(U (e\otimes f)) \bigr\rangle \\
+    & \ = \ 
+    \TR \bigl[
+    U^* (\rho \otimes \ketbra{f_0}{f_0})U \,
+    (A \otimes 1)  \bigr] \\
+& \ = \ 
+\TR \bigl[ A   \TR\nolimits_{\scrK'}[ U^* (\rho \otimes \ketbra{f_0}{f_0} ) U] \bigr].
+\end{align*}
+This show that indeed~$\Phi(\rho)
+    = \TR_{\scrK'}[ U^* (\rho \otimes \ketbra{v_0}{v_0})U]$
+    as desired with~$v_0 \equiv f_0$.
+\end{solution}
+\begin{solution}{kraus-exercise}%
+Let~$\varphi\colon \scrB(\scrH) \to \scrB(\scrK)$
+    be any ncp-map.
+By~\sref{physics-stinespring}
+    there is a Hilbert space~$\scrK'$
+    and a bounded operator~$V\colon \scrK \to \scrH \otimes \scrK'$
+    with~$\varphi(A) = V^* (A \otimes 1) V$.
+Let~$E$ be any orthonormal basis of~$\scrK'$.
+    Then~$1 = \sum_{e\in E} \ketbra{e}{e}$
+        where the sum converges ultraweakly
+        and so by ultraweak continuity of~$\ad_V$ (\sref{ad-normal})
+        and~$B \mapsto A\otimes B$ (\sref{tensor-simple-facts}), we see
+    \begin{equation}\label{kraus-exc-eq1}
+        \varphi(A) \ =\  V^* \Bigl(A \otimes \sum_{e\in E} \ketbra{e}{e}\Bigr) V
+        ) \ =\  \sum_{e \in E} V^* (A \otimes \ketbra{e}{e}) V.
+    \end{equation}
+For~$e\in E$, define~$P_e \colon \scrH \otimes \scrK' \to \scrH$
+    by~$P_e \equiv 1\otimes \bra{e}$,
+    i.e.~$P_e(x \otimes y) = x \langle e, y\rangle$.
+Define~$V_e \equiv P_e V$.
+    Note that~$P_e^*AP_e = A \otimes\ketbra{e}{e}$ and so
+\begin{alignat*}{2}
+    \varphi(A)
+    &\ = \  \sum_{e \in E} V^* (A \otimes \ketbra{e}{e} ) V &\qquad&
+    \text{by \eqref{kraus-exc-eq1}} \\
+    &\ = \  \sum_{e \in E} V^* P_e^*A P_e V \\
+    &\ = \  \sum_{e \in E} V_e^* A V_e,
+\end{alignat*}
+as desired.
+From the special case~$A=1$, we see
+    that~$\sum_{e \in E} V_e^*V_e = \varphi(1)$
+    and so the partial sums of~$\sum_{e \in E} V_e^* V_e$ are bounded.
+
+For the final part, assume~$\scrH$ and~$\scrK$ are finite dimensional.
+Recall that the standard Stinespring dilation space (say~$\scrK''$)
+    for~$\varphi$ is constructed using a completion
+    and quotient of~$\scrB(\scrH)\odot \scrK$.
+As~$\scrB(\scrH)\odot \scrK$ is finite dimensional
+    it is already complete.
+    Hence~$\scrK''$ has dimension at most~$(\dim\scrH)^2( \dim\scrK)$.
+By construction~$\scrH \otimes \scrK' \cong \scrK''$,
+    hence~$\dim \scrK' \leq (\dim \scrH )(\dim \scrK)$.
+Recall~$E$ is a basis of~$\scrK'$
+    and so there are indeed at most~$(\dim \scrH )(\dim \scrK)$
+        Kraus operators.
+\end{solution}
+\begin{solution}{exc-chris-univ-prop}%
+We will show that~$U\colon \mathsf{Rep} \to \mathsf{Rep}_{\mathrm{cp}}$
+    has a left adjoint by demonstrating the universal mapping property.
+    Let~$\varphi\colon \scrA \to \scrB(\scrH)$ be any object of~$\mathsf{Rep}_{\mathrm{cp}}$.
+    Pick any minimal Stinespring dilation~$(\scrK, \varrho, V)$ of~$\varphi$.
+The map~$\varrho\colon \scrA\to \scrB(\scrK)$ is an object
+        of~$\mathsf{Rep}$.
+Clearly~$\ad_V \after \varrho \after \id = \varphi$
+    and so~$\eta_\varphi\equiv (\id,V)\colon \varphi \to U\varrho$
+        is a morphism in~$\mathsf{Rep}_{\mathrm{cp}}$.
+We will show that for each~$f\colon \varphi \to U\varrho'$
+        in~$\mathsf{Rep}_{\mathrm{cp}}$,
+    there is a unique~$f'\colon \varrho \to \varrho'$
+    in~$\mathsf{Rep}$ with~$Uf' \after \eta_\varphi = f$.
+This is sufficient to show that~$U$
+    has a left adjoint.
+
+    So let~$f\colon \varphi\to U\varrho'$ be any morphism
+        in~$\mathsf{Rep}_{\mathrm{cp}}$.
+Say~$\varrho'\colon \scrA' \to \scrB(\scrK')$.
+    Then~$f \equiv (m', V')$ consists of
+    a nmiu-map~$m'\colon \scrA \to \scrA'$
+    and bounded operator~$V' \colon \scrH \to \scrK'$
+    with~$\ad_{V'} \after \varrho' \after m' = \varphi$.
+By~\sref{dils-univ-stinespring}
+    there is a unique bounded operator~$S\colon \scrK \to \scrK'$
+        with~$SV = V'$ and~$\varrho = \ad_S \after \varrho' \after m'$.
+This turns~$f' \equiv(m',S)$ into a
+    morphism~$\varrho \to \varrho'$ in~$\mathsf{Rep}$.
+Furthermore~$Uf' \after \eta_\varphi
+                = (m' \after \id, SV) = (m',V') = f$.
+To show uniqueness, assume
+        there is some~$f'' \colon \varrho \to \varrho'$
+        in~$\mathsf{Rep}$
+        with~$Uf'' \after \eta_\varphi = f$.
+Say~$f'' = (m'',S'')$.
+    Then~$(m',V') = f = Uf' \after \eta_\varphi = (m'', S''V)$.
+So~$m''=m'$ and~$V' = S''V$.
+The fact that~$f''$ is a morphism in~$\mathsf{Rep}$
+    is
+    equivalent to~$\ad_{S''} \after \varrho' \after m'' = \varrho$.
+Thus~$\ad_{S''} \after \varrho' \after m' = \varrho$.
+By uniqueness of~$S$, we get~$S'' = S$.
+    Hence~$f''=(m'',S'') = (m',S) = f'$, as desired.
+\end{solution}
+\begin{solution}{ess-uniq-pur}%
+Let~$\varphi\colon \scrB(\scrH) \to \scrB(\scrK)$ be any ncp-map.
+As in the description of the exercise,
+    let~$\scrK$ be a Hilbert space
+    and~$V,W\colon \scrK \to \scrH \otimes \scrK'$
+    be bounded operators
+    with~$V^* (a \otimes 1) V = \varphi(a) = W^* (a\otimes 1) W$.
+Write~$\scrV$ for the closed linear span
+    of~$\{(a \otimes 1) V x; \ a \in \scrB(\scrH),\ x \in \scrK\}$
+        in~$\scrH\otimes \scrK'$
+and similarly~$\scrW$ for that
+    of~$\{(a \otimes 1) W x; \ a \in \scrB(\scrH),\ x \in \scrK\}$.
+Note that for any~$n\in \N$, ~$x_1,\ldots, x_n \in \scrK$
+    and~$a_1, \ldots, a_n \in \scrB(\scrH)$ we have
+\begin{align*}
+    \bigl\| \sum_i (a_i\otimes1) V x_i \bigr\|^2
+    &\ = \ 
+     \sum_{i,j} \langle x_i,\, V^* ((a_i^*a_j) \otimes 1) V x_j\rangle \\
+    &\ = \ 
+     \sum_{i,j} \langle x_i,\, W^* ((a_i^*a_j) \otimes 1) W x_j\rangle \\
+     &\ = \ 
+    \bigl\| \sum_i (a_i\otimes1) W x_i \bigr\|^2.
+\end{align*}
+Thus there is a unique unitary~$U_0\colon \scrW \to \scrV$
+    fixed by~$U_0 (a \otimes 1) W x = U_0 (a \otimes 1) V x$.
+We see~$U_0 W = V$ by setting~$a=1$.
+Furthermore
+    \begin{equation*}
+        (\alpha \otimes 1) U_0 (a \otimes 1) W x
+        \ = \ ((\alpha a)  \otimes 1) V x
+        \ = \ U_0 (\alpha  \otimes 1 )(a  \otimes 1) W x
+    \end{equation*}
+    for any~$\alpha,a \in \scrB(\scrH)$ and~$x \in \scrK$,
+    hence~$(\alpha \otimes 1) U_0 = U_0 (\alpha \otimes 1)$.
+
+For any~$a \in \scrB(\scrH)$,
+    the operator~$a \otimes 1 \in \scrB(\scrH \otimes \scrK')$
+    restricts to~$\scrB(\scrW)$.
+Pick an orthonormal basis~$E$ of~$\scrH$
+    and some~$e_0 \in E$.
+    Note that~$(\ketbra{e_0}{e_0} \otimes 1) \scrW = e_0 \otimes \scrW'$
+    for some closed subspace~$\scrW' \subseteq \scrK'$.
+In fact, for any~$e \in E$
+    we have~$e \otimes \scrW'
+    = (\ketbra{e}{e_0} \otimes 1) (e_0 \otimes \scrW')
+    = (\ketbra{e}{e_0}\otimes 1)  (1 \otimes \ketbra{e_0}{e_0}) \scrW
+    = (\ketbra{e}{e} T \otimes 1)  \scrW = (\ketbra{e}{e} \otimes 1) \scrW$,
+    where~$T$ is the unitary on~$\scrH$ that only swaps~$e$ and~$e_0$.
+Hence~$\scrW = \scrH \otimes \scrW'$.
+Similarly~$\scrV = \scrH \otimes \scrV'$
+    for some closed subspace~$\scrV' \subseteq \scrK'$.
+
+For any non-zero~$w \in \scrW'$ and unit-vector~$x \in \scrH$,
+    we have~$U_0 (x \otimes w)
+        = U_0 (\ketbra{x}{x} \otimes 1)( x\otimes w)
+        = (\ketbra{x}{x} \otimes 1) U_0 (x\otimes w)$
+        so~$U_0 (x \otimes w) = x \otimes y$ for some~$y \in \scrV'$.
+Clearly~$\| w \| = \| x \otimes w\|=\| U_0 (x\otimes w) \|
+        = \|x \otimes y\| = \|y\|$,
+        so there is a unique unitary~$U_1\colon \scrW' \to \scrV'$
+        with~$U_0 (x \otimes w) = x \otimes U_1 w$.
+        It follows~$U_0 = 1 \otimes U_1$.
+
+As~$\scrV$ and~$\scrW$ are isomorphic, they have the same dimension
+    and so do~$\scrV^\perp$ and~$\scrW$.
+Consequently, there is an unitary~$U\colon \scrK' \to \scrK'$
+    extending~$U_1$.
+We have~$V = (1\otimes U) W
+    =   (1 \otimes U_1) W
+     = U_0 W = V$ as desired.
+\end{solution}
+\begin{solution}{paschke-basics}%
+We cover the points in order.
+\begin{enumerate}
+\item
+Let~$\varrho \colon \scrA \to \scrB$ be a mniu-map.
+Assume there are nmiu~$\varrho'\colon \scrA \to \scrP'$
+    and ncp~$h'\colon \scrP' \to \scrB$
+        with~$h' \after \varrho' = \varrho$.
+We have to show there is a unique map~$\sigma\colon \scrP \to \scrB$
+    with~$\id \after \sigma= h'$ and~$h' \after \varrho' = \varrho$.
+        Clearly~$\sigma\equiv h' $ fits the bill.
+
+\item
+Let~$(\scrP,\varrho,h)$ be any Paschke dilation.
+        We will show that~$(\scrP, \id, h)$ is a Paschke dilation of~$h$.
+To this end, let~$\varrho'\colon \scrA \to \scrP'$
+        be any nmiu-map and~$h'\colon \scrP' \to \scrB$
+        be any ncp-map with~$h' \after \varrho' = h$.
+Consider~$\varrho' \after \varrho$ and~$h'$.
+    By the universal property of the original dilation,
+            there is a unique ncp-map~$\sigma \colon \scrP' \to \scrP$
+                with~$\sigma\after\varrho'\after\varrho = \varrho$
+                and~$h \after\sigma = h'$.
+Furthermore~$\id\colon \scrP \to \scrP$
+    is the unique ncp-map
+        with~$\id \after \varrho = \varrho$
+        and~$h \after \id = h$.
+Now~$(\sigma \after \varrho') \after \varrho = \varrho$
+    and~$h \after (\sigma \after \varrho') = h' \after \varrho' = h$,
+        so~$\sigma \after \varrho' = \id$.
+We are are halfway demonstrating that~$\sigma$ is also the mediating map
+        for our dilation of~$h$.
+It remains to be shown that~$\sigma$ is the unique ncp-map
+    with~$\sigma \after \varrho' = \id$
+        and~$h \after \sigma = h'$.
+So assume there is a ncp-map~$\sigma'\colon \scrP' \to \scrP$
+    with~$h \after \sigma' = h'$ and~$\sigma' \after \varrho' = \id$.
+    Clearly~$\sigma' \after\varrho' \after\varrho =\varrho$
+        and so by uniqueness of~$\sigma$ as the mediating map
+        for the orignal dilation,
+        we see~$\sigma' = \sigma$, as desired.
+    \item
+
+    Let~$
+        \left(\begin{smallmatrix}\varphi_1\\\varphi_2 \end{smallmatrix} \right)
+        \colon \scrA \to \scrB_1 \oplus \scrB_2$
+        be any ncp-map.
+    Pick Paschke dilations~$(\scrP_i, \varrho_i, h_i)$
+            of~$\varphi_i$ for~$i=1,2$.
+        We will show that~$(\scrP_1 \oplus \scrP_2, 
+        \left(\begin{smallmatrix}\varrho_1\\\varrho_2 \end{smallmatrix} \right),
+            h_1 \oplus h_2 )$
+            is a Paschke dilation of~$
+    \left(\begin{smallmatrix}\varphi_1\\\varphi_2 \end{smallmatrix} \right)$.
+Clearly~$h_1 \oplus h_2 \after 
+        \left(\begin{smallmatrix}\varrho_1\\\varrho_2 \end{smallmatrix} \right)=
+        (\begin{smallmatrix}h_1 \after\varrho_1\\h_2 \after \varrho_2 \end{smallmatrix} )
+            = 
+    \left(\begin{smallmatrix}\varphi_1\\\varphi_2 \end{smallmatrix} \right) $.
+Let~$\varrho'\colon \scrA \to \scrP'$ be any nmiu-map
+    and~$
+    \left(\begin{smallmatrix}h_1\\ h_2\end{smallmatrix} \right) 
+        \colon \scrP' \to \scrB_1 \oplus \scrB_2$
+        any ncp-map with~$
+    \left(\begin{smallmatrix}h_1\\ h_2\end{smallmatrix} \right)  \after
+        \varrho' = 
+    \left(\begin{smallmatrix}\varphi_1\\ \varphi_2\end{smallmatrix} \right) $.
+Note~$h_i \after \varrho' = \varphi_i$
+    (for~$i=1,2$)
+    and so there is a unique~$\sigma_i\colon \scrP' \to \scrP_i$
+    with~$\sigma_i \after \varrho' = \varrho_i$
+    and~$h_i \after \sigma_i = h_i'$.
+We will show that~$
+    \left(\begin{smallmatrix}\sigma_1\\ \sigma_2\end{smallmatrix} \right) 
+        \colon \scrP' \to \scrP_1\oplus \scrP_2$
+        is the unique mediating map.
+Clearly~$
+    \left(\begin{smallmatrix}\sigma_1\\ \sigma_2\end{smallmatrix} \right) 
+        \after \varrho' = 
+    \bigl(\begin{smallmatrix}\sigma_1 \after \varrho'\\ \sigma_2 \after \varrho' \end{smallmatrix} \bigr) =
+    \left(\begin{smallmatrix}\varrho_1\\ \varrho_2 \end{smallmatrix} \right) $
+and~$(h_1 \oplus h_2) \after
+\bigl( \begin{smallmatrix} \sigma_1\\ \sigma_2 \end{smallmatrix} \bigr)
+    =
+\bigl( \begin{smallmatrix}
+h'_1 \after \sigma_1\\
+h'_2 \after \sigma_2
+\end{smallmatrix} \bigr) =
+\bigl( \begin{smallmatrix}
+h_1 \\
+h_2
+\end{smallmatrix} \bigr)$.
+To show uniqueness of~$
+( \begin{smallmatrix}
+\sigma_1\\
+\sigma_2
+\end{smallmatrix})$,
+assume
+there is ncp-map$
+    \bigl(\begin{smallmatrix}\sigma'_1\\ \sigma'_2\end{smallmatrix} \bigr) 
+        \colon \scrP' \to \scrP_1\oplus \scrP_2$
+    such that~$ \bigl(\begin{smallmatrix}\sigma'_1\\ \sigma'_2\end{smallmatrix} \bigr) 
+        \after \varrho'
+        = 
+    \bigl(\begin{smallmatrix}\varrho_1\\ \varrho_2 \end{smallmatrix} \bigr) $
+and~$(h_1 \oplus h_2) \after
+\bigl( \begin{smallmatrix} \sigma'_1\\ \sigma'_2 \end{smallmatrix} \bigr)
+    =
+\bigl( \begin{smallmatrix}
+h_1 \\
+h_2
+\end{smallmatrix} \bigr)$.
+Then~$h_i \after \sigma_i' = h_i$ and~$\sigma_i' \after \varrho' = \varrho_i$
+    for~$i=1,2$ and so~$\sigma_i=\sigma_i'$ by the uniqueness
+    of the seperate~$\sigma_i$.
+    Thus indeed~$
+( \begin{smallmatrix}
+\sigma_1\\
+\sigma_2
+\end{smallmatrix}) =
+\bigl( \begin{smallmatrix}
+\sigma'_1\\
+\sigma'_2
+\end{smallmatrix}\bigr)$.
+
+\item
+Let~$\varphi\colon \scrA \to \scrB$ be any ncp-map
+    with Paschke dilation~$(\scrP, \varrho, h)$.
+Assume~$\lambda \in \R, \lambda > 0$.
+We will show~$(\scrP, \varrho, \lambda h)$
+    is a Paschke dilation of~$\lambda \varphi$.
+Clearly~$\lambda h \after \varrho = \lambda \varphi$.
+To this end, assume~$\varrho'\colon \scrA \to \scrP'$ is a nmiu-map
+    and~$h' \colon \scrP' \to \scrB$ is an ncp-map
+    with~$h' \after \varrho' = \lambda \varphi$.
+Then~$\lambda^{-1} h' \after \varrho' = \varphi $.
+Thus there is a unique~$\sigma\colon \scrP' \to \scrP$
+    with~$\sigma \after \varrho' = \varrho$
+    and~$h \after \sigma = \lambda^{-1} h'$.
+Clearly~$\lambda h \after \sigma = h'$ and so~$\sigma$
+    also serves as the unique mediating map
+    for the dilation of~$\lambda \varphi$.
+\end{enumerate}
+\end{solution}
+\spacingfix
+\begin{solution}{module-seminorm}%
+Let~$X$ be a right~$\scrB$-module
+with~$\scrB$-valued inner product~$\langle \,\cdot\,,\,\cdot\,\rangle$
+    for some C$^*$-algebra~$\scrB$.
+Using the C$^*$-identity, ~\sref{module-CS} and the definition
+    of~$\|\,\cdot\,\|$ on~$X$, we
+    get~$ \| \langle x, y\rangle\|^2
+        = \| \langle x, y\rangle^* \langle x, y\rangle\|
+        = \| \langle y,x \rangle\langle x,y\rangle \|
+        \leq \bigl\| \|\langle x,x\rangle\| \langle y, y \rangle \bigr\|
+        = \| x\|^2 \|y\|^2$,
+        so indeed~$\|\langle x, y \rangle \| \leq \|x\|\|y\|$.
+
+    Now we will show~$\|x\| \equiv \| \langle x,x\rangle\|^{\frac{1}{2}}$
+    is a seminorm on~$X$.
+    Clearly~$\|x\| \geq 0$ for any~$x \in X$.
+For any~$\lambda \in \C$ and~$x \in X$
+    we have~$\langle \lambda x, \lambda x \rangle
+        = \overline\lambda \langle x, x \rangle \lambda
+        = | \lambda |^2 \langle x,x\rangle$,
+    hence~$
+        \|\lambda x\|=
+       \|\lambda^2 \langle x, x \rangle \|^{\frac{1}{2}} =
+        |\lambda|  \|x\| $.
+Next, for any~$x,y \in X$ we have
+\begin{alignat*}{2}
+    \| x + y \|^2 & \ = \  \| \langle x + y, x+y\rangle \| \\
+    & \ \leq \ \| \langle x,x\rangle\| 
+        + \| \langle y,y\rangle\|
+        + \| \langle x, y \rangle \|
+        + \| \langle x, y \rangle^* \| \\
+    & \ = \ \|x\|^2 + \|y\|^2 + 2\|\langle x,y\rangle\| \\
+    & \ \leq \ \|x\|^2 + \|y\|^2 + 2\|x\|\|y\| \\
+    & \ =\ (\|x\| + \|y\|)^2
+\end{alignat*}
+and thus~$\|\,\cdot\,\|$ is indeed a seminorm.
+
+Finally, we will show~$\|x \cdot b\| \leq \|x\|\|b\|$
+    for any~$b\in \scrB$ and~$x \in X$.
+As~$\langle x,x\rangle$ is positive,
+    we have~$\langle x,x \rangle  \leq \|\langle x,x\rangle \|
+            = \|x\|^2$.
+Also recall~$a \mapsto b^* a b$ is clearly positive.
+Thus~$\|x\cdot b\|^2 \equiv \|\langle xb, xb\rangle \|
+        = \| b^* \langle x, x \rangle b\|
+        \leq  \bigl\|
+        \|x\|^2
+        b^*b
+        \bigr\|
+        = \|b\|^2 \|x\|^2$ as desired.
+\end{solution}
+\begin{solution}{hilbmod-polarization}%
+Let~$B$ be any~$\scrB$-sesquilinear form on a pre-Hilbert~$\scrB$-module~$X$
+    for some C$^*$-algebra~$\scrB$.
+    Distributing~$B$ in~$\sum_{k=0}^3 i^k B(i^k x+y, i^k x+y)$
+    we get 16 terms
+    consisting of four of each~$B(x,x)$, $B(y,y)$, $B(x,y)$ and $B(y,x)$
+    with the following coefficients.
+    \begin{center}
+        \begin{tabular}{c|rrrr}
+        & $B(x,x)$ & $B(y,y)$ & $B(x,y)$ & $B(y,x)$\\ \hline
+        $k\,=\,0$ & $1$ & $1$ & $1$ & $1$ \\
+        $k\,=\,1$ & $i\cdot (-i)\cdot i\,=\,i$ & $i$ & $i \cdot (-i)\,=\,1$ & $i^2 \,=\, -1$ \\
+        $k\,=\,2$ & $(-1)^3\,=\,-1 $&$ -1 $&$ (-1)^2 \,=\,1$&$ (-1)^2\,=\,1$ \\
+            $k\,=\,3$ & $(-i) \cdot i \cdot (-i)\,=\,-i $&$ -i $&$ (-i)\cdot i\,=\, 1$&$ (-i)^2\,=\,-1 $\\
+    \end{tabular}
+\end{center}
+    Note that the coefficients in
+    every column sum to~$0$, except for the coefficients for~$B(x,y)$ which
+    sum to~$4$.
+    Hence~$ \sum_{k=0}^3 i^k B(i^k x+y, i^k x+y) = 4B(x,y)$.
+\end{solution}
+\begin{solution}{exc-subbase}%
+    Let~$X$ be a set together with a subbase~$B$.
+    Write~$\Phi$ for the filter generated by~$B$.
+    Note~$B \subseteq \Phi$.
+    We will show~$(X,\Phi)$ is a uniform space, by proving
+        its axioms in order.
+\begin{enumerate}
+    \item
+        By construction~$\Phi$ is a filter.
+    \item
+        Pick any~$\varepsilon \in \Phi$.
+        We have to show~$\Delta\equiv\{(x,x); \ x\in X\} \subseteq \varepsilon$.
+        By definition of~$\Phi$, there
+        are~$\varepsilon_1, \ldots, \varepsilon_n \in B$
+        with~$\varepsilon_1 \cap \ldots \cap \varepsilon_n \subseteq \varepsilon$.
+    By definition of a base, we have~$\Delta \subseteq \varepsilon_i$
+        for each~$1 \leq i \leq n$
+        and so~$\Delta \subseteq \varepsilon_1 \cap \ldots
+        \cap \varepsilon_n \subseteq\varepsilon$ as well.
+    \item
+        Pick any~$\varepsilon \in \Phi$.
+    By definition of~$\Phi$, there
+        are~$\varepsilon_1, \ldots, \varepsilon_n \in B$
+        with~$\varepsilon_1 \cap \ldots \cap
+        \varepsilon_n \subseteq \varepsilon$.
+    As~$B$ is a base, there are~$\delta_1, \ldots, \delta_n$
+     with~$\delta_i \after \delta_i \subseteq \varepsilon_i$
+        for~$1 \leq i \leq n$.
+    Define~$\delta = \delta_1 \cap \ldots \cap \delta_n$.
+        Then~$\delta \after \delta
+            \subseteq \bigcap_{i,j} \delta_i \after \delta_j
+            \subseteq \bigcap_i \delta_i \subseteq 
+            \bigcap_i \varepsilon_i \subseteq \varepsilon$.
+\item
+        Pick any~$\varepsilon \in \Phi$.
+    By definition of~$\Phi$, there
+        are~$\varepsilon_1, \ldots, \varepsilon_n \in B$
+        with~$\varepsilon_1 \cap \ldots \cap
+        \varepsilon_n \subseteq \varepsilon$.
+    As~$B$ is a base, there are~$\delta_1, \ldots, \delta_n$
+        with~$\delta_i^{-1} \subseteq \varepsilon_i$.
+    Define~$\delta = \delta_1 \cap \ldots \cap \delta_n$.
+        Then~$\delta^{-1} =
+            \bigcap_{i} \delta_i^{-1}  \subseteq
+            \bigcap_i \varepsilon_i \subseteq \varepsilon$.
+\end{enumerate}
+    Thus indeed, $(X, \Phi)$ is a uniform space.
+\end{solution}
+\begin{solution}{dils-uniform-spaces-basics}%
+We prove the subexercises in order.
+\begin{enumerate}
+\item
+First we will show that equivalence of Cauchy nets is an equivalence
+    relation.
+As for every entourage~$\varepsilon$ we have~$x \mathrel\varepsilon x$,
+    we see that every Cauchy net is equivalent to itself.
+Assume~$(x_\alpha)_\alpha \sim (y_\beta)_\beta$.
+        We will show~$(y_\beta)_\beta \sim (y_\alpha)_\alpha$.
+Let~$\varepsilon$ be some entourage.
+    There is some entourage~$\delta$ with~$\delta^{-1}\subseteq \varepsilon$.
+        By assumption there are~$\alpha_0$ and~$\beta_0$
+        such that~$x_\alpha \mathrel{\delta} y_\beta$
+        for all~$\alpha \geq \alpha_0$ and~$\beta \geq \beta_0$.
+    But then~$y_\beta \mathrel{\varepsilon} x_\alpha$
+        for~$\alpha \geq \alpha_0$ and~$\beta \geq\beta_0$.
+        Hence~$(y_\beta)_\beta \sim (x_\alpha)_\alpha$.
+    To prove transitivity,
+assume we are given Cauchy nets~$(x_\alpha)_\alpha \sim (y_\beta)_\beta 
+            \sim (z_\gamma)_\gamma$.
+Let~$\varepsilon$ be some entourage.
+There is an entourage~$\delta$ with~$\delta \after \delta \subseteq \varepsilon$.
+There are~$\alpha_0, \beta_0, \gamma_0$
+    such that~$x_\alpha \mathrel\delta y_\beta $
+            and~$y_\beta \mathrel\delta z_\gamma $
+            for~$\alpha \geq \alpha_0$, $\beta \geq \beta_0$
+            and~$\gamma \geq \gamma_0$.
+        Hence~$x_\alpha \mathrel\varepsilon z_\gamma$ for such~$\alpha$ and~$\gamma$, which shows~$(x_\alpha)_\alpha \sim (z_\gamma)_\gamma$.
+
+Next, assume that~$(x_\alpha)_\alpha$ is a subnet
+        of a Cauchy net~$(y_\alpha)_\alpha$.
+    To show~$(x_\alpha)_\alpha \sim (y_\alpha)_\alpha$,
+            assume~$\varepsilon$ is some entourage.
+    By the definition of Cauchy net,
+            there is some~$\alpha_0$
+            such that~$x_\alpha \mathrel{\varepsilon} x_\beta$
+            for all~$\alpha,\beta \geq \alpha_0$.
+    In particular~$x_\alpha \mathrel{\varepsilon} y_\beta$
+        for all~$\alpha, \beta \geq \alpha_0$
+        which shows~$(x_\alpha)_\alpha \sim (x_\beta)_\beta$.
+
+\item
+Assume~$(x_\alpha)_\alpha \sim (y_\beta)_\beta$
+    and~$x_\alpha \to x$.
+To prove $y_\alpha \to x$, pick any entourage~$\varepsilon$.
+Pick~$\delta$ such that~$\delta^2 \subseteq \varepsilon$.
+There are~$\alpha_0$ and~$\beta_0$
+    such that~$y_\beta \mathrel\delta x_\alpha$
+        and~$x_\alpha \mathrel\delta x$
+        for all~$\alpha \geq \alpha_0 $ and~$\beta \geq \beta_0$.
+    Then~$y_\beta \mathrel\varepsilon x$ for all~$\beta \geq \beta_0$,
+        whence~$y_\beta \to x$.
+
+\item
+    Assume~$(x_\alpha)_\alpha \to x$ and~$(x_\alpha)_\alpha \to y$
+            in some Hausdorff uniform space.
+    Let~$\varepsilon$ be any entourage.
+        Pick~$\delta$ and~$\delta'$ with~$\delta^2 \subseteq \varepsilon$
+        and~$\delta'\subseteq \delta^{-1}$.
+    There is an~$\alpha_0$ such that~$x_\alpha \mathrel\delta x$
+        and~$x_\alpha \mathrel{\delta'} y$
+        for all~$\alpha \geq \alpha_0$.
+    Thus~$x \mathrel\varepsilon y$.
+    As our space is Hausdorff the previous implies~$x=y$.
+\item
+    Let~$f\colon X\to Y$ be a continuous map between uniform spaces.
+    Assume~$x_\alpha \to x$ in~$X$.
+    Let~$\varepsilon$ be any entourage of~$Y$.
+By continuity there is a~$\delta$
+    such that~$x \mathrel\delta y$ implies~$f(x) \mathrel{\varepsilon} f(y)$
+    for any~$y \in Y$.
+There is an~$\alpha_0$ such that~$x \mathrel{\delta} x_\alpha$
+    for all~$\alpha \geq \alpha_0$.
+For those~$\alpha$ we also have~$f(x) \mathrel{\varepsilon} f(x_\alpha)$,
+    which shows~$f(x_\alpha) \to f(x)$.
+\item
+    Let~$f\colon X\to Y$ be a uniformly continuous map
+        between uniform spaces.
+Let~$(x_\alpha)_\alpha$ and~$(y_\beta)_\beta$
+    be nets of~$X$
+    such that for each entourage~$\varepsilon$ of~$X$
+        there are~$\alpha_0,\beta_0$ with~$x_\alpha \mathrel\varepsilon y_\beta$
+        for all~$\alpha\geq\alpha_0$ and~$\beta \geq \beta_0$.
+The map~$f$ preserves this relation between the nets
+    in the following way.
+Let~$\varepsilon$ be any entourage of~$Y$
+By uniform continuity there is a~$\delta$
+    such that~$x \mathrel\delta y$ implies~$f(x) \mathrel\varepsilon f(y)$.
+There are~$\alpha_0$ and~$\beta_0$
+    with~$x_\alpha \mathrel\delta y_\beta$ for all~$\alpha \geq\alpha_0$
+    and~$\beta \geq\beta_0$.
+    Hence~$f(x_\alpha) \mathrel\varepsilon f(y_\beta)$
+        for such~$\alpha,\beta$.
+
+From the previous it follows that~$f$
+    preserves Cauchy nets (by setting~$x_\alpha=y_\alpha$)
+    and that it preserves equivalence between Cauchy nets.
+\item
+Let~$D \subseteq X$ be a dense subset of a uniform space~$X$.
+Let~$x \in X$ be any point.
+Pick for every~$\varepsilon \in \Phi$
+    an element~$d_\varepsilon \in D$
+    with~$x \mathrel\varepsilon d_\varepsilon$.
+Clearly~$(d_\varepsilon)_{\varepsilon\in\Phi}$ is a net with inverse
+inclusion. We have~$d_\varepsilon \to x$
+    as~$d_\delta \mathrel\varepsilon x$
+    whenever~$\delta \subseteq \varepsilon$.
+\item
+Assume~$f,g\colon X \to Y$ are continuous maps between uniform
+    spaces that agree on a dense subset~$D \subseteq X$.
+Let~$x\in X$ be any point.
+Pick a net~$x_\alpha$ from~$D$ with~$x_\alpha \to x$.
+Then~$f(x) = f(\lim_\alpha x_\alpha) = \lim_\alpha f(x_\alpha)
+    =  \lim_\alpha g(x_\alpha) = g(\lim_\alpha x_\alpha) = g(x)$.
+    Hence~$f=g$.
+\end{enumerate}
+\end{solution}
+\spacingfix
+\begin{solution}{dils-product-uniformity}%
+Write~$B \equiv \{ \hat\varepsilon; \ \varepsilon \in \Phi_i;\ i \in I\}$.
+First we show~$B$ is a subbase,
+    i.e.~that is satisfies conditions 2, 3 and 4
+    of~\sref{dils-dfn-uniformity}.
+Let~$\hat\varepsilon$ be an arbitrary element of~$B$
+    and~$i \in I$ denote the index element with~$\varepsilon \in \Phi_i$.
+    Assume~$(x_i)_{i \in I} \in \Pi_i X_i$.
+Clearly~$x_i \mathrel\varepsilon x_i$
+    and so~$(x_i)_i \mathrel{\hat\varepsilon} (x_i)_i$.
+    Thus~$B$ satisfies condition 2 of~\sref{dils-dfn-uniformity}.
+Pick a~$\delta \in \Phi_i$ with~$\delta^2 \subseteq \varepsilon$.
+    Then~${\hat\delta}^2 =\widehat{\delta^2} \subseteq \hat{\varepsilon}$
+    and so~$B$ satisfies condition 3 of~\sref{dils-dfn-uniformity}.
+Now let~$\delta$ denote an entourage of~$X_i$
+    with~$\delta^{-1} \subseteq \varepsilon$.
+    Then~$\hat{\delta}^{-1} = \widehat{\delta^{-1}}
+        \subseteq \hat{\varepsilon}$
+        and so~$B$ also satisfies condition 4 of~\sref{dils-dfn-uniformity}.
+
+Next we show that the projectors~$\pi_i \colon \prod_i X_i \to X_i$
+    are uniformly continuous.
+    Assume~$i_0 \in I$ and~$\varepsilon$ is an entourage of~$X_{i_0}$.
+Define~$\delta \equiv \hat\varepsilon$.
+    Let~$(x_i)_i$ and~$(y_i)_i$
+        from~$\prod_i X_i$ be given
+        with~$(x_i)_i \mathrel\delta (y_i)_i$.
+    Then~$x_{i_0} \mathrel\varepsilon y_{i_0}$.
+    Thus~$\pi_{i_0}$ is indeed uniformly continuous.
+
+To show~$(\pi_i)_{i}$ is a categorical product,
+    assume we are given a uniform space~$Y$ together
+        with uniformly continuous maps~$f_i \colon Y \to X_i$
+            for each~$i \in I$.
+We have to show that there is a unique uniformly continuous 
+    map~$f\colon Y \to \prod_i X_i$
+        with~$\pi_i \after f = f_i$ for all~$i \in I$.
+    Define~$f$ by~$(f(y))_i \equiv f_i (y)$.
+    Clearly~$\pi_i \after f = f_i$.
+
+    To show~$f$ is uniformly continuous,
+        pick any entourage~$\varepsilon$ of~$\prod_i X_i$.
+        By definition, there are~$i_1, \ldots, i_n$
+            and~$\varepsilon_1, \ldots, \varepsilon_n$
+            with~$\varepsilon_j \in \Phi_{i_j}$
+            and~$\bigcap_j \widehat{\varepsilon_j} \subseteq \varepsilon$.
+    For each~$1 \leq j \leq n$
+        pick an entourage~$\delta_j$ of~$Y$
+        such that~$x \mathrel\delta_j y$
+        implies~$f_{i_j}(x) \mathrel{\varepsilon_j} f_{i_j}(y)$.
+Define~$\delta \equiv \bigcap_j \delta_j$
+    Assume~$x \mathrel\delta y$.
+    Then for each~$1 \leq j \leq n$
+        we have~$f_{i_j}(x) \mathrel{\varepsilon_j} f_{i_j}(y)$
+            and so~$f(x) \mathrel{\widehat{\varepsilon_j}} f(y)$,
+            hence~$f(x) \mathrel\varepsilon f(y)$.
+        Thus~$f$ is uniformly continuous.
+
+To show uniqueness of~$f$, assume there is a uniformly continuous
+    map~$f'\colon Y \to \prod_i X_i$ with~$\pi_i \after f' = f_i$.
+Then~$(f'(y))_i = f_i(y) = (f(y))_i$ for every~$y \in Y$
+    and so~$f' = f$.
+\end{solution}
+\begin{solution}{ultranormscalar}%
+    Let~$\scrB$ be a von Neumann algebra and~$X$
+        a right $\scrB$-module with~$\scrB$-valued inner product.
+    We will show that~$x \mapsto xb$ is ultranorm continuous
+        for any~$b \in \scrB$.
+    It is sufficient to show it is ultranorm continuous at~$0$,
+        so assume~$x_\alpha \to 0$ ultranorm for some net~$x_\alpha$ in~$X$.
+Let~$f\colon \scrB \to \C$ be any np-map.
+    Then~$\|x_\alpha b\|_f^2  
+        = f([x_\alpha b, x_\alpha b])
+        = f(b^* [x_\alpha , x_\alpha ]b)
+        \leq \|b^*b\| f([x_\alpha, x_\alpha])
+        = \|b\|^2 \|x_\alpha \|_f^2 \to 0$
+        thus~$x_\alpha b \to 0$ ultranorm as well.
+\end{solution}
+\begin{solution}{mod-projelabs}%
+For brevity, write~$p \equiv \langle e,e\rangle$.
+Note~$\| e p - e\|^2
+    = \| e (1-p) \|^2
+    = \langle e (1 - p), e (1-p) \rangle
+    = (1-p) \langle e,e\rangle (1-p)
+    = (1-p) p (1-p) = 0$.
+Thus~$ep - e= 0$ and so~$ep = e$ as desired.
+\end{solution}
+\begin{solution}{mod-parseval}%
+Let~$X$ be a pre-Hilbert~$\scrB$-module for a von Neumann algebra~$\scrB$
+    with orthonormal basis~$E \subseteq X$.
+Assume~$x \in X$.
+By definition of orthonormal basis,
+    we know~$x = \sum_{e \in E} e \langle e,x\rangle$
+    where the sum converges ultranorm.
+That is: $\sum_{e \in S} e \langle e,x\rangle \to x$
+    as~$S$ ranges over the finite subsets of~$E$.
+    By~\sref{innerprod-ultraweak}
+        we
+        see~$
+        \bigl\langle
+        \sum_{e \in S} e \langle e,x\rangle,
+        \sum_{e \in S} e \langle e,x\rangle \bigr\rangle
+        \to \langle x, x\rangle $ ultraweakly.
+Thus~$\sum_{e \in S} \langle x,e\rangle\langle e, x\rangle
+    = \sum_{e,d \in S} \langle x,e\rangle\langle e,d\rangle\langle d, x\rangle
+    =
+        \bigl\langle
+        \sum_{e \in S} e \langle e,x\rangle,
+        \sum_{e \in S} e \langle e,x\rangle \bigr\rangle
+        \to \langle x, x\rangle $ ultraweakly, as desired.
+\end{solution}
+\begin{solution}{hilbmod-adjoint-exists}%
+Let~$T\colon X\to Y$ be a bounded~$\scrB$-linear map between Hilbert~$\scrB$-modules.
+Assume~$X$ is self dual.
+For any~$y \in Y$, the map~$x \mapsto \langle y, Tx\rangle$
+    is~$\scrB$-linear and bounded
+    and so by self-duality of~$X$,
+    there is a~$t_y \in X$
+    with~$\langle t_y, x \rangle = \langle y, Tx\rangle$
+    for all~$x \in X$.
+For any~$z,y \in Y$ and~$x \in X$,
+        we have~$\langle t_z + t_y, x\rangle
+            = \langle t_z, x\rangle + \langle t_y, x\rangle
+            = \langle z, Tx\rangle + \langle y, Tx \rangle
+            = \langle z + y, Tx \rangle
+            = \langle t_{z+y}, x\rangle$.
+        Thus~$t_z + t_y = t_{z+y}$
+For any~$\lambda \in \C$, $y \in Y$ and~$x \in X$
+    we have~$\langle \lambda t_y, x \rangle
+        =  \langle \lambda y, T x\rangle
+        = \langle t_{\lambda y}, x \rangle$
+        and so~$\lambda t_y = t_{\lambda y}$.
+Hence~$T^* y \equiv t_y$ defines a linear map from~$Y$ to~$X$
+    with~$\langle y, Tx\rangle = \langle t_y, x\rangle
+    \equiv \langle T^*y, x \rangle$ for all~$x\in X$ and~$y \in Y$.
+So~$T^*$ is the adjoint of~$T$.
+\end{solution}
+\begin{solution}{hilmod-fixed-on-V}%
+    Let~$V$ be a right~$\scrB$-module with~$\scrB$-valued inner product
+        for some von Neumann algebra~$\scrB$.
+    Write~$\eta\colon V \to X$ for the ultranorm completion of~$V$
+        from~\sref{dils-completion}.
+    Let~$T \in \scrB^a(X)$ be given
+        with~$\langle \hat{x}, T \hat{x} \rangle \geq 0$
+        for all~$x \in V$.
+    We have to show~$T \geq 0$.
+    Let~$x \in X$ be an arbitrary vector.
+    As all vector states on~$\scrB^a(X)$ are order separating
+        by~\sref{hilbmod-denseordersep},
+        it is sufficient to show~$\langle x, Tx \rangle \geq 0$.
+As the image of~$V$ under~$\eta$ is ultranorm dense in~$X$,
+    we can find find a net~$x_\alpha$ with~$\widehat{x_\alpha} \to x$.
+Then by~\sref{innerprod-ultraweak}
+    we get~$\langle x, Tx\rangle = \uwlim_\alpha \langle \widehat{x_\alpha},
+            T\widehat{x_\alpha}\rangle \geq 0$.
+            So indeed~$T \geq 0$, as desired.
+\end{solution}
+\begin{solution}{hilbmod-adj-vector-ncp}%
+   Let~$\scrA$ be a C$^*$-algebra
+        with~$a_1, \ldots, a_n \in \scrA$.
+    Define~$\varphi \colon \scrA \to M_n \scrA$
+        by~$\varphi(d) \equiv (a_i^* d a_j)_{ij}$.
+        We have to show~$\varphi$ is an ncp-map.
+Recall~$\scrA$ is a self-dual Hilbert~$\scrA$-module
+    with~$\langle a,b\rangle \equiv a^*b$
+    and so its~$n$-fold direct product~$\scrA^n$
+    is also self dual (see also \sref{direct-prod-self-dual-basis}.)
+Define~$T\colon \scrA^n \to \scrA$
+    by~$T((b_i)_i) \equiv \sum_i b_i a_i$
+    (i.e.~$T$ is the row-vector~$(a_i)_i$.)
+Clearly~$T$ is~$\scrA$-linear.
+    It is also bounded: $\| T (b_i)_i \|^2 = \sum_i \|b_i a_i\|^2
+        \leq \sum_i A \|b_i\|^2 = A \| (b_i)_i\|^2 $,
+            where~$A \equiv \max_i \|a_i\|^2$.
+    It's easy that~$T^*(b) \equiv (a_i^* b)_i$ is the adjoint of~$T$.
+We may identify~$\scrB^a(\scrA^n) = M_n$
+    and then~$\ad_T(d)\,  ((b_i)_i) = T^* d T (b_i)_i
+                =  T^* d \sum_i a_i b_i
+                = (\sum_i (a_j^* d a_i) b_i)_j 
+                = \varphi(d) \, ((b_i)_i)$.
+Thus~$\ad_T = \varphi$.
+    By~\sref{hilbmod-ad-ncp} the map~$\ad_T$ and thus~$\varphi$ is as well.
+\end{solution}
+\begin{solution}{direct-prod-self-dual-basis}%
+    Assume~$X$ and~$Y$ are self-dual Hilbert~$\scrB$-modules over a
+        von Neumann algebra~$\scrB$ with orthonormal bases~$E \subseteq X$
+        and~$F \subseteq Y$.
+Write~$G \equiv \{(e,0); \ e \in E\} \cup \{ (0,d); \ d \in D \}$.
+Clearly~$G$ is orthonormal.
+To show~$G$ is an orthonormal basis,
+    two conditions remain.
+For the first, let~$(x,y) \in X \oplus Y$ be given.
+As~$E$ and~$F$ are orthonormal bases
+    we know~$x = \sum_{e\in E} e \langle e,x\rangle$
+    and~$y = \sum_{f \in F} f \langle f,x\rangle$,
+    where the sums converge ultranorm.
+    The inclusions~$x \mapsto (x,0)$ and~$y \mapsto (0,y)$
+        are bounded~$\scrB$-linear and thus ultranorm continuous,
+        hence
+\begin{align*}
+        \sum_{g\in G} g \langle g, (x,y)\rangle
+        &\ =\  \Bigl(\sum_{e\in E}
+                        (e,0) \langle (e,0), (x,y) \rangle \Bigr)  \ +\ 
+                        \Bigl( \sum_{f \in F} 
+                        (0,f) \langle (0,f), (x,y) \rangle \Bigr) \\
+        &\ =\  \Bigl(\sum_{e\in E}
+                        (e,0) \langle e, x \rangle \Bigr) \ + \ 
+                        \Bigl( \sum_{f \in F} 
+                        (0,f) \langle f, y \rangle \Bigr) \\
+        &\ =\  \Bigl(\sum_{e \in E} e \langle e,x \rangle ,
+                \sum_{f \in F} f \langle f, y \rangle  \Bigr)\\
+                    & \ =\ (x,y),
+\end{align*}
+which proves the first condition.
+    For the second condition, let~$(b_g)_{g\in G}$
+    be some~$\ell^2$-summable family from~$\scrB$.
+The subfamilies~$(b_{e_0})_{e \in E}$
+    and~$(b_{0,f})_{f \in F}$
+    are~$\ell^2$-summable as well.
+Hence the
+    sums~$\sum_{e \in E} e b_{(e,0)}$
+    and~$\sum_{f \in F} f b_{(0,f)}$ converge ultranorm.
+Thus~$\sum_{e \in E} (e,0) b_{(e,0)}
+    + \sum_{f \in F} (0,f) b_{(0,f)}
+    =\sum_{g \in G} g b_g$ converges ultranorm as well.
+We have shown~$G$ is an orthonormal basis of~$X\oplus Y$.
+Consequently~$X \oplus Y$ is self dual
+    by~\sref{dils-selfdual}.
+\end{solution}
+\begin{solution}{selfdual-orthn-basis}%
+    Assume~$X$ is a self-dual Hilbert~$\scrB$-module for a von Neumann
+    algebra~$\scrB$. Suppose~$E \subseteq X$ is an orthonormal set.
+We will show~$E$ is an orthonormal basis of~$E^{\perp\perp}$.
+Clearly~$E$ is orthonormal.
+    Because of this, and the fact that~$E^{\perp\perp}$ is ultranorm
+        closed (by~\sref{hilbmod-projthm}) 
+        we know~$\sum_e b b_e$ converges ultranorm in~$E^{\perp\perp}$
+        for any~$\ell^2$-family $(b_e)_e$.
+Assume~$x \in E^{\perp\perp}$.
+To show~$E$ is an orthonromal base,
+    it only remains to be shown that~$x = \sum_e e \langle e, x\rangle$.
+Define~$x' \equiv x - \sum_e e \langle e, x\rangle$.
+By~\sref{hilbmod-projthm} we know~$E^{\perp\perp}$ is ultranorm closed
+    and so~$x' \in E^{\perp\perp}$.
+For any~$e_0\in E$
+    we also have~$\langle e_0, x'\rangle = \langle e_0,x \rangle
+            - \sum_{e \in E} \langle e_0, e\rangle\langle e, x\rangle
+            = 0 $ and so~$x' \in E^{\perp}$.
+    Hence~$\langle x',x'\rangle = 0$, so indeed~$x = \sum_e e\langle e, x\rangle$
+        and~$E$ is an orthonormal basis of~$E^{\perp\perp}$.
+
+For the second part, assume~$x \in X$.
+    By Parseval's identity (see \sref{mod-parseval})
+        we have~$\langle x, x\rangle = \sum_e \langle x,e \rangle\langle e,x\rangle$
+        for any~$x \in E^{\perp\perp}$.
+To prove the converse,
+    assume~$\langle x, x\rangle = \sum_e \langle x,e \rangle\langle e,x\rangle$.
+By~\sref{hilbmod-projthm} we know~$x = x' + x''$
+    for~$x' \in E^{\perp\perp}$  and~$x'' \in E^\perp$.
+Note~$\langle e, x' \rangle = \langle e, x\rangle$ for any~$e \in E$
+    and so by Parseval's identity for~$E^{\perp\perp}$
+    we see~$\langle x',x'\rangle = \sum_e \langle x, e\rangle\langle e, x\rangle
+        = \langle x, x\rangle$.
+Now, using~$\langle x'',x'\rangle = 0$
+    we see~$\langle x,x\rangle = \langle x'', x''\rangle + \langle x', x'\rangle
+        = \langle x'', x''\rangle + \langle x, x\rangle$
+        and so~$\langle x'', x''\rangle=0$, whence~$x \in E^{\perp\perp}$.
+\end{solution}
+\begin{solution}{selfdual-gramschmidt}%
+    Let~$X$ be a self-dual Hilbert~$\scrB$-module
+        for some von Neumann algebra~$\scrB$.
+    Assume~$x_1, \ldots, x_n \in X$.
+We will show that there is a finite orthonormal set~$E$
+    of~$n$ or fewer elements such that~$E$ is a
+    basis of~$\{x_1, \ldots, x_n\}^{\perp\perp}$.
+We do this by induction over~$n$.
+For~$n=0$, the set~$E = \emptyset$ suffices.
+For the induction step,
+    assume~$n > 0$ and~$E'$ is an
+    orthonormal basis of~$\{x_1, \ldots, x_{n-1}\}^{\perp\perp}$.
+    Write~$x' \equiv x_n - \sum_{e\in E'} e\langle e,x_n\rangle$. 
+If~$x'=0$, then~$E \equiv E'$ suffices.
+For the other case, assume~$x' \neq 0$.
+    By polar decomposition (see the end of~\sref{selfdual-bcompl-then-basis}),
+    there is an~$u \in X$
+    with~$x' = u\langle x',x'\rangle^{\frac{1}{2}}$
+    and~$\langle u, u \rangle = \ceil{\langle x',x'\rangle}$.
+Define~$E \equiv E' \cup \{ u \}$.
+Clearly~$E$ is an othonormal set of~$n$ or fewer elements.
+    By the induction assumption
+    and~\sref{selfdual-orthn-basis},
+    we know~$x_i \in E'^{\perp\perp} \subseteq E^{\perp\perp}$ for~$i \leq 1 \neq n-1$.
+For any~$d \in E^\perp$
+    we have~$\langle d, x'\rangle =
+    \langle d, u \rangle \langle x',x'\rangle^{\frac{1}{2}} = 0$
+    and so~$x' \in E^{\perp\perp}$.
+    Clearly~$\sum_{e \in E'}e \langle e,x_n \rangle \in E'^{\perp\perp}
+        \subseteq E^{\perp\perp}$
+        and so~$x_n = x' + \sum_{e \in E'} e \langle e,x_n\rangle \in
+            E^{\perp\perp}$.
+    Together with the previous,
+    we see~$\{x_1, \ldots, x_n\}^{\perp\perp} \subseteq E^{\perp\perp\perp\perp}
+        = E^{\perp\perp} \subseteq \{x_1, \ldots, x_n\}^{\perp\perp}$,
+        thus~$E^{\perp\perp} = \{ x_1, \ldots, x_n\}^{\perp\perp}$.
+    By~\sref{selfdual-orthn-basis}
+        we know~$E$ is an orthonormal basis of~$E^{\perp\perp}$,
+        which completes the proof by induction.
+\end{solution}
+\begin{solution}{hilbmod-el2}%
+For brevity write~$\ell^2 \equiv \ell^2((p_i)_{i \in I})$.
+We will first proof that~$\ell^2$ is a right~$\scrB$-module.
+Assume~$(a_i)_i, (b_i)_i \in \ell^2$.
+    We want to show~$(a_i+b_i)_i \in \ell^2$.
+    First, we to show~$\sum_i (a_i + b_i)^*(a_i+b_i)$ is bounded.
+Pick~$A,B\in \R^+$ with~$\sum_i a_i^*a_i \leq A$
+    and~$\sum_i b_i^* b_i \leq B$ which exist
+    as~$(a_i)_i$ and~$(b_i)_i$ are~$\ell^2$.
+Let~$f$ be any normal state on~$\scrB$
+    and~$S \subseteq I$ some finite subset.
+Then
+\begin{align*}
+    f \Bigl(\sum_{i \in S} (a_i + b_i)^*(a_i + b_i) \Bigr)
+        & \ =\ \sum_{i \in S} \| a_i + b_i\|_f^2  \\
+        & \ \leq\ \sum_{i \in S} \| a_i\|_f^2  +\| b_i\|_f^2 
+                                + 2\|a_i\|_f \|b_i\|_f \\
+        & \ \leq\ A+B+ 2\sum_{i \in S}  \|a_i\|_f \|b_i\|_f.
+\end{align*}
+    By Cauchy--Schwarz~$\sum_{i \in S} \|a_i\|_f \|b_i\|_f
+        \leq \bigl(\sum_{i \in S} \|a_i\|^2_f\bigr)^{\frac{1}{2}}
+            \bigl(\sum_{i \in S} \|b_i\|^2_f \bigr)^{\frac{1}{2}}
+            \leq (AB)^{\frac{1}{2}}$.
+    As normal states are order separating,
+        we see that we have a bounded and thus
+        converging sum of positive elements~$\sum_i (a_i+b_i)^*(a_i+b_i) \leq 
+                    A+B+(AB)^\frac{1}{2}$.
+Suppose~$i \in I$.
+    It remains to be shown~$\ceil{(a_i+b_i)(a_i+b_i)^*} \leq p_i$.
+Recall from~\sref{ceill-basic}
+    that~$\ceil{xx^*} \leq p_i $ if and only if~$p_i x = x$.
+Clearly~$p_i (a_i +b_i) =  p_i a_i + p_i b_i = a_i+b_i$
+    as~$(a_i)_i, (b_i)_i \in \ell^2$ and so indeed~$(a_i+b_i)_i \in \ell^2$.
+
+Suppose~$b \in \scrB$
+    and~$(a_i)_i \in \ell^2$.
+    Then~$b^* \bigl( \sum_i a_i^* a_i \bigr) b
+            = \sum_i (a_i b)^* a_i b$ as~$x \mapsto b^*xb$ is normal
+            by~\sref{ad-normal}
+            and so~$(a_ib)_i$ is~$\ell^2$.
+    Furthermore~$p_i a_i b = a_i b$ for any~$i \in I$,
+     so~$(a_i b)_i \in \ell^2$.
+     We have shown~$\ell^2$ is a right~$\scrB$-module
+     with coordinatewise operations.
+
+    Next we will show~$\langle (a_i)_i , (b_i)_i \rangle \equiv
+        \sum_i a_i^* b_i$ defines a~$\scrB$-valued inner product
+        on~$\ell^2$.
+    First we have to show the sum converges.
+    Suppose~$f$ is any normal state on~$\scrB$.
+Pick~$A,B\in \R^+$
+    with~$\sum_i a_i^*a_i \leq A$
+    and~$\sum_i b_i^*b_i \leq B$.
+For any finite subset~$S \subseteq I$
+    we have
+\begin{equation*}
+    \Bigl|f \Bigl( \sum_{ i \in S} a_i^*b_i \Bigr) \Bigr|
+    \ \leq \  \sum_{i \in S} | [a_i,b_i]_f | \ \leq \ 
+    \sum_{i \in S} \|a_i\|_f \|b_i\|_f
+    \ \leq\ (AB)^{\frac{1}{2}},
+\end{equation*}
+where we used Cauchy--Schwarz for~$\scrB$-valued inner products
+    in the second inequality and classic
+    Cauchy--Schwarz in the final inequality.
+We have shown that~$\sum_{i \in S} a_i^*b_i$
+    is a norm-bounded net in~$S$.
+    We claim it is ultraweakly Cauchy as well.
+For now, pick any finite sets~$S,T \subseteq I$.
+Assume~$f$ is any normal state on~$\scrB$.
+We want to show that the following quantity vanishes
+    for sufficiently large~$S \cap T$.
+\begin{equation}\label{e1612eq2}
+\Bigl| f \Bigl( \sum_{i \in S} a_i^*b_i
+                - \sum_{i \in T} a_i^*b_i \Bigr)\Bigr|
+                \ \leq \ 
+                \Bigl| \sum_{i \in S - T} f(a_i^*b_i) \Bigr|
+                    \ +\  \Bigl| \sum_{i \in T -S} f(a_i^*b_i) \Bigr|.
+\end{equation}
+Note that~$[ (a_i)_i, (b_i)_i ] \equiv \sum_{i\in S-T} f(a_i^*b_i)$
+    is an inner product and so
+\begin{equation}\label{e1612eq1}
+        \Bigl| \sum_{i \in S - T} f(a_i^*b_i) \Bigr|
+        \ \leq \ 
+         \Bigl( \sum_{i \in S - T} f(a_i^*a_i) \Bigr)^{\frac{1}{2}}
+         \Bigl( \sum_{i \in S - T} f(b_i^*b_i) \Bigr)^{\frac{1}{2}}.
+\end{equation}
+The sum~$\sum_i f(a_i^*a_i)$ converges
+    and so~$\sum_{i \in S - T} f(a_i^*a_i)$
+    can be made arbitrarily small
+    by picking sufficiently large~$S\cap T$.
+And so (with a similar argument for the other factor),
+    we see that~\eqref{e1612eq1} vanishes,
+    which is the left term of~\eqref{e1612eq2}.
+The argument for the other term of~\eqref{e1612eq2} is the same.
+Thus~$\sum_{i \in S} a_i^*b_i$ is ultraweakly Cauchy
+    and converges by~\sref{bh-bounded-uw-complete}.
+From the fact that~$a \mapsto a^*$,
+    $a \mapsto ab$ and~$(a,b) \mapsto a+b$
+    are all ultraweakly continuous,
+    it follows readily that~$\langle (a_i)_i , \rangle (b_i)_i\rangle \equiv
+        \sum_i a_i^*b_i$ is an inner product on~$\ell^2$.
+    We claim this inner product is definite.
+Assume~$0 = \langle (a_i)_i, (a_i)_i\rangle \equiv \sum_i a_i^*a_i$.
+Then~$a_i^*a_i = 0$~for each~$i \in I$ and so~$a_i = 0$,
+    which is to say~$(a_i)_i = 0$. Indeed our inner product is definite.
+    Thus~$\ell^2$ is a pre-Hilbert~$\scrB$-module.
+
+Write~$E \equiv \{ \delta_i; \ i \in I\}$,
+    where~$(\delta_i)_j = 0$ for~$i \neq j$
+    and~$(\delta_i)_i = p_i$.
+Clearly~$E$ is an orthonormal set.
+We claim it's an orthonormal basis of~$\ell^2$.
+Assume~$(a_i)_i \in \ell^2$.
+It is easy to see~$\sum_{i \in I} \delta_i a_i = (a_i)_i$
+    and so~$\sum_{\delta_i \in E} \delta_i \langle \delta_i, (a_i)_i\rangle
+        = \sum_{i \in I} \delta_i a_i = (a_i)_i$.
+    It remains to be shown that~$\sum_{\delta_i \in E} \delta_i b_{\delta_i}$
+        converges ultranorm for any~$\ell^2$ summable~$(b_i)_{\delta_i \in E}$,
+        which indeed it does to~$(b_{\delta_i})_{i \in I}$
+         as we already saw.
+Thus~$\ell^2$ is self dual.
+
+For the final part of the exercise, assume~$X$ is a self-dual Hilbert~$\scrB$-module
+    over some von Neumanna algebra~$\scrB$ with orthonormal basis~$E \subseteq X$.
+Define~$\vartheta\colon X \to \ell^2((\langle e,e\rangle)_{e \in E})$
+    by~$\vartheta(x) \equiv (\langle e, x\rangle)_e$.
+Clearly~$\vartheta$ is~$\scrB$-linear.
+It also preserves the inner product:
+$\langle x, y\rangle = \langle x, \sum_e e \langle e, y\rangle \rangle
+    = \sum_e \langle x, e\langle e, y\rangle\rangle
+    = \sum_e \langle x, e\rangle\langle e, y\rangle
+    = \langle \vartheta(x), \vartheta(y)\rangle$.
+    which entails it's injective.
+To show~$\vartheta$ is surjective,
+    let~$(x_e)_e \in \ell^2((\langle e,e\rangle)_{e \in E})$
+    be given.
+    The family~$(x_e)_e$ is~$\ell^2$
+        so~$\sum_e e b_e$ converges ultranorm.
+        Clearly~$\vartheta (\sum_e e b_e)
+                = (\langle e, \sum_e e b_e\rangle )_e
+                = (b_e)_e$,
+    so~$\vartheta$ is indeed surjective.
+    It follows~$\vartheta$ is an isomorphism~$X \cong
+    \ell^2((\langle e,e\rangle)_{e \in E})$.
+\end{solution}
+\begin{solution}{onb1}%
+    Let~$X$ be a self-dual Hilbert~$\scrB$-module~$X$
+        for some von Neumann algebra~$\scrB$
+        with orthonormal basis~$(e_i)_{i\in I}$.
+Assume~$(u_i)_{i \in I}$ is a family partial isometries
+    with~$u_iu_i^* = \langle e_i, e_i \rangle$.
+    We will show~$(e_iu_i)_{i \in I}$ is an orthonormal basis
+    of~$X$.
+For brevity, write~$d_i \equiv e_iu_i$.
+To start, note~$\langle d_i, d_j\rangle
+            = u_i^* \langle e_i, e_j\rangle u_j$,
+            which is zero if~$i \neq j$.
+If~$i = j$, then~$\langle d_i, d_i\rangle = u_i^* \langle e_i, e_i\rangle u_i
+            = u_i^*u_i $ which is a projection.
+    So~$(d_i)_i$ is orthonormal.
+Hence~$\sum_i d_i b_i$ converges for any~$\ell^2$-family~$(d_i)_i$.
+It remains to be shown that~$x = \sum_i d_i \langle d_i, x\rangle$.
+Note~$\sum_i d_i \langle d_i, x\rangle
+    =  \sum_i e_i \langle e_i u_i u_i^*, x \rangle
+    =  \sum_i e_i \langle e_i \langle e_i, e_i\rangle, x \rangle
+    =  \sum_i e_i \langle e_i, x \rangle = x$,
+    so indeed~$(d_i)_i$ is an orthonormal basis of~$X$.
+
+For the next part, assume~$(p_i)_{i \in I}$ and~$(q_i)_{i \in I}$
+    are projections with~$p_i \sim q_i$.
+Let~$p_i$ denote the partial projection with~$u_i^* u_i = q_i$
+    and~$u_i u_i^* = p_i$.
+Consider~$\ell^2((p_i)_{i \in I})$.
+Define~$((\delta_i)_i) \in \ell^2$
+    by~$ (\delta_i)_j = 0$ if~$i \neq j$
+        and~$(\delta_i)_i = p_i$.
+    In~\sref{hilbmod-el2} we saw~$(\delta_i)_i$ is an
+        orthonormal basis of~$\ell^2((p_i)_{i \in I})$.
+    Note~$u_iu_i^* = p_i = \langle \delta_i, \delta_i\rangle$.
+    By the previous~$\delta_i u_i$ is another orthonormal basis of~$
+        \ell^2((p_i)_{i \in I})$.
+    By the second part of~\sref{hilbmod-el2}
+        we see~$
+        \ell^2((p_i)_{i \in I}) \cong
+        \ell^2((\langle \delta_i u_i, \delta_i u_i\rangle)_{i \in I} ) =
+        \ell^2((u_i^* p_i u_i  )_{i \in I} ) =
+        \ell^2((q_i )_{i \in I} )$,
+        as promised.
+\end{solution}
+\begin{solution}{onb2}%
+Let~$X$ be a self-dual Hilbert~$\scrB$-module.
+Assume~$E \subseteq X$ and~$e_1,e_2 \in X$
+    such that~$E \cup \{ e_1, e_2\} $ is an orthonormal basis
+    and~$\langle e_1, e_1 \rangle + \langle e_2, e_2\rangle \leq 1$
+We will show that~$E' \equiv E \cup \{e_1 + e_2\}$
+        is an orthonormal basis as well.
+For brevity, write~$p_1 \equiv \langle e_1,e_1\rangle$
+    and~$p_2 \equiv \langle e_2, e_2\rangle$.
+Clearly~$E$ itself is an orthonormal set.
+For any~$e \in E$ we have~$\langle e, e_1+e_2 \rangle =
+    \langle e, e_1\rangle + \langle e,e_2\rangle = 0$
+    and so~$E'$ is an orthogonal set.
+By assumption~$p_1$ and~$p_2$ are projections
+    with~$p_1 + p_2 \leq 1$
+    and so by~\sref{orthogonal-tuple-of-projections}
+    they are orthogonal and thus in particular~$p_1 + p_2$
+        is again a projection.
+Hence~$\langle e_1 + e_2, e_1 + e_2 \rangle
+        = p_1 + p_2$ is a projection.
+    Thus~$E'$ is an orthonormal set.
+
+Let~$x \in X$ be given.
+By~\sref{mod-projelabs} we have~$e_2 = e_2 p_2$
+    and so~$e_2 \langle e_1 + e_2, x\rangle
+                = e_2 \langle (e_1 + e_2)p_2, x\rangle
+                = e_2 \langle e_2, x \rangle$.
+Similarly~$e_1 \langle e_1 + e_2, x\rangle
+                = e_1 \langle e_1, x\rangle$.
+Thus~$ x = e_1 \langle e_1, x\rangle + e_2 \langle e_2, x\rangle 
+            + \sum_{e \in E} e \langle e, x\rangle
+        = (e_1 + e_2) \langle e_1 + e_2, x\rangle
+            + \sum_{e \in E} e \langle e, x\rangle$,
+            which shows the first condition on an orthonormal
+            set to be an orthonormal basis.
+The second (and final) condition
+    holds automatically as~$E'$ is an orthonormal set
+        and~$X$ is ultranorm complete.  Thus~$E'$ is indeed
+        an orthonormal basis.
+
+The the last part of the exercise, assume~$p,q \in \scrB$
+    are projections with~$p+q \leq 1$.
+    Clearly~$\{p+q\}$ is an orthonormal basis of~$(p+q)\scrB$
+        and so is~$\{p,q\}$ by the previous.
+    Hence by~\sref{hilbmod-el2}
+        we see~$(p+q) \scrB \cong \ell^2(\{p, q\})
+            = p\scrB \oplus q\scrB$, as promised.
+\end{solution}
+\begin{solution}{hilbmod-tensor-ketbra}%
+Assume~$X$ is a self-dual Hilbert~$\scrA$-module
+    and~$Y$ is a self-dual Hilbert~$\scrB$-module
+        for von Neumann algebras~$\scrA$ and~$\scrB$.
+\begin{enumerate}
+\item
+    Assume~$x_1,x_2,x \in X$ and~$y_1,y_2,y \in Y$.
+        Then
+    \begin{align*}
+        \ketbra{x_1}{x_2} \otimes \ketbra{y_1}{y_2} 
+            \, x \otimes y 
+        &\ =\  (\ketbra{x_1}{x_2} x) \otimes (\ketbra{y_1}{y_2} y) \\
+        &\ =\ (x_1 \langle x_2, x\rangle) \otimes (y_1 \langle y_2, y\rangle) \\
+        &\ =\ (x_1 \otimes y_1)  (\langle x_2, x\rangle \otimes \langle y_2, y\rangle) \\
+        &\ =\ (x_1 \otimes y_1)  \langle x_2 \otimes y_2, x \otimes y\rangle \\
+        &\ =\ \ketbra{x_1 \otimes y_1}{x_2 \otimes y_2} \, x\otimes y.
+    \end{align*}
+This is sufficient to show
+    that~$\ketbra{x_1}{x_2} \otimes \ketbra{y_1}{y_2} 
+        = \ketbra{x_1 \otimes y_1}{x_2 \otimes y_2}$,
+    either by appealing to the defining universal property of~$X \otimes Y$
+    or by the related property
+    that the~$\scrA \odot \scrB$-linear
+    span of~$\{x \otimes y; \ x \in X, y\in Y\}$
+    is ultranorm dense in~$X \otimes Y$.
+        (In fact the~$\C$-linear span is already ultranorm dense.)
+\item
+    Clearly, for any~$x \in X$ and~$y \in Y$
+            we have~$(1 \otimes 1) \, (x \otimes y)
+                    = 1 \, x \otimes y$
+        and so by same token (as the conclusion of the previous point)
+        we see~$1 = 1\otimes 1$.
+\item
+    Assume~$x \in X$, $y \in Y$, $S,S' \in \scrB^a(X)$ and~$T,T' \in \scrB^a(Y)$.
+        Then
+\begin{equation*}
+    (S \otimes T) (S' \otimes T') \, x \otimes y
+         \ = \ (SS' x) \otimes (TT' y) \\
+         \ = \ (SS')  \otimes (TT') \, x \otimes y,
+\end{equation*}
+        which is sufficient to show~$(SS') \otimes (TT') = (S\otimes T) \otimes (S' \otimes T')$ (see the conclusion of the first point.)
+\item
+    Assume~$S \in \scrB^a(X)$, $T \in \scrB^a(Y)$, $x_1,x_2\in X$
+        and~$y_1,y_2\in Y$.
+    Then
+\begin{align*}
+    \langle (S \otimes T)^* \, x_1 \otimes y_1, \ x_2 \otimes y_2\rangle    
+& \ = \  \langle x_1 \otimes y_1, \ (S \otimes T) \, x_2 \otimes y_2\rangle \\
+    & \ = \  \langle x_1 \otimes y_1, \ (Sx_2) \otimes (Ty_2) \rangle \\
+    & \ = \ \langle x_1, Sx_2\rangle \otimes \langle y_1 , T y_2\rangle\\
+    & \ = \ \langle S^* x_1, x_2\rangle \otimes \langle T^* y_1 ,  y_2\rangle\\
+    & \ = \  \langle (S^* \otimes T^*)\, x_1 \otimes y_1, \ x_2 \otimes y_2\rangle.
+\end{align*}
+This is sufficient (see the conclusion of the first point)
+        to show that the vector functionals
+        for~$(S \otimes T)^* x_1\otimes y_1$
+        and~$(S^*\otimes T^*)x_1 \otimes y_1$ agree.
+        Hence~$(S \otimes T)^* x_1\otimes y_1= (S^*\otimes T^*)x_1 \otimes y_1$.
+        In turn this is sufficient to show~$(S \otimes T)^* = S^* \otimes T^*$,
+        as desired.
+\end{enumerate}
+\end{solution}
+\begin{solution}{dils-filter-basics-exercise}%
+    Assume~$\varphi\colon \scrA \to \scrB$ is an ncp-map between
+        von Neumann algebras.
+\begin{enumerate}
+\item
+    Assume~$c\colon \scrB \to \scrC$ is a filter
+            and that~$(\scrP, \varrho, h)$ is a Paschke dilation of~$\varphi$.
+    We will show that~$(\scrP, \varrho, c \after h)$ is a Paschke
+        dilation of~$c \after \varphi$.
+    To this end, assume~$\varrho\colon \scrA \to \scrP'$ is some nmiu-map
+            and~$h'\colon \scrP' \to \scrC$ is any ncp-map
+            with~$h' \after \varrho' = c \after \varphi$.
+    Assume~$\varphi(1) \leq 1$.
+        (We will reduce the general to this one later on.)
+        Note~$h'(1) = h'(\varrho'(1)) = c(\varphi(1)) \leq c(1)$
+            and so by the universal property of~$c$,
+            there is a unique ncp-map map~$h''\colon \scrP' \to \scrB$
+                with~$c \after h'' = h'$.
+    Then~$c \after \varphi = h' \after \varrho' =
+             c \after h'' \after \varrho'$.
+    And so~$\varphi = h'' \after \varrho'$
+        as~$c$ is injective, see \sref{dils-filters-injective}.
+    There is a unique ncp-map~$\sigma\colon \scrP' \to \scrP$
+            with~$h \after \sigma = h''$
+                and~$\sigma \after \varrho' =\varrho$.
+Then~$h' = c \after h'' = c \after h \after \sigma$.
+Assume~$\sigma'\colon \scrP'\to \scrP$
+    is any ncp-map with~$\sigma' \after \varrho = \varrho$
+            and~$c \after h \after \sigma' = h'$.
+Then~$c \after h \after \sigma' = h' = c \after h''$
+    and so~$h \after \sigma' = h''$.
+    Hence~$\sigma=\sigma'$ by the uniqueness of~$\sigma$.
+Thus~$(\scrP, \varrho, c\after h)$ is a Paschke dilation of~$c\after\varphi$.
+
+    Now, in the general case, assume~$\varphi(1) \nleq 1$.
+    Then~$\varphi(1) \neq 0$.
+        Define~$\varphi' \equiv \|\varphi(1)\|^{-1} \varphi$.
+        Then~$\varphi'(1) = \|\varphi(1)\|^{-1} \varphi(1) \leq 1$.
+        By~\sref{paschke-basics}
+         we know~$(\scrP, \varrho, \|\varphi(1)\|^{-1} h)$
+            is a Paschke dilation of~$\varphi'$.
+    Now we are in our previous case
+        and so~$(\scrP, \varrho, \|\varphi(1)\|^{-1} c \after h)$
+            is a Paschke dilation of~$c \after \varphi'$.
+    Applying~\sref{paschke-basics} once again,
+            we conclude~$(\scrP, \varrho,c \after h)$
+        is a Paschke dilation of~$c \after \varphi$ as desired.
+\item
+Assume~$c' \colon \scrC' \to \scrB$ is a filter of~$\varphi(1)$.
+By the universal property of~$c'$,
+    there is a unique ncp-map~$\varphi'\colon \scrA \to \scrC'$
+            with~$c'\after \varphi' = \varphi$.
+Then~$c'(\varphi'(1)) = \varphi(1) = c'(1)$
+        and so by injectivity of~$c'$ (see~\sref{dils-filters-injective})
+            we get~$\varphi'(1) = 1$ ---
+            that is to say: $\varphi'$ is unital.
+
+For the final part of this exercise, assume~$(\scrP, \varrho, h)$
+    is a Paschke dilation of~$\varphi'$.
+By the previous point,
+    we know~$(\scrP, \varrho, c' \after h)$
+        is a Paschke dilation of~$c' \after \varphi' = \varphi$,
+        as desired.
+\end{enumerate}
+\end{solution}
+\begin{solution}{dils-filters-injective}%
+Let~$c\colon \scrC \to \scrB$ be some filter for~$b \in \scrB$.
+    By~\sref{dils-stand-filter}
+        we know~$c_b\colon \ceil{b} \scrB \ceil{b} \to \scrB$
+            given by~$a \mapsto \sqrt{b} a \sqrt{b}$
+                is also a filter for~$b$.
+    By the universal property of~$c$,
+        there is a unique ncp-map~$\vartheta_1$
+            with~$c \after \vartheta_1 = c_b$.
+    In the other direction, by the universal property of~$c_b$,
+        there is a unique ncp-map~$\vartheta_2$
+            with~$c_b \after \vartheta_2 = c$.
+    Hence~$c \after (\vartheta_1 \after \vartheta_2)
+            = c_b \after \vartheta_2 = c \after \id$.
+Clearly~$c(1) \leq c(1)$
+    and so by the universal property of~$c$
+    the map~$\id$ is the unique ncp-map
+    with~$c \after \id = c$, hence~$\vartheta_1 \after \vartheta_2 = \id$.
+Reasoning similarly on the other side,
+    we see~$\vartheta_2 \after \vartheta_1 = \id$
+    and so~$\vartheta_2$ is an isomorphism.
+Recall~$c = c_b \after \vartheta_2$
+    and so it is sufficient to show~$c_b$ is injective.
+    To this end, let~$a_1,a_2 \in \ceil{b} \scrB \ceil{b}$ be given
+    with~$c_b(a_1) = c_b(a_2)$;
+    i.e.~$\sqrt{b}a_1\sqrt{b} = \sqrt{b}a_2\sqrt{b}$.
+    Then~$a_1 = a_2$ by~\sref{mult-cancellation}
+        and so~$c_b$ is indeed injective.
+\end{solution}
+\begin{solution}{surjective-nmiu}%
+Assume~$\varrho \colon \scrA \to \scrB$
+    is a surjective nmiu-map between von Neumann algebras.
+We already saw in~\sref{kernel-ultraweak-twosided-ideal-dils}
+    that the kernel of an nmiu-map is an ultraweakly-closed
+    two-sided ideal and hence a principal ideal of a central projection
+        by~\sref{prop:weakly-closed-ideal}.
+    Write~$z$ for the central projection of~$\scrA$
+        with~$\ker \varrho = (1-z) \scrA$;
+        $h_z \colon \scrA \to z\scrA$ for the map~$h_z(a) = za$
+        and~$\varrho'\colon z\scrA \to \scrB$
+        for the restriction of~$\varrho$ to~$z \scrA$.
+    Clearly~$\varrho' \after h_z = \varrho$ and so~$\varrho'$ is surjective.
+    Furthermore~$\varrho'$ is injective,
+        because for any~$a \in z\scrA$ with~$\varrho(a)=0$
+        we have~$\varrho(a)=0$ and so~$a \in \ker \varrho = (1-z)\scrA$,
+        hence~$a = 0$.
+It is easy to see that~$\varrho'$ as a bijective miu-map
+    has an miu inverse and so it is an miu-isomorphism.
+    Consequently, it is an~nmiu-isomorphism (as
+        miu-maps are order-preserving)
+        and in particular an ncp-isomorphism.
+The map~$h_z$ is a standard corner for~$z$ (see~\sref{standard-corner-dils})
+    and so~$\varrho = \varrho' \after h_z$ is also a corner for~$z$
+    as~$\varrho'$ is an ncp-isomoprhism.
+
+Conversely, assume~$h\colon \scrA \to \scrC$
+        is a corner for a central projection~$z \in \scrA$.
+The map~$h_z\colon \scrA \to z \scrA$ given by~$a \mapsto za$
+    is another corner for~$z$, see~\sref{standard-corner-dils}.
+By the universal property of~$h$,
+    there is a unique ncp-map~$\vartheta_1\colon z\scrA \to \scrC$
+            with~$h \after \vartheta_1 =\vartheta_2$.
+On the other side, by the universal property of~$h_z$,
+    there is a unique ncp-map~$\vartheta_2\colon \scrC\to z\scrA$
+    with~$h_z \after \vartheta_2 = \vartheta_1$.
+Again, by the universal property of~$h$,
+    the map~$\id\colon \scrC \to \scrC$
+    is the unique ncp-map~$\scrC \to \scrC$
+        with~$h = h \after \id$.
+    Note~$h = h_z \after \vartheta_2 = h \after (\vartheta_1 \after \vartheta_2)$ and so~$\id = \vartheta_1 \after \vartheta_2$.
+    Similarly~$\vartheta_2 \after \vartheta_1 = \id$.
+    Thus~$\vartheta_1$ is an ncp-isomorphism
+        and consequently an nmiu-isomoprhism by~\sref{iso}.
+Clearly~$h_z$ is a surjective nmiu-map
+    and thus~$h = h_z \after \vartheta_2$
+    is a surjective nmiu-map as well.
+\end{solution}
+\begin{solution}{pcm-preorder}%
+Reflexivity is easy:~$a \ovee 0 = 0 \ovee a = a$
+    by the partial commutativity and zero axiom, so~$a \leq a$.
+For transitivity, assume~$a \leq b$ and~$b \leq c$.
+Pick~$d,e \in M$
+    with~$a \ovee d = b$ and~$b \ovee e = c$.
+Then by partial
+associativity~$c = b \ovee e = (a \ovee d) \ovee e = a \ovee (d \ovee e)$
+so~$a \leq c$.
+\end{solution}
+\begin{solution}{ea-product}%
+Assume~$E$ and~$F$ are effect algebras.
+We define~$a \ovee b$ for~$a,b \in E\times F$
+    whenever both~$a_1 \perp b_1$ and~$a_2 \perp b_2$
+    and in that case~$a\ovee b \equiv (a_1 \ovee b_1, a_2 \ovee b_2)$.
+Furthermore, define~$1 \equiv (1,1)$ and~$0 \equiv (0,0)$.
+We claim that these operations turn~$E \times F$ into an effect algebra.
+
+We start with partial commutativity.
+Assume~$a,b \in E\times F$ with~$a \perp b$.
+Then~$a_1 \perp b_1$ and~$a_2 \perp b_2$,
+    hence~$b_1 \perp a_1$, $b_2 \perp a_2$
+    and~$a \ovee b = (a_1 \ovee b_1, a_2 \ovee b_2)
+                    = (b_1 \ovee a_1, b_2 \ovee a_2)
+                    = b \ovee a$.
+
+We continue with partial associativity.
+Assume~$a,b,c \in E\times F$ with~$a\perp b$ and~$a \ovee b \perp c$.
+Then~$a_i \perp b_i$, $a_i \ovee b_i \perp c_i$ for~$i=1,2$
+    and so~$b_i \perp c_i$ and~$(a_i \ovee b_i) \ovee c_i = a_i \ovee (
+    b_i \ovee c_i)$. Consequently~$(a \ovee b) \ovee c = a \ovee (b\ovee c)$.
+
+    Next the zero axiom: for any~$a \in E\times F$
+        we have~$a_1 \perp 0$,~$a_2 \perp 0$, $0 \ovee a_1 =a_1$
+        and~$0 \ovee a_2 = a_2$.
+            Thus~$0 \equiv (0,0) \perp (a_1,a_2)$ and~$0 \ovee a = a$.
+
+    To prove the orthocomplement law, assume~$a \in E \times F$.
+        Then for~$a \equiv (a_1^\perp, a_2^\perp)$
+            we have~$a \perp a^\perp$ and~$a \ovee a^\perp = (1,1) \equiv 1$.
+    Furthermore, if~$a \vee b = 1$ for some~$b \in E \times F$,
+        then~$b_1 = a_1^\perp$ and~$b_2 = a_2^\perp$, hence~$b = a^\perp$.
+
+Only the zero--one law remains.  Asumme~$a\perp 1$ for some~$a \in E \times F$.
+Then~$a_1 \perp 1$ and~$a_2 \perp 1$, hence~$a_1=0$ and~$a_2=0$.
+Thus~$a = 0$, as desired.
+We have shown~$E \times F$ is an effect algebra with componentwise operations.
+
+Write~$\pi_1\colon E\times F \to E$ and~$\pi_2\colon E\times F \to F$
+        for the maps given by~$\pi_1(a_1,a_2) = a_1$
+            and~$\pi_2(a_1,a_2)=a_2$.
+    Clearly~$\pi_1$ and~$\pi_2$ are additive and unital, hence
+    effect algebra homomorphisms.
+We will show that~$E\times F$ with projections~$\pi_1$ and~$\pi_2$
+    forms a categorical product of~$E$ and~$F$ in~$\mathsf{EA}$.
+To this end, assume~$f_1\colon G \to E$ and~$f_2\colon G \to F$
+    are effect algebra homomorphisms for some effect algebra~$G$.
+Define~$g\colon G \to E\times F$ by~$g(a) = (f_1(a), f_2(a))$.
+Clearly~$g$ is the unique map with~$\pi_i \after g = f_i$ for~$i=1,2$.
+It is also an effect algebra homomorphism and
+    so~$E \times F$ is indeed the product of~$E$ and~$F$.
+\end{solution}
+\begin{solution}{ea-redund}%
+Let~$E$ be an effect algebra with any~$a \in E$.
+We will first show that~$1^\perp = 0$ and~$a^{\perp\perp} = a$.
+By the orthocomplement law~$1 \ovee 1^\perp = 1$,
+    so~$1^\perp \perp 1$,
+    hence~$1^\perp=0$ by the zero--one law.
+By the orthocomplement law~$a \ovee a^\perp = 1$.
+Thus~$a^\perp \ovee a = a \ovee a^\perp = 1$ by partial commutativity.
+    Hence~$a = a^{\perp\perp}$ by uniqueness of the orthocomplement.
+Now, to prove the zero law,
+    note~$a^\perp \ovee a^{\perp\perp}
+        = 1 = (a^\perp\ovee a^{\perp\perp})
+    \ovee (a^\perp \ovee a^{\perp\perp})^\perp
+    = (a^\perp \ovee a^{\perp\perp}) \ovee 0 
+        = a^\perp \ovee (a^{\perp\perp} \ovee 0)$
+    by the orthocomplement law and partial associativity.
+Thus by uniqueness of the orthocomplement~$a^{\perp\perp} = a^{\perp\perp} \ovee 0$,
+    hence~$0 \ovee a = a$ by partial commutativity and~$a^{\perp\perp} = a$.
+\end{solution}
+\begin{solution}{exc-dposet}%
+We start with~(D1).  Assume~$b \leq a$. Then~$b \ovee c= a$ for some~$c$.
+    By definition~$c = a \ominus b $.
+Conversely, assume~$a \ominus b$ is defined.
+    Then~$b \ovee (b \ominus a) = a$, hence~$b \leq a$.
+To prove~(D2), assume~$a \ominus b$ is defined.
+    Then~$a \ominus b \leq b \ovee (a \ominus b) = a$ as desired.
+For~(D3) assume~$a \ominus b$ and~$a \ominus (a \ominus b)$
+    are defined.
+Note~$(a \ominus b) \ovee b = b \ovee (a \ominus b) = a$
+    and so~$b = a \ominus (a \ominus b)$.
+
+(D4) is next.  Assume~$a\leq b \leq c$.
+    Then~$(c \ominus b) \ovee (b\ominus a)  \ovee a
+        = c  =  (c \ominus a) \ovee a$
+            and so by cancellation~$
+               c \ominus b \leq (c\ominus b) \ovee (b \ominus a)
+               = c \ominus a$.
+    Note~$ ((c \ominus a) \ominus (c \ominus b))  \ovee (c \ominus b)
+        \ovee a = c = (b \ominus a) \ovee a \ovee (c \ominus b)$
+    and so by cancellation~$ (c\ominus a) \ominus (c \ominus b) = b\ominus a$.
+
+For the final part of the exercise, assume~$E$ is a poset
+    with maximum element~$1$ and a partial operation~$\ominus$
+    satisfying~(D1), (D2), (D3) and (D4).
+We will show~$E$ is an effect algebra with~$a \ovee b = c \Leftrightarrow
+            a = c \ominus b$ and~$0 = 1\ominus 1$.
+
+First we have to show that if~$c_1 \ominus b = c_2 \ominus b$
+    for some~$b \leq c_1, c_2$ in~$E$,
+    then~$c_1 = c_2$
+    so that~$\ovee$ is at most single-valued.
+By~(D4)
+    we have~$(1 \ominus b) \ominus (1 \ominus c_1)
+        = c_1\ominus b$
+        and so~$(1 \ominus b) \ominus a =
+        (1 \ominus b) \ominus (c_1 \ominus b)
+            =  (1\ominus b) \ominus ((1 \ominus b) \ominus (1 \ominus c_1))
+            = 1 \ominus c_1$ by (D3).
+Similarly~$1 \ominus c_2 = (1 \ominus b) \ominus a$,
+        so with another application of (D3) we
+        see~$c_1 = 1 \ominus(1\ominus c_1) = 1 \ominus (1 \ominus c_2)
+            = c_2$.
+
+The first axiom we will prove is partial commutativity.
+    Assume~$a,b \in E$ with~$a \perp b$.
+    By definition, there is some~$c\geq b$ with~$c \ominus b = a$.
+    By~(D3) we have~$c \ominus a = c \ominus (c \ominus b) = b$
+        and so~$b \perp a$
+        with~$b \ovee a = c = a\ovee b$ as desired.
+Note that we have also shown that~$a \leq a\ovee b$
+    and~$(a \ovee b) \ominus a = b$
+    for~$a \perp b$.
+
+Next, to prove partial associativity, assume~$a,b,c\in E$
+    with~$a \perp b$ and~$a \ovee b \perp c$.
+Then~$a \leq a \ovee b \leq (a \ovee b) \ovee c$ and thus
+\begin{align*}
+    b & \ =\ (a \ovee b) \ominus a \\
+    & \ \overset{\mathclap{\mathrm{(D4)}}}{=} \ 
+    \bigl( ((a \ovee b) \ovee c) \ominus a \bigr) \,
+    \ominus \, \bigl( ((a\ovee b) \ovee c) \ominus (a \ovee b) \bigr) \\
+    & \ = \ 
+    \bigl( ((a \ovee b) \ovee c) \ominus a \bigr) \,
+    \ominus \, c,
+\end{align*}
+which shows~$b \perp c$
+    with~$b \ovee c=  ((a \ovee b) \ovee c) \ominus a$.
+From that it immediately follows
+    that~$b \ovee c \perp a$ with~$(b\ovee c)\ovee a = (a\ovee b) \ovee c$
+        and so~$a \perp b \ovee c$
+            with~$(a \ovee b) \ovee c = a \ovee (b \ovee c)$
+                by partial commutativity.
+
+We continue with the zero axiom.
+Assume~$a \in E$.
+Clearly~$a \leq 1 \leq 1$ and
+    so~$(1 \ominus a) \ominus (1 \ominus 1) = 1 \ominus a$ by~(D4),
+    which shows~$1 \ominus a \perp  1\ominus 1 \equiv 0$
+    with~$(1 \ominus a) \ovee 0 = 1\ominus a$.
+    The zero law follows by partial commutativity.
+
+Now we prove the orthocomplement law.
+Assume~$a \in E$.
+By~(D3) we have~$1 \ominus( 1\ominus a) = a$,
+    which demonstrates~$a \perp 1\ominus a \equiv a^\perp$
+    with~$a \ovee a^\perp = 1$.
+Assume~$b \in E$ with~$a \ovee b = 1$.
+By definition, we have~$a = 1 \ominus b$ and so by~(D3)
+    we see~$b = 1 \ominus (1 \ominus b) = 1 \ominus a \equiv a^\perp$.
+
+To show the last axiom (zero--one), assume~$a \in E$ with~$a\perp 1$.
+Then~$1 \leq a\ovee 1 \leq 1$ and so~$a \ovee 1 = 1$.
+Hence~$a = (a\ovee 1) \ominus 1 = 1\ominus 1 \equiv 0$.
+We have shown~$E$ is an effect algebra.
+
+The conclude this exercise, we show that the original
+    order and~$\ominus$ coincide with
+    those defined for~$E$ as an effect algebra.
+For clarity, write~$\leq_{\mathrm{EA}}$ and~$\ominus_{\mathrm{EA}}$
+    for the latter.
+
+To start, assume~$a \leq b$ for some~$a,b \in E$ (as a D-poset).
+Then~$b = a \ovee (b \ominus a)$
+    as trivially~$b \ominus a = b \ominus a$.
+Hence~$a \leq_{\mathrm{EA}} b$.
+To prove the converse, assume~$a \leq_{\mathrm{EA}} b$.
+Then~$a \ovee c = b$ for some~$c \in E$.
+Hence~$a \leq a \ovee c \leq b$.  Indeed~$\leq = \leq_{\mathrm{EA}}$.
+
+Assume~$a,b\in E$.
+The element~$a \ominus_{\textrm{EA}} b$ is defined
+    if and only if~$b \leq a$,
+    which is precisely when~$ a \ominus b$ is defined.
+        Furthermore~$b \ovee (a \ominus_{\textrm{EA}} b) = a$
+        and so~$
+        a \ominus_{\textrm{EA}} b =
+        (b \ovee (a \ominus_{\textrm{EA}} b)) \ominus b =
+        a \ominus b $.
+\end{solution}
+\begin{solution}{exc-eamorphism}%
+   Assume~$f\colon E \to F$ is an homomorphism between effect algebras.
+    \begin{enumerate}
+        \item
+            We have~$0\perp 1$ and so~$f(0) \perp f(1) = 1$,
+                hence~$f(0) = 0$ by the zero--one law.
+        \item
+            Assume~$a \leq b$ in~$E$.
+            Then~$a \ovee c = b$ for some~$c \in E$.
+            Hence~$f(b) = f(a \ovee c) = f(a) \ovee f(c)$,
+            which shows~$f(a) \leq f(b)$.
+        \item
+            Assume~$a \ominus b$ is defined (i.e.~$a \geq b$).
+            Recall~$(a \ominus b) \ovee b = a$
+                and so~$f(a \ominus b) \ovee f(b) = f(a)$.
+                Hence~$f(a \ominus b) = f(a) \ominus f(b)$.
+        \item
+            Assume~$a \in E$.
+            In~\sref{exc-dposet} we saw~$1 \ominus a = a^\perp$
+            and so by the previous point~$f(a^\perp) = f(1\ominus a) =
+                f(1) \ominus f(a) = 1 \ominus f(a) = f(a)^\perp$.
+    \end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{exc-emonzero}%
+    Let~$M$ be an effect monoid with any~$a \in M$.
+    Then~$a\odot 1 = a \odot (0 \ovee 1) = (a\odot 0) \ovee (a \odot 1)$.
+    Hence by cancellation~$a \odot 0 = 0$.
+    Similarly~$0 \odot a = 0$.
+\end{solution}
+\begin{solution}{emond-lemma-for-conv}%
+   Assume~$M$ is an effect monoid with~$a_1,\ldots,a_n,b_1, \ldots, b_n \in M$
+        such that~$\bigovee_i a_i = 1$ and~$\bigovee_i a_i \odot b_i = 1$.
+Note that for any~$1 \leq i \leq n$
+    we have~$a_i \odot b_i \leq a_i$
+        as~$(a_i \odot b_i) \ovee a_i \odot b_i^\perp = a_i \odot 1 = a_i$.
+Thus
+\begin{equation*}
+    a_i^\perp
+    \ = \ \bigovee_{j \neq i} a_j
+    \ \geq \ \bigovee_{j \neq i} a_j \odot b_j
+    \ = \ (a_i \odot b_i)^\perp
+    \ \geq a_i^\perp
+\end{equation*}
+    and so~$a_i^\perp = (a_i \odot b_i)^\perp$,
+        hence~$a_i = a_i \odot b_i$.
+\end{solution}
+\begin{solution}{eff-prod-rules}%
+   Let~$C$ be an effectus in partial form.
+Assume~$f\colon X \to A$ and~$g\colon X \to B$
+    are any arrows in~$C$ with~$1 \after f \perp 1 \after g$.
+\begin{enumerate}
+\item Assume~$[a,b]\colon A+B \to Y$ is any map.
+Then~$1 \after a \after f \leq 1 \after f \perp 1 \after g
+        \geq 1 \after b \after g$
+        and so~$1 \after a \after f \perp 1 \after b \after g$.
+    Hence~$a \after f \perp b \after g$
+    and so~$[a,b] \after \langle f, g \rangle
+        = [a,b] \after ((\kappa_1 \after f) \ovee (\kappa_2 \after g))
+        = ([a,b] \after (\kappa_1 \after f)) \ovee ([a,b] \after (\kappa_2 \after g)) = (a \after f) \ovee (b \after g)$.
+\item By the previous point and~\sref{cotupl-pcm},
+        we have~$1 \after \langle f,g\rangle
+            = [1,1] \after \langle f,g\rangle
+            = (1 \after f) \ovee (1 \after g)$.
+\item Assume~$k\colon A \to A'$ and~$l \colon B \to B'$ are two maps in~$C$.
+    Then by the first point of this exercise,
+            we have~$(k+l) \after \langle f, g\rangle
+                \equiv [\kappa_1 \after k, \kappa_2 \after l] \after
+                    \langle f, g \rangle 
+                = (\kappa_1 \after k \after f) \ovee
+                (\kappa_2 \after l \after g) \equiv \langle 
+                k \after f, l \after g \rangle $.
+\item
+Assume~$k\colon X' \to X$ is some map in~$C$.
+Then by PCM-enrichment of~$C$, we
+    get~$\langle f, g \rangle \after k 
+        \equiv ((\kappa_1 \after f) \ovee (\kappa_2 \after g)) \after k
+        = (\kappa_1 \after f\after k) \ovee (\kappa_2 \after g \after k)
+        \equiv \langle f \after k, g\after k\rangle$.
+\end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{exc-jointly-monic-pullback}%
+    Assume~$h_1,h_2 \colon Q \to P$
+        are two arrows with~$m_1 \after h_1 = m_1 \after h_2$
+        and~$m_2 \after h_1 = m_2 \after h_2$.
+    Note~$(f \after m_1) \after h_1= g \after m_2 \after h_1
+        = (g \after m_2) \after h_2$
+        and so by the universal property of a pullback
+        there is a unique map~$h\colon Q \to P$
+        with~$m_1 \after h = m_1 \after h_1$
+            and~$m_2 \after h = m_2 \after h_2$
+            and so~$h_1 = h_2 = h$.
+\end{solution}
+\begin{solution}{pullback-lemma}%
+    For the first point,
+   assume the left and right inner squares are pullbacks.
+To prove the outer square is a pullback,
+    assume~$\alpha \colon S \to C$ and~$\beta\colon S \to X$
+    are any maps with~$g' \after f' \after \beta = m \after \alpha$.
+As the right inner square is a pullback,
+    there is a unique map~$\gamma\colon S \to B$
+        with~$g \after \gamma = \alpha$
+            and~$l \after \gamma = f' \after \beta$.
+By this last equality and the fact that the left inner square is
+    a pullback, there is a unique map~$\delta \colon S \to A$
+    with~$f \after \delta = \gamma$
+        and~$k \after \delta = \beta$.
+    We will prove that this~$\delta$ is also the mediating map
+        for the outer square.
+Clearly~$g \after f \after \delta g \after \gamma = \alpha$.
+Assume~$\delta'\colon S \to A$
+    is some other map with~$g \after f \after \delta' = \alpha$
+    and~$k \after \delta' \after \beta$.
+Note that~$g \after f \after \delta' = \alpha = g \after \gamma$
+    and~$l \after f \after \delta' = f' \after k \after \delta'
+        = f' \after \beta = l \after \gamma$.
+Thus~$f \after \delta' = \gamma$ as~$g$ and~$l$ are jointly monic by~\sref{exc-jointly-monic-pullback}.
+Consequently~$\delta=\delta'$ and so the outer square is indeed a pullback.
+
+For the second point, assume the outer square is a pullback
+    and that~$l$ and~$g$ are jointly monic.
+We will prove that the left inner square is a pullback.
+To this end, assume~$\alpha\colon S \to B$ and~$\beta\colon S \to X$
+    are maps with~$l \after \alpha = f' \after \beta$.
+Note~$m \after g \after \alpha = g' \after l \after \alpha = g' \after f' \after \beta$
+    and thus by the fact that the outer square is a pullback,
+        there is a unique~$\gamma\colon S \to A$
+        with~$g \after f \after \gamma = g \after \alpha$
+            and~$k \after \gamma = \beta$.
+    This will also be the unique mediating map
+        demonstrating that the left inner square is a pullback.
+We have~$l \after f \after \gamma = f' \after k \after \gamma
+        = f' \after \beta = l \after \alpha$
+            and so by the joint monicity of~$l$ and~$g$,
+            we conclude~$f \after \gamma = \alpha$.
+    Assume there is some map~$\gamma' \colon S \to A$
+        with~$f \after \gamma' = \alpha$ and~$k \after \gamma' = \beta$.
+Then clearly~$g \after f \after \gamma' = g \after \alpha$
+    and so by the uniqueness of~$\gamma$
+    as a mediating map for the outer square,
+    we find~$\gamma' = \gamma$.
+    Thus the left inner square is a pullback as well.
+\end{solution}
+\begin{solution}{par-c-coprod}%
+    Let~$f\colon X \pto Z$ and~$g\colon Y \pto Z$
+        be two partial maps in~$C$;
+        that is~$f\colon X \to Z+1$ and~$g \colon Y \to Z+1$.
+    Then the cotuple~$[f,g]\colon X+Y \to Z+1$
+        (with respect to the coproduct that we assumed to exist)
+    is also a partial map~$X+Y \pto Z$.
+Note~$[f,g] \hafter \hat\kappa_1
+    = [[f,g],\kappa_2]\after\kappa_1\after\kappa_1 = f$
+and~$[f,g] \hafter \hat\kappa_2
+    = [[f,g],\kappa_2]\after\kappa_1\after\kappa_2 = g$.
+Suppose~$h \colon X+Y \pto Z$ is a partial map
+    with~$h \hafter \hat\kappa_1 = f$
+        and~$h \hafter \hat\kappa_2 = g$.
+Then~$h \after \kappa_1 = h \hafter \hat\kappa_1 = f$
+and~$h \after \kappa_2 = h \hafter \hat\kappa_2 = g$,
+    so~$h = [f,g]$.
+    This shows~$X+Y$ is also a coproduct in~$\Par C$ with
+        coprojectors~$\hat{\kappa_1}$ and~$\hat{\kappa_2}$.
+
+To show~$0$ is an initial object of~$\Par C$,
+    assume~$X$ is some object of~$\Par C$, i.e.~of~$C$.
+    As~$0$ is initial in~$C$, there
+    is a unique map~$!\colon 0 \to X+1$ in~$C$
+    and so there is a unique map~$!\colon 0 \pto X$ in~$\Par C$.
+\end{solution}
+\begin{solution}{toteff-zero}%
+We already know that the initial object~$0$ of~$C$
+    is also initial in~$\Par C$.
+    We will show that it is also final in~$\Par C$.
+To this end, assume~$X$ is some object in~$\Par C$, i.e.~of~$C$.
+There is a unique map~$!\colon X\to 1$ in~$C$
+    and so there is a unique map~$!\colon X \pto 0$ in~$\Par C$.
+    Thus~$0$ is final in~$\Par C$.
+
+For any objects~$X$ and~$Y$ from~$\Par C$,
+    the zero map~$0\colon X \to Y$ in~$\Par C$
+    is by definition equal to~$i \hafter f$,
+    where~$f \colon X \pto 0$ is the unique final map
+        and~$i \colon 0 \to \pto Y$ is the unique initial map.
+Unfolding definitions, we see~$0 = i \hafter f = [i, \kappa_2]\after f
+        = \kappa_2\after !$ as desired.
+\end{solution}
+\begin{solution}{distinction-part-tot-eff}%
+For the first point, assume~$C$ is an effectus in total form
+    together with a map~$f\colon A \to 0$.
+    We will show that~$f$ is an isomorpism.
+    By initiality of~$0$, we know~$f \after !_A = !_0 = \id$.
+By~\sref{tot-pullbacks}, the following square is a pullback.
+\begin{equation*}
+    \xymatrix{
+        0 \pullback \ar[d]_{!} \ar@{=}[r]
+        & 0 \ar@{=}[d]
+        \\
+        A \ar[r]_{f}
+        & 0
+    }
+\end{equation*}
+As~$\id_0 \after f = f \after \id_A$,
+    there is a unique map~$h\colon A \to 0$
+        with~$\id \after h = f$ and~$! \after h = \id$.
+So~$h = f$ and~$! \after f = ! \after h = \id$.
+Thus~$f$ is indeed an isomorphism with inverse~$!$.
+
+For the second point, assume~$C$ is an effectus in total and partial form.
+Let~$X$ and~$Y$ be any two objects.
+As~$0$ is final in an effectus in total form,
+    there are maps~$!_X \colon X \to 0$ and~$!_Y \colon Y \to 0$.
+As~$0$ is a strict initial object in an effectus in partial form,
+    both~$!_X$ and~$!_Y$ are isomorphisms.
+Hence~$!_Y \after !_X^{-1}$ is an isomorphism between~$X$ and~$Y$.
+\end{solution}
+\begin{solution}{exc-rng-eff}%
+   To show~$\op\Rng$ is an effectus in total form,
+        we shown the dual axioms for~$\Rng$.
+    Clearly, for any two unit rings~$R$ and~$S$,
+        their cartesian product~$R \times S$ is a categorical product
+        with projectors~$\pi_1(r,s) = r$ and~$\pi_2(r,s)=s$.
+    The integer ring~$\Z$ is the initial object of~$\Rng$.
+The zero ring (the unique unit ring with a single element~$0=1$)
+    is the final object of~$\Rng$.
+
+To show the pushout diagrams corresponding to~\eqref{pullbacks} hold,
+    assume we are given unit rings~$R,S,T$ with
+    unit-preserving homomorphisms~$\alpha, \beta,\delta$
+    that make the outer squares of the following diagrams commute.
+\begin{equation*}
+    \xymatrix{
+    T\\
+    & R \times S \ar@{.>}[lu]
+    & R \times \Z \ar[l]^{\id\times !}
+    \ar@/_1pc/[llu]_{\alpha}
+    \\& \Z \times S \ar[u]_{! \times \id}
+    \ar@/^1pc/[luu]^{\beta}
+    & \Z \times \Z \ar[l]^{\id\times!} \ar[u]_{! \times \id}
+    } \qquad
+    \xymatrix{
+    T\\
+    & R \ar@{.>}[lu]
+    & \Z \ar[l]^{!}
+    \ar@/_1pc/[llu]_{!}
+    \\& R \times S \ar[u]_{\pi_1}
+    \ar@/^1pc/[luu]^{\delta}
+    & \Z \times \Z \ar[l]^{!\times!} \ar[u]_{\pi_1}
+    }
+\end{equation*}
+    We have to show that there are unique dashed arrows (as shown)
+        that make these diagrams commute.
+    We start with the left diagram.
+    Define~$f\colon R\times S \to T$
+    by~$f(r,s) \equiv \alpha(r,0) + \beta(0,s)$.
+Clearly~$f$ is additive and $f(0,0) = \alpha(0,0) + \beta(0,0) = 0$.
+    By assumption~$\alpha(n,m) = \beta(n,m)$ for any~$n,m \in \Z$
+        and so~$\alpha(1,0) = \beta(1,0)$ in particular,
+        hence~$f(1,1) = \alpha(1,0) + \beta(0,1) = \beta(1,1) = 1$.
+It remains to be shown that~$f$ is multiplicative.
+    First note that~$\alpha(1,0) \beta(0,1)
+    = \beta(1,0)\beta(0,1) = \beta(0,0) = 0$.
+    Thus~$\alpha(r,0)\beta(0,s)
+            = \alpha(r,0)\alpha(1,0)\beta(0,1)\beta(0,s) = 0$
+        for any~$r \in R$ and~$s \in S$
+            and similarly~$\beta(0,s)\alpha(r,0) = 0$.
+Hence~$f(r,s)f(r',s') = \alpha(r,0)\alpha(r',0) + \beta(0,s)\beta(0,s')
+        = \alpha(rr',0) + \beta(0,ss') = f(rr', ss')$.
+        We have shown~$f$ is a unit-preserving ring homomorphism.
+Clearly~$f(r, m) = \alpha(r, 0) + \beta(0, m)
+            = \alpha(r,0) + \alpha(0,m) = \alpha(r,m)$
+                for any~$r \in R$ and~$m \in \Z$
+                hence~$\alpha = f \after (\id \times !)$.
+    Similarly~$\beta = f \after (! \after \id)$.
+Assume~$f'\colon R\times S \to T$ is any unit-preserving
+    ring homomorphism with~$\alpha = f' \after (\id \times !)$
+        and~$\beta = f' \after (! \after \id)$.
+Then clearly~$f'(r,0) = \alpha(r,0)$ and~$f'(0,s) = \beta(0,s)$,
+    so~$f'(r,s) = f'(r,0) + f'(0,s) = \alpha(r,0) + \beta(0,s) = f(r,s)$.
+This shows the left square above is indeed a pushout.
+
+We continue with the diagram on the right.
+By assumption~$\delta(n,m) = n$ for any~$n,m \in \Z$
+    hence~$\delta(0,s) = \delta(0,s)\delta(0,1) = 0$ for any~$s\in S$.
+Thus~$\delta(r,s) = \delta(r,0) + \delta(0,s) = \delta(r,0)$
+    for any~$r \in R$ and~$s \in S$.
+Define~$g\colon R \to T$ by~$g(r) = \delta(r,0)$.
+Clearly~$g$ is additive, multiplicative and~$g(0,0) = 0$.
+Furthermore~$g(1) = \delta(1,0) = \delta(1,1) = 1$,
+    so it is a unit-preserving ring homomorphism.
+It is easy to see that~$g \after \pi_1 = \delta$ and that~$g$
+    is the unique such unit-preserving ring homomorphism.
+We have shown the right diagram is a pushout too.
+
+To show~$\op\Rng$ is an effectus in total form,
+    it only remains to be shown that~$
+        \langle \pi_1, \pi_2,\pi_2\rangle,
+        \langle \pi_2, \pi_1,\pi_2\rangle
+        \colon \Z\times\Z
+            \to \Z\times\Z\times\Z$ are jointly epic.
+    So assume~$f,g\colon \Z\times\Z\times\Z \to R$
+        are two unit-preserving ring homomorphisms
+        for which we have~$f \after \langle \pi_1, \pi_2,\pi_2\rangle  =
+        g \after \langle \pi_1, \pi_2,\pi_2\rangle$
+        and~$f \after \langle \pi_2, \pi_1,\pi_2\rangle =
+        g \after \langle \pi_2, \pi_1,\pi_2\rangle$.
+    By the first equality~$f(k,0,0) = g(k,0,0)$
+        and by the second~$f(0,l,0) = g(0,l,0)$
+            for any~$k,l \in \Z$.
+In particular~$f(0,0,1) = 1-f(1,0,0) - f(0,1,0)
+    = 1 - g(1,0,0) - g(0,1,0) = g(0,0,1)$
+        and so~$f(0,0,m) = m f(0,0,1) = m g(0,0,1) = g(0,0,m)$
+            for any~$m \in \Z$.
+    Putting it all together: $f(k,l,m) 
+            = f(k,0,0) = f(0,l,m) + f(0,0,m)
+            = g(k,0,0) = g(0,l,m) + g(0,0,m) = g(k,l,m)$.
+    So~$f=g$ and so we have shown the required joint epicity.
+We have shown~$\op\Rng$ is indeed an effectus in total form.
+
+We continue with the two additional points.
+Let~$p \colon \Z\times\Z \to R$ be any predicate on~$R$.
+Then~$p(1,0) \in R$ with~$p(1,0)^2 = p(1,0^2) = p(1,0)$ and so~$p(1,0)$
+    is an idempotent.
+    Furthermore~$p(0,1) = p(1,1) - p(1,0) = 1 - p(1,0)$,
+        so~$p$ is fixed by the idempotent~$p(1,0)$.
+Let~$e \in R$ be any idempotent.
+It is easy to see that~$p(n,m) \equiv ne + m(1-e)$ is a unit-preserving
+    ring homomorphism with~$p(1,0) = e$.  Thus the predicates
+        on~$R$ correspond to its idempotents.
+    This also shows that the set of scalars of~$\op\Rng$
+        is the two-element effect monoid~$2$
+        as~$\Z$ has exactly two idempotents: $0$ and~$1$.
+
+Assume~$p \perp q$ for two predicates~$p,q \colon \Z\times\Z \to R$
+    on~$R$.
+Then, by definition, $p \perp q$ if
+        there is a~$b\colon \Z\times\Z\times\Z\to R$
+    with~$b(n,m,m) = p(n,m)$
+    and~$b(m,n,m) = q(n,m)$ for all~$n,m \in \Z$
+In particular~$p(1,0)q(1,0) = b(1,0,0)b(0,1,0) = 0$,
+    thus the idempotents corresponding to~$p$ and~$q$ are orthogonal.
+Conversely, if~$p(1,0)$ and~$q(1,0)$ are orthogonal,
+    then~$b(k,l,m) = k p(1,0) + l q(1,0) + m (1-p(1,0) - q(1,0))$
+        defines a unit-presrving ring homomorphism
+        that shows~$p \perp q$ with~$(p \ovee q)(1,0)
+            = b(1,1,0) = p(1,0) + q(1,0)$.
+From this it is also clear that~$p^\perp(1,0) = 1 - p(1,0)$.
+
+There are many examples to show unit-preserving ring homomorphisms
+    need not be fixed on their value on idempotents
+        (and thus that~$\op\Rng$ does not have separting predicates.)
+For instance, let~$R$ denote the unit ring of continuous real-valued
+    functions on the unit interval~$[0,1]$.
+This ring has only two idempotents: the functions that are constant~$0$
+    and~$1$, which are also the zero and unit element (respectively)
+    of the ring.
+For every~$x \in [0,1]$
+    the map~$\delta_x \colon R \to \R$ given by~$\delta_x(f) =f(x)$
+    is a unit-preserving ring homomorphism.
+Clearly~$\delta_x(0) = 0 = \delta_y(0)$ and~$\delta_x(1) = 1 = \delta_y(1)$
+    for any~$x,y \in [0,1]$ with~$x\neq y$, but not~$\delta_x = \delta_y$.
+
+Finally, we treat the second and last point of the exercise.
+Reasoning towards contradiction,
+    let~$f\colon \Z_2 \to \Z$ be any unit-preserving ring homomorphism.
+Then~$0 = f(0) = f(1+1) = f(1) + f(1) = 1 + 1 = 2$, which is absurd.
+Thus there is no such homomorphism.
+However, there are two unit-preserving ring
+    homomorphisms~$\Z \times \Z \to \Z_2$
+    corresponding to the idempotents~$0$ and~$1$ in~$\Z_2$.
+Hence the states cannot be separating (for otherwise
+    there could at most be a single unit-preserving
+    ring homomorphism~$\Z\times\Z\to\Z_2$.)
+\end{solution}
+\begin{solution}{exc-dm-effectus}%
+We will first show that~$\mathcal{D}_M$ is a functor.
+To start, clearly
+\begin{equation*}
+    \mathcal{D}_M(\id)(p)(x) 
+        \ \equiv\  \bigovee_{y; \id(y)=x} p(y)
+        \ =\ p(x)
+\end{equation*}
+        and so~$\mathcal{D}_M(\id) = \id$.
+Let~$f\colon X \to Y$ and~$g\colon Y \to Z$ be given.
+    Then
+    \begin{align*}
+        \mathcal{D}_M (g \after f) (p) (z)
+        & \ \equiv\ \bigovee_{x;\ g(f(x))=z} p(x)\\
+        & \ =\ \bigovee_{y;\ g(y) = z}
+               \bigovee_{x;\ f(x) = y} p(x) \\
+        & \ =\ \bigovee_{y;\ g(y) = z}
+                \bigl((\mathcal{D}_M f)(p)\bigr)(y) \\
+        & \ =\ \bigl( \, (\mathcal{D}_M g) \bigl(
+                (\mathcal{D}_M f)(p)\bigr) \, \bigr)(z)
+    \end{align*}
+    and so~$\mathcal{D}_M (g \after f)
+        = (\mathcal{D}_M g)\after (\mathcal{D}_M f)$.
+
+Next, we show that~$\eta$ is a natural transformation.
+Let~$f\colon X \to Y$ be any map.
+Then for any~$x_0 \in X$, we have
+\begin{align*}
+    ((\mathcal{D}_M f) \after \eta_X) (x_0)
+        & \ = \ \bigovee_{x;\ f(x)=y} (\eta_X(x_0))(x) \\
+        & \ = \ \bigovee_{x;\  \substack{f(x)=y \\ x = x_0}} 1 \\
+        & \ = \ (\eta_Y (f(x_0)))
+\end{align*}
+and so~$\mathcal{D}_M f \after \eta_X = \eta_Y \after f$,
+    i.e.~$\eta$ is a natural transformation~$\id \Rightarrow \mathcal{D}_M$.
+
+To show~$\mu$ is a natural transformation,
+    assume~$f\colon X \to Y$ is some map, $y \in Y$ and~$\Phi \in
+        \mathcal{D}_M\mathcal{D}_M X$.
+Then
+\begin{align*}
+    (\mathcal{D}_M f) ( \mu_X(\Phi) ) (y)
+    & \ = \ \bigovee_{x;\ f(x)=y} \mu_X(\Phi)(x) \\
+    & \ = \ \bigovee_{x;\ f(x)=y}
+            \bigovee_{p} \Phi(p) \odot p(x) \\
+    & \ = \ \bigovee_{p}
+                \bigovee_{x;\ f(x)=y}
+            \Phi(p) \odot p(x) \\
+    & \ = \ \bigovee_{p}
+            \Phi(p) \odot 
+                \bigovee_{x;\ f(x)=y} p(x)  \\
+    & \ = \ \bigovee_{p}
+            \Phi(p) \odot 
+                (\mathcal{D}_M f)(p)(y) \\
+    & \ = \ \bigovee_{q}
+                \bigovee_{p;\ (\mathcal{D}_M f)(p) = q}
+            \Phi(p) \odot q(y) \\
+    & \ = \ \bigovee_{q}
+               \Bigl( \bigovee_{p;\ (\mathcal{D}_M f)(p) = q}
+            \Phi(p)\Bigr) \odot q(y) \\
+    & \ = \ \bigovee_{q}
+                    (\mathcal{D}_M \mathcal{D}_M f) (\Phi)(q) \odot q(y) \\
+    & \ = \ \mu_Y (( \mathcal{D}_M \mathcal{D}_M f)(\Phi)) (y)
+\end{align*}
+and so~$(\mathcal{D}_M f) \after \mu_X
+= \mu_Y \after (\mathcal{D}_M \mathcal{D}_M f)$,
+ hence~$\mu$ is a natural transformation~$\mathcal{D}_M \mathcal{D}_M
+    \Rightarrow \mathcal{D}_M$.
+    We continue with the monad laws. Assume~$X$ is a set, $x \in X$
+        and~$\aleph \in \mathcal{D}_M \mathcal{D}_M \mathcal{D}_M X$.
+        Then
+\begin{align*}
+\mu_X ( \mu_{\mathcal{D}_M X} ( \aleph))(x)
+    & \ = \ \bigovee_p (\mu_{\mathcal{D}_M X}) (\aleph) (p) \odot p(x) \\
+    & \ = \ \bigovee_p \bigovee_\Phi \aleph(\Phi) \odot \Phi(p) \odot p(x) \\
+    & \ = \ \bigovee_\Phi  \aleph(\Phi) \odot \bigovee_p \Phi(p) \odot p(x) \\
+    & \ = \ \bigovee_\Phi  \aleph(\Phi) \odot \mu_X(\Phi)(x) \\
+    & \ = \ \bigovee_p \bigovee_{\Phi; \ \mu_X(\Phi)=p}
+        \aleph(\Phi) \odot p(x) \\
+    & \ = \ \bigovee_p  (\mathcal{D}_M \mu_X) (\aleph) (p)\odot p(x) \\
+    & \ = \ \mu_X ((\mathcal{D}_M \mu_X)(\aleph)) (x)
+\end{align*}
+    and so~$\mu \after \mu_{\mathcal{D}_M} = \mu \after (\mathcal{D}_M )$.
+For any~$x \in X$ and $p \in \mathcal{D}_M X$, we have
+\begin{equation*}
+    \mu_X (\eta_{\mathcal{D}_M X}(p))(x)
+    \ = \ \bigovee_q \eta_{\mathcal{D}_M X}(p)(q) \odot q(x) \ = \ p(x)
+\end{equation*}
+and so~$\mu \after \eta_{\mathcal{D}_M} = \id$.
+For the final monad law, assume~$x \in X$ and~$p \in \mathcal{D}_M X$.
+Then
+\begin{align*}
+    \mu_X( (\mathcal{D}_M \eta_X)(p))(x)
+    & \ = \ \bigovee_q (\mathcal{D}_M \eta_X) (p)(q) \odot q(x) \\
+    & \ = \ \bigovee_q \bigovee_{y; \ \eta_X(y)=q}
+            p(y) \odot q(x) \\
+    & \ = \ \bigovee_y p(y) \odot \eta_X (y)(x) \\
+    & \ = \ p(x)
+\end{align*}
+and so~$\mu \after \mathcal{D}_M \eta = \id$.
+We have shown~$(\mathcal{D}_M, \eta, \mu)$ is a monad.
+
+Our next project is to show that~$\Kl \mathcal{D}_M$ is an effectus
+    in total form.
+It is easy to see that the coproduct~$X + Y$ from~$\mathsf{Set}$
+    is also a coproduct in~$\mathcal{D}_M$
+        with coprojectors~$\eta\after\kappa_i$,
+            where~$\kappa_i$ are the coprojectors for~$X+Y$ in~$\mathsf{Set}$.
+(In fact, for any category~$C$ and monad~$T$,
+    the inclusion functor~$K\colon C \to \Kl T$
+        given by~$K X = X$ and~$K f = \eta \after f$
+        is a left adjoint and so~$K$ preserves colimits.)
+The empty set is also the initial object of~$\Kl \mathcal{D}_M$.
+As~$\mathcal{D}_M 1 \cong 1$,
+    the category~$\Kl \mathcal{D}_M$
+        has as final object the one-element set~$1$.
+
+Now we will show that a square such as that on the
+    left of \eqref{pullbacks} is a pullback.
+So assume~$\alpha \colon Z \to \mathcal{D}_M (X+1)$
+    and~$\beta\colon Z \to \mathcal{D}_M (1+Y)$
+        are maps with~$(\hat !+\hat\id) \hafter \alpha = (\hat\id+\hat!) \hafter \beta$,
+        where~$\hafter$ denotes the composition in~$\Kl \mathcal{D}_M$
+        and~$\hat f \equiv \eta \after f$ the Kleisli embedding.
+Assume~$z \in Z$.
+By assumption~$ \alpha(z) (\kappa_2*)
+                = ((\hat! + \hat\id) \hafter \alpha) (z) (\kappa_2 *)
+                = ((\hat\id + \hat!) \hafter \beta) (z) (\kappa_2 *)
+                = \bigovee_y \beta(z)(\kappa_2 y) $,
+                    where~$*$ is the unique element of~$1$.
+We want to define~$\delta\colon Z \to \mathcal{D}_M (X+Y)$
+    by~$\delta(z)(\kappa_1 x) = \alpha(z)(\kappa_1 x)$
+        and~$\delta(z)(\kappa_2 y) = \beta(z)(\kappa_2 y)$,
+            but first need to check the image of~$\delta(z)$ sums to~$1$.
+Indeed~$\bigovee_w \delta(z)(w)
+    = \bigovee_y \beta(z)(\kappa_2 y)
+    \ovee \bigovee_x \alpha(z)(\kappa_1 x)
+    = \alpha(z)(\kappa_2*)
+    \ovee \bigovee_x \alpha(z)(\kappa_1 x)
+    = 1$.
+Clearly~$\alpha = (\hat\id+\hat!) \hafter \delta $
+    and~$\beta = (\hat!+\hat\id)\hafter \delta$.
+Suppose~$\delta'\colon Z \to \mathcal{D}_M (X+Y)$
+    is some map with~$\alpha = (\hat\id+\hat!) \hafter \delta'$
+        and~$\beta = (\hat!+\hat\id) \hafter \delta'$.
+    Then~$\delta'(\kappa_1 x)
+        = ((\hat\id + \hat!) \hafter \delta')(\kappa_1 x)
+        = \alpha(\kappa_1 x)$ for any~$x \in X$
+        and similarly~$\delta'(\kappa_2 y)
+        = \beta(\kappa_2 y)$ for any~$y \in Y$, so~$\delta' = \delta$.
+We have shown that the square on the left of~\eqref{pullbacks}
+    is indeed a pullback in~$\Kl \mathcal{D}_M$.
+
+To show that the square on the right of~\eqref{pullbacks}
+    is also a pullback, assume~$\alpha\colon Z \to \mathcal{D}_M 1$
+        and~$\beta\colon Z \to \mathcal{D}_M (X+Y)$
+            are maps with~$(\hat!+\hat!) \hafter \beta = \hat\kappa_1 \hafter \alpha$.
+    Assume~$z \in Z$ and~$y \in Y$.
+    Then~$\beta(z)(\kappa_2 y) 
+                \leq ((\hat!+\hat!) \hafter \beta)(z)(\kappa_2 *)
+                = (\hat\kappa_1 \hafter \alpha)(z)(\kappa_2 *)
+                = 0 $.
+This allows us to define~$\delta \colon Z \to \mathcal{D}_M X$
+        by~$\delta(z)(x) = \beta(\kappa_1 x)$
+        as~$\bigovee_x \delta(z)(x)
+                = \bigovee_x \beta(\kappa_1 x)
+                = \bigovee_x \beta(\kappa_1 x)
+                 \ovee \bigovee_y \beta(\kappa_2 y) = 1$.
+    Clearly~$\hat\kappa_1 \hafter \delta = \beta$
+        and~$\hat! \hafter \delta = \alpha$.
+Suppose~$\delta' \colon Z \to \mathcal{D}_M X$ is some map
+    with~$\hat\kappa_1 \hafter \delta' = \beta$
+        and~$\hat! \hafter \delta' = \alpha$.
+    Then~$\delta'(z)(x) = (\hat\kappa_1 \hafter \delta')(\kappa_1 x)
+        = \beta(z)(\kappa_1 x) = \delta(z)(x)$
+        and so~$\delta = \delta'$.
+We have shown that the square on the right of~\eqref{pullbacks}
+    is a pullback in~$\Kl \mathcal{D}_M$.
+
+It only remains to be shown that the
+    maps~$
+    [\hat\kappa_1, \hat\kappa_2, \hat\kappa_2],
+    [\hat\kappa_2, \hat\kappa_1, \hat\kappa_2] \colon
+        1+1+1 \to \mathcal{D}_M (1+1) $
+        are jointly monic in~$\Kl \mathcal{D}_M$.
+To this end,
+assume~$f_1,f_2 \colon Z \to \mathcal{D}_M (1+1+1)$
+are given with~$
+    [\hat\kappa_1, \hat\kappa_2, \hat\kappa_2] \hafter f_1 =
+    [\hat\kappa_1, \hat\kappa_2, \hat\kappa_2] \hafter f_2$
+    and~$[\hat\kappa_2, \hat\kappa_1, \hat\kappa_2] \hafter f_1 =
+    [\hat\kappa_2, \hat\kappa_1, \hat\kappa_2] \hafter f_2$.
+Assume~$z \in Z$.
+Clearly
+\begin{align*}
+f_1 (z)(\kappa_1 *)
+            &\ =\  ([\hat \kappa_1, \hat\kappa_2, \hat\kappa_2] \hafter  f_1)
+                (z)(\kappa_1 *)\\
+            &\ =\  ([\hat \kappa_1, \hat\kappa_2, \hat\kappa_2] \hafter  f_2)
+                (z)(\kappa_1 *)\\
+            &\ =\  f_2(z)(\kappa_1 *)
+\end{align*}
+    and
+\begin{align*}
+    f_1 (z)(\kappa_2 *)
+           &\ =\ ([\hat \kappa_2, \hat\kappa_1, \hat\kappa_2] \hafter  f_1)
+                (z)(\kappa_1 *)\\
+           &\ =\ ([\hat \kappa_2, \hat\kappa_1, \hat\kappa_2] \hafter  f_2)
+                (z)(\kappa_1 *)\\
+           &\ =\ f_2(z)(\kappa_2 *).
+\end{align*}
+So
+\begin{align*}
+f_1(z)(\kappa_3 *)
+       &\ =\ \bigl(f_1(z)(\kappa_1 *) \ovee 
+        f_1(z)(\kappa_2 *)\bigr)^\perp\\
+       &\ =\ \bigl(f_2(z)(\kappa_1 *) \ovee 
+        f_2(z)(\kappa_2 *)\bigr)^\perp\\
+            &\ =\  f_2(z)(\kappa_3 *),
+\end{align*}
+hence~$f_1 = f_2$.
+We have shown that~$\Kl \mathcal{D}_M$ is an effectus.
+
+A scalar in~$\Kl \mathcal{D}_M$
+    corresponds to a map~$\lambda\colon 1 \to \mathcal{D}_M (1+1)$,
+        which corresponds in turn to an element of~$M$.
+Unfolding definitions, it is straight-forward to see
+    that the effect monoid structure defined on the scalars
+        is the same as that of~$M$.
+\end{solution}
+\begin{solution}{aconv-cong}%
+We start with the surjectivity of~$q$, $\mathcal{D}_M q$
+    and~$\mathcal{D}_M \mathcal{D}_M q$.
+By definition~$q$ is clearly surjective.
+Pick a section~$r\colon X/_\sim \to X$ of~$q$;
+    i.e.~$q \after r = \id$.
+Then~$\mathcal{D}_M r$
+    and $\mathcal{D}_M \mathcal{D}_M r$
+    are sections of~$\mathcal{D}_M q$ and~$\mathcal{D}_M \mathcal{D}_M q$
+    respectively, hence~$\mathcal{D}_M q$ and~$\mathcal{D}_M \mathcal{D}_M q$
+        are surjective.
+
+To prove the second point,
+    assume~$\sim$ is a congruence.
+Assume~$\varphi, \psi \in \mathcal{D}_M X$ with~$
+    (\mathcal{D}_M q)(\varphi) =
+    (\mathcal{D}_M q)(\psi) $.
+    By definition~$\varphi \sim \psi$ and~$h(\varphi) \sim h(\psi)$
+        by assumption that~$\sim$ is a congruence.
+    Thus~$q \after h (\varphi) = q \after h (\psi)$.
+Thus together with the surjectivity of~$\mathcal{D}_M q$,
+    there is a unique map~$h_\sim \colon \mathcal{D}_M X/_\sim \to
+        X/_\sim$ fixed by~$h_\sim \after (\mathcal{D}_M q) = q \after h$.
+To prove the converse, assume there is a
+    map~$h_\sim \colon \mathcal{D}_M X/_\sim \to
+        X/_\sim$ with~$h_\sim \after (\mathcal{D}_M q) = q \after h$
+            and assume~$\varphi \sim \psi$
+            for some~$\varphi,\psi \in \mathcal{D}_M X$.
+    Then~$q(h(\varphi))
+    = h_\sim (\mathcal{D}_M q(\varphi))
+    = h_\sim (\mathcal{D}_M q(\psi))
+    = q(h(\psi))$ and so~$h(\varphi) \sim h(\psi)$,
+    which shows that~$\sim$ is a congruence.
+
+For the third point, assume~$\sim$ is a congruence.
+Then
+\begin{alignat*}{3}
+    h_\sim \after
+    \mathcal{D}_M h_\sim  \after
+    \mathcal{D}_M \mathcal{D}_M h_\sim 
+&\ =\ h_\sim \after
+    \mathcal{D}_M (h_\sim \after \mathcal{D}_M q)\\
+&\ =\ h_\sim \after
+    \mathcal{D}_M (q \after h) &\quad & \text{by the second point}\\
+    &\ =\ q \after h \after \mathcal{D}_M h && \text{idem}\\
+    &\ =\ q \after h \after \mu && \text{as $(X,h)$ is a.conv.}\\
+    &\ =\ h_\sim \after \mathcal{D}_M q \after \mu && \text{by the second point} \\
+    &\ =\ h_\sim \after \mu \after
+    \mathcal{D}_M \mathcal{D}_M q
+    && \text{by naturality~$\mu$.}
+\end{alignat*}
+    Hence by surjectivity of~$\mathcal{D}_M \mathcal{D}_M q$,
+        we find~$h_\sim \after \mathcal{D}_M h_\sim
+            = h_\sim \after \mu$.
+    Using naturality of~$\eta$,
+        the second point
+            and the fact that~$(X,h)$ is an abstract convex set
+            (in that order),
+            we find~$h_\sim \after \eta \after q
+        = h_\sim \after \mathcal{D}_M q \after \eta
+        = q \after h \after \eta
+        = q $ and so~$h_\sim \after \eta = \id$ by surjectivity of~$q$.
+We have shown~$(X/_\sim, h_\sim)$ is an abstract~$M$-convex set.
+    The equality~$q \after h = h_\sim \after \mathcal{D}_M q$
+        from the second point shows that~$q$ is
+        an~$M$-affine map.
+\end{solution}
+\begin{solution}{affine-kernel-cong}%
+To show~$\sim$ is a congruence,
+    assume~$\varphi \sim \psi$ for~$\varphi,\psi \in \mathcal{D}_M X$.
+Write~$q \colon X \to X/_\sim$
+    for the quotient map for~$\sim$
+        and~$f_\sim \colon X/_\sim \to X$ for
+        the unique map with~$f_\sim \after q =f$.
+    Note that~$
+    \mathcal{D}_M q (\varphi)
+    = \mathcal{D}_M q (\psi)$ and so~$f(h(\varphi)) = 
+    h (\mathcal{D}_M f(\varphi)) =
+    h (\mathcal{D}_M f_\sim (\mathcal{D}_M q (\varphi))) =
+    h (\mathcal{D}_M f_\sim (\mathcal{D}_M q (\psi))) =
+    f(h(\psi))$
+    and so~$h(\varphi) \sim h(\psi)$, which shows~$\sim$
+    is a congruence.
+\end{solution}
+\begin{solution}{least-conv-cong}%
+Concerning the first point:
+clearly~$h (\eta(h(\psi))) = h(\psi)$
+    and so~$(\, \eta(h(\psi)), \, \psi\,)$
+    is a derivation of~$\eta(h(\psi)) \approx \psi$.
+Assume~$\varphi \approx \psi$.
+    Then~$\eta(h(\varphi)) \approx \varphi \approx \psi \approx \eta(h(\psi))$
+        and so~$h(\varphi) \sim h(\psi)$.
+
+We continue with the second point.
+    Suppose we are given~$\chi_1, \ldots, \chi_n, \varphi,\psi \in \mathcal{D}_M X$
+    and~$\lambda_0, \ldots, \lambda_n \in M$
+        with~$\bigovee_i \lambda_i = 1$.
+To cover the first base case in the definition
+    of a derivation, assume~$h(\varphi) = h(\psi)$.
+Then
+\begin{align*}
+    (h \after \mu) \Bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\Bigr)
+    & \ = \ 
+    (h \after \mathcal{D}_M h) \Bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\Bigr) \\
+    & \ = \ 
+    h  \Bigl(\lambda_0 \ket{h(\psi)} \ovee \bigovee_{j=1}^n \lambda_j \ket{h(\chi_j)}\Bigr) \\
+    & \ = \ 
+    h  \Bigl(\lambda_0 \ket{h(\varphi)} \ovee \bigovee_{j=1}^n \lambda_j \ket{h(\chi_j)}\Bigr) \\
+    & \ = \ 
+    (h \after \mu) \Bigl(\lambda_0 \ket{\varphi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\Bigr)
+\end{align*}
+and so
+    $\mu \bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)
+     \approx  
+    \mu \bigl(\lambda_0 \ket{\varphi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)$.
+Next, for the other base case in the definition of a derivation,
+    assume~$\varphi \equiv \bigovee_i^m \mu_i \ket{x_i}$
+    and~$\psi \equiv \bigovee_i^m \mu_i \ket{y_i}$
+    with~$x_i \mathrel{R^*} y_i$ for~$1 \leq i \leq m$.
+Then
+\begin{align*}
+    \mu \Bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\Bigr)
+    & \ = \  
+    \bigovee_{i=1}^m \lambda_0 \odot \mu_i \ket{y_i}
+    \ovee \bigovee_{j=1}^n \bigovee_x \lambda_j \odot \chi_j(x) \ket{x}\\
+    \mu \Bigl(\lambda_0 \ket{\varphi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\Bigr)
+    & \ = \  
+    \bigovee_{i=1}^m \lambda_0 \odot \mu_i \ket{x_i}
+    \ovee \bigovee_{j=1}^n \bigovee_x \lambda_j \odot \chi_j(x) \ket{x}.
+\end{align*}
+This shows that~$\mu \bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)
+     \approx  
+    \mu \bigl(\lambda_0 \ket{\varphi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)$ by the second base case of a derivation.
+Thus by induction~$\mu \bigl(\lambda_0 \ket{\psi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)
+     \approx  
+    \mu \bigl(\lambda_0 \ket{\varphi} \ovee \bigovee_{j=1}^n \lambda_j \ket{\chi_j}\bigr)$ whenever merely~$\varphi \approx \psi$.
+
+For the third point, we need some preparation.
+Pick representatives~$R \subseteq X$ of~$\sim$:
+    for every~$x \in X$ there is a unique~$r_x \in R$ with~$r_x\sim x$.
+    By definition~$\eta(r_x) \approx \eta(x)$.
+    Let~$\varphi \equiv \bigovee^n_{i=1} \lambda_i\ket{x_i}  \in \mathcal{D}_M X$ given.
+By the previous point~
+\begin{align*}
+    \varphi & \ = \ 
+    \mu \Bigl( \lambda_1 \ket{\eta(x_1)}  \ovee \bigovee^n_{i=2} \lambda_i\ket{\eta(x_i)}  \Bigr) \\
+    & \ \approx \ 
+    \mu \Bigl( \lambda_1 \ket{\eta(r_{x_1})}  \ovee \bigovee^n_{i=2} \lambda_i\ket{\eta(x_i)}  \Bigr) \\
+    & \ = \ 
+    \mu \Bigl( \lambda_2 \ket{\eta(x_2)}  \ovee \lambda_1 \ket{r_{x_1}}  \ovee  \bigovee^n_{i=3} \lambda_i\ket{\eta(x_i)}  \Bigr) \\
+    & \ \approx \ 
+    \mu \Bigl( \lambda_2 \ket{\eta(r_{x_2})}  \ovee \lambda_1 \ket{r_{x_1}}  \ovee  \bigovee^n_{i=3} \lambda_i\ket{\eta(x_i)}  \Bigr) \\
+    & \qquad\qquad  \vdots\\
+    & \ \approx \ \bigovee_{i=1}^n \lambda_i \ket{r_{x_i}} \\
+    & \ \approx \ \bigovee_{r \in R} \Bigl(\bigovee_{x \sim r} \varphi(x) \Bigr)\ket{r}.
+\end{align*}
+Now, assume~$\varphi \sim \psi$.
+Then~$\bigovee_{x \sim x_0} \varphi(x)
+    = \bigovee_{x \sim x_0} \psi(x)$ for any~$x_0 \in X$
+        and so
+\begin{equation*}
+\varphi \ \approx  \ 
+                \bigovee_{r \in R} \Bigl( \bigovee_{x \sim r} \varphi(x) \Bigr) \ket{r}
+              \ = \  \bigovee_{r \in R} \Bigl( \bigovee_{x \sim r} \psi(x) \Bigr) \ket{r}
+            \ \approx \  \psi.
+\end{equation*}
+
+Clearly~$\sim$ is an equivalence relation on~$X$.
+To show it is a congruence, assume~$\varphi \sim \psi$.
+By the previous, we know~$\varphi \approx \psi$
+    and so~$h(\varphi) \sim h(\psi)$ by the first point,
+        which shows~$\sim$ is indeed a congruence.
+Furthermore~$R$ is contained in~$\sim$;
+indeed, if~$x \mathrel{R} y$,
+    then~$(\eta(x), \eta(y))$ is a derivation of~$\eta(x) \approx \eta(y)$
+    and so~$x \sim y$.
+
+To show~$\sim$ is the smallest congruence containing~$R$,
+    assume~$S \subseteq X^2$ is some congruence of~$X$
+        with~$R \subseteq S$.
+It is sufficient to show that~$\varphi \approx \psi$
+    implies~$h(\varphi) \mathrel{S} h(\psi)$.
+Indeed if this is the case and~$x \sim y$,
+    then by definition~$\eta(x) \approx \eta(y)$
+    and so~$x = h(\eta(x)) \mathrel{S} h(\eta(y)) = y$.
+
+We will prove that~$\varphi \approx \psi$
+    implies~$h(\varphi) \mathrel{S} h(\psi)$
+    by induction over the definition of~$\approx$.
+For the first base case in the definition of~$\approx$,
+    assume~$\varphi \equiv \bigovee^n_{i=1} \lambda_i \ket{x_i}$
+and~$\psi \equiv \bigovee^n_{i=1} \lambda_i \ket{y_i}$
+for some~$(x_1,y_1), \ldots, (x_n,y_n) \in R^*$.
+Then~$x_i \mathrel{S} y_i$
+    and so~$\varphi \mathrel{S} \psi$,
+    hence~$h(\varphi) \mathrel{S} h(\psi)$.
+For the other base case, suppose~$h(\varphi) = h(\psi)$
+    for some~$\varphi,\psi \in \mathcal{D}_M X$.
+Then clearly~$h(\varphi) \mathrel{S} h(\psi)$.
+Thus, by induction~$h(\varphi) \mathrel{S} h(\psi)$
+    whenever~$\varphi \approx \psi$. 
+\end{solution}
+\begin{solution}{n-times-one-aconvm}%
+As the one element set is final in~$\mathsf{Set}$,
+    there is a unique map~$!\colon \mathcal{D}_M 1 \to 1$.
+        This turns~$\mathcal{D}_M 1$ into an abstract~$M$-convex set:
+        ${!} \after \mathcal{D}_M {!} = {!} = {!} \after \mu$
+        and~${!} \after \eta = {!} = \id$.
+Note that there is a single formal~$M$-convex combination over~$1$
+    and so~$\mathcal{D}_M 1 \cong 1$.
+As~$\AConvM$ is the Eilenberg--Moore category
+    of the monad~$\mathcal{D}_M$,
+    it follows that the functor~$F\colon \mathsf{Set} \to \AConvM$
+    given by~$F(X) = (\mathcal{D}_M X, \mu)$
+    and~$Ff = \mathcal{D}_M f$ is a left adjoint
+    and so preserves coproducts.
+    Hence~$\mathcal{D}_M \{1,\ldots,n\}
+                \cong F(n\cdot 1)
+                \cong n \cdot F(1)
+                \cong n \cdot 1$.
+\end{solution}
+\begin{solution}{exc-divisoid-basics}%
+    Clearly~$0 \leq \rfrac{0}{0}$
+        and~$0\odot 0 = 0$.
+        Thus, by uniqueness of~$\rfrac{0}{0}$,
+            we have~$\rfrac{0}{0}=0$.
+For any~$a \in M$,
+    we have~$\rfrac{a}{1} = 1 \odot \rfrac{a}{1} = a$
+        and so in particular~$\rfrac{1}{1}=1$.
+Next, note~$\rfrac{a}{a} \odot \rfrac{a}{a} \leq \rfrac{a}{a}$
+    and~$a \odot \rfrac{a}{a} \odot \rfrac{a}{a} = a \odot \rfrac{a}{a} = a$
+        and so by uniqueness of~$\rfrac{a}{a}$,
+            we have~$\rfrac{a}{a}\odot \rfrac{a}{a} = \rfrac{a}{a}$.
+For the final equation of the first point, assume~$b \in M$.
+    As~$a \odot b \leq a$ we know~$\rfrac{a\odot b}{a}$ is defined.
+Note~$\rfrac{a}{a} \odot b \leq \rfrac{a}{a}$
+    and~$a \odot \rfrac{a}{a} \odot b = a \odot b$.
+    So by uniqueness of~$ \rfrac{a\odot b}{a}$
+    we see~$ \rfrac{a\odot b}{a}
+    = \rfrac{a}{a} \odot b$.
+
+For the second point, suppose~$a,b,c \in M$ with~$a \leq b \leq c$.
+    Note~$\rfrac{b}{c} \odot \rfrac{a}{b} \leq \rfrac{b}{c} \leq \rfrac{c}{c}$
+        and~$c \odot \rfrac{b}{c} \odot \rfrac{a}{b}
+            = b\odot \rfrac{a}{b} = a $.
+    So by uniqueness of~$\rfrac{a}{c}$,
+        we get~$\rfrac{b}{c} \odot \rfrac{a}{b} = \rfrac{a}{c}$, as desired.
+\end{solution}
+\begin{solution}{basic-divisoid-equiv}%
+Let~$X$ be a compact Hausdorff space.
+Assume that the unit interval of~$C(X)$
+    is an effect divisoid.
+To show~$X$ is basically disconnected,
+    assume~$f \in C(X)$.
+We have to show that~$\overline{\supp f}$ is open.
+Note~$\supp | f | = \supp  f$ and so, without loss of generality,
+    we may assume that~$f \geq 0$.
+By compactness~$f$ is bounded.  Pick~$B > 0$ with~$B \geq f$.
+    Then~$\supp B^{-1} f = \supp f$ and~$B^{-1} f \leq 1$,
+    so we may also assume without loss of generality, that~$0 \leq f \leq 1$.
+    If~$\overline{\supp f} = X$, then we are done,
+    so assume~$\overline{\supp f} \neq X$.
+    Pick any~$y \notin \overline{\supp f}$.
+By Urysohn's lemma, there is a~$g \in C(X)$
+    with~$g(y) = 0$ and~$g(x) = 1$ for every~$x \in \overline{\supp f}$.
+    Define~$h \equiv  \rfrac{f}{f} \wedge (0 \vee g)$.
+Clearly~$0 \leq h \leq \rfrac{f}{f} \leq 1$
+    and~$h(y) \leq (0 \vee g)(y) = 0$.
+    Note that~$\rfrac{f}{f}\rfrac{f}{f} \equiv  \rfrac{f}{f} \odot \rfrac{f}{f} = \rfrac{f}{f}$
+    and so~$\rfrac{f}{f}$ is zero--one valued: a characteristic function.
+Pick any~$x \in \supp f$.
+    Then~$0 < f(x) \leq \rfrac{f}{f}(x) \in \{0,1\}$,
+        hence~$\rfrac{f}{f}(x)=1$.
+    By continuity~$\rfrac{f}{f}(x)=1$
+        for every~$x \in \overline{\supp f}$
+            and so~$h(x) = \rfrac{f}{f}(x) \wedge g(x) = 1 \wedge 1 = 1$.
+Hence~$(f \odot h) (x) = f(x)h(x) = f(x)$ for~$x \in \overline{\supp f}$
+    and~$(f \odot h)(x) = f(x)h(x) = 0 = f(x)$ whenever~$x \notin \overline{\supp f}$.
+Thus~$f \odot h = f$.
+    By uniqueness of~$\rfrac{f}{f}$, we have~$\rfrac{f}{f} = h$.
+    Consequently~$\rfrac{f}{f}(y) = h(y) = 0$.
+    Recall that~$y$ was an arbitrary element~$y \notin \overline{\supp f}$
+        and thus~$\rfrac{f}{f}$ is the characteristic function of~$\overline{\supp f}$,
+            which is thus open. Hence~$X$ is basically disconnected.
+
+To prove the converse, assume~$X$ is basically disconnected.
+Let~$f,g \in C(X)$ be given with~$0 \leq f \leq g \leq 1$.
+    Define~$U_n \equiv \{x; \ g(x) > \frac{1}{n}\}$.
+Note~$U_n = \supp ((g - \frac{1}{n}) \vee 0)$
+    and so~$\overline{U_n}$ is open as~$X$ is basically disconnected.
+Define
+\begin{equation*}
+    h_n \ \equiv \  \begin{cases}
+        \frac{f(x)}{g(x)} & x \in \overline{U_n}\\
+        0 & \text{otherwise}.
+    \end{cases}
+\end{equation*}
+To show~$h_n$ is continuous, assume
+    there is a net~$(x_\alpha)_\alpha$ with~$x_\alpha \to x$
+        for some~$x \in X$.
+    Suppose~$x \in \overline{U_n}$.
+    As~$\overline{U_n}$ is open,
+        we know~$x_\alpha \in U_n$
+        for sufficiently large~$\alpha$
+        and so~$h_n(x_\alpha) \to h_n(x)$
+            as~$\frac{f(x)}{g(x)}$
+            is continuous for~$x \in \overline{U_n}$
+                as then~$g(x) \geq \frac{1}{n} > 0$.
+    For the other case, suppose~$x \notin\overline{ U_n}$.
+The set~$X - \overline{U_n}$ is open
+    and so~$x_\alpha \notin \overline{U_n}$ for sufficiently large~$\alpha$
+        and then~$h_n(x_\alpha)=0 = h_n(x)$.
+    Thus~$h_n$ is continuous.
+
+Clearly~$0\leq h_1 \leq h_2 \leq \ldots \leq 1$
+ and so we may define~$\rfrac{f}{g} \equiv \sup_n h_n$
+ as~$C(X)$ is~$\omega$-complete by basic disconnectedness of~$X$.
+ Note~$0 \leq \rfrac{f}{g} \leq 1$.
+
+Suppose~$f=g$ and~$x \in \supp f$.
+Then~$h_n(x) = 1$ for all~$n > f(x)^{-1}$
+    and so~$\rfrac{f}{f}(x) = 1$.
+Thus~$\rfrac{f}{f}(x) = 1$ for all~$x \in \overline{\supp f}$.
+Write~$\chi$ for the characteristic function of~$\overline{\supp f}$.
+We just saw~$\chi \leq \rfrac{f}{f}(x)$.
+As~$\overline{U_n} \subseteq \overline{\supp f}$ and~$h_n \leq 1$,
+    we have~$h_n \leq \chi$ for all~$n$ and
+    so~$\rfrac{f}{f} \leq \chi$. Thus~$\rfrac{f}{f} = \chi$,
+    the characteristic function of~$\overline{\supp f}$.
+In particular~$f \leq \rfrac{f}{f}$
+    and~$\rfrac{f}{f} \odot \rfrac{f}{f}
+        \equiv \rfrac{f}{f}\rfrac{f}{f} = \rfrac{f}{f}$.
+
+Let~$f,g \in C(X)$ be given with~$0 \leq f\leq g \leq 1$
+    and~$h_1 \leq h_2\leq  \ldots$ as above.
+We will show~$\rfrac{f}{g} \leq \rfrac{g}{g}$.
+Assume~$x \in X$.
+Suppose~$x \in \supp g$.
+Then~$h_n(x) = \frac{f(x)}{g(x)} \leq 1 = \rfrac{g}{g}(x)$
+    for all~$n > g(x)^{-1}$
+    and so~$\rfrac{f}{g}(x) \leq \rfrac{g}{g}(x)$.
+In particular~$\rfrac{f}{g}(x) \leq \rfrac{g}{g}(x)$
+    for all~$x \in \overline{\supp g}$.
+For the other case, assume~$x \notin \overline{\supp g}$.
+Then~$x \notin \overline{U_n}$ and
+    so~$h_n(x) = 0$ for all~$n \in \N$,
+    whence~$\rfrac{f}{g}(x) = 0 \leq \rfrac{g}{g}(x)$.
+Thus indeed~$\rfrac{f}{g} \leq \rfrac{g}{g}$.
+
+In a similar way, it is easy to see
+    that~$\rfrac{f}{g}(x) \leq \frac{f(x)}{g(x)}$ for~$x \in \supp g$.
+    To show equality, we define
+\begin{equation*}
+    k_n \ \equiv \  \begin{cases}
+        \frac{f(x)}{g(x)} & x \in \overline{U_n}\\
+        1 & \text{otherwise}.
+    \end{cases}
+\end{equation*}
+With similar reasoning as for~$h_n$,  we see that these~$k_n$ are continuous.
+Furthermore~$h_m \leq k_n$ for all~$m$
+    and so~$\rfrac{f}{g} \leq k_n$ for any~$n$.
+Pick any~$x \in \supp g$.
+Then~$\rfrac{f}{g} (x) \leq k_n(x) = \frac{f(x)}{g(x)}$
+    for~$n > g(x)^{-1}$
+    and so~$\rfrac{f}{g}(x) = \frac{f(x)}{g(x)}$
+        for any~$x \in \supp g$.
+Thus~$(g \odot \rfrac{f}{g} )(x)= f(x) $ for~$x \in \supp g$
+    and so~$(g\odot \rfrac{f}{g})(x) = f(x)$ for~$x \in \overline{\supp g}$
+    by continuity.
+For the other case, assume~$x \notin \overline{\supp g}$.
+Then~$g \odot \rfrac{f}{g} (x) \leq \rfrac{f}{g} (x) \leq \rfrac{g}{g}(x) = 0
+    = g(0) \geq f(0)$.
+We have shown~$g\odot \rfrac{f}{g} = f$.
+
+Only uniquness of~$\rfrac{f}{g}$ remains.
+So assume~$h \in C(X)$
+    with~$0 \leq h \leq \rfrac{g}{g}$
+    and~$g \odot  h = f$.
+Assume~$x \in \supp g$.
+Then~$g(x)h(x) = f(x)$ and so~$h(x) = \frac{f(x)}{g(x)} = \rfrac{f}{g}(x)$.
+By continuity~$h(x) = \rfrac{f}{g} (x)$ for all~$x \in \overline{\supp g}$.
+For the other case, assume~$x \notin \overline{\supp g}$.
+As both~$h, \rfrac{f}{g} \leq \rfrac{g}{g}$,
+    we have~$h(x) = 0 = \rfrac{f}{g}(x)$.
+We have shown~$h = \rfrac{f}{g}$
+    and thus the unit interval of~$C(X)$
+    is an effect divisoid.
+\end{solution}
+\begin{solution}{quotient-basics}%
+Assume~$C$ is an effectus.
+\begin{enumerate}
+\item
+Assume~$\xi \colon X \to Y$ is a quotient for~$p$
+    and~$\vartheta \colon Y \to Z$ is an isomorphism.
+Note~$1 \after \vartheta \after \xi = 1 \after \xi \leq p^\perp$.
+To prove~$\vartheta \after \xi$ is a quotient for~$p$,
+    assume~$f\colon X \to Y'$ is some map
+        with~$1 \after f \leq p^\perp$.
+    As~$\xi$ is a quotient, there exists a unique map~$f'\colon Y \to Y'$
+        with~$f' \after \xi = f$.
+        Clearly~$f = f' \after \xi =
+            (f' \after \vartheta^{-1}) \after (\vartheta \after \xi)$.
+Assume~$h\colon Z \to Y'$ is any map with~$f = h\after (\vartheta \after \xi)$.
+Then~$h \after \vartheta = f'$ by uniqueness of~$f'$
+        and so~$h = f' \after \vartheta^{-1}$.
+    We have shown that~$\vartheta \after \xi$ is a quotient of~$p$ as well.
+\item
+    Assume~$\xi_1 \colon X \to Y_1$
+            and~$\xi_2 \colon X \to Y_2$
+        are quotients for~$p$.
+    By the universal property of~$\xi_1$,
+            there is a unique map~$\vartheta_1 \colon Y_1 \to Y_2$
+            with~$\vartheta_1 \after \xi_1 = \xi_2$.
+    Similarly, there is a unique map~$\vartheta_2 \colon Y_2 \to Y_1$
+            with~$\vartheta_2 \after \xi_2 = \xi_1$.
+Note that~$\xi_1 = \vartheta_2 \after \xi_2 = \vartheta_2 \after \vartheta_1 \after \xi_1$.
+By the universal property of~$\xi_1$ again,
+        the map~$\id\colon Y_1 \to Y_1$
+            is the unique map with~$\id \after \xi_1 = \xi_1$
+                and so~$\vartheta_2 \after \vartheta_1 = \id$.
+                Similarly~$\vartheta_1 \after \vartheta_2 = \id$.
+        Thus~$\vartheta_2$ is an isomorphism
+            with~$\vartheta_2 \after \xi_2 = \xi_1$.
+            It is the unique such isomorphism by the universal property of~$\xi_2$.
+\item
+Assume~$f\colon X \to Y$ is some map.
+        Clearly~$1 \after f \leq 1 = 0^\perp$.
+Furthermore~$f$ is itself the unique map~$f'$ with~$f' \after \id = f$.
+Thus~$\id$ is a quotient for~$0$.
+        Consequently any isomorphism is a quotient for~$0$ by the first point.
+\item
+Assume~$X$ is any object.
+As~$0$ is a zero object,
+    there is a unique map~$0_X \colon X \to 0$.
+Clearly~$1 \after 0 = 0 = 1^\perp$.
+Assume~$f\colon X \to Y$ is any map with~$1 \after f \leq 1^\perp= 0$.
+Then~$f = 0$ and so~$f = 0 = 0 \after 0_X$.
+If~$f = h \after 0_X$ for some~$h\colon 0 \to Y$,
+    then~$h=0$ and so any map into zero is indeed a quotient for~$1$.
+\item
+Assume~$\xi \colon X \to Y$ is a quotient for~$p$.
+Clearly~$1 \after p^\perp = p^\perp \leq p^\perp$
+    and so there is a unique map~$f\colon Y \colon 1$
+        with~$f \after \xi = p^\perp$.
+Then~$p^\perp = 1\after p^\perp=  1 \after f \after \xi \leq 1 \after \xi = p^\perp$
+    and so~$1 \after \xi = p^\perp$.
+\item
+Assume~$f_1 \after \xi = f_2 \after \xi$
+    for some quotient~$\xi$ of~$p$.
+        Then~$1 \after f_1 \after \xi \leq 1 \after \xi = p^\perp$.
+    Hence there is a unique~$f$ with~$f \after \xi = f_1 \after \xi$.
+    Both~$f_1$ and~$f_2$ fit the bill, hence~$f_1=f=f_2$.
+    Thus~$\xi$ is epic.
+\end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{quot-fact-system}%
+Let~$C$ be an effectus with quotients.
+Assume~$t' \after \xi' = t \after \xi$
+    for some quotient~$\xi,\xi'$ and total maps~$t,t'$.
+Then~$1 \after \xi = 1 \after t \after \xi = 1 \after t' \after \xi'
+        = 1 \after \xi'$.
+    Thus by~\sref{quotient-basics} there is a unique isomorphism~$\vartheta$
+        with~$\xi' = \vartheta \after \xi$.
+Note~$t \after \xi = t' \after \xi' = t' \after \vartheta \after \xi$
+    and so by epicity of~$\xi$
+    (see~\sref{quotient-basics}),
+    we see~$t = t' \after \vartheta$, as desired.
+\end{solution}
+\begin{solution}{exc-quot-adjoint}%
+Assume~$C$ is an effectus with quotients.
+We will show that~$0$ has a left adjoint by demonstrating the universal mapping property.
+Pick for every object~$(X,p)$ in~$\int \Pred_\square$
+    a quotient~$\xi_p \colon X \to X/_p$ of~$p$.
+    Note~$(0^\perp \after \xi_p)^\perp = p$
+        and so~$\xi_p$ is a map~$(X,p) \to (X/_p, 0)$ in~$\int \Pred_\square$.
+We will use these maps~$\xi_p$ as the components of  the unit of the adjunction.
+    Let~$f \colon (X,p) \to (Y,0)$ be some map in~$\int \Pred_\square$.
+By definition of map~$1 \after f \leq p^\perp$
+    and so by the universal property of~$\xi_p$,
+    there exists a unique map~$f'\colon X/_p \to Y $
+        with~$f = f' \after \xi_p$ in~$C$.
+        Clearly also~$(0 f) \after \xi_p = f$ in~$\int\Pred_\square$.
+Let~$g\colon X/_p \to Y$ be some map with~$(0 g) \after \xi_p = f$
+    as well.
+    Then~$g \after \xi_p = f$ and so~$g' = f'$.
+This shows that~$0$ has a left adjoint.
+
+To prove the converse, assume~$C$ is an effectus
+    where~$0\colon C \to \int\Pred_\square$ has a left adjoint~$Q\colon \int \Pred_\square \to C$.
+Let~$X$ be some object in~$C$ with a predicate~$p$.
+    Write~$\eta \colon (X,p) \to 0Q(X,p)$
+        for the~$(X,p)$ component of the unit of the adjunction~$Q \dashv 0$.
+By definition of maps in~$\int \Pred_\square$,
+    we know~$1 \after \eta \leq p^\perp$.
+We will show that~$\eta$ is a quotientfor~$p$.
+To this end, assume~$f\colon X \to Y$ is some map in~$C$
+    with~$1 \after f \leq p^\perp$.
+Then~$f\colon (X,p) \to (Y,0)$ in~$\int \Pred_\square$.
+By the universal mapping property,
+    there is a unique map~$f'\colon Q(X,p) \to Y$ in~$C$
+    with~$(0f')\after \eta = f$, i.e.~$f' \after \eta = f$.
+This shows that~$\eta$ is indeed a quotient of~$p$.
+Hence~$C$ has quotients.
+\end{solution}
+\begin{solution}{compr-grothendieck}%
+Assume~$C$ is an effectus with comprehension.
+We will show that~$1$ has a right adjoint by demonstrating
+    the dual of the universal mapping property.
+Pick for every object~$(X,p)$ in~$\int \Pred_\square$
+    a comprehension~$\pi_p \colon \cmpr{X}{p} \to X$.
+Note that for any map~$f$,
+    we have~$1 \after f = p \after f$ if and only if~$p^\perp \after f = 0$.
+    Thus~$(p^\perp \after \pi_p)^\perp = 1$, which shows
+        that~$\pi_p$ is a map~$(\cmpr{X}{p}, 1) \to (X,p) $ in~$\int\Pred_\square$.
+    We will use these maps as components for the counit of the adjunction.
+Let~$f\colon (Y,1) \to (X,p)$ be some map in~$C$.
+By  definition of maps in~$\int \Pred_\square$,
+    we have~$1 \leq (p^\perp \after f)^\perp$,
+    viz.~$1 \after f = p \after f$.
+    Thus, by the universal property of~$\pi_p$,
+    there is a unique map~$f'\colon Y \to \cmpr{X}{p}$ in~$C$
+    with~$\pi_p \after f' = f$.
+    Hence~$1 f'$ is the unique map in~$\int \Pred_\square$
+        with~$\pi_p \after (1 f') = f$ in~$\int \Pred_\square$.
+    We have shown that~$1$ has a right adjoint.
+
+To prove the converse, assume~$C$ is an effectus
+    where~$1\colon C \to \int \Pred_\square$
+    has a right adjoint~$K\colon \int \Pred_\square \to C$.
+Let~$X$ be some object of~$C$ with a predicate~$p$.
+    Write~$\varepsilon\colon 1 K(X,p) \to (X,p)$ for the~$(X,p)$ component of
+    the counit of the adjunction~$1 \dashv K$.
+    By definition of maps in~$\int \Pred_\square$,
+        we know~$1 \leq (p^\perp \after \varepsilon)^\perp$,
+     hence~$1 \after \varepsilon = 1 \after \varepsilon$.
+We will show that~$\varepsilon$ is a comprehension for~$p$.
+To this end, assume~$f\colon Y \to X$ is some map in~$C$
+    with~$1 \after f = p \after f$.
+    Then~$1 = (p^\perp \after f)^\perp$
+        and so~$f$ is a map~$(Y, 1) \to (X,p)$
+        in~$\int \Pred_\square$.
+By the dual of the universal mapping property,
+    there is a unique map~$f'\colon Y \to K(X,p)$ in~$\int \Pred_\square$
+    with~$\varepsilon \after (1f') = f$,
+    i.e.~$\varepsilon \after f' = f$.
+    This shows that~$\varepsilon$ is indeed a comprehension for~$p$.
+    Hence~$C$ has comprehension.
+\end{solution}
+\begin{solution}{compr-basics}%
+Let~$C$ be an effectus.
+ \begin{enumerate}
+    \item
+Assume~$\pi \colon X \to Y$ is a comprehension for~$p$
+    and~$\vartheta\colon Z \to X$ is an isomorphism.
+We will show~$\pi \after \vartheta$ is a comprehension for~$p$
+    as well.
+To start, note~$1 \after \pi \after \vartheta  = p \after \pi \after \vartheta$.
+Assume~$f\colon X' \to Y$ is any map with~$1 \after f = p\after f$.
+Then, by the universal property of~$\pi$, there is a unique map~$f' \colon X' \to X$
+    with~$\pi \after f' = f$.
+         Then~$f = (\pi \after \vartheta) \after (\vartheta^{-1} \after f')$.
+Assume~$g \colon X' \to X$ is a map with~$g = (\pi \after \vartheta) \after g$
+    as well.
+Then~$\vartheta \after g = f'$ by uniqueness of~$f'$ and so~$
+    g = \vartheta^{-1} \after f'$.
+We have shown that~$\pi \after \vartheta$ is a comprehension for~$p$ as well.
+\item
+Assume~$\pi_1 \colon X_1 \to Y$ and~$\pi_2 \colon X_2 \to Y$
+    are comprehensions of~$p$.
+By the universal property of~$\pi_1$, there is a unique map~$\vartheta_1\colon X_2 \to X_1$
+    with~$\pi_2 = \pi_1 \after \vartheta_1$.
+On the other side, by the universal property of~$\pi_2$,
+     there is a unique map~$\vartheta_2\colon X_1 \to X_2$
+    with~$\pi_1 = \pi_2 \after \vartheta_2$.
+Then~$\pi_1 = \pi_2 \after \vartheta_2 = \pi_1 \after \vartheta_1 \after \vartheta_2$.
+By the universal property of~$\pi_1$ again, the map~$\id \colon X_1 \to X_1$
+    is the unique map with~$\pi_1 \after \id = \pi_1$
+         and so~$\vartheta_1 \after \vartheta_2 = \id$.
+    Similarly~$\vartheta_2 \after \vartheta_1 = \id$.
+    Thus~$\vartheta_2$ is an isomorphism with~$\vartheta_1 = \pi_2 \after \vartheta_2$.
+        It is the unique such isomorphism by the universal property of~$\pi_2$.
+\item
+Assume~$f\colon X \to Y$ is some map.  Trivially~$1 \after f = 1 \after f$ and~$1 \after \id = 1 \after \id$.
+The map~$f$ itself is the unique map~$g$ with~$g \after \id  = f$
+    and so~$\id$ is a comprehension for~$1$.
+    Consequently any isomorphism is a comprehension for~$1$ by the first point.
+\item
+Assume~$Y$ is any object.
+As~$0$ is a zero object, there is a unique map~$0_Y \colon 0 \to Y$.
+Clearly~$1 \after 0_Y = 0 = 0 \after 0_Y$.
+Assume~$f\colon X \to Y$ is any map with~$1 \after f = 0\after f$.
+Then~$1 \after f= 0 \after f = 0$ and so~$f=0$.
+The zero map is the unique map~$ X \to 0$
+    and for that map, we have~$0_Y \after 0 = 0 = f$
+         and so~$0_Y$ is a comprehension for~$0$.
+\item
+Assume~$\pi \after f_1 = \pi \after f_2$ for some comprehension~$\pi$
+    of~$p$.
+Then~$1 \after \pi \after f_1
+         = p \after \pi \after f_1$
+    and so by the universal property of~$\pi$,
+         there is a unique map~$f$ with~$\pi \after f = \pi \after f_1$.
+         Both~$f_1$ and~$f_2$ fit the bill, hence~$f_1 =f = f_2$.
+         Thus~$\pi$ is monic.
+\item
+Assume~$\pi$ is a comprehension of~$p$.
+         Then~$(p^\perp \after \pi) \ovee (p \after \pi) = 
+                (p^\perp \ovee p) \after \pi = 1 \after \pi =p \after \pi$.
+        Thus~$p^\perp \after \pi = 0$ by cancellation.
+\end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{compr-is-kernel}%
+Let~$C$ be any effectus.
+Assume~$\pi\colon X \to Y$ is a comprehension of~$p$.
+We will show~$\pi$ is a categorical kernel~$p^\perp$.
+To start, note~$p^\perp \after \pi = 0$ by~\sref{compr-basics}.
+Now assume~$f\colon X' \to Y$ is some map with~$p^\perp \after f = 0$.
+    Then~$p \after f = (p \after f) \ovee (p^\perp \after f)= 1 \after f $
+    and so by the universal property of~$\pi$,
+    there is a unique map~$f'\colon X' \to X$ with~$f = \pi \after f'$.
+    Hence~$\pi$ is a kernel of~$p^\perp$.
+
+To prove the converse, assume~$k\colon X \to Y$ is a kernel
+        of~$p^\perp\colon Y \to 1$. 
+We have~$1 \after k = (p \after p^\perp) \after k = (p \after k) \ovee (p^\perp \after k)
+            = p \after k$.
+Assume~$f\colon X' \to Y$ is some map with~$p \after f = 1 \after f$.
+Then~$(p^\perp \after f) \ovee (p \after f) = 1 \after f = p \after f$
+    and so by cancellation~$p^\perp \after f = 0$.
+Hence by the universal property of~$k$
+    there is a unique map~$f'\colon X' \to X$
+        with~$k \after f' = f$.
+    This shows that~$k$ is a comprehension of~$p$.
+\end{solution}
+\begin{solution}{im-ineq}%
+We have~$(\IM f ) \after f \after g = 1 \after f \after g \leq 1 \after g$
+    and so~$\IM f \after g \leq \IM f$.
+    Consequently~$\IM f \after \alpha \leq \IM f
+        = \IM f \after \alpha \after \alpha^{-1}
+        \leq \IM f \after \alpha$ and so~$\IM f \after \alpha  = \IM f$.
+\end{solution}
+\begin{solution}{exc-quot-faithful}%
+Assume~$\xi\colon X \to Y$ is some quotient and~$p$ is a predicate on~$Y$
+    with~$p \after\xi = 0$.
+    Then~$p \after \xi = 0 = 0 \after \xi$
+        and so~$p = 0$ by epicity of~$\xi$.
+Hence~$\xi$ is faithful.
+\end{solution}
+\begin{solution}{img-of-compr}%
+Assume~$\floor{p} = p$.
+    Then~$p = \floor{p} \equiv \IM \pi$ for some comprehension~$\pi$ of~$p$
+        and so~$p$ is sharp.
+To prove the converse, assume~$p$ is sharp;
+    that is: $p = \IM f$ for some~$f$.
+Pick any comprehension~$\pi$ of~$p$.
+    Clearly~$p \after f = (\IM f) \after f = 1 \after f$
+        and so there is a unique~$g$ with~$f = \pi \after g$.
+    By~\sref{im-ineq}
+        we find~$p = \IM f = \IM \pi \after g \leq \IM \pi \equiv \floor{p} \leq p$
+        and so~$p = \floor{p}$.
+\end{solution}
+\begin{solution}{ceiling-within-ceiling}%
+Note~$\ceil{p} \leq \ceil{q}$  whenever~$p \leq q$
+    and so~$\ceil{p \after f} \leq \ceil{\ceil{p} \after f}
+        \leq \ceil{\ceil{p \after f}} = \ceil{p \after f}$
+        as~$p \leq \ceil{p}$
+        and~$\ceil{p} \after f \leq \ceil{p \after f}$ by~\sref{ceiling-within-ceiling}.
+    Thus~$\ceil{p \after f} = \ceil{\ceil{p} \after f}$.
+\end{solution}
+\begin{solution}{img-tupling}%
+To start, note ~$[\IM f, \IM g]
+        \langle f,g\rangle = ((\IM f) \after f) \ovee ((\IM g) \after g)
+            = (1 \after f) \ovee (1 \after g) = 1 \after \langle f,g\rangle$
+            by~\sref{eff-prod-rules}.
+    Assume~$p\equiv[p_1,p_2]$ is some predicate with~$p \after \langle f,g \rangle
+        = 1 \after \langle f, g \rangle$.
+    Then~$(1 \after f) \ovee (1 \after g)
+        = 1 \after \langle f, g \rangle 
+        = p \after \langle f, g \rangle
+        = (p_1 \after f) \ovee (p_2 \after g)
+        \leq (p_1 \after f) \ovee (1 \after g)$
+        and so by cancellation~$1 \after f \leq p_1 \after f \leq 1 \after f$,
+        hence~$1 \after f = p_1 \after f$.
+Thus~$\IM f \leq p_1$.
+Similarly~$\IM g \leq p_2$.
+    Thus~$[\IM f, \IM g] \leq [p_1, p_2] = p$.
+We have shown~$\IM \langle f, g\rangle = [\IM f, \IM g]$.
+
+Assume~$[p,q]$ is sharp.
+    That is, there is some~$f$ with~$[p,q] = \IM f$.
+    Then~$[p,q] = \IM f = \IM \langle \pproj_1 \after f, \pproj_2 \after f \rangle 
+    = [\IM \pproj_1 \after f, \IM \pproj_2 \after f]$
+    and so~$p = \IM \pproj_1 \after f$
+    and~$q = \IM \pproj_2 \after f$,
+    which shows~$p$ and~$q$ are sharp.
+
+To prove the converse, assume~$p$ and~$q$ are sharp.
+Pick~$f$ and~$g$ with~$p = \IM f$ and~$g = \IM g$.
+Note~$f+g = \langle f \after \pproj_1 , g \after \pproj_2 \rangle$.
+We have~$\IM f = \IM f \after \pproj_1 \after \kappa_1
+                \leq \IM f \after \pproj_1  \leq \IM f$
+                and so~$\IM f \after \pproj_1 = \IM f$.
+Similarly~$\IM g \after \pproj_2 = \IM g$.
+Thus~$\IM f+g =  \IM \langle f \after \pproj_1 , g \after \pproj_2 \rangle
+    =  [\IM f \after \pproj_1, \IM g \after \pproj_2]
+    = [\IM f, \IM g] = [p,q]$, which shows~$[p,q]$ is sharp.
+\end{solution}
+\begin{solution}{exc-cokernels}%
+Let~$C$ be an effectus with comprehension and images.
+   Assume~$f\colon X \to Y$ is a quotient of sharp~$s$.
+Let~$\pi_s$ denote a comprehension of~$s$.
+Clearly~$1 \after f \after \pi_s = s^\perp \after \pi_s = 0$.
+Assume~$g\colon X \to Y'$ is some map with~$g \after \pi_s = 0$.
+Then~$1 \after g \after \pi_s = 0$ and so~$1 \after g \leq \IMperp \pi_s = s^\perp$.
+Thus by the universal property of~$f$ as a quotient,
+    there is a unique map~$g'\colon Y \to Y'$
+        with~$g = g' \after f$.
+        This shows~$f$ is a cokernel of~$\pi_s$.
+
+To prove the converse, assume~$f$ is a cokernel of~$\pi_s$.
+By assumption~$f \after \pi_s = 0$.
+Thus~$1 \after f \after \pi_s = 0$.
+Hence~$1 \after f \leq \IMperp \pi_s = s^\perp$.
+Let~$g\colon X \to Y'$ be a map with~$1 \after g \leq s^\perp$.
+Then~$1 \after g \after \pi_s \leq s^\perp \after \pi_s = 0$
+    and so~$g \after \pi_s = 0$.
+    Thus by the universal property of~$f$ as a cokernel,
+        there is a unique map~$g'\colon Y\to Y'$
+        with~$g = g' \after f$.
+This shows~$f$ is a quotient of~$s$.
+\end{solution}
+\begin{solution}{exc-diam-order-pres}%
+Assume~$s \leq t$.
+Then~$s \after f \leq t \after f$,
+    hence~$(t \after f) ^\perp \leq (s \after f)^\perp$ so~$\floor{(t \after f)^\perp} \leq \floor{(s \after f)^\perp}$.
+    Thus~$f^\diamond(s) \equiv \ceil{s \after f}
+        \equiv \floor{(s \after f)^\perp}^\perp \leq \floor{(t \after f)^\perp}^\perp \equiv
+            f^\diamond(t)$.
+        This shows~$f^\diamond$ is order preserving.
+Furthermore~$t^\perp \leq s^\perp$,
+    so~$f^\diamond(t^\perp) \leq f^\diamond(s^\perp)$,
+    hence~$f^\BOX (s) \equiv f^\diamond(s^\perp)^\perp
+        \leq f^\diamond(t^\perp)^\perp \equiv f^\BOX(t)$,
+        which shows that~$f^\BOX$ is order preserving.
+\end{solution}
+\begin{solution}{order-adj-basics}%
+Let~$f\colon X \to Y$ be some map in a~$\diamond$-effectus.
+\begin{enumerate}
+\item
+Assume~$s \leq t$.
+        Clearly~$f_\diamond (t) \leq f_\diamond(t)$
+            so~$s \leq t \leq f^\BOX(f_\diamond(t))$,
+            hence~$f_\diamond(s) \leq f_\diamond(t)$,
+            which shows that~$f_\diamond$ is order preserving.
+\item
+Assume~$D \subseteq \SPred X$ is a set of sharp predicates with a supremum~$\sup D$.
+        We will show~$f_\diamond(\sup D)$ is the supremum of~$f_\diamond(D)$.
+For any~$d \in D$, we have~$d \leq \sup D$
+    and so~$f_\diamond (d) \leq f_\diamond(\sup D)$ by the previous point.
+Assume~$x$ is some sharp predicate of~$Y$
+    with~$f_\diamond(d) \leq x$ for all~$d \in D$ as well.
+Then~$d \leq f^\BOX(x)$ for all~$d \in D$
+    and so~$\sup D \leq f^\BOX(x)$.
+Hence~$f_\diamond(\sup D) \leq x$, which shows
+    that~$\sup f_\diamond (D) = f_\diamond(\sup D)$.
+\item
+Assume~$D \subseteq \SPred Y$ is a set of sharp predicates with an infimum~$\inf D$.
+        We will show~$f^\BOX(\inf D)$ is the infimum of~$f^\BOX(D)$.
+For any~$d \in D$, we have~$\inf D \leq d$
+        and so~$f^\BOX(\inf D) \leq f^\BOX(d)$
+        by~\sref{exc-diam-order-pres}.
+Assume~$x$ is some sharp predicate of~$X$
+    with~$x \leq f^\BOX(d)$ for all~$d \in D$ as well.
+    Then~$f_\diamond(x) \leq d$ for all~$d \in D$
+            and so~$f_\diamond(x) \leq \inf D$,
+hence~$x \leq f^\BOX(\inf D)$.
+        This shows that~$\inf f^\BOX(D) = f^\BOX(\inf D)$.
+\item
+    For for any~$D \subseteq \SPred Y$ with supremum,
+        we have
+        \begin{align*}
+        f^\diamond(\sup D)
+            & \ \equiv\ f^\BOX((\sup D)^\perp)^\perp \\
+            &\  =\ f^\BOX(\inf_{d \in D} ( d^\perp))^\perp \\
+            &\ =\ \bigl(\inf_{d \in D}f^\BOX(  d^\perp)\bigr)^\perp \\
+            &\ =\ \sup_{d \in D}f^\BOX(  d^\perp)^\perp \\
+            &\ =\ \sup_{d \in D}f^\diamond(d)
+        \end{align*}
+    and so~$f^\diamond$ preserves suprema.
+\item
+For any~$s \in \SPred X$
+        we have~$f_\diamond (s) \leq f_\diamond(s)$
+        and so~$s \leq f^\BOX (f_\diamond(s))$.
+Similarly, for any~$t \in \SPred Y$
+    we have~$f_\diamond (f^\BOX (t)) \leq t$.
+Hence~$ f_\diamond (f^\BOX (f_\diamond(s)))
+                \leq f_\diamond(s)
+                \leq f_\diamond(f^\BOX(f_\diamond(s)))$,
+                so~$f_\diamond = f_\diamond \after f^\BOX \after f_\diamond$.
+\item
+We have~$ f^\BOX(f_\diamond(f^\BOX(t)))
+            \leq f^\BOX(t) \leq f^\BOX(f_\diamond(f^\BOX(t)))$
+            and so~$f^\BOX = f^\BOX \after f_\diamond \after f^\BOX$.
+\end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{diamond-equiv-equiv}%
+Let~$f,g\colon X \to Y$  be some maps in a~$\diamond$-effectus.
+Assume~$f^\diamond = g^\diamond$ and~$t \in \SPred X$.
+    Trivially~$g_\diamond(t) \leq (g_\diamond(t)^\perp)^\perp$
+        and so~$f^\diamond(g_\diamond(t)^\perp) =
+        g^\diamond(g_\diamond(t)^\perp) \leq t^\perp$.
+Thus~$f_\diamond(t) \leq g_\diamond(t)^{\perp\perp} = g_\diamond(t)$.
+Reasoning in the same way with~$f$ and~$g$ swapped,
+        we see~$g_\diamond(t) \leq f_\diamond(t)$ and so~$f_\diamond = g_\diamond$.
+
+To prove the converse, assume~$f_\diamond = g_\diamond$ and~$s \in \SPred Y$.
+    Trivially~$g^\diamond(s) \leq (g^\diamond(s)^\perp)^\perp$
+        and so~$f_\diamond(g^\diamond(s)^\perp) =
+        g_\diamond(g^\diamond(s)^\perp) \leq t^\perp$.
+Thus~$f^\diamond(t) \leq g^\diamond(t)^{\perp\perp} = g^\diamond(t)$.
+Reasoning in the same way with~$f$ and~$g$ swapped,
+        we see~$g^\diamond(t) \leq f^\diamond(t)$ and so~$f^\diamond = g^\diamond$.
+\end{solution}
+\begin{solution}{spred-sup}%
+As~$\xi_\diamond$ is left adjoint to~$\xi^\BOX$,
+    we have~$t \leq \xi^\BOX (\xi_\diamond(t))$.
+    Furthermore~$s = \ceil{s^\perp}^\perp = \ceil{1 \after \xi}^\perp
+        = \xi^\BOX(0) \leq
+        \xi^\BOX (\xi_\diamond(t))$.
+Thus~$\xi^\BOX (\xi_\diamond(t))$ is an upper bound of~$s$ and~$t$.
+We have to show it is the least sharp upper bound.
+So assume~$r$ is any sharp predicate with~$r \geq s$ and~$r \geq t$.
+Then~$1 \after \xi_r = r^\perp \leq s^\perp$
+    and so there is a (unique) map~$h$ with~$\xi_r = h \after \xi$. We have
+\begin{equation*}
+    (\xi_r)^\BOX
+     \ = \ \xi^\BOX \after h^\BOX
+     \ = \ \xi^\BOX  \after \xi_\diamond \after \xi^\BOX\after h^\BOX
+     \ = \ \xi^\BOX  \after \xi_\diamond \after (\xi_r)^\BOX
+\end{equation*}
+    and so~$r
+    = (\xi_r)^\BOX(0)
+    = \xi^\BOX (\xi_\diamond((\xi_r)^\BOX(0)))
+    = \xi^\BOX (\xi_\diamond(r))
+    \geq \xi^\BOX (\xi_\diamond(t)) $.
+\end{solution}
+\begin{solution}{exc-diamond-adj}%
+For the first point, assume~$f^\diamond = g_\diamond$
+    for some~$f : X \leftrightarrows Y : g$.
+    Trivially~$g^\diamond(s) \leq (g^\diamond(s)^\perp)^\perp$ for any~
+    for any~$s \in \SPred X$ and
+    so~$ f^\diamond(g^\diamond(s)^\perp) =
+    g_\diamond(g^\diamond(s)^\perp) \leq s^\perp$.
+    Hence~$f_\diamond(s) \leq g^\diamond(s)^{\perp\perp} = g^\diamond(s)$.
+With essentially the same argument
+    (swapping  both~$f$ and~$g$ and the up/down position of the diamonds),
+    we see~$g^\diamond(s) \leq  f_\diamond(s)$,
+    hence~$g^\diamond = f_\diamond$.
+Swapping~$f$ and~$g$ again, gives the argument for the converse.
+
+For the second point, assume~$f$ and~$g$ are~$\diamond$-adjoint.
+    Then~$\IM f = f_\diamond(1) = g^\diamond(1) = \ceil{1 \after g}$,
+    as desired.
+\end{solution}
+\begin{solution}{diamond-squares}%
+For the first point, assume~$f$ is~$\diamond$-self-adjoint.
+Then~$(f \after f)_\diamond
+        = f_\diamond \after f_\diamond
+        = f^\diamond \after f^\diamond
+        = (f \after f)^\diamond $
+        and so~$f\after f$ is~$\diamond$-self-adjoint as well.
+
+For the second point, assume~$f$ is~$\diamond$-positive.
+Then~$f = g \after g$ for some~$\diamond$-self-adjoint~$g$.
+Hence~$f$ is~$\diamond$-self-adjoint by the previous point.
+
+For the third point, assume~$f$ is~$\diamond$-positive
+    and~$f \after f$ is pure.
+By the previous point~$f$ is~$\diamond$-self-adjoint
+        and so~$f\after f$ is~$\diamond$-self-adjoint by the first point.
+    Thus~$f \after f$ is~$\diamond$-positive.
+\end{solution}
+\begin{solution}{sharp-ceil}%
+Assume~$f\colon X \to Y$ is a sharp map and~$p$ is a predicate on~$Y$.
+Using~\sref{ceiling-within-ceiling}
+    and~\sref{img-of-compr}
+    we see~$\ceil{p \after f} = \ceil{\ceil{p} \after f} = \ceil{p} \after f$.
+For the converse assume~$\ceil{p} \after f = \ceil{p \after f}$
+    for every predicate~$p$ on~$Y$.
+Assume~$s$ is any sharp predicate on~$Y$.
+    Then~$\ceil{s \after f} = \ceil{s} \after f = s \after f$ and so~$s \after f$
+        is sharp.  Thus~$f$ is sharp.
+\end{solution}
+\begin{solution}{andthen-square-rule}%
+    Note~$1 \after \asrt_p \after \asrt_p = p \after \asrt_p \equiv \andthen{p}{p}$.
+By \sref{diamond-squares} the map~$\asrt_p \after \asrt_p$
+    is~$\diamond$-positive
+    and thus~$\asrt_p \after \asrt_p = \asrt_{\andthen{p}{p}}$
+    by uniqueness of~$\diamond$-positive maps.
+\end{solution}
+\begin{solution}{asrt-absorp-rule}%
+Assume~$f\colon X\to Y$ is a map in a~$\&$-effectus
+    with~$s \in \SPred Y$ and~$t \in \SPred X$.
+
+Assume~$\IM f \leq s$.
+Then~$1\after f = s \after f$.
+Thus there is a~$g$ with~$f = \pi_s \after g$.
+Then~$\asrt_s \after f = \pi_s \after \zeta_s \after\pi_s \after g
+        = \pi_s \after g = f$.
+For the converse, assume~$\asrt_s \after f = f$.
+Then~$1 \after f = 1 \after \asrt_s \after f =s \after f$
+    and so~$\IM f \leq s$.
+We have shown the first equivalence.
+
+For the second equivalence, assume~$1 \after f \leq t$.
+    Then~$f = h \after \zeta_t$ for a (unique) map~$h$.
+So~$f \after \asrt_t = h \after \zeta_t \after \pi_t \after \zeta_t
+        = h \after \zeta_t = f$.
+For the converse, assume~$f = f \after \asrt_t$.
+Then~$1 \after f = 1 \after f \after \asrt_t \leq 1 \after \asrt_t = t$.
+\end{solution}
+\begin{solution}{simple-andthen-absorption}%
+Clearly~$p \leq s$ if and only if~$1 \after p \leq s$.
+Even more trivially,  $\andthen{s}{p} = p$
+        if and only if~$p \after \asrt_s \equiv \andthen{s}{p} = p$.
+Thus the result follows by applying the second equivalence
+    of~\sref{asrt-absorp-rule} with~$f=p$ and~$t=s$.
+\end{solution}
+\begin{solution}{exc-prod-sharp-maps}%
+Let~$f \colon X \to A$ and~$g\colon X \to B$
+    be maps in a~$\&$-effectus.
+   Assume~$\langle f, g \rangle$ is sharp.
+Pick any sharp predicate~$s$ on~$A$.
+By~\sref{img-tupling} we know~$[s,0]$ is sharp
+    and so~$[s,0] \after \langle f, g \rangle = (s \after f) \ovee (0 \after g) = s \after f$
+    is sharp as well.
+This shows~$f$ is sharp.
+With a similar argument we see~$g$ is sharp.
+For the converse, assume~$f$ and~$g$ are sharp.
+    Assume~$[s,t]$ is some sharp predicate on~$A+B$.
+    By~\sref{img-tupling} we know~$s$ and~$t$ are sharp.
+    Thus~$s \after f$ and~$t \after g$ are sharp.
+    Consequently~$[s,t] \after \langle f, g \rangle = (s \after f) \ovee (t \after g)$
+    is sharp as well by~\sref{diamond-oml}.
+    Thus~$\langle f,g\rangle$ is sharp, as desired.
+\end{solution}
+\begin{solution}{zeta-through-asrt}%
+Assume~$C$ is a~$\&$-effectus
+    where every predicate has a square root
+    and where~$\pi_s$ is~$\diamond$-adjoint to~$\zeta_s$.
+Let~$p$ be a predicate and~$s$ be another predicate on the same object that is sharp.
+    Pick a predicate~$q$ with~$\andthen{q}{q}=p$.
+    The map~$ f\equiv \pi_s \after \asrt_q \after \zeta_s$ is pure and~$\diamond$-self-adjoint:
+\begin{equation*}
+    f^\diamond
+    \ =\ (\zeta_s)^\diamond \after (\asrt_q)^\diamond \after (\pi_s)^\diamond
+    \ =\ (\pi_s)_\diamond \after (\asrt_q)_\diamond \after (\zeta_s)_\diamond
+    \ =\ f_\diamond.
+\end{equation*}
+Thus~$f \after f$ is~$\diamond$-positive.
+By~\sref{andthen-square-rule}, we get~$f \after f = \pi_s \after \asrt_q \after \zeta_s \after \pi_s \after \asrt_q \after \zeta_s
+    = \pi_s \after \asrt_{\andthen{q}{q}} \after \zeta_s
+    = \pi_s \after \asrt_{p} \after \zeta_s$
+    and so~$1 \after f \after f = 1 \after \pi_s \after \asrt_p \after
+        \zeta_s = p \after \zeta_s$.
+    By uniqueness of~$\diamond$-positive maps,
+    we get~$\pi_s \after \asrt_{p} \after \zeta_s = f \after f 
+        = \asrt_{1 \after f \after f} = \asrt_{p \after \zeta_s}$.
+Thus~$\asrt_p \after \zeta_s =
+    \zeta_s \after \pi_s \after \asrt_{p} \after \zeta_s
+        = \zeta_s \after \asrt_{p \after \zeta_s}$.
+\end{solution}
+\begin{solution}{dagger-prime-basics}%
+By~\sref{asrt-absorp-rule} we have
+ \begin{equation*}
+    \asrt_p \ = \ 
+     \asrt_p \after \asrt_{\ceil{p}}
+     \ = \ \pi_{\ceil{p}} \after \id \after \zeta_{\ceil{p}} \after \asrt_p
+ \end{equation*}
+    and so
+\begin{equation*}
+    \asrt^\dagger_p \ =\  \asrt_p \after \pi_{\ceil{p}} \after \id^{-1} \after \zeta_{\ceil{p}}
+        \ =\  \asrt_p \after \asrt_{\ceil{p}} \ =\  \asrt_p.
+\end{equation*}
+    Next, note~$\zeta_1 = \pi_1 = \asrt_1 = \id$
+    and so~$\pi_s = \pi_s \after \id \after \zeta_1 \after \asrt_1$,
+    hence
+\begin{equation*}
+    \pi_s^\dagger 
+       \ =\ \asrt_1 \after \pi_1 \after \id^{-1} \after \zeta_s
+       \ =\ \zeta_s.
+\end{equation*}
+Also~$\zeta_s = \pi_1 \after \id \after \zeta_s \after \asrt_1$
+    and so
+\begin{equation*}
+    \zeta_s^\dagger \ = \ \asrt_1 \after \pi_s \after \id^{-1} \after \zeta_1 \ = \ \pi_s.
+\end{equation*}
+    Finally, note~$\alpha = \asrt_1 = \pi_1 \after \alpha \after \zeta_1$
+        for any isomorphism~$\alpha$ and so
+\begin{equation*}
+    \alpha^\dagger \ =  \ \asrt_1 \after \pi_1 \after \alpha^{-1} \after \zeta_{1} \ = \ \alpha^{-1}.
+\end{equation*}
+\end{solution}
+\spacingfix{}
+\begin{solution}{standard-form-pristine}%
+Assume~$h$ is a pristine map in a~$\&$-effectus.
+By~\sref{standard-form-map} we know there is an isomorphism~$\alpha$
+    with~$h = \pi_{\IM h} \after \alpha \after \zeta_{\ceil{1 \after h}} \after \asrt_{1 \after h}$.
+As~$1 \after h$ is sharp,
+    we have~$\zeta_{\ceil{1 \after h}} \after \asrt_{1 \after h}
+        = \zeta_{1 \after h} \after \pi_{1 \after h} \after \zeta_{1 \after h}
+        = \zeta_{1 \after h}$
+        and so~$
+    h = \pi_{\IM h} \after \alpha \after \zeta_{1 \after h}$.
+\end{solution}
+\begin{solution}{asrt-pristine-reverse}%
+Assume~$h \equiv \pi_{\IM h} \after \alpha \after \zeta_{1 \after h}$
+    is a pristine map in a~$\dagger'$-effectus, cf.~\sref{standard-form-pristine}.
+\begin{enumerate}
+\item
+Clearly~$h =\pi_{\IM h} \after \alpha \after \zeta_{\ceil{1 \after h}} \after \asrt_{1 \after h}$
+as~$1 \after h$ is sharp and by~\sref{asrt-absorp-rule}.
+Thus
+\begin{equation*}
+    h^\dagger \ = \ \asrt_{1 \after h} \after \pi_{\ceil{1 \after h}}
+        \after \alpha^{-1} \after \zeta_{\IM h}
+        \ = \ \pi_{1 \after h} \after \alpha^{-1} \after \zeta_{\IM h}
+\end{equation*}
+        using other equivalence of~\sref{asrt-absorp-rule}.
+\item
+Note that by the previous point~$1 \after h^\dagger = \IM h$
+    and~$\IM h^\dagger = 1\after h$, hence
+        by a second appeal to the previous point:
+\begin{equation*}
+    h^{\dagger\dagger}
+    \ = \  \pi_{1 \after h^\dagger} \after (\alpha^{-1})^{-1} \after \zeta_{\IM h^\dagger}
+    \ = \  \pi_{\IM h} \after \alpha \after \zeta_{1 \after h} \ = \ h.
+\end{equation*}
+\item
+By the first point~$ h^\dagger \after h
+     =  \pi_{1 \after h} \after \alpha^{-1} \after \zeta_{\IM h}
+        \after \pi_{\IM h} \after \alpha \after \zeta_{1 \after h}
+     =  \pi_{1 \after h} \after \zeta_{1 \after h}
+     =  \asrt_{1 \after h}$ as promised.
+\item
+    Clearly~$p \after h^\dagger \leq 1 \after h^\dagger = \IM h$.
+\item
+    Assume~$p \leq 1 \after h$.
+Then~$p \after \asrt_{1 \after h} = p$ by \sref{asrt-absorp-rule} and
+        so~
+    \begin{equation*}
+        \asrt_{p \after h^\dagger} \after h
+                \ \stackrel{\mathclap{\sref{pristine-asrt}}}{=}\
+                h \after \asrt_{p \after h^\dagger \after h}
+                \ \stackrel{\mathclap{\text{pt.~3}}}{=}\  
+                h \after \asrt_{p \after \asrt_{1\after h}}
+                \ = \ h \after \asrt_p,
+    \end{equation*}
+        as desired.
+\end{enumerate}
+\end{solution}
+\spacingfix{}
+\begin{solution}{dagger-iso-alpha2}%
+    The map~$
+    \alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+        \after \varphi^{-1} \after \zeta_s
+        $
+        is a quotient for~$\ceil{t \after f^\dagger}$:
+\begin{align*}
+    1 \after \alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+        \after \varphi^{-1} \after \zeta_s
+        & \ = \ 
+     \ceil{t \after \asrt_p \after \pi_{\ceil{p}}}
+        \after \varphi^{-1} \after \zeta_s \\
+        & \ = \ 
+     \ceil{t \after \asrt_p \after \pi_{\ceil{p}}
+        \after \varphi^{-1} \after \zeta_s} \\
+        & \ = \ 
+     \ceil{t \after f^\dagger}.
+\end{align*}
+Furthermore
+\begin{align*}
+    & \alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+    \after \varphi^{-1} \after \zeta_s \after \pi_{\ceil{t \after f^\dagger}} \\
+    & \qquad \ \stackrel{\mathclap{\eqref{dagger-iso-alpha}}}{=} \ 
+    \alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+    \after \varphi^{-1} \after \zeta_s \after \pi_s \after \varphi
+        \after \pi_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}} \after \alpha^{-1}\\
+      &\qquad \ = \ \id.
+\end{align*}
+    Thus~$\alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+        \after \varphi^{-1} \after \zeta_s$
+        is the unique quotient corresponding to the
+        comprehension~$\pi_{\ceil{t \after f^\dagger}}$.
+    Hence~$\alpha \after \zeta_{\ceil{t \after \asrt_p \after \pi_{\ceil{p}}}}
+        \after \varphi^{-1} \after \zeta_s
+        = \zeta_{\ceil{t \after f^\dagger}}$, as desired.
+\end{solution}
+\begin{solution}{dagger-iso-zeta2}%
+    Note that~$\pi_{\ceil{q}} \after \psi^{-1}
+        = \pi_{\ceil{q}} \after \psi^{-1} \after \zeta_{1} \after \asrt_1$
+        and so by definition of the dagger, we have~$(\pi_{\ceil{q}} \after \psi^{-1})^\dagger
+            = \asrt_1 \after \pi_1 \after (\psi^{-1})^{-1} \after \zeta_{\ceil{q}}
+            = \psi\after \zeta_{\ceil{q}}$.
+    Furthermore~$p \after \pi_t \leq 1 = 1 \after \pi_{\ceil{q}} \after \psi^{-1}$.
+Thus we can apply the fourth point of~\sref{asrt-pristine-reverse}:
+\begin{align*}
+    \pi_{\ceil{q}} \after \psi^{-1} \after \asrt_{p \after \pi_t}
+    & \ = \ \asrt_{p \after \pi_t \after (\pi_{\ceil{q}} \after \psi^{-1})^{-1}}
+    \after \pi_{\ceil{q}} \after \psi^{-1} \\
+    & \ = \ \asrt_{p \after \pi_t \after \psi \after \zeta{\ceil{q}}} \after \pi_{\ceil{q}} \after \psi^{-1} \\
+    & \ = \ \asrt_{p \after k} \after \pi_{\ceil{q}} \after \psi^{-1},
+\end{align*}
+which is the desired equality.
+\end{solution}
+\begin{solution}{exc-cvn-no-dilations}%
+Assume~$\scrA$ is a commutative von Neumann algebra
+    with effect~$a \in \scrA$.
+The standard corner~$h_a\colon \scrA \to \ceil{a} \scrA \ceil{a}$
+    for~$a$ (see~\sref{standard-corner-dils})
+    is given by~$b \mapsto \ceil{a} b \ceil{a}$.
+If~$\scrA$ is commutative,
+    then~$h_a(bc) = \ceil{a} bc \ceil{a}
+            = \ceil{a} b \ceil{a} \ceil{a} c \ceil{a} = h_a(b) h_a(c)$
+            and so~$h_a$ is an nmiu-map.
+Every corner is a standard corner up-to an isomorphism,
+    thus every corner on a commutative von Neumann algebra
+    is an nmiu-map as well.
+If~$\op\CvN$ were to have dilations,
+    then any ncpu-map would be the composition of a corner and an nmiu-map.
+We just saw that such corners are nmiu and so any ncp-map would be an nmiu-map
+    as well, which is absurd.  Thus~~$\op\CvN$ does not have dilations
+        in the sense of~\sref{dfn-eff-dilations}.
+\end{solution}
+\begin{solution}{exc-purec-no-biproduct}%
+   We will first show that for any non-zero pure map~$f\colon \scrA \to \C$,
+        there is a Hilbert space~$\scrH$, an element~$x \in \scrH$,
+    von Neumann algebra~$\scrC$ and isomorphism~$\varphi\colon \scrB(\scrH)\oplus \scrC \to \scrA$
+    with~$f (\varphi (T, c))= \langle x, T x\rangle$.
+By definition of purity, we know~$f = c \after h$
+    for some corner~$h$ and filter~$c$ for~$f(1)$.
+Clearly~$c(1)=f(1) \neq 0$ as~$f\neq 0$ and
+    so~$c\colon \C \to \C$ is simply given by~$c(1)\id$,
+    hence~$f = f(1) h$ for a corner~$h\colon \scrA \to \C$
+        of~$p \in \scrA$.
+    As~$p \scrA p \cong \C$ both have only two projections
+        and so~$p$ is a mimimal projection.
+    In particular~$0$ is the only central element strictly below~$p$,
+        thus~$\cceil{p}\scrA$ is a factor.
+Let~$\varrho\colon \cceil{p}\scrA \to \scrB(\scrH)$, $y\in \scrH$
+    be a GNS-representation of the restriction of~$h$ to~$\cceil{p}\scrA$
+    with~$y\in\scrH$ such that~$h(\cceil{p}a) = \langle y, \varrho(\cceil{p}a) y \rangle$.
+    This restriction of~$h$ is still a corner, hence pure
+    and so by~\sref{paschke-pure} we know~$\varrho$ is surjective.
+    As~$\cceil{p}\scrA$ is a factor, $\varrho$ must be injective as well.
+    Thus~$\varrho$ is an nmiu-isomorphism.
+    Hence~$\varphi\colon \scrB(\scrH) \oplus \scrB \to \scrA$
+        defined by~$\varphi(T,c) \equiv \varrho^{-1}(T) + c$
+                is an nmiu-isomorphism as well.
+Define~$x \equiv \sqrt{f(1)}$. Then~$f(\varphi(T, c))
+            = f(1) h(\varrho^{-1}(T) + c)
+            = f(1) h(\varrho^{-1}(T))
+            = f(1) \langle y, \varrho (\varrho^{-1}(T)) y \rangle
+            = f(1) \langle y, T y \rangle
+            =  \langle x, T x \rangle$ as desired.
+
+We continue with the main task of this exercise.
+Assume~$(\Pure \op\vN)^{\mathsf{op}}$ has a
+        product~$ \C \xleftarrow{\pi_1} \scrA \xrightarrow{\pi_2} \C$
+        of~$\C$ and~$\C$.
+Note~$\pi_1 \neq 0$
+    for otherwise~$\id_\C = \pi_1 \after h = 0$,
+    where~$h\colon \C \to \scrA$ is the unique map given by the universal property
+    of the product for~$\id_\C$ and~$\id_\C$.
+    Similarly~$\pi_2 \neq 0$.
+
+By assumption, there is a unqiue pure map~$h\colon \C \to \scrA$
+    with~$\pi_1 \after h = \id$ and~$\pi_2 \after h = \id$.
+With the reasoning at the start,
+    we know there is a Hilbert space~$\scrH$, an element~ $z\in \scrH$,
+    a von Neumann algebras~$\scrC$
+    and an isomorphism~$\varphi\colon \scrB(\scrH)\oplus \scrC$
+    with~$h^\dagger (\varphi(T,c)) = \langle z, Tz \rangle$.
+    Note that~$T \mapsto \langle z, T z\rangle$
+        is the dagger of the standard filter~$c_{\ketbra{z}{z}}$.
+    Write~$p\colon \scrB(\scrH) \oplus \C \to \scrB(\scrH)$
+        for the regular coprojection~$(T,c) \mapsto T$,
+        which is corner with~$p^\dagger(T) = (T,0)$.
+        Then~$h^\dagger \after \varphi = c^\dagger_{\ketbra{z}{z}} \after p$
+            and so~$h = \varphi \after p^\dagger \after c_{\ketbra{z}{z}}$.
+    By definition of~$h$, we have 
+\begin{equation}\label{exc-224VI1}
+    \id \ =\ \pi_1 \after h = \pi_1 \after \varphi \after p^\dagger \after c_{\ketbra{z}{z}}.
+\end{equation}
+Reasoning the same way as we did for~$f$ at the start
+    of this exercise,
+    we know that~$\ceil{\pi_1 \after \varphi}$ is a minimal projection.
+    If~$\ceil{\pi_1 \after \varphi} \leq (0,1)$,
+        then~$\pi_1 \after \varphi \after p^\dagger = 0$
+        and so~$\id = 0$ by~\eqref{exc-224VI1}, which is absurd.
+    Thus~$\ceil{\pi_1 \after \varphi} = (p_1,0)$
+    for some minimal projection~$p_1$ of~$\scrB(\scrH)$.
+Thus~$\pi_1 (\varphi(T,c)) = \langle x, T x\rangle$ for some~$x \in \scrH$.
+Similarly~$\pi_2 (\varphi(T,c)) = \langle y, T y\rangle$ for some~$y \in \scrH$.
+
+Note that~$
+\pi_i \after \varphi \after (\id \oplus \vartheta)
+=\pi_i \after \varphi$
+for any map~$\vartheta\colon \scrC \to \scrC$ and~$i=1,2$.
+Hence~$\id \after \pi_i \after \varphi \after (\id \oplus\vartheta) \after \varphi^{-1} \after h$
+    for~$i=1,2$ and so~$(\id\oplus\vartheta) \after \varphi^{-1}\after h = \varphi^{-1}\after h$
+    for every~$\vartheta$ by uniqueness of~$h$,
+    which is absurd unless~$\scrC = 0$.
+
+Suppose~$\dim \scrH \geq 3$.
+Then there is some non-zero~$z_0 \in \scrH$
+    with~$z_0 \perp x$ and~$x_0 \perp y$.
+So~$\pi_i \after \varphi \after c_{\ketbra{z_0}{z_0}} = 0$ for~$i=1,2$.
+By the presumed universal property of~$\scrA$,
+    there is a unique map~$h\colon \C \to \scrA$
+        with~$\pi_1 \after h = \pi_1 \after \varphi \after c_{\ketbra{z_0}{z_0}}$
+        and~$\pi_2 \after h = \pi_2 \after \varphi \after c_{\ketbra{z_0}{z_0}}$
+Both~$\varphi \after c_{\ketbra{z_0}{z_0}}$ and~$0$ fit the bill,
+    so~$\varphi \after c_{\ketbra{z_0}{z_0}} = 0$,
+    which is absured. Thus~$\dim \scrH \leq 2$.
+
+Clearly~$\dim \scrH \neq 0$, for otherwise there would be a unqiue pure map~$\C \to \C$, which is absurd.
+If~$\dim \scrH = 1$, then~$x = \lambda y$ for some~$\lambda \in \C, \lambda \neq 0$
+    and so~$\pi_1 = \lambda \pi_2$,
+    hence for any two pure maps~$f_1,f_2\colon \scrB \to \C$ we would have~$f_1 = \lambda f_2$,
+        which is absurd.
+
+Reducing clutter a bit,
+    we may assume without loss of generality~$\scrA = M_2$, $\pi_1(T) = \langle x, Tx\rangle$
+    and~$\pi_2(T) = \langle y, T y\rangle$ for some~$x,y \in \C^2$.
+Write~$f_1,f_2\colon \C^2\to\C$
+    for the maps~$f_1(\lambda,\mu) = \lambda$
+    and~$f_2(\lambda,\mu) = \mu$.
+By the presumed universal property of~$M_2$ as product,
+    there is a unique pure map~$f\colon \C^2 \to \scrA$
+    with~$\pi_1 \after f = f_1$ and~$\pi_2 \after f = f_2$.
+From the definition of purity,
+    it follows that~$f = c \after h$
+        for some corner~$h\colon \C^2 \to \ceil{h(1)} M_2 \ceil{h(1)}$
+        and the standard filter~$c \colon \ceil{h(1)} M_2 \ceil{h(1)} \to M_2$.
+Note~$\ceil{h} \C^2 \ceil{h} \cong \ceil{h(1)} M_2 \ceil{h(1)}$.
+The former is commutative, so~$\ceil{h(1)} \neq 1$.
+If~$\ceil{h(1)} = 0$, then~$h = 0$ and so~$f_1=0$, quod non.
+Thus~$\ceil{h(1)} M_2 \ceil{h(1)} \cong \C$ and so
+    either~$\ceil{h} = (1,0)$
+    or~$\ceil{h} = (0,1)$.
+In the first case~$1 = f_2 (0,1)= \pi_2 (h(0,1)) = \pi_2(0) = 0$,
+    which is a contradiction.
+The second case leads to a similar contradiction.
+So there is no product of~$\C$ and~$\C$ in~$(\Pure \op\vN)^{\mathsf{op}}$.
+\end{solution}
+\begin{solution}{exc-purec-equal}%
+   Assume~$\xi\colon \scrC \to M_4$ is some filter
+    with~$\ad_\sigma \after \xi = \xi$.
+    Note~$\sigma^* = \sigma$.
+    Assume~$c \in \scrC$.
+    Then~$\xi(c) = \ad_\sigma(\xi (c)) = \sigma \xi(c) \sigma$.
+Let~$b \in M_4$ be any element with~$\sigma b \sigma = b$.
+    Then~$
+    (p_\scrS + p_\scrA) b (p_\scrS +p_\scrA)
+        = b = \sigma b \sigma
+  =  (\sigma p_\scrS + \sigma p_\scrA) b (p_\scrS  \sigma +p_\scrA \sigma)
+  =  ( p_\scrS -  p_\scrA) b (p_\scrS  -p_\scrA )$
+    and so~$p_\scrA b p_\scrS + p_\scrS b p_\scrA = 0$.
+As~$p_\scrA$ and~$p_\scrS$ have orthogonal ranges,
+    we see~$p_\scrA b p_\scrS = 0 = p_\scrS b p_\scrA$.
+Hence~$b = p_\scrS b p_\scrS + p_\scrA b p_\scrA$.
+Furthermore~$b p_\scrS =
+    p_\scrS b p_\scrS$.
+If~$b$ is additionally self adjoint, then~$p_\scrS b = 
+    p_\scrS b^* p_\scrS =
+    p_\scrS b p_\scrS = p_\scrS b$.
+Thus~$p_\scrS \xi(c) = \xi(c) p_\scrS$ for any~$c \in \scrC$
+There is some isomorphism~$\vartheta \colon \scrC \to \ceil{\xi(1)} M_4 \ceil{\xi(1)}$
+    with~$\xi(c) = \sqrt{\xi(1)} \vartheta(c) \sqrt{\xi(1)}$
+    and so~$ p_\scrS \sqrt{\xi(1)} b \sqrt{\xi(1)} = \sqrt{\xi(1)} b \sqrt{\xi(1)} p_\scrS$
+    for any~$b \in M_4$.
+    From this it follows (using the pseudoinverse of~$\sqrt{\xi(1)}$)
+    that~$
+    p_\scrS \ceil{\xi(1)} b  \ceil{\xi(1)} =
+     \ceil{\xi(1)} b  \ceil{\xi(1)}  p_\scrS$.
+    Thus~$\ceil{\xi(1)}p_\scrS\ceil{\xi(1)}$ is central in~$\ceil{\xi(1)}M_4 \ceil{\xi(1)}$.
+So either~$\ceil{\xi(1)} p_\scrS \ceil{\xi(1)} = 0$
+    or~$\ceil{\xi(1)} p_\scrS \ceil{\xi(1)} = \ceil{\xi(1)}$.
+    In the first case, we have~$\ceil{\xi(1)} p_\scrS = 0$
+        hence~$\xi(c) = p_\scrA \xi(c) p_\scrA + p_\scrS \xi(c) \ceil{\xi(1)} p_\scrS
+        = p_\scrA \xi(c) p_\scrA \leq p_\scrA$ for all~$c \in \scrC $.
+    With similar reasoning we see that~$\xi(c) \leq p_\scrS$ for all~$c \in \scrC$
+        in the second case.
+
+Assume there is an equalizer~$e\colon E \to M_4$
+    of~$\id_{M_4}$ and~$\ad_\sigma$ in~$(\Pure \op\vN)^{\mathsf{op}}$.
+    By definition of purity~$e = c \after h$ for some filter~$c$ and comprehension~$h$.
+As~$e$ is supposed to be an equalizer of~$\id$ and~$\ad_\sigma$,
+    we have~$\ad_\sigma \after c \after h = \ad_\sigma \after e = e = c \after h$,
+    hence~$\ad_\sigma \after c = c$ by the surjectivity of the corner~$h$.
+We have just shown that then
+        either~$c(b) \leq p_\scrA$ for all~$b$ or
+        or~$c(b) \leq p_\scrS$ for all~$b$.
+    Hence~$h(e) \leq p_\scrA$ for all~$e \in E$
+        or~$h(e) \leq p_\scrS$ for all~$e \in E$.
+    In the first case, consider the map~$\ad_{e^\dagger_\scrS} \colon M_3 \to M_4$.
+    Clearly~$\ad_\sigma \after \ad_{e^\dagger_\scrS}
+     = \ad_{e^\dagger_\scrS}$
+     and so there must be a (unique) map~$h\colon M_3 \to E$
+     with~$e \after h = \ad_{e^\dagger_\scrS}$.
+    However~$p_\scrA \geq e(h(T)) = \ad_{e^\dagger_\scrS}(T) \leq p_\scrS$
+        for all~$T \in M_3$
+        and so~$\ad_{e^\dagger_\scrS} = 0$, quod non.
+    We reach a contradiction in the other case in a similar fashion.
+    Hence~$\Pure \op\vN$ has no coequalizers.
+\end{solution}
+
+% vim: se ft=tex.latex :

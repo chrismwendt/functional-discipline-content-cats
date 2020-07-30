@@ -1,0 +1,57 @@
+types and functions
+
+fundamentally, types are sets of values
+bool : {true, false}
+int  : {...-1,0,1...}
+
+Set, category of sets
+objects : sets
+arrows  : functions
+
+every type (set) is extended by one more, bottom,
+_|_ indicating non-terminating computation
+bool : (true, false _|_)
+
+in haskell, undefined evaluates to bottom
+f :: Bool -> Bool
+f x = undefined
+(or equivalently)
+f = undefined
+
+a total function returns a valid result always,
+partial functions may return bottom
+
+with bottom, the category Set becomes 'Hask'
+
+'pure' functions always give the same output for a given input
+and have no side effects
+'monads' can model side effects
+
+the empty set {} is represented by the type Void
+absurd :: Void -> a
+this function cannot be called because there is
+no value of type Void to even pass to it
+
+Void expresses falsity
+the function absurd express from falsity follows anything
+
+the singleton set type is represented by (), 'unit'
+f44 :: () -> Integer
+f44 () = 44
+
+functions from unit to any type A are 1-1 correspondence with
+the elements of that set A
+
+functions to unit essentially discard their argument
+fInt :: Integer -> ()
+fInt x = ()
+(equivalently, for a discarded argument)
+fInt _ = ()
+thus there is only one such function for every set A (or type a)
+unit :: a -> ()
+unit _ = ()
+
+the two element set is the type Bool
+data Bool = True | False
+functions to Bool we call predicates, e.g. Data.Char.isAlpha, isDigit
+

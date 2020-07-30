@@ -1,0 +1,1 @@
+These notes try to be as complete as possible along side intuitive explanations of the concepts of fibrational models of type theory.

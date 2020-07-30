@@ -1,0 +1,374 @@
+%\usepackage[showframe]{geometry}
+\usepackage{geometry}
+\geometry{nohead,
+%height=466pt,
+width=345pt, % <- make sure the width is the same as b5
+%tmargin=113pt,
+%top=2.5truecm,
+bottom=3truecm,
+paperwidth=170truemm,
+paperheight=240truemm}
+%\usepackage[frame,noinfo,width=176truemm,height=246truemm,center]{crop}
+\usepackage[noinfo,width=176truemm,height=246truemm,center]{crop}
+
+\input{common-lite}
+
+% Refer to a parsec.
+\RenewDocumentCommand{\sref}{m}{\textSref{%
+	\ifthenelse{%
+		\equal{\value{parsec}}{\ourrawref{#1::parsec}}%
+	}{%
+		\ref{#1::point}%
+	}{%
+        \ref{#1}%
+	}%
+}}
+
+
+\newcommand{\colofon}[5]{%
+\vspace*{4em}
+\noindent
+\begin{center}
+    #5
+    \vspace{3em}
+
+    \textcolor{darkblue}{\textsf{\textbf{ Identifiers}}}
+    \vspace{.5em}
+
+\href{https://hdl.handle.net/#4}{hdl:~#4}
+    \vspace{.5em}
+
+\href{https://arxiv.org/abs/#3}{arXiv:~#3}
+    \vspace{.5em}
+
+\textsc{isbn:}~#2
+\end{center}
+\vspace{3em}
+\begin{center}
+    \textcolor{darkblue}{\textsf{\textbf{ Persistent links}}}
+
+\vspace{.5em}
+\purl{https://arxiv.org/abs/#3}
+
+\vspace{.5em}
+\purl{https://doi.org/#4}
+
+\vspace{.5em}
+\purl{https://hdl.handle.net/#4}
+\end{center}
+\vspace{3em}
+
+\begin{center}
+    \textcolor{darkblue}{\textsf{\textbf{Source code}}}
+\vspace{.5em}
+
+\begin{tabular}{rl}
+\LaTeX{} & \purl{https://github.com/westerbaan/theses} \\
+cover & \purl{https://github.com/westerbaan/ndpt}
+\end{tabular}
+
+\end{center}
+\vfill{}
+
+\noindent
+Printed by GVO drukkers \& vormgevers B.V., Ede, 
+\purl{https://proefschriften.nl}.
+
+\vspace{1em}
+\noindent
+Where applicable,
+\ccCopy{}~2019 #1,
+\ccLogo{}\,\ccAttribution{}  available under \textsc{cc by}, \cite{ccby40}.
+\newpage
+}
+
+
+
+% used for arithmetic
+\newcounter{tmptmp} 
+\newcounter{tmptmp2} 
+
+% The content of this thesis is grouped into numbered paragraphs,
+% which are called "parsecs" (for paragraph--section),
+% and these parsecs contain several points.
+\newcounter{parsec} % keeps track of the current parsec number
+\newcounter{parsecMajor}
+\newcounter{parsecMinor} % parsec = 10 * parsecMajor + parsecMinor
+
+\newcommand\refsforparsec{%
+    \setcounter{parsecMajor}{\value{parsec}/10}%
+    \setcounter{parsecMinor}{\value{parsec}-10*\value{parsecMajor}}%
+    \setcounter{parsec}{\value{parsec}-1}%
+    \refstepcounter{parsec}%
+}
+
+% The first argument is the label this parsec will have--use \sref 
+% 	to refer to a parsec.
+\NewDocumentEnvironment{parsec}{g o}{%
+	\leavevmode\unskip%
+	\par\vskip1em\noindent%
+    \renewcommand{\theparsec}{\the\value{parsecMajor}\alph{parsecMinor}}%
+    \setcounter{parsec}{#1}%
+    \refsforparsec{}%
+	%%\setcounter{point}{0}% - point is set to 0 by \numberwithin
+	% In the footer of every odd page we list the parsecs present on 
+	% the spread.  We pass this information to the footer via the 
+	% \markboth,\leftmark,\rightmark-mechanism, which is normally
+	% used to display the section and subsection names and numbers
+	% in the header.
+	% 	Recall that \leftmark will return the LAST value passed
+	% to the first argument of \markboth on this page. (The difficulty
+	% of implementing \leftmark is that a \markboth that will belong
+	% to the next page can be called before the current page is shipped,
+	% because this \markboth may be part of the text that overflows the
+	% current page.)
+	%	\rightmark will return the FIRST value passed to the second
+	% argument of \markboth on this page.
+	%	Since we would not only like to know if this parsec with number
+	% say  N  is present on this spread, but also whether it spills over 
+	% to the next spread (or has spilled over from the previous spread),
+	% we keep track of whether the parsec started on this spread, 
+	% encoded by  2N,  or whether the parsec ended on this spread,
+	% encoded by  2N+1.
+	\setcounter{tmptmp}{2*\value{parsec}}%
+	\markboth{\the\value{tmptmp}}{\the\value{tmptmp}}%
+	\IfValueT{#2}{\label{#2}}%
+    % For the table of contents:
+    \renewcommand{\thepoint}{\the\value{parsecMajor}\alph{parsecMinor}}%
+    \setcounter{point}{\value{point}-1}%
+    \refstepcounter{point}% 
+    \label{parsec-\the\value{parsec}}%
+	% Display the parsec number in the margin.
+        \marginnote{\makebox[3em][c]{\textParsecNumber{%
+            \the\value{parsecMajor}%
+            \alph{parsecMinor}%
+            }}}%
+	\ignorespaces%
+}{%
+	\leavevmode\unskip%
+	\setcounter{tmptmp}{2*\value{parsec}+1}%
+	\markboth{\the\value{tmptmp}}{\the\value{tmptmp}}%
+	\ignorespaces%
+}
+
+\newcounter{point} % keeps track of the current point
+\newcounter{pointMajor}
+\newcounter{pointMinor}
+\numberwithin{point}{parsec}
+\newcounter{pointdepth}  % keeps track of the depth of the current point
+			 % --- points may be nested.
+
+\newcommand\refsforpoint{%
+    \setcounter{pointMajor}{\value{point}/10}%
+    \setcounter{pointMinor}{\value{point}-10*\value{pointMajor}}%
+    \setcounter{point}{\value{point}-1}%
+    \refstepcounter{point}%
+}
+
+\NewDocumentEnvironment{point}{g o g}{%
+	\leavevmode\unskip%
+	\setcounter{pointdepth}{\value{pointdepth}+1}%
+	\refstepcounter{point}% TODO: <- is this needed?
+    \setcounter{point}{#1}%
+    % setup labels
+    \IfValueT{#2}{%
+        \renewcommand{\thepoint}{\the\value{parsec}}%
+        \refsforpoint{}%
+        \label{#2::parsec}%
+        \renewcommand{\thepoint}{\Roman{pointMajor}\alph{pointMinor}}%
+        \refsforpoint{}%
+        \label{#2::point}%
+        \renewcommand{\thepoint}{\theparsec\,\Roman{pointMajor}\alph{pointMinor}}%
+        \refsforpoint{}%
+        \label{#2}%
+    }%
+    \renewcommand{\thepoint}{\theparsec\,\Roman{pointMajor}\alph{pointMinor}}%
+    \refsforpoint{}%
+    \label{parsec-\the\value{parsec}.\the\value{point}}%
+	\ifthenelse{\equal{\value{point}}{10}}{}{%
+		\ifthenelse{\equal{\value{pointdepth}}{1}}{%
+			\par\penalty-100\vskip.6em\noindent%
+		}{%
+			\ifthenelse{\equal{\value{pointdepth}}{2}}{%
+				\par\penalty-50\vskip.2em\noindent%
+			}{%
+				\par\penalty-25\vskip.1em\noindent%
+			}%
+		}%
+		\marginnote{\makebox[2em][c]{\small%
+                    \ifthenelse{\equal{\value{pointdepth}}{1}}{%
+                        \textPointNumberI{\Roman{pointMajor}\alph{pointMinor}}%
+                    }{%
+                        \ifthenelse{\equal{\value{pointdepth}}{2}}{%
+                            \textPointNumberII{\Roman{pointMajor}\alph{pointMinor}}%
+                        }{%
+                            \textPointNumberIII{\Roman{pointMajor}\alph{pointMinor}}%
+                        }%
+		}}}%
+	}%
+	\IfValueT{#3}{%
+		\ifthenelse{\equal{\value{pointdepth}}{1}}{%
+			\textPointHeaderI{#3}%
+		}{%
+			\ifthenelse{\equal{\value{pointdepth}}{2}}{%
+				\textPointHeaderII{#3}%
+			}{%
+				\textPointHeaderIII{(#3)}%
+			}}%
+	\ \ }%	
+\ignorespaces%
+}{%
+\leavevmode\unskip%
+\setcounter{pointdepth}{\value{pointdepth}-1}%
+\ignorespaces%
+}
+
+% Adjust footer and header:
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} % we want no header line
+
+% Since we use \markboth,\leftmark,\rightmark to keep track of the parsecs
+% on a given spread, we should neutralize its old user:
+\renewcommand{\chaptermark}[1]{}  
+\renewcommand{\sectionmark}[1]{}
+
+\fancyhead{}
+
+% These counters are used for computation
+\newcounter{firstParsec}
+\newcounter{lastParsec}
+\newcounter{firstParsecF}
+\newcounter{lastParsecF}
+\newcounter{firstParsecMajor}
+\newcounter{firstParsecMinor}
+\newcounter{lastParsecMajor}
+\newcounter{lastParsecMinor}
+
+% parsecToBeContinued is 1 if the previous spread spilled a parsec,
+% and 0 otherwise.
+\newcounter{parsecToBeContinued}  
+\setcounter{parsecToBeContinued}{0}
+
+\newcommand\ourfancyfooters{%
+    % Set the footer.  It contains the parsecs on this page.
+    % We use "\rightmark+0", because \rightmark might be empty.
+    \fancyfoot[CE]{%
+        \IfInteger{\rightmark}{%
+            \setcounter{tmptmp}{\leftmark+0}%
+            \ifthenelse{\equal{\value{tmptmp}}{\value{lastParsecF}}}{%
+                % the last parsec encountered on this page is the same as
+                % the last parsec encountered on the previous page;
+                % so either the parsec spans the whole of this even page,
+                % or there's no parsec active at all.
+                % In both cases the first parsec on the spread will
+                % be the first parsec on the odd page that 
+                % comes next, so we need not set firstParsecF here.
+                \setcounter{firstParsecF}{0}%
+            }{%
+                \setcounter{firstParsecF}{\rightmark+0}%
+            }
+        }{%
+        }%
+    }%
+    \fancyfoot[RO]{%
+        \textsf{\footnotesize\textcolor{lightgray}{\thepage}}}%
+    \fancyfoot[CO]{%
+        % firstParsecF is already set by the even page that came before,
+        %  ... unless it is 0.
+        \ifthenelse{\equal{\value{firstParsecF}}{0}}{%
+            \setcounter{firstParsecF}{\rightmark+0}%
+        }{% 
+            %do nothing
+        }
+        \setcounter{firstParsec}{\value{firstParsecF}/2}%
+        \setcounter{lastParsecF}{\leftmark+0}%
+        \ifthenelse{\equal{\value{lastParsecF}}{0}}{%
+            % do nothing
+        }{%
+            \setcounter{lastParsec}{\value{lastParsecF}/2}%
+            \textPointNumberI{%
+                \ifthenelse{\equal{\value{parsecToBeContinued}}{1}}{..}{}%
+                \setcounter{firstParsecMajor}{\value{firstParsec}/10}%
+                \setcounter{firstParsecMinor}{\value{firstParsec}-\value{firstParsecMajor}*10}%
+                \the\value{firstParsecMajor}\alph{firstParsecMinor}%
+                \ifthenelse{\equal{\value{firstParsec}}{\value{lastParsec}}}{%
+                    % TODO
+                }{%  no footer without parsecs
+                    \setcounter{tmptmp}{\value{firstParsec}+1}%
+                    \ifthenelse{\equal{\value{tmptmp}}{\value{lastParsec}}}{, }{--}% TODO: fix this, maybe?
+                    \setcounter{lastParsecMajor}{\value{lastParsec}/10}%
+                    \setcounter{lastParsecMinor}{\value{lastParsec}-\value{lastParsecMajor}*10}%
+                    \the\value{lastParsecMajor}\alph{lastParsecMinor}%
+                }%
+                \setcounter{tmptmp}{\value{lastParsec}*2}%
+                \ifthenelse{\equal{\value{tmptmp}}{\value{lastParsecF}}}{%
+                    ..\setcounter{parsecToBeContinued}{1}%
+                }{%
+                    \setcounter{parsecToBeContinued}{0}%
+                }%
+            }%
+        }%
+    }%
+}
+
+\ourfancyfooters
+\fancypagestyle{plain}{\ourfancyfooters}
+
+% Index support for parsecs
+\def\parsechyperlink#1{\sref{parsec-#1}}
+\makeatletter
+\def\@wrindex#1{%
+   \protected@write\@indexfile{}%
+   {\string\indexentry{#1|parsechyperlink{\the\value{parsec}.\the\value{point}}}{\the\value{parsec}.\the\value{point}}}%
+ \endgroup
+ \@esphack}%
+\makeatother
+
+
+% TOC support for parsecs
+\let\oldchapter\chapter%
+\renewcommand\chapter[1]{%
+    \oldchapter{#1}%
+    \setcounter{tmptmp}{(\value{parsec}/10)*10+10}
+    \addtocontents{parsectoc}{\protect\contentsline{chapter}{\numberline{\thechapter} #1}{\sref{parsec-\the\value{tmptmp}}}{chapter.\thechapter}}%
+}
+\let\oldsection\section%
+\renewcommand\section[1]{%
+    \oldsection{#1}%
+    \setcounter{tmptmp}{(\value{parsec}/10)*10+10}
+    \addtocontents{parsectoc}{\protect\contentsline{section}{\numberline{\thesection} #1}{\sref{parsec-\the\value{tmptmp}}}{section.\thesection}}%
+}
+\let\oldsubsection\subsection%
+\renewcommand\subsection[1]{%
+    \oldsubsection{#1}%
+    \setcounter{tmptmp}{(\value{parsec}/10)*10+10}
+    \addtocontents{parsectoc}{\protect\contentsline{subsection}{\numberline{\thesubsection} #1}{\sref{parsec-\the\value{tmptmp}}}{subsection.\thesubsection}}%
+}
+\let\oldsubsubsection\subsubsection%
+\renewcommand\subsubsection[1]{%
+    \oldsubsubsection{#1}%
+    \setcounter{tmptmp}{(\value{parsec}/10)*10+10}
+    \addtocontents{parsectoc}{\protect\contentsline{subsubsection}{\numberline{\thesubsubsection} #1}{\sref{parsec-\the\value{tmptmp}}}{subsubsection.\thesubsubsection}}%
+}
+
+\newcommand\backmattertitle[1]{{%
+    \sffamily\color{darkblue}\Huge\bfseries #1\vspace{1em}}}
+
+% customize title of index
+\makeatletter
+\renewenvironment{theindex}
+               {\if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \twocolumn[\backmattertitle{Index}]%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \columnseprule \z@
+                \columnsep 35\p@
+                \let\item\@idxitem}
+               {\if@restonecol\onecolumn\else\clearpage\fi}
+\makeatother
+

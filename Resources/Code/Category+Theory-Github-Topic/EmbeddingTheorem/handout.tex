@@ -1,0 +1,1014 @@
+\documentclass[a4paper, parskip=half,11pt]{scrartcl}
+
+\usepackage[l2tabu, orthodox]{nag}
+\usepackage[left=2cm, right=2cm, top=2.2cm, bottom=2.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[thmmarks, amsmath]{ntheorem}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{centernot}
+
+
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{faktor}
+\usepackage{etoolbox}
+\usepackage{wrapfig}
+
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{marginbreak}
+\theorembodyfont{\normalfont}
+\theoremheaderfont{\rmfamily\bfseries}
+\newtheorem{remark}{Bemerkung}[section]
+\newtheorem{proposition}[remark]{Proposition}
+\newtheorem{theorem}[remark]{Satz}
+\newtheorem{lemma}[remark]{Hilfssatz}
+\newtheorem{definition}[remark]{Definition}
+\newtheorem{defre}[remark]{Definition und Bemerkung}
+\newtheorem{defle}[remark]{Definition und Hilfssatz}
+\newtheorem{re}[remark]{Erinnerung}
+\newtheorem{cor}[remark]{Folgerung}
+\newtheorem{corde}[remark]{Folgerung und Definition}
+\newtheorem{example}[remark]{Beispiel}
+
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\normalfont\itshape}
+\theorembodyfont{\normalfont\footnotesize}
+\theoremsymbol{\ensuremath{\Box}}
+\newtheorem{proof}{Beweis.}
+\theorembodyfont{\normalfont}
+\theoremheaderfont{\normalfont\itshape}
+\theoremsymbol{\ensuremath{\lrcorner}}
+\newtheorem{overview}{Übersicht.}
+
+
+\MakeOuterQuote{"}
+
+\newtoggle{proofs}
+\toggletrue{proofs}
+
+\newtoggle{overviews}
+\togglefalse{overviews}
+
+\newcommand{\defiff}{\mathrel{\vcentcolon\Longleftrightarrow}}
+\newcommand\ccat\mathsf
+\newcommand\cat\mathcal
+\newcommand{\down}[1]{{\downarrow}#1}
+\newcommand{\p}[1]{\iftoggle{proofs}{#1}{}}
+\renewcommand{\o}[1]{\iftoggle{overviews}{#1}{}}
+\newcommand{\n}{\pgfmatrixnextcell}
+\newcommand\nat\Rightarrow
+
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\id}{id}
+
+\DeclarePairedDelimiterX\set[1]\lbrace\rbrace{\def\given{\;\delimsize\vert\;}#1}
+
+\subtitle{Seminar Kategorientheorie}
+\title{Der Einbettungssatz}
+\author{Markus Himmel}
+\date{19. Juli 2018}
+
+\begin{document}
+	\maketitle
+
+%	\setcounter{section}{1}
+%	\section{Aufwärmen}
+%		\begin{proposition}[Explizite Berechnung kleiner filtrierter Colimiten in $\ccat{Set}$]\label{2-13-3}
+%			Es sei $\cat{C}$ klein und filtriert und $F\colon \cat{C}\to\ccat{Set}$ ein
+%			Funktor. Es ist $\colim_\cat{C} F = L$, wobei
+%			\[
+%				L=\faktor{\coprod_{C\in\cat{C}}FC}{\approx},\quad s_C\colon FC\to L;\ x\mapsto [x]_\approx.
+%			\]
+%			Die Äquivalenzrelation $\approx$ ist gegeben durch
+%			\[
+%				(x\in FC) \approx (x'\in FC') \defiff \exists C''\in\cat{C}, f\colon C\to C'', g\colon C'\to C'': Ff(x) = Fg(x').
+%			\]
+%		\end{proposition}
+%		\p{\begin{proof}
+%			Zu zeigen sind:
+%			\begin{enumerate}[noitemsep]
+%				\item $\approx$ ist eine Äquivalenzrelation.
+%				%\item $L$ ist eine abelsche Gruppe.
+%				\item Der gegebene Kegel ist ein Grenzkegel.
+%			\end{enumerate}
+%			\begin{enumerate}[label=Zu \arabic*:]
+%					\begin{minipage}{0.7\textwidth}
+%					\item Klar: $\approx$ ist reflexiv und symmetrisch. Sei $(x\in FC_1)
+%					\approx (x' \in FC_2)$, $(x'\in FC_2) \approx (x''\in FC_3)$.
+%					Es existieren also Morphismen $f, g, h, k$, sodass
+%					$Ff(x) = Fg(x')$, $Fh(x')=Fk(x'')$. Da $\cat{C}$ filtriert,
+%					existiert ein Cokegel $(\alpha_i\colon C_i\to C_6)$ über dem
+%					gegebenen Diagramm. Insbesondere haben wir also
+%					\begin{align*}
+%						F\alpha_4 \circ Ff(x) &= F\alpha_4\circ Fg(x') = F\alpha_2(x')\\
+%							&= F\alpha_5\circ Fh(x') = F\alpha_5\circ Fk(x'').
+%					\end{align*}
+%					Dies zeigt $x \approx x''$.
+%					\end{minipage}
+%					\begin{minipage}{0.25\textwidth}
+%						\[\begin{tikzcd}[sep=1em]
+%							C_1 \ar{dr}{f} \n \n\\
+%							\n C_4 \ar{dr}{\alpha_4} \n\\
+%							C_2 \ar{dr}{h} \ar{ur}{g} \ar{rr}{\alpha_2} \n \n C_6\\
+%							\n C_5 \ar{ur}{\alpha_5} \n\\
+%							C_3 \ar{ur}{k} \n \n
+%						\end{tikzcd}\]
+%					\end{minipage}
+%				%\item Es sei $(x\in FC_1)\approx (x'\in FC_2)$, $(y\in FC_3)\approx(y'\in FC_4)$.
+%				\item Es seien $C, C'\in\cat{C}$, $f\colon C\to C'$, $x\in C$.
+%					Wegen $Ff(x) = F(\id_{C'})(Ff(x))$ gilt $s_C(x) = [x]_\approx
+%					= [Ff(x)]_\approx = s_{C'}(Ff(x)) \implies s_C = s_{C'}\circ Ff$.
+%					Also bilden die $s_C$ einen Kegel. Es sei ein weiterer Kegel
+%					gegeben durch $(t_C\colon FC\to M)_{C\in\cat{C}}$. Definiere
+%					$t\colon L\to M$ durch $t([x]_\approx)\coloneqq t_C(x)$ für
+%					$x\in FC$. Dies ist wohldefiniert, denn für $x'\in FC'$ mit
+%					$[x']_\approx = [x]_\approx$ existieren $f\colon C\to C''$,
+%					$g\colon C'\to C''$ mit $Ff(x) = Fg(x')$. Da $t$ ein Kegel ist, folgt
+%					\[
+%						t_C(x) = t_{C''}\circ Ff(x) = t_{C''}\circ Fg(x') = t_{C'}(x').
+%					\]
+%					$t\circ s_C=t_C$ gilt per Konstruktion und $t$ wird durch diese
+%					Identität eindeutig festgelegt.
+%			\end{enumerate}
+%		\end{proof}}
+%		\begin{proposition}\label{2-5-9}
+%			Es sei $\cat{C}$ eine Kategorie mit Pullbacks.
+%			\[
+%				\begin{tikzcd}[sep=4em]
+%					A \ar{r}{a} \ar[phantom]{dr}{\text{(I)}} \ar{d}{c} & B \ar[phantom]{dr}{\text{(II)}} \ar{r}{b} \ar{d}{d} & C \ar{d}{e}\\
+%					D \ar{r}{f} & E \ar{r}{g} & F
+%				\end{tikzcd}
+%			\]
+%			Das obige Diagramm sei kommutativ.
+%			\begin{enumerate}
+%				\item Falls (I) und (II) Pullbacks sind, so ist auch das äußere
+%					Rechteck ein Pullback.
+%				\item Falls (II) und das äußere Quadrat Pullbacks sind, so ist auch
+%					(I) ein Pullback.
+%			\end{enumerate}
+%		\end{proposition}
+%		\p{\begin{proof}\leavevmode
+%			\begin{enumerate}
+%				\item Es seien $x\colon X\to D$, $y\colon X\to C$ mit $g\circ f\circ x = e\circ y$.
+%					Pullback (II) liefert ein eindeutiges $z\colon X\to B$, sodass
+%					$b\circ z = y$, $d\circ z = f\circ x$. Letztere Gleichheit und Pullback
+%					(I) geben ein eindeutiges $w\colon X\to A$, sodass $a\circ w = z$, $c\circ w = x$.
+%					Insbesondere gilt $b\circ a\circ w = b\circ z = y$. Es sei $w'\colon X\to A$ ein
+%					weiterer Morphismus mit $b\circ a\circ w' = y$ und $c\circ w' = x$. Es gilt also
+%					$b\circ (a\circ w') = y = b\circ (a\circ w)$ und
+%					$d\circ(a\circ w') = f\circ (c\circ w') = f\circ x = f\circ c\circ w = d\circ (a\circ w)$.
+%					Pullback (II) liefert $a\circ w'=a\circ w$. Weiter ist $c\circ w'= x = c\circ w$.
+%					Pullback (I) liefert $w=w'$.
+%				\item Es sei $(A', c', a')$ der Pullback von $f$ und $d$.
+%					Wegen $d\circ a=f\circ c$ erhalten wir eine eindeutige Faktorisierung
+%					$h\colon A\to A'$ mit $a'\circ h=a$, $c'\circ h=c$.
+%					Mit (1) und da (II) ein Pullback ist, ist $(A', c', b\circ a')$ ein Pullback von
+%					$(g\circ f, e)$. Es ist jedoch auch $(A, c, b\circ a)$ ein Pullback von $(g\circ f, e)$.
+%					Da Limiten eindeutig sind, folgt $A\cong A'$. Es gilt $c'\circ h=c$
+%					und $b\circ a'\circ h = b\circ a$, also ist $h$ \emph{die} Faktorisierung
+%					zwischen den beiden Pullbacks. Da Limiten eindeutig sind, ist $A\cong A'$,
+%					also muss $h$ ein Isomorphismus sein.
+%					\end{enumerate}
+%		\end{proof}}
+%		\begin{proposition}\label{2-5-7}
+%			In einer Kategorie $\cat{C}$ sei $f\colon A\to B$ der Coequalizer von
+%			$x, y\colon X\rightrightarrows A$. Weiter existiere der Pullback
+%			$\alpha, \beta\colon P\rightrightarrows A$ von $(f, f)$. Dann ist
+%			$f$ auch der Coequalizer von $(\alpha, \beta)$.
+%		\end{proposition}
+%		\p{\begin{proof}
+%			\[
+%				\begin{tikzcd}[sep=1.4em]
+%					\n X \ar{dl}[']{z} \ar[shift left]{d}{y} \ar[shift right, ']{d}{x} \n \\
+%					P \ar[shift left]{r}{\alpha} \ar[shift right, ']{r}{\beta} \n \ar{d}{g} A \ar{r}{f} \n \ar{dl}{h} B \\
+%					\n C \n
+%				\end{tikzcd}
+%			\]
+%			Es sei $f$ der Coequalizer von $(x, y)$ und $(\alpha, \beta)$ der
+%			Pullback von $(f, f)$. Wegen $f\circ x = f\circ y$ existiert ein
+%			eindeutiger Morphismus $z\colon X \to P$ mit $\alpha\circ z = x$,
+%			$\beta\circ z=y$. Ist nun $g\colon A\to C$ ein Morphismus mit
+%			$g\circ\alpha = g\circ\beta$, so gilt $g\circ x = g\circ\alpha\circ z
+%			= g\circ\beta\circ z = g\circ y$. Es ist aber $f$ der Coequalizer von
+%			$(x, y)$, also existiert ein eindeutiges $h$ mit $g = h\circ f$.
+%		\end{proof}}
+	%\section{Der Einbettungssatz}
+		\setcounter{section}{1}
+		Es sei stets $\cat{A}$ eine kleine abelsche Kategorie.
+		\begin{lemma}\label{1-14-1}
+			Es sei $F\colon\cat{D}\to\ccat{Ab}^{\cat{A}}$ ein filtriertes Diagramm
+			linksexakter additiver Funktoren. Dann ist auch $\colim_{D\in\cat{D}} F(D)$
+			linksexakt und additiv.
+		\end{lemma}
+		\p{\begin{proof}
+			Ohne.
+		\end{proof}}
+		\begin{definition}[Die Einbettung in $\ccat{Ab}$]
+			Wir definieren die Einbettung $U\colon\cat{A}\to\ccat{Ab}$ durch
+			$U\coloneqq \colim_{D\in\cat{D}}\cat{A}(\phi(D), {-})$.
+			Die Kategorie $\cat{D}$ und der Funktor $\phi\colon\cat{D}\to\cat{A}$ sind
+			noch zu konstruieren.
+		\end{definition}
+		\begin{overview}
+			Für $A\in\cat{A}$ ist $U(A)=\colim_{D\in\cat{D}}\cat{A}(\phi(D), A)\in\ccat{Ab}$.
+			Ist $\cat{D}$ kofiltriert, so ist $x\in U(A)$ eine Äquivalenzklasse
+			von Morphismen der Form $\alpha\colon \phi(D)\to A$ für ein $D\in\cat{D}$.
+			$\alpha\colon\phi(D)\to A$ und $\beta\colon\phi(D')\to A$ sind äquivalent
+			genau dann wenn $D''\in\cat{D}$, $d\colon D''\to D$, $d'\colon D''\to D'$
+			existieren, sodass das Diagramm
+			\[
+				\begin{tikzcd}
+					\phi(D'')
+						\ar{r}{\phi(d)}
+						\ar{d}{\phi(d')} \n
+					\phi(D)
+						\ar{d}{\alpha} \\
+					\phi(D')
+						\ar{r}{\beta} \n
+					A
+				\end{tikzcd}
+			\]
+			kommutiert. Ist $g\colon A\to B$ ein Morphismus in $\cat{A}$, so gilt
+			$U(g)([\alpha]) = [g\circ\alpha]$.
+		\end{overview}
+		\begin{lemma}
+			Ist $\cat{D}$ kofiltriert, so ist $U$ linksexakt.
+		\end{lemma}
+		\p{\begin{proof}
+			Jeder darstellbare Funktor $\cat{A}(A, {-})\colon\cat{A}\to\ccat{Ab}$
+			präserviert Limiten, denn der darstellbare Funktor
+			$\cat{A}(A, {-})\colon\cat{A}\to\ccat{Set}$ tut das (Vortrag),
+			und der Vergissfunktor $\ccat{Ab}\to\ccat{Set}$ reflektiert Limiten
+			(Ohne Beweis? Liegt daran dass er Isomorphismen reflektiert). Also
+			ist $\cat{A}(A, {-})\colon \cat{A}\to\ccat{Ab}$ linksexakt (Vortrag).
+			Da $Y$ kontravariant ist, ist $U$ ein filtrierter Colimes linksexakter
+			Funktoren und mit \ref{1-14-1} selbst linksexakt.
+		\end{proof}}
+		\begin{lemma}
+			Es sei $\cat{D}$ kofiltriert. Weiter besitze jeder Epimorphismus
+			$f\colon A\twoheadrightarrow\phi(D)$ in $\cat{A}$ die Darstellung $f = \phi(d)$, wobei
+			$d\colon D'\to D$ in $\cat{D}$. Dann erhält $U$ Epimorphismen.
+		\end{lemma}
+		\p{\begin{proof}
+			Es sei $g\colon B\to C$ ein Epimorphismus in $\cat{A}$. $U(g)$ ist genau
+			dann ein Epimorphismus, wenn er surjektiv ist. Wir verwenden \ref{2-13-3}
+			(in $\ccat{Ab}$).
+
+			Es sei $x\in U(C) = \colim_{D\in\cat{D}}\cat{A}(\phi(D), C)$. $x$ ist
+			die Äquivalenzklasse eines Morphismus $\gamma\colon \phi(D)\to C$ in
+			$\cat{A}$. Damit $U(g)$, surjektiv ist, muss $y\in U(B)$ existieren,
+			sodass $U(g)(y)=x$. $y$ ist die Äquivalenzklasse eines Morphismus
+			$\beta\colon\phi(D')\to B$. Es gilt $U(g)([\beta]_\approx) = [g\circ\beta]_\approx$,
+			wir suchen also (Kontravarianz!) $D''\in\cat{D}$, $d\colon D''\to D$,
+			$d'\colon D''\to D'$, sodass $g\circ\beta\circ\phi(d')=\gamma\circ\phi(d)$.
+
+			\begin{minipage}{0.5\textwidth}
+				\[
+					\begin{tikzcd}[sep=1.6em]
+						\phi(D') \ar{d}{\beta} \n \phi(D'') \ar[']{l}{\phi(d')} \ar{r}{\phi(d)} \n \phi(D)\ar{d}{\gamma}\\
+						B \ar{rr}{g} \n \n C
+					\end{tikzcd}
+				\]
+			\end{minipage}%
+			\begin{minipage}{0.5\textwidth}
+				\[
+					\begin{tikzcd}[sep=1.6em]
+						A \ar{d}{\alpha} \ar[two heads]{r}{f} \n \phi(D) \ar{d}{\gamma}\\
+						B \ar[two heads]{r}{g} \n C
+					\end{tikzcd}
+				\]
+			\end{minipage}
+
+			Es sei $(A, \alpha, f)$ der Pullback von $(\gamma, g)$ in $\cat{A}$,
+			also $g\circ\alpha = \gamma\circ f$.
+			$f$ ist ein Epimorphismus, da $g$ ein Epimorphismus (Vortrag), und
+			per Voraussetzung existiert $\overline{d}\colon \overline{D}\to D$
+			mit $f=\phi(\overline{d})$. Die Wahlen $D'\coloneqq D''\coloneqq \overline{D}$,
+			$\beta\coloneqq\alpha$, $d'\coloneqq\id_{\overline{D}}$, $d\coloneqq\overline{d}$
+			liefern $g\circ\beta\circ\phi(d')=g\circ\alpha\circ\phi(\id_{\overline{D}})
+			= g\circ\alpha = \gamma\circ f = \gamma\circ\phi(\overline{d}) = \gamma\circ\phi(d)$
+			wie gewünscht.
+		\end{proof}}
+		\begin{lemma}
+			Es sei $\cat{D}$ kofiltriert. Weiter gelte:
+			\begin{enumerate}[label=(\arabic*)]
+				\item $\forall A\in\cat{A}\ \exists D\in\cat{D}: A=\phi(D)$;
+				\item $\phi(d)$ ist ein Epimorphismus in $\cat{A}$ für jeden Morphismus $d$ in $\cat{D}$.
+			\end{enumerate}
+			Dann ist $U$ treu.
+		\end{lemma}
+		\p{\begin{proof}
+			Es seien $f\colon A\rightrightarrows B$ Morphismen in $\cat{A}$ mit
+			$U(f)=U(g)$. $a\in U(A)$ sei die Äquivalenzklasse von $\alpha\colon\phi(D)\to A$.
+			Es ist$[f\circ\alpha]_\approx=U(f)(a)=U(g)(a)=[g\circ\alpha]_\approx$, also
+			existiert $d\colon D'\to D$ in $\cat{D}$ mit $f\circ\alpha\circ\phi(d)=g\circ\alpha\circ\phi(d)$.
+
+			Ist nun $\phi(\overline{D})=A$ für ein $\overline{D}\in\cat{D}$ (Voraussetzung),
+			so wähle $\alpha\coloneqq\id_{A}$. Wir erhalten $f\circ \id_A\circ\phi(d)=g\circ\id_A\circ\phi(d)$.
+			Nach Voraussetzung ist $\phi(d)$ ein Epimorphismus und es folgt $f=g$.
+		\end{proof}}
+		\begin{theorem}[von der treuen Einbettung]\label{abeb}
+			Jede kleine abelsche Kategorie lässt sich treu und exakt in die Kategorie
+			der abelschen Gruppen einbetten.
+		\end{theorem}
+		\o{\begin{overview}
+			Wir konstruieren eine kleine Kategorie $\cat{D}$ und einen Funktor
+			$\phi\colon\cat{D}\to\cat{A}$, die die Voraussetzungen der vorangegangenen
+			Hilfssätze erfüllen.
+			$\cat{D}$ ist eine Poset-Kategorie und durch (vollständige) Induktion definiert: $\cat{D}\coloneqq\bigcup_{n\in\mathbb{N}_0}\cat{D}_n$,
+			wobei $\cat{D}_0\subseteq \cat{D}_1\subseteq\cdots$.
+			$\phi$ ist die Fortsetzung aller $\phi_n\colon \cat{D}_n\to\cat{A}$ ($n\in\mathbb{N}_0$).
+			$\cat{D}_n$ und $\phi_n$ sollen folgende Eigenschaften haben:
+			\begin{enumerate}[label=(\arabic*),noitemsep]
+				\item Für $a, b\in\cat{D}_n$ existiert das Infimum $a\wedge b$;
+				\item Für $n\leq m$ fallen $\phi_n$ und $\phi_m$ auf $\cat{D}_n$ zusammen;
+				\item $\phi_n(d)$ ist ein Epimorphismus für jedes $n\in\mathbb{N}_0$ und
+					für jeden Morphismus $d$ in $\cat{D}_n$;
+				\item $\forall A\in\cat{A}\ \exists D\in\cat{D}_1:\phi_1(D)= A$;
+				\item $\forall A\in\cat{A}, D\in\cat{D}_n, f\colon A\twoheadrightarrow\phi_n(D)\,\text{epi}
+					\ \exists d\in\cat{D}_{n+1}, d\colon D'\to D: \phi_{n+1}(d)=f$;
+				\item $\forall D_1, D_2\in\cat{D}_{n}: [D_1, D_2]_{\cat{D}_n}\coloneqq\set{D\in\cat{D}_n\given
+					D_1\leq D\leq D_2}~\text{endlich}$;
+				\item $\forall D_1, D_2\in\cat{D}_{n}: [D_1, D_2]_{\cat{D}_n} = [D_1, D_2]_{\cat{D}_{n+1}}$.
+			\end{enumerate}
+			$\cat{D}_0\coloneqq\set{*}$; $\phi_0(*)\coloneqq 0_\cat{A}$.
+			$\cat{D}_n$ und $\phi_n$ werden durch (transfinite) Induktion definiert: $\cat{D}_{n+1}\coloneqq\bigcup_\alpha\cat{D}_n^\alpha$
+			mit $\cat{D}_n^0\subseteq\cat{D}_n^1\subseteq\cdots$
+			und $\phi_{n+1}$ ist die Fortsetzung aller $\phi_n^{\alpha}\colon \cat{D}_n^\alpha\to\cat{A}$, wobei die Successor Ordinals $\alpha+1$ alle
+			Paare der Form $(D, f)$, $D\in\cat{D}_n$, $f\colon A\twoheadrightarrow\phi_n(D)$ epi durchnummerieren und
+			folgende Voraussetzungen gelten:
+			\begin{enumerate}[label=(\alph*),noitemsep]
+				\item Für $a, b\in\cat{D}_n^\alpha$ existiert das Infimum $a\wedge b$;
+				\item Für $\beta<\alpha$ fallen $\phi_n^\alpha$ und $\phi_n^\beta$ auf $\cat{D}_n^\beta$ zusammen;
+				\item $\phi_n^\alpha(d)$ ist ein Epimorphismus für jedes $\alpha$ und jeden
+					Morphismus $d$ in $\cat{D}_n^\alpha$;
+				\item Es sei $(D, f)$ das von $\alpha$ indizierte Paar, wobei
+					$f\colon A\to\phi_n(D)$. Dann existiert $d\colon D'\to D$ in
+					$\cat{D}_n^\alpha$, sodass $\phi_n^\alpha(d) = f$;
+				\item $\forall D_1, D_2\in\cat{D}_{n}^\alpha: [D_1, D_2]_{\cat{D}_n^\alpha}~\text{endlich}$;
+				\item $\forall D_1, D_2\in\cat{D}_{n}^\alpha, \beta>\alpha: [D_1, D_2]_{\cat{D}_n^\alpha} = [D_1, D_2]_{\cat{D}_{n}^{\beta}}$.
+			\end{enumerate}
+			Es sei $(\cat{D}_n^\alpha,
+			\phi_n^\alpha)$ definiert und $\alpha+1$ bezeichne das Paar $(D, f)$.
+			$\down{D}\coloneqq\set{D'\in\cat{D}_n^\alpha\given D'\leq D}$. Definiere
+			$\cat{D}_n^{\alpha+1}\coloneqq\cat{D}_n^\alpha\amalg\down{D}$. $D'^*$
+			bezeichnet die Kopie von $D'\leq D$ aus $\down{D}$. Halbordnung durch
+			Ordnungen auf $\cat{D}_n^\alpha$ und $\down{D}$ und durch die Relationen
+			$D'^*\leq D'$ für $D'\leq D$. $\phi_n^{\alpha+1}(D^*)\coloneqq A$,
+			$\phi_n^{\alpha+1}(D^*\leq D)\coloneqq f$. Rest durch Pullbacks:
+			\[
+				\begin{tikzcd}[column sep=8em]
+					P \eqqcolon \phi_n^{\alpha+1}(D'^*)
+						\ar[two heads]{d}{v\eqqcolon \phi_n^{\alpha + 1}(D'^*\leq D')}
+						\ar[two heads]{r}{u\eqqcolon \phi_n^{\alpha+1}(D'^*\leq D^*)}
+					\n A=\phi_n^{\alpha+1}(D^*)
+						\ar[two heads]{d}{f = \phi_n^{\alpha+1}(D^*\leq D)}\\
+					\phi_n^\alpha(D') \ar[two heads]{r}{\phi_n^\alpha(D'\leq D)} \n \phi_n(D)
+				\end{tikzcd}
+			\]
+		\end{overview}}
+		\p{\begin{proof}
+			Wir konstruieren eine kleine Kategorie $\cat{D}$ und einen Funktor
+			$\phi\colon\cat{D}\to\cat{A}$, die die Voraussetzungen der vorangegangenen
+			Hilfssätze erfüllen. $\cat{D}$ wird eine Poset-Kategorie sein; im Folgenden
+			bezeichnen $D$, $D_n$ und $D_n^\alpha$ je nach Kontext entweder die Halbordnung
+			selbst oder die zugehörige Kategorie. Ebenso bezeichne $D_1\leq D_2$ je nach Kontext
+			die Aussage oder den zugehörigen Morphismus.
+
+			Wir konstruieren eine aufsteigende Folge $\cat{D}_0 \subseteq \cat{D}_1 \subseteq \cdots
+			\subseteq \cat{D}_n \subseteq\cdots$ ($n\in\mathbb{N}_0$) von Halbordnungen und
+			Funktoren $\phi_n\colon\cat{D}_n\to\cat{A}$, die die folgenden Eigenschaften
+			erfüllen:
+			\begin{enumerate}[label=(\arabic*),noitemsep]
+				\item Für $a, b\in\cat{D}_n$ existiert das Infimum $a\wedge b$;
+				\item Für $n\leq m$ fallen $\phi_n$ und $\phi_m$ auf $\cat{D}_n$ zusammen;
+				\item $\phi_n(d)$ ist ein Epimorphismus für jedes $n\in\mathbb{N}$ und
+					für jeden Morphismus $d$ in $\cat{D}_n$;
+				\item $\forall A\in\cat{A}\ \exists D\in\cat{D}_1:\phi_1(D)= A$;
+				\item $\forall A\in\cat{A}, D\in\cat{D}_n, f\colon A\twoheadrightarrow\phi_n(D)
+					\ \exists d\in\cat{D}_{n+1}, d\colon D'\to D: \phi_{n+1}(d)=f$.
+			\end{enumerate}
+			Mit $\cat{D}\coloneqq\bigcup_{n\in\mathbb{N}_0}\cat{D}_n$ und der naheliegenden
+			Fortsetzung der $\phi_n$ zu $\phi$ sind dann alle Voraussetzungen erfüllt.
+
+			Definiere $\cat{D}_0\coloneqq\set{*}$, $\phi_0(*)\coloneqq0_\cat{A}$.
+			Diese Wahlen besitzen offensichtlich die Eigenschaften (1) und (3).
+
+			Sind $\cat{D}_0,\ldots,\cat{D}_n$ bereits definiert und (1), (2), (3)
+			und (5) erfüllt, so bezeichnen wir die Paare $(D, f)$, wobei $D\in\cat{D}_n$
+			und $f\colon A\twoheadrightarrow \phi_n(D)$, mit den aufeinanderfolgenden
+			Successor-Ordinalen. Wir konstruieren nun eine aufsteigende Folge von
+			Halbordnungen $\cat{D}_n^0\subseteq\cat{D}_n^1\subseteq\cdots\subseteq\cat{D}_n^\alpha\subseteq\cdots$,
+			und eine Folge von Funktoren $\phi_n^\alpha\colon\cat{D}_n^\alpha\to\cat{A}$,
+			wobei $\alpha$ bis zum Supremum der für die Paare verwendeten Indizes läuft und
+			folgende Eigenschaften erfüllt sein sollen:
+			\begin{enumerate}[label=(\alph*),noitemsep]
+				\item Für $a, b\in\cat{D}_n^\alpha$ existiert das Infimum $a\wedge b$;
+				\item Für $\beta<\alpha$ fallen $\phi_n^\alpha$ und $\phi_n^\beta$ auf $\cat{D}_n^\beta$;
+				\item $\phi_n^\alpha(d)$ ist ein Epimorphismus für jedes $\alpha$ und jeden
+					Morphismus $d$ in $\cat{D}_n^\alpha$;
+				\item Es sei $(D, f)$ das von $\alpha$ indizierte Paar, wobei
+					$f\colon A\to\phi_n(D)$. Dann existiert $d\colon D'\to D$ in
+					$\cat{D}_n^\alpha$, sodass $\phi_n^\alpha(d) = f$.
+			\end{enumerate}
+			Mit $\cat{D}_{n+1}\coloneqq\bigcup_\alpha D_n^\alpha$ und der naheliegenden
+			Fortsetzung $\phi_{n+1}\colon\cat{D}_{n+1}\to\cat{A}$ sind dann (1), (2), (3)
+			und (5) erfüllt.
+
+			$(\cat{D}_n^0, \phi_n^0)\coloneqq (\cat{D}_n, \phi_n)$. Ist $\alpha$ ein
+			Limit-Ordinal, wähle $\cat{D}_n^\alpha\coloneqq\bigcup_{\beta<\alpha}\cat{D}_n^\beta$
+			und für $\phi_n^\alpha$ die entsprechende Fortsetzung. Es sei $(\cat{D}_n^\alpha,
+			\phi_n^\alpha)$ definiert und $\alpha+1$ bezeichne das Paar $(D, f)$.
+			Wir betrachten für die Menge $\down{D}\coloneqq\set{D'\in\cat{D}_n^\alpha\given D'\leq D}$
+			die disjunkte Vereinigung $\cat{D}_n^\alpha\amalg\down{D}$. $D'^*$
+			bezeichne die Kopie von $D'\leq D$ aus $\down{D}$. Wir versehen
+			$\cat{D}_n^\alpha\amalg\down{D}$ mit einer Halbordnung, indem wir die
+			Ordnungen auf $\cat{D}_n^\alpha$ und $\down{D}$ übernehmen und zusätzlich
+			$D'^*\leq D'$ für alle $D'\leq D$ fordern. $\cat{D}_n^{\alpha+1}\coloneqq
+			\cat{D}_n^\alpha\amalg\down{D}$ mit der eben beschriebenen Halbordnung.
+			In $\down{D}$ existieren Infima. Für $D_1\in\down{D}, D_2\in\cat{D}_n^\alpha$
+			haben wir $(D_1\wedge D_2)^*=D_1^*\wedge D_2$ in $\cat{D}_n^{\alpha+1}$.
+
+			Auf $\cat{D}_n^\alpha$ definieren wir $\phi_{n+1}^\alpha$ als gleich
+			$\phi_n^\alpha$. Weiter definieren wir $\phi_n^{\alpha+1}(D^*)\coloneqq A$
+			und $\phi_n^{\alpha+1}(D^*\leq D)\coloneqq f$.
+			\[
+				\begin{tikzcd}[column sep=8em]
+					P \eqqcolon \phi_n^{\alpha+1}(D'^*)
+						\ar[two heads]{d}{v\eqqcolon \phi_n^{\alpha + 1}(D'^*\leq D')}
+						\ar[two heads]{r}{u\eqqcolon \phi_n^{\alpha+1}(D'^*\leq D^*)}
+					\n A=\phi_n^{\alpha+1}(D^*)
+						\ar[two heads]{d}{f = \phi_n^{\alpha+1}(D^*\leq D)}\\
+					\phi_n^\alpha(D') \ar[two heads]{r}{\phi_n^\alpha(D'\leq D)} \n \phi_n(D)
+				\end{tikzcd}
+			\]
+
+			Für $D'\leq D$ definieren wir $(\phi_n^{\alpha+1}, \phi_n^{\alpha+1}(D'^*\leq D'),
+			\phi_n^{\alpha+1}(D'^*\leq D^*))$ durch den Pullback
+			von $(f, \phi_n^\alpha(D'\leq D))$ in $\cat{A}$. Die durch den Pullback
+			definierten Morphismen sind Epimorphismen, weil $f$ und $\phi_n^\alpha(D'\leq D)$
+			Epimorphismen sind.
+			\[
+				\begin{tikzcd}[column sep=9em]
+					P=\phi_n^{\alpha+1}(D'^*)
+						\ar[two heads]{d}{x=\phi_n^{\alpha+1}(D'^*\leq D')}
+						\ar[two heads]{r}{y\eqqcolon \phi_n^{\alpha+1}(D'^*\leq D''^*)} \n
+					\phi_n^{\alpha+1}(D''^*)
+						\ar[two heads]{d}{}
+						\ar[two heads]{r}{} \n
+					A
+						\ar[two heads]{d}{f} \\
+					\phi_n^\alpha(D')
+						\ar[two heads]{r}{\phi_n^\alpha(D'\leq D'')} \n
+					\phi_n^\alpha(D'')
+						\ar[two heads]{r}{\phi_n^\alpha(D''\leq D)} \n
+					\phi_n(D)
+				\end{tikzcd}
+			\]
+			Für $D'\leq D''\leq D$ in $\cat{D}_n^\alpha$ betrachte obiges Diagramm,
+			in dem beide Quadrate Pullbacks sind. Das äußere Quadrat ist ein Pullback
+			und es ist $\phi_n^\alpha(D''\leq D)\circ\phi_n^\alpha(D'\leq D'')=\phi_n^\alpha(D'\leq D)$,
+			daher folgt $P=\phi_n^{\alpha+1}(D'^*)$
+			und $x=\phi_n^{\alpha+1}(D'^*\leq D')$
+			nach vorangegangener Definiton. Wir definieren $\phi_n^{\alpha+1}(D'^*\leq D''^*)\coloneqq y$.
+
+			Für $D'\leq D$, $D'\leq D''$ in $\cat{D}_n^\alpha$ definiere
+			$\phi_n^{\alpha+1}(D'^*\leq D'')\coloneqq \phi_n^{\alpha+1}(D'\leq D'')
+			\circ\phi_n^{\alpha+1}(D'^*\leq D')$.
+
+			$\phi_n^{\alpha+1}$ ist ein Funktor aufgrund der Verknüpfungseigenschaften
+			von Pullbacks.
+			Die Konstruktion der $\cat{D}_n^\alpha$, $\phi_n^\alpha$ stellt sicher,
+			dass die Eigenschaften gegeben sind. Insbesondere haben wir
+			$\phi_n^{\alpha+1}(D^*\leq D)=f$.
+
+			Wir zeigen noch Eigenschaft (4). Die Konstruktion von $\cat{D}_1$ läuft
+			über alle Paare $(*, f)$, wobei $f\colon A\to 0_\cat{A}$ ein Epimorphismus.
+			Es ist aber jeder Morphismus $A\to 0_\cat{A}$ ein Epimorphismus, denn
+			$0_\cat{A}$ ist initial, das heißt wenn $u\circ f=v\circ f$, dann kommt für $u$ und $v$
+			überhaupt nur ein Morphismus in Frage. Da $0_\cat{A}$ terminal ist,
+			haben wir für jedes $A$ in $\cat{A}$ ein entsprechendes Paar $(*, f)$,
+			und Forderung (d) liefert, was wir brauchen.
+		\end{proof}}
+
+		Die Aussagen von \ref{fact} und \ref{func} beziehen sich auf
+		Wahlen für $\cat{D}$ und $\phi$ wie gerade konstruiert.
+		\p{\begin{proof}
+			Wir spielen die beiden verschachtelten Induktionen noch einmal durch und
+			zeigen für zwei Elemente $D_1, D_2$, die an einer Stelle der Konstruktion
+			zusammen auftauchen:
+			\begin{enumerate}[label=(\arabic*),noitemsep]
+				\item $[D_1, D_2]$ ist endlich,
+				\item $[D_1, D_2]$ wird sich in keinem weiteren Schritt noch
+					verändern.
+			\end{enumerate}
+			$\cat{D}_0 = \set{*}$ erfüllt (1). Falls $\cat{D}_n^\alpha$ die Bedingungen
+			erfüllt, betrachte $D_1, D_2$ in $\cat{D}_n^{\alpha+1}$. Die Konstruktion
+			von $\cat{D}_n^{\alpha+1}$ stellt sicher, dass $D'\leq D^*$ für ein Element
+			$D'$ in $\cat{D}_n^\alpha$ und ein Element $D^*$, das in $\cat{D}_n^\alpha$
+			neu dazukommt, nicht vorkommen kann.
+
+			Es seien $D_1, D_2\in\cat{D}_n^{\alpha+1}$, $D_1\leq D_2$.
+			Falls $D_1, D_2\in\cat{D}_n^\alpha$,
+			so ist $[D_1, D_2]$ in $\cat{D}_n^{\alpha+1}$ unverändert gegenüber
+			$\cat{D}_n^{\alpha}$. Falls $D_1, D_2\notin\cat{D}_n^{\alpha}$,
+			dann existieren $D, D'\in\cat{D}_n^\alpha$ mit $D_1=D^*, D_2=D'^*$.
+			$[D_1,D_2]$ in $\cat{D}_n^{\alpha+1}$ ist dann isomorph zu $[D, D']$
+			in $\cat{D}_n^\alpha$, also nach Voraussetzung endlich.
+			Falls $D_1\notin\cat{D}_n^\alpha$, $D_2\in\cat{D}_n^\alpha$, dann ist
+			$D_1=D^*$ und $[D_1, D_2] = [D^*, D_2^*]\cup[D, D_2]$, also endlich.
+			$D_1\in\cat{D}_n^\alpha$, $D_2\notin\cat{D}_n^\alpha$ kann nicht eintreten.
+
+			Da die Bedingungen bei jedem Successor-Ordinal erhalten bleiben, bleiben
+			sie auch bei einem Limit-Ordinal erhalten (der Limit-Schritt fügt ja gar
+			keine Objekte hinzu).
+		\end{proof}}
+		\begin{lemma}\label{fact}
+			Sind $D_1, D_2\in\cat{D}$ Objekte mit $D_1\leq D_2$, so ist die kanonische Faktorisierung
+			\[
+				\begin{tikzcd}
+					\phi(D_1) \arrow[r] & \lim_{D_1<D\leq D_2}\phi(D)
+				\end{tikzcd}
+			\]
+			ein Epimorphismus.
+		\end{lemma}
+		\p{\begin{proof}
+			Wieder mit Induktion über den Moment, in dem $D_1$ eingeführt wird. Da in
+			einem späteren Schritt keine Elemente $D'$ mit $D_1\leq D'$ eingeführt werden,
+			sind in diesem Schritt bereits alle Elemente der Form $D_1<D\leq D_2$ vorhanden.
+
+			Falls $D_1\in\cat{D}_0$, so folgt $D_1=*=D_2$, und der Limes über die
+			leere Kategorie ist gerade $0_\cat{A}$. Der Morphismus $\phi(D_1)\to 0_\cat{A}$ ist
+			ein Epimorphismus wie eben beobachtet.
+
+			Bei einem Limit-Schritt kommen keine neuen Objekte hinzu, also verbleibt der Fall,
+			dass $D_1$ in der Konstruktion von $\cat{D}_n^{\alpha+1}$ eingeführt wird. Es existiert
+			ein $D_0\in\cat{D}_n^\alpha$ mit $D_1=D_0^*$. Es ist nun entweder $D_2\in\cat{D}_n^\alpha$
+			oder $D_2\notin\cat{D}_n^\alpha$.
+
+			Falls $D_1=D_2\notin\cat{D}_n^\alpha$ sind wir in der gleichen Situation wie im Fall
+			$D_1\in\cat{D}_0$.
+			\[
+				\begin{tikzcd}[column sep=5em, row sep=3em]
+					\phi(D_0^*)
+						\ar{d}{}
+						\ar[phantom]{dr}{\text{(1)}}
+						\ar[two heads]{r}{f^*} \n
+					\lim_{D_0^*<D^*\leq D_{00}^*}\phi(D^*)
+						\ar[phantom]{dr}{\text{(2)}}
+						\ar{d}{}
+						\ar{r}{p_{D^*}} \n
+					\phi(D^*)
+						\ar[phantom]{dr}{\text{(3)}}
+						\ar{d}{}
+						\ar{r}{\phi(D^*\leq D_{00}^*)} \n
+					\phi(D_{00}^*)
+						\ar{d}{} \\
+					\phi(D_0)
+						\ar[two heads]{r}{f} \n
+					\lim_{D_0<D\leq D_{00}}\phi(D)
+						\ar{r}{p_D} \n
+					\phi(D)
+						\ar{r}{\phi(D\leq D_{00})} \n
+					\phi(D_{00})
+				\end{tikzcd}
+			\]
+			Falls $D_1\neq D_2\notin \cat{D}_n^\alpha$, $D_2=D_{00}^*$ für ein
+			$D_{00}\in\cat{D}_n^\alpha$, betrachte das Diagramm, wobei
+			$D$ beliebig mit $D_1<D\leq D_2$. (3) ist ein Pullback
+			nach Konstruktion. Da ein Grenzkegel ein Kegel ist, gilt
+			$\phi(D\leq D_{00})\circ p_D = p_{D_{00}}$, $\phi(D^*\leq D_{00}^*)\circ p_{D^*}
+			= p_{D_{00}^*}$. Wir haben also ein Rechteck (2-3), bei dem
+			es sich gerade um den Limes der Pullbacks (3) handelt. Durch Vertauschung
+			von Limiten ist auch (2-3) ein Pullback. Da aber auch das äußere Rechteck
+			nach Konstruktion ein Pullback ist, liefert \ref{2-5-9}, dass auch (1) ein
+			Pullback ist. Nach Induktionsvoraussetzung ist $f$ ein Epimorphismus, also ist auch
+			$f^*$ ein Epimorphismus.
+
+			Der verbleibende Fall ist $D_1=D_0^*$, $D_2\in\cat{D}_n^\alpha$. Der Index
+			$\alpha + 1$ bezeichne das Paar $(\overline{D}, \overline{f})$. Falls
+			$D_0 = \overline{D}$, so ist $D_1$ das einzige Objekt aus $[D_1, D_2]\cap\down{\overline{D}}$,
+			also gilt $\set{D\given D_1<D\leq D_2}=[\overline{D}, D_2]$. Dieses Segment
+			hat aber das initiale Objekt $\overline{D}$, also ist der gesuchte Limes gerade
+			$\phi(\overline{D})$ (ohne Beweis: Hat $\cat{C}$ ein initiales Objekt $0_\cat{C}$, so ist
+			$\lim_\cat{C} F = F(0_\cat{C})$) und die Faktorisierung ist $\overline{f}$ nach
+			Konstruktion.
+
+			Ohne Beweis: Falls $D_1=D_0^*<\overline{D}^*$ und $D_2\in\cat{D}_n^\alpha$,
+			so ist der Limes gerade $\phi(D_1)$ und die Faktorisierung durch die Identität gegeben.
+		\end{proof}}
+		\begin{lemma}\label{func}
+			Es sei $D_0\in\cat{D}$ ein Objekt und $\Gamma\colon \down{D_0}\to\cat{A}$
+			ein Funktor, wobei für alle $D_1\leq D_2\leq D_0$ die Faktorisierung
+			\[
+				\begin{tikzcd}
+					\Gamma(D_1) \arrow[r] & \lim_{D_1<D\leq D_2} \Gamma(D)
+				\end{tikzcd}
+			\]
+			ein Epimorphismus sei. Weiter sei $F\colon\cat{A}\to\ccat{Ab}$ ein exakter
+			Funktor und $\alpha_{D_0}\colon \cat{A}(\Gamma D_0, {-})\nat F$
+			eine natürliche Transformation. Dann besitzt $\alpha_{D_0}$ die
+			Faktorisierung
+			\[
+				\begin{tikzcd}
+					\cat{A}(\Gamma D_0, {-}) \arrow[Rightarrow]{r}{s_{D_0}} & \colim_{D\leq D_0}\cat{A}(\Gamma D, {-}) \arrow[Rightarrow]{r}{\alpha} & F.
+				\end{tikzcd}
+			\]
+			$s_{D_0}$ ist hierbei der kanonische Morphismus des Colimes.
+		\end{lemma}
+		\p{\begin{proof}
+			Eine Teilmenge $S\subseteq\down{D_0}$ nennen wir finales Segment von
+			$D_0$, falls $D\in S \wedge D\leq D'\leq D_0 \implies D'\in S$.
+
+			Es sei $\mathcal{S}$ die Menge aller Paare $(S, (\alpha_D)_{D\in S})$
+			für die gilt:
+			\begin{enumerate}[label=(\arabic*),noitemsep]
+				\item $S$ ist finales Segment von $\down{D_0}$,
+				\item Die $\alpha_D\colon\cat{A}(\Gamma(D), {-})\nat F$ mit $D\in S$ bilden einen Cokegel (in $\ccat{Ab}^\cat{A}$).
+				\item $\alpha_{D_0}$ stimmt mit dem aus der Behauptung überein.
+			\end{enumerate}
+			Wir definieren eine Halbordnung auf $\mathcal{S}$ durch
+			\[
+				(S, (\alpha_D)_{D\in S})\leq (S', (\alpha_D')_{D\in S})\defiff S\subseteq S'\wedge \forall D\in S: \alpha_D'=\alpha_D.
+			\]
+			Jede aufsteigende Kette in $\mathcal{S}$ hat eine obere Schranke (durch
+			Vereinigung und Erweiterung). Das Lemma von Zorn liefert ein maximales
+			Element $(\overline{S}, (\alpha_D)_{D\in\overline{S}})$. Falls $\overline{S}=\down{D_0}$,
+			so haben wir einen Cokegel in der Funktorkategorie gefunden, der zu dem in der Behauptung
+			gegebenen Colimes passt und damit auch die zugehörige Faktorisierung.
+
+			Falls $\overline{S}\neq\down{D_0}$, existiert $D_1\leq D_0$, $D_1\notin\overline{S}$.
+			Das Segment $[D_1, D_0]$ ist endlich nach \ref{fin} und daher finden wir
+			ein $D_2\in [D_1, D_0]$ mit $D_2\notin\overline{S}$, $\forall D_2<D\leq D_0:D\in\overline{S}$.
+			Das Yoneda-Lemma ordnet für jedes $D$ mit $D_2<D\leq D_0$ der natürlichen
+			Transformation $\alpha_D\colon\cat{A}(\Gamma(D),{-})\nat F$ ein Element $a_D\in F\Gamma(D)$ zu.
+			Die abelsche Gruppe $\lim_{D_2<D\leq D_0}F\Gamma(D)$ nimmt die Form
+			\[
+				\lim_{D_2<D\leq D_0}F\Gamma(D) = \set{(b_D)_D\in\prod_{D_2<D\leq D_0} F\Gamma(D)\given F\Gamma(D'\leq D'')(b_{D'}) = b_{D''}}
+			\]
+			an. Da $F$ exakt ist und der Limes endich ist, haben wir $\lim_{D_2<D\leq D_0}F\Gamma(D) = F(\lim_{D_2<D\leq D_0}\Gamma(D))$.
+			Die $a_D$ konstituieren jedoch gerade ein Objekt aus diesem Limes, denn die
+			Bedingung folgt aus der Kegeleigenschaft und der Natürlichkeit in der ersten
+			Komponente des Yoneda-Lemmas. Sei also $a\coloneqq (a_D)_D\in F(\lim\Gamma(D))$.
+
+			Die Faktorisierung $\beta\colon\Gamma(D_2)\to\lim\Gamma(D)$ ist ein Epimorphismus
+			nach Voraussetzung. $F$ ist aber exakt, also ist $F(\beta)$ ein Epimorphismus,
+			also surjektiv. Wähle also $a_{D_2}\in F\Gamma(D_2)$ mit $F(\beta)(a_{D_2})=a$.
+			Dann gilt insbesondere für $D_2<D\leq D_0$: $F\Gamma(D_2\leq D)(a_{D_2})=a_D$.
+			Dann wissen wir aber, dass für die vom Yoneda-Lemma erhaltene natürliche
+			Transformation $\alpha_{D_2}\colon\cat{A}(\Gamma D_2, {-})\nat F$ gerade
+			$\alpha_D=\alpha_{D_2}\circ (\Gamma(D_2\leq D))^*$ gilt.
+
+			Weiter haben wir $D_2$ so gewählt, dass $\overline{S}\cup\set{D_2}$ ein finales
+			Segment in $\down{D_0}$ ist. Damit ist $(\overline{S}\cup\set{D_2}, (\alpha_D)_{D\in\overline{S}\cup\set{D_2}})$
+			eine echte Erweiterung von $(\overline{S}, (\alpha_D)_{D\in\overline{S}})$,
+			ein Widerspruch.
+		\end{proof}}
+		\begin{theorem}[von der volltreuen Einbettung; Einbettungssatz von Freyd-Mitchell]
+			Für jede kleine abelsche Kategorie existieren ein Ring $R$ und eine volltreue
+			und exakte Einbettung in die Kategorie $\ccat{Mod}_R$ der (links-)$R$-Moduln.
+		\end{theorem}
+		%\o{\begin{overview}
+		%	$R\coloneqq\ccat{Nat}(U, U)$. Für $A\in\cat{A}$ ist $U(A)$ durch $r\cdot x\coloneqq r_A(x)$
+		%	ein $R$-Modul. $U(f)$ ist $R$-linear. $V\colon\cat{A}\to\ccat{Mod}_R$ fasst das Bild von $U$
+		%	als $R$-Moduln und $R$-lineare Abbildungen auf; ist treu und exakt, weil $U$ es ist.
+		%	Zeige noch: $V$ ist voll, in mehreren Schritten:
+		%	\begin{itemize}[noitemsep]
+		%		\item Konstruktion des Funktors $\pi\colon\down{\delta_A}\to\cat{A}$ durch
+		%			Kernel Pairs
+		%			\[
+		%				\begin{tikzcd}[column sep=4em]
+		%					\pi(D)
+		%						\ar[shift left]{r}{u_D}
+		%						\ar[shift right, ']{r}{v_D}
+		%						\ar{d}{\pi(D\leq D')} \n
+		%					\phi(D)
+		%						\ar{r}{\phi(D\leq\delta_A)}
+		%						\ar{d}{\phi(D\leq D')} \n
+		%					A
+		%						\ar{d}{\id_A} \\
+		%					\pi(D')
+		%						\ar[shift left]{r}{u_{D'}}
+		%						\ar[shift right, ']{r}{v_{D'}} \n
+		%					\phi(D')
+		%						\ar{r}{\phi(D'\leq\delta_A)} \n
+		%					A
+		%				\end{tikzcd}
+		%			\]
+		%			\begin{itemize}[noitemsep]
+		%				\item Konstruktion von $u, v\colon U\nat P$ und des
+		%					Equalizers $w$
+		%				\begin{gather*}
+		%					\begin{tikzcd}[column sep=6em]
+		%						\cat{A}(\pi D,{-}) \n
+		%						\cat{A}(\phi D, {-})
+		%							\ar[shift right, ']{l}{u_D^*}
+		%							\ar[shift left]{l}{v_D^*} \n
+		%						\cat{A}(A, {-})
+		%							\ar[']{l}{\phi(D\leq\delta_A)^*}
+		%					\end{tikzcd}\\
+		%					\text{\rotatebox[origin=c]{270}{$\leadsto$}}\colim\\
+		%					\begin{tikzcd}
+		%						P \n
+		%						U
+		%							\ar[shift right, ']{l}{u}
+		%							\ar[shift left]{l}{v} \n
+		%						\cat{A}(A,{-})
+		%							\ar[tail,']{l}{w}
+		%					\end{tikzcd}
+		%				\end{gather*}
+		%			\end{itemize}
+		%		\item $\pi$ erfüllt die Voraussetzungen von \ref{func}
+		%		\item $V$ ist voll: Finden eines Urbilds von $\varphi\colon U(A)\to U(B)$
+		%			\begin{itemize}[noitemsep]
+		%				\item Konstruktion des Urbilds $f$ durch Faktorisierung von $\beta$ durch den Equalizer $w$
+		%					\[
+		%						\begin{tikzcd}
+		%							P \n
+		%							U
+		%								\ar[shift right,']{l}{u}
+		%								\ar[shift left]{l}{v} \n
+		%							\cat{A}(A,{-})
+		%								\ar[tail]{l}{w} \\ \n
+		%							\cat{A}(B,{-})
+		%								\ar{u}{\beta}
+		%								\ar[densely dotted, ']{ru}{f^*}
+		%						\end{tikzcd}
+		%					\]
+		%					\begin{itemize}[noitemsep]
+		%						\item $u\circ\beta = v\circ\beta$ durch Widerspruch
+		%					\end{itemize}
+		%				\item Nachweis, dass $U(f)=\varphi$
+		%			\end{itemize}
+		%	\end{itemize}
+		%\end{overview}}
+		\p{\begin{proof}
+			Es sei $U\colon\cat{A}\to\ccat{Ab}$ wie in \ref{abeb} konstruiert und
+			$\ccat{Nat}(U, U)$ die abelsche Gruppe der natürlichen Transformationen
+			von $U$ nach $U$ (Kategorie der additiven Funktoren ist präadditiv). Zusammen mit einer
+			durch Komposition definierten Multiplikation wird diese Gruppe zu einem
+			Ring $R\coloneqq\ccat{Nat}(U, U)$. Dass das aufgeht, liegt daran, dass
+			$\cat{A}$ und $\ccat{Add}(\cat{A}, \ccat{Ab})$ präadditiv sind.
+
+			Für ein Objekt $A\in\cat{A}$ definieren wir eine Skalarmultiplikation
+			$R\cross U(A)\to U(A)$; $(r, x)\mapsto r_A(x)$. Man rechnet nach, dass
+			das tatsächlich eine $R$-Modulstruktur auf $U(A)$ definiert und verwendet
+			dabei, dass $r_A$ ein Gruppenhomomorphismus ist und dass die Addition
+			auf $R$ punktweise funktioniert.
+
+			Es sei $f\colon A\to B$ ein Pfeil in $\cat{A}$. Wir haben für $x\in U(A)$ die
+			Identität $r\cdot (Uf)(x) = r_B((Uf)(x)) = (Uf)(r_A(x)) = (Uf)(r\cdot x)$,
+			denn $r$ ist eine natürliche Transformation. $Uf$ ist also $R$-linear.
+
+			Insgesamt erhalten wir, dass wir das Bild von $U$ anstatt als abelsche Gruppen
+			und Gruppenhomomorphismen auch als $R$-Moduln und $R$-lineare Abbildungen
+			auffassen können. Nobel ausgedrückt haben wir die Faktorisierung
+			\begin{tikzcd}
+				\cat{A} \ar{r}{V} \n \ccat{Mod}_R \ar{r}{W} \n \ccat{Ab}
+			\end{tikzcd}
+			von $U$, wobei $W$ einfach die $R$-Modulstruktur vergisst.
+			Der Funktor $V$ ist unsere Einbettung. Da Limiten und Colimiten
+			in $\ccat{Mod}_R$ genauso funktionieren wie in $\ccat{Ab}$,
+			erbt $V$ die Exaktheit von $U$. Da $U$ treu ist, muss auch $V$ treu sein.
+			Das einzige, was sich verändert hat, ist dass in $\ccat{Mod}_R$ die
+			Morphismengruppen zwischen zwei Objekten, auf die unser Funktor abbildet,
+			jetzt kleiner sind, da wir ja auch $R$-Linearität fordern. Wir werden jetzt
+			noch zeigen, dass wir sie genau so kleiner gemacht haben, dass $V$ voll
+			ist.
+
+			Es sei zunächst $A\in\cat{A}$, $p_A\colon A\to 0_\cat{A}$ der Epimorphismus
+			zum Nullelement und $\alpha+1$ die zu $(*, p_A)$ gehörende Ordinalzahl
+			in der Konstruktion von $\cat{D}_1$. $\cat{D}_0^{\alpha+1}$ entsteht durch
+			Kopie von $\down{*}=\cat{D}_0^\alpha$. $\delta_A$ sei die Kopie von $*$,
+			die auf diese Weise entsteht. Es gilt nach Konstruktion $\phi(\delta_A)=A$,
+			$\phi(\delta_A\leq *)=p_A$.
+			\[
+				\begin{tikzcd}[column sep=4em]
+					\pi(D)
+						\ar[shift left]{r}{u_D}
+						\ar[shift right, ']{r}{v_D}
+						\ar{d}{\pi(D\leq D')} \n
+					\phi(D)
+						\ar{r}{\phi(D\leq\delta_A)}
+						\ar{d}{\phi(D\leq D')} \n
+					A
+						\ar{d}{\id_A} \\
+					\pi(D')
+						\ar[shift left]{r}{u_{D'}}
+						\ar[shift right, ']{r}{v_{D'}} \n
+					\phi(D')
+						\ar{r}{\phi(D'\leq\delta_A)} \n
+					A
+				\end{tikzcd}
+			\]
+			Es sei $D\leq\delta_A$. Im Diagramm sei $(u_D, v_D)$ der Pullback von $\phi(D\leq\delta_A)$ mit
+			sich selbst. Für $D\leq D'\leq\delta_A$ sei weiter $(u_{D'}, v_{D'})$
+			der Pullback von $\phi(D'\leq\delta_A)$ mit sich selbst. Definieren
+			$\pi(D)$ und $\pi(D')$ als die zugehörigen Objekte. Das rechte
+			Quadrat kommutiert, da $\phi$ ein Funktor ist. Die universelle Eigenschaft
+			des unteren Pullbacks liefert einen eindeutigen Morphismus $\pi(D)\to\pi(D')$,
+			der als Definition von $\pi(D\leq D')$ dienen soll. Auf diese Weise erhalten wir
+			einen Funktor $\pi\colon\down{\delta_A}\to\cat{A}$.
+
+			$\phi(D\leq\delta_A)$ ist ein Epimorphismus, also ein Cokern, also ein
+			Coequalizer. \ref{2-5-7} verrät uns, dass $\phi(D\leq\delta_A)$ auch der
+			Coequalizer von $(u_D, v_D)$ ist. Wenn wir darauf die kontravariante
+			Yoneda-Einbettung anwenden, werden Colimiten in Limiten transformiert
+			(Vortrag) und wir erhalten folgenden Equalizer:
+			\[
+				\begin{tikzcd}[column sep=6em]
+					\cat{A}(\pi D,{-}) \n
+					\cat{A}(\phi D, {-})
+						\ar[shift right, ']{l}{u_D^*}
+						\ar[shift left]{l}{v_D^*} \n
+					\cat{A}(A, {-})
+						\ar[']{l}{\phi(D\leq\delta_A)^*}
+				\end{tikzcd}
+			\]
+			Man nehme überall den Colimes über $\down{\delta_A}$:
+			\[
+				\begin{tikzcd}
+					P \n
+					U
+						\ar[shift right, ']{l}{u}
+						\ar[shift left]{l}{v} \n
+					\cat{A}(A,{-})
+						\ar[tail,']{l}{w}
+				\end{tikzcd}
+			\]
+			In der Mitte steht tatsächlich $U$, denn $\down{\delta_A}$ ist
+			initial in $\cat{D}$ (ohne Beweis). Rechts steht
+			$\cat{A}(A,{-})$, weil der Ausdruck ja gar nicht von $D$ abhängt.
+			Weil wir endliche Limiten und filtrierte Colimiten vertauschen dürfen
+			(das hat uns Paul in $\ccat{Set}$ gezeigt, und wir glauben das mal wieder
+			in $\ccat{Ab}$), ist $w$ der Equalizer von $(u, v)$.
+			\[
+				\begin{tikzcd}[column sep=4em]
+					\lim_{D_1<D\leq D_2}\pi(D)
+						\ar[shift left]{r}{\lim u_D}
+						\ar[shift right, ']{r}{\lim v_D} \n
+					\lim_{D_1<D\leq D_2}\phi(D)
+						\ar{r}{l} \n
+					A
+				\end{tikzcd}
+			\]
+			Es seien $D_1\leq D_2\leq\delta_A$. Im Diagramm wurde bei der Definition
+			von $\pi(D)$, die ja ein Kernel Pair war, überall der Limes genommen.
+			Durch Vertauschung von Limiten ist auch dieses Diagramm wieder ein
+			Kernel Pair.
+			\[
+				\begin{tikzcd}[sep=3em]
+					\pi(D_1)
+						\ar[two heads]{r}{}
+						\ar[two heads]{d}{} \n
+					\bullet
+						\ar{r}{}
+						\ar[two heads]{d}{} \n
+					\phi(D_1)
+						\ar[two heads]{d}{m} \\
+					\bullet
+						\ar[two heads]{r}{}
+						\ar[two heads]{d}{} \n
+					\lim\pi(D)
+						\ar{r}{}
+						\ar{d}{} \n
+					\lim\phi(D)
+						\ar{d}{l} \\
+					\phi(D_1)
+						\ar[two heads]{r}{m} \n
+					\lim\phi(D)
+						\ar{r}{l} \n
+					A
+				\end{tikzcd}
+			\]
+			$m$ ist ein Epimorphismus nach \ref{fact}. $l\circ m$ ist gerade
+			$\phi(D_1\leq\delta_A)$, also ist der Pullback des äußeren Quadrats
+			gerade die Definition von $\pi(D_1)$. Da $m$ ein Epimorphismus ist,
+			erhalten wir, dass die Faktorisierung $\pi(D_1)\to\lim\pi(D)$ ein
+			Epimorphismus ist. In anderen Worten: $\pi$ erfüllt die Voraussetzungen
+			von \ref{func}.
+
+			Es seien $A, B\in\cat{A}$ und $\varphi\colon U(A)\to U(B)$ ein
+			$R$-Modulhomomorphismus. Das vorhin konstruierte $w\colon \cat{A}(A,{-})\nat U$
+			korrespondiert nach dem Yoneda-Lemma mit $a = w_A(\id_A)\in U(A)$.
+			Wieder das Yoneda-Lemma ordnet $\varphi(a)\in U(B)$ eine natürliche
+			Transformation $\beta\colon\cat{A}(B,{-})\nat U$ zu, wobei
+			$\beta_C(g) = U(g)(\varphi(a))$.
+			\[
+				\begin{tikzcd}
+					P
+						\ar[bend left=90]{r}{t} \n
+					U
+						\ar[shift right,']{l}{u}
+						\ar[shift left]{l}{v} \n
+					\cat{A}(A,{-})
+						\ar[tail]{l}{w} \\ \n
+					\cat{A}(B,{-})
+						\ar{u}{\beta}
+						\ar[densely dotted, ']{ru}{f^*}
+				\end{tikzcd}
+			\]
+			Wir wollen zeigen: $u\circ\beta=v\circ\beta$. Da $w$ der Equalizer
+			von $(u, v)$ ist, gibt es dann eine eindeutige Faktorisierung, die nach
+			dem Yoneda-Lemma die Form $f^*$ für irgendein $f\colon A\to B$ annimmt.
+
+			Angenommen, es wäre $u\circ\beta\neq v\circ\beta$. $\beta$ korrespondiert
+			mit $\varphi(a)\in U(B) = \colim_{D\leq\delta_B}\cat{A}(\phi(D), B)$, ist
+			also die Äquivalenzklasse eines Morphismus $x\colon\phi(D)\to B$ für
+			irgendein $D\leq\delta_B$. Wenn $u\circ\beta\neq v\circ\beta$, dann muss
+			auch $x\circ u_D\neq x\circ v_D$, was man am Diagramm abliest, denn die
+			linken beiden Dreiecke kommutieren:
+			\[
+				\begin{tikzcd}[sep=4em]
+					\cat{A}(B,{-})
+						\ar[shift left]{r}{u\circ\beta}
+						\ar[shift right, ']{r}{v\circ\beta}
+						\ar[shift left]{dr}{(x\circ u_D)^*}
+						\ar[shift right, ']{dr}{(x\circ v_D)^*} \n
+					P
+						\ar[densely dotted]{r}{t} \n
+					U \\ \n
+					\cat{A}(\pi(D),{-})
+						\ar[tail]{ru}{w'}
+						\ar{u}{s_D}
+				\end{tikzcd}
+			\]
+			Der Monomorphismus $w'$ entsteht aus der Konstruktion für $w$, indem
+			man für $A$ konkret $\pi(D)$ einsetzt. \ref{fact} liefert die Faktorisierung
+			$t\colon P\to U$ mit $t\circ s_A=w'$. Da $w'$ ein Monomorphismus ist, erhalten
+			wir $t\circ u\circ\beta=w'\circ(x\circ u_D)^*\neq w'\circ(x\circ v_D)^*=t\circ v\circ\beta$.
+			Auf der anderen Seite sind $t\circ u, t\circ v\in R$, und für alle $C\in\cat{A}$,
+			$g\colon B\to C$ haben wir
+			\begin{align*}
+				(t_C\circ u_C\circ \beta_C)(g) &= (t\circ u)\cdot((U(g)\circ\varphi)(a))\\
+					&= (U(g)\circ\varphi)((t\circ u)\cdot a)\\
+					&= (U(g)\circ\varphi)((t\circ u)\cdot w_A(\id_A))\\
+					&= (U(g)\circ\varphi)((t_A\circ u_A\circ w_A)(\id_A))\\
+					&= (U(g)\circ\varphi)((t_A\circ v_A\circ w_A)(\id_A))\\
+					&= (U(g)\circ\varphi)((t\circ v)\cdot w_A(\id_A))\\
+					&= (U(g)\circ\varphi)((t\circ v)\cdot a)\\
+					&= (t\circ v)\cdot((U(g)\circ\varphi)(a))\\
+					&= (t_C\circ v_C\circ\beta_C)(g),
+			\end{align*}
+			woraus aber $t\circ u\circ\beta=t\circ v\circ\beta$ folgt, ein Widerspruch.
+			Wir haben also unser $f\colon A\to B$ bekommen und werden nun zeigen, dass
+			tatsächlich $U(f)=\varphi$ gilt.
+			\[
+				\begin{tikzcd}[sep=3em]
+					U \n
+					\cat{A}(\phi(D),{-})
+						\ar[']{l}{\xi}
+						\ar{d}{s_D} \\
+					\cat{A}(A,{-})
+						\ar{u}{\chi}
+						\ar[tail, near start]{ru}{y^*}
+						\ar[tail, ']{r}{w} \n
+					U
+						\ar[densely dotted, near start]{ul}{r}
+				\end{tikzcd}
+			\]
+			Es sei $x\in U(A)$. $\chi\colon\cat{A}(A,{-})\nat U$
+			sei die von $x$ durch das Yoneda-Lemma erhaltene natürliche Transformation.
+			Sei weiter $y\colon\phi(D)\to\cat{A}$, sodass $[y]_\approx\in U(A)$ mit
+			$w\colon\cat{A}(A,{-})\nat U$ von vorhin korrespondiert.
+			Wir haben $s_D\circ y^*=w$. $w$ ist aber ein Monomorphismus, also
+			muss auch $y^*$ ein Monomorphismus sein. Wenn wir also
+			$p, q\colon A\rightrightarrows B$ haben, so gilt
+			$y^*\circ p^* = y^*\circ q^*\implies p=q$, also $p\circ y=q\circ y\implies p=q$,
+			$y$ ist also ein Epimorphismus. Da $U$ exakt, erhält er Epimorphismen,
+			also ist $U(y)\colon U(\phi(D))\to U(A)$ ein Epimorphismus, also surjektiv.
+			Wähle also $z\in U(\phi(D))$ mit $U(y)(z)=x$. Es sei $\xi\colon\cat{A}(\phi(D),{-})\nat U$
+			die zugehörige natürliche Transformation. Aus $U(y)(z)=x$ folgt
+			$\xi\circ y^*=\chi$. Wegen \ref{fact} erfüllt $U$ die Voraussetzungen
+			von \ref{func} und wir erhalten $r\colon U\to U$ mit $r\circ s_D = \xi$.
+			Weiter gilt
+			\[
+				r\circ w = r\circ s_D\circ y^* = \xi\circ y^* = \chi.
+			\]
+			Mit letzten Kräften:
+			\begin{align*}
+				\varphi(x) &= \varphi(\chi_A(\id_A))\\
+					&= \varphi(r_A\circ w_A(\id_A))\\
+					&= (r_B\circ\varphi)(w_A(\id_A))\\
+					&= r_B(\varphi(a))\\
+					&= r_B(\beta_B(\id_B))\\
+					&= r_B((w_B \circ f^*_B)(\id_B))\\
+					&= (r_B\circ w_B\circ f^*_B)(\id_B)\\
+					&= \chi_B(f^*_B(\id_B))\\
+					&= \chi_B(f)\\
+					&= U(f)(x)
+			\end{align*}
+		\end{proof}}
+\end{document}

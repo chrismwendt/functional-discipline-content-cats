@@ -1,0 +1,3 @@
+report: --tags 'not @flavours' --format progress --format html --out=features/generic/report.html
+guard: --format progress
+default: --format pretty

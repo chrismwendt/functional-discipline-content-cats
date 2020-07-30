@@ -1,0 +1,726 @@
+\documentclass[b5paper]{book}
+\input{common}
+\usepackage{subfiles}
+%\usepackage{layouts} %for printing the dimensions
+\externaldocument{a}
+\externaldocument{b}
+
+\makeindex
+
+\begin{document}
+
+\newcommand{\titelpagina}[8]{%
+\vspace*{4em}
+\begin{center}
+{\huge\sffamily\color{darkblue}The Category of Von Neumann Algebras}
+\end{center}
+\vspace{2em}
+\begin{center}
+{\par\noindent\sffamily\color{darkblue}\large\textbf{#1}}
+\end{center}
+\begin{center}
+#2
+\end{center}
+\vspace{1em}
+\begin{center}
+#3
+\end{center}
+\begin{center}
+#4
+\end{center}
+\begin{center}
+#5
+\end{center}
+\begin{center}
+#6
+\end{center}
+\vspace{10em}
+\begin{center}%
+#7
+\end{center}%
+\begin{center}%
+\large\color{darkblue}Abraham Anton \textsc{Westerbaan}
+\end{center}%
+\begin{center}%
+#8
+\end{center}
+\newpage
+}
+
+\newcommand{\achterkanttitelpagina}[3]{
+\vspace*{8em}
+\begin{center}
+\textbf{\large\sffamily\color{darkblue}#1:}
+\end{center}
+\begin{center}
+Prof.~dr.~B.P.F.~\textsc{Jacobs}
+\end{center}
+\vspace{5em}
+\begin{center}
+\textbf{\large\sffamily\color{darkblue}#2:}
+\end{center}
+\begin{center}
+Prof.~dr.~J.D.M.~\textsc{Maassen}\\
+\vspace{1em}
+    Prof.~dr.~P.~\textsc{Panangaden} \\ {\footnotesize(McGill University, Canada)} \\
+\vspace{1em}
+    Prof.~dr.~P.~\textsc{Selinger} \\ {\footnotesize(Dalhousie University, Canada)} \\
+\vspace{1em}
+    Dr.~C.J.M.~\textsc{Heunen} \\ {\footnotesize(University of Edinburgh, #3)} \\
+\vspace{1em}
+Dr.~A.R.~\textsc{Kissinger}
+\end{center}
+\newpage
+}
+
+\newcommand{\whiteout}[1]{{\color{white}#1}}
+
+\titelpagina{\whiteout{P}$\,$}{$\,$\whiteout{ter}\\
+\whiteout{aan}$\,$\\
+\whiteout{op}$\,$\\
+\whiteout{volgens}$\,$\\
+\whiteout{in}$\,$}{\whiteout{op}$\,$}{\whiteout{dinsdag}$\,$}{\whiteout{om}$\,$}{\whiteout{10.30}$\,$}{\whiteout{door}}{$\,$\whiteout{geboren}$\,$\\
+\whiteout{te}$\,$}
+
+\colofon{A.A.~Westerbaan}{978-94-6332-484-7}{1804.02203}{2066/201611}{}
+
+\titelpagina{Proefschrift}{ter verkrijging van de graad van doctor\\
+aan de Radboud Universiteit Nijmegen\\
+op gezag van de rector magnificus prof. dr. J.H.J.M. \textsc{van Krieken},\\
+volgens besluit van het college van decanen \\
+in het openbaar te verdedigen}{op}{\textbf{dinsdag 14 mei 2019}}{om}{\textbf{10.30 uur precies}}{door}{geboren op 30 augustus 1988\\
+te Nijmegen}
+
+\achterkanttitelpagina{Promotor}{Manuscriptcommissie}{Verenigd Koninkrijk}
+
+\titelpagina{Doctoral Thesis}{to obtain the degree of doctor \\
+from  Radboud University Nijmegen \\
+on the authority of the Rector Magnificus prof. dr. J.H.J.M. \textsc{van Krieken},\\
+according to the decision of the Council of Deans \\
+to be defended in public}{on}{\textbf{Tuesday, May 14, 2019}}{at}{\textbf{10.30 hours}}{by}{born on August 30, 1988\\
+in Nijmegen (the Netherlands)}
+
+\achterkanttitelpagina{Supervisor}{Doctoral Thesis Committee}{United Kingdom}
+
+\vspace*{.1em}
+
+\newpage
+\makeatletter\@starttoc{parsectoc}\makeatother
+\chapter{Introduction}
+
+% Code to print the dimensions of the paper:
+%\newpage
+%\currentpage
+%\pagedesign
+%\currentpage
+%\pagedesign
+
+\begin{parsec}{10}
+\begin{point}{10}
+What does this Ph.D.~thesis offer?
+Proof, perhaps,
+to the doctoral thesis committee
+of passable academic work;
+an advertisement, as it may be,
+of my school's perspective
+to colleagues;
+a display, even,
+of intellectual achievement
+to friends and family.
+But I believe such narrow and selfish goals \emph{alone}
+barely serve to keep a writer's spirits 
+energised---and are definitely detrimental to that of the readers.
+That is why I have foolhardily
+challenged
+myself
+not just 
+to drily list contributions,
+but to write this thesis 
+as the introduction,
+that I would have liked to read
+when I started
+research for this thesis
+back in May~2014.
+
+The topic is von Neumann algebras,
+the category they form,
+and how they may be used
+to model aspects of quantum computation.
+Let us just say for now that a von Neumann algebra
+is a special type of complex vector
+space endowed with
+a multiplication operation among some other additional structure.
+An important example is the complex vector space~$M_2$
+of~$2\times 2$ complex matrices,
+because it models (the predicates on) a qubit;
+but all~$N\times N$-complex matrices form a von Neumann algebra~$M_N$ as well.
+Using von Neumann algebras
+(and their little cousins, $C^*$-algebras) 
+to describe quantum data types 
+seems to be quite a recent idea
+(see e.g.~\cite{jacobs2013block,rennela2015operator,furber2013kleisli}, 
+	and~\cite{cho2016semantics} for an overview)
+and has two distinct features.
+Firstly, classical data types
+are neatly incorporated:
+$\C^2 \equiv \C\oplus \C$
+models a bit,
+and the direct sum $M_2\oplus M_3$
+models the union type of a qubit and a qutrit.
+Secondly,
+von Neumann algebras
+allow for infinite data types as well
+	such as~$\scrB(\ell^2(\Z))$,
+which represents a ``quantum integer.''\footnote{Though
+	other methods of modelling infinite dimensional
+	quantum computing have been proposed as well
+	e.g.~using non-standard analysis\cite{Gogioso2017},
+	pre-sheaves\cite{malherbe2013categorical},
+	the geometry of interaction\cite{hasuo2017semantics},
+	and quantitative semantics\cite{pagani2014applying}.}
+It should be said that this last feature
+is both a boon and a bane:
+it brings with it all the inherent
+intricacies of dealing with infinite dimensions;
+and it is no wonder that
+most authors choose 
+to restrict themselves
+to finite dimensions,
+especially since
+this seems to be enough to describe quantum algorithms,
+see e.g.~\cite{nielsen2002quantum}.
+\end{point}
+\begin{point}{20}%
+In this thesis, however,
+we do face infinite dimensions,
+because the two main results demand it:
+\begin{enumerate}
+\item
+For the first result,
+that von Neumann algebras
+form  a model of Selinger and Valiron's quantum lambda calculus,
+		as Cho and I explained in~\cite{model}
+and for which I'll provide the foundation here,
+we need to interpret function types,
+some of which are essentially infinite dimensional.
+\item
+The second result,
+an axiomatisation
+of the map $a\mapsto \sqrt{p}a\sqrt{p}\colon \scrA\to\scrA$
+representing measurement
+of an element $p\in[0,1]_\scrA$
+of a von Neumann algebra~$\scrA$
+was tailored by B.E.~Westerbaan (my twin brother) and myself to work for
+both finite and infinite dimensional~$\scrA$.
+\end{enumerate}
+These results
+are part of a line of research that
+tries to find patterns
+in the category of von Neumann algebras,
+that may also be cut from other categories
+modelling computation---ideally in order to arrive at categorical axioms
+for (probabilistic) computation in general.
+When I joined the fray
+the notion of \emph{effectus}\cite{newdirections} had already
+been established by Jacobs,
+and the two results
+above offer potential additional axioms.
+The work in this area has largely been a collaborative effort,
+primarily between Jacobs, Cho, my twin brother, and myself,
+and many of their insights have ended up in this thesis.
+
+Of this I'd say no more
+than that my work appears conversely, and proportionally,
+in their writings too, except that the close cooperation
+with my brother begs further explanation.
+Our efforts on certain topics have been like interleaving 
+of the pages of two phone books:
+separating them  would be nigh impossible,
+especially the work on the axiomatisation
+of~$a\mapsto \sqrt{p}a\sqrt{p}$ and Paschke dilations.
+So that's why we decided to write our theses
+as two volumes of the same work;
+preliminaries on von Neumann algebras,
+and the axiomatisation of $a\mapsto \sqrt{p}a\sqrt{p}$
+appear in this thesis,
+while the work on dilations,
+and effectus theory appear in my brother's thesis,
+\cite{bas}.
+\end{point}
+\begin{point}{30}
+The two results mentioned above only
+make up 
+about a third of this thesis;
+the rest of it is devoted to 
+the introduction to the theory of von Neumann algebras
+needed to understand these results.
+My aim is that anyone 
+with, say, a bachelor's degree in mathematics
+(more specifically, basic knowledge of linear algebra,
+analysis\cite{rudin1964principles}, 
+topology\cite{willard}
+and set theory\cite{devlin2012joy})
+should at least be able to follow the lines of reasoning
+with only minimal recourse to external sources.
+But I hope that they will gain some deeper understanding
+of the material as well.
+To this end, and because I wanted to gain some of this insight
+for myself too,
+I've not just mixed
+and matched
+results from the literature,
+but I tailored a thorough treatise
+of everything that's needed,
+including proofs (except~\sref{intersection-tensor-proof}).
+Whenever possible,
+I've taken shortcuts
+(e.g.~avoiding for example
+the theory of Banach algebras
+and locally convex spaces entirely)
+to  prevent the mental tax
+the added concepts
+(and pages) would have brought.
+For the same reasons
+I've refrained from putting
+everything in its proper abstract (and categorical\cite{maclane}) context
+trusting that it'll shine through of its own accord.
+I've however not been able to restrain
+myself in making perhaps frivolous variations on the existing
+theory whenever not strictly necessary,
+taking for example Kadison's characterisation\cite{kadison1956}
+of von Neumann algebras
+as my definition,
+and developing the elementary theory for it;
+in my defence I'll just say this adds to
+the original element that is expected of a thesis.
+\end{point}
+\begin{point}{40}{Advertisements}%
+Due to space--time constraints
+this thesis is based only on a selection
+\cite{model,cho2015quotient,cho2016duplicable,qpakm,westerbaan2016universal}
+of the works
+I produced under supervision of Jacobs,
+and while~\cite{wwpaschke,effintro,statesofconvexsets}
+are incorporated in my brother's thesis,
+this means~\cite{jacobs2015effect,jacobs2017distances} 
+are unfortunately left out.
+If you like this thesis,
+then
+you might also want to take a look
+at these~\cite{rennela2017infinite,
+rennela2015complete,
+furber2013kleisli,
+kornell2012,
+heunen2015domains,
+Maassen2010} recent works on von Neumann algebras,
+and $C^*$-algebras.
+If you're curious
+about effectus theory
+and related matters,
+please have a look at~\cite{jacobs2017quantum,
+cho2017disintegration,
+jacobs2016hyper,
+jacobs2017channel,
+jacobs2017formal,
+cho2017efprob,
+jacobs2017probability,
+jacobs2017recipe,
+jacobs2016effectuses,
+jacobs2016affine,
+jacobs2016relating,
+effintro,
+statesofconvexsets,
+cho2015quotient,
+jacobs2017distances,
+jacobs2015effect,
+jacobs2016expectation,
+jacobs2016predicate,
+newdirections}.
+But if you'd like more pictures instead,
+I'd suggest~\cite{coecke2017picturing}.
+\end{point}
+\begin{point}{50}[on-writing-style]{Writing style}
+I've replaced page numbers by
+paragraph numbers
+such as~\sref{on-writing-style}
+for this paragraph.
+The numbers after~\sref{final-bram} refer to paragraphs
+	in my twin brother's thesis\cite{bas}.
+\Define{Definitions}\index{definitions} are set like that
+(i.e.~in blue),
+and can be found in the index.
+Proofs of certain facts
+that are easily obtained on the back of an envelope,
+and would clutter this manuscript,
+have been left out.
+Instead these facts have been phrased as exercises
+as a challenge to the reader.
+\end{point}
+\begin{point}{51}
+    The symbol ``\Define{$:=$}''\index{(((defequal@$:=$, is defined to be}
+should be interpreted as ``is defined to be'',
+    while ``\Define{$\equiv$}''\index{(((equiv@$\equiv$, being of the form}
+should be read as ``being of the form''.
+Sometimes ``$\equiv$'' is
+used to define something on its right-hand side,
+as in ``let $A\equiv\left(
+\begin{smallmatrix} a&b\\b^* &c\end{smallmatrix}
+\right)$ be a self-adjoint matrix.''
+Other times~``$\equiv$''
+indicates a simple rewrite step, as in
+``since~$a=2$, we have $a+2=2+2\equiv 4$,''
+where it's not suggested $a=2$ implies $2+2=4$.
+\end{point}
+\begin{point}{60}{Acknowledgements}
+The work in this thesis specifically
+has benefited greatly from
+discussions
+with John van de Wetering,
+Robert Furber,
+Kenta Cho,
+and Bas Westerbaan,
+but I've also had the pleasure
+of discussing a variety
+of other topics 
+with 
+Aleks Kissinger,
+Andrew Polonsky,
+Bert Lindenhovius,
+Frank Roumen, 
+Hans Maassen,
+Henk Barendregt,
+Joshua Moerman,
+Martti Karvonen,
+Robbert Krebbers,
+Robin Adams, 
+Robin Kaarsgaard,
+Sam Staton, 
+Sander Uijlen,
+Sebastiaan Joosten,
+and many others.
+I'm especially honoured to have been received
+in Edinburgh by Chris Heunen 
+and in Oberwolfach
+by Jianchao Wu.
+I'm very grateful to
+Arnoud van Rooij,
+Bas Westerbaan
+and
+John van de Wetering
+for proofreading large parts of
+this manuscript,
+without whose efforts
+even more shameful errors would have remained.
+I'm very grateful too for the manuscript committee's members' 
+various suggestions and comments, and hope the improvements I made to this text
+do them justice.
+I should of course not forget to mention
+the contribution
+of friends (both close and distant),
+family,
+and colleagues---too numerous to name---of keeping me sane
+these past years.
+
+This is the second dissertation topic
+I've worked on;
+my first attempt
+under different supervision
+was unfortunately cut short after $1\sfrac{1}{2}$ years.
+When Bart Jacobs graciously offered
+me a second chance,
+I initially had my reservations,
+but accepted on account of the challenging topic.
+Little did I know 
+that behind the ambition and suit
+	one finds a man
+of singular moral fibre,
+embodying
+what was said
+	about von Neumann himself:
+	``[he] had to understand and accept much that most 
+of us do not want to accept and do not even wish to understand.''%
+\footnote{An excerpt from Eugene P.~Wigner's writings,
+see page~130 of~\cite{wigner2013collected}.}
+\end{point}
+\begin{point}{70}{Funding} was received from the 
+European Research Council under grant agreement \textnumero~320571.
+\end{point}
+\end{parsec}
+
+%\subfile{apropos}
+\subfile{cstar}
+\subfile{vn}
+\subfile{proc}
+\begin{parsec}{1330}%
+\begin{point}{10}[conclusion]{Conclusion}
+Here ends this thesis,
+but not the entire story.
+There's much more to be said
+about self-dual Hilbert $\scrA$-modules,
+about dilations and their relation to purity,
+and about the abstract theory of corners, filters,
+and $\diamond$-positivity.
+You'll see all this,
+and more,
+in the sequel,
+``Dagger and dilations in the category of von Neumann algebras''\cite{bas},
+brought to you by my twin brother.
+\end{point}
+\end{parsec}
+\begin{parsec}{1340}[final-bram]
+\begin{point}{10}
+(Paragraphs numbered~\sref{final-bram}
+and up can be found in~\cite{bas}.)
+\end{point}
+\end{parsec}
+
+
+\backmatter
+
+\fancyfoot[CE]{}
+\fancyfoot[CO]{}
+\fancypagestyle{plain}{
+    \fancyfoot[CE]{}
+    \fancyfoot[CO]{}
+}
+
+\printindex
+
+\begingroup
+\renewcommand\chapter[2]{\backmattertitle{Bibliography}}
+\bibliography{main}{}
+\endgroup
+
+\bibliographystyle{plain}
+
+\oldchapter{Lekensamenvatting}
+
+Wat is wiskunde? Volgens mij is ze niets anders dan een studie van de patronen
+in de wereld om ons heen in de meest \emph{strenge} en 
+\emph{formele} zin.
+De wiskundige
+maakt zich  bewust, bijna komisch, blind 
+voor zaken die een ander z\'o in het oog zouden springen.
+``Ja.'' antwoorden op de vraag ``Wil je koffie of thee?'' is voor
+een wiskundige volstrekt acceptabel.
+Maar door deze blindheid kan de wiskundige wel
+met een onge\"evenaarde nauwkeurigheid,
+zekerheid en tijdloosheid
+uitdrukking geven aan afzonderlijke  aspecten van de werkelijkheid.
+
+Slechts een zeer beperkt aantal fenomenen
+is vatbaar voor wiskundige \hyphenation{ana-lyse}analyse.
+Soms begrijpen we een fenomeen er nog niet goed genoeg voor.
+Soms is de benodigde wiskunde er nog niet voor ontwikkeld.
+Maar in de meeste gevallen is het zo dat
+het mes van de formele wiskunde simpelweg te scherp snijdt. 
+Een wiskundige zou je niet kunnen vertellen
+of een schip hetzelfde blijft als je alle planken vervangt,\footnote{Het schip
+van Theseus, zie~\S23 van~\cite{theseus}.}
+wat \emph{twee} is w\'el.
+Het is niet zozeer dat hij of zij zich niet bezig zou willen houden
+met dagelijkse begrippen, maar eerder dat deze begrippen daartegen niet
+bestand zijn.
+Daarom gaat de wiskunde over abstracte en ge\"idealiseerde 
+objecten zoals getallen, vierkanten, cirkels, distributies,
+tensoren en vari\"eteiten,
+in plaats van wereldse tegenhangers zoals
+respectievelijk
+logistiek, akkers, hemellichamen, toekomstverwachtingen,
+elektrische velden en sterrenstelsels.
+
+Het is wonderbaarlijk hoe behulpzaam
+wiskunde kan zijn ondanks en juist dankzij haar
+beperkingen.
+Niemand---ook geen wiskundige---kan zich het stilleven 
+op de omslag van dit boekje vanuit een andere hoek nauwkeurig voorstellen.
+Maar als ik vertel dat het een plaatje is van
+een reflecterende bol in~$\R^{12}$
+(tussen twee afgeknotte hypervlakken, met een deels reflecterend 
+schaakbordpatroon) en wanneer ik 
+de relevante co\"ordinaten en afmetingen geef, dan
+kan ieder die \hyphenation{be-kend}bekend is met `inproducten' (vgl.~\sref{hilb-def})
+een computerprogramma schrijven dat
+dit tafereel vanuit een andere hoek toont.
+Dankzij de wiskunde
+is bovenmenselijk inzicht in de twaalfde dimensie niet nodig!
+
+Dat sommige wiskundige begrippen zeer bruikbaar zijn,
+wil niet zeggen dat \emph{elk} wiskundig begrip dit is.
+Integendeel zelfs:
+van alle denkbare figuren op papier
+grijpt men ongetwijfeld het vaakst terug
+naar de cirkel en de lijn.
+Bepaalde constanten ($2\pi$, $e$, $\varphi$, $\sqrt{2}$, \ldots) 
+verschijnen ook vaker in formules dan andere.
+Natuurlijk kan een nuttig wiskundig begrip 
+ook slecht gebruikt worden.
+Men kan bijvoorbeeld 
+de baan van een planeet met een groot
+aantal cirkels (Ptolemaeus' `epicykels') 
+omschrijven in plaats van met \'e\'en ellips.
+Bij een dergelijk waardeoordeel als `goed' of `slecht' gebruik
+van een begrip is er zeker sprake van persoonlijke
+voorkeur, conventie en willekeur. Waarom gebruiken
+we niet $2\pi=6,\!2831\dotsc$
+als constante in plaats van
+$\pi=3,\!1415\dotsc$? Volgens mij zou
+dat veel formules eleganter maken;
+zie~\cite{palais2001pi}.
+Dat een wiskundig begrip (zoals epicykels)
+in ongebruik geraakt is, wil bovendien niet zeggen
+dat het geen \hyphenation{stijl-vol}stijlvol herintreden kan maken:
+de befaamde Fourier-reeks (die in feite bestaat uit oneindig veel epicykels)
+geeft de ellips weer 
+het nakijken!\footnote{Of toch niet,  \cite{mayer2010drawing}?}
+
+Dit proefschrift gaat over zo'n bruikbaar, abstract en 
+ge\"idealiseerd wiskundig begrip:
+de \emph{von Neumann-algebra},
+bedacht door en vernoemd naar het Hongaarse genie
+en de alleskunner
+John von Neumann (geboren als Neumann J\'anos Lajos).
+Aan hem hebben we niet alleen
+de moderne computer-architectuur te danken,
+maar bijvoorbeeld ook de springstoflenzen die in kernwapens gebruikt worden,
+de afschrikwekkende strategie van \emph{mutual assured destruction}
+en de numerieke weersvoorspelling.
+
+Het is niet eenvoudig om uit te leggen
+ wat von Neumann-algebra's precies zijn (\sref{vna}),
+ maar 
+ik kan wel een indruk geven waarvoor ik ze gebruik.
+Uitgangspunt van dit proefschrift is dat 
+de elementaire
+systemen
+die je tegenkomt bij het ontwerpen van een algoritme
+voor een kwantumcomputer omschreven
+kunnen worden door von Neumann-algebra's.
+Zo wordt de klassieke bit (die~$0$ of~$1$ kan zijn)
+voorgesteld door de von Neumann-algebra ``$\C^2$''
+en wordt de kwantumbit (die een complexe combinatie van~$0$ of~$1$ is totdat
+je haar meet)
+voorgesteld door de von Neumann-algebra~``$M_2$''.
+Dit geeft de hoop dat ingewikkeldere samengestelde systemen
+ook een bijpassende von Neumann-algebra hebben.
+Dat hangt natuurlijk af van de wijze van samenstelling:
+het systeem dat bestaat uit twee kwantumbits en \'e\'en bit wordt voorgesteld
+met de von Neumann-algebra $M_2\otimes M_2 \otimes \C^2$,
+terwijl het systeem dat een kwantumbit of een klassieke bit bevat 
+omschreven wordt met de von Neumann-algebra $M_2 \oplus \C^2$.
+De bewerking ``$\otimes$'' op von Neumann-algebra's
+is de interpretatie voor de  ``en''-samenstelling van systemen, 
+terwijl ``$\oplus$''  invulling geeft aan ``of''-samenstelling van systemen.
+Een veel complexere samenstelling van twee systemen~$A$ en~$B$
+bestaat uit alle `processen' van~$A$ naar~$B$.
+Meting is bijvoorbeeld zo'n proces van een kwantumbit naar een klassieke bit.
+Zulke processen worden in de wereld van von Neumann-algebra's
+voorgesteld door zogenaamde ``ncpsu-afbeeldingen'' (\sref{maps})
+tussen von Neumann-algebra's.
+
+E\'en van de hoofdresultaten van dit proefschrift
+is een interpretatie voor deze `processen'-samenstelling,
+de bewerking~$\limp$.
+Door bepaalde formele kaders
+was het al van tevoren duidelijk dat er hoogstens \'e\'en
+interpretatie mogelijk zou zijn;
+de vraag was alleen: welke?  Sterker nog: is er \"uberhaupt eentje?
+Dit is vergelijkbaar met de vraag wat de kleinste\footnote{Kleinste
+in de woordenboekordening.}
+grammaticaal
+correcte tekst is waarin
+alle Nederlandse woorden voorkomen.
+Om dit probleem op te lossen kun je niet zomaar alle woorden
+op een rij zetten---de onderlinge samenhang moet immers kloppen.
+De crux was voor mij om niet te willen proberen om de bewerking~$\limp$ 
+direct te omschrijven,
+maar om het bestaan ervan indirect aan te tonen,
+zoals je ook kunt laten zien dat de  bovengenoemde Nederlandse tekst
+uit het voorbeeld bestaat,
+zonder te weten hoe hij precies is samengesteld.
+(Voor een beperkte klasse van
+von Neumann-algebra's, de `hereditair atomische', bleek een
+directe omschrijving trouwens wel mogelijk, \sref{AstarhaB-concrete}.)
+
+Het tweede hoofdresultaat van dit proefschrift
+is de vondst van een abstracte omschrijving
+van de processen
+die bij een meting horen (\sref{sqrt-axiom}).
+Het \hyphenation{ken-mer-ken-de}kenmerkende aspect van deze omschrijving is dat
+het alleen gebruik maakt van zogenaamd `categorisch' jargon.
+Dat dit mogelijk is toont aan
+dat we in de categorie van von Neumann-algebra's
+niet op een te abstract niveau werken:
+we kunnen het nog steeds over meting hebben.
+Dankzij de  categorische omschrijving  wordt het bovendien
+mogelijk `meting' in andere contexten  te interpreteren.
+Bij de zoektocht naar deze categorische omschrijving
+was lange tijd het probleem om
+een manier te vinden
+om onderscheid te maken tussen de processen\footnote{Hier is~$u\neq 1$
+een  unitaire
+en 
+$p$ een positief element van een von Neumann-algebra~$\scrA$
+met $\ceil{p}=1$.}
+\begin{equation*}
+\sqrt{p}(\,\cdot\,)\sqrt{p}\qquad\text{en}\qquad
+\sqrt{p}u^*(\,\cdot\,)u \sqrt{p}.
+\end{equation*}
+De linker hoort bij een meting, de rechter niet.
+De oplossing was om een begrip uit de theorie 
+van Hilbert-ruimten---geadjungeerdeerdheid---in een 
+afgezwakte vorm over te nemen, namelijk $\diamond$-geadjungeerdheid 
+(of \emph{contraposedness}, \sref{contraposed}).
+Het linker proces blijkt een kwadraat te zijn van een aan zichzelf
+$\diamond$-geadjungeerd proces; de rechter niet.
+Beide hoofdresultaten staan in het laatste hoofdstuk.
+
+De rest van dit proefschrift bestaat---enigszins ongebruikelijk---uit 
+een grondige introductie
+tot de benodigde, reeds bestaande, theorie
+van $C^*$-algebra's en van von Neumann-algebra's.
+Niet alleen bestond
+een geschikte introductie nog niet, maar het leek me ook een goede kans 
+om me verder te verdiepen in de theorie van von Neumann-algebra's.
+In de eerste hoofdstukken ontwikkel ik de gehele benodigde theorie, inclusief 
+bewijzen.
+Het is mijn bedoeling dat eenieder die een bachelorgraad in de wiskunde heeft 
+behaald deze tekst zou moeten kunnen begrijpen.
+Op een groot aantal plekken wijk ik af van 
+het begane pad:
+soms om de tekst kort te houden, (zo ontwijk ik de
+theorie van Banach algebra's volkomen),
+maar meestal om te experimenteren met variaties.
+Zo gebruik ik Kadison's omschrijving
+van von Neumann-algebra's om
+de theorie op te bouwen (wat niet eerder gedaan is.)
+Zo houdt men goede wiskundige begrippen levend.
+
+\oldchapter{About the Author}
+Bram Westerbaan, born August 30, 1988,
+enrolled as a physics and astronomy student at 
+the Radboud University in 2006.
+He obtained a bachelor's degree in mathematics in 2012 (cum laude)
+with a thesis
+on the simply typed $\lambda$-calculus
+supervised by prof.~dr.~H.P.~Barendregt
+(resulting in a publication~\cite{brambachelor}.)
+The same year,
+he obtained a master's degree in mathematics (summa cum laude)
+with a thesis\cite{brammaster} on measure and integral
+under supervision of prof.~dr.~A.C.M.~van Rooij.
+His doctoral studies started in 2013
+on the topic of (co)algebra guided by dr.~A.~Silva,
+and shifted 
+to the material presented in this thesis
+in~2014
+under the auspices of prof.~dr.~B.P.F.~Jacobs.
+From 2018 onward Bram works as a postdoctoral researcher
+at the digital security department on
+an NWA project applying polymorphic pseudonymisation
+to network traffic flow data.
+
+% Trick arXiv into running latex 4 times
+\message{Rerun to get citations correct.}
+
+\end{document}

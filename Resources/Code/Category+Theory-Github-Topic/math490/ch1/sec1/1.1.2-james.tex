@@ -1,0 +1,50 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\settheorem{1}{1}{11}
+\begin{definition}
+	A \tbf{groupoid} is a category in which every morphism is an isomorphism.
+\end{definition}
+\popthm
+
+\begin{exercise}
+	Let \(\sC\) be a category. Show that the collection of isomorphisms in
+	\(\sC\) defines a subcategory, the \tbf{maximal groupoid} inside \(\sC\).
+\end{exercise}
+
+\begin{proof}
+	Let \(\sC_{\iso}\) denote the objects of \(\sC\) together with its
+	isomorphisms. We wish to show that \(\sC_{\iso}\) is a category.
+	$\sC_{\iso}$ inherits composition and associativity from $\sC$.
+	Notice that the identity morphism for each object
+	is in $\sC$ is clearly an isomorphism as it is both right and left
+	invertible, so the identity morphisms for each object are in $\sC_{\iso}.$
+	Because composition in $\sC_{\iso}$ is the same as in $\sC$, each object
+	will have the same identity morphism as in $\sC.$
+	To show $\sC_{\iso}$ is closed under composition, take two morphisms
+	\(\func{f}{x}{y}\) and \(\func{g}{u}{x}\)
+	in \(\sC_{\iso}\). Since \(f\) is an isomorphism, then there is a morphism
+	\(h\in\mor\sC_{\iso}\) with \(\func{h}{y}{x}\), such that \(fh=1_y\) and
+	\(hf=1_x\). Likewise, since \(g\) is an isomorphism, then there is a
+	morphism \(j\in\mor\sC_{\iso}\) with \(\func{j}{x}{u}\), such that \(gj=1_x\)
+	and \(jg=1_u\). We can take the composition \(fg\), since
+	\(\dom(f)=\cod(g)\). We also have the composition \(jh\), since
+	\(\dom(j)=\cod(h)\). And again, respecting domains and codomains, we have
+	the composition \((fg)(jh)\), since \(\dom(fg)=\cod(jh)\). From the
+	associativity of the parent category \(\sC\), then
+	\((fg)(jh)=f(gj)h=f(1_x)h=fh=1_y\). Thus \(jh\) is the right inverse of the
+	composition \(fg\). Similarly, since \(\cod(fg)=\dom(jh)\), we have the
+	composition \((jh)(fg)\), which again from the associativity of the category
+	\(\sC\), \((jh)(fg)=j(hf)g=j1_xg=jg=1_u\). So, \(jh\) is the left inverse of
+	\(fg\), and \(fg\) is an isomorphism.
+
+	We have shown that \(\sC_{\iso}\) is a category, with all of the objects of
+	\(\sC\) and morphisms of \(\sC\) restricted to the isomorphisms of \(\sC\).
+	So the groupoid \(\sC_{\iso}\) is a subcategory of \(\sC\). Presented with
+	any other subcategory \(\sD\), of \(\sC\), that is strictly larger than
+	\(\sC_{\iso}\), there must be a morphism in \(\sD\) that is not in
+	\(\sC_{\iso}\). Then this morphism must not be an isomorphism, and hence,
+	\(\sD\) cannot be a groupoid. So, the category \(\sC_{\iso}\) is the maximal
+	groupoid that is a subcategory of \(\sC.\)
+\end{proof}
+\end{document}

@@ -1,0 +1,190 @@
+    % fallback as parameter to given key after searching for key in /tikz
+    % fallback to/.code 2 args={%
+        % \let\searchname=\pgfkeyscurrentname%
+        % \pgfkeysalso{
+            % /tikz/\searchname/.try=#1,
+            % #2/.retry/.expand once=\searchname,
+        % }%
+    % },
+    % keys to hold kD styles sorted by kind
+    % objects/.unknown/.style={
+        % /kD/fallback to={#1}{/kD/math node contents},
+    % },
+    % arrows/.search also=/tikz,
+    % labels/.unknown/.style={
+        % /kD/fallback to={#1}{/kD/math node contents},
+    % },
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\kDChopParse#1|#2|#3\GO%
+%  {\kDBalancerInit\pgfdecoratedpathlength
+%   \kDBalancerTally#1\to One\GO
+%   \kDBalancerTally#2\to Two\GO
+%   \kDBalancerTally#3\to Thr\GO
+%   \expandafter\kDBalancerGauge\One\to Fst\GO
+%   \expandafter\kDBalancerGauge\Thr\to Lst\GO
+%   \pgfmathsetmacro\start{\Fst}
+%   \pgfmathsetmacro\stop{1-\Lst}}
+%
+%\tikzset{/kD/arrows/chop/.style={
+%  decoration={
+%    show path construction,
+%    curveto code={
+%      \kDFullExpandAfter\kDChopParse{#1}\GO
+%      \pgfpathcurvebetweentime{\start}{\stop}
+%      {\pgfpointdecoratedinputsegmentfirst}
+%      {\pgfpointdecoratedinputsegmentsupporta}
+%      {\pgfpointdecoratedinputsegmentsupportb}
+%      {\pgfpointdecoratedinputsegmentlast}},
+%    lineto code={
+%      \kDFullExpandAfter\kDChopParse{#1}\GO
+%      \pgfpathcurvebetweentime{\start}{\stop}
+%      {\pgfpointdecoratedinputsegmentfirst}
+%      {\pgfpointdecoratedinputsegmentfirst}
+%      {\pgfpointdecoratedinputsegmentlast}
+%      {\pgfpointdecoratedinputsegmentlast}}
+%  },decorate},
+%  % the following key has to be integrated into the syntax of the main key
+%  /kD/arrows/schop/.style={/kD/arrows/chop=#1|*|#1},}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \def\kDCSDef#1#2%
+  % {\expandafter\def\csname#1\endcsname{#2}}
+
+% Define a macro and its starred version from a pair of macros
+% so that #1*=#2 and #1=#3
+% \def\kDDefStarred#1\with#2\and#3\GO%
+  % {\kDCSDef{#1}%
+    % {\expandafter\futurelet\expandafter\kDMaybeStar%
+     % \csname#1MaybeStarred\endcsname}%
+   % \kDCSDef{#1MaybeStarred}%
+    % {\ifx*\kDMaybeStar\let\next#2\else\let\next#3\fi\next}}
+% 
+% \def\kDCSDefOptional#1\with#2\and#3\GO%
+  % {\kDCSDef{#1}%
+     % {\expandafter\futurelet\expandafter\kDFirstCharacter%
+      % \csname kD#1MaybeOptions\endcsname}%
+   % \kDCSDef{kD#1MaybeOptions}%
+     % {\ifx[\kDFirstCharacter\let\kDTmp#2\else\let\kDTmp#3\fi\kDTmp}}
+
+%\def\kDGobbleHardTok#1\with#2\at#3\into#4\GO%
+%  {\def\Gobbler##1#3##2\GO{#2##1\GO\ifx##2\relax\else\Gobbler##2\GO\fi}%
+%   \kDCSDef{#4}{\Gobbler#1\GO}}
+
+%\def\kDFullExpandAfter#1#2{\edef\tmp{#2}\expandafter#1\tmp}
+
+% ============================================================ PARSING HELPERS =
+
+%\def\kDSplice#1\at#2\into#3\and#4\GO%
+%  {\def\Rimmer##1#2\GO{\kDCSDef{#4}{##1}}%
+%   \def\Cutter##1#2##2\GO%
+%     {\def\snd{##2}\ifx\snd\empty\kDCSDef{#3}{}\kDCSDef{#4}{##1}%
+%      \else\kDCSDef{#3}{##1}\Rimmer##2\GO\fi}%
+%   \Cutter#1#2\GO}
+
+%\def\kDTrisect#1\at#2\into#3\and#4\and#5\GO%
+%  {\def\Cut#2##1#2##2#2##3#2##4\GO%
+%     {\def\cnt{##4}\def\one{#2}\def\two{#2#2}\def\thr{#2#2#2}
+%      \ifx\cnt\one\kDCSDef{#3}{##1}\kDCSDef{#4}{}   \kDCSDef{#5}{}   \else
+%      \ifx\cnt\two\kDCSDef{#3}{##2}\kDCSDef{#4}{##1}\kDCSDef{#5}{}   \else
+%      \ifx\cnt\thr\kDCSDef{#3}{##3}\kDCSDef{#4}{##2}\kDCSDef{#5}{##1}\else
+%      \errmessage{PROBLEMS, YO!}\fi\fi\fi}
+%   \Cut#2#1#2#2#2#2\GO}
+
+%\def\kDBisect#1\at#2\into#3\and#4\GO%
+%  {\def\Cut#2##1#2##2#2##3\GO%
+%     {\def\cnt{##3}\def\one{#2}\def\two{#2#2}
+%      \ifx\cnt\one\kDCSDef{#3}{##1}\kDCSDef{#4}{}   \else
+%      \ifx\cnt\two\kDCSDef{#3}{##2}\kDCSDef{#4}{##1}\else
+%      \errmessage{PROBLEMS, YO!}\fi\fi}
+%   \Cut#2#1#2#2#2\GO}
+
+
+
+
+
+
+
+
+
+
+
+
+
+% There macros are the primitives to handle length partitioning.
+% Rigid lengths are either a dimension or a number representing a fraction
+% of the Total.  Loose lengths are starred numbers that proportionally fill
+% the rest.  So, a specification like
+%     0|0.1|*|*3|1cm    with Total=10cm
+% would ultimately be parsed as
+%     0cm|1cm|2cm|6cm|1cm
+% These macros here parse just single numbers, but standard gobbling procedure
+% can easily generalize the parsing to a string like the example.
+
+%\def\kDChopParse#1|#2|#3\GO%
+%  {\kDBalancerInit\pgfdecoratedpathlength
+%   \kDBalancerTally#1\to One\GO
+%   \kDBalancerTally#2\to Two\GO
+%   \kDBalancerTally#3\to Thr\GO
+%   \expandafter\kDBalancerGauge\One\to Fst\GO
+%   \expandafter\kDBalancerGauge\Thr\to Lst\GO
+%   \pgfmathsetmacro\start{\Fst}
+%   \pgfmathsetmacro\stop{1-\Lst}}
+
+%\pgfqkeys{/kD/balancer}{
+%}
+
+% Basic initialization
+% \def\kDBalancerInit#1%
+  % {\def\kDBalancerLoose{0}%
+   % \def\kDBalancerRigid{0}%
+   % \def\kDBalancerTotal{#1}}
+
+% First we tally the totals
+% \def\kDBalancerTallyLoose*#1\to#2\GO%
+  % {\ifx\relax#1\relax\pgfmathparse{1}\else\pgfmathparse{#1}\fi%
+   % \expandafter\edef\csname#2\endcsname{*\pgfmathresult}%
+   % \pgfmathsetmacro\kDBalancerLoose{\kDBalancerLoose+\pgfmathresult}}
+% \def\kDBalancerTallyRigid#1\to#2\GO%
+  % {\ifx\relax#1\relax\pgfmathparse{0}\else\pgfmathparse{#1}\fi%
+   % \ifpgfmathunitsdeclared\pgfmathdivide{#1}{\kDBalancerTotal}\fi%
+   % \expandafter\pgfmathsetmacro\csname#2\endcsname{\pgfmathresult}%
+   % \pgfmathsetlengthmacro\kDBalancerRigid{\kDBalancerRigid+\pgfmathresult}}
+% \kDDefStarred kDBalancerTally%
+  % \with\kDBalancerTallyLoose%
+   % \and\kDBalancerTallyRigid\GO
+
+% Then we can produce the actual lengths
+% \def\kDBalancerGaugeLoose*#1\to#2\GO%
+  % {\expandafter\pgfmathsetmacro\csname#2\endcsname%
+     % {#1*(1-\kDBalancerRigid)/\kDBalancerLoose}}
+% \def\kDBalancerGaugeRigid#1\to#2\GO%
+  % {\expandafter\pgfmathsetmacro\csname#2\endcsname{#1}}
+% \kDDefStarred kDBalancerGauge%
+  % \with\kDBalancerGaugeLoose%
+   % \and\kDBalancerGaugeRigid\GO
+
+
+
+
+
+
+
+% \newif\ifkatharizoisverbose
+% \pgfqkeys{/kD}{
+%   verbose/.is if=katharizoisverbose,
+%   verbose=true,
+%   log/.code 2 args={
+%     \let~\space
+%     \newlinechar=`\^
+%     \message{kD.#1~>~#2^}
+%   },
+% }
+
+
+% NOTE: this was the sanitizer logging routine
+% logging routine:
+% \expandafter\kDDetokenize\kDKatharizoInput\kDInto kDKatharizoDetokenizedInput\kD%
+% \pgfkeysalso{/kD/log={katharizo~~~~~~~}%
+%   {{\kDKatharizoDetokenizedInput} -> (\kDFoo)}}%
+

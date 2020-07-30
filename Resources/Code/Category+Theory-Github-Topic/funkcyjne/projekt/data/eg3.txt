@@ -1,0 +1,4 @@
+The result of show is a syntactically correct Haskell expression containing only constants, given the fixity declarations in force at the point where the type is declared. It contains only the constructor names defined in the data type, parentheses, and spaces. When labelled constructor fields are used, braces, commas, field names, and equal signs are also used.
+If the constructor is defined to be an infix operator, then showsPrec will produce infix applications of the constructor.
+the representation will be enclosed in parentheses if the precedence of the top-level constructor in x is less than d (associativity is ignored). Thus, if d is 0 then the result is never surrounded in parentheses; if d is 11 it is always surrounded in parentheses, unless it is an atomic expression.
+If the constructor is defined using record syntax, then show will produce the record-syntax form, with the fields given in the same order as the original declaration.

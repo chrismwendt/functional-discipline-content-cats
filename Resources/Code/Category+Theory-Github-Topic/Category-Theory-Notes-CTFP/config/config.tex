@@ -1,0 +1,122 @@
+\usepackage{graphicx}
+
+\usepackage{ebproof}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{mathtools}
+
+\usepackage[english]{babel}
+
+\usepackage{enumitem}
+\setlist{nosep}
+
+\usepackage{tikz}
+\usetikzlibrary{
+    matrix, 
+    shapes, 
+    arrows,
+    calc, 
+    positioning, 
+    automata, 
+    positioning
+}
+\tikzset{%
+    block/.style = {
+        rectangle, 
+        draw, 
+        align=center, 
+        minimum height=1em, 
+        minimum width=1em,
+        inner sep=0.5em
+    },
+    dashedblock/.style = {
+        rectangle,
+        draw,
+        align=center, 
+        minimum height=1em, 
+        minimum width=1em,
+        inner sep=0.5em,
+        dashed
+    },
+    phantomblock/.style = {
+        rectangle,
+        draw=none,
+        align=center,
+        minimum height=1em,
+        minimum width=1em,
+        inner sep=0.5em
+    },
+    labelblock/.style = {
+        rectangle,
+        fill=white,
+        align=center,
+        minimum height=1em,
+        minimum width=1em,
+        inner sep=0.5em
+    },
+    line/.style = {
+        draw, 
+        -stealth
+    },
+}
+
+\usepackage{float}
+
+\usepackage{minted}
+\usepackage{subcaption}
+
+\usepackage{forest}
+
+\usepackage{booktabs}
+
+\usepackage{csquotes}
+
+\usepackage[font={small}, margin=1cm]{caption}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\usepackage{xpatch,letltxmacro}
+\LetLtxMacro{\cminted}{\minted}
+\let\endcminted\endminted
+\xpretocmd{\cminted}{\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}}{}{}
+
+\renewcommand{\figurename}{Listing}
+
+\usepackage{tabularx}
+\usepackage{rotating}
+\usepackage{rotfloat}
+\usepackage{adjustbox}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+\algblock{Input}{EndInput}
+\algnotext{EndInput}
+\algblock{Output}{EndOutput}
+\algnotext{EndOutput}
+\newcommand{\Desc}[2]{\State \makebox[2em][l]{#1}#2}
+
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{codebg}{rgb}{0.98,0.98,0.98}
+\setminted{
+    bgcolor=codebg,
+    frame=lines
+}
+
+\usepackage[style=ieee]{biblatex}
+
+\usepackage{tikz-cd}

@@ -1,0 +1,176 @@
+\section{Categories of Various Shapes and Sizes}
+
+\subsection{Empty Category}
+
+\begin{definition}[Empty Category]
+    A category with zero objects have zero morphisms. It is an \textit{empty category}.
+\end{definition}
+
+\subsection{Categories from Directed Graphs}
+
+\begin{definition}[Free Category and Free Construction]
+    It is possible to construct a \textit{free category} from a directed graph.
+    \begin{enumerate}
+        \item Add an \textit{identity arrow} at each node.
+        \item For any two composable arrows, add a new arrow to act as their composition. Upon adding, consider its composition with any other arrows.
+    \end{enumerate}
+    
+    That is, a \textit{free category} is created which has an \textit{object} corresponding to each \textit{node} of the directed graph, with all possible \textit{chains} of composable graph \textit{edges} as morphisms. The process of the construction is called \textit{free construction}, by adding a given structure with minimal required items to satisfy category laws.
+\end{definition}
+
+\subsection{Orders}
+
+\begin{definition}[Category of Relations]
+    Categories can be constructed from objects with the relationships between them as morphisms.
+\end{definition}
+
+\begin{definition}[Category of Preorder Relation]
+    Given some category $C$ and that the \textit{preorder} relation is well defined on its elements, where the preorder relation $\le$ satisfies
+    \begin{enumerate}
+        \item \textbf{Reflexivity}. Given some object $a$
+        \begin{equation}
+            a \le a
+        \end{equation}
+        \item \textbf{Transitivity}. Given some objects $a, b, c$
+        \begin{equation}
+            a \le b \land b \le c \to a \le c
+        \end{equation}
+    \end{enumerate}
+    
+    Such that the objects with the preorder relation as morphisms form a well-defined category, since
+    \begin{itemize}
+        \item Identity morphisms exist due to \textit{reflexivity} of preorder relation.
+        \item Preorder relation is composable from \textit{transitivity}.
+        \item Preorder relation is associative.
+        \begin{equation}
+            (a \le b) \le c \Leftrightarrow a \le (b \le c)
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Partial Order]
+    In addition to preorder relation, \textit{partial order} requires that given objects $a, b$,
+    \begin{equation}
+        a \le b \land b \le a \to a = b
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Total Order]
+    \textit{Total order} requires that \textit{any} two objects from the category is in a relation with each other.
+\end{definition}
+
+\begin{definition}[Preorder Category (Thin Category)]
+    A \textit{preorder category} (or \textit{thin category}) requires that there exist at most one morphism between any object $a$ to any object $b$.
+\end{definition}
+
+\begin{definition}[Hom-set]
+    A \textit{hom-set} $\HomSet{\MCategory{C}}{a, b}$ is the set of morphisms from object $a$ to object $b$ in category $\MCategory{C}$.
+    
+    Each hom-set in a preorder category is either \textit{empty} or \textit{singleton}, i.e. given any two objects $a$ and $b$ from the category, then
+    \begin{equation}
+        \left\lvert \HomSet{\MCategory{C}}{a, b} \right\rvert \le 1
+    \end{equation}
+    
+    This restriction applies to $\HomSet{\MCategory{C}}{a, a}$ as well, with morphisms between the same object being either empty or the only identity morphism. Cycles are permitted in preorder categories but not allowed in partial order categories.
+\end{definition}
+
+\subsection{Monoid}
+
+\begin{definition}[Monoid]
+    A \textit{monoid} requires
+    \begin{enumerate}
+        \item A \textbf{set}.
+        \item A \textbf{binary operation}.
+        \item \textbf{Associativity} of the binary operation.
+        \item A \textbf{neutral element} for the binary operation which behaves as unit.
+    \end{enumerate}
+    
+    A typeclass for \textit{monoids} can be defined in Haskell, with neutral element \mintinline{hs}{mempty} and binary operation \mintinline{hs}{mappend}. Ensuring that \mintinline{hs}{mempty} is neutral and \mintinline{hs}{mappend} is associative is the responsibility of the programmer.
+    \inputminted{hs}{content/code-listings/monoid.hs}
+\end{definition}
+
+\begin{example}
+    It is possible have a \mintinline{hs}{String} monoid where
+    \inputminted{hs}{content/code-listings/string-monoid.hs}
+    
+    Notice that the neutral element is the empty string \mintinline{hs}{""} while the binary operation is the concatenation operator \mintinline{hs}{(++)}.
+\end{example}
+
+\begin{remark}
+    Note that the previous definition for \mintinline{hs}{mappend} uses \textit{equality of functions}, or \textit{equality of morphisms} in the \Category{Hask} category
+    \begin{minted}{hs}
+mappend = (++)
+    \end{minted}
+    
+    But the expression
+    \begin{minted}{hs}
+mappend s1 s2 = (++) s1 s2
+    \end{minted}
+    Is the \textit{equality of values} and is called \textit{extensional equality} -- for the same given inputs \mintinline{hs}{s1} and \mintinline{hs}{s2}, functions \mintinline{hs}{mappend} and \mintinline{hs}{(++)} produce identical output.
+\end{remark}
+
+\begin{example}
+    A monoid can also be modelled in C++ via \textit{concepts}.
+    \inputminted{cpp}{content/code-listings/monoid.cpp}
+    
+    The instantiation of the Monoid concept for Strings is
+    \inputminted{cpp}{content/code-listings/string-monoid.cpp}
+\end{example}
+
+\begin{definition}[Points and Point-wise Equality]
+    The value of arguments of a function is sometimes called \textit{points}.
+    
+    For example, a function $f$ produces some value $f(x)$ at point $x$. Given another function $g$, if $g(x) = f(x)$ at the same point $x$, then $f$ and $g$ have \textit{point-wise equality} at the point $x$.
+\end{definition}
+
+\begin{definition}[Point-free Equality]
+    Two functions $f$ and $g$ have \textit{point-free equality} if they are identical without supplying the arguments.
+\end{definition}
+
+\subsection{Monoid as a Category}
+
+\begin{definition}[Monoid Category]
+    A \textit{monoid} is a single-object category $\MCategory{M}$ with a set of composable morphisms.
+    
+    \begin{itemize}
+        \item In $\MCategory{M}$, there is the hom-set $\HomSet{\MCategory{M}}{m, m}$ for the single object $m$.
+        \item A binary operator could be defined for the hom-set. The \textit{monodial product} of two elements $\alpha, \beta$ of the hom-set is in fact the element $\gamma$ of the hom-set which corresponds to the composition $\gamma = \beta \circ \alpha$. Since the source and target for the morphisms $\alpha, \beta$ are always the single object $m$, the composition $\gamma$ is guaranteed to exist, and is associative by definition of a category. The identity morphism $id_m$ is the neutral element of the product.
+    \end{itemize}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzcd}
+            m   \arrow[loop above, out=135, in=45, distance=2em, "f"]
+                \arrow[loop above, out=135, in=45, distance=5em, "g"]
+                \arrow[loop above, out=135, in=45, distance=8em, "g \circ f"]
+            \end{tikzcd}
+            \caption{As hom-set}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzcd}
+                \node [phantomblock] (f) {$f$};
+                \node [phantomblock, below=0.5em of f] (g) {$g$};
+                \node [phantomblock, below=0.5em of g] (c) {$g \circ f$};
+                \node [draw, circle, fit=(f) (g) (c)] (container) {};
+            \end{tikzcd}
+            \caption{As points in a set}
+        \end{subfigure}
+        \caption{Monoid}
+        \label{fig:monoid-hom-set}
+    \end{figure}
+\end{definition}
+
+\begin{remark}
+    It is thus always possible to recover a \textit{set monoid} from a \textit{category monoid}. Note that morphisms do \textit{not} have to form a set -- categories may have things larger than sets.
+\end{remark}
+
+\begin{definition}[Locally Small]
+    A category is \textit{locally small} when morphisms between any two objects form set.
+\end{definition}
+
+\begin{remark}
+    Here elements of a hom-set can be considered composable morphisms, as well as points of a set. Composition of morphisms in \Category{M} is the monoidal product in the set $\HomSet{\MCategory{M}}{m, m}$.
+\end{remark}

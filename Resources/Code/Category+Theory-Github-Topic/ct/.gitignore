@@ -1,0 +1,10 @@
+*.vo
+*.glob
+*.v.d
+*.aux
+*.ml
+*.mli
+*.d
+Makefile.bak
+Makefile.conf
+html

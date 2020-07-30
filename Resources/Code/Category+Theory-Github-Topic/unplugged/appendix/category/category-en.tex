@@ -1,0 +1,344 @@
+\ifx\wholebook\relax \else
+
+\documentclass[UTF8]{article}
+
+\usepackage[en]{../../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{Category}
+
+\author{LIU Xinyu
+\thanks{{\bfseries LIU Xinyu} \newline
+  Email: liuxinyu95@gmail.com \newline}
+  }
+
+\maketitle
+\fi
+
+\markboth{Category}{Mathematics of Programming}
+
+\chapter*{Uniqueness of product and coproduct}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{Uniqueness of product and coproduct}
+
+Are product and coproduct unique? The following theorem answers this question.
+
+\begin{lemma}
+\normalfont
+For any pair of object $A$, $B$ of category $\pmb{C}$, let the objects and arrows in below diagram
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    P &   &  &   & I \\
+      & A &  & A &   \\
+      & B &  & B &   \\
+    Q &   &  &   & J \\};
+  \path[-stealth]
+    % left
+    (m-1-1) edge node [above] {$p_A$} (m-2-2)
+    (m-1-1) edge node [below] {$p_B$} (m-3-2)
+    (m-4-1) edge node [above] {$q_A$} (m-2-2)
+    (m-4-1) edge node [below] {$q_B$} (m-3-2)
+    % right
+    (m-2-4) edge node [above] {$i_A$} (m-1-5)
+    (m-2-4) edge node [above] {$j_A$} (m-4-5)
+    (m-3-4) edge node [below] {$i_B$} (m-1-5)
+    (m-3-4) edge node [below] {$j_B$} (m-4-5);
+\end{tikzpicture}
+\end{center}
+
+be a pair of
+
+\begin{center}
+product \quad \quad \quad coproduct
+\end{center}
+
+wedges, then
+
+\[
+P, Q \quad \quad \quad I, J
+\]
+
+are isomorphic wedges. There are unique arrows:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=3em, minimum width=2em]{
+    P & & I \\
+    Q & & J \\};
+  \path[-stealth]
+    % left
+    (m-1-1.south west) edge node [left] {$f$} (m-2-1.north west)
+    (m-2-1.north east) edge node [right] {$g$} (m-1-1.south east)
+    % right
+    (m-1-3.south west) edge node [left] {$f$} (m-2-3.north west)
+    (m-2-3.north east) edge node [right] {$g$} (m-1-3.south east);
+\end{tikzpicture}
+\end{center}
+
+Such that:
+
+\[
+\begin{array}{lcl}
+  \begin{cases}
+    p_A = q_A \circ f & p_B = q_B \circ f \\
+    q_A = p_A \circ g & q_B = p_B \circ g
+  \end{cases}
+  & \quad &
+  \begin{cases}
+    i_A = g \circ j_A & i_B = g \circ j_B \\
+    j_A = f \circ i_A & j_B = f \circ i_B
+  \end{cases}
+\end{array}
+\]
+
+Where $f$ and $g$ are inverse pair of isomorphisms.
+\end{lemma}
+
+\begin{proof}
+We only prove the left side part. The right side can be proved in a similar way. Given $A$, $B$, Object $Q$ and the pair $q_A, q_B$ form a product wedge. Object $P$ and the pair $p_A, p_B$ form another wedge. From the definition of product, there is a unique mediator $f$ satisfying:
+
+\[
+p_A = q_A \circ f \quad \text{和} \quad p_B = q_B \circ f
+\]
+
+By reversing the role of $P$ and $Q$ (Let $P$ be product, and $Q$ be arbitrary wedge), we have:
+
+\[
+q_A = p_A \circ g \quad \text{和} \quad q_B = p_B \circ g
+\]
+
+Hence we have:
+
+\[
+\begin{cases}
+p_A \circ g \circ f = q_A \circ f = p_A \\
+p_B \circ g \circ f = q_B \circ f = p_B
+\end{cases}
+\]
+
+and:
+
+\[
+\begin{cases}
+q_A \circ f \circ g = p_A \circ g = q_A \\
+q_B \circ f \circ g = p_B \circ g = q_B \\
+\end{cases}
+\]
+
+Therefore:
+
+\[
+g \circ f = id_P \quad \quad \quad f \circ g = id_Q
+\]
+
+\end{proof}
+
+This proved if two objects have product (or coproduct), then it is unique.
+
+\chapter*{Cartesian product and disjoint union of sets form product and coproduct}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{Cartesian product and disjoint union of sets form product and coproduct}
+
+\begin{proof}
+We prove this by construction. The Cartesian product $A \times B$ contains all combinations from the two sets.
+
+\[
+\{(a, b) | a \in A, b \in B\}
+\]
+
+We define two special arrows (functions) as $p_A$ and $p_B$:
+
+\[
+\begin{cases}
+fst\ (a, b) = a \\
+snd\ (a, b) = b
+\end{cases}
+\]
+
+Consider an arbitrary wedge
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+      & A  \\
+    X &    \\
+      & B  \\};
+  \path[-stealth]
+    (m-2-1) edge node[above] {$p$} (m-1-2)
+    (m-2-1) edge node[below] {$q$} (m-3-2);
+\end{tikzpicture}
+\end{center}
+
+Where $p\ x = a, q\ x = b, x \in X$. For example, let $X$ be $Int$, $A$ be $Int$, and $B$ be $Bool$, the two functions $p$ and $q$ are defined as:
+
+\[
+\begin{cases}
+p(x) = -x \\
+q(x) = even(x)
+\end{cases}
+\]
+
+Such that $p$ negates an integer, and $q$ examines if it is even. We define the function $X \arrowto{m} A \times B$ as below:
+
+\[
+m(x) = (a, b)
+\]
+
+For this example, we have:
+
+\[
+m(x) = (-x, even(x))
+\]
+
+Such that, the following diagram commutes:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+      & A \\
+    X & A \times B \\
+      & B \\};
+  \path[-stealth]
+    % left
+    (m-2-1) edge node [above] {$p$} (m-1-2)
+    (m-2-1) edge node [below] {$q$} (m-3-2)
+    (m-2-1) edge node [above] {$m$}   (m-2-2)
+    (m-2-2) edge node [right] {$fst$} (m-1-2)
+    (m-2-2) edge node [right] {$snd$} (m-3-2);
+\end{tikzpicture}
+\end{center}
+
+Let us verify it:
+
+\[
+\begin{array}{rcll}
+(fst \circ m)(x) & = & fst\ m(x) & \text{function composition} \\
+                 & = & fst\ (a, b) & \text{definition of $m$} \\
+                 & = & a & \text{definition of $fst$} \\
+                 & = & p(x) & \text{reverse of $p$}
+\end{array}
+\]
+
+and:
+
+\[
+\begin{array}{rcll}
+(snd \circ m)(x) & = & snd\ m(x) & \text{function composition} \\
+                 & = & snd\ (a, b) & \text{definition of $m$} \\
+                 & = & b & \text{definition of $snd$} \\
+                 & = & q(x) & \text{reverse of $q$}
+\end{array}
+\]
+
+For the above example, we have:
+
+\[
+\begin{cases}
+(fst \circ m)(x) = fst\ (-x, even(x)) = -x = p(x) \\
+(snd \circ m)(x) = snd\ (-x, even(x)) = even(x) = q(x)
+\end{cases}
+\]
+
+We also need prove the uniqueness of $m$. Suppose there exists another function $x \arrowto{h} A \times B$, such that the diagram also commutes:
+
+\[
+fst \circ h = p \quad \text{and} \quad snd \circ h = q
+\]
+
+We have:
+
+\[
+\begin{array}{rcll}
+(a, b) & = & (p(x),\ q(x)) & \text{definition of $p, q$} \\
+       & = & ((fst \circ h)(x),\ (snd \circ h)(x)) & \text{commute} \\
+       & = & (fst\ h(x),\ snd\ h(x)) & \text{function composition} \\
+       & = & (fst\ (a, b),\ snd\ (a, b)) & \text{reverse of $fst, snd$}
+\end{array}
+\]
+
+Hence $h(x) = (a, b) = m(x)$, which proves the uniqueness of $m$.
+
+Next we prove the coproduct part. The elements in the disjoint union $A + B$ have two types. One comes from $A$ as $(a, 0)$, the other comes from $B$ as $(b, 1)$. We can define two special arrows (functions) as $i_A$ and $i_B$:
+
+\[
+\begin{cases}
+left(a) = (a, 0) \\
+right(b) = (b, 1)
+\end{cases}
+\]
+
+Consider the wedge of an arbitrary set $X$:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    A & \\
+      & X \\
+    B & \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$p$} (m-2-2)
+    (m-3-1) edge node [below] {$q$} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+We define arrow $A + B \arrowto{m} X$ as below:
+
+\[
+\begin{cases}
+m\ (a, 0) = p(a) \\
+m\ (b, 1) = q(b)
+\end{cases}
+\]
+
+Such that the following diagram commutes:
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    A & \\
+    A + B & X \\
+    B & \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$p$} (m-2-2)
+    (m-3-1) edge node [below] {$q$} (m-2-2)
+    (m-2-1) edge node [above] {$m$}   (m-2-2)
+    (m-1-1) edge node [left] {$left$} (m-2-1)
+    (m-3-1) edge node [left] {$right$} (m-2-1);
+\end{tikzpicture}
+\end{center}
+
+Next we need prove the uniqueness of $m$. Suppose there exists another arrow $A + B \arrowto{h} X$, also makes the diagram commutes:
+
+\[
+h \circ left = p \quad \text{and} \quad h \circ right = q
+\]
+
+Taking any $a \in A, b \in B$, we have:
+
+\[
+\begin{cases}
+h\ (a, 0) = h(left(a)) = (h \circ left)(a) = p(a) = m\ (a, 0) \\
+h\ (b, 1) = h(right(a)) = (h \circ right)(b) = q(b) = m\ (b, 1)
+\end{cases}
+\]
+
+Hence $h = m$, which proves the uniqueness of $m$.
+\end{proof}
+
+\ifx\wholebook\relax \else
+
+\expandafter\enddocument
+%\end{document}
+
+\fi

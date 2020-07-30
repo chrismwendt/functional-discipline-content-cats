@@ -1,0 +1,15 @@
+package typedefs-js
+
+version = 0.2.0
+
+modules = JS.Main
+
+executable = typedefs.js
+
+main = JS.Main
+
+sourcedir = src
+
+pkgs = contrib, tparsec, js, bytes, effects
+
+opts = "--codegen node --interface"

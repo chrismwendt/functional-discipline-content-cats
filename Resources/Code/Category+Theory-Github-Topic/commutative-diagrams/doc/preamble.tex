@@ -1,0 +1,387 @@
+%==[ document class ]===========================================================
+
+\documentclass[12pt]{scrbook}
+
+%==[ languages ]================================================================
+
+\usepackage[british]{babel}
+% \hyphenation{Fortran hy-phen-ation}
+
+%==[ fonts, encoding ]==========================================================
+
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[ttdefault=true]{AnonymousPro}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%==[ page geometry ]============================================================
+
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  portrait,
+  marginparwidth=4.25cm,
+  marginparsep=.75cm,
+  %% showframe,
+  width=11cm,
+  hmarginratio=10:25,
+  height=23cm,
+  vmarginratio=20:30,
+}
+
+\makeatletter
+\let\org@Gm@pageframes\Gm@pageframes
+\renewcommand*{\Gm@pageframes}{%
+  \begingroup
+    \color{gray}%
+    \org@Gm@pageframes
+  \endgroup
+}
+\makeatother
+
+%==[ page layout ]==============================================================
+
+%\usepackage{multicol}
+%\usepackage{tabularx}
+\usepackage{booktabs}
+%\usepackage{verbatimbox}
+%\usepackage{wrapfig}
+
+\usepackage{float}
+% \usepackage{framed}
+% \usepackage{lipsum}
+\usepackage{enumitem}
+% \usepackage{pdfpages}
+
+% \usepackage{caption}
+\usepackage{sidenotes}
+
+% \DeclareCaptionStyle{sidenote}{font=scriptsize}
+
+% \usepackage{todonotes}
+% \usepackage{marginnote}
+
+\usepackage[
+  headwidth=textwithmarginpar,
+  footwidth=textwithmarginpar,
+]{scrlayer-scrpage}
+%\clearpairofpagestyles
+
+% \lofoot{}
+% \cofoot{}
+% \rofoot{}
+% \lohead{}
+% \cohead{}
+% \rohead{\thepage}
+
+%==[ page style ]===============================================================
+
+\setkomafont{disposition}{\rmfamily\scshape}
+
+\usepackage{parskip}
+
+% \usepackage{csquotes}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\DeclareCaptionStyle{marginfigure}{
+  font=footnotesize,
+  justification=centering,
+}
+
+\captionsetup[subfigure]{
+  textfont=footnotesize,
+  %% singlelinecheck=off,
+  justification=centering
+}
+
+\setcounter{secnumdepth}{0}
+
+%==[ commonplace math ]=========================================================
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\DeclareMathOperator{\coker}{coker}
+
+% \def\id{{\mathbf 1}}
+% \DeclareUnicodeCharacter{0131}{{\noexpand\mathbf R}}
+% \DeclareUnicodeCharacter{00D7}{{\otimes}}
+% \catcode`ı=\active \letı\id
+% \catcode`×=\active \let×\otimes
+% NOTE: needed just for the associahedron example
+\usepackage{newunicodechar}
+\newunicodechar{ı}{\mathbf 1}
+\newunicodechar{×}{\otimes}
+
+%==[ graphics ]=================================================================
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+% TODO: what did I need soul for again?
+\usepackage{color,soul}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+%==[ CoDi ]=====================================================================
+
+% \usetikzlibrary{commutative-diagrams}
+\usepackage{commutative-diagrams}
+\usetikzlibrary{positioning}
+
+%==[ alternatives to CoDi ]=====================================================
+
+% So, yeah, I got *really* tired...
+\usepackage{filecontents}
+
+% Copied from Xy sourcecode
+\def\Xy{\hbox{\kern-.1em X\kern-.3em\lower.4ex\hbox{Y\kern-.15em}}}
+
+%==[ utilities and custom macros ]==============================================
+
+\usepackage{etoolbox}
+\usepackage{xparse}
+
+% \NewDocumentCommand{\SmashAndCenter}{m}{%
+% \begingroup\setbox0=\hbox{#1}%
+% \newdimen\tmp\tmp=\dimexpr-.5\ht0+.5\dp0\relax%
+% \hfill\smash{\raisebox{\the\tmp}{\box0}}\hfill\null\endgroup%
+% }
+
+\newsavebox\SmashAndCenterBox
+\newdimen\SmashandCenterRaise
+
+% TODO: make overflow on left pages go left
+\NewDocumentEnvironment{SmashAndCenter}{}{%
+\begin{lrbox}{\SmashAndCenterBox}}{%
+\end{lrbox}%
+\SmashandCenterRaise=\dimexpr-.5\ht\SmashAndCenterBox+.5\dp\SmashAndCenterBox\relax%
+\hfill\smash{\raisebox{\the\SmashandCenterRaise}{\usebox\SmashAndCenterBox}}\hfill\null%
+}
+
+\def\eg{e.\,g.}
+%% \deg\ie{i.\,e.}
+
+%==[ sourcecode and examples ]==================================================
+
+\usepackage{listings}
+
+% Use straight quotes in code listings. https://tex.stackexchange.com/a/145417/82186
+\usepackage{textcomp}
+\lstset{upquote=true}
+
+% http://tex.stackexchange.com/a/336331/82186
+\makeatletter
+\lst@Key{lastline}\relax{\ifnumcomp{#1}{<}{0}{%
+  \let\mylst@file\kvtcb@listingfile\sbox0{\lstinputlisting{\mylst@file}}%
+  \def\lst@lastline{\the\numexpr#1+\value{lstnumber}-1\relax}}%
+  {\def\lst@lastline{#1\relax}}}
+\makeatother
+
+\usepackage{showexpl}
+
+\makeatletter
+\lst@Key{postset}\relax{\def\SX@postset{#1}}
+\newcommand\SX@postset{}
+\renewcommand*\SX@resultInput{%
+  \ifx\SX@graphicname\@empty
+    \begingroup
+      \MakePercentComment\makeatother\catcode`\^^M=5\relax
+      \SX@@preset\SX@preset
+      \if@SX@rangeaccept
+       \let\SX@tempa=\SX@input
+      \else
+       \let\SX@tempa=\input
+      \fi
+      \if\SX@scaled ?%
+        \let\SX@tempb=\@firstofone
+      \else
+        \if\SX@scaled !%
+          \def\SX@tempb##1{\resizebox{\SX@width}{!}{##1}}%
+        \else
+          \def\SX@tempb##1{\scalebox{\SX@scaled}{##1}}%
+        \fi
+      \fi
+      \SX@tempb{\SX@tempa{\SX@codefile}}\SX@postset\par
+    \endgroup
+  \else
+    \expandafter\includegraphics\expandafter[\SX@graphicparam]%
+      {\SX@graphicname}%
+  \fi
+}
+\makeatother
+
+% \lstdefinelanguage{TikZ}{
+%   morekeywords={for},
+%   sensitive=false,
+%   morecomment=[l]{//},
+%   morecomment=[s]{/*}{*/},
+%   morestring=[b]",
+% }
+
+\lstdefinestyle{TeX}{
+  language=[LaTeX]TeX,
+  basicstyle=\ttfamily\lst@ifdisplaystyle\scriptsize\fi,
+  backgroundcolor=\color{teal!10},
+  % keywordstyle=*\color{blue},
+  % identifierstyle=\color{orange}\bfseries,
+  % morekeywords={\path},
+  alsoother={@},
+  moretexcs={
+    \starttext,\stoptext,\usemodule,
+    \tikzpicture,\endtikzpicture,
+    \tikzexternalize,
+    \starttikzpicture,\stoptikzpicture,
+    \usetikzlibrary,
+    \codi,\endcodi,
+    \startcodi,\stopcodi,
+    \lay,\obj,\mor,
+    \bye,
+    \draw,\foreach,
+    \ar,
+    \psset,\everypsbox,\ncline,\ncarc,
+    \xymatrix,
+  },
+  texcsstyle=*\bfseries,
+  % morestring=[b]",
+  commentstyle=\itshape\color{black!60},
+  frame=none,
+  % extendedchars=false,
+  inputencoding=utf8,
+  escapeinside={(@}{@)},
+  moredelim=**[is][\color{orange!80!black}]{@opt@}{@/opt@},
+  moredelim=**[is][\color{blue!80!black}]{@nws@}{@/nws@},
+  % moredelim=**[is][\color\underbar]{@rep@}{@/rep@},
+  moredelim=**[s][\itshape]{<}{>},
+  % NOTE: × and ı are needed just for the associahedron example
+  literate={~}{{\textvisiblespace}}1 {XOR}{{$\vert$}}1 {:}{{\textbf{:}}}1 {:=}{{$\equiv$}}1 {×}{{\texttimes}}1 {ı}{{\i}}1,
+}
+
+\lstset{style=TeX}
+% \lstMakeShortInline[style=TeX]"
+
+% \makeatletter
+% \newcount\ublvl\ublvl=0
+% \newcount\ubdpt\ubdpt=0
+% \newdimen\ubgap\ubgap=.2em
+% \def\underbra#1{\underline {\sbox \tw@ {\global\advance\ubdpt1\advance\ublvl1#1}\dp \tw@ \dimexpr\ubgap*(\ubdpt-\ublvl-1)\relax \box \tw@ }\ifnum\ublvl=0\ubdpt=0\fi}
+% \makeatother
+
+% \lstset{explpreset={
+%   wide,
+%   basicstyle=\ttfamily\scriptsize,
+%   pos=o,
+%   width=\marginparwidth,
+%   hsep=\marginparsep,
+%   rframe={},
+%   preset={\centering\tikzpicture[codi]},
+%   postset={\endtikzpicture}
+% }}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8}
+\tcbset{listing utf8=latin1}
+
+\tcbset{
+  smash and center/.style={
+    if odd page={
+      before lower=\begin{SmashAndCenter},
+      after lower=\end{SmashAndCenter}
+    }{
+      before upper=\begin{SmashAndCenter},
+      after upper=\end{SmashAndCenter}
+    }},
+  trim/.style args={#1 and #2}{
+    listing options={
+      firstline=#1,
+      lastline=#2}},
+  trim/.default={2 and -1},
+  snippet/.style={
+    size=tight,
+    colback=white,
+    colframe=white,
+    if odd page={
+      listing side text,
+      lefthand width=\textwidth,
+      righthand width=\marginparwidth,
+      halign lower=center,
+    }{
+      text side listing,
+      righthand width=\textwidth,
+      lefthand width=\marginparwidth,
+      halign upper=center,
+    },
+    toggle enlargement,
+    grow to right by=\marginparsep+\marginparwidth,
+    sidebyside gap=\marginparsep,
+    smash and center,
+    listing options={}
+  },
+  commented snippet/.style={
+    snippet,
+    comment={}, % avoids text compilation (possible tcb bug?)
+    if odd page={
+      listing side comment,
+    }{
+      comment side listing,
+    },
+  },
+  gallery/.style={
+    size=tight,
+    colback=white,
+    colframe=white,
+    if odd page={
+      % listing side text,
+      % lefthand width=\textwidth,
+      % righthand width=\marginparwidth,
+      grow to right by=\marginparsep+\marginparwidth,
+    }{
+      grow to right by=\marginparsep+\marginparwidth,
+      % text side listing,
+      % righthand width=\textwidth,
+      % lefthand width=\marginparwidth,
+      % halign upper=center,
+    },
+    toggle enlargement,
+    % grow to right by=\marginparsep+\marginparwidth,
+    text above listing,
+    listing options={}
+  }
+}
+
+% \tcbset{codi snippet/.style={snippet, trim, smash and center}}
+
+\def\nilstrut{\rule{0sp}{0sp}}
+
+%==[ extra stuff ]==============================================================
+
+\usepackage{soul}
+
+% \usepackage{lipsum}
+
+\usepackage{hologo}
+\def\ConTeXt{\hologo{ConTeXt}}
+\def\CoDi{{\scshape CoDi}}
+\def\TikZ{{\scshape TikZ}}
+
+% \usepackage[lastpage,user]{zref}
+\usepackage[
+  % colorlinks=true,
+  % urlcolor=blue,
+  % linkbordercolor=black,
+  % pdfborderstyle={/S/U/W .4}% border style will be underline of width 1pt
+  % urlbordercolor=cyan        % color of external links
+  hidelinks
+]{hyperref}
+
+\def\NiceURL#1#2{\href{#2}{\color{blue}\ul{#1}}}
+
+%==[ microtype ]================================================================
+
+\usepackage{microtype}

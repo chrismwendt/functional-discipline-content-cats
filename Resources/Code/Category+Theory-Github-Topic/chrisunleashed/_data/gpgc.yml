@@ -1,0 +1,11 @@
+repo_owner: chriskevin
+repo_name: chrisunleashed
+disabled: false
+use_show_action: false
+label_name: Post Comments
+label_color: 666666
+github_application:
+  client_id: 1263cbd33859ce249a6d
+  code_authenticator: https://chrisunleashed.herokuapp.com/authenticate/
+  callback_url: https://chriskevin.github.io/chrisunleashed/assets/html/gpgc_redirect.html
+enable_diagnostics: false

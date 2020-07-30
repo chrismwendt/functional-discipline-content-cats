@@ -1,0 +1,147 @@
+\newcommand{\subsubsubsection}[1]{\textbf{#1}}
+\newcommand{\WIP}{\textbf{WIP}}
+
+\newcommand{\coloneqq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+  =}
+
+\newcommand{\defeq}{\mathrel{\triangleq}}
+%% Alternatively:
+%% \newcommand{\defeq}{≔}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bC}{ℂ}
+\newcommand{\bD}{𝔻}
+\newcommand{\bX}{𝕏}
+% \newcommand{\to}{\rightarrow}
+%% \newcommand{\mto}{\mapsto}
+\newcommand{\mto}{\rightarrow}
+\newcommand{\UU}{\ensuremath{\mathcal{U}}\xspace}
+\let\type\UU
+\newcommand{\MCU}{\UU}
+\newcommand{\todo}[1]{\textit{#1}}
+\newcommand{\comp}{\circ}
+\newcommand{\x}{\times}
+\newcommand\inv[1]{#1\raisebox{1.15ex}{$\scriptscriptstyle-\!1$}}
+\newcommand{\tp}{\mathrel{:}}
+\newcommand{\Type}{\mathcal{U}}
+
+\usepackage{graphicx}
+\makeatletter
+\newcommand{\shorteq}{%
+  \settowidth{\@tempdima}{-}% Width of hyphen
+  \resizebox{\@tempdima}{\height}{=}%
+}
+\makeatother
+\newcommand{\var}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\varindex}[1]{\ensuremath{\var{#1}}\index{$\var{#1}$}}
+\newcommand{\nomen}[2]{\emph{#1}\index{#2}}
+\newcommand{\nomenindex}[1]{\nomen{#1}{#1}}
+
+\newcommand{\Hom}{\varindex{Hom}}
+\newcommand{\fmap}{\varindex{fmap}}
+\newcommand{\bind}{\varindex{bind}}
+\newcommand{\join}{\varindex{join}}
+\newcommand{\omap}{\varindex{omap}}
+\newcommand{\pure}{\varindex{pure}}
+\newcommand{\idFun}{\varindex{id}}
+\newcommand{\Sets}{\varindex{Sets}}
+\newcommand{\Set}{\varindex{Set}}
+\newcommand{\hSet}{\varindex{hSet}}
+\newcommand{\id}{\varindex{id}}
+\newcommand{\isEquiv}{\varindex{isEquiv}}
+\newcommand{\idToIso}{\varindex{idToIso}}
+\newcommand{\idIso}{\varindex{idIso}}
+\newcommand{\isSet}{\varindex{isSet}}
+\newcommand{\isContr}{\varindex{isContr}}
+\newcommand{\isGroupoid}{\varindex{isGroupoid}}
+\newcommand{\pathJ}{\varindex{pathJ}}
+\newcommand\Object{\varindex{Object}}
+\newcommand\Functor{\varindex{Functor}}
+\newcommand\isProp{\varindex{isProp}}
+\newcommand\propPi{\varindex{propPi}}
+\newcommand\propSig{\varindex{propSig}}
+\newcommand\PreCategory{\varindex{PreCategory}}
+\newcommand\IsPreCategory{\varindex{IsPreCategory}}
+\newcommand\isIdentity{\varindex{isIdentity}}
+\newcommand\propIsIdentity{\varindex{propIsIdentity}}
+\newcommand\IsCategory{\varindex{IsCategory}}
+\newcommand\Gl{\varindex{\lambda}}
+\newcommand\lemPropF{\varindex{lemPropF}}
+\newcommand\isPreCategory{\varindex{isPreCategory}}
+\newcommand\congruence{\varindex{cong}}
+\newcommand\identity{\varindex{identity}}
+\newcommand\isequiv{\varindex{isequiv}}
+\newcommand\qinv{\varindex{qinv}}
+\newcommand\fiber{\varindex{fiber}}
+\newcommand\shufflef{\varindex{shuffle}}
+\newcommand\Univalent{\varindex{Univalent}}
+\newcommand\refl{\varindex{refl}}
+\newcommand\isoToId{\varindex{isoToId}}
+\newcommand\Isomorphism{\varindex{Isomorphism}}
+\newcommand\rrr{\ggg}
+%% \newcommand\fish{\mathbin{↣}}
+%% \newcommand\fish{\mathbin{⤅}}
+\newcommand\fish{\mathbin{⤇}}
+%% \newcommand\fish{\mathbin{⤜}}
+%% \newcommand\fish{\mathrel{\wideoverbar{\rrr}}}
+\newcommand\fst{\varindex{fst}}
+\newcommand\snd{\varindex{snd}}
+\newcommand\Path{\varindex{Path}}
+\newcommand\Category{\varindex{Category}}
+\newcommand\TODO[1]{TODO: \emph{#1}}
+\newcommand*{\QED}{\hfill\ensuremath{\square}}%
+\newcommand\uexists{\exists!}
+\newcommand\Arrow{\varindex{Arrow}}
+\newcommand\embellish[1]{\widehat{#1}}
+\newcommand\nattrans[1]{\embellish{#1}}
+\newcommand\functor[1]{\embellish{#1}}
+\newcommand\NTsym{\varindex{NT}}
+\newcommand\NT[2]{\NTsym\ #1\ #2}
+\newcommand\Endo[1]{\varindex{Endo}\ #1}
+\newcommand\EndoR{\functor{\mathcal{R}}}
+\newcommand\omapR{\mathcal{R}}
+\newcommand\omapF{\mathcal{F}}
+\newcommand\omapG{\mathcal{G}}
+\newcommand\FunF{\functor{\omapF}}
+\newcommand\FunG{\functor{\omapG}}
+\newcommand\funExt{\varindex{funExt}}
+\newcommand{\suc}[1]{\varindex{suc}\ #1}
+\newcommand{\trans}{\varindex{trans}}
+\newcommand{\toKleisli}{\varindex{toKleisli}}
+\newcommand{\toMonoidal}{\varindex{toMonoidal}}
+\newcommand\pairA{\mathcal{A}}
+\newcommand\pairB{\mathcal{B}}
+\newcommand{\joinNT}{\functor{\varindex{join}}}
+\newcommand{\pureNT}{\functor{\varindex{pure}}}
+\newcommand{\hrefsymb}[2]{\href{#1}{#2 \ExternalLink}}
+\newcommand{\sourcebasepath}{http://web.student.chalmers.se/\textasciitilde hanghj/cat/doc/html/}
+\newcommand{\docbasepath}{https://github.com/fredefox/cat/}
+\newcommand{\sourcelink}[1]{\hrefsymb
+    {\sourcebasepath#1.html}
+    {\texttt{#1}}
+  }
+\newcommand{\gitlink}{\hrefsymb{\docbasepath}{\texttt{\docbasepath}}}
+\newcommand{\doclink}{\hrefsymb{\sourcebasepath}{\texttt{\sourcebasepath}}}
+\newcommand{\clll}{\mathrel{\bC.\mathord{\lll}}}
+\newcommand{\dlll}{\mathrel{\bD.\mathord{\lll}}}
+\newcommand\coe{\varindex{coe}}
+\newcommand\Monoidal{\varindex{Monoidal}}
+\newcommand\Kleisli{\varindex{Kleisli}}
+\newcommand\I{\mathds{I}}
+
+\makeatletter
+\DeclareRobustCommand\bigop[1]{%
+  \mathop{\vphantom{\sum}\mathpalette\bigop@{#1}}\slimits@
+}
+\newcommand{\bigop@}[2]{%
+  \vcenter{%
+    \sbox\z@{$#1\sum$}%
+    \hbox{\resizebox{\ifx#1\displaystyle.7\fi\dimexpr\ht\z@+\dp\z@}{!}{$\m@th#2$}}%
+  }%
+}
+\makeatother
+
+\renewcommand{\llll}{\mathbin{\bigop{\lll}}}
+\renewcommand{\rrrr}{\mathbin{\bigop{\rrr}}}
+%% \newcommand{\llll}{lll}
+%% \newcommand{\rrrr}{rrr}

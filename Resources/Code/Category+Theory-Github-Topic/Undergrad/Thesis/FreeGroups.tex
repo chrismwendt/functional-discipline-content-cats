@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,xcolor}
+\usepackage{enumitem, tikz-cd}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definiton}[section]
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{construction}{Construction}[theorem]
+
+\begin{document}
+\paragraph{A note on Free groups(borrowed from Hungerford Ch1)}
+\begin{definition}[Concrete category] %{{{ Concrete category		Definition
+	A category $ \mathcal{A}  $ , along with a \textcolor{red}{ faithful functor to $ Set $ }
+\end{definition}
+
+\begin{definition}[Free object on a set] %{{{ Free object 		Definition
+	Let $ A $ be an object of concrete category $ \mathcal{A}  $ ,$ \, X \neq \phi $ a set, and a map $ i:X \rightarrow A $. Then, $ A $ is said to be free on the set X iff
+	\begin{equation*}
+		B\in \mathcal{B} \text{ and }f:X\rightarrow B\implies
+		\begin{tikzcd}
+			X \arrow{r}{i} \arrow [swap]{dr}{f} & A \arrow{d}{g} \\ & B
+		\end{tikzcd}
+		\text{ commutes i.e. }\exists! g \in \mathcal{A}(A,B)\text{ such that } g \circ i = f
+	\end{equation*}
+
+
+
+
+\end{definition}
+
+\begin{theorem}[Free objects depend only on the cardinality of the set they're free on] %{{{ Free objects depend only on the cardinality of the set they're free on		Definition
+	If $ \text{ F and F' }$ are objects of a concrete category $ \mathcal{A} $ such that they're free on $ X \text{ and } X' $ respectively. Then
+	\[ |X|=|X'| \implies F \cong F'\]
+\end{theorem}
+\begin{proof}
+	Let $ A,B $ be free on $ X,Y ;\; i:X \rightarrow A \text{ and } j:Y \rightarrow B $. With $ |X|=|Y| $ , so, there's a bijection, $ p: X \leftrightarrow Y $
+	\begin{equation}
+		\text{As $ A$  is free on $ X $ ,}
+		\begin{tikzcd}
+			X \arrow{r}{i} \arrow[swap]{dr}{p \circ j} & A  \arrow{d}{f} \\ & B
+		\end{tikzcd}
+		\text{ i.e. }
+		\begin{tikzcd}
+			X \arrow{r}{i} \arrow{d}{p} & A  \arrow{d}{f} \\ Y \arrow{r}{j} & B
+		\end{tikzcd}
+		\text{ must commute for some unique f.}
+	\end{equation}
+
+	\begin{equation}
+		\text{Similarly, as $ B$  is free on $ Y $ ,}
+		\begin{tikzcd}
+			Y \arrow{r}{j} \arrow[swap]{dr}{p^{-1} \circ i} & B  \arrow{d}{g} \\ & A
+		\end{tikzcd}
+		\text{ i.e. }
+		\begin{tikzcd}
+			Y \arrow{r}{j} \arrow{d}{p^{-1}} & B  \arrow{d}{g} \\ X \arrow{r}{i} & A
+		\end{tikzcd}
+		\text{ must commute for some unique g.}
+	\end{equation}
+	\begin{equation*}
+		\text{ Combining (1):}
+		\begin{tikzcd}
+			A \arrow{r}{f} & B \\ X \arrow{u}{i} \arrow{r}{p} & Y\arrow{u}{j}
+		\end{tikzcd}
+		\text{ and (2):}
+		\begin{tikzcd}
+			B \arrow{r}{g} & A \\ Y \arrow{u}{j} \arrow{r}{p^{-1}} & X\arrow{u}{i}
+		\end{tikzcd}
+		\text{ gives }
+		\begin{tikzcd}
+			A \arrow{r}{f \circ g} &[4em] A \\ X \arrow{u}{i} \arrow{r}{p \circ p^{-1} = 1_X} & X\arrow{u}{i}
+		\end{tikzcd}
+		\text{ So that }
+		\begin{tikzcd}
+			X \arrow{r}{i} \arrow[swap]{dr}{i \circ 1_X = i} &A \arrow{d}{f \circ g} \\ &A
+		\end{tikzcd}
+	\end{equation*}
+	But again, as $ A $ is free on $ X $ , there exists a unique $ \psi $ satisfying $ \psi \circ i = i $. Thus, $ \psi = f \circ g $ , and as $ 1_A \circ i = i $, uniqueness of $ \psi $ gives $ f \circ g = 1_A $. Now, via symmetry, $ g \circ f = 1_B $. Hence, $A \cong B$
+\end{proof}
+\begin{corollary}
+	Two objects of a category are free on the same set only if they're isomorphic.
+\end{corollary}
+
+\begin{construction}[Free Group on a set]
+	Given X, constructing the free group on it, F(X):\\
+	If $X=\phi$, then define F(X) to be the trivial group. Else, let$X\neq \phi$, thus there exists a disjoint set, $X'$with $|X|=|X'|$.
+	And also, choose a set $I$ with exactly one element, say $\mathcal{I} $ such that $I\cap X=\phi =I\cap X'$.\\
+	Now, a \textbf{ \textit{word} \textcolor{blue}{(on X)}} is defined to be a sequence $(a_n)$, of symbols,
+	with at most finitely many terms that aren't $\mathcal{I}$:
+	\[ (a_n)_{n\in \mathbb{N}} \text{ s.t. } a_i \in X \cup I \cup X'
+	\text{ and } \exists k \in \mathbb{N}: \forall i \geq k,\; a_i=\mathcal{I}   \]
+	Define \textbf{\textit{empty word, $1$}} as $(\mathcal{I})_{n \in \mathbb{N}}$.
+	A word is said to be \textbf{\textit{reduced}} iff
+	\[ \text{ (i) }   \forall x \in X , a_i=x \implies a_{i+1} \neq x^{-1}
+	\text{ and }  a_i = x^{-1} \implies a_{i+1} \neq x \]
+	\[ \text{ (ii) } a_k=\mathcal{I} \implies \forall i \geq k , a_i=\mathcal{I} \]
+	So, every non-empty reduced word is of the form
+	\[ x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n},\mathcal{I},\mathcal{I},\mathcal{I}...
+	\text{ with } n \in \mathbb{N} ,\; x_i \in X ,\; \lambda_i = \pm 1 \]
+	And two reduced words are equal if and only if they're equal as sequences.
+	Now, define the inclusion map,
+	\[ i:X \rightarrow F(X) \text{ as } \forall x \in X, x \mapsto (x^1,\mathcal{I},.. ) \]
+	Finally, define a binary operation on the set of all reduced words, $ .:F(X) \rightarrow F(X)$:
+	\[ (a) \text{ the empty word, 1 is the identity, } 1.w=w=w.1 \; \;\forall w \]
+	\[ (b) \text{ for non-empty, reduced words: } w=(x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n}), \;
+	w' =(y_1^{\lambda_1},y_2^{\lambda_2},...,y_m^{\lambda_m}), \]
+	If $n\leq m$, let k be the largest integer such that $0\leq k \leq n$
+	\[ (x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n}).
+		(y_1^{\lambda_1},y_2^{\lambda_2},...,y_m^{\lambda_m}):=
+		\begin{cases}
+			(x_1^{\lambda_1},x_2^{\lambda_2},...,x_{n-k}^{\lambda_{n-k}},
+			y_{k+1}^{\lambda_{k+1}},...,y_m^{\lambda_m}) &\text{ if } k<n \\
+			\hfil	(y_{n+1}^{\lambda_{n+1}},...,y_m^{\lambda_m}) & \text{ if } k=n<m \\
+			\hfil		\mathcal{I} & k=m=n
+		\end{cases} \]
+		Else, if $n>m$, let k be the largest integer such that $0\leq k \leq m$
+		\[ (x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n}).
+			(y_1^{\lambda_1},y_2^{\lambda_2},...,y_m^{\lambda_m}):=
+			\begin{cases}
+				(x_1^{\lambda_1},x_2^{\lambda_2},...,x_{n-k}^{\lambda_{n-k}},
+				y_{k+1}^{\lambda_{k+1}},...,y_m^{\lambda_m}) &\text{ if } k<m \\
+				\hfil	(x_1^{\lambda_1},x_2^{\lambda_2},...,x_{n-m}^{\lambda_{n-m}}) & \text{ if } k=m<n \\
+			\end{cases} \]
+			Essentially, concatenation followed by reduction. So, now F(X) has a binary operation on with an identity $\mathcal{I}$, and inverses ($(x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n})^{-1}=
+			(x_1^{-\lambda_1},x_2^{-\lambda_2},...,x_n^{-\lambda_n})$). So, just need to show associativity.\\
+			So, for each $x\in X$ and $\delta=\pm 1$ , define a map, $|x^{\delta}|:F(X) \rightarrow F(X)$ as $1 \mapsto x^\delta$ and
+			\[
+				(x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n}) \mapsto
+				\begin{cases}
+					(x^\delta x_1^{\lambda_1},x_2^{\lambda_2},...,x_n^{\lambda_n}) & \text{ if } x^\delta \neq x_1^{\delta_1}\\
+					\hfil (x_2^{\lambda_2},...,x_n^{\lambda_n}) & if x^\delta = x_1^{-\delta_1}
+
+				\end{cases}
+		\]
+		Essentially, pre-multiplication by $x^\delta$. So, as for any $x\in X$ , $|x||x^{-1}|=1_F=|x^{-1}||x|$. Thus , each of these maps is a bijection, and hence a permutation of $F(X)$. Let $A(F)$ be the permutation group on F(X) and it's subgroup generated by $\{|x| : x \in X\}$ be $F_o$. Now, let
+		\[ \psi : F \rightarrow F_o \text{ as } \mathcal{I} \mapsto 1_{F(X)} \text{ and } w=(x_1^{\delta_1},x_2^{\delta_2},...,x_n^{\delta_n}) \mapsto (|x_1^{\delta_1}| \circ |x_2^{\delta_2}|\circ...\circ|x_n^{\delta_n})| \]
+		\[ \text{ So that } \psi(w_1w_2)=|w_1|\circ |w_2|=\psi(w_1)\psi(w_2) \implies  \psi(u(vw)=|u|\circ |vw|= |u|\circ|v|\circ|w|=|uv|\circ|w|=\psi(uv(w))\]
+		\[ \text{ Thus, $F(X)$ is associative, and , } \mathcal{I} \mapsto 1_{F(X)} \implies \psi \text{ is 1-1 } \]
+		So, $\psi$ is an isomorphism between $F(X)$ and $F_o$ , and as the latter is a group, so is the former.
+		Moreover, $F(X)=<X>$ \textcolor{red}{need to show this}
+
+		\end{construction}
+
+
+		\end{document}

@@ -1,0 +1,15 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.pdf
+!assets/**
+*.bbl
+*.blg
+*.toc
+*.idx
+*.ilg
+*.ind
+*.nav
+*.snm

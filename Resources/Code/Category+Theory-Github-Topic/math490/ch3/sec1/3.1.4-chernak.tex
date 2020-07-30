@@ -1,0 +1,39 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\paragraph{}
+\begin{exercise}
+	Give a second proof of Proposition 3.1.7 by using the universal properties
+	of each of a pair of limit cones $ \lm \colon l \Rightarrow F $ and $
+	\lm' \colon l' \Rightarrow F $ to directly construct the unique
+	isomorphism $ l \cong l' $ between their apexes.
+\end{exercise}
+
+\begin{proof}
+Since $ \lm $ and $ \lm' $ are limit cones, for any cones $
+\Lm\colon c\Rightarrow F $ and  $ \Lm'\colon c^\prime\Rightarrow F $ there are
+unique morphisms $ f \colon c\rightarrow l $ and $ f^\prime \colon c'
+\rightarrow l' $ such that $\Lm =\lm f$ and $\Lm^\prime
+=\lm^\prime f^\prime$.
+
+In the case in which $\Lm=\lm$ and $\Lm^\prime =\lm^\prime$, the
+unique $f$ and $f^\prime$ satisfying $\lm=\lm f$ and $\lm^\prime
+=\lm^\prime f$ are $f=1_l$ and $f^\prime =1_{l^\prime}$.
+
+In the case in which $\Lm=\lm^\prime$ and $\Lm^\prime =\lm$ we
+obtain unique morphisms $g\colon l^\prime\rightarrow l$ and $g^\prime\colon l\rightarrow
+l^\prime$ such that $\lm^\prime =\lm g$ and $\lm =\lm^\prime
+g^\prime$.
+
+Thus, $\lm =\lm^\prime g^\prime =\lm gg^\prime$. But, we have
+already seen that the unique morphism $f$ such that $\lm =\lm f$ is
+$1_l$. So, $gg^\prime =1_l$. Similarly, $\lm^\prime =\lm
+g=\lm^\prime g^\prime g$ and a similar uniqueness argument made above shows
+us that $g^\prime g=1_{l^\prime}$.
+
+So, $g$ and $g^\prime$ are inverse isomorphisms between $l$ and $l^\prime$ as
+required.
+
+\end{proof}
+
+\end{document}

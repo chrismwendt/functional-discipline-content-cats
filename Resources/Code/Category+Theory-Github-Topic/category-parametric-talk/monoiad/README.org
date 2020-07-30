@@ -1,0 +1,16 @@
+#+title: The Monoiad
+an epic journey through monoids
+
+This talk is available in (and slightly different between) [[file:haskell.org][Haskell]] and [[file:scala.org][Scala]] versions.
+
+* Abstract
+
+Monoids provide a vast landscape of concepts that we rely on in FP. Applicatives, monads, categories – all of them are monoids, as is much else. The epic takes us on a journey with this fundamental structure. We’ll move between everyday code, some niche areas of the language, and category theory.
+
+* Description
+
+We’ll start with the venerable Monoid, explain in detail what it is and the many places it appears. Then we’ll generalize it in various directions, to see where else those same ideas appear. We’ll also see how monoids combine to form richer structures like lattices, rings, and duoids. And, as is traditional with an epic, we’ll return home to the monoid itself, and see what it could be built upon, raising questions about what, if anything, is actually fundamental.
+
+This talk is grounded in practice, with some digressions into “what could be”. The talk will touch on category theory and some lesser-known language features and extensions that help tie all the ideas together.
+
+

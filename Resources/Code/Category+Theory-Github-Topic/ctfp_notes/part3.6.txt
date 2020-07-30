@@ -1,0 +1,30 @@
+monad is just a monoid in the category of endofunctors,
+whats the problem?
+
+recall
+monoid can be represented as single object category
+    whose endomorphisms form a homset(id,id)
+
+monad defined by some T with
+    η ::    () -> a     (pure)     
+    μ :: (a,a) -> a     (join)
+
+this is a cartesian category
+(we have a terminal obj, () and product, a x a)
+
+we want to get to a monoid, which requires
+    associativity law
+        μ(μ(x. y), z) =μ(x, μ(y, z))
+    unit laws
+        μ(η (), x) = x
+        μ(x, η ()) = x
+
+now we have a monoidal category of endofunctors
+wlog lets pick some element, an endofunctor T
+and also the id endofunctor.
+the morphism between these, lets call η
+recall morphisms on functors are natural transformations
+this is exactly our monad's pure
+similarly, consider T∘T, also an element in
+our category of endofunctors
+again, the NT from T² to T, was μ, monad bind (>>=)

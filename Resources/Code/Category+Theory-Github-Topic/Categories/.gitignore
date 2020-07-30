@@ -1,0 +1,13 @@
+Makefile
+Makefile.conf
+.Makefile.d
+*~
+*.glob
+*.v.d
+*.vo
+*.aux
+.coq-native
+*.bak
+*#*
+*.vok
+*.vos

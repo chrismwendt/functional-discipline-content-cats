@@ -1,0 +1,16 @@
+#+SETUPFILE:   notes.org
+#+TITLE:       VirtualBox Notes
+#+DATE:        2015-12-12
+#+DESCRIPTION: Notes I find useful as I experiment with VirtualBox.
+#+KEYWORDS:    VirtualBox
+
+#+BEGIN_SRC sh
+VBoxManage internalcommands createrawvmdk \
+           -filename ~/VirtualBox\ VMs/${VM_NAME}/${DISK_NAME}.vmdk
+           -rawdisk /dev/disk${DISK_NUMBER}s${PARTITION_NUMBER}
+#+END_SRC
+
+Make it "Retina".
+#+BEGIN_SRC sh
+VBoxManage controlvm ${VM_NAME} setvideomodehint 2048 1280 32
+#+END_SRC

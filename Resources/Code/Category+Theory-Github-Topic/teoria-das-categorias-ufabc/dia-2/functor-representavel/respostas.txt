@@ -1,0 +1,6 @@
+Respostas:
+
+a. Uma lista de `m`, assim: `[m]`.
+b. Para recuperar o estado inicial nesse caso, seria aplicar `[]` a `f`, assim: `f []`.
+c. Deve-se compor `f` com `(mv:)`, dessa forma: `(f . (mv:))`.
+d. `index (ts !! fromEnum mv) mvs`.

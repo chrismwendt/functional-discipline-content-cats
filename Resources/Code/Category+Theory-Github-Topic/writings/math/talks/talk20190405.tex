@@ -1,0 +1,1041 @@
+%%%%%%%%%%%%%
+% Variables %
+%%%%%%%%%%%%%
+
+% Language
+\setvariables [document] [language=en]
+
+% Version and mode
+\setvariables [document] [version=final]    % {final, concept, temporary}
+\setvariables [document] [mode=presentation]    % {presentation, manuscript, handout}
+
+% Colors
+% https://coolors.co/app
+\setvariables [document] [color-link-external=royalblue]
+\setvariables [document] [color-link-internal=violetred]
+\setvariables [document] [color-background-0=white]
+\setvariables [document] [color-background-1=mistyrose]
+\setvariables [document] [color-background-2=whitesmoke]
+\setvariables [document] [color-foreground-0=deepskyblue4]
+\setvariables [document] [color-foreground-1=firebrick4]
+\setvariables [document] [color-foreground-2=darkslategray]
+
+% Fonts
+% Options: palatino, xitsbidi, euler
+\setvariables [document] [font=palatino]
+\setvariables [document] [fontsize-presentation=38pt]
+\setvariables [document] [fontsize-document=12pt]
+
+% Information
+\setvariables [document] [title={A generalization of stochastic integrals and its applications to large deviations theory}]
+\setvariables [document] [subtitle={General examination presentation}]
+\setvariables [document] [author={Sudip Sinha}]
+\setvariables [document] [date={2019-04-05}]
+\setvariables [document] [keyword={mathematics, probability, stochastic, integral, calculus, large deviations, applications}]
+
+% Logo
+\setvariables [document] [logo=MC_Logo_Symbol_672x668.png]
+
+% Environment
+\environment env-talks
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the document starts.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\starttext
+
+\startfrontmatter
+
+%%%%%%%%%%%%%%%%
+% Front matter %
+%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-0}]
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+
+% \startmode [handout]
+% \startcolumns
+% \stopmode
+
+
+% Introduction
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+\startmode [presentation]
+
+\startslide
+
+\startalign [middle]
+
+	{\tfd
+		\color[\getvariable{document}{color-foreground-1}]{A generalization of Itô calculus}\\
+		and\\
+		\color[\getvariable{document}{color-foreground-2}]{large deviations theory}}
+
+	\blank[2*line]
+
+	{\tfb \getvariable{document}{author}}
+
+	\blank[line]
+
+	{\tfa \getvariable{document}{date}}
+
+	\blank[2*line]
+
+	Advisors
+
+	\color[\getvariable{document}{color-foreground-1}]{Prof. Hui-Hsiung Kuo}
+
+	\color[\getvariable{document}{color-foreground-2}]{Prof. Padmanabhan Sundar}
+\stopalign
+\stopslide
+
+
+% Table of contents
+\startslide [title={Outline}]
+	\placecontent
+
+\stopslide
+\stopmode
+
+% \startmode [manuscript]
+
+% This presentation is going to be on two topics:
+% \startitemize [n,nowhite,after]
+% 	\item  Generalization of stochastic integrals developed primarily by Professor H.-H. Kuo
+% 	\item  Applications of generalization in large deviations theory
+% \stopitemize
+
+% \stopmode
+
+\stopfrontmatter
+
+
+
+\startbodymatter
+
+%%%%%%%%%%%%%%%%
+% Introduction %
+%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-0}]
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+\startsection [title={Introduction and motivation}, reference=sec:introduction]
+
+\startmode [presentation]
+
+\startslide [title={Quick revision and notations}]
+
+	\startitemize [4]
+
+		\item  Let \m{T ∈ (0, ∞)}, and denote \m{t ∈ [0, T]}.
+
+		\item  Let \m{(Ω, ℱ, ℱ_{\argdotsub}, ℙ)} be a filtered probability space.
+
+		\item  \m{B_{\argdotsub}} is a Brownian motion on \m{(Ω, ℱ, ℱ_{\argdotsub}, ℙ)}.
+
+		\item  Properties of \m{B_{\argdotsub}}
+			\startitemize [5, columns, joinedup]
+				\item  starts at 0
+				\item  has independent increments
+				\item  \m{B_t - B_s ∼ 𝓝(0, t - s)}
+				\item  continuous paths (a.s.)
+				\item  is a.s. nowhere differentiable
+				\item  has \bad{unbounded linear variation \frown}
+				\item  has \good{bounded quadratic variation \smile}
+				\item  \m{𝔼(B_t B_s) = s ∧ t}
+				\item  martingale
+			\stopitemize
+
+		\item  \bad{Naive integration w.r.t. \m{B_t}: not possible}.
+
+		\item  A stochastic process \m{X_{\argdotsub}} is called \important{adapted} to \m{ℱ_{\argdotsub}} if \m{X_t} is measurable w.r.t. \m{ℱ_t} \m{∀t}.
+
+	\stopitemize
+\stopslide
+
+\startslide[title={Martingales and Markov processes}]
+
+	\startdefinition
+
+		Let \m{X_{\argdotsub}} be an integrable \m{ℱ_{\argdotsub}}-adapted stochastic process and let \m{0 ≤ s ≤ t ≤ T}. Then \m{X_{\argdotsub}} is called a \important{martingale} if \m{𝔼(X_t ∣ ℱ_s) = X_s}.
+		% \startitemize [5, joinedup]
+		% 	\item  \important{martingale} if \m{𝔼(X_t ∣ ℱ_s) = X_s},
+		% 	\item  \important{submartingale} if \m{𝔼(X_t ∣ ℱ_s) ≥ X_s},
+		% 	\item  \important{supermartingale} if \m{𝔼(X_t ∣ ℱ_s) ≤ X_s}.
+		% \stopitemize
+	\stopdefinition
+
+	\startremark
+
+		If \m{(X_n)} is a discrete-time martingale and \m{(H_n)} is an adapted process, then the process \m{Y_n = ∑_{j = 0}^{n - 1} H_j (X_{j + 1} - X_j) =: (H ∙ X)_n} is itself a martingale and called a \important{martingale transform} of \m{(X_n)}.
+	\stopremark
+
+	\startdefinition
+
+		A stochastic process \m{X_{\argdotsub}} is called \important{Markov} if for any \m{0 ≤ s ≤ t ≤ T}, we have
+		\startformula
+			ℙ(X_t ∈ E ∣ ℱ_s) = ℙ(X_t ∈ E ∣ X_s) .
+		\stopformula
+	\stopdefinition
+\stopslide
+
+\startslide [title={Wiener integral for \m{f ∈ L^2[0, T]}}]
+
+	\startitemize [4]
+
+		\item  Definition of the integral:
+			\startitemize [n, joinedup]
+				\item  Step functions \m{f = ∑_{j = 0}^{n-1} c_j 𝟙_{[t_j, t_{j + 1})}(t)}: Define \m{∫_0^T f(t) \d B_t  =  ∑_{j = 0}^{n-1} c_j Δ B_j}, where
+
+					\important{\m{Δ B_j = B_{t_{j + 1}} - B_{t_j}}}.
+
+				\item  \m{f ∈ L^2[0, T]}: Use step functions approximating \m{f} to extend the integral \important{a.s.}
+			\stopitemize
+
+		\item  Properties of the integral:
+			\startitemize [5, joinedup]
+				\item  Linear.
+				\item  \good{Gaussian distribution} with mean 0 and variance \m{\norm[f]_{L^2[0, T]}^2} (Itô isometry).
+				\item  Agrees with the Riemann–Stieltjes integral for continuous functions of bounded variation.
+			\stopitemize
+
+		\item  Properties of the associated process \m{I_{\argdotsub} = ∫_0^{\argdotsup} f(t) \d B_t}:
+			\startitemize [5, joinedup]
+				\item  continuity.
+				\item  martingale.
+			\stopitemize
+
+		\item  Problem: Cannot integrate stochastic processes.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Trying to integrate stochastic processes}]
+
+	\startitemize [4]
+
+		\item  \m{∫_0^T B_t \d B_t ≟}
+
+			Since \m{B_t} is continuous, let us try the Riemann–Stieltjes integral. Consider a sequence of partitions \m{Δ_n} such that \m{\norm[Δ_n] → 0}. Then
+			\startformula
+				∫_0^T B_t \d B_t  =  \lim ∑_{j = 0}^{n - 1} B_{t_j^*} Δ B_j .
+			\stopformula
+
+		\item  Choosing different endpoints for \m{t_j^*} gives us different results.
+			\starttabulate [|c|m|c|m|c|c|]
+				\NC  \m{t_j^*}  \NC  ∫_0^t B_s \d B_s  \NC  Intuitive?  \NC  𝔼  \NC  Martingale?  \NC  Theory  \NR
+				\FL
+				\NC  \good{left}   \NC  \good{\frac12 \brnd[B_t^2 - t]}  \NC  \good{\frown}  \NC  \good{0}  \NC  \good{\smile}  \NC  \good{Itô}  \NR
+				\NC  mid    \NC  \frac12 \brnd[B_t^2]  \NC  \smile  \NC  \frac12 t  \NC  \frown  \NC  Stratonovich  \NR
+				\NC  \bad{right}  \NC  \bad{\frac12 \brnd[B_t^2 + t]}  \NC  \bad{\frown}  \NC  \bad{t}  \NC  \bad{\frown}  \NC    \NR
+				\BL
+			\stoptabulate
+
+		\item  Which one do we choose?
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Itô integral \cite[short][Itô1944SI] for \m{X_{\argdotsub} ∈ L^2_{\text{ad}} ([0, T] × Ω)}}]
+
+	\startitemize [4]
+
+		\item  Definition of the integral:
+			\startitemize [n, joinedup]
+				\item  Adapted step processes \m{X_t(ω) = ∑_{j = 0}^{n-1} ξ_j(ω) 𝟙_{[t_j, t_{j + 1})}(t)}: define \m{∫_0^T X_t \d B_t  =  ∑_{j = 0}^{n-1} ξ_j Δ B_j}.
+				\item  \m{X ∈ L^2_{\text{ad}} ([0, T] × Ω)}: use step processes approximating \m{X} to extend the integral \important{in \m{L^2(Ω)}}.
+			\stopitemize
+
+		\item  Properties of the integral:
+			\startitemize [5, joinedup]
+				\item  Linear.
+				\item  Mean 0 and variance \m{\norm[f]_{L^2[0, T]}^2} \good{(Itô isometry)}.
+				\item  For \m{X_{\argdotsub}} continuous,
+					\m{∫_0^T X_t \d B_t
+						=  \lim ∫_0^T X_{\floor[\frac{t n}{n}]} \d B_t
+						=  \lim ∑_{j = 0}^{n - 1} X_{t_j} Δ B_j}.
+			\stopitemize
+
+		\item  Properties of the associated process \m{I_{\argdotsub} = ∫_0^{\argdotsup} X_t \d B_t}:
+			\startitemize [5, joinedup]
+				\item  continuity.
+				\item  martingale.
+			\stopitemize
+
+		\item  Example: \m{∫_0^t B_u \d B_u = \frac12 (B_t^2 - t) \quad ∀ t}.
+
+		% \item  Problem: Cannot integrate many continuous functions of \m{B_t}, for example \m{e^{B_t^2}}.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Itô integral for \m{X_{\argdotsub}} such that \m{∫_0^T X_t^2 \d t < ∞} a.s.}]
+
+	\startitemize [4]
+
+		\item  Definition: Use sequences of processes in \m{L^2_{\text{ad}} ([0, T] × Ω)} approximating \m{X} in probability to extend the integral \important{in probability}.
+
+		\item  Properties of the integral:
+			\startitemize [5, joinedup]
+				\item  Linear.
+				\item  \bad{Mean and variance? \frown}
+			\stopitemize
+
+		\item  Properties of the associated process \m{I_{\argdotsub} = ∫_0^{\argdotsup} X_t \d B_t}:
+			\startitemize [5, joinedup]
+				\item  continuity.
+				\item  \okay{local} martingale.
+			\stopitemize
+
+		\item  Example: \m{∫_0^T e^{B_t^2} \d B_t = ∫_0^{B_T} e^{t^2} \d t - ∫_0^T B_t e^{B_t^2} \d t}.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={The Itô formula}]
+
+	\startitemize [4]
+
+		% \item  A (local, continuous) \important{semimartingale} is a process \m{X_t} that can be written as \m{X_t = X_0 + M_t + A_t}, where
+		% \startitemize [n, joinedup]
+		% 	\item  \m{M_t} is a mean-zero (local, continuous) martingale, and
+		% 	\item  \m{A_t} is an right-continuous adapted process of locally bounded variation.
+		% \stopitemize
+		% This is equivalently represented in the \important{differential form} as \m{\d X_t = \d M_t + \d A_t}.
+
+		\item  An \important{Itô process} is a process of the form \m{X_{\argdotsub} = X_0 + ∫_0^{\argdotsup} m_t \d t + ∫_0^{\argdotsup} σ_t \d B_t}.
+
+		Equivalently expressed as \m{\d X_t = m_t \d t + σ_t \d B_t}.
+
+		% [Only makes sense when \m{∫_0^T \brnd[{\abs[m_s] + \abs[σ_s]^2}] \d s < ∞} a.s.]
+
+	\stopitemize
+
+	\starttheorem[title={\cite[short][Itô1944SI]}]
+		Let \m{X_t} be a \m{d}-dimensional Itô process, and assume \m{f ∈ C^{1, 2}(ℝ × ℝ)}. Then \m{f(t, X_t)} is also a \m{d}-dimensional Itô process given by
+			\startformula
+				\d f(t, X_t)  =  \frac{∂ f}{∂ t} (t, X_t) \d t
+				 +  \inn[(\D f) (t, X_t), \d X_t]
+				 +  \frac12 \inn[\d X_t, (D^2 f)(t, X_t) \, \d X_t] ,
+			\stopformula
+			% \startformula
+			% 	\d Y_t
+			% 	=  \d f(X_t)
+			% 	=  ∑_{j = 1}^d  \frac{∂f}{∂x_j} (X_t)  \d A_t^{(j)}
+			% 	 + ∑_{j = 1}^d  \frac{∂f}{∂x_j} (X_t) \d M_t^{(j)}
+			% 	 + \frac12 ∑_{j, k = 1}^d  \frac{∂^2 f}{∂x_j ∂x_k} (X_t) \d \inn[M^{(j)}, M^{(k)}]_t ,
+			% \stopformula
+			where we use the rule \important{\m{\d B_t ⊗ \d B_t = I_d \d t}}.
+	\stoptheorem
+
+	\startitemize [4]
+
+		\item  Example: For \m{σ} constant, \m{𝓔_t = \exp\brnd[σ B_t - \frac12 σ^2 t]}, \m{\d 𝓔_t = \comment{- \frac12 σ^2 𝓔_t \d t} + σ 𝓔_t \d B_t \comment{+ \frac12 σ^2 𝓔_t (\d B_t)^2}}.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Exponential processes and the Girsanov theorem}]
+
+	\startitemize [4]
+
+		\item  Let \m{h_{\argdotsub}} be an adapted stochastic process. The associated \important{exponential process} is defined as
+			\startformula
+				𝓔^{(h)}_{\argdotsub} = \exp\brnd[∫_0^{\argdotsup} h_t \d B_t - \frac12 ∫_0^{\argdotsup} h_t^2 \d t] .
+			\stopformula
+
+		\item  The exponential process is a martingale if and only if \m{𝔼 𝓔^{(h)}_t = 1 \ ∀ t}.
+
+		\item  The \important{Novikov condition}:
+			The exponential process is a martingale if \m{𝔼 \exp\brnd[\frac12 ∫_0^T h_t^2 \d t] < ∞}.
+
+		\item  The \important{Girsanov theorem} \cite[short][Girsanov1960]:
+			The process \m{W_{\argdotsub} = B_{\argdotsub} - ∫_0^{\argdotsup} h_t \d t} is a Brownian motion under the probability measure \m{\widetilde{ℙ}} defined by the Radon-Nikodym derivative
+			\m{\frac{\d \widetilde{ℙ}}{\d ℙ} = 𝓔^{(h)}_T}.
+
+			% Moreover the process \m{Z_t := 𝔼 \brnd[𝓔^{h}_T ∣ 𝓕_t]} is a martingale.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Stochastic differential equations}]
+
+	\startitemize [4]
+
+		\item  Let \m{ξ ∈ L^2(Ω)} be independent of \m{B_{\argdotsub}}, and \m{m, σ: [0, T] × ℝ → ℝ} have \quote{nice} measurability.
+		% \m{m, σ: [0, T] × ℝ × Ω → ℝ} be \m{𝓑[0, T] × 𝓑(ℝ) × 𝓕} measurable such that \m{m(t, ⋅, ⋅)} and \m{σ(t, ⋅, ⋅)} are \m{𝓑(ℝ) × 𝓕_t} measurable \m{∀ t}.
+
+			Then a \m{𝓕_t}-adapted stochastic process \m{X_t} is called a solution of the \important{stochastic \emph{integral} equation} \important{\m{X_t = ξ + ∫_0^t m(s, X_s) \d s + ∫_0^t σ(s, X_s) \d B_s}} if for each \m{t}, the \m{X_t} satisfies the integral equation a.s.
+
+		\item  \important{Stochastic \emph{differential} equation} \m{\d X_t = m(t, X_t) \d t + σ(t, X_t) \d B_t, \ X_0 = ξ} is a \emph{formal representation}.
+	\stopitemize
+
+	\starttheorem [title={Existence and uniqueness, Markov property}]
+
+		% The SDE above has a unique solution if there exists an \m{M > 0} such that the following two conditions are satisfied:
+		% \startitemize [5, joinedup]
+		% 	\item  (Lipschitz condition) \m{\abs[m(t, x) - m(t, y)]^2 + \abs[σ(t, x) - σ(t, y)]^2 ≤ M \abs[x - y]^2} a.s.
+		% 	\item  (growth condition) \m{\abs[m(t, x)]^2 + \abs[σ(t, y)]^2 ≤ M \brnd[1 + {\abs[x]}^2]} a.s.
+		% \stopitemize
+		The SDE above has a \important{unique} solution if \m{m} and \m{σ} are \important{Lipschitz} and satisfy the \important{linear growth condition}.
+
+		The solution is a Markov process.
+
+		Moreover if \m{ξ ∈ ℝ} and \m{m, σ} are functions of only \m{x}, then the solution is also stationary.
+
+	\stoptheorem
+
+	\startitemize [5, joinedup]
+
+		\item  	Example: For \m{σ} constant, \m{\d 𝓔_t = σ 𝓔_t \d B_t, 𝓔_0 = 1} is solved by \m{𝓔_t = \exp\brnd[σ B_t - \frac12 σ^2 t]}.
+
+	\stopitemize
+\stopslide
+
+\startslide [title={Multiple Wiener–Itô integrals}]
+
+	\startitemize [4]
+
+		\item  How do we define the double integral?
+
+		\item  Naive idea: \m{∫_0^t ∫_0^t \d B_u \d B_v = ∫_0^t \d B_u ∫_0^t \d B_v = B_t^2}.
+
+			But \m{𝔼 B_t^2 = \ugly{t ≠ 0}}, so \ugly{no martingale property}. \frown
+
+		\item  Itô's idea: remove the diagonal to get
+		\startformula
+			∫_0^t ∫_0^t \d B_u \d B_v  =  2 ∫_0^t ∫_0^v \d B_u \d B_v  =  2 ∫_0^t B_v \d B_v  =  B_t^2 - t .
+		\stopformula
+
+
+	\stopitemize
+
+	\starttheorem[title={\cite[short][Itô1951MWI]}]
+		Let \m{f ∈ L^2\brnd[{[0, T]}^n]} and \m{\bad{\hat{f}}} be its symmetrization. Then
+		\startformula
+			∫_{[0, T]^n} f(t_1, …, t_n) \d B_{t_1} ⋯ \d B_{t_n}  =  \bad{n!} ∫_0^T ⋯ ∫_0^{\bad{t_{n-2}}} \brnd[∫_0^{\bad{t_{n-1}}} \bad{\hat{f}}(t_1, …, t_n) \d B_{t_n}] \d B_{t_{n-1}} ⋯ \d B_{t_1} .
+		\stopformula
+		% \m{\hat{f}(t_1, …, t_n)  =  \frac{1}{n!} ∑_{σ ∈ S_n} f(t_{σ(1)}, …, t_{σ(n)})}
+	\stoptheorem
+
+	% \startitemize [4]
+	% 	\item  Example: \m{}
+	% \stopitemize
+\stopslide
+
+
+\stopmode
+
+\stopsection
+
+\page    % Needed for correct color transition
+
+% \startmode [manuscript]
+
+% This is the first part and we are going to talk about generalization of stochastic integrals developed primarily by Professor H.-H. Kuo.
+
+% \stopmode
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A Generalization of stochastic calculus %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-1}]
+\startcolor  [\getvariable{document}{color-foreground-1}]    % text color
+
+\startsection [title={A Generalization of Itô calculus}, reference=sec:generalization-Itô-calculus]
+
+\startmode [presentation]
+
+\startslide [title={Motivation}]
+
+	\startitemize [4]
+
+		\item  Iterated integrals: Consider the iterated integral \m{∫_0^t ∫_0^t \d B_u \d B_v \ugly{= ∫_0^t B_t \d B_v ≟ B_t^2}}.
+
+		\item  Note that \m{𝔼(B_t^2) = \ugly{t ≠ 0}}, so \ugly{no martingale property} \frown.
+
+		\item  Stochastic differential equations with anticipation:
+
+			\startcombination [2*1]
+				{\startframed[width=0.5\textwidth, frame=off]
+					\startformula
+						\startmathcases
+							\NC   \d X_t =  \MC  X_t \d B_t \NR
+							\NC  \ \ X_0 =  \MC  \important{B_T}  \NR
+						\stopmathcases  \qquad \qquad  \text{or}
+					\stopformula
+				\stopframed}{}
+				{\startframed[width=0.5\textwidth, frame=off]
+					\startformula
+						\startmathcases
+							\NC   \d Y_t =  \MC  \important{B_T} \d B_t \NR
+							\NC  \ \ Y_0 =  \MC  1  \NR
+						\stopmathcases .
+					\stopformula
+				\stopframed}{}
+			\stopcombination
+
+		\item  Problem: We want to define \m{∫_0^T Z(t) \d B_t}, where \m{Z(\argdotmid)} is not (necessarily) adapted.
+
+		\item  Some approaches:
+		\startitemize [5, joinedup]
+			\item  Enlargement of filtration \m{𝓖_{\argdotsub} = 𝓕_{\argdotsub} ∨ σ(B_T)}, with Itô's decomposition of integrand \cite[short][Itô1978] \m{B_t = \brnd[B_t - ∫_0^t \frac{B_T - B_s}{T - s} \d s] + ∫_0^t \frac{B_T - B_s}{T - s} \d s}.
+			\item  White noise theory
+			\item  Malliavin calculus
+			% \item  …
+
+				% \m{B_t = \brnd[B_t - ∫_0^t \frac{B_T - B_s}{1 - s} \d s] + ∫_0^T \frac{B_T - B_s}{1 - s} \d s}
+		\stopitemize
+
+	\stopitemize
+\stopslide
+
+\startslide [title={The generalized integral \cite[short][AyedKuo2008, AyedKuo2010]}]
+
+	\startitemize [4]
+
+		\item  A process \m{Y^{\argdotsup}} and filtration \m{ℱ_{\argdotsub}} are called \important{instantly independent} if \m{Y^t} and \m{ℱ_t} are independent \m{∀ t}.
+
+			Example: The process \m{(B_T - B_{\argdotsub})} is instantly independent of the filtration generated by \m{B_{\argdotsub}}.
+
+		\item  Idea
+			\startitemize [n, joinedup]
+
+				\item  Decompose the integrand into \good{adapted} and \okay{instantly independent} parts.
+
+				\item  Evaluate the \good{adapted} and the \okay{instantly independent} parts at the \good{left} and \okay{right} endpoints.
+
+			\stopitemize
+
+		\item  Consider two continuous stochastic processes, \good{\m{X_t} adapted} and \okay{\m{Y^t} instantly independent} w.r.t. \m{ℱ_{\argdotsub}}. Then the integral \m{∫_0^T \good{X_t} \okay{Y^t} \d B_t} is \important{defined} as
+			\startformula
+				∫_0^T \good{X_t} \okay{Y^t} \d B_t  ≜  \ℙlim_{\norm[Δ_n] → 0}  ∑_{j = 0}^{n - 1} \good{X_{t_{j}}} \okay{Y^{t_{j+1}}} ΔB_j ,
+			\stopformula
+			provided that the limit exists in probability.
+
+		\item  Now, for any stochastic process \m{Z(t) = ∑_{k = 1}^n \good{X_t^{(k)}} \okay{Y^t_{(k)}}} we extend the definition by linearity.
+
+		\item  This is well-defined \cite[short][HwangKuoSaitôZhai2016].
+		%\m{∫_0^T Z(t) \d B_t = ∑_{k = 1}^n ∫_0^T Z(t) X_t^{(k)} Y^t_{(k)} \d B_t}.
+		% \startformula
+		% 	∫_0^T Z(t) \d B_t = ∑_{k = 1}^n ∫_0^T \good{X_t^{(k)}} \okay{Y^t_{(k)}} \d B_t
+		% \stopformula
+
+	\stopitemize
+\stopslide
+
+\startslide [title={A simple example}]
+	
+	\startformula \startalign
+		\NC  ∫_0^t B_T \d B_t
+			\NC =  ∫_0^t (\good{B_t} + \okay{(B_T - B_t)}) \d B_t
+			    =  \good{∫_0^t B_t \d B_t}  +  \okay{∫_0^t (B_T - B_t) \d B_t}
+		\NR \NC
+			\NC =  \good{\Ltwolim_{\norm[Δ_n] → 0} ∑_{j = 0}^{n - 1} B_{t_j} Δ B_j}
+				+  \okay{\Ltwolim_{\norm[Δ_n] → 0} ∑_{j = 0}^{n - 1} (B_T - B_{t_{j + 1}}) Δ B_j}
+		\NR \NC
+			\NC =  \Ltwolim_{\norm[Δ_n] → 0} ∑_{j = 0}^{n - 1} \brnd[B_T - Δ B_j] Δ B_j
+		\NR \NC
+			\NC =  B_T ⋅ \Ltwolim_{\norm[Δ_n] → 0} ∑_{j = 0}^{n - 1} Δ B_j - \Ltwolim_{\norm[Δ_n] → 0} ∑_{j = 0}^{n - 1} (Δ B_j)^2
+			    =  B_T B_t - t .
+	\stopalign \stopformula
+
+	\startitemize [4]
+
+		\item  Note that \m{𝔼(B_T B_t - t) = 0}.
+
+		\item  In general, \m{𝔼 ∫_0^t Z(s) \d B_s = 0}. \good{\smile}
+	\stopitemize
+\stopslide
+
+\startslide [title={The near-martingale property}]
+
+	\startitemize [4]
+
+		\item  Question: What are the analogues of the martingale property and the Markov property?
+
+		% \item  Answer for martingales: near-martingales \cite[short][KuoSaeTangSzozda2012].
+
+		\item  Example: \m{𝔼(B_T B_t - t ∣ ℱ_s) = B_s^2 - s ≠ B_T B_s - s}. \frown
+
+			But \m{𝔼(B_T B_s - s ∣ ℱ_s) = B_s^2 - s}. \smile
+
+		\item  Let \m{Z(t)} be a process such that \m{𝔼\abs[Z(t)] < ∞ \ ∀ t}, and \m{0 ≤ s ≤ t ≤ T}. Then \m{Z(t)} is called a \important{near-martingale} if \m{𝔼(Z(t) ∣ ℱ_s) = 𝔼(Z(s) ∣ ℱ_s)}.
+			% \startitemize [5, joinedup]
+			% 	\item  \important{near-martingale} if \m{𝔼(Z(t) ∣ ℱ_s) = 𝔼(Z(s) ∣ ℱ_s)},
+			% 	\item  \important{near-submartingale} if \m{𝔼(Z(t) ∣ ℱ_s) ≥ 𝔼(Z(s) ∣ ℱ_s)},
+			% 	\item  \important{near-supermartingale} if \m{𝔼(Z(t) ∣ ℱ_s) ≤ 𝔼(Z(s) ∣ ℱ_s)}.
+			% \stopitemize
+
+	\stopitemize
+
+	\starttheorem [title={\cite[short][KuoSaeTangSzozda2012]}]
+		Let \m{f} and \m{ϕ} be continuous functions on \m{ℝ}. Under integrability conditions, the processes \m{X_{\argdotsub} = ∫_0^{\argdotsup} f(B_t) ϕ(B_T - B_t) \d B_t} and \m{Y^{\argdotsup} = ∫_{\argdotsub}^T f(B_t) ϕ(B_T - B_t) \d B_t} are near-martingales.
+		% \startformula
+		% 	X_{\argdotsub} = ∫_0^{\argdotsup} f(B_t) ϕ(B_T - B_t) \d B_t
+		% 	\qquad \text{ and } \qquad
+		% 	Y^{\argdotsup} = ∫_{\argdotsub}^T f(B_t) ϕ(B_T - B_t) \d B_t
+		% \stopformula
+		% are near-martingales.
+	\stoptheorem
+
+	\starttheorem [title={\cite[short][HwangKuoSaitôZhai2017]}]
+		Let \m{Z(\argdotmid)} be a stochastic process bounded in \m{L^1}, and \m{X_{\argdotsub} = 𝔼(Z(\argdotmid) ∣ ℱ_{\argdotsub})}. Then \m{X_{\argdotsub}} is a (\good{sub}/\bad{super})martingale if and only if \m{Z(\argdotmid)} is a near-(\good{sub}/\bad{super})martingale.
+	\stoptheorem
+\stopslide
+
+\startslide [title={A generalized Itô formula \cite[short][HwangKuoSaitôZhai2016]}]
+
+	\starttabulate [|c|m|m|]
+		\NC  Process
+		\NC  \text{Definition}
+		\NC  \text{Representation}
+
+		\NR
+		\FL
+
+		\NC  \good{Itô}
+		\NC  \good{X_{\argdotsub} = X_0 + ∫_0^{\argdotsup} m_t \d t + ∫_0^{\argdotsup} σ_t \d B_t}
+		\NC  \good{\d X_t = m_t \d t + σ_t \d B_t}
+
+		\NR
+
+		\NC  \okay{instantly independent}
+		\NC  \okay{Y^{\argdotsup} = Y^0 + ∫_{\argdotsub}^T η^t \d t + ∫_{\argdotsub}^T ς^t \d B_t}
+		\NC  \okay{\d Y^t = - η^t \d t - ς^t \d B_t}
+
+		\NR
+		\BL
+	\stoptabulate
+
+	Here \m{η^t} and \m{ς^t} are instantly independent such that \m{Y^t} is also instantly independent.
+
+	\starttheorem[title={\cite[short][HwangKuoSaitôZhai2016]}]
+		Let \good{\m{\d X_t = m_t \d t + σ_t \d B_t}} be an \m{d}-dimensional \good{Itô} process, and
+
+		\okay{\m{\d Y^t = - η^t \d t - ς^t \d B_t}} be a \m{k}-dimensional \okay{instantly independent} process.
+		If \m{f(t, x, y) ∈ C^{1, 2, 2}(ℝ × ℝ^d × ℝ^k)}, then
+		\startformula \startalign[n=3]
+				\NC \d f(t, X_t, Y^t)  =
+				\NC \frac{∂ f}{∂ t}(t, X_t, Y^t) \d t
+				\NC + \good{\inn[(\D_x f) (t, X_t, Y^t), \d X_t]
+					+ \frac12 \inn[\d X_t, (D_x^2 f)(t, X_t, Y^t) \, \d X_t]}
+			\NR \NC
+				\NC \qquad \qquad \qquad
+				\NC + \okay{\inn[(\D_y f) (t, X_t, Y^t), \d Y^t]
+					- \frac12 \inn[\d Y^t, (D_y^2 f)(t, X_t, Y^t) \, \d Y^t]} ,
+		\stopalign \stopformula
+		where we use the rules \important{\m{\d B_t ⊗ \d B_t = I \d t}}, where \m{I} is the identity matrix.
+	\stoptheorem
+\stopslide
+
+\startslide [title={Iterated integrals}]
+
+	\starttheorem[title={\cite[short][Itô1951MWI]}]
+		Let \m{f ∈ L^2([0, T]^n)} and \m{\bad{\hat{f}}} be its symmetrization. Then
+		\startformula
+			∫_{[0, T]^n} f(t_1, …, t_n) \d B_{t_1} … \d B_{t_n}  =  \bad{n!} ∫_0^T ⋯ ∫_0^{\bad{t_{n-2}}} \brnd[∫_0^{\bad{t_{n-1}}} \bad{\hat{f}}(t_1, …, t_n) \d B_{t_n}] \d B_{t_{n-1}} … \d B_{t_1} .
+		\stopformula
+		% \m{\hat{f}(t_1, …, t_n)  =  \frac{1}{n!} ∑_{σ ∈ S_n} f(t_{σ(1)}, …, t_{σ(n)})}
+	\stoptheorem
+
+	\starttheorem[title={\cite[short][AyedKuo2010]}]
+		Let \m{f ∈ L^2([0, T]^n)}. Then
+		\startformula
+			∫_{[0, T]^n} f(t_1, …, t_n) \d B_{t_1} … \d B_{t_n}  =  ∫_0^T ⋯ ∫_0^T f(t_1, …, t_n) \d B_{t_n} … \d B_{t_1} .
+		\stopformula
+	\stoptheorem
+
+	Example\cite[short][HwangKuoSaitôZhai2016]: For the new integral, \m{∫_0^T \brnd[∫_0^T B_u \d u] \d B_v = ∫_0^T \brnd[∫_0^T B_u \d B_v] \d u}.
+\stopslide
+
+\startslide [title={A generalization of Itô isometry}]
+
+	\starttheorem [title={\cite[short][KuoSaeTangSzozda2012]}]
+		Let \m{ϕ} be an analytic function on \m{ℝ}. Then under integrability conditions and for each \m{t},
+		\startformula
+			𝔼\bsqr[{\brnd[∫_0^t ϕ(B_T - B_s) \d B_s]}^2]  =  ∫_0^t 𝔼\bsqr[{\brnd[ϕ(B_T - B_s)]}^2] \d s
+		\stopformula
+	\stoptheorem
+
+	\starttheorem [title={\cite[short][KuoSaeTangSzozda2013]}]
+		Let \m{f} and \m{ϕ} be \m{C^1} functions on \m{ℝ}. Then
+		\startformula \startalign
+			\NC  𝔼\bsqr[{\brnd[∫_0^T f(B_t) ϕ(B_T - B_t) \d B_t]}^2]
+			\NC  =  ∫_0^T 𝔼\bsqr[{\brnd[f(B_t) ϕ(B_T - B_t)]}^2] \d t
+			\NR  \NC  \NC  \quad + 2 ∫_0^T∫_0^{\bad{t}} 𝔼\bsqr[f(B_s) ϕ'(B_T - B_s) f'(B_s) ϕ(B_T - B_s)] \d s \d t .
+		\stopalign \stopformula
+	\stoptheorem
+\stopslide
+
+\startslide [title={A generalization of Girsanov theorem}]
+
+	\starttheorem[title={\cite[short][KuoPengSzozda2013b]}]
+		Let \m{X_{\argdotsub}} and \m{Y^{\argdotsup}} be continuous square-integrable stochastic processes such that \m{X_{\argdotsub}} is adapted and \m{Y^{\argdotsup}} is instantly independent.
+
+		Then the translated stochastic process \m{W_{\argdotsub} = B_{\argdotsub} - ∫_0^{\argdotsup} (X_t + Y^t) \d t} is a near-martingale under the probability measure \m{\widetilde{ℙ}} defined by the Radon-Nikodym derivative \m{\frac{\d \widetilde{ℙ}}{\d ℙ} = 𝓔^{(X + Y)}_T}.
+	\stoptheorem
+\stopslide
+
+\stopmode
+
+\stopsection
+
+\page    % Needed for correct color transition
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large deviations theory %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-2}]
+\startcolor [\getvariable{document}{color-foreground-2}]    % text color
+
+\startsection [title={Large deviations theory}, reference=sec:large-deviations-theory]
+
+\startmode [presentation]
+
+\startslide[title={What is it about?}]
+
+	\startitemize [4]
+
+		\item  A theory to find probabilities of rare events that decay exponentially.
+
+		\item  Started by Swedish actuarials Fredrik Esscher, Harald Cramér, Filip Lundberg.
+
+		\item  Unified by Varadhan in his 1966 paper \cite[short][Varadhan1966].
+
+		\item  Example: A problem faced by the insurance industry.
+			\startitemize [5, joinedup]
+				\item  Value of claims received on the \m{n}th day: \m{X_n} \$.
+				\item  Steady income from premium: \m{x} \$/day.
+				\item  Planning period: \m{n} days.
+				\item  Average expenditure: \m{\overline{X}_n = \frac1n ∑_{j = 1}^n X_j} \$/day.
+				\item  \emph{Question}: How should the company decide on the premium?
+				\item  \important\emph{Idea}: {Determine \m{x} such that \m{ℙ\bcrl[\overline{X}_n > x] < ε}, where \m{ε} is specified}.
+			\stopitemize
+	\stopitemize
+\stopslide
+
+\startslide [title={Insurance problem: setup}]
+
+	\startitemize [n]
+		\item  Let the following hold:
+			\startitemize [5, joinedup]
+				\item  \m{(Ω, ℱ, ℙ)} is a probability space.
+				\item  \m{(X_n)} is a sequence of i.i.d. random variables on \m{(Ω, ℱ, ℙ)} with finite moment generating function \m{M}.
+				\item  \important{\m{𝔼 X_1 = m}}, \m{𝕍 X_1 = σ^2}, and \m{X_1 ∼ μ}.
+				\item  \m{\overline{X}_n = \frac1n ∑_{j = 1}^n X_j}.
+			\stopitemize
+
+		\item  Asymptotic behavior of \m{\overline{X}_n}:
+			\startitemize [5, joinedup]
+				\item  \important{Weak law of large numbers: \m{\overline{X}_n \xrightarrow{ℙ} m}}.
+				\item  Central limit theorem: \m{\sqrt{n} (\overline{X}_n - m) \xrightarrow{𝓓} 𝓝(0, σ^2)}.
+			\stopitemize
+
+		\item  What is the rate for LLN?
+
+		% \item  We want to \quotation{control large deviations from the mean}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Insurance problem: large deviation bounds}]
+
+	\startitemize [n]
+		\item  For \m{x > m} and an arbitrary \m{θ > 0}, we get
+			\startformula
+				ℙ\bcrl[\overline{X}_n ≥ x]
+				=  ℙ\bcrl[e^{θn\overline{X}_n} ≥ e^{θnx}]
+				≤  e^{-θnx} 𝔼\brnd[e^{θn\overline{X}_n}]
+				=  e^{-θnx} M(θ)^n
+				=  e^{-n(θx - \log M(θ))} .
+			\stopformula
+
+		\item  Since \m{θ} was arbitrary, we have
+			\startformula
+				ℙ\bcrl[\overline{X}_n ≥ x]
+				≤  \inf_θ e^{-n(θx - \log M(θ))}
+				=  e^{-n \sup_θ (θx - \log M(θ))}
+				=: e^{-n I(x)} .
+			\stopformula
+
+		\item  Generalizing, we get the \important{large deviation upper bound}
+			\startformula
+				\important{\limsupm \frac1n \log ℙ\bcrl[\overline{X}_n ∈ F]  ≤  -\inf_F I  \qquad  ∀ F \text{ closed}} .
+			\stopformula
+
+		\item  We can also obtain a \important{large deviation lower bound} using an exponential change of measure
+			\startformula
+				\important{\liminfm \frac1n \log ℙ\bcrl[\overline{X}_n ∈ G]  ≥  -\inf_G I  \qquad  ∀ G \text{ open}} .
+			\stopformula
+
+		\item  We informally write \m{ℙ\bcrl[\overline{X}_n ∈ \d x] ≍ e^{-n I(x)} \d x} for \m{x ∈ ℝ}.
+	\stopitemize
+\stopslide
+
+\startslide [title={Definition of large deviation principle}]
+
+	\startitemize [4]
+
+		\item  The setup: \m{(X_n)} is a stochastic process on \m{(Ω, ℱ, ℙ)} taking values in a Polish space \m{(𝓧, d)}.
+
+		\item  A function \m{I: 𝓧 → [0, ∞]} is called a \important{rate function} if it has compact lower level sets.
+
+		% \item  \m{I} is lower semicontinuous and attains its infimum on every nonempty closed set.
+
+		% \item  For any Borel set \m{E}, denote \m{I(E) = \inf I(x)}.
+	\stopitemize
+
+	\startdefinition
+		\m{(X_n)} is said to satisfy the \important{large deviation principle on \m{𝓧} with rate function \m{I}} if the large deviation \okay{upper} and \okay{lower} bounds hold.
+		% \startformula \startalign[n=4]
+		% 	\NC  \text{(upper bound)}  \qquad  \NC  \limsupm \frac1n \log ℙ\bcrl[\overline{X}_n ∈ F]  \NC ≤  -\inf_{F} I  \NC  \qquad  ∀ F \text{ closed}  \NR
+		% 	\NC  \text{(lower bound)}  \qquad  \NC  \liminfm \frac1n \log ℙ\bcrl[\overline{X}_n ∈ G]  \NC ≥  -\inf_{G} I  \NC  \qquad  ∀ G \text{ open}
+		% \stopalign \stopformula
+	\stopdefinition
+
+	Example
+	\starttheorem [title={\cite[short][Cramér1938]}]
+		Let \m{(X_n)} be a sequence of i.i.d. real random variables with finite moment generating function \m{M}. Then \m{(\overline{X}_n)} follows the large deviation principle with rate function \m{I(x) = \sup_θ \brnd[θ x - \log M(θ)]}.
+	\stoptheorem
+\stopslide
+
+\startslide [title={Applications of the Cramér theorem}]
+
+	Rate functions for some common distributions
+	% \placetable[force,none]{}{%    % This centers the table
+	\starttabulate [|M|M|M|]
+		\FL
+		\NC  \text{Distribution}  \VL  M(θ)  \VL  I(x)  \NR
+		\FL
+		\NC  \text{Bernoulli}(p)  \VL  1 - p + p e^θ  \VL  \brnd[x \log x + (1-x) \log(1-x) - {\brnd[x \log \frac{1-p}{p} + \log{p}]}] 𝟙_{[0, 1]}(x) + ∞ 𝟙_{[0, 1]^∁}(x)  \NR
+		\NC \VL \VL \NR
+		\NC  \text{Poisson}(λ)  \VL  e^{λ(e^θ - 1)}  \VL  \brnd[λ - x + x \log \frac{x}{λ}] 𝟙_{[0, ∞)}(x) + ∞ 𝟙_{(-∞, 0)}(x)  \NR
+		\NC \VL \VL \NR
+		\NC  \text{Exp}(λ)   \VL  \inv[{\brnd[1 - \frac{θ}{λ}]}]  \VL  \brnd[λx - 1 + x \log(λ x)] 𝟙_{[0, ∞)}(x) + ∞ 𝟙_{(-∞, 0)}(x)  \NR
+		\NC \VL \VL \NR
+		\NC  𝓝(m, σ^2)  \VL  e^{m θ + \frac12 σ^2 θ^2}  \VL  \frac{(x - m)^2}{2 σ^2}  \NR %\NR
+		% \NC  χ^2(k)  \NC  (1 - 2 θ)^{-\frac{k}{2}}  \NC  \frac12 \brnd[x - k + k \log\frac{k}{x}]  \NR
+		\BL
+	\stoptabulate%}
+	% ToDo: Add more.
+	% ToDo: Add the computation in the appendix.
+\stopslide
+
+\startslide [title={The Schilder theorem}]
+
+	\startitemize [4]
+
+		\item  Aim: Estimate the probability that a scaled-down sample path of a \important{Brownian motion} will stray far from the mean path.
+
+		\item  Let \m{C_x} denote the set of continuous functions from \m{[0, T]} to \m{ℝ^d} starting at \m{x}, and
+
+			let \m{\text{CM}_x = \bcrl[ω ∈ C_x : ω \text{ is absolutely continuous and } ω_t' ∈ L^2{[0, T]}]}.
+
+		\item  Let \m{B_{\argdotsub}} be a \m{d}-dimensional Brownian motion, so \m{B_{\argdotsub} ∈ C_0 = C_0([0, T]; ℝ^d)}
+
+		\item  Let \m{\frac{1}{\sqrt{n}} B_t ∼ W^{(n)}}. Then \m{W^{(n)} = 𝓝\brnd[0, \frac{t}{n}] ⟹ δ_0} as \m{n → ∞}.
+		% This scales down the variance of the Brownian motion to \m{ε t}.
+
+	\stopitemize
+
+	\starttheorem [title={\cite[short][Schilder1966]}]
+		On the Banach space \m{\brnd[C_0, {\norm[⋅]}_∞]}, the sequence of probability measures \m{\brnd[W^{(n)}]} satisfies LDP with the rate function \m{I : C_0 → \clsr[ℝ]} given by
+		\startformula
+			I(ω)  =  \brnd[\frac12 ∫_0^T {\abs[ω_t']}^2 \d t] 𝟙_{\text{CM}_0}(ω) + ∞ 𝟙_{\text{CM}_0^∁}(ω)
+		\stopformula
+	\stoptheorem
+\stopslide
+
+\startslide [title={The Freidlin–Wentzell theorem}]
+
+	\startitemize [4]
+
+		\item  Aim: Estimate the probability that a scaled-down sample path of an \important{Itô diffusion} will stray far from the mean path.
+
+		\item  Let \m{X^{(n)}_{\argdotsub}} be the solution of the \m{d}-dimensional stochastic differential equation
+
+			\important{\m{\d X^{(n)}_t = m(X^{(n)}_t) \d t + \frac{1}{\sqrt{n}} σ(X^{(n)}_t) \d B_t , \ X^{(n)}_0 = x}},
+			where \m{m} and \m{σ} are sufficiently nice.
+
+		\item  Let \m{W^{(n)}_x} denote the law of \m{X^{(n)}_{\argdotsub}} starting at \m{x}.
+
+		\item  As \m{n → ∞}, \m{W^{(n)}_x ⟹ δ_ξ}, where \m{ξ} solves the ODE \m{\dot{ξ}(t) = m(ξ(t)), \ ξ(0) = x}.
+
+		% \item  Let \m{\text{CM}_x = \bcrl[ω ∈ C_x : ω \text{ is absolutely continuous and } ω_t' ∈ L^2{[0, T]}]}.
+	\stopitemize
+
+	% Generalizes the Schilder theorem for Itô diffusions.
+
+	\starttheorem [title={\cite[short][FreidlinWentzell2012]}]
+		For any fixed \m{x}, the sequence of probability measures \m{\brnd[W^{(n)}_x]} satisfies LDP with the rate function \m{I_x : C_0 → \clsr[ℝ]} given by
+		\startformula
+			I_x(ω)  =  \brnd[\frac12 ∫_0^T {\inn[ω_t' - m(ω_t), {\inv[A](ω_t)}{\brnd[ω_t' - m(ω_t)]}]} \d t] 𝟙_{\text{CM}_x}(ω) + ∞ 𝟙_{\text{CM}_x^∁}(ω) ,
+		\stopformula
+		where \m{A = σ σ^*}.
+	\stoptheorem
+\stopslide
+
+\stopmode
+
+\stopsection
+
+\page    % Needed for correct color transition
+
+
+
+%%%%%%%%%%%%%%
+% Conclusion %
+%%%%%%%%%%%%%%
+
+\setupbackgrounds [page] [
+	background={color,backgraphics,foreground},
+	backgroundcolor=\getvariable{document}{color-background-0}]
+\startcolor [\getvariable{document}{color-foreground-0}]    % text color
+
+\startsection [title={The way forward}, reference=sec:directions]
+
+\startmode [presentation]
+
+\startslide [title={Possible research directions}]
+
+	\startcolor [\getvariable{document}{color-foreground-1}]    % text color
+	\startitemize [4]
+
+		\item  Identify the class of integrable processes under the new integral.
+
+		\item  Give a broader generalization of the Itô isometry for the new integral.
+
+		\item  Provide a broader generalization of the Girsanov theorem.
+
+		\item  Formulate an extension of the new integral to stochastic differential equations with anticipating coefficients.
+
+		\item  Develop the near-Markov property for the new integral.
+	\stopitemize
+
+	\startcolor [\getvariable{document}{color-foreground-2}]    % text color
+	\startitemize [4]
+
+		\item  Prove Freidlin–Wentzell type results for SDEs with anticipating initial conditions.
+
+		\item  Study LDP results for SDEs with anticipating coefficients involving the new integral.
+
+		\item  Analyze LDP for linear SPDEs with anticipating initial conditions.
+	\stopitemize
+\stopslide
+
+\startslide
+
+	\startalign [middle]
+
+		\blank[4*line]
+
+		{\tfd Thank you!}
+
+	\stopalign
+\stopslide
+
+\stopmode
+
+\stopsection
+
+\stopbodymatter
+
+
+
+
+%%%%%%%%%%%%%%%
+% Back matter %
+%%%%%%%%%%%%%%%
+
+\startbackmatter
+
+\startsubject [title={Appendix}, reference=sub:appendix]
+
+\startmode [presentation]
+
+\startslide [title={Laplace principle and equivalence to LDP}]
+
+	\startdefinition [title={Laplace principle}]
+		\m{(X_n)} is said to satisfy the \important{Laplace principle on \m{𝓧} with rate function \m{I}} if for all bounded continuous functions \m{h}, we have
+		\startformula
+			\lim  \frac1n \log 𝔼\exp(-n h(X_n))  =  \inf_𝓧 (h + I)
+		\stopformula
+	\stopdefinition
+
+	\starttheorem
+		\m{(X_n)} satisfies LP on \m{𝓧} with rate function \m{I} if and only if \m{(X_n)} satisfies LDP on \m{𝓧} with the same rate function \m{I}.
+	\stoptheorem
+
+	\bold{Some important results}
+	\startitemize [5, nowhite]
+		\item  Uniqueness of the rate function.
+		\item  Continuity principle.
+			% Let \m{f:𝓧 → 𝓨} be a continuous map of Polish spaces. Then \m{(f(X_n))} satisfies Laplace principle with rate function \m{J(y) = \inf \bcrl[I(x): x ∈ {\inv[f]}(y)]}.
+		\item  Superexponential approximation preserves Laplace principle.
+		  % If \m{(Y_n)} is superexponentially close to \m{(X_n)}, then \m{(Y_n)} satisfies Laplace principle with the same rate function \m{I}.
+	\stopitemize
+\stopslide
+
+% \startslide[title={An application of Schilder theorem}]
+
+% 	\startitemize [4]
+
+% 		\item  \m{W\brnd[C_0 ∖ B_r(0)] = \bcrl[{\norm[B_{\argdotsub}]}_∞ > r]}
+
+% 		\item  \m{\bcrl[{\norm[B_{\argdotsub}]}_∞ > r]}
+% 	\stopitemize
+% \stopslide
+
+% \startslide[title={Using the continuity principle to extend the Schilder theorem}]
+% 	TODO
+% \stopslide
+
+% \startslide [title={Sanov theorem}]
+
+% 	\startitemize [4]
+
+% 		\item  \bold{Aim}: Provide a bound on the probability of observing an atypical sequence of samples from a given probability distribution.
+
+% 		\item
+% 	\stopitemize
+% \stopslide
+
+\startslide
+
+	\startalign [middle]
+
+		\blank[4*line]
+
+		{\tfd Thank you!}
+
+	\stopalign
+\stopslide
+
+\stopsubject
+
+\startslide [title={Bibliography}]
+	\placelistofpublications
+\stopslide
+\stopmode
+\stopbackmatter
+
+\stoptext

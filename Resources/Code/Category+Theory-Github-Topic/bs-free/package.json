@@ -1,0 +1,34 @@
+{
+  "name": "bs-free",
+  "version": "0.7.0",
+  "description": "Free monads and other free structures for bucklescript",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Risto-Stevcev/bs-free.git"
+  },
+  "scripts": {
+    "clean": "bsb -clean-world",
+    "build": "bsb -make-world",
+    "watch": "bsb -make-world -w",
+    "test": "mocha lib/js/test/Test*.js",
+    "test-watch": "mocha -w lib/js/test/Test*.js"
+  },
+  "homepage": "https://github.com/Risto-Stevcev/bs-free",
+  "bugs": "https://github.com/Risto-Stevcev/bs-free/issues",
+  "keywords": [
+    "BuckleScript",
+    "reason"
+  ],
+  "author": "Risto Stevcev",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "bs-chai": "^0.4.0",
+    "bs-effects": "^0.10.0",
+    "bs-jsverify": "^0.10.0",
+    "bs-mocha": "^0.4.0",
+    "bs-platform": "^4.0.0"
+  },
+  "dependencies": {
+    "bs-abstract": "^0.16.0"
+  }
+}
