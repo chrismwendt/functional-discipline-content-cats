@@ -1,0 +1,9 @@
+language: clojure
+lein: lein
+sudo: false
+
+script:
+  - ./.travis/test-cljs.sh
+  - ./.travis/test-clj.sh
+jdk:
+  - oraclejdk8
