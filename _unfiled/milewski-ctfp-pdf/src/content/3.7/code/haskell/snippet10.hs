@@ -1,0 +1,1 @@
+extract (Prod e a) = a

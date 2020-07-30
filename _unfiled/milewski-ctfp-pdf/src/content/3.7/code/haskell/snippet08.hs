@@ -1,0 +1,1 @@
+data Product e a = Prod e a deriving Functor
