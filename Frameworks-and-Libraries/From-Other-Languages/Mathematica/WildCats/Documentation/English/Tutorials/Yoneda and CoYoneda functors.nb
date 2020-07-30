@@ -1,0 +1,1758 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     51654,       1748]
+NotebookOptionsPosition[     38884,       1355]
+NotebookOutlinePosition[     40673,       1402]
+CellTagsIndexPosition[     40630,       1399]
+WindowTitle->Yoneda and CoYoneda Functors - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"CoYoneda\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/CoYoneda"], "\<\"Yoneda\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/ref/Yoneda"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"WildCats/tutorial/Yoneda and CoYoneda functors\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/tutorial/Yoneda and CoYoneda functors"]}, Visible -> 
+            False]]; SelectionMove[
+         DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+Yoneda and CoYoneda functors.html"], StandardForm]], "Input", 
+              TextClipboardType -> "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/Yoneda and CoYoneda functors", ".html"]], 
+           None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["Yoneda and CoYoneda Functors", "Title",
+ CellID->247490821],
+
+Cell[TextData[{
+ "This terminates the current ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " session and starts a new clean session"
+}], "Text",
+ CellID->12172402],
+
+Cell["(recommended for troubleshooting)", "Text",
+ CellID->121457497],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->309037897],
+
+Cell[CellGroupData[{
+
+Cell["This loads the package:", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1825449234],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[2]:=",
+ CellID->98796305]
+}, Open  ]],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.70.0\"","\", \"",RowBox[{"{", 
+         RowBox[{"2014", ",", "1", ",", "31"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2013, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package and palette\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->543616126],
+
+Cell[CellGroupData[{
+
+Cell["Defining Yoneda and CoYoneda functors", "Section",
+ CellID->103575027],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Yoneda\[CloseCurlyQuote]s lemma states that any locally small category C can \
+be embedded in the category of contravariant functors from C to Set. This is \
+called the Yoneda embedding and is represented in WildCats by the Yoneda \
+functor Y.\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->561910019],
+
+Cell[TextData[{
+ "By duality arguments, any locally small category ",
+ Cell[BoxData[
+  SuperscriptBox["C", "OP"]], "InlineFormula"],
+ " can be embedded in the category of covariant functors from C to Set. This \
+is called the CoYoneda embedding and is represented in WildCats by the \
+CoYoneda functor ",
+ Cell[BoxData[
+  OverscriptBox["Y", "~"]]],
+ "."
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->36274927],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["Yoneda",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/Yoneda"], "[", 
+     "\[DoubleStruckCapitalC]", "]"}], Cell["\<\
+Yoneda functor of locally small category \[DoubleStruckCapitalC]\
+\>", "TableText"]},
+   {
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], Cell["\<\
+Parsed and formatted Yoneda functor of \[DoubleStruckCapitalC] \
+\>", "TableText"]},
+   {
+    RowBox[{"x", "\[RightTeeArrow]", 
+     RowBox[{
+      SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+      RowBox[{"-", 
+       RowBox[{",", "x"}]}], "]"}]}], Cell["\<\
+effect of Yoneda functor on objects/morphisms in \[DoubleStruckCapitalC]\
+\>", "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["CoYoneda",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/CoYoneda"], "[", 
+     "\[DoubleStruckCapitalC]", "]"}], Cell["\<\
+Coyoneda functor of locally small category \[DoubleStruckCapitalC]\
+\>", "TableText"]},
+   {
+    SubscriptBox[
+     OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"], Cell["\<\
+Parsed and formatted CoYoneda functor of \[DoubleStruckCapitalC] \
+\>", "TableText"]},
+   {
+    RowBox[{"x", "\[RightTeeArrow]", 
+     RowBox[{
+      SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+      RowBox[{"x", ",", "-"}], "]"}]}], Cell["\<\
+effect of CoYoneda functor on objects/morphisms in \[DoubleStruckCapitalC]\
+\>", "TableText"]}
+  }]], "DefinitionBox",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->2096742444],
+
+Cell["Yoneda and CoYoneda functors.", "Caption",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1891092685]
+}, Open  ]],
+
+Cell["\<\
+Just for aesthetic reasons, we can create a custom notation, so that the \
+index becomes a subscript\
+\>", "Text",
+ CellID->880910032],
+
+Cell[BoxData[{
+ RowBox[{"Notation", "[", 
+  RowBox[{
+   TemplateBox[{SubscriptBox["c", "n_"]},
+    "NotationTemplateTag"], " ", "\[DoubleLongLeftRightArrow]", " ", 
+   TemplateBox[{RowBox[{"c", "[", "n_", "]"}]},
+    "NotationTemplateTag"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Notation", "[", 
+  RowBox[{
+   RowBox[{
+    TemplateBox[{SubscriptBox["c", "n_"]},
+     "NotationTemplateTag"], " ", "\[DoubleLongLeftRightArrow]", " ", 
+    TemplateBox[{RowBox[{"c", "[", "n_", "]"}]},
+     "NotationTemplateTag"]}], ",", 
+   RowBox[{"WorkingForm", " ", "\[Rule]", " ", "TraditionalForm"}]}], 
+  "]"}]}], "Input",
+ CellLabel->"In[1]:=",
+ CellID->7103310],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Define an empty category (do not fill any object/morphism in the dialog box).\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->9672905],
+
+Cell[BoxData[
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalC]", "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[3]:=",
+ CellID->10570368],
+
+Cell["Assume \[DoubleStruckCapitalC] is locally small.", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->99786946],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"LocallySmallQ", "[", "\[DoubleStruckCapitalC]", "]"}], ":=", 
+  "True", "  "}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[4]:=",
+ CellID->101786351],
+
+Cell[TextData[{
+ "Define objects ",
+ Cell[BoxData[
+  SubscriptBox["c", "1"]], "InlineFormula"],
+ ", ",
+ Cell[BoxData[
+  SubscriptBox["c", "2"]], "InlineFormula"],
+ " in \[DoubleStruckCapitalC]"
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->868241699]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DefObject", "[", 
+    RowBox[{"#", ",", "\[DoubleStruckCapitalC]"}], "]"}], "&"}], "/@", 
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["c", "1"], ",", 
+    SubscriptBox["c", "2"]}], "}"}], " "}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->467587743],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->861435681]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define morphism f between them", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->172436016],
+
+Cell[BoxData[
+ RowBox[{"DefMorphism", "[", 
+  RowBox[{"f", ",", 
+   SubscriptBox["c", "1"], ",", 
+   SubscriptBox["c", "2"], ",", "\[DoubleStruckCapitalC]"}], "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[6]:=",
+ CellID->821003],
+
+Cell["\<\
+The Yoneda functor realizes the Yoneda embedding.\[LineSeparator]As a functor \
+it is: \
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->330190466],
+
+Cell["full", "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->26837992],
+
+Cell["faithful", "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->934546563],
+
+Cell["injective on objects ", "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->230936465],
+
+Cell["\<\
+injective on objects up to isomorphism (this is explained in the \
+\"applications\" section below)\
+\>", "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->8174831],
+
+Cell["\<\
+Several notations for the Yoneda functor exist in the literature.\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->318294225],
+
+Cell[BoxData[GridBox[{
+   {"Wikipedia", Cell[TextData[Cell[BoxData[
+     FormBox[
+      SubscriptBox["h", "-"], TraditionalForm]]]], "TableText"], Cell[
+    "Yoneda lemma", "TableText"]},
+   {"Borceux", 
+    StyleBox[
+     SubscriptBox["Y", "*"],
+     FontSlant->"Italic"], Cell[
+    "Handbook of Categorical Algebra I , page 18", "TableText"]},
+   {"Awodey", 
+    StyleBox["y",
+     FontSlant->"Italic"], Cell[
+    "Category Theory (2006), page 160", "TableText"]},
+   {
+    RowBox[{"Ad\[AAcute]mek", ",", " ", "Herrlich", ",", " ", "Strecker"}], 
+    StyleBox["E",
+     FontSlant->"Italic"], Cell[
+    "Abstract and Concrete Categories, page 88", "TableText"]},
+   {"MacLane", 
+    StyleBox[Cell[TextData[StyleBox["Y'",
+      FontSlant->"Italic"]], "TableText"],
+     FontSlant->"Italic"], Cell[
+    "Categories for the working mathematician, 2nd ed. page 62", "TableText"]}
+  }]], "DefinitionBox3Col",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->351034231],
+
+Cell["\<\
+Equivalent notation for the Yoneda functor found in the literature.\
+\>", "Caption",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->46797876],
+
+Cell[TextData[{
+ "Some basic facts about the Yoneda functor ",
+ Cell[BoxData[
+  SubscriptBox["Y", "\[DoubleStruckCapitalC]"]], "InlineFormula"]
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->96263417],
+
+Cell[BoxData[
+ RowBox[{"DC", "[", 
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"}], 
+  "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[7]:=",
+ CellID->80439347],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\[DoubleStruckCapitalC]", "\[Rule]", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]}], ",", 
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"]}], "}"}]], "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ ImageSize->{105, 25},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->234999654],
+
+Cell[TextData[{
+ "The Yoneda functor ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}]], "InlineFormula"],
+ " is simply ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+   RowBox[{"-", 
+    RowBox[{",", 
+     SubscriptBox["c", "1"]}]}], "]"}]], "InlineFormula"],
+ ", as we can see by supplying a second argument ",
+ Cell[BoxData[
+  SubscriptBox["c", "2"]], "InlineFormula"]
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->218765297],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}], "[", 
+  SubscriptBox["c", "2"], "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[8]:=",
+ CellID->35225488],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+  RowBox[{
+   SubscriptBox["c", "2"], ",", 
+   SubscriptBox["c", "1"]}], "]"}]], "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ ImageSize->{83, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->562993137],
+
+Cell[TextData[{
+ "Some basic facts about the CoYoneda functor ",
+ Cell[BoxData[
+  SubscriptBox[
+   OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"]], "InlineFormula"],
+ ". "
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1584084],
+
+Cell["Compare with the Yoneda functor.", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->342823791],
+
+Cell[BoxData[
+ RowBox[{"DC", "[", 
+  RowBox[{
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"], ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"}], 
+  "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[9]:=",
+ CellID->28836673],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["\[DoubleStruckCapitalC]", "OP"], "\[Rule]", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalC]"]}], ",", 
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"]}], "}"}]], "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ ImageSize->{105, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->65879565],
+
+Cell[TextData[{
+ "The CoYoneda functor ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}]], "InlineFormula"],
+ " is simply ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+   RowBox[{
+    SubscriptBox["c", "1"], ",", "-"}], "]"}]], "InlineFormula"],
+ ", as we can see by supplying a second argument ",
+ Cell[BoxData[
+  SubscriptBox["c", "2"]], "InlineFormula"]
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->8185602],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}], "[", 
+  SubscriptBox["c", "2"], "]"}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellLabel->"In[10]:=",
+ CellID->114063300],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Hom", "\[DoubleStruckCapitalC]"], "[", 
+  RowBox[{
+   SubscriptBox["c", "1"], ",", 
+   SubscriptBox["c", "2"]}], "]"}]], "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ ImageSize->{83, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[10]=",
+ CellID->543776841]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Yoneda Lemma", "Section",
+ CellID->5562548],
+
+Cell["\<\
+We follow now , very closely, the notation of Maclane\[CloseCurlyQuote]s \
+Categories for the working mathematician 2nd ed. (CWM) on Yoneda lemma, page \
+61\
+\>", "Text",
+ CellID->173532214],
+
+Cell["\<\
+Define empty category \[DoubleStruckCapitalD] and some objects\
+\>", "Text",
+ CellID->15174749],
+
+Cell[BoxData[
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalD]", "]"}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->116828022],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+  "a", ",", "b", ",", "c", ",", "d", ",", "r", ",", 
+   "\[DoubleStruckCapitalD]"}], "]"}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->531827677],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null"}], 
+  "}"}]], "Output",
+ ImageSize->{202, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[12]=",
+ CellID->342295536]
+}, Open  ]],
+
+Cell["Assert that \[DoubleStruckCapitalD] is locally small", "Text",
+ CellID->697480884],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"LocallySmallQ", "[", "\[DoubleStruckCapitalD]", "]"}], ":=", 
+  "True"}]], "Input",
+ CellLabel->"In[13]:=",
+ CellID->17836189],
+
+Cell[TextData[{
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalD]", "OP"]], "Input"],
+ " is automatically locally small"
+}], "Text",
+ CellID->663565181],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LocallySmallQ", "[", 
+  SuperscriptBox["\[DoubleStruckCapitalD]", "OP"], "]"}]], "Input",
+ CellLabel->"In[14]:=",
+ CellID->209722185],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[14]=",
+ CellID->30323028]
+}, Open  ]],
+
+Cell["Define a functor K: \[DoubleStruckCapitalD] \[Rule] \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", "Text",
+ CellID->550120930],
+
+Cell[BoxData[
+ RowBox[{"DefFunctor", "[", 
+  RowBox[{
+  "K", ",", "\[DoubleStruckCapitalD]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[15]:=",
+ CellID->127585431],
+
+Cell[TextData[{
+ "We will use the CoYoneda functor - ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "r", "]"}]], 
+  "Input"],
+ " - where MacLane uses the notation  D(r,-) for the covariant representable \
+functor. They are the same thing in WildCats, as was explained above."
+}], "Text",
+ CellID->199705966],
+
+Cell["Yoneda lemma states that the following expression", "Text",
+ CellID->542504366],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"iso1", "=", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Hom", 
+      SuperscriptBox[
+       "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+       "\[DoubleStruckCapitalD]"]], "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox[
+        OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "r", "]"}], 
+      ",", "K"}], "]"}], 
+    UnderscriptBox["\[TildeFullEqual]", 
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+    RowBox[{"K", "[", "r", "]"}]}]}], ";"}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->503605992],
+
+Cell["\<\
+is indeed an isomorphism in \[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]. \
+\>", "Text",
+ CellID->193742604],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iso1", "//", "IsomorphismQ"}]], "Input",
+ CellLabel->"In[17]:=",
+ CellID->32390109],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[17]=",
+ CellID->118712024]
+}, Open  ]],
+
+Cell[TextData[{
+ "We can replace K by any other functor \[DoubleStruckCapitalD] \[Rule] \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT],  for example the \
+representable functor ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox[
+    OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "b", "]"}]], 
+  "Input"]
+}], "Text",
+ CellID->84939469],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iso2", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Hom", 
+      SuperscriptBox[
+       "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+       "\[DoubleStruckCapitalD]"]], "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox[
+        OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "c", "]"}], 
+      ",", "K"}], "]"}], 
+    UnderscriptBox["\[TildeFullEqual]", 
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+    RowBox[{"K", "[", "c", "]"}]}], "/.", 
+   RowBox[{"K", "\[Rule]", " ", 
+    RowBox[{
+     SubscriptBox[
+      OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "b", 
+     "]"}]}]}]}]], "Input",
+ CellLabel->"In[18]:=",
+ CellID->371616158],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Hom", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalD]"]], "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox[
+      OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "c", "]"}], 
+    ",", 
+    RowBox[{
+     SubscriptBox[
+      OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "b", "]"}]}], 
+   "]"}], " ", 
+  UnderscriptBox["\[TildeFullEqual]", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+  RowBox[{
+   SubscriptBox["Hom", "\[DoubleStruckCapitalD]"], "[", 
+   RowBox[{"b", ",", "c"}], "]"}]}]], "Output",
+ ImageSize->{240, 22},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[18]=",
+ CellID->437449008]
+}, Open  ]],
+
+Cell["WildCats recognizes that this is indeed an isomorphism", "Text",
+ CellID->644485049],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iso2", "//", "IsomorphismQ"}]], "Input",
+ CellLabel->"In[19]:=",
+ CellID->74421724],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[19]=",
+ CellID->131256100]
+}, Open  ]],
+
+Cell["\<\
+The above result is the content of the Corollary in CWM, page 61\
+\>", "Text",
+ CellID->674664463],
+
+Cell["\<\
+Define another object Ka  in \[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]\
+\>", "Text",
+ CellID->511673471],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+  "Ka", ",", "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[20]:=",
+ CellID->861627858],
+
+Cell["Assert that is isomorphic to K[a]", "Text",
+ CellID->93845361],
+
+Cell[BoxData[
+ RowBox[{"DefIsomorphism", "[", 
+  RowBox[{"Ka", ",", 
+   RowBox[{"K", "[", "a", "]"}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[21]:=",
+ CellID->685943983],
+
+Cell["\<\
+Because of Yoneda lemma and the transitive property of isomorphisms, the \
+following isomorphism holds\
+\>", "Text",
+ CellID->269445622],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Hom", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalD]"]], "[", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox[
+       OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "a", "]"}], 
+     ",", "K"}], "]"}], 
+   UnderscriptBox["\[TildeFullEqual]", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], "Ka"}], "//", 
+  "IsomorphismQ"}]], "Input",
+ CellLabel->"In[22]:=",
+ CellID->953869199],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[22]=",
+ CellID->16954298]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalD]"]], "Input"],
+ " is generally ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " locally small"
+}], "Text",
+ CellID->464530424],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LocallySmallQ", "[", 
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalD]"], "]"}]], "Input",
+ CellLabel->"In[23]:=",
+ CellID->178717477],
+
+Cell[BoxData["False"], "Output",
+ ImageSize->{39, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[23]=",
+ CellID->505210381]
+}, Open  ]],
+
+Cell[TextData[{
+ "So ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Hom", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalD]"]], "[", 
+    RowBox[{"...", ",", "..."}], "]"}], " "}]], "Input"],
+ "is generally ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " a set"
+}], "Text",
+ CellID->304702858],
+
+Cell[TextData[{
+ "However, Yoneda lemma shows that ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["Hom", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalD]"]], "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox[
+      OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "a", "]"}], 
+    ",", "K"}], "]"}]], "Input"],
+ " is a set, since it is isomorphic to K[a], which is a set.\nWildCats is \
+aware of this."
+}], "Text",
+ CellID->451070401],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Hom", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalD]"]], "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox[
+      OverscriptBox["Y", "~"], "\[DoubleStruckCapitalD]"], "[", "a", "]"}], 
+    ",", "K"}], "]"}], "//", "SetQ"}]], "Input",
+ CellLabel->"In[24]:=",
+ CellID->167566955],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[24]=",
+ CellID->363470636]
+}, Open  ]],
+
+Cell[TextData[{
+ "There is another version of the Yoneda lemma, which uses Yoneda functors \
+and functors ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["\[DoubleStruckCapitalD]", "OP"], "\[Rule]", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}]], "Input"],
+ " . \nWe follow notation from Awodey 1st ed. page 162."
+}], "Text",
+ CellID->246415631],
+
+Cell[BoxData[
+ RowBox[{"DefFunctor", "[", 
+  RowBox[{"F", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalD]", "OP"], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[25]:=",
+ CellID->164439172],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"iso3", "=", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Hom", 
+      SuperscriptBox[
+       "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+       SuperscriptBox["\[DoubleStruckCapitalD]", "OP"]]], "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["Y", "\[DoubleStruckCapitalD]"], "[", "r", "]"}], ",", 
+      "F"}], "]"}], 
+    UnderscriptBox["\[TildeFullEqual]", 
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+    RowBox[{"F", "[", "r", "]"}]}]}], ";"}]], "Input",
+ CellLabel->"In[26]:=",
+ CellID->43882044],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"iso3", "//", "IsomorphismQ"}]], "Input",
+ CellLabel->"In[27]:=",
+ CellID->1042577864],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[27]=",
+ CellID->484215117]
+}, Open  ]],
+
+Cell[TextData[{
+ "Again ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Hom", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+      SuperscriptBox["\[DoubleStruckCapitalD]", "OP"]]], "[", 
+    RowBox[{"...", ",", "..."}], "]"}], " "}]], "Input"],
+ "is ",
+ "generally",
+ " ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " a set "
+}], "Text",
+ CellID->213863569],
+
+Cell[TextData[{
+ "However, this version of Yoneda lemma shows that ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["Hom", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     SuperscriptBox["\[DoubleStruckCapitalD]", "OP"]]], "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "\[DoubleStruckCapitalD]"], "[", "a", "]"}], ",", 
+    "F"}], "]"}]], "Input"],
+ " is a set."
+}], "Text",
+ CellID->26693396],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Hom", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     SuperscriptBox["\[DoubleStruckCapitalD]", "OP"]]], "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "\[DoubleStruckCapitalD]"], "[", "a", "]"}], ",", 
+    "F"}], "]"}], "//", "SetQ"}]], "Input",
+ CellLabel->"In[28]:=",
+ CellID->318368333],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[28]=",
+ CellID->20390659]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Yoneda Lemma: applications", "Section",
+ CellID->210009360],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "The Yoneda Functor is ",
+ StyleBox["injective on objects",
+  FontSlant->"Italic"],
+ ", this means that:"
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->64318814],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}], "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+     SubscriptBox["c", "2"], "]"}], " ", "\[DoubleLongRightArrow]", " ", 
+    SubscriptBox["c", "1"]}], "=", 
+   SubscriptBox["c", "2"]}]}]], "Text"]], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->67749225],
+
+Cell["\<\
+using traditional mathematical notation where \"=\" stands for equality and \
+\"\[DoubleLongRightArrow]\" stands for implies )\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->135170948],
+
+Cell[TextData[{
+ "So an equality in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]]],
+ " implies an equality in \[DoubleStruckCapitalC]."
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->438801830],
+
+Cell["\<\
+However the Yoneda functor enjoys an even more general property:\
+\>", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->27353801],
+
+Cell[TextData[{
+ "the Yoneda Functor is ",
+ StyleBox["injective on objects up to isomorphism",
+  FontSlant->"Italic"],
+ ", this means that:"
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->124636694],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "1"], "]"}], 
+  UnderscriptBox["\[TildeFullEqual]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]], 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "2"], "]"}], " ", "\[DoubleLongRightArrow]", " ", 
+   SubscriptBox["c", "1"]}], 
+  UnderscriptBox["\[TildeFullEqual]", "\[DoubleStruckCapitalC]"], 
+  SubscriptBox["c", "2"]}]], "Text"]], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->266578558],
+
+Cell[TextData[{
+ "So an isomorphism in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]]],
+ " implies an isomorphism in \[DoubleStruckCapitalC]."
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->528353914],
+
+Cell["Since Yoneda is a functor, we also know of course that", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->17303868],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  SubscriptBox["c", "1"], 
+  UnderscriptBox["\[TildeFullEqual]", "\[DoubleStruckCapitalC]"], 
+  RowBox[{
+   SubscriptBox["c", "2"], "  ", "\[DoubleLongRightArrow]", " ", 
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "1"], "]"}]}], 
+  UnderscriptBox["\[TildeFullEqual]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]], 
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "2"], "]"}]}]], "Text"]], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->431684841],
+
+Cell["So we have that", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->417018761],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  SubscriptBox["c", "1"], 
+  UnderscriptBox["\[TildeFullEqual]", "\[DoubleStruckCapitalC]"], 
+  RowBox[{
+   SubscriptBox["c", "2"], "  ", "\[DoubleLongLeftRightArrow]", "  ", 
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "1"], "]"}]}], 
+  UnderscriptBox["\[TildeFullEqual]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]], 
+  RowBox[{
+   SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+   SubscriptBox["c", "2"], "]"}]}]], "Text"]], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->74318310],
+
+Cell[TextData[{
+ "Yoneda lemma is therefore usually applied in this form:\nin order to show \
+that ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["c", "1"], 
+   UnderscriptBox["\[TildeFullEqual]", "\[DoubleStruckCapitalC]"], 
+   SubscriptBox["c", "2"], " "}]]],
+ ", we show that",
+ Cell[BoxData[
+  RowBox[{" ", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+     SubscriptBox["c", "1"], "]"}], 
+    UnderscriptBox["\[TildeFullEqual]", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+      SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]], 
+    RowBox[{
+     SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+     SubscriptBox["c", "2"], "]"}]}]}]]]
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->139404322],
+
+Cell["Now, to show that", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->101452635],
+
+Cell[TextData[{
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "1"], "]"}], 
+   UnderscriptBox["\[TildeFullEqual]", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]], 
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "2"], "]"}]}]]],
+ ", "
+}], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->28967294],
+
+Cell["we show that", "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->344058370],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "1"], "]"}], "[", "c", "]"}], 
+  UnderscriptBox["\[TildeFullEqual]", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "2"], "]"}], "[", "c", "]"}]}]]]], "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->69144346],
+
+Cell[TextData[{
+ "for all c in \[DoubleStruckCapitalC] and that these isomorphisms are",
+ StyleBox[" natural ",
+  FontSlant->"Italic"],
+ "in",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ "c."
+}], "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->82068512]
+}, Open  ]],
+
+Cell[TextData[{
+ "WildCats knows that the Yoneda Functor is ",
+ StyleBox["injective on objects up to isomorphism",
+  FontSlant->"Italic"],
+ ","
+}], "Text",
+ CellID->40732569],
+
+Cell[TextData[{
+ "Assert the isomorphism of two Yoneda ",
+ StyleBox["images",
+  FontSlant->"Italic"]
+}], "Text",
+ CellID->363057012],
+
+Cell[BoxData[
+ RowBox[{"DefIsomorphism", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "1"], "]"}], ",", 
+   RowBox[{
+    SubscriptBox["Y", "\[DoubleStruckCapitalC]"], "[", 
+    SubscriptBox["c", "2"], "]"}], ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    SuperscriptBox["\[DoubleStruckCapitalC]", "OP"]]}], "]"}]], "Input",
+ CellLabel->"In[29]:=",
+ CellID->612629149],
+
+Cell[TextData[{
+ "Then WildCats infers that ",
+ Cell[BoxData[
+  SubscriptBox["c", "1"]]],
+ " and ",
+ Cell[BoxData[
+  SubscriptBox["c", "2"]]],
+ " are isomorphic"
+}], "Text",
+ CellID->297842947],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["c", "1"], " ", 
+   UnderscriptBox["\[TildeFullEqual]", "\[DoubleStruckCapitalC]"], 
+   SubscriptBox["c", "2"]}], "//", "IsomorphismQ"}]], "Input",
+ CellLabel->"In[30]:=",
+ CellID->225296255],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[30]=",
+ CellID->182487531]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->961285135],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1567025153]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["Universal Properties",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/UniversalProperties"]], "TutorialRelatedLinks",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->328489779]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Yoneda and CoYoneda Functors - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 44, 36.9292306}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> "Wild Cats Tutorial", 
+    "language" -> "en", "paclet" -> "WildCats", "status" -> "None", "summary" -> 
+    "This terminates the current Mathematica session and starts a new clean \
+session (recommended for troubleshooting) This loads the package:", 
+    "synonyms" -> {}, "title" -> "Yoneda and CoYoneda Functors", "type" -> 
+    "Tutorial", "uri" -> "WildCats/tutorial/Yoneda and CoYoneda functors"}, 
+  "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[621, 21, 78, 1, 70, "TutorialColorBar"],
+Cell[702, 24, 179, 5, 70, "LinkTrail"],
+Cell[884, 31, 2745, 63, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3654, 98, 65, 1, 70, "Title",
+ CellID->247490821],
+Cell[3722, 101, 171, 6, 70, "Text",
+ CellID->12172402],
+Cell[3896, 109, 69, 1, 70, "Text",
+ CellID->121457497],
+Cell[3968, 112, 73, 2, 70, "Input",
+ CellID->309037897],
+Cell[CellGroupData[{
+Cell[4066, 118, 113, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1825449234],
+Cell[4182, 122, 169, 4, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->98796305]
+}, Open  ]],
+Cell[4366, 129, 878, 22, 70, "Print",
+ CellID->543616126],
+Cell[CellGroupData[{
+Cell[5269, 155, 76, 1, 70, "Section",
+ CellID->103575027],
+Cell[CellGroupData[{
+Cell[5370, 160, 340, 7, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->561910019],
+Cell[5713, 169, 437, 12, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->36274927],
+Cell[6153, 183, 1511, 43, 70, "DefinitionBox",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->2096742444],
+Cell[7667, 228, 122, 2, 70, "Caption",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1891092685]
+}, Open  ]],
+Cell[7804, 233, 144, 4, 70, "Text",
+ CellID->880910032],
+Cell[7951, 239, 655, 17, 70, "Input",
+ CellID->7103310],
+Cell[CellGroupData[{
+Cell[8631, 260, 172, 4, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->9672905],
+Cell[8806, 266, 181, 4, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->10570368],
+Cell[8990, 272, 136, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->99786946],
+Cell[9129, 276, 220, 6, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->101786351],
+Cell[9352, 284, 278, 10, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->868241699]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9667, 299, 295, 10, 70, "Input",
+ CellID->467587743],
+Cell[9965, 311, 209, 7, 36, "Output",
+ CellID->861435681]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10211, 323, 119, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->172436016],
+Cell[10333, 327, 268, 7, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->821003],
+Cell[10604, 336, 184, 5, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->330190466],
+Cell[10791, 343, 100, 2, 70, "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->26837992],
+Cell[10894, 347, 105, 2, 70, "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->934546563],
+Cell[11002, 351, 118, 2, 70, "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->230936465],
+Cell[11123, 355, 201, 5, 70, "BulletedText",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->8174831],
+Cell[11327, 362, 162, 4, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->318294225],
+Cell[11492, 368, 977, 26, 70, "DefinitionBox3Col",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->351034231],
+Cell[12472, 396, 166, 4, 70, "Caption",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->46797876],
+Cell[12641, 402, 227, 6, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->96263417],
+Cell[12871, 410, 293, 8, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->80439347],
+Cell[13167, 420, 484, 12, 46, "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->234999654],
+Cell[13654, 434, 562, 18, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->218765297],
+Cell[14219, 454, 267, 8, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->35225488],
+Cell[14489, 464, 353, 11, 36, "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->562993137],
+Cell[14845, 477, 259, 8, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1584084],
+Cell[15107, 487, 121, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->342823791],
+Cell[15231, 491, 318, 9, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->28836673],
+Cell[15552, 502, 513, 14, 39, "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->65879565],
+Cell[16068, 518, 571, 18, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->8185602],
+Cell[16642, 538, 294, 9, 70, "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->114063300],
+Cell[16939, 549, 354, 11, 36, "Output",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->543776841]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[17342, 566, 49, 1, 70, "Section",
+ CellID->5562548],
+Cell[17394, 569, 200, 5, 70, "Text",
+ CellID->173532214],
+Cell[17597, 576, 105, 3, 70, "Text",
+ CellID->15174749],
+Cell[17705, 581, 130, 3, 70, "Input",
+ CellID->116828022],
+Cell[CellGroupData[{
+Cell[17860, 588, 198, 6, 70, "Input",
+ CellID->531827677],
+Cell[18061, 596, 253, 8, 36, "Output",
+ CellID->342295536]
+}, Open  ]],
+Cell[18329, 607, 88, 1, 70, "Text",
+ CellID->697480884],
+Cell[18420, 610, 161, 5, 70, "Input",
+ CellID->17836189],
+Cell[18584, 617, 159, 5, 70, "Text",
+ CellID->663565181],
+Cell[CellGroupData[{
+Cell[18768, 626, 157, 4, 70, "Input",
+ CellID->209722185],
+Cell[18928, 632, 161, 5, 36, "Output",
+ CellID->30323028]
+}, Open  ]],
+Cell[19104, 640, 145, 2, 70, "Text",
+ CellID->550120930],
+Cell[19252, 644, 226, 7, 70, "Input",
+ CellID->127585431],
+Cell[19481, 653, 368, 10, 70, "Text",
+ CellID->199705966],
+Cell[19852, 665, 85, 1, 70, "Text",
+ CellID->542504366],
+Cell[19940, 668, 590, 18, 70, "Input",
+ CellID->503605992],
+Cell[20533, 688, 131, 4, 70, "Text",
+ CellID->193742604],
+Cell[CellGroupData[{
+Cell[20689, 696, 107, 3, 70, "Input",
+ CellID->32390109],
+Cell[20799, 701, 162, 5, 36, "Output",
+ CellID->118712024]
+}, Open  ]],
+Cell[20976, 709, 351, 10, 70, "Text",
+ CellID->84939469],
+Cell[CellGroupData[{
+Cell[21352, 723, 741, 23, 70, "Input",
+ CellID->371616158],
+Cell[22096, 748, 786, 24, 43, "Output",
+ CellID->437449008]
+}, Open  ]],
+Cell[22897, 775, 90, 1, 70, "Text",
+ CellID->644485049],
+Cell[CellGroupData[{
+Cell[23012, 780, 107, 3, 70, "Input",
+ CellID->74421724],
+Cell[23122, 785, 162, 5, 36, "Output",
+ CellID->131256100]
+}, Open  ]],
+Cell[23299, 793, 108, 3, 70, "Text",
+ CellID->674664463],
+Cell[23410, 798, 130, 4, 70, "Text",
+ CellID->511673471],
+Cell[23543, 804, 190, 6, 70, "Input",
+ CellID->861627858],
+Cell[23736, 812, 68, 1, 70, "Text",
+ CellID->93845361],
+Cell[23807, 815, 235, 7, 70, "Input",
+ CellID->685943983],
+Cell[24045, 824, 146, 4, 70, "Text",
+ CellID->269445622],
+Cell[CellGroupData[{
+Cell[24216, 832, 535, 16, 70, "Input",
+ CellID->953869199],
+Cell[24754, 850, 161, 5, 36, "Output",
+ CellID->16954298]
+}, Open  ]],
+Cell[24930, 858, 259, 9, 70, "Text",
+ CellID->464530424],
+Cell[CellGroupData[{
+Cell[25214, 871, 214, 5, 70, "Input",
+ CellID->178717477],
+Cell[25431, 878, 163, 5, 36, "Output",
+ CellID->505210381]
+}, Open  ]],
+Cell[25609, 886, 366, 14, 70, "Text",
+ CellID->304702858],
+Cell[25978, 902, 501, 15, 70, "Text",
+ CellID->451070401],
+Cell[CellGroupData[{
+Cell[26504, 921, 391, 12, 70, "Input",
+ CellID->167566955],
+Cell[26898, 935, 162, 5, 36, "Output",
+ CellID->363470636]
+}, Open  ]],
+Cell[27075, 943, 362, 9, 70, "Text",
+ CellID->246415631],
+Cell[27440, 954, 249, 7, 70, "Input",
+ CellID->164439172],
+Cell[27692, 963, 582, 17, 70, "Input",
+ CellID->43882044],
+Cell[CellGroupData[{
+Cell[28299, 984, 109, 3, 70, "Input",
+ CellID->1042577864],
+Cell[28411, 989, 162, 5, 36, "Output",
+ CellID->484215117]
+}, Open  ]],
+Cell[28588, 997, 402, 16, 70, "Text",
+ CellID->213863569],
+Cell[28993, 1015, 433, 13, 70, "Text",
+ CellID->26693396],
+Cell[CellGroupData[{
+Cell[29451, 1032, 386, 11, 70, "Input",
+ CellID->318368333],
+Cell[29840, 1045, 161, 5, 36, "Output",
+ CellID->20390659]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[30050, 1056, 65, 1, 70, "Section",
+ CellID->210009360],
+Cell[CellGroupData[{
+Cell[30140, 1061, 206, 7, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->64318814],
+Cell[30349, 1070, 475, 13, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->67749225],
+Cell[30827, 1085, 223, 5, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->135170948],
+Cell[31053, 1092, 322, 8, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->438801830],
+Cell[31378, 1102, 160, 4, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->27353801],
+Cell[31541, 1108, 225, 7, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->124636694],
+Cell[31769, 1117, 687, 16, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->266578558],
+Cell[32459, 1135, 328, 8, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->528353914],
+Cell[32790, 1145, 142, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->17303868],
+Cell[32935, 1149, 688, 16, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->431684841],
+Cell[33626, 1167, 104, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->417018761],
+Cell[33733, 1171, 692, 16, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->74318310],
+Cell[34428, 1189, 803, 23, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->139404322],
+Cell[35234, 1214, 106, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->101452635],
+Cell[35343, 1218, 525, 15, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->28967294],
+Cell[35871, 1235, 101, 2, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->344058370],
+Cell[35975, 1239, 495, 13, 70, "DisplayMath",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->69144346],
+Cell[36473, 1254, 271, 10, 70, "Text",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->82068512]
+}, Open  ]],
+Cell[36759, 1267, 174, 6, 70, "Text",
+ CellID->40732569],
+Cell[36936, 1275, 132, 5, 70, "Text",
+ CellID->363057012],
+Cell[37071, 1282, 470, 12, 70, "Input",
+ CellID->612629149],
+Cell[37544, 1296, 193, 9, 70, "Text",
+ CellID->297842947],
+Cell[CellGroupData[{
+Cell[37762, 1309, 242, 7, 70, "Input",
+ CellID->225296255],
+Cell[38007, 1318, 162, 5, 36, "Output",
+ CellID->182487531]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[38218, 1329, 66, 1, 70, "TutorialMoreAboutSection",
+ CellID->961285135],
+Cell[38287, 1332, 205, 4, 70, "TutorialMoreAbout",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->1567025153]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38529, 1341, 68, 1, 70, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[38600, 1344, 230, 5, 70, "TutorialRelatedLinks",
+ CellGroupingRules->{GroupTogetherGrouping, 10002.},
+ CellID->328489779]
+}, Open  ]]
+}, Open  ]],
+Cell[38857, 1353, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,28 @@
+source https://www.nuget.org/api/v2
+
+framework: netstandard2.0, netcoreapp2.0, net461
+storage: none
+clitool dotnet-fake
+nuget Hopac
+nuget Microsoft.SourceLink.GitHub prerelease copy_local: true
+nuget Microsoft.NETFramework.ReferenceAssemblies copy_local: true # allows for building full framework on macOS/linux without mono
+nuget TaskBuilder.fs
+
+group Test
+source https://www.nuget.org/api/v2
+storage: none
+nuget Expecto
+nuget Expecto.Hopac
+nuget Fable.Mocha
+
+group Build
+source https://www.nuget.org/api/v2
+storage: none
+nuget Fake.Core.Target
+nuget Fake.DotNet.Cli
+nuget Fake.Core.ReleaseNotes
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Paket
+nuget Fake.DotNet.Testing.Expecto
+nuget Fake.Tools.Git 
+nuget Fake.JavaScript.Npm

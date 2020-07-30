@@ -1,0 +1,13 @@
+options:
+
+  - title: How to Learn
+    url: docs/index.html
+
+  - title: Hello World
+    url: docs/hello-world.html
+
+  - title: A Guessing Game
+    url: docs/guessing-game.html
+
+  - title: Command Shell To-Do List
+    url: docs/todo-list.html

@@ -1,0 +1,142 @@
+This code is under the GNU LGPL. Copyright (C) 1999-2018 Esa Pulkkinen <esa.pulkkinen@iki.fi>
+For exact terms, see http://www.gnu.org/copyleft/lgpl.txt.
+
+See <https://github.com/esapulkkinen/cifl-math-library>.
+Documentation is at: <https://esapulkkinen.github.io/cifl-math-library/>.
+
+There are portions that I have read from internet from various places
+and by nature of the library's use of the data must be incorporated to
+the Haskell code. These portions are allowed to be copied also under
+their original author's license. I have tried to insert comment on the
+portion of code that is obtained from or based on such sources and
+included URL, link or reference to the corresponding place and add a
+reference or copy of the corresponding license in this file. The code
+contains many such references. Usually they are visible in the
+automatically generated documentation as well, but to be sure to find
+all of them, please read the actual Haskell code.
+
+Due to nature of basic mathematical theory, very few portions of the
+code contain original mathematics. I do not attempt to claim to have
+invented any such basic theory such as what is found in basic linear
+algebra, category theory or graph theory or other such well known part
+of mathematics.
+
+Portions that are based on data from Wikipedia
+<http://en.wikipedia.org> are copyright by Wikipedia authors with
+creative commons attribute share-alike license version 3.0 (CC BY-SA
+3.0), <http://creativecommons.org/licenses/by-sa/3.0/>, and co-licensed
+with GFDL <http://www.gnu.org/copyleft/fdl.html>.
+
+Portions also refer to Haskell wiki (https://wiki.haskell.org) which
+is under simple permissive license
+(https://wiki.haskell.org/HaskellWiki:Copyrights).
+
+With respect to many modules in Math.Graph package, and occasionally
+in other modules as well, the book
+"Lawvere, Rosebrugh: Sets for mathematics", ISBN 0-521-01060-8
+has been an invaluable resource.
+
+Portions are based on Haskell standard library and its implementation
+in the GHC compiler as described in GHC documentation.
+https://www.haskell.org/ghc/
+https://www.haskell.org/ghc/license
+
+The Glasgow Haskell Compiler License
+
+Copyright 2004, The University Court of the University of Glasgow.
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+    Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+    Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+    Neither name of the University nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE UNIVERSITY COURT OF THE UNIVERSITY OF GLASGOW AND THE CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE UNIVERSITY COURT OF THE UNIVERSITY OF GLASGOW OR THE CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=======
+gxl-1.0.dtd is from http://www.gupro.de/GXL/dtd/gxl-1.0.html
+(c) Andy Schuerr, Susan Elliott Sim, Ric Holt, Andreas Winter.
+
+"GXL has been developed to be an open standard.  No licensing or other
+legal arrangements are required for its use, whether commercial and
+non-commercial.  The specification of GXL is copyright by its authors,
+to allow control of its evolution. The specification can be reproduced
+and used without charge, but with explicit acknowledgement of its
+authors."
+=====
+HaXML is from https://hackage.haskell.org/package/HaXml
+HaXML is (c) Malcolm Wallace and licensed under LGPL.
+====
+JSON package (c) 2007-2009 Galois Inc,
+from https://hackage.haskell.org/package/json
+Licensed under BSD3.
+===
+Documentation is generated from Haskell code using haddock. <https://www.haskell.org/haddock/>.
+===
+The dependency graphs on the documentation are generated using
+stack (https://docs.haskellstack.org/en/stable/README/), graphviz (which is under "Common Public License"), and ps2pdf (from
+ghostscript, under GPL).
+
+See <https://www.graphviz.org/> for graphviz.
+===
+See cifl.cabal file for information about individual Haskell library
+build-depends. The code is relying on many libraries from the hackage
+repository: <http://hackage.haskell.org/>.
+
+I am not distributing these, users are encouraged to use cabal/stack
+automatic dependency management to download them
+from hackage.haskell.org.
+
+Library build-depends (warning up-to-date version in cifl.cabal file):
+See <http://hackage.haskell.org/package/[package-name]> for details of
+each package.
+
+QuickCheck 2.12.6.1
+Stream 0.4.7.2 
+array 0.5.3.0
+arrows 0.4.4.2
+base 4.12.0.0
+base-compat 0.10.5
+binary 0.8.6.0
+bytestring 0.10.8.2
+cifl-math-library 1.0.3.1
+colour 2.3.5
+containers 0.6.0.1
+deepseq 1.4.4.0
+directory 1.3.3.0
+dlist 0.8.0.6
+erf 2.0.0.0
+exceptions 0.10.2
+fgl 5.7.0.1
+filepath 1.4.2.1
+ghc-boot-th 8.6.5
+ghc-prim 0.5.3
+graphviz 2999.20.0.3
+integer-gmp 1.0.2.0
+json 0.9.3
+lazysmallcheck 0.6
+mtl 2.2.2
+parallel 3.2.2.0
+parsec 3.1.13.0
+polyparse 1.12.1
+pretty 1.1.3.6
+primitive 0.6.4.0
+process 1.6.5.0
+random 1.1
+rts 1.0
+stm 2.5.0.0
+syb 0.7.1
+template-haskell 2.14.0.0
+temporary 1.3
+text 1.2.3.1
+tf-random 0.5
+time 1.8.0.2
+transformers 0.5.6.2
+transformers-compat 0.6.5
+unix 2.7.2.2
+wl-pprint-text 1.2.0.0
+
+Test build depends (warning: up-to-date version in cifl.cabal): 
+  build-depends: base, containers >= 0.5.6.2, random >= 1.1, pretty >= 1.1.2.0, array >= 0.5.1.0, transformers >= 0.4.2.0, syb >= 0.5.1, QuickCheck >= 2.8.1, mtl >= 2.2.1, arrows >= 0.4.4.1, fgl >= 5.5.3.0, text >= 1.2.2.1, graphviz >= 2999.18.1.2, json >= 0.9.1, parallel >= 3.2.0.6, binary >= 0.7.5.0, bytestring >= 0.10.6.0, HUnit, template-haskell

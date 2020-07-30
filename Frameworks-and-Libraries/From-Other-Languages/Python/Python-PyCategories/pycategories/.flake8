@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 79
+ignore = E731,W504
+exclude = categories/__init__.py,.svn,CVS,.bzr,.hg,.git,__pycache__,.tox,.eggs,*.egg,build/
+per-file-ignores =
+    tests/test_applicative.py: E225
+    tests/test_functor.py: E225
+    tests/test_monad.py: E225
+    tests/test_monoid.py: E225
+    tests/test_semigroup.py: E225
+    tests/test_utils.py: E225

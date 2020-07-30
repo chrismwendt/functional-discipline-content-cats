@@ -1,0 +1,347 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10313,        337]
+NotebookOptionsPosition[      7336,        245]
+NotebookOutlinePosition[      9167,        294]
+CellTagsIndexPosition[      9083,        289]
+WindowTitle->DiscreteCategory (\:F773) - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILDCATS PACKAGE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Functors\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/Functors"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats/ref/DiscreteCategory\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/ref/DiscreteCategory"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/ref/\
+DiscreteCategory.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/ref/DiscreteCategory", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["DiscreteCategory (\[ScriptCapitalD])", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData["DiscreteCategory"], "InlineFormula"],
+     "\[LineSeparator]represents the discrete category functor."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData["DiscreteCategory"], "InlineFormula"],
+     "[",
+     StyleBox["set",
+      FontSlant->"Italic"],
+     "]\[LineSeparator]represents the discrete category whose objects are the \
+elements of set ",
+     StyleBox["set",
+      FontSlant->"Italic"],
+     "."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData["DiscreteCategory"], "InlineFormula"],
+     "[",
+     StyleBox["fun",
+      FontSlant->"Italic"],
+     "]\[LineSeparator]represents the functor between discrete categories \
+with object function  ",
+     StyleBox["fun",
+      FontSlant->"Italic"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, {None}}, "RowsIndexed" -> {}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->927162746],
+
+Cell[TextData[{
+ "DiscreteCategory can be entered as  ",
+ StyleBox["Esc", "KeyEvent"],
+ StyleBox["\[ThinSpace]scD\[ThinSpace]", "InlineCode"],
+ StyleBox["Esc ", "KeyEvent"]
+}], "Notes",
+ CellID->5930947],
+
+Cell["\<\
+The only morphisms of a discrete category are the identities on its objects. \
+\>", "Notes",
+ CellID->1067943069]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->404895745],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection",
+ CellID->227415004],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DiscreteCategory", "[", "\[EmptySet]", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->63313677],
+
+Cell[BoxData["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]0"], \
+"Output",
+ ImageSize->{33, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->458607290]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DiscreteCategory", "[", "Singleton", "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->329693258],
+
+Cell[BoxData["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]1"], \
+"Output",
+ ImageSize->{33, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->487465747]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "TutorialsSection",
+ CellID->250839057],
+
+Cell[TextData[StyleBox[ButtonBox["Functors",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Functors"],
+ FontWeight->"Bold"]], "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"DiscreteCategory (\[ScriptCapitalD]) - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 28, 33.3041144}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> 
+    "WildCats Package Paclet Symbol", "language" -> "en", "paclet" -> 
+    "WildCats Package", "status" -> "None", "summary" -> 
+    "DiscreteCategory represents the discrete category \
+functor.DiscreteCategory[set] represents the discrete category whose objects \
+are the elements of set set.DiscreteCategory[fun] represents the functor \
+between discrete categories with object function fun.", "synonyms" -> {}, 
+    "title" -> "DiscreteCategory (\\[ScriptCapitalD])", "type" -> "Symbol", 
+    "uri" -> "WildCats/ref/DiscreteCategory"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[5267, 162, 461, 13, 70, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->404895745]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 8940, 282}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[618, 21, 76, 1, 70, "SymbolColorBar"],
+Cell[697, 24, 179, 5, 70, "LinkTrail"],
+Cell[879, 31, 2337, 53, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3241, 88, 79, 1, 70, "ObjectName",
+ CellID->1224892054],
+Cell[3323, 91, 958, 31, 70, "Usage"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4318, 127, 580, 17, 70, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->927162746],
+Cell[4901, 146, 203, 6, 70, "Notes",
+ CellID->5930947],
+Cell[5107, 154, 123, 3, 70, "Notes",
+ CellID->1067943069]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[5267, 162, 461, 13, 70, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->404895745],
+Cell[CellGroupData[{
+Cell[5753, 179, 148, 5, 70, "ExampleSection",
+ CellID->227415004],
+Cell[CellGroupData[{
+Cell[5926, 188, 121, 3, 70, "Input",
+ CellID->63313677],
+Cell[6050, 193, 215, 6, 36, "Output",
+ CellID->458607290]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6302, 204, 120, 3, 70, "Input",
+ CellID->329693258],
+Cell[6425, 209, 215, 6, 36, "Output",
+ CellID->487465747]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6701, 222, 419, 12, 70, "TutorialsSection",
+ CellID->250839057],
+Cell[7123, 236, 171, 4, 70, "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+Cell[7309, 243, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

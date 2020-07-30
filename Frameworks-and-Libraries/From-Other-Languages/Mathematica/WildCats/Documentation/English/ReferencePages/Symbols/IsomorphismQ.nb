@@ -1,0 +1,277 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8568,        267]
+NotebookOptionsPosition[      6450,        206]
+NotebookOutlinePosition[      8002,        246]
+CellTagsIndexPosition[      7959,        243]
+WindowTitle->IsomorphismQ - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILDCATS PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Morphisms and composition\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/MorphismsAndComposition"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats/ref/IsomorphismQ\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/ref/IsomorphismQ"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/ref/\
+IsomorphismQ.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/ref/IsomorphismQ", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["IsomorphismQ", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       RowBox[{"IsomorphismQ", "[", 
+        StyleBox["wcat",
+         FontSlant->"Italic"], "]"}], "[", 
+       RowBox[{
+        StyleBox["obj1",
+         FontSlant->"Italic"], ",", 
+        StyleBox["obj2",
+         FontSlant->"Italic"]}], "]"}]], "InlineFormula"],
+     " \[LineSeparator]returns True if ",
+     StyleBox["obj1",
+      FontSlant->"Italic"],
+     " and ",
+     StyleBox["obj2",
+      FontSlant->"Italic"],
+     " are isomorphic objects in W-category ",
+     StyleBox["wcat",
+      FontSlant->"Italic"]
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       RowBox[{"IsomorphismQ", "[", 
+        StyleBox["wcat",
+         FontSlant->"Italic"], "]"}], "[", 
+       RowBox[{
+        StyleBox["obj1",
+         FontSlant->"Italic"], " ", 
+        UnderscriptBox["\[TildeFullEqual]", 
+         StyleBox["wcat",
+          FontSlant->"Italic"]], 
+        StyleBox["obj2",
+         FontSlant->"Italic"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns True if ",
+     StyleBox["obj1",
+      FontSlant->"Italic"],
+     " and ",
+     StyleBox["obj2",
+      FontSlant->"Italic"],
+     " are isomorphic objects in W-category ",
+     StyleBox["wcat",
+      FontSlant->"Italic"]
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->49917728],
+
+Cell[TextData[{
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    StyleBox["obj1",
+     FontSlant->"Italic"], " ", 
+    UnderscriptBox["\[TildeFullEqual]", "wcat"], 
+    StyleBox["obj2",
+     FontSlant->"Italic"]}], "//", "IsomorphismQ"}]]],
+ " is a special postfix notation equivalent to IsomorphismQ[wcat][obj1,obj2]"
+}], "Notes",
+ CellID->1067943069]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "TutorialsSection",
+ CellID->250839057],
+
+Cell[TextData[StyleBox[ButtonBox["Morphisms and composition",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/MorphismsAndComposition"],
+ FontWeight->"Bold"]], "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"IsomorphismQ - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 34, 15.7767027}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> "WildCats Paclet Symbol", 
+    "language" -> "en", "paclet" -> "WildCats", "status" -> "None", "summary" -> 
+    "IsomorphismQ[wcat][obj1, obj2] returns True if obj1 and obj2 are \
+isomorphic objects in W-category wcatIsomorphismQ[wcat][obj1 \
+UnderscriptBox[\\[TildeFullEqual], wcat] obj2] returns True if obj1 and obj2 \
+are isomorphic objects in W-category wcat", "synonyms" -> {}, "title" -> 
+    "IsomorphismQ", "type" -> "Symbol", "uri" -> "WildCats/ref/IsomorphismQ"},
+   "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[605, 21, 76, 1, 70, "SymbolColorBar"],
+Cell[684, 24, 179, 5, 70, "LinkTrail"],
+Cell[866, 31, 2353, 54, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3244, 89, 55, 1, 70, "ObjectName",
+ CellID->1224892054],
+Cell[3302, 92, 1480, 51, 70, "Usage",
+ CellID->982511436]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4819, 148, 579, 17, 70, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->49917728],
+Cell[5401, 167, 345, 11, 70, "Notes",
+ CellID->1067943069]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[5783, 183, 419, 12, 70, "TutorialsSection",
+ CellID->250839057],
+Cell[6205, 197, 203, 4, 70, "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+Cell[6423, 204, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

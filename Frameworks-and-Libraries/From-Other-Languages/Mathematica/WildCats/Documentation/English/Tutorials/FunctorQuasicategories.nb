@@ -1,0 +1,2075 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     64652,       2065]
+NotebookOptionsPosition[     54387,       1712]
+NotebookOutlinePosition[     56356,       1763]
+CellTagsIndexPosition[     56313,       1760]
+WindowTitle->Functor W-categories - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS PACKAGE TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"WildCats/tutorial/FunctorQuasicategories\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/tutorial/FunctorQuasicategories"]}, Visible -> 
+            False]]; SelectionMove[
+         DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+FunctorQuasicategories.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/FunctorQuasicategories", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["Functor W-categories", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "This terminates the current ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " session and starts a new clean session\[LineSeparator]",
+ "(recommended for troubleshooting)."
+}], "MathCaption",
+ CellID->56565528],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->3132515],
+
+Cell["This loads the package:", "MathCaption",
+ CellID->1825449234],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->829090770],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.70.0\"","\", \"",RowBox[{"{", 
+         RowBox[{"2014", ",", "2", ",", "5"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2014, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package and palette\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->566400394]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The \[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT] \
+operator", "Section",
+ CellID->1215666],
+
+Cell[TextData[{
+ "Functor W-categories are represented by ",
+ Cell[BoxData[
+  ButtonBox[
+   "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]",
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"]]],
+ " expressions."
+}], "Text",
+ CellID->130283103],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox[
+      "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"], "[", 
+     RowBox[{
+      StyleBox["cat1",
+       FontSlant->"Italic"], ",", 
+      StyleBox["cat2",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "Functor W-category between ",
+     StyleBox["cat1",
+      FontSlant->"Italic"],
+     " and ",
+     StyleBox["cat2",
+      FontSlant->"Italic"]
+    }], "TableText"]},
+   {
+    SuperscriptBox[
+     StyleBox["cat2",
+      FontSlant->"Italic"], 
+     StyleBox["cat1",
+      FontSlant->"Italic"]], Cell[TextData[Cell[BoxData[Cell[TextData[{
+      "Formatted functor W-category between ",
+      StyleBox["cat1",
+       FontSlant->"Italic"],
+      " and ",
+      StyleBox["cat2",
+       FontSlant->"Italic"]
+     }], "TableText"]]]], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->266013035],
+
+Cell["Functor quasicategories.", "Caption",
+ CellID->322494902],
+
+Cell[TextData[{
+ "An expression like ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox[
+    StyleBox["base",
+     FontSlant->"Italic"], 
+    StyleBox["exp",
+     FontSlant->"Italic"]], " "}]], "InlineFormula"],
+ " is interpreted as a functor W-category if and only if ",
+ StyleBox["base",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["exp",
+  FontSlant->"Italic"],
+ " are both categories"
+}], "Text",
+ CellID->49389796],
+
+Cell[TextData[{
+ "Let\[CloseCurlyQuote]s consider two categories, for example  ",
+ Cell[BoxData[
+  ButtonBox["\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]",
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/DoubleStruckCapitalRDoubleStruckNDoubleStruckG"]], 
+  "InlineFormula"],
+ " and ",
+ Cell[BoxData[
+  ButtonBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/DoubleStruckCapitalSDoubleStruckEDoubleStruckT"]], 
+  "InlineFormula"],
+ "\n",
+ Cell[BoxData[
+  ButtonBox[
+   "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]",
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"]]],
+ "[\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG],\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]]has a standard \
+textbook formatting"
+}], "MathCaption",
+ CellID->76519552],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]", "[", 
+  RowBox[{
+  "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->63477539],
+
+Cell[BoxData[
+ SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+  "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], "Output",
+ ImageSize->{42, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->11852780]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]],
+ " is a W-category"
+}], "MathCaption",
+ CellID->502216192],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QuasiCategoryQ", "[", 
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"], "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->9313746],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->91176264]
+}, Open  ]],
+
+Cell["\<\
+It also a Category, since \[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG] is locally small\
+\>", "MathCaption",
+ CellID->373426191],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LocallySmallQ", "[", 
+  "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->24771761],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->3173700]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryQ", "[", 
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"], "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->10727280],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->371089622]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryQ", "[", 
+  SuperscriptBox["\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"], "]"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->256048662],
+
+Cell[BoxData["False"], "Output",
+ ImageSize->{39, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->354302621]
+}, Open  ]],
+
+Cell[TextData[{
+ "For an arbitrary category \[DoubleStruckCapitalC], ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    SuperscriptBox["\[DoubleStruckCapitalC]", "\[DoubleStruckOne]"], " "], 
+   TraditionalForm]]],
+ " is isomorphic to \[DoubleStruckCapitalC]. "
+}], "MathCaption",
+ CellID->161145358],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+  "\[DoubleStruckOne]"]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->169290948],
+
+Cell[BoxData["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], \
+"Output",
+ ImageSize->{24, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[6]=",
+ CellID->35625587]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+  "\[DoubleStruckOne]"]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->405740241],
+
+Cell[BoxData["\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"], \
+"Output",
+ ImageSize->{27, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->39856626]
+}, Open  ]],
+
+Cell["\<\
+If both the source and target categories are small, then the functor category \
+is also small\
+\>", "MathCaption",
+ CellID->763782208],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["\[DoubleStruckTwo]", "\[DoubleStruckOne]"], "//", 
+  "SmallCatQ"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->28265503],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->29047284]
+}, Open  ]],
+
+Cell[TextData[{
+ "Define some objects in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]],
+ ". \nObjects in a functor category are functors."
+}], "Text",
+ CellID->41660757],
+
+Cell["Standard way to define a functor", "MathCaption",
+ CellID->70930210],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DefFunctor", "[", 
+   RowBox[{
+   "S", ",", "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}], 
+  "  "}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->196729282],
+
+Cell["Another way to define a functor", "MathCaption",
+ CellID->147466920],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{"T", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], 
+  "]"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->381585323],
+
+Cell["\<\
+S and T are functors, so they are morphisms in \[DoubleStruckCapitalC]\
+\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]\
+\>", "MathCaption",
+ CellID->156157277],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DC", "[", 
+  RowBox[{
+  "S", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->265984728],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "\[Rule]", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], ",", "S"}], 
+  "}"}]], "Output",
+ ImageSize->{96, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[11]=",
+ CellID->1006522]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DC", "[", 
+  RowBox[{
+  "T", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->473961633],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "\[Rule]", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], ",", "T"}], 
+  "}"}]], "Output",
+ ImageSize->{96, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[12]=",
+ CellID->95334777]
+}, Open  ]],
+
+Cell["\<\
+Functor S is also an object in \[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT][\
+\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG],\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]], while T is also a \
+functor from \[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG] to \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]\
+\>", "MathCaption",
+ CellID->174970522],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"ObjectQ", "[", 
+    RowBox[{"S", ",", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], "]"}], 
+   ",", 
+   RowBox[{"FunctorQ", "[", "T", "]"}]}], "}"}]], "Input",
+ CellLabel->"In[13]:=",
+ CellID->129411639],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[13]=",
+ CellID->9394632]
+}, Open  ]],
+
+Cell["Objects c and c1 in \[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", "MathCaption",
+ CellID->101265289],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+  "c", ",", "c1", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[14]:=",
+ CellID->88310568],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[14]=",
+ CellID->51696416]
+}, Open  ]],
+
+Cell["\<\
+Morphism f between c and c1 in \[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]\
+\>", "MathCaption",
+ CellID->477070116],
+
+Cell[BoxData[
+ RowBox[{"DefMorphism", "[", 
+  RowBox[{
+  "f", ",", "c", ",", "c1", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[15]:=",
+ CellID->275143428],
+
+Cell[TextData[{
+ "and finally a natural transformation \[Tau] between functors S and T.\n\
+Define \[Tau] simply as a morphism between S and T in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]]
+}], "MathCaption",
+ CellID->50618309],
+
+Cell[BoxData[
+ RowBox[{"DefMorphism", "[", 
+  RowBox[{"\[Tau]", ",", "S", ",", "T", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], 
+  "]"}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->548407990],
+
+Cell["Verify that it is a natural transformation", "MathCaption",
+ CellID->15626301],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"NaturalTransformations", ",", 
+   RowBox[{"NaturalTransformationQ", "[", "\[Tau]", "]"}], ",", 
+   RowBox[{"NaturalTransformationQ", "[", 
+    RowBox[{
+    "\[Tau]", ",", "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+     ",", "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}], 
+   ",", 
+   RowBox[{"NaturalTransformationFunctors", "[", "\[Tau]", "]"}], ",", 
+   RowBox[{"NaturalTransformationSource", "[", "\[Tau]", "]"}], ",", 
+   RowBox[{"NaturalTransformationTarget", "[", "\[Tau]", "]"}]}], 
+  "}"}]], "Input",
+ CellLabel->"In[17]:=",
+ CellID->415223697],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "\[Tau]", "}"}], ",", "True", ",", "True", ",", 
+   RowBox[{"{", 
+    RowBox[{"S", ",", "T"}], "}"}], ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "}"}]], "Output",
+ ImageSize->{232, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[17]=",
+ CellID->34572635]
+}, Open  ]],
+
+Cell[TextData[{
+ "Natural transformation \[Tau] is a morphism in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]]
+}], "MathCaption",
+ CellID->572234941],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MorphismQ", "[", 
+  RowBox[{"\[Tau]", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], 
+  "]"}]], "Input",
+ CellLabel->"In[18]:=",
+ CellID->808559416],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[18]=",
+ CellID->286673590]
+}, Open  ]],
+
+Cell[TextData[{
+ "In ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]],
+ " the identity morphisms are natural transformations"
+}], "MathCaption",
+ CellID->18439117],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"NaturalTransformationQ", "[", 
+    SubscriptBox["Id", "S"], "]"}], ",", "\n", 
+   RowBox[{"NaturalTransformationFunctors", "[", 
+    SubscriptBox["Id", "S"], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"NaturalTransformationSource", "[", 
+    SubscriptBox["Id", "S"], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"NaturalTransformationTarget", "[", 
+    SubscriptBox["Id", "S"], "]"}]}], "\[IndentingNewLine]", "}"}]], "Input",
+ CellLabel->"In[20]:=",
+ CellID->89648688],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", 
+   RowBox[{"{", 
+    RowBox[{"S", ",", "S"}], "}"}], ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "}"}]], "Output",
+ ImageSize->{161, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[20]=",
+ CellID->733369843]
+}, Open  ]],
+
+Cell[TextData[{
+ "The components of ",
+ Cell[BoxData[
+  SubscriptBox["Id", "S"]]],
+ " are identity morphisms in ",
+ "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"
+}], "MathCaption",
+ CellID->144329377],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Id", "S"], "[", "c", "]"}], ",", 
+   RowBox[{
+    SubscriptBox["Id", "S"], "[", "c1", "]"}]}], "}"}]], "Input",
+ CellLabel->"In[21]:=",
+ CellID->539340057],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["Id", 
+    RowBox[{"S", "[", "c", "]"}]], ",", 
+   SubscriptBox["Id", 
+    RowBox[{"S", "[", "c1", "]"}]]}], "}"}]], "Output",
+ ImageSize->{104, 17},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[21]=",
+ CellID->309723886]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MorphismQ", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Id", "S"], "[", "c", "]"}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[22]:=",
+ CellID->98458132],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[22]=",
+ CellID->278357570]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MorphismQ", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["Id", "S"], "[", "c1", "]"}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[23]:=",
+ CellID->256790966],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[23]=",
+ CellID->49276307]
+}, Open  ]],
+
+Cell["\<\
+Define two functors and two natural transformations: \[Rho] from Q to R and \
+\[Sigma] from R to S\
+\>", "MathCaption",
+ CellID->272889071],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DefFunctor", "[", 
+   RowBox[{
+   "Q", ",", "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}], 
+  "  "}], "\n", 
+ RowBox[{
+  RowBox[{"DefFunctor", "[", 
+   RowBox[{
+   "R", ",", "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}], 
+  "  "}]}], "Input",
+ CellLabel->"In[24]:=",
+ CellID->201509601],
+
+Cell[BoxData[{
+ RowBox[{"DefMorphism", "[", 
+  RowBox[{"\[Rho]", ",", "Q", ",", "R", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], "]"}], "\n", 
+ RowBox[{"DefMorphism", "[", 
+  RowBox[{"\[Sigma]", ",", "R", ",", "S", ",", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], 
+  "]"}]}], "Input",
+ CellLabel->"In[26]:=",
+ CellID->199424221],
+
+Cell[TextData[{
+ "Let's visualize the situation in ",
+ Cell[BoxData[
+  SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]]],
+ ". We can use a labelled Panel"
+}], "MathCaption",
+ CellID->379677959],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Panel", "[", 
+  RowBox[{
+   RowBox[{"CategoryPlot", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"DC", "[", 
+       RowBox[{"\[Rho]", ",", 
+        SuperscriptBox[
+         "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+         "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], "]"}], 
+      ",", 
+      RowBox[{"DC", "[", 
+       RowBox[{"\[Sigma]", ",", 
+        SuperscriptBox[
+         "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+         "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], "]"}], 
+      ",", 
+      RowBox[{"DC", "[", 
+       RowBox[{"\[Tau]", ",", 
+        SuperscriptBox[
+         "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+         "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}], 
+       "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"Framed", "@", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[28]:=",
+ CellID->209798092],
+
+Cell[BoxData[
+ TemplateBox[{PanelBox[
+    GraphicsBox[
+     NamespaceBox["NetworkGraphics", 
+      DynamicModuleBox[{Typeset`graph = HoldComplete[
+          
+          Graph[{$CellContext`Q, $CellContext`R, $CellContext`S, \
+$CellContext`T}, {{{1, 2}, {2, 3}, {3, 4}}, Null}, {
+           EdgeLabels -> {
+             DirectedEdge[$CellContext`Q, $CellContext`R] -> $CellContext`\
+\[Rho], DirectedEdge[$CellContext`S, $CellContext`T] -> $CellContext`\[Tau], 
+              DirectedEdge[$CellContext`R, $CellContext`S] -> $CellContext`\
+\[Sigma]}, EdgeLabelStyle -> {
+              Directive[Background -> GrayLevel[1]]}, 
+            EdgeShapeFunction -> {{Black, 
+               Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> All,
+             VertexLabels -> {
+              Placed["Name", Center]}, VertexShapeFunction -> {None}, 
+            VertexStyle -> {
+              Directive[
+               EdgeForm[], 
+               GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+        GraphicsGroupBox[{{
+            Directive[
+             Hue[0.6, 0.2, 0.8], 
+             EdgeForm[
+              Directive[
+               GrayLevel[0], 
+               Opacity[0.7]]]], 
+            TagBox[{
+              TagBox[
+               StyleBox[
+                StyleBox[
+                 PointBox[{0., 6.123233995736766*^-16}], ShowContents -> 
+                 False, StripOnInput -> False], 
+                Directive[
+                 EdgeForm[], 
+                 GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+               "VertexID$1"], 
+              InsetBox[
+               FormBox["Q", TraditionalForm], 
+               DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+               "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+            TagBox[{
+              TagBox[
+               StyleBox[
+                StyleBox[
+                 PointBox[{1., 4.898587196589413*^-16}], ShowContents -> 
+                 False, StripOnInput -> False], 
+                Directive[
+                 EdgeForm[], 
+                 GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+               "VertexID$2"], 
+              InsetBox[
+               FormBox["R", TraditionalForm], 
+               DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+               "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+            TagBox[{
+              TagBox[
+               StyleBox[
+                StyleBox[
+                 PointBox[{2., 2.4492935982947064`*^-16}], ShowContents -> 
+                 False, StripOnInput -> False], 
+                Directive[
+                 EdgeForm[], 
+                 GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+               "VertexID$3"], 
+              InsetBox[
+               FormBox["S", TraditionalForm], 
+               DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+               "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+            TagBox[{
+              TagBox[
+               StyleBox[
+                StyleBox[
+                 PointBox[{3., 0.}], ShowContents -> False, StripOnInput -> 
+                 False], 
+                Directive[
+                 EdgeForm[], 
+                 GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+               "VertexID$4"], 
+              InsetBox[
+               FormBox["T", TraditionalForm], 
+               DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+               "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"]}, {
+            Directive[
+             Opacity[0.7], 
+             Hue[0.6, 0.7, 0.5]], {
+             TagBox[{
+               GrayLevel[0], 
+               
+               ArrowBox[{{0., 6.123233995736766*^-16}, {1., 
+                4.898587196589413*^-16}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+              "EdgeLabelID$1"], 
+             InsetBox[
+              FormBox[
+               StyleBox["\[Rho]", 
+                Directive[Background -> GrayLevel[1]], StripOnInput -> False],
+                TraditionalForm], 
+              DynamicLocation["EdgeLabelID$1", Automatic, 
+               Scaled[0.5]], 
+              ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+             TagBox[{
+               GrayLevel[0], 
+               
+               ArrowBox[{{1., 4.898587196589413*^-16}, {2., 
+                2.4492935982947064`*^-16}}, {0.1, 0.1}]}, "DynamicName", 
+              BoxID -> "EdgeLabelID$2"], 
+             InsetBox[
+              FormBox[
+               StyleBox["\[Sigma]", 
+                Directive[Background -> GrayLevel[1]], StripOnInput -> False],
+                TraditionalForm], 
+              DynamicLocation["EdgeLabelID$2", Automatic, 
+               Scaled[0.5]], 
+              ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+             TagBox[{
+               GrayLevel[0], 
+               
+               ArrowBox[{{2., 2.4492935982947064`*^-16}, {3., 0.}}, {0.1, 
+                0.1}]}, "DynamicName", BoxID -> "EdgeLabelID$3"], 
+             InsetBox[
+              FormBox[
+               StyleBox["\[Tau]", 
+                Directive[Background -> GrayLevel[1]], StripOnInput -> False],
+                TraditionalForm], 
+              DynamicLocation["EdgeLabelID$3", Automatic, 
+               Scaled[0.5]], 
+              ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], 
+        Typeset`data}, 
+       TagBox[
+        DynamicBox[
+         GraphComputation`NetworkGraphicsBox[
+         2, Typeset`graph, Typeset`boxes], {
+         CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+          SynchronousUpdating -> False, TrackedSymbols :> {}}, 
+         ImageSizeCache -> {{21.485786437626885`, 
+          338.514213562373}, {-9.270213562373117, 5.558213562373155}}], 
+        MouseAppearanceTag["NetworkGraphics"]], AllowKernelInitialization -> 
+       False, UnsavedVariables :> {Typeset`data}]], 
+     DefaultBaseStyle -> {
+      "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> 
+       Hue[0.8, 1., 0.6]}, FrameTicks -> None, ImagePadding -> 20, ImageSize -> 
+     All]],FrameBox[
+    SuperscriptBox[
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"], StripOnInput -> 
+    False]},
+  "Labeled",
+  DisplayFunction->(GridBox[{{
+      ItemBox[#2, Alignment -> {Left, Inherited}, DefaultBaseStyle -> 
+       "PanelLabel"]}, {
+      TagBox[
+       ItemBox[
+        PaneBox[
+         TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+         BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+       "SkipImageSizeLevel"]}}, 
+    GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+    AutoDelete -> False, 
+    GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+    BaselinePosition -> {2, 1}]& ),
+  InterpretationFunction->(RowBox[{"Labeled", "[", 
+     RowBox[{#, ",", 
+       RowBox[{"{", #2, "}"}], ",", 
+       RowBox[{"{", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Left"}], "}"}], "}"}], ",", 
+       RowBox[{"DefaultLabelStyle", "\[Rule]", "\"PanelLabel\""}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"{", "}"}]}], ",", 
+       RowBox[{"RotateLabel", "\[Rule]", "False"}], ",", 
+       RowBox[{"Spacings", "\[Rule]", "Automatic"}]}], "]"}]& )]], "Output",
+ ImageSize->{382, 107},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[28]=",
+ CellID->136710415]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Vertical composition", "Section",
+ CellID->628801061],
+
+Cell["\<\
+Natural transformations can be composed in the functor W-category using Op. \
+\>", "Text",
+ CellID->61820815],
+
+Cell["This is sometimes called vertical composition. ", "Text",
+ CellID->332105024],
+
+Cell["\<\
+It is simply the composition made with the Op operator in the appropriate \
+functor W-category\
+\>", "Text",
+ CellID->464759339],
+
+Cell[TextData[{
+ "As was shown before, Op[......,",
+ Cell[BoxData["wcat_"]],
+ "] is associative and the identities (identity functors, in this case) are \
+automatically erased"
+}], "MathCaption",
+ CellID->64264629],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Tau]", 
+  UnderscriptBox["\[EmptyCircle]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+  SubscriptBox["Id", "S"], 
+  UnderscriptBox["\[EmptyCircle]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], "\[Sigma]", 
+  " ", 
+  UnderscriptBox["\[EmptyCircle]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+  SubscriptBox["Id", "R"], 
+  UnderscriptBox["\[EmptyCircle]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], "\[Rho]", 
+  " "}]], "Input",
+ CellLabel->"In[29]:=",
+ CellID->579903295],
+
+Cell[BoxData[
+ RowBox[{"\[Tau]", 
+  UnderscriptBox["\[EmptyCircle]", 
+   SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+  RowBox[{"\[Sigma]", " ", 
+   UnderscriptBox["\[EmptyCircle]", 
+    SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], "  ", 
+   "\[Rho]"}]}]], "Output",
+ ImageSize->{107, 25},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[29]=",
+ CellID->493671757]
+}, Open  ]],
+
+Cell["\<\
+It is possible to compute the components of a composite transformation\
+\>", "MathCaption",
+ CellID->374933015],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"\[Tau]", 
+    UnderscriptBox["\[EmptyCircle]", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+    SubscriptBox["Id", "S"], 
+    UnderscriptBox["\[EmptyCircle]", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+    "\[Sigma]", " ", 
+    UnderscriptBox["\[EmptyCircle]", 
+     SuperscriptBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+       "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"]], 
+    "\[Rho]"}], " ", ")"}], "[", "c", "]"}]], "Input",
+ CellLabel->"In[30]:=",
+ CellID->450041761],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Tau]", "[", "c", "]"}], 
+  UnderscriptBox["\[EmptyCircle]", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], 
+  RowBox[{
+   RowBox[{"\[Sigma]", "[", "c", "]"}], " ", 
+   UnderscriptBox["\[EmptyCircle]", 
+    "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"], "  ", 
+   RowBox[{"\[Rho]", "[", "c", "]"}]}]}]], "Output",
+ ImageSize->{134, 22},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[30]=",
+ CellID->73819234]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Power functors", "Section",
+ CellID->665685510],
+
+Cell[TextData[{
+ "An expression ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox[
+    StyleBox["base",
+     FontSlant->"Italic"], 
+    StyleBox["exp",
+     FontSlant->"Italic"]], " "}]], "InlineFormula"],
+ " is interpreted as a functor W-category if and only if ",
+ StyleBox["base",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["exp",
+  FontSlant->"Italic"],
+ " are both categories."
+}], "Text",
+ CellID->17365999],
+
+Cell[TextData[{
+ "If at least one of ",
+ StyleBox["base",
+  FontSlant->"Italic"],
+ " or ",
+ StyleBox["exp",
+  FontSlant->"Italic"],
+ " is a functor, then the expression ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox[
+    StyleBox["base",
+     FontSlant->"Italic"], 
+    StyleBox["exp",
+     FontSlant->"Italic"]], " "}]], "InlineFormula"],
+ " is interpreted as a power functor."
+}], "Text",
+ CellID->85882956],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"PowerFunctor", "[", 
+     RowBox[{
+      StyleBox["exp",
+       FontSlant->"Italic"], ",", 
+      StyleBox["base",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       SuperscriptBox["base", "exp"], " "}]], "InlineFormula"],
+     " power functor"
+    }], "TableText"]},
+   {
+    RowBox[{
+     SuperscriptBox["funct1", "funct2"], ",", 
+     SuperscriptBox["funct", "cat"], ",", " ", 
+     SuperscriptBox["cat", "funct"]}], Cell[
+    "alternative input forms of PowerFunctor", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->116007878],
+
+Cell["PowerFunctors.", "Caption",
+ CellID->279426638],
+
+Cell["\<\
+This construction and notation is described  in Mac Lane\[CloseCurlyQuote]s \
+Categories for the working mathematician, 2nd ed.,  page 44.\
+\>", "Text",
+ CellID->297672614],
+
+Cell["\<\
+The term \"power functor\" is non-standard in mathematics and is used in \
+WildCats to describe the expressions PowerFunctor[.....].\
+\>", "Text",
+ CellID->516414571],
+
+Cell["\<\
+Define four empty categories (do not fill any object/morphism in the dialog \
+box).\
+\>", "MathCaption",
+ CellID->26284519],
+
+Cell[BoxData[{
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalA]", "]"}], "\n", 
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalB]", "]"}], "\n", 
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalC]", "]"}], "\n", 
+ RowBox[{"DefCategory", "[", "\[DoubleStruckCapitalD]", "]"}]}], "Input",
+ CellLabel->"In[8]:=",
+ CellID->374411810],
+
+Cell["Define three functors", "MathCaption",
+ CellID->182481376],
+
+Cell[BoxData[{
+ RowBox[{"DefFunctor", "[", 
+  RowBox[{
+  "F", ",", "\[DoubleStruckCapitalA]", ",", "\[DoubleStruckCapitalB]"}], 
+  "]"}], "\n", 
+ RowBox[{"DefFunctor", "[", 
+  RowBox[{
+  "G", ",", "\[DoubleStruckCapitalC]", ",", "\[DoubleStruckCapitalD]"}], 
+  "]"}], "\n", 
+ RowBox[{"DefFunctor", "[", 
+  RowBox[{
+  "S", ",", "\[DoubleStruckCapitalD]", ",", "\[DoubleStruckCapitalA]"}], 
+  "]"}]}], "Input",
+ CellLabel->"In[12]:=",
+ CellID->234373344],
+
+Cell["Visualize in \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]", "MathCaption",
+ CellID->39357011],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryPlot", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"DC", "[", 
+     RowBox[{"F", ",", 
+      StyleBox[
+       "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+       FontSlant->"Plain"]}], "]"}], ",", 
+    RowBox[{"DC", "[", 
+     RowBox[{"S", ",", 
+      StyleBox[
+       "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+       FontSlant->"Plain"]}], "]"}], ",", 
+    RowBox[{"DC", "[", 
+     RowBox[{"G", ",", 
+      StyleBox[
+       "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+       FontSlant->"Plain"]}], "]"}]}], "}"}], "]"}]], "Input",
+ CellLabel->"In[28]:=",
+ CellID->583805827],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{$CellContext`\[DoubleStruckCapitalA], $CellContext`\
+\[DoubleStruckCapitalB], $CellContext`\[DoubleStruckCapitalD], $CellContext`\
+\[DoubleStruckCapitalC]}, {{{1, 2}, {3, 1}, {4, 3}}, Null}, {
+      EdgeLabels -> {
+        DirectedEdge[$CellContext`\[DoubleStruckCapitalC], $CellContext`\
+\[DoubleStruckCapitalD]] -> $CellContext`G, 
+         DirectedEdge[$CellContext`\[DoubleStruckCapitalD], $CellContext`\
+\[DoubleStruckCapitalA]] -> $CellContext`S, 
+         DirectedEdge[$CellContext`\[DoubleStruckCapitalA], $CellContext`\
+\[DoubleStruckCapitalB]] -> $CellContext`F}, EdgeLabelStyle -> {
+         Directive[Background -> GrayLevel[1]]}, EdgeShapeFunction -> {{Black, 
+          Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> All, 
+       VertexLabels -> {
+         Placed["Name", Center]}, VertexShapeFunction -> {None}, VertexStyle -> {
+         Directive[
+          EdgeForm[], 
+          GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{2.031382027155592, 0.}], ShowContents -> False, 
+            StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalA]", TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{2.996709900823629, 6.862438016478216*^-12}], 
+            ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalB]", TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0.9662661908964504, 2.0369023772156175`*^-12}], 
+            ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$3"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalD]", TraditionalForm], 
+          DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0., 6.136860293043858*^-12}], ShowContents -> False, 
+            StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$4"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalC]", TraditionalForm], 
+          DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"]}, {
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], {
+        TagBox[{
+          GrayLevel[0], 
+          
+          ArrowBox[{{2.031382027155592, 0.}, {2.996709900823629, 
+           6.862438016478216*^-12}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$1"], 
+        InsetBox[
+         FormBox[
+          StyleBox["F", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$1", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          
+          ArrowBox[{{0.9662661908964504, 2.0369023772156175`*^-12}, {
+           2.031382027155592, 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$2"], 
+        InsetBox[
+         FormBox[
+          StyleBox["S", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$2", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          
+          ArrowBox[{{0., 6.136860293043858*^-12}, {0.9662661908964504, 
+           2.0369023772156175`*^-12}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$3"], 
+        InsetBox[
+         FormBox[
+          StyleBox["G", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$3", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], Typeset`data}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      2, Typeset`graph, Typeset`boxes], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {}},
+      ImageSizeCache->{{21.4857864377313, 
+       338.51421356226876`}, {-9.270213562268706, 5.558213562972183}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{Typeset`data}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None,
+  ImagePadding->20,
+  ImageSize->All]], "Output",
+ ImageSize->{364, 52},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[28]=",
+ CellID->8780517]
+}, Open  ]],
+
+Cell["Power functors connect two functor W-categories", "MathCaption",
+ CellID->64563487],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DC", "[", 
+  RowBox[{
+   SuperscriptBox["F", "G"], ",", 
+   StyleBox[
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+    FontSlant->"Plain"]}], "]"}]], "Input",
+ CellLabel->"In[15]:=",
+ CellID->390108312],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["\[DoubleStruckCapitalA]", "\[DoubleStruckCapitalD]"], 
+    "\[Rule]", 
+    SuperscriptBox["\[DoubleStruckCapitalB]", "\[DoubleStruckCapitalC]"]}], 
+   ",", 
+   SuperscriptBox["F", "G"]}], "}"}]], "Output",
+ ImageSize->{91, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[15]=",
+ CellID->665427374]
+}, Open  ]],
+
+Cell["Visualize in \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]", "MathCaption",
+ CellID->201955633],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryPlot", "[", 
+  RowBox[{"{", 
+   RowBox[{"DC", "[", 
+    RowBox[{
+     SuperscriptBox["F", "G"], ",", 
+     StyleBox[
+      "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+      FontSlant->"Plain"]}], "]"}], "}"}], "]"}]], "Input",
+ CellLabel->"In[31]:=",
+ CellID->37128797],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+       WildCats`\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT][$\
+CellContext`\[DoubleStruckCapitalD], $CellContext`\[DoubleStruckCapitalA]], 
+       WildCats`\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT][$\
+CellContext`\[DoubleStruckCapitalC], $CellContext`\[DoubleStruckCapitalB]]}, \
+{{{1, 2}}, Null}, {EdgeLabels -> {DirectedEdge[
+           
+           WildCats`\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT][$\
+CellContext`\[DoubleStruckCapitalD], $CellContext`\[DoubleStruckCapitalA]], 
+           
+           WildCats`\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT][$\
+CellContext`\[DoubleStruckCapitalC], $CellContext`\[DoubleStruckCapitalB]]] -> 
+         WildCats`PowerFunctor[$CellContext`G, $CellContext`F]}, 
+       EdgeLabelStyle -> {
+         Directive[Background -> GrayLevel[1]]}, EdgeShapeFunction -> {{Black, 
+          Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> All, 
+       VertexLabels -> {
+         Placed["Name", Center]}, VertexShapeFunction -> {None}, VertexStyle -> {
+         Directive[
+          EdgeForm[], 
+          GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{1., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox[
+           SuperscriptBox[
+           "\[DoubleStruckCapitalA]", "\[DoubleStruckCapitalD]"], 
+           TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0., 1.2246467991473532`*^-16}], ShowContents -> False, 
+            StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox[
+           SuperscriptBox[
+           "\[DoubleStruckCapitalB]", "\[DoubleStruckCapitalC]"], 
+           TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"]}, {
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{1., 0.}, {0., 1.2246467991473532`*^-16}}, {0.1, 0.1}]}, 
+         "DynamicName", BoxID -> "EdgeLabelID$1"], 
+        InsetBox[
+         FormBox[
+          StyleBox[
+           SuperscriptBox["F", "G"], 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$1", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], Typeset`data}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      2, Typeset`graph, Typeset`boxes], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {}},
+      ImageSizeCache->{{17.9857864376269, 
+       343.01421356237313`}, {-10.770213562373087`, 7.058213562373126}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{Typeset`data}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None,
+  ImagePadding->20,
+  ImageSize->All]], "Output",
+ ImageSize->{364, 52},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[31]=",
+ CellID->649865186]
+}, Open  ]],
+
+Cell["\<\
+The action of a power functor on functors (objects in its domain) is very \
+similar to that of the Hom functor on morphisms\
+\>", "MathCaption",
+ CellID->311111466],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["F", "G"], "[", "S", "]"}]], "Input",
+ CellLabel->"In[21]:=",
+ CellID->59376801],
+
+Cell[BoxData[
+ RowBox[{"F", 
+  UnderscriptBox["\[EmptyCircle]", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"], 
+  RowBox[{"S", " ", 
+   UnderscriptBox["\[EmptyCircle]", 
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]"], 
+   "  ", "G"}]}]], "Output",
+ ImageSize->{76, 22},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[21]=",
+ CellID->344388939]
+}, Open  ]],
+
+Cell["\<\
+If one of the two arguments in PowerFunctor is a category, that argument is \
+interpreted as the identity functor of that category\
+\>", "MathCaption",
+ CellID->127363670],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["F", "\[DoubleStruckCapitalD]"]], "Input",
+ CellLabel->"In[32]:=",
+ CellID->170367106],
+
+Cell[BoxData[
+ SuperscriptBox["F", 
+  UnderscriptBox["Id", "\[DoubleStruckCapitalD]"]]], "Output",
+ ImageSize->{22, 22},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[32]=",
+ CellID->31090395]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["\[DoubleStruckCapitalA]", "G"]], "Input",
+ CellLabel->"In[33]:=",
+ CellID->204821224],
+
+Cell[BoxData[
+ SuperscriptBox[
+  UnderscriptBox["Id", "\[DoubleStruckCapitalA]"], "G"]], "Output",
+ ImageSize->{24, 23},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[33]=",
+ CellID->212822801]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->23220180],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellID->1567025153]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["Yoneda and CoYoneda functors",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/Yoneda and CoYoneda functors"]], \
+"TutorialRelatedLinks",
+ CellID->328489779]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Functor W-categories - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 41, 52.8208441}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> 
+    "Wild Cats Package Tutorial", "language" -> "en", "paclet" -> 
+    "WildCats Package", "status" -> "None", "summary" -> 
+    "This terminates the current Mathematica session and starts a new clean \
+session (recommended for troubleshooting). This loads the package: Functor \
+W-categories are represented by \
+\\[DoubleStruckCapitalF]\\[DoubleStruckCapitalU]\\[DoubleStruckCapitalN]\\[\
+DoubleStruckCapitalC]\\[DoubleStruckCapitalT] expressions.", "synonyms" -> {},
+     "title" -> "Functor W-categories", "type" -> "Tutorial", "uri" -> 
+    "WildCats/tutorial/FunctorQuasicategories"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[613, 21, 78, 1, 70, "TutorialColorBar"],
+Cell[694, 24, 179, 5, 70, "LinkTrail"],
+Cell[876, 31, 2858, 66, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3759, 101, 57, 1, 70, "Title",
+ CellID->509267359],
+Cell[3819, 104, 233, 7, 70, "MathCaption",
+ CellID->56565528],
+Cell[4055, 113, 71, 2, 70, "Input",
+ CellID->3132515],
+Cell[4129, 117, 67, 1, 70, "MathCaption",
+ CellID->1825449234],
+Cell[CellGroupData[{
+Cell[4221, 122, 117, 3, 70, "Input",
+ CellID->829090770],
+Cell[4341, 127, 877, 22, 70, "Print",
+ CellID->566400394]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5255, 154, 169, 3, 70, "Section",
+ CellID->1215666],
+Cell[5427, 159, 434, 13, 70, "Text",
+ CellID->130283103],
+Cell[5864, 174, 1109, 37, 70, "DefinitionBox",
+ CellID->266013035],
+Cell[6976, 213, 63, 1, 70, "Caption",
+ CellID->322494902],
+Cell[7042, 216, 415, 17, 70, "Text",
+ CellID->49389796],
+Cell[7460, 235, 1058, 29, 70, "MathCaption",
+ CellID->76519552],
+Cell[CellGroupData[{
+Cell[8543, 268, 353, 8, 70, "Input",
+ CellID->63477539],
+Cell[8899, 278, 291, 7, 36, "Output",
+ CellID->11852780]
+}, Open  ]],
+Cell[9205, 288, 231, 6, 70, "MathCaption",
+ CellID->502216192],
+Cell[CellGroupData[{
+Cell[9461, 298, 244, 5, 70, "Input",
+ CellID->9313746],
+Cell[9708, 305, 160, 5, 36, "Output",
+ CellID->91176264]
+}, Open  ]],
+Cell[9883, 313, 151, 4, 70, "MathCaption",
+ CellID->373426191],
+Cell[CellGroupData[{
+Cell[10059, 321, 165, 4, 70, "Input",
+ CellID->24771761],
+Cell[10227, 327, 159, 5, 36, "Output",
+ CellID->3173700]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10423, 337, 240, 5, 70, "Input",
+ CellID->10727280],
+Cell[10666, 344, 161, 5, 36, "Output",
+ CellID->371089622]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10864, 354, 241, 5, 70, "Input",
+ CellID->256048662],
+Cell[11108, 361, 162, 5, 36, "Output",
+ CellID->354302621]
+}, Open  ]],
+Cell[11285, 369, 301, 9, 70, "MathCaption",
+ CellID->161145358],
+Cell[CellGroupData[{
+Cell[11611, 382, 167, 4, 70, "Input",
+ CellID->169290948],
+Cell[11781, 388, 213, 6, 36, "Output",
+ CellID->35625587]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12031, 399, 167, 4, 70, "Input",
+ CellID->405740241],
+Cell[12201, 405, 213, 6, 36, "Output",
+ CellID->39856626]
+}, Open  ]],
+Cell[12429, 414, 144, 4, 70, "MathCaption",
+ CellID->763782208],
+Cell[CellGroupData[{
+Cell[12598, 422, 161, 5, 70, "Input",
+ CellID->28265503],
+Cell[12762, 429, 160, 5, 36, "Output",
+ CellID->29047284]
+}, Open  ]],
+Cell[12937, 437, 282, 7, 70, "Text",
+ CellID->41660757],
+Cell[13222, 446, 74, 1, 70, "MathCaption",
+ CellID->70930210],
+Cell[13299, 449, 279, 8, 70, "Input",
+ CellID->196729282],
+Cell[13581, 459, 74, 1, 70, "MathCaption",
+ CellID->147466920],
+Cell[13658, 462, 270, 7, 70, "Input",
+ CellID->381585323],
+Cell[13931, 471, 169, 4, 70, "MathCaption",
+ CellID->156157277],
+Cell[CellGroupData[{
+Cell[14125, 479, 200, 7, 70, "Input",
+ CellID->265984728],
+Cell[14328, 488, 352, 11, 36, "Output",
+ CellID->1006522]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14717, 504, 200, 7, 70, "Input",
+ CellID->473961633],
+Cell[14920, 513, 353, 11, 36, "Output",
+ CellID->95334777]
+}, Open  ]],
+Cell[15288, 527, 467, 8, 70, "MathCaption",
+ CellID->174970522],
+Cell[CellGroupData[{
+Cell[15780, 539, 358, 10, 70, "Input",
+ CellID->129411639],
+Cell[16141, 551, 208, 7, 36, "Output",
+ CellID->9394632]
+}, Open  ]],
+Cell[16364, 561, 120, 2, 70, "MathCaption",
+ CellID->101265289],
+Cell[CellGroupData[{
+Cell[16509, 567, 203, 7, 70, "Input",
+ CellID->88310568],
+Cell[16715, 576, 209, 7, 36, "Output",
+ CellID->51696416]
+}, Open  ]],
+Cell[16939, 586, 139, 4, 70, "MathCaption",
+ CellID->477070116],
+Cell[17081, 592, 216, 7, 70, "Input",
+ CellID->275143428],
+Cell[17300, 601, 341, 7, 70, "MathCaption",
+ CellID->50618309],
+Cell[17644, 610, 297, 7, 70, "Input",
+ CellID->548407990],
+Cell[17944, 619, 84, 1, 70, "MathCaption",
+ CellID->15626301],
+Cell[CellGroupData[{
+Cell[18053, 624, 630, 14, 70, "Input",
+ CellID->415223697],
+Cell[18686, 640, 447, 13, 36, "Output",
+ CellID->34572635]
+}, Open  ]],
+Cell[19148, 656, 262, 6, 70, "MathCaption",
+ CellID->572234941],
+Cell[CellGroupData[{
+Cell[19435, 666, 275, 7, 70, "Input",
+ CellID->808559416],
+Cell[19713, 675, 162, 5, 36, "Output",
+ CellID->286673590]
+}, Open  ]],
+Cell[19890, 683, 273, 7, 70, "MathCaption",
+ CellID->18439117],
+Cell[CellGroupData[{
+Cell[20188, 694, 550, 12, 70, "Input",
+ CellID->89648688],
+Cell[20741, 708, 396, 12, 36, "Output",
+ CellID->733369843]
+}, Open  ]],
+Cell[21152, 723, 212, 7, 70, "MathCaption",
+ CellID->144329377],
+Cell[CellGroupData[{
+Cell[21389, 734, 225, 8, 70, "Input",
+ CellID->539340057],
+Cell[21617, 744, 314, 11, 38, "Output",
+ CellID->309723886]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21968, 760, 243, 8, 70, "Input",
+ CellID->98458132],
+Cell[22214, 770, 162, 5, 36, "Output",
+ CellID->278357570]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22413, 780, 245, 8, 70, "Input",
+ CellID->256790966],
+Cell[22661, 790, 161, 5, 36, "Output",
+ CellID->49276307]
+}, Open  ]],
+Cell[22837, 798, 149, 4, 70, "MathCaption",
+ CellID->272889071],
+Cell[22989, 804, 502, 14, 70, "Input",
+ CellID->201509601],
+Cell[23494, 820, 535, 11, 70, "Input",
+ CellID->199424221],
+Cell[24032, 833, 282, 7, 70, "MathCaption",
+ CellID->379677959],
+Cell[CellGroupData[{
+Cell[24339, 844, 1094, 29, 70, "Input",
+ CellID->209798092],
+Cell[25436, 875, 7565, 177, 70, "Output",
+ CellID->136710415]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[33050, 1058, 59, 1, 70, "Section",
+ CellID->628801061],
+Cell[33112, 1061, 119, 3, 70, "Text",
+ CellID->61820815],
+Cell[33234, 1066, 83, 1, 70, "Text",
+ CellID->332105024],
+Cell[33320, 1069, 138, 4, 70, "Text",
+ CellID->464759339],
+Cell[33461, 1075, 214, 6, 70, "MathCaption",
+ CellID->64264629],
+Cell[CellGroupData[{
+Cell[33700, 1085, 902, 19, 70, "Input",
+ CellID->579903295],
+Cell[34605, 1106, 590, 14, 46, "Output",
+ CellID->493671757]
+}, Open  ]],
+Cell[35210, 1123, 121, 3, 70, "MathCaption",
+ CellID->374933015],
+Cell[CellGroupData[{
+Cell[35356, 1130, 770, 17, 70, "Input",
+ CellID->450041761],
+Cell[36129, 1149, 510, 14, 43, "Output",
+ CellID->73819234]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[36688, 1169, 53, 1, 70, "Section",
+ CellID->665685510],
+Cell[36744, 1172, 411, 17, 70, "Text",
+ CellID->17365999],
+Cell[37158, 1191, 409, 17, 70, "Text",
+ CellID->85882956],
+Cell[37570, 1210, 615, 20, 70, "DefinitionBox",
+ CellID->116007878],
+Cell[38188, 1232, 53, 1, 70, "Caption",
+ CellID->279426638],
+Cell[38244, 1235, 182, 4, 70, "Text",
+ CellID->297672614],
+Cell[38429, 1241, 176, 4, 70, "Text",
+ CellID->516414571],
+Cell[38608, 1247, 133, 4, 70, "MathCaption",
+ CellID->26284519],
+Cell[38744, 1253, 341, 6, 70, "Input",
+ CellID->374411810],
+Cell[39088, 1261, 64, 1, 70, "MathCaption",
+ CellID->182481376],
+Cell[39155, 1264, 452, 14, 70, "Input",
+ CellID->234373344],
+Cell[39610, 1280, 126, 2, 70, "MathCaption",
+ CellID->39357011],
+Cell[CellGroupData[{
+Cell[39761, 1286, 697, 20, 70, "Input",
+ CellID->583805827],
+Cell[40461, 1308, 5965, 148, 70, "Output",
+ CellID->8780517]
+}, Open  ]],
+Cell[46441, 1459, 89, 1, 70, "MathCaption",
+ CellID->64563487],
+Cell[CellGroupData[{
+Cell[46555, 1464, 258, 8, 70, "Input",
+ CellID->390108312],
+Cell[46816, 1474, 408, 13, 39, "Output",
+ CellID->665427374]
+}, Open  ]],
+Cell[47239, 1490, 127, 2, 70, "MathCaption",
+ CellID->201955633],
+Cell[CellGroupData[{
+Cell[47391, 1496, 330, 10, 70, "Input",
+ CellID->37128797],
+Cell[47724, 1508, 4306, 104, 70, "Output",
+ CellID->649865186]
+}, Open  ]],
+Cell[52045, 1615, 174, 4, 70, "MathCaption",
+ CellID->311111466],
+Cell[CellGroupData[{
+Cell[52244, 1623, 121, 4, 70, "Input",
+ CellID->59376801],
+Cell[52368, 1629, 439, 12, 43, "Output",
+ CellID->344388939]
+}, Open  ]],
+Cell[52822, 1644, 181, 4, 70, "MathCaption",
+ CellID->127363670],
+Cell[CellGroupData[{
+Cell[53028, 1652, 116, 3, 70, "Input",
+ CellID->170367106],
+Cell[53147, 1657, 228, 7, 43, "Output",
+ CellID->31090395]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53412, 1669, 116, 3, 70, "Input",
+ CellID->204821224],
+Cell[53531, 1674, 229, 7, 44, "Output",
+ CellID->212822801]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[53809, 1687, 65, 1, 70, "TutorialMoreAboutSection",
+ CellID->23220180],
+Cell[53877, 1690, 152, 3, 70, "TutorialMoreAbout",
+ CellID->1567025153]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54066, 1698, 68, 1, 70, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[54137, 1701, 196, 5, 70, "TutorialRelatedLinks",
+ CellID->328489779]
+}, Open  ]]
+}, Open  ]],
+Cell[54360, 1710, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

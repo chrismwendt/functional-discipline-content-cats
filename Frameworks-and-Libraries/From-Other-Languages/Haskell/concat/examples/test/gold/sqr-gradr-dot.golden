@@ -1,0 +1,19 @@
+digraph sqr_gradr {
+  margin=0
+  compound=true
+  rankdir=LR
+  node [shape=Mrecord]
+  edge [fontsize=8,fontcolor=indigo]
+  bgcolor=transparent
+  nslimit=20
+  c0 [label="{In|{<Out0>}}"]
+  c1 [label="{{<In0>|<In1>}|\×|{<Out0>}}"]
+  c156 [label="{{<In0>|<In1>}|+|{<Out0>}}"]
+  c157 [label="{{<In0>|<In1>}|Out}"]
+  c0:Out0 -> c1:In0 [label="Double"]
+  c0:Out0 -> c1:In1 [label="Double"]
+  c0:Out0 -> c156:In0 [label="Double"]
+  c0:Out0 -> c156:In1 [label="Double"]
+  c1:Out0 -> c157:In0 [label="Double"]
+  c156:Out0 -> c157:In1 [label="Double"]
+}

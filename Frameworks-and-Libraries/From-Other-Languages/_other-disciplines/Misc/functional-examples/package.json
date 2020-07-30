@@ -1,0 +1,38 @@
+{
+  "name": "dr-frisbe-course",
+  "version": "0.1.0",
+  "main": "server.js",
+  "description": "My project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitriz/dr-frisbe-course.git"
+  },
+  "author": "Dmitri Zaitsev <dmitri14@gmail.com> (https://github.com/dmitriz)",
+  "config": {
+    "port": "8001"
+  },
+  "scripts": {
+    "start": "node server",
+    "sync": "git add . && git commit; git pull && git push",
+    "pub": "npm version patch && npm publish && git push"
+  },
+  "keywords": [
+    "dr-frisbe-course"
+  ],
+  "bugs": {
+    "url": "https://github.com/dmitriz/dr-frisbe-course/issues"
+  },
+  "homepage": "https://github.com/dmitriz/dr-frisbe-course#readme",
+  "dependencies": {
+    "creed": "^1.4.0",
+    "data.either": "^1.4.0",
+    "data.task": "^3.1.1",
+    "fantasy-identities": "0.0.1",
+    "fluture": "^11.0.0",
+    "futurize": "^1.2.0",
+    "immutable": "^3.8.2",
+    "immutable-ext": "^1.1.5",
+    "request": "^2.79.0"
+  }
+}

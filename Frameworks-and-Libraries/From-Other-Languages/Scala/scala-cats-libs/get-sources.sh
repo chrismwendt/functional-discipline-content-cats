@@ -1,0 +1,15 @@
+git clone https://github.com/tpolecat/tpolecat.github.io
+git clone https://github.com/typelevel/catalysts
+git clone https://github.com/tpolecat/turtles
+git clone https://github.com/typelevel/cats
+git clone https://github.com/typelevel/cats-effect
+git clone https://github.com/julien-truffaut/newts
+git clone https://github.com/tpolecat/iteratee
+git clone https://github.com/tpolecat/mouse
+git clone https://github.com/typelevel/mouse
+git clone https://github.com/tpolecat/scalaz
+git clone https://github.com/tpolecat/dogs
+git clone https://github.com/tpolecat/ocs3
+git clone https://github.com/tpolecat/tuco
+git clone https://github.com/tpolecat/libra
+git clone https://github.com/tpolecat/doobie-labs

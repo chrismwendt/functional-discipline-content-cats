@@ -1,0 +1,57 @@
+highlighter: rouge
+url: http://tpolecat.github.io/
+# lsi: false
+exclude: [LICENSE, CNAME, README.md, .gitignore]
+markdown: kramdown
+
+collections:
+  doobie-0.2.0:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.2.0"
+  doobie-0.2.1:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.2.1"
+  doobie-0.2.2:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.2.2"
+  doobie-0.2.3:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.2.3"
+  doobie-0.2.4:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.2.4"
+  doobie-0.3.0:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.3.0"
+  doobie-cats-0.4.0:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.4.0 • cats"
+  doobie-scalaz-0.4.0:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.4.0 • scalaz"
+  doobie-cats-0.4.2:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.4.2 • cats"
+  doobie-scalaz-0.4.2:
+    output: true
+    title: "book of doobie"
+    index: "00-index.html"
+    version: "0.4.2 • scalaz"

@@ -1,0 +1,35 @@
+dist/
+doc/
+org/
+tmp/
+.stack-work/
+*.hp
+*.prof
+*.xsl
+*.orig
+m.txt
+mpf.txt
+*.swp
+hellow.*
+*travis.log
+*.tix
+
+# Verigraph stuff
+.verigraph-repl-history
+
+# Cabal stuff
+.cabal-sandbox
+cabal.sandbox.config
+
+images/.directory
+
+
+# HSpec stuff
+.hspec-failures
+
+
+# Editor/IDE stuff
+TAGS
+*#
+.vscode/
+.idea/

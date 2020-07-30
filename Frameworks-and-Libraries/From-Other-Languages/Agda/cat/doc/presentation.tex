@@ -1,0 +1,492 @@
+\documentclass[a4paper]{beamer}
+%% \documentclass[a4paper,handout]{beamer}
+%% \usecolortheme[named=seagull]{structure}
+
+\input{packages.tex}
+
+\input{macros.tex}
+
+\title{Univalent Categories}
+\subtitle{A formalization of category theory in Cubical Agda}
+
+\newcommand{\myname}{Frederik Hangh{\o}j Iversen}
+\author[\myname]{
+  \myname\\
+  \footnotesize Supervisors: Thierry Coquand, Andrea Vezzosi\\
+  Examiner: Andreas Abel
+}
+\institute{Chalmers University of Technology}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Introduction}
+Category Theory: The study of abstract functions. Slogan: ``It's the
+arrows that matter''\pause
+
+Objects are equal ``up to isomorphism''.  Univalence makes this notion
+precise.\pause
+
+Agda does not permit proofs of univalence.  Cubical Agda admits
+this.\pause
+
+Goal: Construct a category whose terminal objects are (equivalent to)
+products. Use this to conclude that products are propositions, not a
+structure on a category.
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+The path type
+
+Definition of a (pre-) category
+
+1-categories
+
+Univalent (proper) categories
+
+The category of spans
+\end{frame}
+
+\section{Paths}
+\begin{frame}
+  \frametitle{Paths}
+  \framesubtitle{Definition}
+  Heterogeneous paths
+  \begin{equation*}
+    \Path \tp (P \tp \I → \MCU) → P\ 0 → P\ 1 → \MCU
+  \end{equation*}
+  \pause
+  For $P \tp \I → \MCU$ and $a_0 \tp P\ 0$, $a_1 \tp P\ 1$
+  inhabitants of $\Path\ P\ a_0\ a_1$ are like functions
+  %
+  $$
+  p \tp ∏_{i \tp \I} P\ i
+  $$
+  %
+  Which satisfy $p\ 0 & = a_0$ and $p\ 1 & = a_1$
+  \pause
+
+  Homogenous paths
+  $$
+  a_0 ≡ a_1 ≜ \Path\ (\var{const}\ A)\ a_0\ a_1
+  $$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Pre categories}
+  \framesubtitle{Definition}
+  Data:
+  \begin{align*}
+    \Object   & \tp \Type \\
+    \Arrow    & \tp \Object → \Object → \Type \\
+    \identity & \tp \Arrow\ A\ A \\
+    \llll      & \tp \Arrow\ B\ C → \Arrow\ A\ B → \Arrow\ A\ C
+  \end{align*}
+  %
+  \pause
+  Laws:
+  %
+  \begin{align*}
+  \var{isAssociative} & \tp
+  h \llll (g \llll f) ≡ (h \llll g) \llll f \\
+  \var{isIdentity} & \tp
+  (\identity \llll f ≡ f)
+  ×
+  (f \llll \identity ≡ f)
+  \end{align*}
+
+\end{frame}
+\begin{frame}
+  \frametitle{Pre categories}
+  \framesubtitle{1-categories}
+Cubical Agda does not admit \emph{Uniqueness of Identity Proofs}
+(UIP).  Rather there is a hierarchy of \emph{Homotopy Types}:
+Contractible types, mere propositions, sets, groupoids, \dots
+
+\pause
+  1-categories:
+  $$
+  \isSet\ (\Arrow\ A\ B)
+  $$
+\pause
+  \begin{align*}
+    \isSet    & \tp \MCU → \MCU \\
+    \isSet\ A & ≜ ∏_{a_0, a_1 \tp A} \isProp\ (a_0 ≡ a_1)
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+The path type \ensuremath{\checkmark}
+
+Definition of a (pre-) category \ensuremath{\checkmark}
+
+1-categories \ensuremath{\checkmark}
+
+Univalent (proper) categories
+
+The category of spans
+\end{frame}
+
+\begin{frame}
+  \frametitle{Categories}
+  \framesubtitle{Univalence}
+  Let $\approxeq$ denote isomorphism of objects.  We can then construct
+  the identity isomorphism in any category:
+  $$
+  (\identity , \identity , \var{isIdentity}) \tp A \approxeq A
+  $$
+  \pause
+  Likewise since paths are substitutive we can promote a path to an isomorphism:
+  $$
+  \idToIso \tp A ≡ B → A ≊ B
+  $$
+  \pause
+  For a category to be univalent we require this to be an equivalence:
+  %
+  $$
+  \isEquiv\ (A ≡ B)\ (A \approxeq B)\ \idToIso
+  $$
+  %
+\end{frame}
+\begin{frame}
+  \frametitle{Categories}
+  \framesubtitle{Univalence, cont'd}
+  $$\isEquiv\ (A ≡ B)\ (A \approxeq B)\ \idToIso$$
+  \pause%
+  $$(A ≡ B) ≃ (A \approxeq B)$$
+  \pause%
+  $$(A ≡ B) ≅ (A \approxeq B)$$
+  \pause%
+  Name the inverse of $\idToIso$:
+  $$\isoToId \tp (A \approxeq B) → (A ≡ B)$$
+\end{frame}
+\begin{frame}
+  \frametitle{Propositionality of products}
+  Construct a category for which it is the case that the terminal
+  objects are equivalent to products:
+  \begin{align*}
+    \var{Terminal} ≃ \var{Product}\ ℂ\ 𝒜\ ℬ
+  \end{align*}
+
+  \pause
+  And since equivalences preserve homotopy levels we get:
+  %
+  $$
+  \isProp\ \left(\var{Product}\ \bC\ 𝒜\ ℬ\right)
+  $$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Categories}
+  \framesubtitle{A theorem}
+  %
+  Let the isomorphism $(ι, \inv{ι}, \var{inv}) \tp A \approxeq B$.
+  %
+  \pause
+  %
+  The isomorphism induces the path
+  %
+  $$
+  p ≜ \isoToId\ (\iota, \inv{\iota}, \var{inv}) \tp A ≡ B
+  $$
+  %
+  \pause
+  and consequently a path on arrows:
+  %
+  $$
+  p_{\var{dom}} ≜ \congruence\ (λ x → \Arrow\ x\ X)\ p
+  \tp
+  \Arrow\ A\ X ≡ \Arrow\ B\ X
+  $$
+  %
+  \pause
+  The proposition is:
+  %
+  \begin{align}
+    \label{eq:coeDom}
+    \tag{$\var{coeDom}$}
+    ∏_{f \tp A → X}
+    \var{coe}\ p_{\var{dom}}\ f ≡ f \llll \inv{\iota}
+  \end{align}
+\end{frame}
+\begin{frame}
+  \frametitle{Categories}
+  \framesubtitle{A theorem, proof}
+  \begin{align*}
+    \var{coe}\ p_{\var{dom}}\ f
+    & ≡ f \llll (\idToIso\ p)_1 && \text{By path-induction} \\
+    & ≡ f \llll \inv{\iota}
+    && \text{$\idToIso$ and $\isoToId$ are inverses}\\
+  \end{align*}
+  \pause
+  %
+  Induction will be based at $A$.  Let $\widetilde{B}$ and $\widetilde{p}
+  \tp A ≡ \widetilde{B}$ be given.
+  %
+  \pause
+  %
+  Define the family:
+  %
+  $$
+  D\ \widetilde{B}\ \widetilde{p} ≜
+  \var{coe}\ \widetilde{p}_{\var{dom}}\ f
+  ≡
+  f \llll \inv{(\idToIso\ \widetilde{p})}
+  $$
+  \pause
+  %
+  The base-case becomes:
+  $$
+  d \tp D\ A\ \refl =
+  \left(\var{coe}\ \refl_{\var{dom}}\ f ≡ f \llll \inv{(\idToIso\ \refl)}\right)
+  $$
+\end{frame}
+\begin{frame}
+  \frametitle{Categories}
+  \framesubtitle{A theorem, proof, cont'd}
+  $$
+  d \tp
+  \var{coe}\ \refl_{\var{dom}}\ f ≡ f \llll \inv{(\idToIso\ \refl)}
+  $$
+  \pause
+  \begin{align*}
+    \var{coe}\ \refl_{\var{dom}}\ f
+    & =
+    \var{coe}\ \refl\ f \\
+    & ≡ f
+    && \text{neutral element for $\var{coe}$}\\
+    & ≡ f \llll \identity \\
+    & ≡ f \llll \var{subst}\ \refl\ \identity
+    && \text{neutral element for $\var{subst}$}\\
+    & ≡ f \llll \inv{(\idToIso\ \refl)}
+    && \text{By definition of $\idToIso$}\\
+  \end{align*}
+  \pause
+  In conclusion, the theorem is inhabited by:
+  $$
+  \var{pathInd}\ D\ d\ B\ p
+  $$
+\end{frame}
+\begin{frame}
+  \frametitle{Span category} \framesubtitle{Definition} Given a base
+  category $\bC$ and two objects in this category $\pairA$ and $\pairB$
+  we can construct the \nomenindex{span category}:
+  %
+  \pause
+  Objects:
+  $$
+  ∑_{X \tp Object} (\Arrow\ X\ \pairA) × (\Arrow\ X\ \pairB)
+  $$
+  \pause
+  %
+  Arrows between objects $(A , a_{\pairA} , a_{\pairB})$ and
+  $(B , b_{\pairA} , b_{\pairB})$:
+  %
+  $$
+  ∑_{f \tp \Arrow\ A\ B}
+  (b_{\pairA} \llll f ≡ a_{\pairA}) ×
+  (b_{\pairB} \llll f ≡ a_{\pairB})
+  $$
+\end{frame}
+\begin{frame}
+  \frametitle{Span category}
+  \framesubtitle{Univalence}
+  \begin{align*}
+    (X , x_{𝒜} , x_{ℬ}) ≡ (Y , y_{𝒜} , y_{ℬ})
+  \end{align*}
+  \begin{align*}
+    \begin{split}
+      p \tp & X ≡ Y \\
+      & \Path\ (λ i → \Arrow\ (p\ i)\ 𝒜)\ x_{𝒜}\ y_{𝒜} \\
+      & \Path\ (λ i → \Arrow\ (p\ i)\ ℬ)\ x_{ℬ}\ y_{ℬ}
+    \end{split}
+  \end{align*}
+  \begin{align*}
+    \begin{split}
+      \var{iso} \tp & X \approxeq Y \\
+      & \Path\ (λ i → \Arrow\ (\widetilde{p}\ i)\ 𝒜)\ x_{𝒜}\ y_{𝒜} \\
+      & \Path\ (λ i → \Arrow\ (\widetilde{p}\ i)\ ℬ)\ x_{ℬ}\ y_{ℬ}
+    \end{split}
+  \end{align*}
+  \begin{align*}
+    (X , x_{𝒜} , x_{ℬ}) ≊ (Y , y_{𝒜} , y_{ℬ})
+  \end{align*}
+\end{frame}
+\begin{frame}
+  \frametitle{Span category}
+  \framesubtitle{Univalence, proof}
+  %
+  \begin{align*}
+    %% (f, \inv{f}, \var{inv}_f, \var{inv}_{\inv{f}})
+    %% \tp
+    (X, x_{𝒜}, x_{ℬ}) \approxeq (Y, y_{𝒜}, y_{ℬ})
+    \to
+    \begin{split}
+      \var{iso} \tp & X \approxeq Y \\
+      & \Path\ (λ i → \Arrow\ (\widetilde{p}\ i)\ 𝒜)\ x_{𝒜}\ y_{𝒜} \\
+      & \Path\ (λ i → \Arrow\ (\widetilde{p}\ i)\ ℬ)\ x_{ℬ}\ y_{ℬ}
+    \end{split}
+  \end{align*}
+  \pause
+  %
+  Let $(f, \inv{f}, \var{inv}_f, \var{inv}_{\inv{f}})$ be an inhabitant
+  of the antecedent.\pause
+
+  Projecting out the first component gives us the isomorphism
+  %
+  $$
+  (\fst\ f, \fst\ \inv{f}
+  , \congruence\ \fst\ \var{inv}_f
+  , \congruence\ \fst\ \var{inv}_{\inv{f}}
+  )
+  \tp X \approxeq Y
+  $$
+  \pause
+  %
+  This gives rise to the following paths:
+  %
+  \begin{align*}
+    \begin{split}
+      \widetilde{p} & \tp X ≡ Y \\
+      \widetilde{p}_{𝒜} & \tp \Arrow\ X\ 𝒜 ≡ \Arrow\ Y\ 𝒜 \\
+    \end{split}
+  \end{align*}
+  %
+\end{frame}
+\begin{frame}
+  \frametitle{Span category}
+  \framesubtitle{Univalence, proof, cont'd}
+  It remains to construct:
+  %
+  \begin{align*}
+    \begin{split}
+      & \Path\ (λ i → \widetilde{p}_{𝒜}\ i)\ x_{𝒜}\ y_{𝒜}
+    \end{split}
+  \end{align*}
+  \pause
+  %
+  This is achieved with the following lemma:
+  %
+  \begin{align*}
+    ∏_{q \tp A ≡ B} \var{coe}\ q\ x_{𝒜} ≡ y_{𝒜}
+    →
+    \Path\ (λ i → q\ i)\ x_{𝒜}\ y_{𝒜}
+  \end{align*}
+  %
+  Which is used without proof.\pause
+
+  So the construction reduces to:
+  %
+  \begin{align*}
+    \var{coe}\ \widetilde{p}_{𝒜}\ x_{𝒜} ≡ y_{𝒜}
+  \end{align*}%
+  \pause%
+  This is proven with:
+  %
+  \begin{align*}
+    \var{coe}\ \widetilde{p}_{𝒜}\ x_{𝒜}
+    & ≡ x_{𝒜} \llll \fst\ \inv{f} && \text{\ref{eq:coeDom}} \\
+    & ≡ y_{𝒜} && \text{Property of span category}
+  \end{align*}
+\end{frame}
+\begin{frame}
+  \frametitle{Propositionality of products}
+  We have
+  %
+  $$
+  \isProp\ \var{Terminal}
+  $$\pause
+  %
+  We can show:
+  \begin{align*}
+    \var{Terminal} ≃ \var{Product}\ ℂ\ 𝒜\ ℬ
+  \end{align*}
+  \pause
+  And since equivalences preserve homotopy levels we get:
+  %
+  $$
+  \isProp\ \left(\var{Product}\ \bC\ 𝒜\ ℬ\right)
+  $$
+\end{frame}
+\begin{frame}
+  \frametitle{Monads}
+  \framesubtitle{Monoidal form}
+  %
+  \begin{align*}
+    \EndoR  & \tp \Functor\ ℂ\ ℂ \\
+    \pureNT
+    & \tp \NT{\widehat{\identity}}{\EndoR} \\
+    \joinNT
+    & \tp \NT{(\EndoR \oplus \EndoR)}{\EndoR}
+  \end{align*}
+  \pause
+  %
+  Let $\fmap$ be the map on arrows of $\EndoR$.
+  %
+  \begin{align*}
+    \join \llll \fmap\ \join
+    & ≡ \join \llll \join \\
+    \join \llll \pure\           & ≡ \identity \\
+    \join \llll \fmap\     \pure & ≡ \identity
+  \end{align*}
+\end{frame}
+\begin{frame}
+  \frametitle{Monads}
+  \framesubtitle{Kleisli form}
+  %
+  \begin{align*}
+    \omapR & \tp \Object → \Object \\
+    \pure  & \tp % ∏_{X \tp Object}
+    \Arrow\ X\ (\omapR\ X) \\
+    \bind  & \tp
+    \Arrow\ X\ (\omapR\ Y)
+    \to
+    \Arrow\ (\omapR\ X)\ (\omapR\ Y)
+  \end{align*}\pause
+  %
+  \begin{align*}
+    \fish & \tp
+    \Arrow\ A\ (\omapR\ B)
+    →
+    \Arrow\ B\ (\omapR\ C)
+    →
+    \Arrow\ A\ (\omapR\ C) \\
+    f \fish g & ≜ f \rrrr (\bind\ g)
+  \end{align*}
+  \pause
+  %
+  \begin{align*}
+    \bind\ \pure & ≡ \identity_{\omapR\ X} \\
+    \pure \fish f & ≡ f \\
+    (\bind\ f) \rrrr (\bind\ g) & ≡ \bind\ (f \fish g)
+  \end{align*}
+\end{frame}
+\begin{frame}
+  \frametitle{Monads}
+  \framesubtitle{Equivalence}
+  In the monoidal formulation we can define $\bind$:
+  %
+  $$
+  \bind\ f ≜ \join \llll \fmap\ f
+  $$
+  \pause
+  %
+  And likewise in the Kleisli formulation we can define $\join$:
+  %
+  $$
+  \join ≜ \bind\ \identity
+  $$
+  \pause
+  The laws are logically equivalent. Since logical equivalence is
+  enough for as an equivalence of types for propositions we get:
+  %
+  $$
+  \var{Monoidal} ≃ \var{Kleisli}
+  $$
+  %
+\end{frame}
+\end{document}

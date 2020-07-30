@@ -1,0 +1,14 @@
+*.ibc
+*.exe
+*.idr~
+
+*.o
+*.hi
+
+target/
+elba.lock
+
+typedefs_parser.js
+typedefs.js
+typedefs_examples
+typedefs_parser

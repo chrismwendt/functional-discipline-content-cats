@@ -1,0 +1,15 @@
+---
+layout: blog
+---
+
+<h3>bloggish scribbles</h3>
+<p>These posts are infrequent and are almost always inspired by questions that come up on the <code>#scala</code> IRC channel on FreeNode. I don't have comments turned on because I haven't figured out how to do that, so for now if you have comments or suggestions please find me via one of the methods suggested on the <a href="/about.html">about</a> page.</p>
+
+<table class="table table-hover">
+  {% for post in site.posts %}
+  <tr>
+    <td width="100pt">{{ post.date | date_to_string }}</td>
+    <td><a href="{{ post.url }}">{{ post.title }}</td>
+  </tr>
+  {% endfor %}
+</table>

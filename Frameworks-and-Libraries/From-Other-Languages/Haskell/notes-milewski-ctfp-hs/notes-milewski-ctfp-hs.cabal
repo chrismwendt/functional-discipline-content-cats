@@ -1,0 +1,80 @@
+name:                notes-milewski-ctfp-hs
+version:             0.0.1.0
+synopsis:            Notes and thoughts from reading Category Theory for Programmers written in Haskell
+-- description:
+homepage:            https://github.com/rpeszek/notes-milewski-ctfp-hs#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Robert Peszek
+maintainer:          example@example.com
+copyright:           2017 Robert Peszek
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     CTNotes.Introduction
+                     , CTNotes.P1Ch03a_NatsCat
+                     , CTNotes.P1Ch03b_FiniteCats
+                     , CTNotes.P1Ch03c_DiscreteCats
+                     , CTNotes.P1Ch07_Functors_Composition
+                     , CTNotes.P1Ch07b_Functors_AcrossCats
+                     , CTNotes.P1Ch08a_BiFunctorAsFunctor
+                     , CTNotes.P1Ch08b_BiFunctorComposition
+                     , CTNotes.P1Ch08c_BiFunctorNonHask
+                     , CTNotes.P1Ch10_NaturalTransformations
+                     , CTNotes.P1Ch10b_NTsNonHask
+                     , CTNotes.P2Ch02a_LimitsColimitsExtras
+                     , CTNotes.P2Ch02b_Continuity
+                     , CTNotes.P2Ch02c_Equalizer
+                     , CTNotes.P2Ch03_FreeMonoidFoldMap
+                     , CTNotes.P2Ch05a_YonedaAndMap
+                     , CTNotes.P2Ch05b_YonedaNonHask
+                     , CTNotes.P3Ch02a_CurryAdj
+                     , CTNotes.P3Ch02b_AdjNonHask
+                     , CTNotes.P3Ch02c_AdjProps
+                     , CTNotes.P3Ch06a_CTMonads
+                     , CTNotes.P3Ch06b_FiniteMonads
+                     , CTNotes.P3Ch06c_MonoidalCats
+                     , CTNotes.P3Ch07a_GameOfLife
+                     , CTNotes.P3Ch07b_Comonad
+                     , CTNotes.P3Ch08a_Falg
+                     , CTNotes.P3Ch08b_FalgFreeMonad
+                     , CTNotes.P3Ch09a_Talg
+                     , CTNotes.P3Ch11a_KanExt
+                     , CTNotes.P3Ch12a_HaskEnrich
+                     , CTNotes.P3Ch12b_EnrichedPreorder
+                     , CTNotes.P3Ch15a_Spans
+                     , CTNotes.P3Ch15b_CatsAsMonads
+                     , Trivialities.NTProps
+                     , Utils.Pretty
+                     , Utils.Stream
+  build-depends:       base >= 4.7 && < 5
+                     -- , category-extras
+                     , comonad
+                     , lens
+                     , ghc-prim
+  default-language:    Haskell2010
+
+executable notes-milewski-ctfp-hs
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , notes-milewski-ctfp-hs
+  default-language:    Haskell2010
+
+test-suite ct-examples-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , notes-milewski-ctfp-hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/githubuser/notes-milewski-ctfp-hs

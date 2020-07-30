@@ -1,0 +1,343 @@
+\ifx\wholebook\relax \else
+
+\documentclass[UTF8]{article}
+
+\usepackage[cn]{../../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{范畴}
+
+\author{刘新宇
+\thanks{{\bfseries 刘新宇} \newline
+  Email: liuxinyu95@gmail.com \newline}
+  }
+
+\maketitle
+\fi
+
+\markboth{范畴}{编程中的数学}
+
+\chapter*{积和余积的唯一性}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{积和余积的唯一性}
+
+积和余积是唯一的么？下面的定理回答了这个问题：
+
+\begin{lemma}
+对于范畴$\pmb{C}$中的一对对象$A$和$B$，令下图中的对象和箭头
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    P &   &  &   & I \\
+      & A &  & A &   \\
+      & B &  & B &   \\
+    Q &   &  &   & J \\};
+  \path[-stealth]
+    % left
+    (m-1-1) edge node [above] {$p_A$} (m-2-2)
+    (m-1-1) edge node [below] {$p_B$} (m-3-2)
+    (m-4-1) edge node [above] {$q_A$} (m-2-2)
+    (m-4-1) edge node [below] {$q_B$} (m-3-2)
+    % right
+    (m-2-4) edge node [above] {$i_A$} (m-1-5)
+    (m-2-4) edge node [above] {$j_A$} (m-4-5)
+    (m-3-4) edge node [below] {$i_B$} (m-1-5)
+    (m-3-4) edge node [below] {$j_B$} (m-4-5);
+\end{tikzpicture}
+\end{center}
+
+各自为一对
+
+\begin{center}
+积 \quad \quad \quad 余积
+\end{center}
+
+的楔形。则
+
+\[
+P, Q \quad \quad \quad I, J
+\]
+
+是同构的楔形，存在唯一的箭头：
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=3em, minimum width=2em]{
+    P & & I \\
+    Q & & J \\};
+  \path[-stealth]
+    % left
+    (m-1-1.south west) edge node [left] {$f$} (m-2-1.north west)
+    (m-2-1.north east) edge node [right] {$g$} (m-1-1.south east)
+    % right
+    (m-1-3.south west) edge node [left] {$f$} (m-2-3.north west)
+    (m-2-3.north east) edge node [right] {$g$} (m-1-3.south east);
+\end{tikzpicture}
+\end{center}
+
+使得：
+
+\[
+\begin{array}{lcl}
+  \begin{cases}
+    p_A = q_A \circ f & p_B = q_B \circ f \\
+    q_A = p_A \circ g & q_B = p_B \circ g
+  \end{cases}
+  & \quad &
+  \begin{cases}
+    i_A = g \circ j_A & i_B = g \circ j_B \\
+    j_A = f \circ i_A & j_B = f \circ i_B
+  \end{cases}
+\end{array}
+\]
+
+并且，$f$和$g$是互逆的同构箭头对。
+\end{lemma}
+
+\begin{proof}
+我们只证明左侧积的部分，右侧余积部分的证明与此类似。给定$A, B$，对象$Q$和两个箭头$q_A, q_B$构成的楔形是一个积。我们把对象$P$和一对箭头$p_A, p_B$看成是另一个楔形。根据积的定义，存在唯一的媒介箭头$f$满足：
+
+\[
+p_A = q_A \circ f \quad \text{和} \quad p_B = q_B \circ f
+\]
+
+交换$P$和$Q$（令$P$为积，$Q$为任意楔形），又可以得到：
+
+\[
+q_A = p_A \circ g \quad \text{和} \quad q_B = p_B \circ g
+\]
+
+这样就有：
+
+\[
+\begin{cases}
+p_A \circ g \circ f = q_A \circ f = p_A \\
+p_B \circ g \circ f = q_B \circ f = p_B
+\end{cases}
+\]
+
+以及：
+
+\[
+\begin{cases}
+q_A \circ f \circ g = p_A \circ g = q_A \\
+q_B \circ f \circ g = p_B \circ g = q_B \\
+\end{cases}
+\]
+
+因此：
+
+\[
+g \circ f = id_P \quad \quad \quad f \circ g = id_Q
+\]
+
+\end{proof}
+
+这一结论说明，如果两个对象存在积（或者余积）则它是唯一的。
+
+\chapter*{集合的笛卡尔积和不相交并集构成积和余积的证明}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{集合的笛卡尔积和不相交并集构成积和余积的证明}
+
+\begin{proof}
+我们可以用构造法证明。首先证明左侧积的部分。$A \times B$的笛卡尔积是来自两个集合的元素对的全部组合
+
+\[
+\{(a, b) | a \in A, b \in B\}
+\]
+
+我们定义两个特殊的箭头（函数）作为$p_A$和$p_B$
+
+\[
+\begin{cases}
+fst\ (a, b) = a \\
+snd\ (a, b) = b
+\end{cases}
+\]
+
+考虑任意楔形
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+      & A  \\
+    X &    \\
+      & B  \\};
+  \path[-stealth]
+    (m-2-1) edge node[above] {$p$} (m-1-2)
+    (m-2-1) edge node[below] {$q$} (m-3-2);
+\end{tikzpicture}
+\end{center}
+
+其中$p\ x = a, q\ x = b, x \in X$。举个具体的例子，$X$为$Int$, $A$为$Int$，$B$为$Bool$，而两个函数$p, q$的定义为：
+
+\[
+\begin{cases}
+p(x) = -x \\
+q(x) = even(x)
+\end{cases}
+\]
+
+也就是说，$p$对一个整数取相反数，$q$判断其是否是偶数。我们定义函数$X \arrowto{m} A \times B$如下：
+
+\[
+m(x) = (a, b)
+\]
+
+具体到上面的例子，有：
+
+\[
+m(x) = (-x, even(x))
+\]
+
+这样，下面图中的箭头就可交换了：
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+      & A \\
+    X & A \times B \\
+      & B \\};
+  \path[-stealth]
+    % left
+    (m-2-1) edge node [above] {$p$} (m-1-2)
+    (m-2-1) edge node [below] {$q$} (m-3-2)
+    (m-2-1) edge node [above] {$m$}   (m-2-2)
+    (m-2-2) edge node [right] {$fst$} (m-1-2)
+    (m-2-2) edge node [right] {$snd$} (m-3-2);
+\end{tikzpicture}
+\end{center}
+
+不难验证：
+
+\[
+\begin{array}{rcll}
+(fst \circ m)(x) & = & fst\ m(x) & \text{函数组合} \\
+                 & = & fst\ (a, b) & \text{$m$的定义} \\
+                 & = & a & \text{$fst$的定义} \\
+                 & = & p(x) & \text{反向用$p$的定义}
+\end{array}
+\]
+
+并且：
+
+\[
+\begin{array}{rcll}
+(snd \circ m)(x) & = & snd\ m(x) & \text{函数组合} \\
+                 & = & snd\ (a, b) & \text{$m$的定义} \\
+                 & = & b & \text{$snd$的定义} \\
+                 & = & q(x) & \text{反向用$q$的定义}
+\end{array}
+\]
+
+具体到上面的例子，有：
+
+\[
+\begin{cases}
+(fst \circ m)(x) = fst\ (-x, even(x)) = -x = p(x) \\
+(snd \circ m)(x) = snd\ (-x, even(x)) = even(x) = q(x)
+\end{cases}
+\]
+
+我们还需要证明$m$是唯一的。假设存在另一个函数$x \arrowto{h} A \times B$，也使得范畴图中的箭头可交换。即：
+
+\[
+fst \circ h = p \quad \text{且} \quad snd \circ h = q
+\]
+
+我们有：
+
+\[
+\begin{array}{rcll}
+(a, b) & = & (p(x),\ q(x)) & \text{$p, q$的定义} \\
+       & = & ((fst \circ h)(x),\ (snd \circ h)(x)) & \text{可交换} \\
+       & = & (fst\ h(x),\ snd\ h(x)) & \text{函数组合} \\
+       & = & (fst\ (a, b),\ snd\ (a, b)) & \text{反向用$fst, snd$的定义}
+\end{array}
+\]
+
+所以$h(x) = (a, b) = m(x)$。这样就证明了$m$的唯一性。
+
+接下来，我们证明右侧的余积部分。不相交的并集$A+B$中的元素分为两类。一类是来自$A$中的元素$(a, 0)$，另一类是来自$B$中的元素$(b, 1)$。为此，我们定义两个特殊的箭头（函数）作为$i_A, i_B$：
+
+\[
+\begin{cases}
+left(a) = (a, 0) \\
+right(b) = (b, 1)
+\end{cases}
+\]
+
+考虑任意集合$X$构成的楔形：
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    A & \\
+      & X \\
+    B & \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$p$} (m-2-2)
+    (m-3-1) edge node [below] {$q$} (m-2-2);
+\end{tikzpicture}
+\end{center}
+
+我们定义箭头$A + B \arrowto{m} X$如下：
+
+\[
+\begin{cases}
+m\ (a, 0) = p(a) \\
+m\ (b, 1) = q(b)
+\end{cases}
+\]
+
+这样，下图中的箭头就可交换了。
+
+\begin{center}
+\begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+               row sep=2em, column sep=2em, minimum width=2em]{
+    A & \\
+    A + B & X \\
+    B & \\};
+  \path[-stealth]
+    (m-1-1) edge node [above] {$p$} (m-2-2)
+    (m-3-1) edge node [below] {$q$} (m-2-2)
+    (m-2-1) edge node [above] {$m$}   (m-2-2)
+    (m-1-1) edge node [left] {$left$} (m-2-1)
+    (m-3-1) edge node [left] {$right$} (m-2-1);
+\end{tikzpicture}
+\end{center}
+
+接下来要证明$m$的唯一性，也就是说$m$是唯一使上图可交换的箭头。假设存在另一个箭头$A + B \arrowto{h} X$也使得上图可交换。即满足：
+
+\[
+h \circ left = p \quad \text{且} \quad h \circ right = q
+\]
+
+我们任取$a \in A, b \in B$，有：
+
+\[
+\begin{cases}
+h\ (a, 0) = h(left(a)) = (h \circ left)(a) = p(a) = m\ (a, 0) \\
+h\ (b, 1) = h(right(a)) = (h \circ right)(b) = q(b) = m\ (b, 1)
+\end{cases}
+\]
+
+于是$h = m$，这就证明了$m$的唯一性。
+\end{proof}
+
+\ifx\wholebook\relax \else
+
+\expandafter\enddocument
+%\end{document}
+
+\fi

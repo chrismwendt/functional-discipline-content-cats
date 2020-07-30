@@ -1,0 +1,89 @@
+((exl . id *** apply . ((id *** const 1.0) . dup) . repr . exr . id) . dup) .
+second repr .
+apply .
+((curry
+  (apply .
+   (curry
+    ((exr ***
+      apply .
+      (curry
+       (abst .
+        apply .
+        (curry (abst . apply . (exl *** repr . exr) . dup) .
+         curry
+         (curry
+          (apply . (exl . exl *** apply . (exr . exl *** exr) . dup) . dup)) .
+         repr . repr . exr ***
+         exl) .
+        dup) .
+       repr .
+       abst .
+       abst .
+       curry mulC .
+       apply . (curry exl . negateC . sinC . exl . exr . exl *** exr) . dup ***
+       apply .
+       (curry
+        (abst .
+         apply .
+         (curry (abst . apply . (exl *** repr . exr) . dup) .
+          curry
+          (curry
+           (apply . (exl . exl *** apply . (exr . exl *** exr) . dup) . dup)) .
+          repr . repr . exr ***
+          exl) .
+         dup) .
+        repr . exr . exr . exl ***
+        apply .
+        (curry
+         (abst .
+          apply .
+          (curry (abst . apply . (exl *** repr . exr) . dup) .
+           curry
+           (curry
+            (apply . (exl . exl *** apply . (exr . exl *** exr) . dup) . dup)) .
+           repr . repr . exr ***
+           exl) .
+          dup) .
+         repr . exr . exl . exl ***
+         abst . abst . curry (addC . exr)) .
+        dup) .
+       dup) .
+      dup) .
+     dup) ***
+    cosC . exl . exr) .
+   dup) ***
+  ((mulC ***
+    apply .
+    (curry
+     (abst .
+      apply .
+      (curry (abst . apply . (exl *** repr . exr) . dup) .
+       curry
+       (curry
+        (apply . (exl . exl *** apply . (exr . exl *** exr) . dup) . dup)) .
+       repr .
+       apply .
+       (curry (abst . apply . (exl *** repr . exr) . dup) .
+        curry
+        (curry
+         ((apply . (exl . exl *** exl . exr) . dup ***
+           apply . (exr . exl *** exr . exr) . dup) .
+          dup)) .
+        repr . repr . exl ***
+        repr . exr) .
+       dup ***
+       abst . curry (dup . exr)) .
+      dup) .
+     abst . abst . curry mulC . exr ***
+     abst . abst . curry mulC . exl) .
+    dup) .
+   dup) .
+  exl) .
+ dup) .
+(((const 2.0 *** exr) . dup ***
+  abst .
+  abst .
+  curry ((const 0.0 *** apply . (exl *** exr . exr) . dup) . dup) .
+  repr . repr . abst . abst . curry exr) .
+ dup) .
+dup

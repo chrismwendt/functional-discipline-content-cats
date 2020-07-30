@@ -1,0 +1,1192 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     31294,       1182]
+NotebookOptionsPosition[     22754,        900]
+NotebookOutlinePosition[     25816,        989]
+CellTagsIndexPosition[     25583,        978]
+WindowTitle->Introduction to WildCats - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Quasicategories, Categories and \
+StandardCategories\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCatsVersion\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/ref/WildCatsVersion"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats/tutorial/Introduction\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/tutorial/Introduction"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+Introduction.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/Introduction", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["Introduction to WildCats", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "WildCats is the first package to bring the full power and machinery of \
+Category Theory to ",
+ StyleBox["Mathematic",
+  FontSlant->"Italic"],
+ "a or, indeed, to any other widely used Computer Algebra System."
+}], "Text",
+ CellID->1534169418],
+
+Cell["\<\
+WildCats has a database of properties of most well-known categories, the \
+so-called standard categories. But above all, WildCats has powerful \
+visualization tools to quickly produce commutative diagrams and even \
+visualize functorial action directly on diagrams.\
+\>", "Text",
+ CellID->248835204],
+
+Cell["WildCats requires Mathematica 8 or later versions.", "Text",
+ CellID->547904292],
+
+Cell[TextData[StyleBox["Features",
+ FontVariations->{"Underline"->True}]], "Text",
+ CellID->351700093],
+
+Cell["\<\
+Knowledge base of 25+ well-known categories and several functors\
+\>", "BulletedText",
+ CellID->126811335],
+
+Cell["\<\
+User-definable categories, functors, natural transformations and other \
+categorical  constructions\
+\>", "BulletedText",
+ CellID->71558675],
+
+Cell["\<\
+State-of-the-art palette interface. Easily input all defined objects and \
+operators (coming soon)\
+\>", "BulletedText",
+ CellID->34576934],
+
+Cell["Easy generation of commutative and non-commutative diagrams", \
+"BulletedText",
+ CellID->154095143],
+
+Cell["\<\
+Visual functorial computations: apply a functor to a diagram and see the \
+resulting diagram\
+\>", "BulletedText",
+ CellID->154680860],
+
+Cell["\<\
+Visual diagram evaluation: apply a diagram to an object and see the resulting \
+diagram\
+\>", "BulletedText",
+ CellID->793012025],
+
+Cell["Fully integrated documentation with 15+ tutorial notebooks", \
+"BulletedText",
+ CellID->104054389],
+
+Cell[CellGroupData[{
+
+Cell["Learning category theory with WildCats", "Section",
+ CellID->162173206],
+
+Cell["\<\
+Although the tutorials assume that the user has a working knowledge of \
+category theory, a student should have no difficulty learning category theory \
+by following the tutorials in the suggested order together with a good \
+textbook.\
+\>", "Text",
+ CellID->661825619],
+
+Cell[CellGroupData[{
+
+Cell["Textbooks", "Subsection",
+ CellID->132691198],
+
+Cell[TextData[{
+ "Awodey's (AW)",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["1",
+  ButtonData->"paclet:ref/1"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00005903"],
+ " Category Theory is an excellent introduction to category theory. \nThe \
+first edition (2006) is also available online as the weekly notes and \
+homework in this ",
+ ButtonBox["course",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.andrew.cmu.edu/course/80-413-713/"], None}],
+ " "
+}], "BulletedText",
+ CellID->407080380],
+
+Cell[TextData[{
+ "MacLane's (McL)",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["2",
+  ButtonData->"paclet:ref/2"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00005FD1"],
+ " is the standard reference from one of the creators of category theory. \
+Prior knowledge of abstract algebra is recommended."
+}], "BulletedText",
+ CellID->29904564],
+
+Cell[TextData[{
+ "Ad\.b4amek, Herrlich, Strecker (AHS) ",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["6",
+  ButtonData->"paclet:ref/6"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00007A43"],
+ ", Abstract and Concrete Categories: The Joy of Cats. Well written and very \
+detailed."
+}], "BulletedText",
+ CellID->844782157]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Online resources", "Subsection",
+ CellID->41987776],
+
+Cell["Invaluable sources of information and examples.", "Text",
+ CellID->32205098],
+
+Cell[TextData[{
+ "Wikipedia (WK) has a rich category theory section",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["3",
+  ButtonData->"paclet:ref/3"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"0000355D"],
+ "."
+}], "BulletedText",
+ CellID->138624233],
+
+Cell[TextData[{
+ "nlab",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["4",
+  ButtonData->"paclet:ref/4"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00003041"],
+ " is a great collaborative wiki dedicated to (higher) category theory. A \
+must-read."
+}], "BulletedText",
+ CellID->864837669],
+
+Cell[TextData[{
+ "The Catsters wonderful video lectures",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["5",
+  ButtonData->"paclet:ref/5"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"0000319F"],
+ " on YouTube"
+}], "BulletedText",
+ CellID->2689012]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Loading WildCats", "Section",
+ CellID->33861714],
+
+Cell["\<\
+When WildCats is loaded, a brief splash screen will appear and then a short \
+text message will be printed on the current notebook.\
+\>", "Text",
+ CellID->15188864],
+
+Cell["This loads the package:", "Text",
+ CellID->1825449234],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->98796305],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.70.0\"","\", \"",RowBox[{"{", 
+         RowBox[{"2014", ",", "2", ",", "5"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2014, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package and palette\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[7]:=",
+ CellID->190022612]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["WildCats version", "Section",
+ CellID->28259317],
+
+Cell["WildCatsVersion returns the current version of WildCats", "Text",
+ CellID->819778542],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["WildCatsVersion",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/WildCatsVersion"], Cell[TextData[Cell[
+    BoxData[Cell[
+     "a list giving the complete version of WildCats in use", "TableText"]]]],
+      "TableText"]}
+  }]], "DefinitionBox",
+ CellID->5962921],
+
+Cell["Variable specifying the version of WildCats used", "Caption",
+ CellID->135660220],
+
+Cell["\<\
+The fist element in the returned list is the version number, the second \
+element is the release date given as a list {year, month, day} \
+\>", "Text",
+ CellID->324934438],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["WildCatsVersion"], "Input",
+ CellLabel->"In[8]:=",
+ CellID->28706464],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"0.70.0\"\>", ",", 
+   RowBox[{"{", 
+    RowBox[{"2014", ",", "2", ",", "5"}], "}"}]}], "}"}]], "Output",
+ ImageSize->{149, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->189655120]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["WildCats Disclaimer", "Section",
+ CellID->266153142],
+
+Cell["This is the standard disclaimer for a GPL licence", "Text",
+ CellID->377468734],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Disclaimer", "[", "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->352257387],
+
+Cell[BoxData["\<\"These are points 11 and 12 of the General Public \
+License:\\n\\nBECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO \
+WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT \
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES \
+PROVIDE THE PROGRAM `AS IS\.b4 WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED \
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF \
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO \
+THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM \
+PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR \
+CORRECTION.\\n\\nIN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO \
+IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY \
+AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR \
+DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES \
+ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT \
+LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED \
+BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER \
+PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE \
+POSSIBILITY OF SUCH DAMAGES.\"\>"], "Print",
+ CellLabel->"During evaluation of In[3]:=",
+ CellID->372793903]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Foundations", "Section",
+ CellID->716631927],
+
+Cell["\<\
+WildCats uses Von Neumann-Bernays-Goedel (NBG) set theory augmented with \
+\[LineSeparator]conglomerates (NBG-C) as its mathematical foundation.
+NBG-C has three hierarchies of collections:\
+\>", "Text",
+ CellID->662786847],
+
+Cell[BoxData[GridBox[{
+   {"sets", Cell["elements of classes", "TableText"]},
+   {"classes", Cell["arbitrary collections of sets", "TableText"]},
+   {"conglomerates", Cell["arbitrary collections of classes", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->722046454],
+
+Cell["NBG-C hierarchies of collections.", "Caption",
+ CellID->281190716],
+
+Cell["\<\
+By \"arbitrary collection\" we mean any collection descrivable by a sentence \
+in a first order language.\
+\>", "Text",
+ CellID->203156599],
+
+Cell["\<\
+This foundational basis is described in more detail in Ch. 2 of\
+\>", "Text",
+ CellID->486728047],
+
+Cell[TextData[{
+ "Ad",
+ "\[AAcute]",
+ "mek, Herrlich, Strecker (AHS) ",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["6",
+  ButtonData->"paclet:ref/6"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00007A43"],
+ ", Abstract and Concrete Categories: The Joy of Cats. \nAvailable online as \
+an open access file at: ",
+ ButtonBox["http://katmat.math.uni-bremen.de/acc",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://katmat.math.uni-bremen.de/acc"], None}],
+ "\nPlease refer to this text if in doubt about foundations"
+}], "Text",
+ CellID->118507413],
+
+Cell[TextData[{
+ "In AHS the most general ",
+ StyleBox["category-like ",
+  FontSlant->"Italic"],
+ "structures",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ "are called \"Quasicategories\", however this term is nowadays being used \
+for other types of mathematical objets following Joyal, so we prefer to use \
+the unambiguous term \"W-categories\". \[LineSeparator]WildCats documentation \
+has not been completely updated yet, so both terms appear."
+}], "Text",
+ CellID->4865082],
+
+Cell["\<\
+A more in-depth explanation of the foundational basis of WildCats will appear \
+in future releases.\
+\>", "Text",
+ CellID->172800325],
+
+Cell["\<\
+Following AHS page 40, a W-category is a quadruple \[DoubleStruckCapitalC] = \
+(Ob, hom, id, \[SmallCircle]):\
+\>", "Text",
+ CellID->131945464],
+
+Cell[BoxData[GridBox[{
+   {"Ob", Cell["\<\
+a conglomerate. Its members (A, B,...) are called objects. They are classes\
+\>", "TableText"]},
+   {"Mor", Cell["\<\
+a conglomerate. Its members (f, g,...) are called morphisms. They are classes\
+\>", "TableText"]},
+   {
+    SubscriptBox["id", "A"], Cell[
+    "the identity morphism on object A", "TableText"]},
+   {
+    RowBox[{"f", "\[SmallCircle]", "g"}], Cell["\<\
+the associative composition of (composable) morphisms f and g with identity id\
+\>", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->39332880],
+
+Cell["W-categories.", "Caption",
+ CellID->62703699],
+
+Cell[TextData[{
+ "If you wish, you can think of the W-categories as the ",
+ StyleBox["Wild-Cats",
+  FontSlant->"Italic"],
+ "! \[LineSeparator]They are the most general categorical structures in \
+WildCats."
+}], "Text",
+ CellID->420518707],
+
+Cell["\<\
+Further restricting the collections of objects, morphisms or hom(A, B) (the \
+collection of all morphisms between objects A and B) leads to the definition \
+of: \
+\>", "Text",
+ CellID->624457905],
+
+Cell["\[Bullet] category", "Text",
+ CellID->618831083],
+
+Cell["\[Bullet] locally small category", "Text",
+ CellID->1731192],
+
+Cell["\[Bullet] small category.", "Text",
+ CellID->71106735],
+
+Cell[BoxData[GridBox[{
+   {"Ob", Cell["the collection of all objects is a class", "TableText"]},
+   {"Mor", Cell["the collection of all morphisms is a class", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->652114870],
+
+Cell["WildCats categories.", "Caption",
+ CellID->114745971],
+
+Cell[BoxData[GridBox[{
+   {"Ob", Cell["the collection of all objects is a class", "TableText"]},
+   {
+    RowBox[{"hom", 
+     RowBox[{"(", 
+      RowBox[{"A", ",", " ", "B"}], ")"}]}], Cell[
+    "each hom (A, B) is a set", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->230922496],
+
+Cell["WildCats locally small category.", "Caption",
+ CellID->68622957],
+
+Cell[BoxData[GridBox[{
+   {"Ob", Cell["the collection of all objects is a set", "TableText"]},
+   {"Mor", Cell["the collection of all morphisms is a set", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->906894560],
+
+Cell["WildCats small category.", "Caption",
+ CellID->340455304],
+
+Cell["\<\
+In the literature there are several slightly different definitions of \
+W-category, quasicategory, category and locally small category.\
+\>", "Text",
+ CellID->71909027],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     RowBox[{"WC", "  ", "W"}], "-", "category"}], Cell[
+    "AHS quasicategory", "TableText"]},
+   {
+    RowBox[{"WC", " ", "category"}], Cell["AW or WK category", "TableText"]},
+   {
+    RowBox[{
+    "WC", " ", "or", " ", "AW", " ", "locally", " ", "small", " ", 
+     "category"}], Cell["AHS category", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->402339295],
+
+Cell["Equivalent definitions found in reference literature.", "Caption",
+ CellID->108916593],
+
+Cell[TextData[{
+ "In summary:\[LineSeparator]WildCats (WC) definition of W-category is the \
+same as AHS definition of quasicategory.\[LineSeparator]WildCats definition \
+of category is the same as ",
+ "Awodey's (AW)",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["1",
+  ButtonData->"paclet:ref/1"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"00005903"],
+ " or Wikipedia (WK)",
+ ButtonBox[Cell[TextData[StyleBox[ButtonBox["7",
+  ButtonData->"paclet:ref/7"],
+  FontVariations->{"CompatibilityType"->"Superscript"}]], "Citation",
+  Editable->False],
+  BaseStyle->"Hyperlink",
+  ButtonData->"0000346E"],
+ " definition \[LineSeparator]\[LineSeparator]AHS definition of category \
+requires hom(A, B) to be sets so it is the same as Wildcats's or Awodey's \
+definition of locally small category."
+}], "Text",
+ CellID->532420975]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->961285135],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["Quasicategories, Categories and StandardCategories",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/QuasicategoriesCategoriesAndStandardCategories"]],\
+ "RelatedTutorials",
+ CellID->806871991]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["REFERENCES", "TutorialRelatedLinksSection",
+ CellID->138006650],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["1",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "Awodey",
+ ",",
+ " ",
+ "Steve",
+ " ",
+ "(",
+ "2006",
+ ")",
+ ".",
+ " ",
+ "Category",
+ " ",
+ "Theory",
+ " ",
+ "(",
+ "Oxford",
+ " ",
+ "Logic",
+ " ",
+ "Guides",
+ " ",
+ "49",
+ ")",
+ ".",
+ " ",
+ "Oxford",
+ " ",
+ "University",
+ " ",
+ "Press",
+ ".",
+ " ",
+ "2",
+ "nd",
+ " ",
+ "edition",
+ ",",
+ " ",
+ "2010"
+}], "Reference",
+ Editable->False,
+ CellTags->"00005903",
+ CellID->12045137],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["2",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "Mac",
+ " ",
+ "Lane",
+ ",",
+ " ",
+ "Saunders",
+ ",",
+ " ",
+ "Categories",
+ " ",
+ "for",
+ " ",
+ "the",
+ " ",
+ "Working",
+ " ",
+ "Mathematician",
+ ".",
+ "Graduate",
+ " ",
+ "Texts",
+ " ",
+ "in",
+ " ",
+ "Mathematics",
+ " ",
+ "5",
+ " ",
+ "(",
+ "2",
+ "nd",
+ " ",
+ "ed",
+ ".",
+ ")",
+ " ",
+ "Springer",
+ "-",
+ "Verlag"
+}], "Reference",
+ Editable->False,
+ CellTags->"00005FD1",
+ CellID->477098848],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["3",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "http",
+ ":",
+ "//",
+ "en",
+ ".",
+ "wikipedia",
+ ".",
+ "org",
+ "/",
+ "wiki",
+ "/",
+ "Outline_of",
+ "_category",
+ "_theory"
+}], "Reference",
+ Editable->False,
+ CellTags->"0000355D",
+ CellID->138562797],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["4",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "http",
+ ":",
+ "//",
+ "nlab",
+ ".",
+ "mathforge",
+ ".",
+ "org",
+ "/",
+ "nlab",
+ "/",
+ "show",
+ "/",
+ "HomePage"
+}], "Reference",
+ Editable->False,
+ CellTags->"00003041",
+ CellID->808576627],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["5",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "http",
+ ":",
+ "//",
+ "www",
+ ".",
+ "youtube",
+ ".",
+ "com",
+ "/",
+ "user",
+ "/",
+ "TheCatsters",
+ "/",
+ "videos"
+}], "Reference",
+ Editable->False,
+ CellTags->"0000319F",
+ CellID->83586919],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["6",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "Ad\[AAcute]mek",
+ ",",
+ " ",
+ "Herrlich",
+ ",",
+ " ",
+ "Strecker",
+ ",",
+ " ",
+ "Abstract",
+ " ",
+ "and",
+ " ",
+ "Concrete",
+ " ",
+ "Categories",
+ ":",
+ " ",
+ "The",
+ " ",
+ "Joy",
+ " ",
+ "of",
+ " ",
+ "Cats",
+ ".",
+ " ",
+ "http",
+ ":",
+ "//",
+ "katmat",
+ ".",
+ "math",
+ ".",
+ "uni",
+ "-",
+ "bremen",
+ ".",
+ "de",
+ "/",
+ "acc",
+ "/",
+ "acc",
+ ".",
+ "htm"
+}], "Reference",
+ Editable->False,
+ CellTags->"00007A43",
+ CellID->55937445],
+
+Cell[TextData[{
+ "\t",
+ StyleBox["7",
+  FontVariations->{"CompatibilityType"->"Superscript"}],
+ "\t",
+ "http",
+ ":",
+ "//",
+ "en",
+ ".",
+ "wikipedia",
+ ".",
+ "org",
+ "/",
+ "wiki",
+ "/",
+ "Category_",
+ "%28",
+ "mathematics",
+ "%29"
+}], "Reference",
+ Editable->False,
+ CellTags->"0000346E",
+ CellID->9627042]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Introduction to WildCats - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 42, 50.2421284}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> "Wild Cats Tutorial", 
+    "language" -> "en", "paclet" -> "WildCats", "status" -> "None", "summary" -> 
+    "WildCats is the first package to bring the full power and machinery of \
+Category Theory to Mathematica or, indeed, to any other widely used Computer \
+Algebra System. WildCats has a database of properties of most well-known \
+categories, the so-called standard categories. But above all, WildCats has \
+powerful visualization tools to quickly produce commutative diagrams and even \
+visualize functorial action directly on diagrams. WildCats requires \
+Mathematica 8 or later versions.", "synonyms" -> {}, "title" -> 
+    "Introduction to WildCats", "type" -> "Tutorial", "uri" -> 
+    "WildCats/tutorial/Introduction"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "00005903"->{
+  Cell[19986, 646, 478, 47, 70, "Reference",
+   CellTags->"00005903",
+   CellID->12045137]},
+ "00005FD1"->{
+  Cell[20467, 695, 491, 47, 70, "Reference",
+   CellTags->"00005FD1",
+   CellID->477098848]},
+ "0000355D"->{
+  Cell[20961, 744, 303, 22, 70, "Reference",
+   CellTags->"0000355D",
+   CellID->138562797]},
+ "00003041"->{
+  Cell[21267, 768, 292, 22, 70, "Reference",
+   CellTags->"00003041",
+   CellID->808576627]},
+ "0000319F"->{
+  Cell[21562, 792, 293, 22, 70, "Reference",
+   CellTags->"0000319F",
+   CellID->83586919]},
+ "00007A43"->{
+  Cell[21858, 816, 533, 53, 70, "Reference",
+   CellTags->"00007A43",
+   CellID->55937445]},
+ "0000346E"->{
+  Cell[22394, 871, 306, 23, 70, "Reference",
+   CellTags->"0000346E",
+   CellID->9627042]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"00005903", 24817, 947},
+ {"00005FD1", 24925, 951},
+ {"0000355D", 25034, 955},
+ {"00003041", 25143, 959},
+ {"0000319F", 25252, 963},
+ {"00007A43", 25360, 967},
+ {"0000346E", 25468, 971}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[617, 21, 78, 1, 70, "TutorialColorBar"],
+Cell[698, 24, 179, 5, 70, "LinkTrail"],
+Cell[880, 31, 3077, 72, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3982, 107, 61, 1, 70, "Title",
+ CellID->509267359],
+Cell[4046, 110, 260, 7, 70, "Text",
+ CellID->1534169418],
+Cell[4309, 119, 309, 6, 70, "Text",
+ CellID->248835204],
+Cell[4621, 127, 86, 1, 70, "Text",
+ CellID->547904292],
+Cell[4710, 130, 102, 2, 70, "Text",
+ CellID->351700093],
+Cell[4815, 134, 116, 3, 70, "BulletedText",
+ CellID->126811335],
+Cell[4934, 139, 150, 4, 70, "BulletedText",
+ CellID->71558675],
+Cell[5087, 145, 149, 4, 70, "BulletedText",
+ CellID->34576934],
+Cell[5239, 151, 105, 2, 70, "BulletedText",
+ CellID->154095143],
+Cell[5347, 155, 144, 4, 70, "BulletedText",
+ CellID->154680860],
+Cell[5494, 161, 139, 4, 70, "BulletedText",
+ CellID->793012025],
+Cell[5636, 167, 104, 2, 70, "BulletedText",
+ CellID->104054389],
+Cell[CellGroupData[{
+Cell[5765, 173, 77, 1, 70, "Section",
+ CellID->162173206],
+Cell[5845, 176, 279, 6, 70, "Text",
+ CellID->661825619],
+Cell[CellGroupData[{
+Cell[6149, 186, 51, 1, 70, "Subsection",
+ CellID->132691198],
+Cell[6203, 189, 597, 17, 70, "BulletedText",
+ CellID->407080380],
+Cell[6803, 208, 426, 11, 70, "BulletedText",
+ CellID->29904564],
+Cell[7232, 221, 410, 11, 70, "BulletedText",
+ CellID->844782157]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7679, 237, 57, 1, 70, "Subsection",
+ CellID->41987776],
+Cell[7739, 240, 82, 1, 70, "Text",
+ CellID->32205098],
+Cell[7824, 243, 337, 10, 70, "BulletedText",
+ CellID->138624233],
+Cell[8164, 255, 375, 11, 70, "BulletedText",
+ CellID->864837669],
+Cell[8542, 268, 333, 10, 70, "BulletedText",
+ CellID->2689012]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[8924, 284, 54, 1, 70, "Section",
+ CellID->33861714],
+Cell[8981, 287, 174, 4, 70, "Text",
+ CellID->15188864],
+Cell[9158, 293, 60, 1, 70, "Text",
+ CellID->1825449234],
+Cell[CellGroupData[{
+Cell[9243, 298, 116, 3, 70, "Input",
+ CellID->98796305],
+Cell[9362, 303, 877, 22, 70, "Print",
+ CellID->190022612]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10288, 331, 54, 1, 70, "Section",
+ CellID->28259317],
+Cell[10345, 334, 91, 1, 70, "Text",
+ CellID->819778542],
+Cell[10439, 337, 320, 9, 70, "DefinitionBox",
+ CellID->5962921],
+Cell[10762, 348, 87, 1, 70, "Caption",
+ CellID->135660220],
+Cell[10852, 351, 181, 4, 70, "Text",
+ CellID->324934438],
+Cell[CellGroupData[{
+Cell[11058, 359, 83, 2, 70, "Input",
+ CellID->28706464],
+Cell[11144, 363, 279, 9, 36, "Output",
+ CellID->189655120]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11472, 378, 58, 1, 70, "Section",
+ CellID->266153142],
+Cell[11533, 381, 85, 1, 70, "Text",
+ CellID->377468734],
+Cell[CellGroupData[{
+Cell[11643, 386, 101, 3, 70, "Input",
+ CellID->352257387],
+Cell[11747, 391, 1406, 19, 70, "Print",
+ CellID->372793903]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[13202, 416, 50, 1, 70, "Section",
+ CellID->716631927],
+Cell[13255, 419, 232, 5, 70, "Text",
+ CellID->662786847],
+Cell[13490, 426, 265, 5, 70, "DefinitionBox",
+ CellID->722046454],
+Cell[13758, 433, 72, 1, 70, "Caption",
+ CellID->281190716],
+Cell[13833, 436, 149, 4, 70, "Text",
+ CellID->203156599],
+Cell[13985, 442, 107, 3, 70, "Text",
+ CellID->486728047],
+Cell[14095, 447, 643, 18, 70, "Text",
+ CellID->118507413],
+Cell[14741, 467, 475, 12, 70, "Text",
+ CellID->4865082],
+Cell[15219, 481, 143, 4, 70, "Text",
+ CellID->172800325],
+Cell[15365, 487, 153, 4, 70, "Text",
+ CellID->131945464],
+Cell[15521, 493, 554, 15, 70, "DefinitionBox",
+ CellID->39332880],
+Cell[16078, 510, 51, 1, 70, "Caption",
+ CellID->62703699],
+Cell[16132, 513, 238, 7, 70, "Text",
+ CellID->420518707],
+Cell[16373, 522, 205, 5, 70, "Text",
+ CellID->624457905],
+Cell[16581, 529, 54, 1, 70, "Text",
+ CellID->618831083],
+Cell[16638, 532, 66, 1, 70, "Text",
+ CellID->1731192],
+Cell[16707, 535, 60, 1, 70, "Text",
+ CellID->71106735],
+Cell[16770, 538, 216, 4, 70, "DefinitionBox",
+ CellID->652114870],
+Cell[16989, 544, 59, 1, 70, "Caption",
+ CellID->114745971],
+Cell[17051, 547, 281, 8, 70, "DefinitionBox",
+ CellID->230922496],
+Cell[17335, 557, 70, 1, 70, "Caption",
+ CellID->68622957],
+Cell[17408, 560, 212, 4, 70, "DefinitionBox",
+ CellID->906894560],
+Cell[17623, 566, 63, 1, 70, "Caption",
+ CellID->340455304],
+Cell[17689, 569, 178, 4, 70, "Text",
+ CellID->71909027],
+Cell[17870, 575, 404, 12, 70, "DefinitionBox",
+ CellID->402339295],
+Cell[18277, 589, 92, 1, 70, "Caption",
+ CellID->108916593],
+Cell[18372, 592, 909, 22, 70, "Text",
+ CellID->532420975]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[19318, 619, 66, 1, 70, "TutorialMoreAboutSection",
+ CellID->961285135],
+Cell[19387, 622, 150, 3, 70, "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19574, 630, 68, 1, 70, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[19645, 633, 232, 5, 70, "RelatedTutorials",
+ CellID->806871991]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19914, 643, 69, 1, 70, "TutorialRelatedLinksSection",
+ CellID->138006650],
+Cell[19986, 646, 478, 47, 70, "Reference",
+ CellTags->"00005903",
+ CellID->12045137],
+Cell[20467, 695, 491, 47, 70, "Reference",
+ CellTags->"00005FD1",
+ CellID->477098848],
+Cell[20961, 744, 303, 22, 70, "Reference",
+ CellTags->"0000355D",
+ CellID->138562797],
+Cell[21267, 768, 292, 22, 70, "Reference",
+ CellTags->"00003041",
+ CellID->808576627],
+Cell[21562, 792, 293, 22, 70, "Reference",
+ CellTags->"0000319F",
+ CellID->83586919],
+Cell[21858, 816, 533, 53, 70, "Reference",
+ CellTags->"00007A43",
+ CellID->55937445],
+Cell[22394, 871, 306, 23, 70, "Reference",
+ CellTags->"0000346E",
+ CellID->9627042]
+}, Open  ]]
+}, Open  ]],
+Cell[22727, 898, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,9 @@
+package typedefs-examples
+
+executable = typedefs_examples
+
+main = Examples
+
+sourcedir = examples
+
+pkgs = typedefs-core

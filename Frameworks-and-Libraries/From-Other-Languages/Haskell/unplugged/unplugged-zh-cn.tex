@@ -1,0 +1,111 @@
+%\documentclass{article}
+\documentclass[UTF8, a4paper,twoside]{book} %this has problems
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
+
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+% ==================== Book flag==========================
+
+\global\let\wholebook=\relax %without relax, we build article, esle book
+
+\usepackage[cn]{prelude}
+\usepackage[firstpage=true]{background}
+
+\setcounter{page}{1}
+
+\graphicspath{
+  {img/}
+  {nat/}
+  {recursion/}
+  {algebra/}
+  {category-theory/}
+  {deduction/}
+  {infinity/}
+  {paradox/}
+}
+
+\makeindex
+
+\begin{document}
+
+% set PDF properties
+\hypersetup{pdftitle={unplugged},%
+            pdfauthor={liuxinyu95@gmail.com},%
+            pdfsubject={Math},%
+            pdfkeywords={Math, CS}}
+
+% ================================================================
+%                 COVER PAGE
+% ================================================================
+
+% https://en.wikipedia.org/wiki/File:FWF_Samuel_Monnier_d%C3%A9tail.jpg
+\backgroundsetup{
+  scale=2,
+  opacity=0.4,
+  angle=0,
+  position={0,0},
+  contents={
+    \includegraphics[width=\paperwidth,height=\paperheight]{img/cover-bg.jpg}}
+}
+
+\title{
+  {\bf \Huge 同构 \newline}
+  \vspace{5mm}
+  {\bf ——编程中的数学 \newline \newline \newline}
+  \centering
+  \scalebox{1.5}{\includegraphics{nat/img/the-school-of-athens.eps}}
+}
+
+\author{刘新宇
+  \thanks{ liuxinyu95@gmail.com, Version: 0.6180339887498949}
+}
+
+\maketitle
+
+\subimport{appendix/preface/}{preface-zh-cn.tex}
+
+% ================================================================
+%                 Content
+% ================================================================
+
+%\newpage
+\tableofcontents
+\newpage
+
+%\part{前言}
+\subimport{nat/}{nat-zh-cn.tex}
+
+\subimport{recursion/}{recursion-zh-cn.tex}
+
+\subimport{algebra/}{algebra-zh-cn.tex}
+
+\subimport{category-theory/}{category-zh-cn.tex}
+
+\subimport{deduction/}{deduction-zh-cn.tex}
+
+\subimport{infinity/}{infinity-zh-cn.tex}
+
+\subimport{paradox/}{paradox-zh-cn.tex}
+
+\part{附录}
+\appendix
+%\appendixpage
+\noappendicestocpagenum
+\addappheadtotoc
+
+\subimport{appendix/nat/}{nat-zh-cn.tex}
+
+\subimport{appendix/category/}{category-zh-cn.tex}
+
+%\part{参考文献}
+\subimport{appendix/reference/}{reference-zh-cn.tex}
+
+\printindex
+
+\input{fdl-1.3.tex}
+
+\end{document}

@@ -1,0 +1,1009 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     31285,        999]
+NotebookOptionsPosition[     25210,        796]
+NotebookOutlinePosition[     27085,        847]
+CellTagsIndexPosition[     27042,        844]
+WindowTitle->W-categories, Categories and StandardCategories - Wolfram \
+Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS PACKAGE TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Standard categories, objects and morphisms\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/StandardCategoriesObjectsAndMorphisms"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Categories\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/Categories"], "\<\"CategoryQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/CategoryQ"], "\<\"QuasiCategoryQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/QuasiCategoryQ"], "\<\"StandardCategories\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/StandardCategories"], "\<\"StandardCategoryQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/StandardCategoryQ"], "\<\"\[DoubleStruckCapitalC]\
+\[DoubleStruckA]\[DoubleStruckT]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckA]\
+\[DoubleStruckT]"], "\<\"\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"], \
+"\<\"\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"], "\<\"\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]"], "\<\"\[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]"], "\<\"\[DoubleStruckCapitalT]\[DoubleStruckO]\
+\[DoubleStruckP]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalT]\[DoubleStruckO]\
+\[DoubleStruckP]"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+             "WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories.html"], StandardForm]], 
+              "Input", TextClipboardType -> "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["W-categories, Categories and StandardCategories", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "This terminates the current ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " session and starts a new clean session"
+}], "Text",
+ CellID->12172402],
+
+Cell["(recommended for troubleshooting)", "Text",
+ CellID->121457497],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->309037897],
+
+Cell["This loads the package:", "Text",
+ CellID->1825449234],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->98796305],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.70.0\"","\", \"",RowBox[{"{", 
+         RowBox[{"2014", ",", "2", ",", "5"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2014, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package and palette\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->323934516]
+}, Open  ]],
+
+Cell["\<\
+The term \"W-category\" will be used to indicate \[DoubleStruckCapitalC]\
+\[DoubleStruckCapitalA]\[DoubleStruckCapitalT],  \[DoubleStruckCapitalF]\
+\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\
+\[DoubleStruckCapitalT] and any other standard or user-defined category, \
+while the term \"category\" will be used to indicate only standard or \
+user-defined categories\
+\>", "Text",
+ CellID->170254624],
+
+Cell["\<\
+In WildCats at the moment there are only a few proper W-categories.\
+\[LineSeparator]\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT] and  \[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\
+\[DoubleStruckCapitalN]\[DoubleStruckCapitalC]\[DoubleStruckCapitalT] are \
+examples of proper W-categories defined at launch.
+All other W-categories are actually categories.\
+\>", "Text",
+ CellID->141686818],
+
+Cell["\<\
+Proper W-categories cannot be user-defined, only categories can be \
+user-defined.\
+\>", "Text",
+ CellID->413165614],
+
+Cell[TextData[{
+ "WildCats comes with several well-known ",
+ StyleBox["predefined",
+  FontSlant->"Italic"],
+ " categories."
+}], "Text",
+ CellID->65165492],
+
+Cell["They are called \"standard categories\".", "Text",
+ CellID->56025086],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox[
+     ButtonBox[
+      ButtonBox["StandardCategories",
+       BaseStyle->"Link",
+       ButtonData->"paclet:WildCats/ref/StandardCategories"],
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/"],
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/StandardCategories"], Cell[TextData[{
+     "list of all ",
+     StyleBox["predefined",
+      FontSlant->"Italic"],
+     " categories known to WildCats"
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->952161528],
+
+Cell["Standard categories.", "Caption",
+ CellID->18453368],
+
+Cell["\<\
+These include most well-known algebraic and topological categories\
+\>", "Text",
+ CellID->242304356],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["StandardCategories"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->862065135],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "\[DoubleStruckCapitalA]\[DoubleStruckB]", ",", 
+   "\[DoubleStruckCapitalA]\[DoubleStruckB]Top", ",", 
+   "\[DoubleStruckCapitalB]\[DoubleStruckA]\[DoubleStruckN]", ",", 
+   "\[DoubleStruckCapitalB]\[DoubleStruckO]\[DoubleStruckO]", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckZero]", ",", "\[DoubleStruckOne]", ",", 
+   "\[DoubleStruckTwo]", ",", 
+   "\[DoubleStruckCapitalP]\[DoubleStruckA]\[DoubleStruckR]", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalO]\[DoubleStruckR]\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", ",", 
+   "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]\[DoubleStruckH]", 
+   ",", "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckA]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]", 
+   ",", "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", ",", 
+   "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", ",", 
+   "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]\[DoubleStruckH]", 
+   ",", "\[DoubleStruckCapitalV]\[DoubleStruckC]\[DoubleStruckT]\
+\[DoubleStruckCapitalF]"}], "}"}]], "Output",
+ ImageSize->{538, 33},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->300306905]
+}, Open  ]],
+
+Cell["Notice they are all typed with double-struck characters", "Text",
+ CellID->386981766],
+
+Cell["The current number of standard categories.", "Text",
+ CellID->184023177],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StandardCategories", "//", "Length", " "}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->8005100],
+
+Cell[BoxData["29"], "Output",
+ ImageSize->{18, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->792689090]
+}, Open  ]],
+
+Cell["Here are a few of the most common ones.", "Text",
+ CellID->29372008],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox[
+     ButtonBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalSDoubleStruckEDoubleStruckT"], 
+    Cell["the category of sets and functions", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox["\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalGDoubleStruckRDoubleStruckP"], 
+    Cell["the category of groups and group-morphisms", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox["\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalT]\[DoubleStruckO]\
+\[DoubleStruckP]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalTDoubleStruckODoubleStruckP"], 
+    Cell["the category of topological spaces and continuous functions", 
+     "TableText"]}
+  }]], "DefinitionBox",
+ CellID->370976800],
+
+Cell["Some well-knowns standard categories.", "Caption",
+ CellID->50428557],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["StandardCategoryQ",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/StandardCategoryQ"]], "InlineFormula"],
+ "[cat] tests for membership"
+}], "Text",
+ CellID->36954963],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StandardCategoryQ", "[", "\[DoubleStruckCapitalA]\[DoubleStruckB]", 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->610698661],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->168194684]
+}, Open  ]],
+
+Cell[TextData[{
+ "Even more categories can be user-defined. They are listed in ",
+ Cell[BoxData[
+  ButtonBox["Categories",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/Categories"]], "InlineFormula"]
+}], "Text",
+ CellID->9001461],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["Categories",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Categories"], Cell[
+    "list of all categories defined in a WildCats session", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->109080422],
+
+Cell["List of known categories.", "Caption",
+ CellID->102185516],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Categories",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/Categories"]], "InlineFormula"],
+ " is a list of all categories which have been defined in a WildCats session."
+}], "Text",
+ CellID->57263975],
+
+Cell[TextData[{
+ "Notice that proper W-categories are not listed in ",
+ Cell[BoxData[
+  ButtonBox["Categories",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/Categories"]], "InlineFormula"]
+}], "Text",
+ CellID->130249365],
+
+Cell["\<\
+Predicate (Query) functions can discriminate between different types of \
+categories.\
+\>", "Text",
+ CellID->163520603],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox[
+      ButtonBox[
+       ButtonBox["QuasiCategoryQ",
+        BaseStyle->"Link",
+        ButtonData->"paclet:WildCats/ref/QuasiCategoryQ"],
+       BaseStyle->"Link",
+       ButtonData->"paclet:WildCats/ref/QuasiCategoryQ"],
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/QuasiCategoryQ"], "[", 
+     StyleBox["cat",
+      FontSlant->"Italic"], "]"}], Cell[TextData[{
+     "test whether ",
+     Cell[BoxData[
+      StyleBox["cat", "TI"]], "InlineFormula"],
+     " is a W-category"
+    }], "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["CategoryQ",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/CategoryQ"], "[", 
+     StyleBox["cat",
+      FontSlant->"Italic"], "]"}], Cell[TextData[{
+     "test whether ",
+     Cell[BoxData[
+      StyleBox["cat", "TI"]], "InlineFormula"],
+     " is a category"
+    }], "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["StandardCategoryQ",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/StandardCategoryQ"], "[", 
+     StyleBox["cat",
+      FontSlant->"Italic"], "]"}], Cell[TextData[{
+     "test whether ",
+     Cell[BoxData[
+      StyleBox["cat", "TI"]], "InlineFormula"],
+     " is a standard category"
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->458210694],
+
+Cell["Tests for different types of categories.", "Caption",
+ CellID->39064628],
+
+Cell["There are also some proper W-categories", "Text",
+ CellID->357852916],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox[
+   ButtonBox[
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+    BaseStyle->"Link",
+    ButtonData->
+     "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"],
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalADoubleStruckCapitalT"]]],
+ " is a proper W-category."
+}], "Text",
+ CellID->2196028],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox[
+   "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]",
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"]]],
+ "[cat1, cat2] is often a proper W-category, depending on cat1 and cat2."
+}], "Text",
+ CellID->166151626],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox[
+     ButtonBox[
+      "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalADoubleStruckCapitalT"], Cell[
+    "the proper W-category of categories and functors", "TableText"]},
+   {
+    RowBox[{
+     ButtonBox[
+      "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckCapitalUDoubleStruckCapitalNDoubleStruckCapita\
+lCDoubleStruckCapitalT"], "[", 
+     RowBox[{
+      StyleBox["cat1",
+       FontSlant->"Italic"], ",", 
+      StyleBox["cat2",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "the ",
+     "W-category",
+     " of functors between ",
+     StyleBox["cat1",
+      FontSlant->"Italic"],
+     " and ",
+     StyleBox["cat2",
+      FontSlant->"Italic"],
+     " and their natural transformations"
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->439745520],
+
+Cell["\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT], \
+\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]", "Caption",
+ CellID->17037669],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox[
+   ButtonBox[
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+    BaseStyle->"Link",
+    ButtonData->
+     "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"],
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalADoubleStruckCapitalT"]]],
+ " is not a standard category."
+}], "Text",
+ CellID->593024049],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StandardCategoryQ", "[", 
+  "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]", 
+  "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->246209906],
+
+Cell[BoxData["False"], "Output",
+ ImageSize->{39, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->270390926]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox[
+   ButtonBox[
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+    BaseStyle->"Link",
+    ButtonData->
+     "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"],
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalADoubleStruckCapitalT"]]],
+ " is too \"large\" to be a category."
+}], "Text",
+ CellID->377615287],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryQ", "[", 
+  "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]", 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->439737114],
+
+Cell[BoxData["False"], "Output",
+ ImageSize->{39, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->84674309]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QuasiCategoryQ", "[", 
+  "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]", 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->109384406],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->204723780]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox[
+   ButtonBox[
+    "\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]",
+    BaseStyle->"Link",
+    ButtonData->
+     "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]"],
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalADoubleStruckCapitalT"]]],
+ " is clearly distinct from ",
+ Cell[BoxData[
+  ButtonBox[
+   ButtonBox["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]",
+    BaseStyle->"Link",
+    ButtonData->
+     "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckA]\
+\[DoubleStruckT]"],
+   BaseStyle->"Link",
+   ButtonData->
+    "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT"]]],
+ " which is a standard category"
+}], "Text",
+ CellID->347821903],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StandardCategoryQ", "[", 
+  "\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]", "]"}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->128823655],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[6]=",
+ CellID->788581735]
+}, Open  ]],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox[
+     ButtonBox["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalC]\[DoubleStruckA]\
+\[DoubleStruckT]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT"], 
+    Cell["the category of small categories and functors", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->43208236],
+
+Cell["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]", "Caption",
+ CellID->527295239],
+
+Cell[TextData[{
+ "WildCats definitions can be summarized by the following inclusions:\n\
+StandardCategories \[Subset] Categories \[Subset] W-categories\nProper \
+W-categories are W-categories which are ",
+ StyleBox["not",
+  FontSlant->"Italic"],
+ " Categories\nProper W-categories = W-categories \\ Categories"
+}], "Text",
+ CellID->2314446],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QuasiCategoryQ", "[", "\[DoubleStruckCapitalA]\[DoubleStruckB]", 
+  "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->103071165],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->53372926]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QuasiCategoryQ", "[", 
+  RowBox[{
+  "\[DoubleStruckCapitalF]\[DoubleStruckCapitalU]\[DoubleStruckCapitalN]\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalT]", "[", 
+   RowBox[{
+   "\[DoubleStruckCapitalA]\[DoubleStruckB]", ",", 
+    "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]"}], "]"}], "]"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->41541585],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->269082924]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->961285135],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["Standard categories, objects and morphisms",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/StandardCategoriesObjectsAndMorphisms"]], \
+"RelatedTutorials",
+ CellID->806871991]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"W-categories, Categories and StandardCategories - Wolfram \
+Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 43, 50.8495950}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> 
+    "Wild Cats Package Tutorial", "language" -> "en", "paclet" -> 
+    "WildCats Package", "status" -> "None", "summary" -> 
+    "This terminates the current Mathematica session and starts a new clean \
+session (recommended for troubleshooting) This loads the package:", 
+    "synonyms" -> {}, "title" -> 
+    "W-categories, Categories and StandardCategories", "type" -> "Tutorial", 
+    "uri" -> "WildCats/tutorial/\
+QuasicategoriesCategoriesAndStandardCategories"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[642, 22, 78, 1, 70, "TutorialColorBar"],
+Cell[723, 25, 179, 5, 70, "LinkTrail"],
+Cell[905, 32, 4897, 104, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[5827, 140, 84, 1, 70, "Title",
+ CellID->509267359],
+Cell[5914, 143, 171, 6, 70, "Text",
+ CellID->12172402],
+Cell[6088, 151, 69, 1, 70, "Text",
+ CellID->121457497],
+Cell[6160, 154, 73, 2, 70, "Input",
+ CellID->309037897],
+Cell[6236, 158, 60, 1, 70, "Text",
+ CellID->1825449234],
+Cell[CellGroupData[{
+Cell[6321, 163, 116, 3, 70, "Input",
+ CellID->98796305],
+Cell[6440, 168, 877, 22, 70, "Print",
+ CellID->323934516]
+}, Open  ]],
+Cell[7332, 193, 433, 8, 70, "Text",
+ CellID->170254624],
+Cell[7768, 203, 428, 8, 70, "Text",
+ CellID->141686818],
+Cell[8199, 213, 126, 4, 70, "Text",
+ CellID->413165614],
+Cell[8328, 219, 154, 6, 70, "Text",
+ CellID->65165492],
+Cell[8485, 227, 75, 1, 70, "Text",
+ CellID->56025086],
+Cell[8563, 230, 532, 17, 70, "DefinitionBox",
+ CellID->952161528],
+Cell[9098, 249, 58, 1, 70, "Caption",
+ CellID->18453368],
+Cell[9159, 252, 110, 3, 70, "Text",
+ CellID->242304356],
+Cell[CellGroupData[{
+Cell[9294, 259, 87, 2, 70, "Input",
+ CellID->862065135],
+Cell[9384, 263, 2324, 43, 54, "Output",
+ CellID->300306905]
+}, Open  ]],
+Cell[11723, 309, 91, 1, 70, "Text",
+ CellID->386981766],
+Cell[11817, 312, 78, 1, 70, "Text",
+ CellID->184023177],
+Cell[CellGroupData[{
+Cell[11920, 317, 118, 3, 70, "Input",
+ CellID->8005100],
+Cell[12041, 322, 159, 5, 36, "Output",
+ CellID->792689090]
+}, Open  ]],
+Cell[12215, 330, 74, 1, 70, "Text",
+ CellID->29372008],
+Cell[12292, 333, 1331, 36, 70, "DefinitionBox",
+ CellID->370976800],
+Cell[13626, 371, 75, 1, 70, "Caption",
+ CellID->50428557],
+Cell[13704, 374, 222, 7, 70, "Text",
+ CellID->36954963],
+Cell[CellGroupData[{
+Cell[13951, 385, 154, 4, 70, "Input",
+ CellID->610698661],
+Cell[14108, 391, 161, 5, 36, "Output",
+ CellID->168194684]
+}, Open  ]],
+Cell[14284, 399, 242, 7, 70, "Text",
+ CellID->9001461],
+Cell[14529, 408, 255, 7, 70, "DefinitionBox",
+ CellID->109080422],
+Cell[14787, 417, 64, 1, 70, "Caption",
+ CellID->102185516],
+Cell[14854, 420, 257, 7, 70, "Text",
+ CellID->57263975],
+Cell[15114, 429, 233, 7, 70, "Text",
+ CellID->130249365],
+Cell[15350, 438, 129, 4, 70, "Text",
+ CellID->163520603],
+Cell[15482, 444, 1312, 44, 70, "DefinitionBox",
+ CellID->458210694],
+Cell[16797, 490, 78, 1, 70, "Caption",
+ CellID->39064628],
+Cell[16878, 493, 75, 1, 70, "Text",
+ CellID->357852916],
+Cell[16956, 496, 464, 15, 70, "Text",
+ CellID->2196028],
+Cell[17423, 513, 446, 12, 70, "Text",
+ CellID->166151626],
+Cell[17872, 527, 1276, 40, 70, "DefinitionBox",
+ CellID->439745520],
+Cell[19151, 569, 228, 3, 70, "Caption",
+ CellID->17037669],
+Cell[19382, 574, 470, 15, 70, "Text",
+ CellID->593024049],
+Cell[CellGroupData[{
+Cell[19877, 593, 187, 5, 70, "Input",
+ CellID->246209906],
+Cell[20067, 600, 162, 5, 36, "Output",
+ CellID->270390926]
+}, Open  ]],
+Cell[20244, 608, 477, 15, 70, "Text",
+ CellID->377615287],
+Cell[CellGroupData[{
+Cell[20746, 627, 179, 5, 70, "Input",
+ CellID->439737114],
+Cell[20928, 634, 161, 5, 36, "Output",
+ CellID->84674309]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21126, 644, 184, 5, 70, "Input",
+ CellID->109384406],
+Cell[21313, 651, 161, 5, 36, "Output",
+ CellID->204723780]
+}, Open  ]],
+Cell[21489, 659, 844, 26, 70, "Text",
+ CellID->347821903],
+Cell[CellGroupData[{
+Cell[22358, 689, 170, 4, 70, "Input",
+ CellID->128823655],
+Cell[22531, 695, 161, 5, 36, "Output",
+ CellID->788581735]
+}, Open  ]],
+Cell[22707, 703, 484, 13, 70, "DefinitionBox",
+ CellID->43208236],
+Cell[23194, 718, 94, 1, 70, "Caption",
+ CellID->527295239],
+Cell[23291, 721, 340, 8, 70, "Text",
+ CellID->2314446],
+Cell[CellGroupData[{
+Cell[23656, 733, 151, 4, 70, "Input",
+ CellID->103071165],
+Cell[23810, 739, 160, 5, 36, "Output",
+ CellID->53372926]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24007, 749, 406, 10, 70, "Input",
+ CellID->41541585],
+Cell[24416, 761, 161, 5, 36, "Output",
+ CellID->269082924]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24614, 771, 66, 1, 70, "TutorialMoreAboutSection",
+ CellID->961285135],
+Cell[24683, 774, 150, 3, 70, "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24870, 782, 68, 1, 70, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[24941, 785, 215, 5, 70, "RelatedTutorials",
+ CellID->806871991]
+}, Open  ]]
+}, Open  ]],
+Cell[25183, 794, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

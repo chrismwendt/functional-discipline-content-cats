@@ -1,0 +1,73 @@
+CHANGELOG
+
+0.8.3 -> 0.8.4
+  - Updated to constraints-0.10
+  - Updated for GHC 8.4
+    - Updated to base-4.11
+    - Updated to template-haskell-2.13
+    - `Semigroup` is now a superclass of `Monoid`
+
+0.8.2 -> 0.8.3
+  - Added Data.Functor.Free.TH to other-modules
+  
+0.8.1 -> 0.8.2
+  - Support for `deriveInstances` for classes which have one or more superclasses
+  - `deriveInstances` now also derives the `HasSuperClasses` instance
+  - Expose internal `ShowHelper` datatype
+  
+0.8 -> 0.8.1
+  - Added HHCofree
+  - Changes towards support for `SuperClass1` in TH code for `Free`
+  
+0.7.2 -> 0.8
+  - Updated for GHC 8.2
+    - Updated to base-4.10
+    - Updated to template-haskell-2.12
+    - Updated to algebraic-classes-0.8
+
+0.7.1 -> 0.7.2
+  - Fixed Traversable instance of `Free c`
+
+0.7 -> 0.7.1
+  - Rewritten SuperClass1
+
+0.6.5 -> 0.7
+  - Allow contravariant uses of HFree
+  - Added HHFree for free profunctors/categories/arrows
+  - Updated to base-4.9
+  - Updated to template-haskell-2.11
+  - Updated to comonad-5
+  - Updated to constraints-0.9
+  - Updated to algebraic-classes-0.7
+
+0.6.4.1 -> 0.6.5
+  - Updated to transformers-0.5.0.0
+  - Updated to constraints-0.6
+
+0.6.4 -> 0.6.4.1
+  - Raise lower bounds of template-haskell
+
+0.6.3.3 -> 0.6.4
+  - Updated to algebraic-classes 0.6
+  - Updated to template-haskell-2.10.0.0
+
+0.6.3.2 -> 0.6.3.3
+  - Updated to void 0.7
+
+0.6.3.1 -> 0.6.3.2
+  - Updated to constraints 0.4
+
+0.6.2 -> 0.6.3.1
+  - Updated to comonad 4.2
+  - Updated to transformers 0.4.1.0
+
+0.6.1.1 -> 0.6.2
+  - Updated to template-haskell-2.9.0.0
+  - Added instance Applicative (HFree Monad f)
+
+0.6.1 -> 0.6.1.1
+  - Added a changelog
+
+0.6 -> 0.6.1
+  - Updated to comonad-4.0
+  - Added convert to Data.Functor.HCofree

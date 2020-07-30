@@ -1,0 +1,41 @@
+[package]
+name = "typedefs/typedefs"
+version = "0.1.0"
+authors = []
+
+[dependencies]
+"gallais/idris-tparsec" = { git = "https://github.com/gallais/idris-tparsec/" }
+"HuwCampbell/optparse-idris" = { git = "https://github.com/statebox/optparse-idris" }
+"ziman/idris-bytes" = { git = "https://github.com/statebox/idris-bytes/" }
+"HuwCampbell/idris-lens" = { git = "https://github.com/andrevidela/idris-lens" }
+
+[dev_dependencies]
+"pheymann/specdris" = { git = "https://github.com/pheymann/specdris/" }
+
+[targets.lib]
+path = "src"
+mods = [ "Typedefs.Names"
+       , "Typedefs.Parse"
+       , "Typedefs.Typedefs"
+       , "Typedefs.TypedefsDecEq"
+       , "Typedefs.TermParse"
+       , "Typedefs.TermWrite"
+       , "Typedefs.Provider"
+       , "Typedefs.Backend"
+       , "Typedefs.Backend.Haskell"
+       , "Typedefs.Backend.JSON"
+       , "Typedefs.Backend.ReasonML"
+       , "Typedefs.Backend.Utils"
+       ]
+idris_opts = ["-p","contrib","-p","effects"]
+
+[[targets.bin]]
+path = "src"
+name = "typedefs"
+main = "CLI/Main.idr"
+idris_opts = ["-p","contrib","-p","effects"]
+
+[[targets.test]]
+path = "src"
+main = "Typedefs.Test.TypedefsSuite.testSuite"
+idris_opts = ["-p","contrib","-p","effects","--total"]

@@ -1,0 +1,762 @@
+\ifx\wholebook\relax \else
+
+\documentclass{article}
+
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
+
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[en]{../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{Paradox}
+
+\author{Liu Xinyu
+\thanks{{\bfseries Liu Xinyu} \newline
+  Email: liuxinyu95@gmail.com \newline}
+  }
+
+\maketitle
+\fi
+
+\markboth{Paradox}{Mathematics of Programming}
+
+\ifx\wholebook\relax
+\chapter{Paradox}
+\numberwithin{Exercise}{chapter}
+\fi
+
+\epigraph{I know that I know nothing}{——Socrates}
+
+\begin{wrapfigure}{R}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/Escher-Waterfall-1961.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Escher, Waterfall, 1961}
+ \label{fig:Escher-Waterfall}
+\end{wrapfigure}
+
+\index{Deep Blue}
+In 1996, the 26th Summer Olympic game was hold in Atlanta, U.S. More than 10 thousand athletes from 197 nations challenged human limit of speed, strength, and team work in 26 sports. At the same time, there was another interesting match on-going. An IBM computer, called Deep Blue challenged the world chess champion Garry Kasparov in a six-game match. Deep Blue won the first game, but Kasparov won three and drew two, defeating Deep Blue by a score of 4:2. The next year, heavily upgraded Deep Blue challenged again to human world champion Kasparov. On May 11, computer defected human: two wins for Deep Blue, one for the champion, and three draws. Deep Blue is a super computer of 1270 kilogram weight, with 32 processors. It can explorer 200 million possible moves in a second. The design team input 2 million grandmaster games in the past 100 years as the knowledge base for Deep Blue. The machine created by human intelligence, defected human at the first time in the field of intelligence. This result led to attention, fear, and hotly debate among mess media.
+
+Most people believed this was a significant progress in artificial intelligence at that time. Although computer could defected human for chess, but there was still a big gap in board game Go. There are 8 rows and 8 columns in chess board, and 32 pieces. Computer need search among a big game tree containing about $10^{123}$ possible moves. Even Deep Blue could explore 2 million moves per second, it would take about $10^{107}$ years to exhaust the tree. The design team optimized the program to narrow down the search space, such that Deep Blue only need explore 12 moves ahead from current game, while human grandmasters can only evaluate about 10 moves ahead. However for Go game, there are 19 rows and 19 columns, two players can put black and white pieces in 361 grids. The scale of the game tree is about $10^{360}$, which is far bigger than chess. For a long time after Deep Blue, people did not believe computer could defect human in Go.
+
+%\begin{wrapfigure}{R}{0.5\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.4]{img/Deep-blue-1997.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Deep Blue versus Kasparov. from {\em Scientific American}}
+ \label{fig:Deep-blue-1997}
+\end{figure}
+%\end{wrapfigure}
+
+\index{AlphaGo}
+20 years later in 2016, a computer program `AlphaGo' challenged top human Go master. Korean professional 9-dan Go player, Lee Sedol, lost the game in a 1:4 series matches. One year after, the successor program `AlphaGo master' beat Chinese professional Ke Jie, the world number one ranked player, in a three-game match. Go had previously been regarded as a hard problem in artificial intelligence that was expected to be out of reach for the technology of the time. It was considered the end of an era. Facing the emotionless machine, Ke Jie was unwilling and burst into tears. As human beings, our feelings are mixed. Even the programmer community doing intellectual work is feeling the pressure from machine: will machine replace us eventually?
+
+%University of Tubingen, Germany
+% Leon A. Gatys, Alexander S. Ecker Matthias Bethge
+Traditionally, we thought the areas with culture background, inner emotions, and human characters, like art, literature, and music could not be dominated by machine. In 2015, three researchers Gatys, Ecker, and Bethge from University of Tübingen, a small town 30 km south of Stuttgart, Germany, applied machine learning to art style. By using deep convolutional neural network, they transformed a landscape photo of Tübingen into art painting of different styles\cite{Gatys-2015}. No matter the exaggerated emotion of the post-impressionist Van Gogh, or Turner's romantic turbid light and shadow effect, all vivid imitated by machine, as if the artists painted by themselves (figure \ref{fig:style-transfer}).
+
+%\begin{wrapfigure}{R}{0.5\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.85]{img/style-transfer.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Artworks in different styles generated by machine learning: \textbf{A}, Landscape photo of Tübingen; \textbf{B}, {\em The Shipwreck of the Minotaur} by J.M.W. Turner, 1805; \textbf{C}, {\em The Starry Night} by Vincent van Gogh, 1889; \textbf{D}, {\em Der Schrei} by Edvard Munch, 1893; \textbf{E}, {\em Femme nue assise} by Pablo Picasso, 1910; \textbf{F}, {\em Composition VII} by Wassily Kandinsky, 1913.}
+ \label{fig:style-transfer}
+\end{figure}
+%\end{wrapfigure}
+
+In the following years, artificial intelligence and machine learning conquered varies of areas in accelerated speed. Machines generated different styles of music, and played them with moods and rhythms of tension, relaxing, and so on. It is not the monotonous electronic sound anymore. Machine batch translated news and academic papers, which is comparable to human professional translators. Machine processed X-ray photos, CT, and MRI medical images to diagonal diseases, and the accuracy exceeded human doctors. Self-driven cars, powered by artificial intelligence traveled on streets, successfully overtaking other vehicles and avoid pedestrians. Automated groceries suddenly appeared on the street, people can pick the products and walk out without being checked out by a cashier... As humans we can't stop asking: Are we eliminating jobs faster than creating? Will human be replaced by machine completely? Will machine rules people in the future?
+
+All these lead to a critical question: does there exist boundary of computation? if yes, where is it?
+
+\section{Boundary of computation}
+
+Gu Sen described the hesitated feelings when facing a long-running program in his popular book {\em Fun of thinking}: Will this program finish? Shall I wait or kill it? Is there a compiler could tell if my program will run endlessly (\cite{GuSen-2012} pp.228)?
+
+\begin{quotation}
+\itshape
+Why not possible? It seems more realistic than time machine. We may see such a scene in a scientific film: a programmer typed something in the dark screen, then hit enter. A highlighted, bold warning popped up immediately ``Warn: the program with the given input will run forever. Continue? (Y/N)'' If this became true one day, what fantastic cool things will you do? Do you believe that I can make big monkey with it? I'll firstly use it to prove the Goldbach's conjecture. I can write a program, enumerate all even numbers one by one, examine if it is the sum of two prime numbers. If yes, then check the next even number, otherwise output the negative example and quit. The next thing is to compile my program. Can't the compiler determine my program terminates or not in advance? If the magic compiler warns me that my program will run endlessly, haven't I proved Goldbach's conjecture? Or if the compiler tells me the program will terminate, doesn't it mean Goldbach's conjecture is falsehood? Either case, I'll be the first one that solve the Goldbach's conjecture, and leave my name in mathematical history. What's the next? I will modify that program to explore the twin primes, then compile it to see if there are really infinite many twin primes. And next, are there infinite many Mersenne primes? This is also an open question in number theory for a long time. I can easily solve it in this way. The $3x + 1$ conjecture? It's a piece of cake to write a ``proof program'' in a few minutes, then win the 500 dollars prize offered by Paul Erdős. There are enough mathematical open questions, I'll never worry about nothing to do. Martin LaBar in 1984 asked if a $3 \times 3$ magic square can be constructed with nine distinct square numbers. The award has accumulated to 100 dollars, 100 euros, and a bottle of champagne. Search ``Unsolved problems in mathematics'', filter in those about discrete things, and with award, then write a few programs to solve them all...
+\end{quotation}
+
+\index{Turning's halting problem}
+In 1936, the pioneer of computer science and artificial intelligence, Alan Turing proved that, a general algorithm to determine an arbitrary computer program will finish running, or continue to run forever, cannot exist. A key part of the proof was a mathematical definition of a computer and program, which became known as a Turing machine. This problem is called {\em halting problem} today.
+
+We can use reduction to absurdity method to prove the Turing's halting problem. Suppose there exists a algorithm $halts(p)$, that can determine an arbitrary program $p$ terminates or not. First, we construct a never halting program:
+
+\[
+forever() = forever()
+\]
+
+This is a infinitely recursive call. Then define a special program $G$ as below\footnote{We intend to use $G$ for special meaning. It's Gödel's initial letter, exactly the same name for nondeterministic proposition in Gödel's incompleteness theorem.}:
+
+\[
+G() = \begin{cases}
+halts(G) = \text{True}: & forever() \\
+\text{otherwise}: & \text{halt} \\
+\end{cases}
+\]
+
+In program $G$, we utilize $halts(G)$ to examine whether $G$ itself will halt or not. If it halts, then we call $forever()$ to let it run forever. It exactly means $G$ will not halt in this case, hence $halts(G)$ should be false. However, according to the second clause, it will halt. Therefore $halts(G)$ should be true. whether $halts(G)$ is true or false, we obtain conflicted result. Hence our assumption can't hold. There does not exit a general algorithm to solve the halting problem for all possible program input.
+
+There is another method to prove the halting problem in two steps(\cite{SICP} pp.268). Most are same except that $G$ accepts another argument $p$, it applies $p$ to itself, then passes to $halts$:
+
+\lstset{frame=single}
+\begin{lstlisting}
+G(p) = if halts(p(p)) then forever() else 'Halted'
+\end{lstlisting}
+
+Let's see what will happen when pass $G$ to itself $G(G)$. If $halts(G(G))$ returns true, then it calls $forever()$, hence $G(G)$ never finishes. While it exactly means $halts(G(G))$ should returns false, hence the program enters the \texttt{else} branch, and halts. But it again means $halts(G(G))$ should return true. Whether halts or not, it leads to absurdity.
+
+The halting problem clearly provides a incomputable problem, breaks the bubble of all the above magic ideas. It reminds us the proof of Cantor's theorem in previous chapter, where we used quite similar method to prove that for all sets, including infinite sets, the cardinals are strict less than their power sets. Actually, halting problem is closely related to many interesting logic paradoxes.
+
+\section{Russel's paradox}
+
+% Eubulides of Miletus
+The history of paradox came back to ancient Greece. We've introduced Zeno's paradoxes about infinity and continuity. Logic paradox is often an interesting problem, with strict reasoning but deduced to conflicted result. About the fourth Century BC, the ancient Greek philosopher Eubulides of Miletus raised a proposition: ``I am lying.'' How to determine if this declaration is true or false?
+
+If this declaration is false, then what it states (lying) should be true, it conflicts; however if this declaration is true, since it states I am laying, it should be false and lead to conflict again. Whether what Eubulides said is true or not, all falls into contradiction. This confusing problem is called `liar paradox'.
+
+\index{liar paradox}
+There is a variance of liar paradox, appeared as two separated statements:
+
+\textbf{Achilles}: The tortoise is a liar, he always lies. Do not trust him.
+
+\textbf{Tortoise}: Dear Achilles, you are honest, you always speaks truth.
+
+Is it true or false for what the tortoise said? If the tortoise tells the truth, then what Achilles states is true. However, Achilles claims the tortoise is laying, it leads to contradiction. On the contrary, if the tortoise lies, then what Achilles says is wrong, hence the tortoise should be true. We end up with a wired-loop: whether the tortoise speaks truth or not, all leads to absurdity.
+
+This two-segment liar paradox sometimes appears as a joke. You receive a piece of note: ``The other side is nonsense.'' while when you flip to the other side, it writes: ``The other side is true.'' Which side is true? In a similar way, it reduces to contradiction.
+
+Such paradox also appears in children's story. A lion caught a rabbit. He is so happy, that he promise the rabbit: If you can guess what I am going to do, I'll let you go; otherwise I'll eat you. The clever rabbit then answers: I guess you are going to eat me.
+
+If the lion eats the rabbit, then the rabbit guesses correct, the lion should keep his promise to let the rabbit go. However, if he let the rabbit go, it means the rabbit guesses wrong. Hence the lion should eat the rabbit. The lion falls into the dilemma, he should neither eat the rabbit, nor let the rabbit go. We can imagine the rabbit silently runs away when the lion keeps deep thinking.
+
+According to the legend, after ancient Greek army defected Persian, the king decided to do something kind to the captives -- let them chose the way to be killed. According to what the captive said, if it is true, then cut head off, otherwise hang. A clever captive said: ``I think you are going to hang me.'' If the king hangs him, then what the captive said is true. Hence he should be cut head according to the rule. But if cut his head off, then it does not follow what the captive said. Hence he spoke falsehood, and should be hanged. Whether cut head or hang, the king's rule will not be conducted correctly. Facing such struggled situation, the king did not only let this clever man go, but also released all captives.
+
+\begin{wrapfigure}{L}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.17]{img/father-and-son.eps}
+ \captionsetup{labelformat=empty}
+ \caption{E. O. Plauen {\em Father and Son}, 1930s}
+ \label{fig:father-and-son}
+\end{wrapfigure}
+
+In Cervantes' novel {\em Don Quixote}, there is an interesting paradox in Part II, Chapter 51:
+
+\begin{quotation}
+\itshape
+A deep river divides a certain lord’s estate into two parts... over this river is a bridge, and at one end a gallows and a sort of courthouse, in which four judges sit to administer the law imposed by the owner of the river, the bridge and the estate. It runs like this: ``Before anyone crosses this bridge, he must first state on oath where he is going and for what purpose. If he swears truly, he may be allowed to pass; but if he tells a lie, he shall suffer death by hanging on the gallows there displayed, without any hope of mercy.'' ... Now it happened that they once put a man on his oath, and he swore that he was going to die on the gallows there -- and that was all. After due deliberation the judges pronounced as follows: ``If we let this man pass freely he will have sworn a false oath and, according to the law, he must die; but he swore that he was going to die on the gallows, and if we hang him that will be the truth, so by the same law he should go free.''
+\end{quotation}
+
+% https://en.wikipedia.org/wiki/Barber_paradox
+\index{Barber paradox}
+Besides the liar paradox, the barber paradox is another popular puzzle. It was told by British mathematician and logician, Bertrand Russel in 1919. In a small village, the barber sets up a rule for himself: ``He only shaves all those, and those only, who do not shave themselves.'' Then the question is, does the barber shave himself? If he shaves himself, the according to his rule, he should not shave himself; but if he does not, then he should serve and shave himself. The barber falls into his own trap.
+
+\index{Russell's paradox}
+Russel discovered the paradox in set theory early in 1901. He collected and summarized a series of paradoxes, and formalized them as a fundamental problem in set theory. People called this kind of paradoxes as {\em Russell's paradox}. In Cantor's naive set theory, Russell considered the problem about if any set belongs to itself. Some sets do, while others not. For example the set of all spoons is obviously not another spoon; while the set of anything that is not a spoon, is definitely not a spoon. Russell considered the latter, and extended it to all such cases. He constructed a set $R$, which contains all sets that are not members of themselves. Symbolically:
+
+\[
+R = \{ x | x \notin x \}
+\]
+
+Russell next asked, is $R$ a member of $R$? According to logical law of excluded middle, an element either belongs to a set, or does not. For a given set, it makes sense to ask whether the set belongs itself. But this well defined, reasonable question falls into contradiction.
+
+If $R$ is a member of $R$, then according to its definition, $R$ only contains the sets that are not members of themselves, hence $R$ should not belong to $R$; On the contrary, if $R$ is not a member of $R$, again, from its definition, any set does not belong to itself should be contained, hence $R$ is a member of $R$. Whether it is a member or not, gives contradiction. Formalized as:
+
+\[
+R \in R \iff R \notin R
+\]
+
+Russell explicitly gave the paradox in Cantor's set theory.
+
+\vspace{5mm}
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.5]{img/Russell.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Bertrand Russell, 1872 - 1970}
+ \label{fig:Russell}
+\end{wrapfigure}
+
+%Monmouthshire
+\index{Russell}
+Bertrand Russell was born in 1872 in Monmouthshire into a family of the British aristocracy. Both his parents died before he was three, and his grandfather died in 1878. His grandmother, the countess was the dominant family figure for the rest of Russell's childhood and youth. Her favourite Bible verse, ``Thou shalt not follow a multitude to do evil'', became his motto.
+
+Russell was educated at home by a series of tutors. When Russell was eleven years old, his brother Frank introduced him to the work of Euclid, which he described in his autobiography as ``one of the great events of my life, as dazzling as first love.'' During these years, he read about the poems of Percy Bysshe Shelley, and thought about religious and philosophy. In 1890, Russell won a scholarship to read for the Mathematical Tripos at Trinity College, Cambridge, where he became acquainted with Alfred North Whitehead. He quickly distinguished himself in mathematics and philosophy, graduating as seventh Wrangler in the former in 1893 and becoming a fellow in the latter in 1895.
+
+Russell started an intensive study of the foundations of mathematics. He discovered Russell's paradox. In 1903 he published {\em The Principles of Mathematics}, a work on foundations of mathematics. It advanced a thesis of logicism, that mathematics and logic are one and the same. The three-volume {\em Principia Mathematica}, written with Whitehead, was published between 1910 and 1913. This, along with the earlier The Principles of Mathematics, soon made Russell world-famous in his field.
+
+After the 1950s, Russell turned from mathematics and philosophy to international politics. He opposed nuclear war. The Russell–Einstein Manifesto was a document calling for nuclear disarmament and was signed by eleven of the most prominent nuclear physicists and intellectuals of the time. Russell was arrested and imprisoned twice. The second time he was in jail was at the age of 89, for ``breach of peace'' after taking part in an anti-nuclear demonstration in London. The magistrate offered to exempt him from jail if he pledged himself to ``good behaviour", to which Russell replied: ``No, I won't." In 1950 Russell won the Nobel Prize for Literature. The committee described him as ``in recognition of his varied and significant writings in which he champions humanitarian ideals and freedom of thought.''
+
+Russell died of influenza on February 2nd, 1970 at his home in Penrhyndeudraeth. In accordance with his will, there was no religious ceremony; his ashes were scattered over the Welsh mountains later that year.
+
+\subsection{Impact of Russell's paradox}
+
+Russell was sad after discovering the paradox in the central of set theory. ``What makes it vital, what makes it fruitful, is the absolute unbridled Titanic passion that I have put into it. It is passion that has made my intellect clear, ... it is passion that enabled me to sit for years before a blank page, thinking the whole time about one probably trivial point which I could not get right ...''(\cite{HanXueTao16} pp.231) Russell wrote to mathematician and logician Gottlob Frege about his paradox. Frege was about to build the foundation of arithmetic. The second volume of his {\em Basic Laws of Arithmetic} was about to go to press. Frege was surprised, he wrote: ``Hardly anything more unwelcome can befall a scientific writer than that one of the foundations of his edifice be shaken after the work is finished. This is the position into which I was put by a letter from Mr Betrand Russell as the printing of this volume was nearing completion... '' Russell's paradox in axiomatic set theory was disastrous. Further, since set theory was seen as the basis for axiomatic development of all other branches of mathematics, Russell's paradox threatened the foundation. This motivated a great deal of research around the turn of the 20th century to develop a consistent (contradiction free) mathematics.
+
+\begin{Exercise}
+\Question{We can define numbers in natural language. For example ``the maximum of two digits number'' defines 99. Define a set containing all numbers that cannot be described within 20 words. Consider such an element: ``The minimum number that cannot be described within 20 words''. Is it a member of this set?}
+\Question{``The only constant is change'' said by Heraclitus. Is this a Russell's paradox?}
+\Question{Is the quote saying by Socrates (the beginning of this chapter) a Russell's paradox?}
+\end{Exercise}
+
+\section{Philosophy of mathematics}
+
+To solve Russell's paradox that affects the foundation of mathematics and logic, many mathematicians continued discussing, debating, and proposed varies of solutions from 1900 to 1930. For thousands of years, mathematics had long been regarded as the truth with non-doubtful absoluteness and uniqueness in rational thinking. In this hot discussion, people finally realized that different mathematics can coexist under different philosophical views.
+
+\subsection{Logicism}
+
+\begin{wrapfigure}{L}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.9]{img/Frege.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Gottlob Frege, 1848-1925}
+ \label{fig:Frege}
+\end{wrapfigure}
+
+\index{Frege}
+
+Gottlob Frege was a German philosopher, logician, and mathematician. He is understood by many to be the father of analytic philosophy. Frege was the early representative of logicism. His goal was to show that mathematics grows out of logic, and in so doing, he devised techniques that took him far beyond the traditional logic. Frege treated the naive set theory as a part of logic. In order to do that, he defined natural numbers with logic. We know that numbers are abstraction from concrete things. For example 3 can represents three persons, three eggs, three angles in a figure and so on. All these collections are a {\em class}\footnote{Frege's work was prior to Cantor's, he used the term `class', while Cantor later used `set' in German} containing 3 elements. Which one should be used to represent natural number 3? Frege's idea is `all'. All such classes that 1-to-1 correspondence can be established. This is a infinite, abstract class that defines natural number 3. Although a bit complex, it's a great definition that free from culture limitation. No matter what language, what symbol you are using, there won't be any ambiguities to understand number 3 through Frege's method. This is because no symbol is needed in Frege's definition. As such, Frege managed to define number -- which is the class of all classes. On top of this definition and logical laws, Frege developed his theory of natural numbers, hence established logical arithmetic. As the next step, he was going to develop all mathematics except for geometry from logic. This is what Frege wanted to achieved in his book {\em Basic Laws of Arithmetic}. Frege believed logical axioms were reliable and widely accepted. Once his work completed, mathematics would be ``fixed on an eternal foundation''.
+
+We know what happened next. Just during the preparation of press for {\em Basic Laws of Arithmetic}, Russell's letter arrived `in time'. Frege fell into confusions about Russell's paradox. His corner stone -- using logic to define the concept of numbers -- is exactly about class of all classes. Such definition directly leads to logical paradox. Frege was shocked, and finally gave up his logicism viewpoint.
+
+Russell took over the torch of logicism. He then tried to develop mathematics from logic in another way. Russell believed all mathematics is symbolic logic. His logicism was largely influenced by Italian mathematician Giuseppe Peano. In 1900, Russell attended the International Congress of Philosophy in Paris. He wrote: ``The Congress was the turning point of my intellectual life, because there I met Peano... In discussions at the Congress I observed that he was always more precise than anyone else, and that he invariably got the better of any argument on which he embarked. As the days went by, I decided that this must be owing to his mathematical logic... It became clear to me that his notation afforded an instrument of logical analysis such as I had been seeking for years...'' After came back, Russell and Whitehead discussed the basic concepts of mathematics every day. After hard work, they finally wrote the famous {\em Principia Mathematica}\footnote{Russell and Whitehead gave this Latin name in honor of Issac Newton's {\em Philosophiæ Naturalis Principia Mathematica}.}. The three volumes classic work about mathematical logic were published from 1910 to 1913. To solve the paradox, Russell pointed that: ``An analysis of the paradoxes to be avoided shows that they all result from a kind of {\em vicious circle}. The vicious circles in question arise from supposing that a collection of objects may contain members which can only be defined by means of the collection as a whole.'' He suggested: ``Whatever involves all of a collection must not be one of the collection'' and call this the ``vicious-circle principle''. To carry out this restriction, Russell and Whitehead introduced `theory of types'.
+
+\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Whitehead.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Alfred North Whitehead, 1861-1947}
+ \label{fig:Whitehead}
+\end{wrapfigure}
+
+\index{theory of types}
+The theory of types classified sets into levels. Individual elements, such as a person, a number, or a particular book are of type 0; The sets of elements in type 0 are of type 1; The set of elements in type 1, which are sets of sets are of type 2... Every set is of a well defined type. The objects in a proposition must belongs to its type. Thus if one says $a$ belongs to $b$, then $b$ must be of higher type than $a$. Also one cannot speak of a set belonging to itself. Although this approach can avoid paradox, it is exceedingly complex in practice. It took 363 pages till the definition of number 1 in {\em Principia Mathematica}. Poincaré remarked: ``eminently suitable to give an idea of the number 1 to people who have never heard it spoken of before.'' The theory of types requires all works at their proper type levels, propositions about integers have to be at the level of integers; propositions about rationals have to be at the level of rationals. $n/1$ and $n$ are at different levels, hence should not be handled in one proposition at the same time. And the common statements like ``all the real numbers...'' are not valid any more, as multiple types of sets are involved.
+
+\index{axiom of reducibility}
+The most questionable part is about {\em axiom of reducibility}, {\em axiom of choice}, and {\em axiom of infinity}. In order to handle natural numbers, real numbers, and transfinite numbers, Russel and Whitehead accepted the axiom of infinity to support the concept of infinite classes. They also accept one can chose elements from non-empty set or even infinite set to form new set. Such two arguable axioms exist in set theory too. Many people opposed to the axiom of reducibility particularly. To support mathematical induction, this axiom says any proposition at a higher level is coextensive with a proposition at type 0 level. Poincaré pointed out it was disguised form of mathematical induction. But mathematical induction is part of mathematics and is needed to establish mathematics, hence we cannot prove consistency.
+
+Later Russell himself became more concerned: ``Viewed from this strictly logical point of view, I do not see any reason to believe that the axiom of reducibility is logically necessary, which is what would be meant by saying that it is true in all possible worlds. The admission of this axiom into a system of logic is therefore a defect, even if the axiom is empirically true.''\cite{M-Kline-2007}
+
+\subsection{Intuitionism}
+
+\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.28]{img/Brouwer.eps}
+ \captionsetup{labelformat=empty}
+ \caption{L. E. J. Brouwer, 1881-1966}
+ \label{fig:Brouwer}
+\end{wrapfigure}
+
+%图片来自The Low Countries, Arts and Society in Flanders and the netherlands. A year book 1998-99
+\index{Brouwer}
+Some mathematicians took opposite approach to build the foundation of mathematics called intuitionism. They thought mathematics was purely the result of the constructive mental activity of humans rather than the discovery of fundamental principles claimed to exist in an objective reality. Intuitionism can be backtracked to Blaise Pascal. Leopold Kronecker was the pioneer mathematician hold intuitionism philosophy. Many world class mathematicians, including János Bolyai, Henri Lebesgue, Henri Poincaré, and Hermann Weyl support intuitionism. The founder is the Dutch mathematician Luitzen Egbertus Jan Brouwer. Brouwer was bore in 1881 in Overschie near Rotterdam, Netherlands. He entered University of Amsterdam in 1897, and soon demonstrated good mathematics capability. While still an undergraduate Brouwer proved original results on continuous motions in four dimensional space and published his result in the Royal Academy of Science in Amsterdam in 1904. Other topics which interested Brouwer were topology and the foundations of mathematics.
+
+Influenced by Hilbert's list of problems proposed at the Paris International Congress of Mathematicians in 1900, Brouwer put a very large effort to study typology from 1907 to 1913. The best known is his fixed point theorem, usually referred to now as the Brouwer Fixed Point Theorem. This theorem states that in the plan every continuous function from a closed disk to itself has at least one fixed point. He also extended this theorem to arbitrary finite dimension. Specially, every continuous function from a closed ball of a Euclidean space into itself has a fixed point. In 1910, Brouwer proved topological invariance of degree, then gave the rigours definition of topological dimension. Because of the outstanding contribution to topology, he was elected a member of the Royal Netherlands Academy of Arts and Sciences.
+
+When Brouwer was a post graduate student, he was interested in the on-going debate between Russell and Poincaré on the logical foundations of mathematics\footnote{Poincaré distinguished three kinds of intuition: an appeal to sense and to imagination, generalization by induction, and intuition of pure number—whence comes the axiom of induction in mathematics. The first two kinds cannot give us certainty, but, he says, ``who would seriously doubt the third, who would doubt arithmetic?''\cite{Poincare2}}. His doctoral thesis in 1907 attacked the logical foundations of mathematics and marks the beginning of the Intuitionist School. His views had more in common with those of Poincaré and if one asks which side of the debate he came down on then it would have with the latter. Brouwer was killed in 1966 at the age of 85, struck by a vehicle while crossing the street in front of his house.
+
+Brouwer's intuitionism came from his philosophy: mathematics is a intellectual human activity. It does not exist outside our mind. Therefore, it is independent from the real physical world. The mind recognizes basic and clear intuitions. These intuitions are not perceptual or empirical, but directly admit certain mathematical concepts, like integers. Brouwer believed that mathematical thinking is a process of intellectual construction. It builds its own world, that is independent of experience, and is limited only by the basic mathematical intuition. The basic intuitive concepts should not be understood as undefined in axiomatic theory, but should be conceived as something, as long as they are indeed useful in mathematical thinking, they can be used to understand various undefined concepts in a mathematics.
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/Poincare.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Henri Poincaré, 1854-1912}
+ \label{fig:Poincare}
+\end{wrapfigure}
+
+In his 1908 paper, Brouwer rejected in mathematical proofs the principle of the excluded middle, which states that any mathematical statement is either true or false, no other possibility is allowed. Brouwer denied that this dichotomy applied to infinite sets. In 1918 he published a set theory, the following year a theory of measure, and by 1923 a theory of functions, all developed without using the principle of the excluded middle.
+
+Brouwer's constructive theories were not easy to set up since the notion of a set could not be taken as a basic concept but had to be built up using more basic notions. Because of this, Intuitionism rejected non-constructive existence proofs. For example, Euclid's proof about the existence of infinite many prime numbers was not acceptable according to Brouwer because it does not give a way to construct the prime number.
+
+In general, intuitionism was more critical than construction in the first decades of the 20th Century. Intuitionism denied a large number of mathematical achievements, including irrational numbers, function theory, and Cantor's transfinite numbers. Many reasoning methods, like the principle of the excluded middle, were rejected. Therefore, it was strongly opposed by other mathematicians. Hilbert said: ``For, compared with the immense expense of modern mathematics, what would wretched remnants mean, the few isolated results incomplete and unrelated, that the intuitionists have obtained. ''
+
+% Intuitionism enjoyed a resurgence of interest after World War II, primarily because of contributions by the American mathematician Stephen Cole Kleene.
+
+\subsection{Formalism}
+
+\begin{wrapfigure}{L}{0.5\textwidth}
+ \centering
+ \includegraphics[scale=0.25]{img/Hilbert.eps}
+ \captionsetup{labelformat=empty}
+ \caption{David Hilbert, 1862-1943}
+ \label{fig:Hilbert}
+\end{wrapfigure}
+
+\index{Hilbert}
+The third mathematical school of thought is the Formalism led by the German mathematician David Hilbert. Hilbert was one of the most influential and universal mathematicians of the 19th and early 20th Centuries. He was born in 1862 in Königsberg, Eastern Prussia. He didn't shine at school at first, but later received the top grade for mathematics. In 1880, Hilbert enrolled at the University of Königsberg, where he met and developed lifelong friendship with Hermann Minkowski (two years younger than Hilbert), and associate professor Adolf Hurwitz (three years elder than Hilbert). Hilbert wrote: ``During innumerable walks, at times undertaken day after day, we roamed in these eight years through all the corners of mathematical science.''
+
+In 1895, invited by Felix Klein, he obtained the position of Professor of Mathematics at the University of Göttingen. He remained there 48 years for the rest of his life. During the Klein and Hilbert years, Göttingen became the preeminent institution in the mathematical world. Students and young mathematicians viewed Göttingen as the Mecca of mathematics: ``Packed a bag and go to Göttingen!''
+
+Hilbert contributed to many branches of mathematics. There are too many terms, theorems named after him, that even Hilbert himself did not know. He once asked other colleagues in Göttingen what `Hilbert space' was. ``If you think of mathematics as a world. which it is, then Hilbert was a world conqueror.'' When he died, {\em Nature} remarked that there was scarcely a mathematician in the world whose work did not derive from that of Hilbert.\cite{Ried-1996}
+
+Hilbert put forth a most influential list of 23 unsolved problems at the International Congress of Mathematicians in Paris in 1900. This is generally reckoned as the most successful and deeply considered compilation of open problems ever to be produced by an individual mathematician. These were the problems which he considered most significant in mathematics at that time; not isolated questions but problems of such a general character that their solution was bound to have an enormous influence on the shape of future mathematics.
+%cite: https://www.nature.com/articles/152182a0.pdf?origin=ppub
+% Nature, Aug 14, 1943, Vol 52 pp. 182-183
+
+Among Hilbert's students were Hermann Weyl, the famous world chess champion Emanuel Lasker, and Ernst Zermelo. But the list includes many other famour names including Wilhelm Ackermann, Felix Bernstein, Otto Blumenthal, Richard Courant, Haskell Curry, Max Dehn, Rudolf Fueter, Alfred Haar, Georg Hamel, Erich Hecke, Earle Hedrick, Ernst Hellinger, Edward Kasner, Oliver Kellogg, Hellmuth Kneser, Otto Neugebauer, Erhard Schmidt, Hugo Steinhaus, and Teiji Takagi. From 1933, the Nazis purged many of the prominent faculty members, included Hermann Weyl, Emmy Noether and Edmund Landau. About a year later, the new Nazi Minister of Education, Bernhard Rust asked whether ``the Mathematical Institute really suffered so much because of the departure of the Jews''. Hilbert replied, ``Suffered? It doesn't exist any longer, does it!'' Hilbert died in 1943 at age of 81. The epitaph on his tombstone in Göttingen consists of the famous lines he spoke: ``We must know. We will know.''
+
+Hilbert's {\em Foundations of Geometry} published in 1899 proposes a formal set, called Hilbert's axioms, substituting for the traditional axioms of Euclid. It is the representative work of axiomatization. Hilbert's approach signaled the shift to the modern axiomatic method. From 1904, Hilbert started studying the foundation of mathematics. In 1920 he proposed explicitly a research project that became known as Hilbert's program. He wanted mathematics to be formulated on a solid and complete logical foundation. It opened the way for the development of the formalist school, one of three major schools of mathematics of the 20th century. According to the formalist, mathematics is manipulation of symbols according to agreed upon formal rules. It is therefore an autonomous activity of thought.
+
+The main goal of Hilbert's program was to provide secure foundations for all mathematics. In particular this should include:
+
+\begin{enumerate}
+\item \textbf{A formulation of all mathematics}. In other words all mathematical statements should be written in a precise formal language, and manipulated according to well defined rules.
+
+\item \textbf{Completeness}: a proof that all true mathematical statements can be proved in the formalism.
+\item \textbf{Consistency}: a proof that no contradiction can be obtained in the formalism of mathematics. This consistency proof should preferably use only ``finitistic'' reasoning about finite mathematical objects.
+\item \textbf{Conservation}: a proof that any result about ``real objects'' obtained using reasoning about ``ideal objects'' (such as uncountable sets) can be proved without using ideal objects.
+\item \textbf{Decidability}: there should be an algorithm for deciding the truth or falsity of any mathematical statement.
+\end{enumerate}
+
+To execute his program, Hilbert initiated metamethematics, to study the mathematics itself using mathematical methods. This study produces metatheories, which are mathematical theories about other mathematical theories. Such approach actually differentiates three different mathematical systems:
+
+\begin{enumerate}
+\item Mathematics that is not formalized $G$: It's the normal mathematics, that allows classic logical reasoning. For example, applying principle of excluded middle on infinite set.
+
+\item Formalized mathematics $H$: All symbols, formulas, axioms, and propositions are formalized. They are undefined concepts without any concrete meanings before explanation. Once explained, they are the concepts in $G$. In other words, $G$ is the model of $H$, and $H$ is formalized $G$. As Hilbert described: ``One must be able to say at all times — instead of points, straight lines, and planes — tables, chairs, and beer mugs.'' With this approach, the specific meanings and background in Euclid geometry are put aside, we only focus on the relations between the undefined concepts, which are reflected through a collection of axioms.
+
+\item Metamathematics $K$: This is the metatheories to study $H$. All reasoning in $K$ should be admitted intuitively. For example, without applying principle of excluded middle on infinite set.
+\end{enumerate}
+
+While Hilbert and the mathematicians who worked with him in his enterprise were committed to the project, a young mathematician Gödel proved incompleteness theorems, which showed that most of the goals of Hilbert's program were impossible to achieve. We'll explain the details in later sections.
+
+\subsection{Axiomatic set theory}
+
+Different from the mathematical schools of logicism, intuitionism, and formalism, the members of the set-theoretic school did not formulate their distinct philosophy at the beginning, but they gradually gained adherents, and a program. This school today earns as much as supporters as the other three we introduced.
+
+The set-theoretic school can be traced back to Cantor and Dedekind's work. Although both were primarily concerned with infinite sets, they found by establishing the concept of natural numbers on basis of set, all of mathematics could then be derived. When Russell's paradox was found at the centre of Cantor's set theory, some mathematicians believed that the paradox was due to the informal introduction of sets. Cantor's set theory is often described today as `naive set theory'. Hence the set theoretic thought that a carefully selected axiomatic foundation would remove the paradoxes of set theory. Just as the axiomatization of geometry and of the number system had resolved logical problems in those areas. German mathematician Ernst Zermelo first took the axiomatization approach in set theory in 1908.
+
+\index{Zermelo}
+Zermelo also believed the paradoxes arose because Cantor had not restricted the concept of a set. He therefore stressed with clear and explicit axioms to clarify what is meant by a set, and what properties sets should have. In particular, he wanted to limit the size of possible sets. He had no philosophical basis but sought only to avoid the contradictions. His axiom system contained the undefined fundamental concepts of set and the relation of one set being included in another. These and the defined concepts were to satisfy the statements in the axioms. No properties of sets were to be used unless granted by the axioms. In his system, the existence of infinite sets, the operations as the union of sets, and the formation of subsets were provided as axioms. Zermelo also used the axiom of choice\cite{M-Kline-2007}.
+
+\begin{figure}[htbp]
+  \centering
+  \subcaptionbox{Ernst Zermelo, 1871-1953}[0.45\linewidth]{\includegraphics[scale=0.7]{img/Zermelo.eps}} \quad
+  \subcaptionbox{Abraham Fraenkel, 1891-1965}[0.45\linewidth]{\includegraphics[scale=0.7]{img/Fraenkel.eps}}
+  \captionsetup{labelformat=empty}
+  \caption{}
+  \label{fig:Zermelo-and-Fraenkel}
+\end{figure}
+
+\index{ZF system} \index{Fraenkel}
+Zermelo's system of axioms was improved by Abraham Fraenkel in 1922. Zermelo did not distinguished a set property and the set itself, they were used as synonymous. The distinction was made by Fraenkel. The system of axioms used mostly common by set theorists is known as Zermelo-Fraenkel system, abbreviated as ZF system. They both saw the possibility of refined and sharper mathematical logic available in their time, but did not specify the logical principles, which they thought were outside of mathematics, and could be confidently applied as before\cite{M-Kline-2007}.
+
+Zermelo provided 7 axioms in his 1908 paper. Then in 1930, Fraenkel, Skolem, and Von Neumann suggested to add another two axioms. These axioms are as below:
+
+\index{axiom of choice}
+\begin{enumerate}
+\item \textbf{Axiom of extensionality}: Two sets are equal if they have the same elements. For set $A$ and $B$, if $A \subseteq B$ and $B \subseteq A$, then $A = B$.
+
+\item \textbf{Empty set}: The empty set exists.
+
+\item \textbf{Axiom schema of separation}: Also known as axiom schema of specification. Any property that can be formalized in the language of the theory can be used to define a set. For set $S$, if proposition $p(x)$ is defined, then there exists set $T = \{ x | x \in S, p(x)\}$.
+
+\item \textbf{Axiom of power set}: One can form the power set (the collection of all subsets of a given set) of any set. This process can be repeated infinitely.
+
+\item \textbf{Axiom of union}: The union over the elements of a set exists.
+
+\item \textbf{Axiom of choice}：abbreviated as AC.
+
+\item \textbf{Axiom of infinity}: There exists a set $Z$, containing empty set. For any $a \in Z$, then $\{a\} \in Z$. This axiom ensures infinite set exits.
+
+\item \textbf{Axiom schema of replacement}: This axiom is introduced by Fraenkel in 1922. For any function $f(x)$ and set $T$, if $x \in T$, and $f(x)$ is defined, there exits a set $S$, that for all $x \in T$, there is a $y \in S$, such that $y = f(x)$. It says that the image of a set under any definable function will also fall inside a set.
+
+\item \textbf{Axiom of regularity}: Also known as axiom of foundation. It was introduced by Von Neumann in 1925. $x$ does not belong to $x$.
+\end{enumerate}
+
+As such, set theory was abstracted to a axiomatic system. Set turned to be an undefined concept that satisfies these axioms. They do not permit `all inclusive set', hence avoid the paradox, and fixed the defects in naive set theory. However, there were still debate about which axioms were acceptable, particularly the axiom of choice is arguable.
+
+%\begin{wrapfigure}{R}{0.5\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.6]{img/Banach-Tarski-Paradox.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Banach-Tarski paradox: a solid ball can be decomposed and put back together into two copies of the original ball.}
+ \label{fig:Banach-Tarski-Paradox}
+\end{figure}
+%\end{wrapfigure}
+
+\index{Banach-Tarski paradox} \index{ZFC system}
+In 1924, Polish mathematicians Stefan Banach and Alfred Tarski proved a theorem called Banach-Tarski paradox\footnote{Also known as Hausdorff-Banach-Tarski theorem, or `Doubling sphere paradox'.}. This theorem states that, if accept axiom of choice, then for a solid ball in 3 dimensional space, there exists a decomposition of the ball into a finite number of disjoint subsets, which can then be put back together in a different way to yield two identical copies of the original ball. Indeed, the reassembly process involves only moving the pieces around and rotating them without changing their shape. Banach and Tarski was going to reject axiom of choice through this theorem. However, their proof looked so natural, that mathematicians tend to consider it only reflects the counter intuitive fact about axiom of choice. Some set-theorists insist not to including axiom of choice, such axiomatic set theory is called ZF system, while the one included axiom of choice is called ZFC system. We introduced the interesting relation between axiom of choice and continuum hypothesis in previous chapter.
+
+\section{Gödel's incompleteness theorems}
+
+By 1930, there had been four separated, distinct, and more or less conflicting approaches about mathematics foundation. Their supporters adherence to their own mathematical schools. One could not say a theorem is correctly proven, because by 1930, he had to add by whose standard, it was proven correct. The consistency of mathematics, which motivated these new approaches was not settled at all except if one argue that it's the human intuition guarantees consistency\cite{M-Kline-2007}. Hilbert was still planing his project optimistically to prove the completeness and consistency of mathematics. All these were ended up by a young mathematician and logician, Gödel.
+
+\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.8]{img/Godel-young.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Kurt Gödel, 1906-1978}
+ \label{fig:Godel-young}
+\end{wrapfigure}
+
+\index{Gödel}
+Kurt Gödel was born in 1906 in Brünn, Austria-Hungary Empire (now Brno, Czech Republic) into a German family. He had quite a happy childhood. He had rheumatic fever and recovered at age 6. However, 2 years later when read medical books about the illness, he learnt that a weak heart was a possible complication. Although there is no evidence that he did have a weak heart, Kurt became convinced that he did, and concern for his health became an everyday worry for him. In his family, young Kurt was known as ``Mr. Why'' because of his insatiable curiosity.
+
+In 1924, Gödel entered the University of Vienna. he hadn't decided whether to study mathematics or theoretic physics until he learnt number theory. He decided to take mathematics as his main subject in 1926. Gödel was also interested in philosophy, and took part in seminars about mathematical logic. The exploration of philosophy and mathematics set Gödel's life course.
+
+In 1929, at the age of 23, he completed his doctoral dissertation. In it, he established his completeness theorem regarding the first-order predicate calculus. He was going to further study Hilbert's program to prove the completeness and consistency of mathematics in finite steps. However, he soon developed an excepted result. In 1930 Gödel attended the Second Conference on the Epistemology of the Exact Sciences, held in Königsberg. Here he delivered his first incompleteness theorem, and soon, proved the second incompleteness theorem.
+
+Gödel worked at University of Vienna from 1932. In 1933, Adolf Hitler came to power in Germany, the Nazis rose in influence in Austria academy over the following years. In 1936, Moritz Schlick, whose seminar had aroused Gödel's interest in logic, was assassinated by one of his former students. This triggered ``a severe nervous crisis'' in Gödel. He developed paranoid symptoms, including a fear of being poisoned. After the world war II broken out, Gödel accepted the invitation from the Institute for Advanced Study in Princeton, New Jersey. and moved to US. To avoid the difficulty of an Atlantic crossing, the Gödels took the Trans-Siberian Railway to the Pacific, sailed from Japan to San Francisco, then crossed the US by train to Princeton. He met Albert Einstein in Princeton, who became a good friend. They were known to take long walks together to and from the Institute for Advanced Study. Einstein's death in 1955 impacted him a lot. In his later life, logician and mathematician Wang Hao was his close friend and commentator.
+
+Gödel's married Adele Nimbursky, whom he had known for over 10 years on September 20th, 1938. Their relationship had been opposed by his parents on the grounds that she was a divorced dancer, six years older than Gödel. Later in his life, Gödel suffered periods of mental instability and illness. He had an obsessive fear of being poisoned; he would eat only food that Adele prepared for him. Late in 1977, she was hospitalized for six months and could subsequently no longer prepare her husband's food. In her absence, he refused to eat, eventually starving to death. He weighed 29 kilograms (65 lb) when he died. His death certificate reported that he died of ``malnutrition and inanition caused by personality disturbance'' in 1978. Because of the outstanding contributions in logic, he was regarded as the greatest logician since Aristotle.
+
+\index{Gödel's incompleteness theorems}
+In 1931, Gödel published his paper titled {\em On Formally Undecidable Propositions of Principia Mathematica and Related Systems}. Where `Principia Mathematica' is the work of Russell and Whitehead. In that article, he proved for any computable axiomatic system that is powerful enough to describe the arithmetic of the natural numbers:
+
+\begin{enumerate}
+\item If a system is consistent, it cannot be complete.
+\item The consistency of axioms cannot be proved within their own system.
+\end{enumerate}
+
+For any consistency formal system, Gödel gave an undecidable statement $G$, that can neither be proved nor disproved. This theorem is called Gödel's first incompleteness theorem. It tells that consistent formalized system is incomplete. As far as the system is powerful enough to contain arithmetic of natural numbers, there will be problems exceed it. One may ask, since $G$ is undecidable, what if accept $G$ or $G$'s negation as an additional axiom, to obtain a more powerful system? However, Gödel soon proved the second incompleteness. It tells that if a formal system containing elementary arithmetic, then the consistency cannot be proved within its own system. Whether accept or reject $G$, the new system is still incomplete. There always exists undecidable statement in the higher level.
+
+In Euclidean geometry for example, we can exclude the fifth postulate, to obtain the axiomatic system with the first four postulates. However, we cannot prove the fifth postulate true or false. We know that whether accept or reject the fifth postulate gives consistent geometry -- Euclidean geometry and varies of non-Euclidean geometries respectively. In axiomatic set theory ZF system, we cannot prove axiom of choice true or false. Accepting it gives the consistent ZFC system; while rejecting it gives another consistent system. After add the axiom of choice to establish ZFC system, we cannot prove the continuum hypothesis true or false in ZFC. Accepting continuum hypothesis gives a consistent system; while rejecting continuum hypothesis gives another consistent system.
+
+%\begin{wrapfigure}{R}{0.5\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=1]{img/Angel-Devil-1941.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Escher, Angles and Devils, 1941}
+ \label{fig:Angel-Devil-1941}
+\end{figure}
+%\end{wrapfigure}
+
+Gödel's first and second incompleteness theorems ended a half-century of attempts, beginning with the work of Frege and culminating in Principia Mathematica and Hilbert's formalism, to find a set of axioms sufficient for all mathematics. Even the elementary arithmetic system is consistent, such consistency cannot be proved within itself. As mathematician André Weil said: ``God exists since mathematics is consistent, and the Devil exists since we cannot prove it.''\cite{HanXueTao16}
+
+\section{Proof sketch for the first incompleteness theorem}
+
+According to Hilbert's project, the first step is to formalize all the mathematics into a system. Then study it with metamathematics. In order to do that, we need represent every mathematical branch as a formal system, which only contains finite many axioms, then prove it is complete and consistent. Among them, the most fundamental system is the arithmetic of natural numbers. Many mathematical branches are isomorphic to it. In previous chapter, we see how to extend natural numbers to define integers, rationals, and real numbers. By establishing the correspondence between points and real numbers, we can further treat the Euclidean geometry as arithmetic through coordinate geometry.
+
+\subsection{Formalize the system}
+\index{TNT system} \index{Typographical Number Theory}
+Here we use the method and terms, that Douglas Hofstadter wrote in his popular book {\em Gödel, Escher, Bach: An Eternal Golden Braid} to introduce the proof sketch. Gödel's proof also starts from modeling a formal system. We call this system ``Typographical Number Theory'', abbreviated as TNT. It happens to be the same abbreviation of Trinitrotoluene, a powerful explosive. Hofstadter intended to give this name to indicate it's powerful enough to destroy the building itself. TNT formalizes the number theory in natural language into a series of typographical strings. Although sounds complex, we can realize it step by step on top of the Peano Axioms we introduced in chapter 1. As the first thing, we need define numbers. According to Peano's axioms, zero is natural number, every natural number has its successor, we can define the typographical string for numbers as the following:
+
+\vspace{5mm}
+\begin{tabular}{|r|l|}
+zero & 0 \\
+\hline
+one & S0 \\
+\hline
+two & SS0 \\
+\hline
+three & SSS0 \\
+\hline
+... & ... \\
+\end{tabular}
+\vspace{5mm}
+
+Where `S' means successor, two letters, `SS' mean the successor of a successor. A hundred `S's and a `0' are the 100 times successor of zero, which is the natural number 100. Although it is very long, the rule itself is simple enough. With natural numbers being defined, we need next define variables. To make the system as simple as possible, we only use 5 typographical letters $a, b, c, d, e$. When need more variables, we can simply add primes like $a', a'', a'''$. Next we need `$+$' for addition, `$\cdot$' for multiplication, and the parenthesis to control the arithmetic orders. To formalize the proposition we need `$=$', `$\lnot$' for negation, and $\to$ for implication. Here are some examples of formal propositions (no matter their truth or falsehood):
+
+\begin{itemize}
+\item one plus two equals four: $(S0 + SS0) = SSSS0$
+\item two plus two is not equal to five: $\lnot (SS0 + SS0) = SSSSS0$
+\item if one equals to zero, then zero equals one: $(S0 = 0) \to (0 = S0)$
+\end{itemize}
+
+A proposition can have free variables, for example:
+
+\[
+(a + SS0) = SSS0
+\]
+
+It means $a$ plus 2 equals 3. Obviously the value of $a$ determines if this proposition is true or false. Therefore, we need universal quantifier $\forall$, existential quantifier $\exists$, and colon `:' to indicate quantifier scope. The following proposition:
+
+\[
+\exists a : (a + SS0) = SSS0
+\]
+
+means, there exists $a$, such that $a$ plus 2 equals 3. Here is another example:
+
+\[
+\forall a : \forall b : (a + b) = (b + a)
+\]
+
+It is exactly the commutative law of addition for natural numbers. When remove the quantifier for $a$, it changes to:
+
+\[
+\forall b : (a + b) = (b + a)
+\]
+
+This is a open formula, since $a$ is free. It expresses a unspecified number $a$ commutes with all numbers $b$. It may or may not be true. In order to compose propositions, we need logical conjunction (and) $\land$, logical disjunction (or) $\lor$. Although there are few symbols, TNT is very expressive. Here are some examples:
+
+2 is not the square of any natural numbers: $\lnot \exists a : (a \cdot a) = SS0$
+
+Fermat's last theorem holds when $n$ equals 3: $\lnot \exists a : \exists b : \exists c : ((a \cdot a) \cdot a) + ((b \cdot b) \cdot b) = ((c \cdot c) \cdot c)$
+
+We defined typographical symbols to express propositions so far. To construct TNT system, we also need axioms and reasoning rules.
+
+\subsubsection{Axioms and reasoning rules}
+
+Following Peano's axioms, we define 5 axioms for the TNT system:
+
+\begin{enumerate}
+\item $\forall a : \lnot Sa = 0$, this axiom states that, zero is not the successor of any number;
+\item $\forall a: (a + 0) = 0$, this axiom states that, any number plus 0 equals itself;
+\item $\forall a: \forall b: (a + Sb) = S(a + b)$, this axiom defines the addition for natural numbers;
+\item $\forall a: (a \cdot 0) = 0$, this axiom states that, any number multiplies zero equals zero;
+\item $\forall a: \forall b: (a \cdot Sb) = ((a \cdot b) + a)$, this axiom defines multiplication for natural numbers.
+\end{enumerate}
+
+Next we establish reasoning rules. For example, from axiom 1, that 0 is not the successor of any number, we want to deduce a special case, that 1 is not the successor of 0. In order to do this, we introduce the rule of specification:
+
+\textbf{Rule of specification}: Suppose $u$ is a variable occurs in string $x$. If $\forall u: x$ is a theorem, then $x$ is also a theorem, and any replacement of $u$ in $x$ wherever it occurs, also gives a theorem.
+
+There is a restriction, the term that replaces $u$, must not contain any variables that is quantified in $x$. And the replacement should be consistent. The opposite rule to specification is the rule of generalization. It allows us to add the universal quantifier before a theorem.
+
+\textbf{Rule of generalization}: Suppose $x$ is a theorem, $u$ is a free variable in it. Then $\forall u: x$ is a theorem.
+
+For example, $\lnot S(c + S0) = 0$ means there is no such a number, that plus 1, then take the successor gives 0. We can generalize it as: $\forall c: \lnot S(c + S0) = 0$.
+
+The next rule tells us how to convert universal and existential quantifiers.
+
+\textbf{Rule of interchange}: Suppose $u$ is a variable, then the string $\forall u: \lnot $ and $\lnot \exists u:$ are interchangeable.
+
+When applying this rule to axiom 1 for example, it transforms to $\lnot \exists a: Sa = 0$. The next rule allows us to put a existential quantifier before a string.
+
+\textbf{Rule of existence}: Suppose a term appears once or multiply in a theorem, then it can be replaced with a variable, and add a corresponding existential quantifier in front.
+
+Use axiom 1 for example again: $\forall a: \lnot Sa = 0$, we can replace 0 with a variable $b$, and add the corresponding existential quantifier to give: ：$\exists b: \forall a: \lnot Sa = b$. It states that, there exists a number, such that any natural number is not its successor.
+
+We next consider the symmetry and transitivity for equality, and define rules. Let $r, s, t$ all stand for arbitrary terms.
+
+\textbf{Rules of quality}:
+\begin{itemize}
+\item Symmetry: if $r = s$ is a theorem, then $s = r$ is also theorem;
+\item Transitivity: if $r = s$ and $s = t$ are theorems, then $r = t$ is also theorem.
+\end{itemize}
+
+To add or remove the successorship $S$, we define below rules.
+
+\textbf{Rules of successorship}：
+\begin{itemize}
+\item Add: If $r = t$ is theorem, then $Sr = St$ is a theorem;
+\item Drop: If $Sr = St$ is theorem, then $r = t$ is a theorem.
+\end{itemize}
+
+So far, the TNT system is very powerful, we can construct complex theorems with it.
+
+\begin{Exercise}
+\Question{Translate Fermat's last theorem into a TNT string.}
+\Question{Prove the associate law of addition with TNT reasoning rules.}
+\end{Exercise}
+
+\subsubsection{Incompleteness of TNT}
+
+With the axioms and reasoning rules in TNT system, we can prove a series of theorems easily:
+
+\[
+\begin{array}{rcl}
+(0 + 0) & = & 0 \\
+(0 + S0) & = & S0 \\
+(0 + SS0) & = & SS0 \\
+(0 + SSS0) & = & SSS0 \\
+... & & ...
+\end{array}
+\]
+
+From axiom 2, we can deduce the first theorem by replacing $a$ with 0; on top of this theorem, and use axiom 3, we can obtain the second theorem; every theorem can be deduced from the previous one. Observe this pattern, we immediately ask, why can't we summarize them to a theorem?
+
+\[
+\forall a: (0 + a) = a
+\]
+
+Note it is different from axiom 2. Unfortunately, we can't reason this theorem with all the rules in TNT so far. We may want to add an additional rule: if all this series of strings are theorems, then the universally quantified string which summarizes them is also a theorem. However, only human that outside TNT has this insight. It's not a valid rule for the formal system.
+
+\index{$\omega$ incomplete}
+Lack of such summarize capability indicates TNT is incomplete. Accurately speaking, a system with this kind of `defect' is called $\omega$ incomplete. Where $\omega$ is the cardinal of countable infinite set introduced in previous chapter. We say a system is $\omega$ incomplete if all the strings in a series are theorems, but the universal quantified summarizing string is not a theorem. Incidentally, the negation of the summarizing string:
+
+\[
+\lnot \forall a: (0 + a) = a
+\]
+
+is not a theorem of TNT too. It means the string is undecidable within TNT system. The capability of TNT is not enough to determine this string is theorem or not. It just likes the same situation, that with only the first four postulates in Euclidean geometry, the fifth postulation is undecidable. We can either accept to add the fifth postulation to obtain Euclidean geometry, or reject to add its negation to obtain non-Euclidean geometry. Similarly, we can either add this string or its negation to TNT to construct different formal systems.
+
+It looks a bit counter intuitive if we chose the negation as theorem: zero plus any number does not equal to this number any more. It's quite different from the arithmetic of natural numbers that familiar to us. It exactly reminds us, the concept in a formal system is undefined. We give it the meaning of addition for natural numbers only for the purpose of easy understanding.
+
+The $\omega$ incompleteness of TNT tells us, we are missing an important rule -- you may have already thought of -- Peano's fifth axiom that corresponding to mathematical induction. Let's add this last piece of tile to the puzzle.
+
+\textbf{Rule of induction}: Suppose $u$ is a variable in string $X$, denoted as $X{u}$. If it is a theorem when replace $u$ with 0, and $\forall u: X{u} \to X{Su}$. It means if $X$ is a theorem for $u$, so as it is when replace $u$ to $Su$. Then $\forall u: X{u}$ is also a theorem.
+
+With mathematical induction supported, TNT system now has the same capability as Peano's arithmetic.
+
+\begin{Exercise}
+\Question{Prove that $\forall a: (0 + a) = a$ with the newly added rule of induction.}
+\end{Exercise}
+
+\subsection{Gödel numbering}
+\index{Gödel numbering}
+One critical step Gödel took was to introduce Gödel numbering. TNT system is powerful enough to mirror other formal system, is it possible to mirror TNT by itself? What Gödel thought is to `arithmetize' the reasoning rules. To do this, he assigned all symbols with a number.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|r||l|r|}
+\hline
+\textbf{symbol} & \textbf{number} & \textbf{symbol} & \textbf{number} \\
+\hline
+0 & 666 & S & 123 \\
+\hline
+= & 111 & + & 112 \\
+\hline
+$\cdot$ & 236 & ( & 362 \\
+\hline
+) & 323 & $a$ & 262 \\
+\hline
+$'$ & 163 & $\land$ & 161 \\
+\hline
+$\lor$ & 616 & $\to$ & 633 \\
+\hline
+$\lnot$ & 223 & $\exists$ & 333 \\
+\hline
+$\forall$ & 626 & : & 636 \\
+\hline
+\end{tabular}
+\caption{A Gödel numbering to TNT}
+\end{table}
+
+Axiom 1 is translated to such numerals:
+
+\begin{tabular}{cccccccc}
+$\forall$ & $a$ & : & $\lnot$ & $S$ & $a$ & = & 0 \\
+626 & 262 & 636 & 223 & 123 & 262 & 111 & 666 \\
+\end{tabular}
+
+The numbering scheme is not unique. It does not matter if one assigns different numbers. With Gödel numbering, every TNT string can be represented as a number (although it can be a very big number). The problem is in the other direction: given any number, can we determine if it represents a TNT theorem? We know the first five TNT numbers, which represent the five axioms. With the TNT reasoning rules, we can construct infinite many TNT numbers from these five numbers. Atop of this, we introduce a number theory predication:
+
+\begin{center}
+$a$ is a TNT number.
+\end{center}
+
+For example, 626,262,636,223,123,262,111,666 is a TNT number (We add commas to make it easy to read), it represents axiom 1. Its negation form is:
+
+\begin{center}
+$\lnot a$ is a TNT number.
+\end{center}
+
+For example, 123,666,111,666 is not a TNT number. It means we can replace $a$ by a string of 123666111666 Ss and a 0. This huge string actually means: $S0 = 0$ is not a TNT theorem. TNT system can really speak about itself. It is not an accidental feature, but because of the fact that all formal systems are isomorphic to number theory $N$. Hence we formed a circle: A TNT string has its interpretation in number theory $N$, while the statement in $N$ can have a second meaning, which is the metalanguage interpretation about TNT.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (-8, 0) circle[x radius=1.5cm, y radius=1cm] node (TNT) {TNT}
+      (0, 0) circle[x radius=2.0cm, y radius=1cm] node (N) {Number theory $N$}
+      (8, 0) circle[x radius=1.5cm, y radius=1cm] node (Meta-TNT) {Meta-TNT};
+\draw[->] (TNT) to node [above] {Number theory interpretation} (N);
+\draw[->] (N) to node [above] {Metalanguage statement} (Meta-TNT);
+\end{tikzpicture}
+\caption{TNT $\to$ number theory $N$ $\to$ Meta-TNT}
+\label{fig:TNT-N-TNT}
+\end{figure}
+
+\subsection{Construct the self-reference}
+
+The last step in Gödel's proof is to construct a self-reference. It's such a TNT string, called $G$, which is about itself:
+
+\begin{center}
+$G$ is not a theorem of TNT.
+\end{center}
+
+Now we can detonate TNT. Whether $G$ is a theorem of TNT or not? If $G$ is a theorem, then it states the truth that ``$G$ is not a theorem''. Here we see the power of self-reference. As a theorem, $G$ can't be falsehood. Because we assume that TNT will not treat falsehood as theorem, we have to draw the conclusion that $G$ is not a theorem. While known that $G$ is not a theorem, we should admit that $G$ is truth. It reflects that TNT does not meet our expectation -- we found a string, it states the truth, but is not a theorem. Further, considering the fact that $G$ has its number theory interpretation, which is a statement of arithmetic property about natural numbers. From the reasoning outside TNT, we can confirm this statement is true, and the string is not a theorem of TNT. However, when we ask TNT whether this string is true, TNT could never say `Yes' or `No'.
+
+$G$ is that undecidable proposition. This is the sketch of the proof of Gödel's first incompleteness theorem.
+
+\section{Universal program and diagonal argument}
+\index{primitive recursive function}
+What does Gödel's incompleteness theorems mean to programming? We have an exactly isomorphic problem of programming. In order to see it, let us start from a formal computer programming language, This language supports primitive recursive function. The so called primitive recursive function is a kind of number theory functions, they can map from natural numbers to natural numbers, and follow the 5 axioms:
+
+\begin{enumerate}
+\item Constant function: The 0-ary constant function 0 is primitive recursive;
+
+\item Successor function: The 1-ary successor function $S(k) = k + 1$ is primitive recursive;
+
+\item Projection function: The $n$-ary function, which accepts $n$ arguments, and returns its $i$-th argument $P_i^n$ is primitive recursive;
+
+\item Composition: The result of finite many times composition of primitive functions is still primitive recursive;
+
+\item Primitive recursion:
+\[
+\begin{cases}
+h(0) = k \\
+h(n + 1) = g(n, h(n)) \\
+\end{cases}
+\]
+We say $h$ is computed from $g$ through primitive recursion. It can be extended to the case of multiple arguments.
+\end{enumerate}
+
+The programming language that supports basic arithmetic like addition, subtraction, if-then branches, equal, less than prediction, and bounded loop is called primitive recursive programming language. The bounded loop means the number of loops are determined beforehand. It can be loop without go-to statement, or for-loop that does not allow to alter the loop variable inside it. However, it cannot be while loop, or repeat-until loop. Because of these limitations, all primitive recursive programs must halt.
+
+An important property of primitive recursive function is that, all primitive recursive programs are recursively enumerable. Suppose we can list all primitive recursive functions that with one input and one output, store them in a infinite big library. We can number each of them\footnote{One numbering method is to concatenate all ASCII codes of the program to form a number, then sort them from less to big. Since each program is unique, their ASCII codes are different}, from 0, 1, 2, 3, ... And denote these programs as $B[0], B[1], B[2], ...$. For the $i$-th program, when input $n$, it gives result $B[i](n)$.
+
+Now, we construct a special function $f(n)$, when input $n$, its output is what the $n$-th program's output for $n$ plus 1. Like this:
+
+\[
+f(n) = B[n](n) + 1
+\]
+
+Such $f$ is definitely computable. Now we ask whether $f$ is a primitive recursive program stored in our library? If yes, suppose its number in the library is $m$. According to our numbering method, when input $m$ to the $m$-th program, the result should be $B[m](m)$. However, from the definition of $f$, its output should be $f(m) = B[m](m) + 1$. These two results are not equal obviously. The contradiction proves there exists computable function that is not primitive recursive.
+
+Our proof uses the same method as Cantor's diagonal argument in previous chapter. We have to relax the bounded loop limitation to make the programming language more powerful. To do that, we allow go-to statement in the loop to jump out; the loop variable can be altered inside; we introduced while loop, repeat-until loop; and general recursive functions. As such, we extend from primitive recursive function to {\em total recursive function}. This kind of programming language is called Turing-complete language. Most computer programming languages are Turing-complete, which are isomorphic to the formal systems like arithmetic of natural numbers. However, there is defect in Turning-complete language, as we can construct the primitive recursive function of Turing halting problem. It proves there exits incomputable problem. Is it possible to relax the limitation further, empower Turning-complete language, to design a universal program? The answer is no. Turning-complete is at the highest level, that reaches to the limitation of formal system. There is no other limitation can be relaxed any more. Gödel's incompleteness theorems tell us, once the formal system is powerful enough to include arithmetic of natural numbers, there must be undecidable problem in it.
+
+\section{Epilogue}
+
+\begin{wrapfigure}{R}{0.6\textwidth}
+%\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.8]{img/Escher-Dragon.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Escher, {\em Dragon}, 1952}
+ \label{fig:Escher-Dragon}
+%\end{figure}
+\end{wrapfigure}
+
+As human being, our rational thinking is great. It can lead us back to thousands of years, and talk to ancient sages; it can send us across the universe, and step onto the unreachable planet; it can foresee elementary parcels that are invisible to eyes; it can break through intuition and reach to high dimension magic world. Looking up the sky, through the clouds, dust, and stars, we feel the insignificant of ourselves. We are just passing passengers in the long river of time, just like a drop in the vast sea.
+
+The problem we introduce in this chapter, is essentially about ourselves as human. Does there exist the boundary of our rational thinking? Are we swallowing ourselves along a strange circle? These are questions everybody will ask at the era of artificially intelligence. People are making machine isomorphic to people, making the huge machinery computing isomorphic to brain and rational thinking. Just as Escher illustrated in his {\em Dragon}, he tried best to break free from the two-dimension picture. He has found the two slits in the paper. His head and neck pokes through one slit, and the tail through the other, with the head biting the tail, he want to pull himself out to the three-dimension world. As the observer, we clearly know all still happen on the two-dimension paper, the dragon's hard work is in vain. All these are ``like a dream, an illusion, a bubble and a shadow, like dew and lightning.''
+
+Even it was about a hundred years ago, the hot debate about mathematical foundation, the genius proof given by Gödel still have their practical significance today. As human beings, we are humbly in awe of the nature, the universe, our ancestors, and ourselves.
+
+\ifx\wholebook\relax \else
+\begin{thebibliography}{99}
+
+\bibitem{Gatys-2015}
+Leon A. Gatys, Alexander S. Ecker, Matthias Bethge. ``A Neural Algorithm of Artistic Style.'' 2015. arXiv:1508.06576 [cs.CV] IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2017.
+
+\bibitem{GuSen-2012}
+{\fontspec{\cnmainft}顾森 《思考的乐趣——Matrix67数学笔记》 人民邮电出版社.} 2012, ISBN: 9787115275868
+
+\bibitem{SICP}
+Harold Abelson, Gerald Jay Sussman, Julie Sussman. ``Structure and Interpretation of Computer Programs''. MIT Press, 1984; ISBN 0-262-01077-1
+
+\bibitem{HanXueTao16}
+{\fontspec{\cnmainft}韩雪涛 ``数学悖论与三次数学危机''. 人民邮电出版社}. 2016, ISBN: 9787115430434
+
+\bibitem{M-Kline-2007}
+Morris Kline. ``Mathematics: The Loss of Certainty''. Oxford University Press, 1980. 0-19-502754-X.
+
+\bibitem{Poincare2}
+Henri Poincaré. ``The Value of Science''. Modern Library, 2001. ISBN: 978-0375758485
+
+\bibitem{Ried-1996}
+Constance Ried. ``Hilbert''. Springer, 1st Printing edition, 1996, ISBN: 978-0387946740
+
+\end{thebibliography}
+
+\expandafter\enddocument
+%\end{document}
+
+\fi

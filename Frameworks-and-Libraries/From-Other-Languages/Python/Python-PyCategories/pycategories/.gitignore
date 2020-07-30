@@ -1,0 +1,15 @@
+*.pyc
+*.egg-info
+.eggs/
+__pycache__
+.pytest_cache/
+.coverage*
+.testmondata
+htmlcov/
+TODO.org
+docs/build/
+build/
+dist/
+shell.nix
+notebooks/
+.mypy_cache/

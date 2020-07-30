@@ -1,0 +1,424 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     12778,        414]
+NotebookOptionsPosition[      9005,        297]
+NotebookOutlinePosition[     10059,        326]
+CellTagsIndexPosition[     10016,        323]
+WindowTitle->WildCats - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "GuideColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ StyleBox[ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:guide/Mathematica"],
+  FontSlant->"Italic"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["WildCats", "GuideTitle",
+ CellID->942062912],
+
+Cell["\<\
+The WildCats package lets you work with Category Theory in Mathematica.\
+\>", "GuideAbstract",
+ CellID->2001916300],
+
+Cell[TextData[{
+ "Long viewed as the fundamental unifying language of mathematics, Category \
+Theory finally becomes more concrete and approachable to a wider audience \
+with the introduction of the WildCats ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package. Manipulating and visualizing objects, morphisms, categories, \
+functors and natural transformations with ease, WildCats provides powerful \
+and elegant new tools to represent abstract mathematical concepts. "
+}], "GuideAbstract",
+ CellID->531902851],
+
+Cell["\<\
+The Wildcats tutorial collection provides a comprehensive overview of the \
+WildCats package. \[LineSeparator]It is recommended that you go through the \
+tutorials in the order given. \[LineSeparator]At the end of each tutorial \
+there is a link to the next tutorial in the list.
+The tutorials assume that the user has a working knowledge of category \
+theory, nevertheless a student should have no difficulty following the \
+tutorials in the suggested order together with a textbook.\
+\>", "GuideAbstract",
+ CellID->643824981],
+
+Cell[TextData[StyleBox["Most sections in the documentation notebooks are \
+closed for easier navigation. \nMoving the mouse to the right hand side of \
+any documentation notebook makes the grouping cell brackets appear",
+ FontColor->RGBColor[0.5, 0, 0.5]]], "GuideAbstract",
+ CellID->579870855]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TUTORIALS", "GuideTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["Introduction",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Introduction"]], "GuideTutorial",
+ CellID->806871991],
+
+Cell["\<\
+\tLearning category theory with WildCats\[LineSeparator]\tLoading WildCats\
+\[LineSeparator]\tWildCats Version\[LineSeparator]\tWildCats disclaimer\
+\[LineSeparator]\tFoundations\
+\>", "GuideText",
+ FontSize->9,
+ CellID->458613803],
+
+Cell[TextData[ButtonBox["W-categories, Categories and StandardCategories",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/QuasicategoriesCategoriesAndStandardCategories"]],\
+ "GuideTutorial",
+ CellID->95639689],
+
+Cell[TextData[ButtonBox["Standard categories, objects and morphisms",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/StandardCategoriesObjectsAndMorphisms"]], \
+"GuideTutorial",
+ CellID->1580708],
+
+Cell["\<\
+\tStandard categories\[LineSeparator]\tNumbers are sets\[LineSeparator]\t\
+Finite sets\[LineSeparator]\tDefining elements of a set and families of sets\
+\>", "GuideText",
+ FontSize->9,
+ CellID->159324838],
+
+Cell[TextData[ButtonBox["CATStructure",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/CATStructure"]], "GuideTutorial",
+ CellID->203952802],
+
+Cell["\tThe structure of \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]", "GuideText",
+ FontSize->9,
+ CellID->261768456],
+
+Cell[TextData[ButtonBox["Defining and modifying categories, objects, \
+morphisms",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/DefiningAndModifyingACategory"]], "GuideTutorial",
+ CellID->46794382],
+
+Cell["\<\
+\tDefining categories, objects and morphisms\[LineSeparator]\tDefining a new \
+category\[LineSeparator]\tDefining new objects and morphisms\[LineSeparator]\t\
+Opposite (Dual) categories\
+\>", "GuideText",
+ FontSize->9,
+ CellID->78917311],
+
+Cell[TextData[ButtonBox["Predicate (Query) functions",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/PredicateQueryFunctions"]], "GuideTutorial",
+ CellID->197977637],
+
+Cell["\<\
+\tObjectQ and MorphismQ\[LineSeparator]\tCatProperties\
+\>", "GuideText",
+ FontSize->9,
+ CellID->449633457],
+
+Cell[TextData[ButtonBox["Morphisms and composition",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/MorphismsAndComposition"]], "GuideTutorial",
+ CellID->341689948],
+
+Cell["\<\
+\tOp, Dom, Cod, Id and DC functionss\[LineSeparator]\tDefine morphism \
+properties\[LineSeparator]\tIsomorphisms and InverseMorphism\[LineSeparator]\t\
+Isomorphisms\
+\>", "GuideText",
+ FontSize->9,
+ CellID->381457719],
+
+Cell[TextData[ButtonBox["Displaying diagrams",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/DisplayingDiagrams"]], "GuideTutorial",
+ CellID->740022069],
+
+Cell["\<\
+\tCategoryPlot, DC and Iso objects\[LineSeparator]\tObject rendering and \
+other Graph options\[LineSeparator]\tManipulating diagrams with GraphEvaluate\
+\>", "GuideText",
+ FontSize->9,
+ CellID->270819312],
+
+Cell[TextData[ButtonBox["Product of categories",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/ProductOfCategories"]], "GuideTutorial",
+ CellID->168870721],
+
+Cell["\tProdCategory", "GuideText",
+ FontSize->9,
+ CellID->646390289],
+
+Cell[TextData[ButtonBox["Functors",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Functors"]], "GuideTutorial",
+ CellID->246803694],
+
+Cell["\<\
+\tDefining functors\[LineSeparator]\tContravariant functors\[LineSeparator]\t\
+Opposite (Dual) functors\[LineSeparator]\tFunctors preserve invertible \
+morphisms\[LineSeparator]\tInvertible functors\[LineSeparator]\t\
+DiscreteCategory functor\[LineSeparator]\tPowerSet and CoPowerSet functors\
+\[LineSeparator]\tCategorial product functors\[LineSeparator]\tCP[\
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]]\
+\[LineSeparator]\tHom functors\[LineSeparator]\tDiagonal functors\
+\>", "GuideText",
+ FontSize->9,
+ CellID->114705360],
+
+Cell[TextData[ButtonBox["Natural transformations",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/NaturalTransformations"]], "GuideTutorial",
+ CellID->559178671],
+
+Cell["\<\
+\tDefining natural transformations\[LineSeparator]\tDisplaying natural \
+transformations\[LineSeparator]\tInvertible natural transformations\
+\[LineSeparator]\tHorizontal composition\
+\>", "GuideText",
+ FontSize->9,
+ CellID->438779736],
+
+Cell[TextData[ButtonBox["Comma categories",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Comma categories"]], "GuideTutorial",
+ CellID->316287684],
+
+Cell["\tDefining Comma categories", "GuideText",
+ FontSize->9,
+ CellID->1953361],
+
+Cell[TextData[ButtonBox["Functor W-categories",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/FunctorQuasicategories"]], "GuideTutorial",
+ CellID->935006103],
+
+Cell["\<\
+\tThe FUNCT operator\[LineSeparator]\tVertical compositions\[LineSeparator]\t\
+Power functors\
+\>", "GuideText",
+ FontSize->9,
+ CellID->97295329],
+
+Cell[TextData[ButtonBox["Yoneda and CoYoneda functors",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/Yoneda and CoYoneda functors"]], "GuideTutorial",
+ CellID->49315165],
+
+Cell["\<\
+\tDefining Yoneda and CoYoneda functors\[LineSeparator]\tYoneda Lemma\
+\[LineSeparator]\tYoneda Lemma : applications\
+\>", "GuideText",
+ FontSize->9,
+ CellID->33110923],
+
+Cell[TextData[ButtonBox["Universal Properties",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/UniversalProperties"]], "GuideTutorial",
+ CellID->95615061],
+
+Cell["\<\
+\tUniversal initial and terminal properties\[LineSeparator]\tVisualizing \
+universal properties\
+\>", "GuideText",
+ FontSize->9,
+ CellID->123991918],
+
+Cell[TextData[ButtonBox["Cones and Limits",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Cones and Limits"]], "GuideTutorial",
+ CellID->118568258],
+
+Cell["\<\
+\tDefining Cones\[LineSeparator]\tDefining Limits (coming soon)\
+\>", "GuideText",
+ FontSize->9,
+ CellID->472978908],
+
+Cell[TextData[ButtonBox["Adjunctions",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/Adjunctions"]], "GuideTutorial",
+ CellID->262820545],
+
+Cell["\tDefining Adjunctions", "GuideText",
+ FontSize->9,
+ CellID->107144900]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RELATED LINKS", "GuideRelatedLinksSection",
+ CellID->415694148],
+
+Cell[TextData[ButtonBox["WildCats website",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wildcatsformma.wordpress.com"], 
+   None}]], "GuideRelatedLinks",
+ CellID->14392853]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"WildCats - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 25, 28.3225340}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> "Wild Cats Guide", 
+    "language" -> "en", "paclet" -> "WildCats", "status" -> "None", "summary" -> 
+    "The WildCats package lets you work with Category Theory in Mathematica.",
+     "synonyms" -> {}, "title" -> "WildCats", "type" -> "Guide", "uri" -> 
+    "WildCats/guide/WildCats"}, "LinkTrails" -> "", "SearchTextTranslated" -> 
+  ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[601, 21, 75, 1, 70, "GuideColorBar"],
+Cell[679, 24, 209, 6, 70, "LinkTrail"],
+Cell[CellGroupData[{
+Cell[913, 34, 50, 1, 70, "GuideTitle",
+ CellID->942062912],
+Cell[966, 37, 125, 3, 70, "GuideAbstract",
+ CellID->2001916300],
+Cell[1094, 42, 521, 10, 70, "GuideAbstract",
+ CellID->531902851],
+Cell[1618, 54, 537, 9, 70, "GuideAbstract",
+ CellID->643824981],
+Cell[2158, 65, 294, 4, 70, "GuideAbstract",
+ CellID->579870855]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2489, 74, 62, 1, 70, "GuideTutorialsSection",
+ CellID->415694126],
+Cell[2554, 77, 152, 3, 70, "GuideTutorial",
+ CellID->806871991],
+Cell[2709, 82, 241, 6, 70, "GuideText",
+ CellID->458613803],
+Cell[2953, 90, 225, 5, 70, "GuideTutorial",
+ CellID->95639689],
+Cell[3181, 97, 210, 5, 70, "GuideTutorial",
+ CellID->1580708],
+Cell[3394, 104, 214, 5, 70, "GuideText",
+ CellID->159324838],
+Cell[3611, 111, 152, 3, 70, "GuideTutorial",
+ CellID->203952802],
+Cell[3766, 116, 145, 3, 70, "GuideText",
+ CellID->261768456],
+Cell[3914, 121, 214, 5, 70, "GuideTutorial",
+ CellID->46794382],
+Cell[4131, 128, 247, 6, 70, "GuideText",
+ CellID->78917311],
+Cell[4381, 136, 181, 4, 70, "GuideTutorial",
+ CellID->197977637],
+Cell[4565, 142, 117, 4, 70, "GuideText",
+ CellID->449633457],
+Cell[4685, 148, 179, 4, 70, "GuideTutorial",
+ CellID->341689948],
+Cell[4867, 154, 227, 6, 70, "GuideText",
+ CellID->381457719],
+Cell[5097, 162, 165, 3, 70, "GuideTutorial",
+ CellID->740022069],
+Cell[5265, 167, 215, 5, 70, "GuideText",
+ CellID->270819312],
+Cell[5483, 174, 168, 3, 70, "GuideTutorial",
+ CellID->168870721],
+Cell[5654, 179, 69, 2, 70, "GuideText",
+ CellID->646390289],
+Cell[5726, 183, 144, 3, 70, "GuideTutorial",
+ CellID->246803694],
+Cell[5873, 188, 562, 10, 70, "GuideText",
+ CellID->114705360],
+Cell[6438, 200, 176, 4, 70, "GuideTutorial",
+ CellID->559178671],
+Cell[6617, 206, 245, 6, 70, "GuideText",
+ CellID->438779736],
+Cell[6865, 214, 160, 3, 70, "GuideTutorial",
+ CellID->316287684],
+Cell[7028, 219, 80, 2, 70, "GuideText",
+ CellID->1953361],
+Cell[7111, 223, 173, 4, 70, "GuideTutorial",
+ CellID->935006103],
+Cell[7287, 229, 155, 5, 70, "GuideText",
+ CellID->97295329],
+Cell[7445, 236, 186, 4, 70, "GuideTutorial",
+ CellID->49315165],
+Cell[7634, 242, 178, 5, 70, "GuideText",
+ CellID->33110923],
+Cell[7815, 249, 166, 3, 70, "GuideTutorial",
+ CellID->95615061],
+Cell[7984, 254, 158, 5, 70, "GuideText",
+ CellID->123991918],
+Cell[8145, 261, 160, 3, 70, "GuideTutorial",
+ CellID->118568258],
+Cell[8308, 266, 126, 4, 70, "GuideText",
+ CellID->472978908],
+Cell[8437, 272, 150, 3, 70, "GuideTutorial",
+ CellID->262820545],
+Cell[8590, 277, 77, 2, 70, "GuideText",
+ CellID->107144900]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8704, 284, 69, 1, 70, "GuideRelatedLinksSection",
+ CellID->415694148],
+Cell[8776, 287, 187, 5, 70, "GuideRelatedLinks",
+ CellID->14392853]
+}, Open  ]],
+Cell[8978, 295, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

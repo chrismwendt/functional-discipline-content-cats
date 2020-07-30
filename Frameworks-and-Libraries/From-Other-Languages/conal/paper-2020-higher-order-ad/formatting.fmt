@@ -1,0 +1,114 @@
+% -*- latex -*-
+
+%% Misc lhs2TeX directives
+
+%% Add a thin space after lambda
+%format \ = "\lambda\, "
+
+%% hack: add missing space, e.g., before "{" in data type decl
+%format SP = "\,{}"
+%format SPC = "\:{}"
+%format SPACE = "\ {}"
+
+%% Use as missing argument in a section.
+%format NOP = " \!{}"
+
+%format :* = " \times "
+%format :+ = " + "
+
+%format *** = "\times"
+%format &&& = "\mathbin{\vartriangle}"
+%format +++ = "+"
+%% Because ||| between inline-code "|" delimiters confuses lhs2tex, use !!!
+%format !!! = "\mathbin{\triangledown}"
+
+%format == = =
+
+%format +=> = "\Rightarrow"
+
+%format ldots = "\ldots"
+%format cdots = "\cdots"
+
+\nc\inv[1]{#1^{\scriptscriptstyle -1}}
+
+%format (inv a) = "\inv{"a"}"
+%format (sub a (b)) = a "_{" b "}"
+
+%% Specific to this paper
+
+%% With the article (non-ACM) font, I sometimes need a small negative space
+%% before sub- or super-scripts.
+%if icfp
+%format QQ = "{}"
+%else
+%format QQ = "\!"
+%endif
+
+%% For parsing tricky infix operators
+%format infixrQ p (op) = infixr p op
+
+\nc\der{\mathcal{D}}
+
+%format :-* = "\multimap"
+%format der = "\der"
+%format ad = der QQ "^+\!"
+%format ad0 = der QQ"_{\scriptscriptstyle 0}\!\!^+\!"
+
+%format (hat(x)) = "\hat{"x"}"
+%format (twiddle(x)) = "\tilde{"x"}"
+
+%% Why doesn't the following definition work?
+%format adh = hat(der)
+
+\nc\subo[1]{#1_{\!o}}
+
+%format adh = "\hat{\der}"
+%format ado = "\der^\circ"
+%format ado = "\der_{\!o}"
+%format ado = "\subo{\der}"
+
+%format unadh = "\inv{"adh"}"
+%format unado = "\inv{"ado"}"
+
+%format derl = "\der_l"
+%format derr = "\der_r"
+
+%format Ds = D"^{\ast}"
+%format Ds' = D"_{\ast}"
+
+%format ders  = "\der^\ast"
+%format ders' = "\der_{\!\ast}"
+
+%% %format :=> = "\mapsto"
+%format :=> = =>
+
+%% \nc\scr[2]{_{\hspace{#1}\scaleto{#2\!}{4pt}}}
+%% % \nc\scr[1]{}
+
+%% %format Prod (k) a b = a "\times\scr{-0.4ex}{k}" b
+%% %format (Exp (k) a b) = a "\Rightarrow\scr{-0.2ex}{k}" b
+
+%format ProdOp k = "\mathbin{" :* "_{\!"k"}}"
+%format CoprodOp k = "\mathbin{" :+ "_{\!"k"}}"
+%format ExpOp  k = "\mathbin{" :=> "_{\!"k"}}"
+
+%format Prod   k (a) (b) = a "\mathbin{" :*  "_{\!"k"}}" b
+%format Coprod k (a) (b) = a "\mathbin{" :+  "_{\!"k"}}" b
+%format Exp    k (a) (b) = a "\mathbin{" :=> "_{\!"k"}}" b
+
+%% TODO: refactor, probably via LaTeX
+
+%format (nopar (x)) = x
+
+%% %format eval = apply
+
+%format R = "\mathbb{R}"
+
+%format :: = :
+
+%format forkF = fork"_{\!F}"
+
+%format unfork = "\inv{"fork"}"
+%format unjoin = "\inv{"join"}"
+
+%format *. = "\cdot"

@@ -1,0 +1,13 @@
+((exl . id *** apply . ((id *** const 1.0) . dup) . repr . exr . id) . dup) .
+(addC . dup ***
+ repr .
+ abst .
+ apply .
+ ((curry (abst . apply . (exl *** repr . exr) . dup) .
+   curry
+   (curry (apply . (exl . exl *** apply . (exr . exl *** exr) . dup) . dup)) .
+   repr . repr ***
+   abst . curry (dup . exr)) .
+  dup) .
+ abst . abst . curry (addC . exr)) .
+dup

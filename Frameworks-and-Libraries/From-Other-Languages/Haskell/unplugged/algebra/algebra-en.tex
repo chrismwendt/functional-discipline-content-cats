@@ -1,0 +1,2334 @@
+\ifx\wholebook\relax \else
+
+\documentclass{article}
+
+\usepackage[nomarginpar
+  %, margin=.5in
+]{geometry}
+
+\addtolength{\oddsidemargin}{-0.05in}
+\addtolength{\evensidemargin}{-0.05in}
+\addtolength{\textwidth}{0.1in}
+
+\usepackage[en]{../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{Abstract Algebra}
+
+\author{Liu Xinyu
+\thanks{{\bfseries Liu Xinyu} \newline
+  Email: liuxinyu95@gmail.com \newline}}
+
+\maketitle
+\fi
+
+\markboth{Abstract Algebra}{Mathematics of Programming}
+
+\ifx\wholebook\relax
+\chapter{Abstract Algebra}
+\numberwithin{Exercise}{chapter}
+\fi
+
+\epigraph{One must be able to say at all times--instead of points, straight lines, and planes--tables, chairs, and beer mugs}{——David Hilbert}
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.35]{img/Escher-Liberation-1955.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Escher, Liberation, 1955}
+ \label{fig:Escher-liberation}
+\end{wrapfigure}
+
+Humans gradually developed the habit to sort things. We classify similar things together. The methods and properties those apply to the entire class are also valid for every thing in it. In this way, we needn't repeately solve the concrete individual problems one by one, but solve the abstract problem as a whole. It greatly improved our ability to understand the world.
+
+In previous chapters, we generalized the abstract `folding' operation from sum and factorial for numbers. We observed their similar structures, abstracted zero in sum, and one in factorial to unit element; then abstracted add and multiplication to binary operation. As the result, we developed the fold operation for numbers in a higher level. With this powerful tool, we then further solved a large sort of problems that are isomorphic to natural number, such as the Fibonacci numbers.
+
+For another example, we defined the abstract $foldr$ operation for list in chapter 1. With this tool, we can sum a list of numbers as $sum = foldr(0, +)$; we can also multiply them as $product = foldr(1, \times)$. In computer programming, there is a data structure called `binary search tree'. We introduced about it in chapter 2. Binary search tree is a special binary tree. Its elements are comparable\footnote{The meaning of comparable is abstract. If the elements are numbers, we can compare which one is bigger, if they are words, we can compare their lexicographical order.}. For any branch node, all elements in its left sub-trees are ahead of the element in this node; while all elements in its right sub-trees are behind it. Due to this kind of ordering, we also call it `sorted binary tree'. We can define insert operation for binary search tree as below:
+
+\[
+\begin{array}{rcl}
+  insert(nil, x) & = & node(nil, x, nil) \\
+  insert(node(l, y, r), x) & = & \left.
+  \begin{cases}
+  x < y\ : & node(insert(l, x), y, r) \\
+  x > y\ : & node(l, y, insert(r, x))
+  \end{cases} \right.
+\end{array}
+\label{eq:BST-insert}
+\]
+
+According to this definition, when insert element $x$ to binary search tree, if the tree is empty, the result is $node(nil, x, nil)$; otherwise, we compare $x$ with the element $y$ in the branch node. If $x$ is ahead of $y$ (the `$<$' holds), then we recursively insert it to the left sub-tree, else insert to the right sub-tree. Is there any similarity among the insertion, sum, and factorial? Insertion is also a binary operation, $nil$ can be considered as the unit element. Then we can apply the abstract fold operation to turn a list of elements into a binary search tree:
+
+\[
+build = foldr(nil, insert)
+\]
+
+Figure \ref{fig:bst-example} shows the binary search tree generated when compute $build\ [4, 3, 1, 8, 2, 16, 10, 7, 14, 9]$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.5]{img/bst-example.ps}
+  \caption{The binary search tree generated from folding.}
+  \label{fig:bst-example}
+\end{figure}
+
+We have similar experience when developing the concept of add. The addition operation was applied to specific things at first, like the fruits being collected, the prey being hunted. People later abstracted the addition for numbers and removed the specific meanings for things. Then we extended our understanding about numbers from integers to fractions, although the detailed addition process is quite different. We need firstly unify the denominators, then add the nominators together, and finally reduce the fraction. People generalized the two different processes to the unified addition for rational numbers. We learned to think about the essence and principles of addition. Every time when people extended the concept of numbers, there was a new definition for addition. Along this way, we defined the addition for real numbers and complex numbers. We found the method established for abstract things without specific meanings had a greater scope of application. Abstract method can solve a whole kind of problems rather than the individual ones. Similar things happened in computer engineering. People developed the object-oriented method, generic type system, and dynamic type system. All these are sorts of mechanisms to support abstraction.
+
+We should always ask an important question when developing abstract tools or generic methods. `What is the applicable scope for this abstraction? When will the abstraction be invalid?' It could lead to ridiculous result if ignore this. One example is about the sum of the infinite geometric series $1 + x + x^2 + x^3 + ... = 1/(1-x)$. It is so powerful that people can solved the Zeno's paradox\footnote{Here it is the Achilles and turtle paradox, which is one of the four famous paradoxes by Zeno, the ancient Greek philosopher. Achilles was a hero in ancient Greek. Zeno supposed Achilles wanted to catch up with the turtle ahead. When he ran to the position where the tortoise left, the tortoise had moved a short distance forward. Achilles must continue to run to that new position, but the turtle moved forward again. Repeated this process, Zeno argued that Achilles would never catch up the turtle. We'll explain Zeno's paradox in detail in Chapter 5.} with it. The mathematicians in the 17 Century substituted $x$ with -1, then got a result of $1 - 1 + 1 - 1 + ... = 1/2$. While, someone had a different idea that, $S = (1 - 1) + (1 - 1)+ ... = 0$. And there was another different one: $S = 1 + (-1 + 1) + (-1 + 1) + ... = 1$. There were people supported the result should be 1/2, because $S = 1 - (1 - 1 + 1 - 1 + ...) = 1 -S$, solving this equation gave $S = 1/2$. The Italian mathematician Grandi (1671 - 1742) found more surprising results. By using the infinite series:
+
+\[
+\def\arraystretch{2.2}
+\begin{array}{l}
+\dfrac{1}{1 + x + x^2} = 1 - x + x^3 - x^4 + x^6 - x^7 + ... \\%[5pt]
+\dfrac{1}{1 + x + x^2 + x^3} = 1 - x + x^4 - x^5 + x^8 - x^9 + ... \\
+...
+\end{array}
+\]
+
+Let $x = 1$, Grandi found the sum of the infinite series $1 - 1 + 1 - 1 + 1 - 1 + ...$ could be 1/3, 1/4, ... Even the great mathematician Leibniz thought the result could be 0 or 1 with the same probability, therefore the `true' value should be the average 1/2. Grandi offered a new explanation in 1710: Two brothers inherited a priceless gem from their father, who forbade them to sell it, so they agreed that it would reside in each other's museums on alternating years. If this agreement last for all eternity between the brother's descendants, then the two families would each have half possession of the gem, even though it changed hands infinitely often\cite{HanXueTao16}. People kept suffering from these strange puzzles until the French mathematician Cauchy introduced the convergence concept for infinite series.
+
+There are similar things in programming. When I implemented the natural merge sort algorithm \footnote{Natural merge sort is a sorting algorithm that permutes a list of elements in order. It firstly divides the elements into multiple groups, that every group contains the elements sorted. Then repeatedly merge these groups till all elements are ordered(\cite{LiuXinyu2017}, pp368).}, I need split the list into ordered groups, for example, split the list \texttt{[15, 9, 0, 12, 11, 7, 10, 5, 6, 13, 1, 4, 8, 3, 14, 2]} into groups of \texttt{[[15, 9, 0], [12, 11, 7], [10, 5], [6], [13, 1], [4], [8, 3], [14, 2]]}. The elements in the grouped sub-list are in descending order such as $15 > 9 > 0$. Then we can merge every two groups to get
+
+\begin{verbatim}
+[[15, 12, 11, 9, 7, 0], [10, 6, 5], [13, 4, 1], [14, 8, 3, 2]]
+\end{verbatim}
+
+Applying merge to every two groups again gives the next result:
+
+\begin{verbatim}
+[[15, 12, 11, 10, 9, 7, 6, 5, 0], [14, 13, 8, 4, 3, 2, 1]]
+\end{verbatim}
+
+Finally, merge the two groups to get the sorted list:
+
+\begin{verbatim}
+[15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 10]
+\end{verbatim}
+
+I found there was a pre-defined abstract grouping function \texttt{groupBy} in the library. It groups list with a given condition. For example \texttt{groupBy (==) "Mississippi"} gives result \texttt{["M", "i", "ss", "i", "ss", "i", "pp", "i"]}. Hence the same elements are grouped together. However, when I passed the `greater or equal' as the group condition, it generated the unexpected result. \texttt{groupBy (>=) [15, 9, 0, 12, 11, 7, 10, 5, 6, 13, 1, 4, 8, 3, 14, 2]} gives \texttt{[[15, 9, 0, 12, 11, 7, 10, 5, 6, 13, 1, 4, 8, 3, 14, 2]]}. This is because \texttt{groupBy} is realized with \texttt{span} like below:
+
+\lstset{language=Haskell, frame=single}
+\begin{lstlisting}
+groupBy _  []      = []
+groupBy eq (x:xs)  = (x:ys) : groupBy eq zs
+    where (ys, zs) = span (eq x) xs
+
+span _ []        = ([], [])
+span p xs@(x:xs')
+     | p x       = let (ys, zs) = span p xs' in (x:ys, zs)
+     | otherwise = ([], xs)
+\end{lstlisting}
+
+For my example, \texttt{span} keeps checking if 15 is greater than the next element. As 15 is the biggest one in the list, therefore all the elements are grouped together. In fact, \texttt{groupBy} assumes the passed in group condition is the abstract `equality' condition, it must satisfy three properties: reflexivity, symmetry, and transitivity:
+
+\begin{itemize}
+\item reflexivity. $x = x$, any element equals to itself;
+\item symmetry. if $x = y$, then $y = x$.
+\item transitivity. if $x = y$, and $y = z$, then $x = z$. If two elements are identical, and one element equals to another, then the three elements are equal.
+\end{itemize}
+
+When use equality as condition to group the character list ``Mississippi'', all the three properties are satisfied. It generates the correct result. However, when pass the greater or equal ($\geq$) as the abstract `equality' condition, it violates reflexivity and symmetry. That's the reason why it led to incorrect result.
+
+This chapter introduces the basic abstract algebra structures. They are not only abstraction to numbers, but also the abstraction to concepts, properties, and relationships. They are the most valuable things from many great thoughts and minds. Some contents challenge our limit of abstract thinking. It's quite common that you can't grasp them during the first time reading. I intended to add many stories about those great mathematicians, how they made breakthrough with unbelievable difficulties. I hope these interesting stories could encourage you keep going forward.
+
+\section{Group}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/Cardano.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Gerolamo Cardano, 1501-1576}
+ \label{fig:Cardano}
+%\end{wrapfigure}
+\end{figure}
+
+\index{Gerolamo Cardano}
+\index{Carl Friedrich Gauss}
+\index{Fundamental theorem of algebra}
+
+The group theory is originate from the history of equations. Equation is a powerful tool developed by ancient people. From the Rhind Mathematical Papyrus and Babylonian clay tablets, we know that the ancient Egyptians and ancient Babylonians mastered the method to solve the linear equation with one unknown and the quadratic equations. However, people didn't find the way to solve the generic cubic equations until the 16th Century. Several Italian mathematicians made great progress in solving cubic equations. Gerolamo Cardano finally published the radical solutions to generic cubic equation and quartic in his 1545 book {\em Ars Magna}. It was not only about to pursue higher and higher orders, but along with the totally new understanding about the numbers in the past thousand years. All the negative roots were discarded because people in that time believed they were meaningless. People also thought the coefficients must be positive numbers. The equation $x^2 - 7x + 8 = 0$ is quite common today to us, but it had to be written in form of $x^2 + 8 = 7x$ to ensure the coefficients are positive. After Cardano list 20 different types of quartic equation in {\em Ars Magna}, he said there were another 67 types of quartic equation could not be given because the coefficient is either negative or zero\cite{HanXueTao2012}. It was the French mathematician François Viète who unified different forms of equations. Although most people thought the negative square root made no sense, Cardano found an interesting thing when solve the cubic equations like $x^3 = 15x +4$. His formula gives the intermediate result of $\sqrt[3]{2 + \sqrt{-121}} + \sqrt[3]{2 - \sqrt{-121}}$. Then it could next generate the three rational roots of 4, $-2 \pm \sqrt{3}$. Such problems expand our view to the irrational number, and finally, the great German mathematician Carl Friedrich Gauss developed the fundamental theorem of algebra\footnote{Gauss proved the fundamental theorem of algebra several times along his life. in 1799 at age of 22, he proved in his doctor thesis that every single-variable polynomial of degree $n$ with real coefficient has at least one complex root, thus deduced the single-variable equation of degree $n$ has and only has $n$ complex roots (counted with multiplicity for the same ones). Gauss gave another two different proofs in 1815 and 1816. In 1849, to celebrate the 50th anniversaries that Gauss received his doctor degree, he published the fourth proof and extend the coefficient to complex number.}.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.25]{img/Gaus.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Gauss (1777-1855) in 10 Mark}
+ \label{fig:Gauss}
+%\end{wrapfigure}
+\end{figure}
+
+People encountered surprisingly difficulty when seek for radical solutions for generic quintic and higher order equations in the next 300 years. The breakthrough happened in the 19th Century with unexpected result. The French young Genius Évariste Galois developed an innovative idea, he was able to determine a necessary and sufficient condition for a polynomial to be savable by radicals while still in his teens\footnote{Around 1770, Joseph Louis Lagrange began the groundwork that unified the method to solve equations, he introduced the new idea to permute roots in the form of Lagrange resolvents. But he didn't consider the combination among the permutations. In 1799 The Italian mathematician Paolo Ruffini marked a major improvement, developing Lagrange's work on permutation theory. However, in general, Ruffini's proof was not considered convincing, and was discovered later incomplete. In 1824, the young Norwegian mathematician Niels Henrik Abel first completed proof demonstrating the impossibility of solving the general quintic equation in radicals. It is called `Abel–Ruffini theorem' nowadays. We know that there are radical solutions to the special quintic equation $x^5-1=0$. In what condition a polynomial is solvable in radicals? This problem was completely solved by Galois\cite{Wiki-Galois-theory}.}.
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/galois.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Galois, 1811 - 1832}
+ \label{fig:Galois}
+\end{wrapfigure}
+%\end{figure}
+
+\index{Galois}
+It was a tragedy in Galois' short 20 years life, but his work laid the foundations of abstract algebra. Galois was born on October 25th, 1811 in Paris. His mother, the daughter of a jurist, was a fluent reader of Latin and classical literature and was responsible for her son's education for his first twelve years. In 1823, he entered a prestigious school in Paris. At the age of 14, he began to take a serious interest in mathematics. He found a copy of {\em Elements} adapted by Legendre which, it is said, he read "like a novel" and mastered at the first reading. At 15, he was reading the original papers of Joseph-Louis Lagrange, which likely motivated his later work on equation theory, yet his classwork remained uninspired, and his teachers accused him of affecting ambition and originality in a negative way.
+
+In 1828, he attempted the entrance examination for the École Polytechnique, the most prestigious institution for mathematics in France at the time, without the usual preparation in mathematics, and failed for lack of explanations on the oral examination. In that same year, he entered the École Normale, a far inferior institution for mathematical studies at that time, where he found some professors sympathetic to him.
+
+In 1829 April, Galois' first paper, on continued fractions, was published. It was around the same time that he began making fundamental discoveries in the theory of polynomial equations. He submitted two papers on this topic to the Academy of Sciences. But both were rejected due to some reasons\footnote{There was saying that the paper was lost by Cauchy. Actually, Cauchy refereed these papers, but refused to accept them for publication for reasons that still remain unclear. However, in spite of many claims to the contrary, it is widely held that Cauchy recognized the importance of Galois' work, and that he merely suggested combining the two papers into one in order to enter it in the competition for the Academy's Grand Prize in Mathematics. Cauchy, an eminent mathematician of the time, though with political views that were at the opposite end from Galois', considered Galois' work to be a likely winner\cite{Wiki-Galois}.}
+
+On July 28, 1829, Galois' father, a mayor of the village, committed suicide after a bitter political dispute with the village priest\cite{Wiki-Galois}. On August 3, Galois made his second and last attempt to enter the Polytechnique, and failed yet again. It is undisputed that Galois was more than qualified; however, accounts differ on why he failed. More plausible accounts state that Galois made too many logical leaps and baffled the incompetent examiner, which enraged Galois. Having been denied admission to the Polytechnique, Galois took the Baccalaureate examinations in order to enter the École Normale. He passed. His examiner in mathematics reported, ``This pupil is sometimes obscure in expressing his ideas, but he is intelligent and shows a remarkable spirit of research.''
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.4]{img/lltp.jpg}
+ \captionsetup{labelformat=empty}
+ \caption{Eugène Delacroix, Liberty Leading the People, 1830, Louvre, Paris}
+ \label{fig:Liberty-Leading-the-People}
+%\end{wrapfigure}
+\end{figure}
+
+In February 1830, following Cauchy's suggestion Galois submitted his memoir on equation theory to the Academy's secretary Joseph Fourier, to be considered for the Grand Prix of the Academy. Unfortunately, Fourier died soon after, and the memoir was lost. The prize was awarded that year in June to Niels Henrik Abel\footnote{The young Norwegian mathematician Abel died on April 6, 1829. He made pioneering contributions in a variety of fields. His most famous single result is the first complete proof demonstrating the impossibility of solving the general quintic equation in radicals. He was also an innovator in the field of elliptic functions, discoverer of Abelian functions. He made his discoveries while living in poverty and died at the age of 26 from tuberculosis.} posthumously and also to Carl Gustav Jacob Jacobi\cite{HanXueTao2009}.
+
+Galois lived during a time of political turmoil in France. The July Revolution broke out in France in 1830\footnote{The Bourbon monarch was restored after Napoleon's defect in Waterloo. King Charles X cleaned the soldiers who had worked for Napoleon in the army and caused dissatisfaction among the people. Continues with a series of failures in politics, economy, culture, religion, and diplomacy, Charles X signed the July Ordinances on July 25, 1830. These, among other steps, suspended the liberty of the press, dissolved the newly elected Chamber of Deputies, and excluded the commercial middle-class from future elections. It triggered the armed uprising of people, overthrew the Bourbon monarch through revolution. It ended with Louis-Philippe becoming king. Known as the July Monarchy.}. While their counterparts at the Polytechnique were making history in the streets, Galois and all the other students at the École Normale were locked in by the school's director. Galois was incensed and wrote a blistering letter criticizing the director, which he submitted to the Gazette des Écoles, signing the letter with his full name. Although the Gazette's editor omitted the signature for publication, Galois was expelled.
+
+Galois quit school and joined the staunchly Republican artillery unit of the National Guard. He divided his time between his mathematical work and his political affiliations. Due to controversy surrounding the unit, soon after Galois became a member, on December 31, 1830, the artillery of the National Guard was disbanded out of fear that they might destabilize the government. He was arrested the on May 10, 1831, but was acquitted on June 15. On the Bastille Day (July 14), Galois was at the head of a protest, wearing the uniform of the disbanded artillery, and came heavily armed with several pistols, a rifle, and a dagger. He was again arrested. On October 23, he was sentenced to six months in prison for illegally wearing a uniform. Early in 1831, Siméon Poisson asked him to submit his work on the theory of equations, which he did on January 17, 1831. Around July 4, 1831, Poisson declared Galois' work ``incomprehensible'', declaring that ``The argument is neither sufficiently clear nor sufficiently developed to allow us to judge its rigor\footnote{However, the rejection report ends on an encouraging note: ``We would then suggest that the author should publish the whole of his work in order to form a definitive opinion.''\cite{Wiki-Galois}}''. While Poisson's report was made before Galois' July 14 arrest, it took until October to reach Galois in prison. It is unsurprising, in the light of his character and situation at the time, that Galois reacted violently to the rejection letter, and decided to abandon publishing his papers through the Academy and instead publish them privately through his friend Auguste Chevalier. Apparently, however, Galois did not ignore Poisson's advice, as he began collecting all his mathematical manuscripts while still in prison, and continued polishing his ideas until his release on April 29, 1832.
+
+Shortly after released from prison, Galois was involved in a obscure duel because of love. On May 29, Galois was so convinced of his impending death that he stayed up all night writing letters to his friends and composing what would become his mathematical testament, the famous letter to Auguste Chevalier outlining his ideas, and three attached manuscripts.German mathematician Hermann Weyl said of this testament, ``This letter, if judged by the novelty and profundity of ideas it contains, is perhaps the most substantial piece of writing in the whole literature of mankind.'' In these final papers, he outlined the rough edges of some work he had been doing in analysis and annotated a copy of the manuscript submitted to the Academy and other papers.
+
+When read Galois' 7 pages testament, there are some words really sad: ``these subjects are not the only ones that I have explored... But I don't have time, and my ideas are not yet well developed in this area, which is immense...it would not be too much in my interest to make mistakes so that one suspects me of having announced theorems of which I would not have a complete proof.'' The most impressed and saddest words are: ``I don't have time'' At the end of the letter, he asked his friend to ``Ask Jacobi or Gauss publicly to give their opinion, not as to the truth, but as to the importance of these theorems. Later there will be, I hope, some people who will find it to their advantage to decipher all this mess.''\cite{Galois-1832}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/GalSign.eps}
+ \captionsetup{labelformat=empty}
+ \caption{``E. Galois, le 29 mai 1832'' at the bottom of the last page in his testament.}
+ \label{fig:GalSign}
+%\end{wrapfigure}
+\end{figure}
+
+Early in the morning of May 30, 1832, Galois was injured badly in the duel. He was shot in the abdomen. A passing farmer found him, and sent Galois to the hospital. He died the following morning at ten o'clock, after refusing the offices of a priest. His younger brother was notified, and came to the hospital. His last words to his brother Alfred were: ``Don't cry, Alfred! I need all my courage to die at twenty!'' We don't know the exact reason behind the duel, whether it was a love tragedy or a political murder. Whatever the reason, a great talent mathematician was killed at the age of 20. He had only been studied mathematics for 5 years. Within the only 67 pages of Galois' collected works are many important ideas that have had far-reaching consequences for nearly all branches of mathematics.
+
+Chevalier and Galois' young brother published the testament in {\em Revue encyclopedique}, but it was not noticed. It might be too brief and hard, there was almost no any impact to the mathematics in that years\footnote{The similar lessons happened to Abel as well. When he spent his own money to publish the paper about why quintic equation couldn't be solved by radicals in 1824, to save money, he tried all means to consolidate the paper in 6 pages. As the result, it's too brief and obscure for people to notice and understand it till Abel's death.}. Decades passed, in 1843 Liouville reviewed Galois manuscript and declared it sound. It was finally published in the October–November 1846 issue of the {\em Journal de Mathématiques Pures et Appliquées}. The most famous contribution of this manuscript was a novel proof that there is no quintic formula – that is, that fifth and higher degree equations are not generally solvable by radicals. Although Abel had already proved the impossibility of a "quintic formula" by radicals in 1824, Galois' methods led to deeper research in what is now called Galois theory. For example, one can use it to determine, for any polynomial equation, whether it has a solution by radicals. Liouville thought about this tragedy and commented in the introduction to Galois' paper: ``Perhaps, his exaggerated desire for conciseness was the cause of this defect, and is something which one must endeavor to refrain from when dealing with the abstract and mysterious matters of pure Algebra. Clarity is, indeed, all the more necessary when one has intention of leading the reader away from the beaten roads into the desert... But at present all that has changed. Alas, Galois is no more! Let us cease carrying on with useless criticisms; let us leave its defects, and instead see its qualities... My zeal was soon rewarded. I experienced great pleasure the moment when, after having filled in the minor gaps, I recognized both the scope and precision of the method that Galois proved.''\cite{Liouville-1846}
+
+In 1870, French mathematician Camille Jordan wrote the book {\em Traité des substitutions et des équations algébriques} based on Galois' theory\footnote{Galois' theory was notoriously difficult for his contemporaries to understand, especially to the level where they could expand on it. For example, in his 1846 commentary, Liouville completely missed the group-theoretic core of Galois' method. Joseph Alfred Serret who attended some of Liouville's talks, included Galois' theory in his 1866 textbook (third edition) Cours d'algèbre supérieure. Jordan was Serret's pupil. Outside France, Galois' theory remained more obscure for a longer period. It turned a century in Britain. In Germany, it was Dedekind lectured on Galois' theory at Göttingen in 1858, showing a very good understanding.}. Galois' most significant contribution to mathematics is his development of Galois theory. He realized that the algebraic solution to a polynomial equation is related to the structure of a group of permutations associated with the roots of the polynomial, the Galois group of the polynomial. It laid the foundation of group theory and lead to the development of abstract algebra and modern mathematics. As the ironic result ``Instead of the political revolution, what Galois actually triggered was the mathematics revolution\cite{StepanovRose15}.''
+
+\subsection{Group}
+\index{Group}
+
+Let us start the journey from groups to understand what Galois landed for abstract algebra.
+
+\begin{definition} A group is a set $G$ equipped with a binary operation ``$\cdot$'', which satisfied four axioms:
+
+\begin{enumerate}
+\item \textbf{Closure}: For all $a, b \in G$, the result of the operation $a \cdot b \in G$;
+\item \textbf{Associativity}: For all $a, b, c$ in $G$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$;
+\item \textbf{Identity element}: There exists an element $e$ in $G$ such that, for every element $a$ in G, the equation $a \cdot e = e \cdot a = a$ holds;
+\item \textbf{Inverse element}: For each element $a \in G$, there exists an element $a^{-1}$, such that $a \cdot a^{-1} = a^{-1} \cdot a = e$, where $e$ is the identity element.
+\end{enumerate}
+\end{definition}
+
+The binary operation is often called ``multiplication'', and the ``product'' $a \cdot b$ is usually written as $ab$. $e$ is the identity element. The elements in a group can be finite or infinite many, thus the group is called finite group or infinite group. the \textbf{order} of a finite group is the number of the elements in the group. A group contains infinite many elements is said to have infinite order.
+
+The ``multiplication'' operation of the group may not be commutative like the normal multiplication for numbers. For example, all the invertible matrix with real entities, together with the matrix multiplication form a group. However, the matrix multiplication order matters, it is not commutative. Groups for which the community equation $ab = ba$ always holds are called \textbf{abelian} groups (in honor of Abel).
+
+To help understanding the definition of group, let us see some examples.
+
+\begin{enumerate}
+\item Integers with addition. Elements are all integers, the binary operation is addition. This is one of the most familiar groups;
+
+\item The set of remainders of all integers divided by 5, that is $\{0, 1, 2, 3, 4\}$. The binary operation is addition then divided by 5, and take the remainder. For example $3 + 4 = 7 \bmod 5 = 2$. They form a group called addition group of integers modulo 5. Denoted as $Z_5$. We can consider it as partition the integers by taking the remainder. It is called \textbf{residue class} or residue modulo $n$;
+
+\item The rotations of Rubik cube form a group. The elements are all cube rotations\footnote{There are 18 Rubik cube rotations. A cube move rotates one of the 6 faces, front, back, top, bottom, left, right, 90\degree, 180\degree, or -90\degree. For example, rotating the left side 90\degree, 180\degree, -90\degree can be denoted as $L$、$L^2$、$L'$\cite{Wiki-Rubik-Cube-group}. Plus the identity transform, there are total 19 elements.}, the binary operation is the composition of cube rotates, corresponding to the result of performing one cube rotate after another.
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=0.8]{img/Rubik_cube_notation.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{There are total 18 Rubik cube rotates for the 6 faces, plus the identity transformation. These moves together with the composition operation form a group.}
+ \label{fig:Rubik-cube-notation}
+%\end{wrapfigure}
+\end{figure}
+
+\item For a plane, all the rotations around a fixed point form a group. The group elements are all the degrees for rotation. The group binary operation is the composition, corresponding to the result of rotating a degree after another degree.
+\end{enumerate}
+
+While the following examples are not groups:
+
+\begin{enumerate}
+\item All the integers except 0, together with multiplication do not form a group. We can't use 1 as the identity element, otherwise there will be no inverse element for 3 for example (1/3 is not integer);
+
+\item For the same reason, remainders of modulo 5 $\{0, 1, 2, 3, 4\}$, together with multiplication modulo 5 do not form a group. However, when exclude all multiples of 5, then the set $\{1, 2, 3, 4\}$ and multiplication modulo 5 form a group. We can see this fact from the following ``multiplication table'' modulo 5:
+
+\vspace{5mm}
+  \begin{tabular}{c|cccc}
+    & 1 & 2 & 3 & 4 \\
+  \hline
+  1 & \textbf{1} & 2 & 3 & 4 \\
+  2 & 2 & 4 & \textbf{1} & 3 \\
+  3 & 3 & \textbf{1} & 4 & 2 \\
+  4 & 4 & 3 & 2 & \textbf{1}
+  \end{tabular}
+\vspace{5mm}
+
+Therefore, 1 is the identity element, it is also the inverse element of itself; 2 and 3 are inverse elements for each other; the inverse element for 4 is 4 again;
+
+\item Although all the none zero remainders modulo 5 form a group under modulo multiplication, the none zero remainders modulo 4 do not form a group. Observe the multiplication table modulo 4:
+
+\vspace{5mm}
+  \begin{tabular}{c|cccc}
+    & 1 & 2 & 3 \\
+  \hline
+  1 & 1 & 2 & 3 \\
+  2 & 2 & \textbf{0} & 2 \\
+  3 & 3 & 2 & 1 \\
+  \end{tabular}
+\vspace{5mm}
+
+Note that $(2 \times 2) \bmod 4 = 0$, which is not in set $\{1, 2, 3\}$. This negative example shows that, only the remainders that are coprime to $n$ form a group under the multiplication modulo $n$. This kind of groups are called multiplicative group of integers modulo $n$. For any prime number $p$, $\{1, 2, ..., p-1\}$ forms multiplicative group modulo $p$.
+
+\item All the rational numbers together with multiplication do not form a group. Although all rational number with form $p/q$ has a inverse element $q/p$, but there is no inverse element for 0. All the rational number exclude 0 form a group under multiplication.
+\end{enumerate}
+
+\begin{Exercise}
+\Question{Do all the even numbers form a group under addition?}
+\Question{Can we find a subset of integers, that can form a group under multiplication?}
+\Question{Do all the positive real numbers form a group under multiplication?}
+\Question{Do integers form a group under subtraction?}
+\Question{Find an example of group with only two elements.}
+\Question{What is the identity element for Rubik cube group? What is the inverse element for $F$?}
+\end{Exercise}
+
+\subsection{Monoid and semi-group}
+
+The criteria to be a group is a bit strict. From the negative examples in previous section, we see some common algebraic structures can't satisfy all the group axioms. Sometimes we needn't inverse element. If relax the limitation, we can get the \textbf{monoid} structure.
+
+\index{monoid}
+\begin{definition}
+A \textbf{monoid} is a set $S$ together with a binary operation $\cdot$, which satisfies two axioms:
+\begin{enumerate}
+\item \textbf{Associativity}: For any three elements in $S$, the equation $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ holds.
+\item \textbf{Identity element}: There exists an element $e$ in $S$, such that for every element $a$ in $S$, the equation $a \cdot e = e \cdot a = e$ holds.
+\end{enumerate}
+\end{definition}
+
+The monoid definition is quite similar to group except there is no axiom about inverse element. There are many negative examples for group are monoids. For example, integers under multiplication form a monoid. The identity element is 1. Monoid often appears in computer programming. We'll revisit this important algebraic structure in next chapter about category theory. Here are some more examples about monoid:
+
+\begin{enumerate}
+\item Given a character set, all finite strings with the concatenation operation form a monoid. The elements are strings; the binary operation is string concatenation; the identity element is the empty string.
+\item Expand from string to list of type $A$ (List A). All lists form a monoid under the concatenation operation. The monoid elements are lists; the binary operation is the list concatenation (denoted as $\doubleplus$); the identity element is the empty list nil.
+
+By using monoid as the algebraic structure, we can abstract both string and list as the below example program.
+
+\begin{lstlisting}
+instance Monoid (List A) where
+    e = nil
+    (*) = (++)
+\end{lstlisting}
+
+The folding operation to string and list, can be abstracted to the level of monoid as well\footnote{We'll introduce how to realize the abstract folding in next chapter about category theory}. The below concatenate operation for example, is defined to any monoid:
+
+\[
+concat = foldr\ e\ (*)
+\]
+
+We can concatenate list with this $concat$ operation like this:
+
+$concat\ [[1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3], [1, 3, 2]]$ gives result: [1, 2, 3, 1, 2, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2].
+
+\index{heap}
+\index{skew heap}
+\item Heap is a common data structure in programming. If the top element in the heap is always the minimum one, it's call the min-heap; If the top element is always the maximum one, it's called max-heap. Skew heap is a type of heap that can be realized in binary tree (\cite{LiuXinyu2017}, section 7.3).
+
+\begin{lstlisting}
+data SHeap A = nil | node (SHeap A, A, SHeap A)
+\end{lstlisting}
+
+The definition is as same as binary tree except for its name. The minimum element can be located at the root for the none empty heap. We define the merge operation for two heaps as below:
+
+\[
+\begin{array}{rcl}
+merge(nil, h) & = & h \\
+merge(h, nil) & = & h \\
+merge(h_1, h_2) & = &
+  \begin{cases}
+  k_1 < k_2 : & node(merge(r_1, h_2), k_1, l_1) \\
+  \text{otherwise}: & node(merge(h_1, r_2), k_2, l_2)
+  \end{cases}
+\end{array}
+\]
+
+When merge two heaps, if one is empty, the result is the other one; if neither one is empty, we denote $h_1, h_2$ as $node(l_1, k_1, r_1)$ and $node(l_2, k_2, r_2)$ respectively. To merge them, we firstly compare their root, select the smaller one as the new root; then merge the other heap with the bigger element to one of its sub-trees. Finally, we exchange the left and right sub-trees. For example, if $k_1 < k_2$, we select $k_1$ as the new root. Then we can either merge $h_2$ to $l_1$, or merge $h_2$ to $r_1$. Without loss of generality, we merge to $r_1$. Then, we exchange the left and right sub-trees to get the final result $(k_1, merge(r_1, h_2), l_1)$. Note the binary merge operation is recursive. The set of all the skew heaps, together with the binary merge operation form a monoid. The identity element is the empty heap nil.
+
+\index{pairing heap}
+\item Heap can also be realized in multi-trees as explained in previous chapter, for example pairing heap is defined as the following (\cite{LiuXinyu2017} section 9.4):
+
+\begin{lstlisting}
+data PHeap A = nil | node (A, List (PHeap A))
+\end{lstlisting}
+
+The definition is as same as multi-tree except for its name. It is a recursive definition. A pairing heap is either empty; or a multi-tree with a root and a list of sub-trees. The minimum element is located at the root for a none empty heap. We define the merge operation for pairing heap as below:
+
+\[
+\begin{array}{rcl}
+merge(nil, h) & = & h \\
+merge(h, nil) & = & h \\
+merge(h_1, h_2) & = &
+  \begin{cases}
+  k_1 < k_2 : & node(k_1, h_2 : ts_1)) \\
+  \text{otherwise} : & node(k_2, h_1 : ts_2)) \\
+  \end{cases}
+\end{array}
+\]
+
+If either heap is empty, then the merge result is the other heap. Otherwise if neither heap is empty, we represent the two heaps $h_1$, $h_2$ as $node(k_1, ts_1)$ and $node(k_2, ts_2)$ respectively. We compare the root elements, let the bigger one be another new sub-tree of the other. The set of all the pairing heaps form a monoid under the merge operation. The identity element is the empty heap nil.
+
+\end{enumerate}
+
+\index{semigroup}
+
+If relax the limitation one more step, to remove the requirement of identity element, then we get another algebraic structure, semigroup.
+
+\begin{definition}
+
+A semigroup is a set together with the associative binary operation.
+\end{definition}
+
+The binary operation for semigroup is associative. It means for any three elements $a$, $b$, and $c$ the equation $(ab)c = a(bc)$ holds. The constraints for semigroup is relaxed one more step from monoid. Here are some semigroup examples:
+
+\begin{enumerate}
+\item All the positive integers form a semigroup under addition, as well as under multiplication;
+\item All the even numbers together with addition form a semigroup, so as under multiplication.
+\end{enumerate}
+
+As we mentioned before, people often call the binary operation for group, monoid, and semigroup as `multiplication', therefore we use the term `power' to represent applying the binary operation multiple times, for example: $x \cdot x \cdot x = x^3$. Generally, the `power' of group and monoid is defined as below recursively:
+
+\[
+x^n = \left .
+  \begin{cases}
+  n = 0 : & e \\
+  \text{otherwise}: & x \cdot x^{n-1}
+  \end{cases}
+\right .
+\]
+
+For semigroup, since the identity element is not defined, $n$ must be none zero positive integer:
+
+\[
+x^n = \left .
+  \begin{cases}
+  n = 1 : & x \\
+  \text{otherwise}: & x \cdot x^{n-1}
+  \end{cases}
+\right .
+\]
+
+\begin{Exercise}
+\Question{The set of Boolean values \{True, False\} forms a monoid under the logic or operator $\lor$. It is called `Any' logic monoid. What is the identity element for this monoid?}
+\Question{The set of Boolean values \{True, False\} forms a monoid under the logic and operator $\land$. It is called `All' logic monoid. What is the identity element for this monoid?}
+\Question{For the comparable type, when compare two elements, there can be three different results. We abstract them as $\{<, =, >\}$\footnote{Some programming languages, such as C, C++, Java use negative number, zero, and positive number to represent these three results. In Haskell, they are GT, EQ, and LE respectively.}. For this set, we can define a binary operation to make it a monoid. What is the identity element for this monoid?}
+\Question{Prove that the power operation for group, monoid, and semigroup is commutative: $x^mx^n = x^nx^m$}
+\end{Exercise}
+
+\subsection{Properties of group}
+
+One powerful idea in abstract algebra is that, we can focus on the inner pattern of the abstract structures and their relations without caring about the concrete object and its meaning. The pattern and the revealed insight are applicable to all objects by the nature of abstraction. When know the generic group properties, if the elements represent points, lines, and surfaces, then we obtain the properties of geometry; if the elements represent Rubik cube rotations, then we obtain the properties of Rubik cube transformation; if the elements represent some data structure in programming, we obtain the properties of the algorithm on top of that data structure. We introduce some important group properties in this section.
+
+\begin{theorem}
+There is one and only one identity element for any group.
+\end{theorem}
+
+\begin{proof}
+Suppose there is another identity element $e'$, for all element $a$, the equation $e'a = ae' = a$ holds. Substitute $a$ with $e$, we have $e = ee'= e'$. Hence proved the uniqueness of the identity element.
+\end{proof}
+
+For any group, not only the identity element, but also the inverse element for every element is unique.
+
+\begin{theorem}
+The unique existence of inverse element. For all element $a$, there is one and only one $a^{-1}$ that satisfies $aa^{-1} = a^{-1}a = e$. We call $a^{-1}$ the inverse element of $a$.
+\end{theorem}
+
+\begin{proof}
+We know the existence of inverse element from the group identity element axiom. Therefore, we only need proof the uniqueness. Suppose there exists another element $b$, that also satisfies $ab = ba = e$. We multiply $a^{-1}$ to the equation from right to get:
+
+\[
+\begin{array}{rll}
+aba^{-1} & = baa^{-1} = ea^{-1} & \\
+& \Rightarrow be = a^{-1} & \text{Apply associative law to the 2nd term} \\
+& \Rightarrow b = a^{-1} & \text{Uniqueness of the inverse element}
+\end{array}
+\]
+\end{proof}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{L}{0.4\textwidth}
+ \centering
+ \includegraphics[scale=1.0]{img/Rubik-cube-F.eps}
+ %\captionsetup{labelformat=empty}
+ \caption{Repeatedly rotating a Rubik cube with F 4 times returns to the original state.}
+ \label{fig:Rubik-cube-F}
+%\end{wrapfigure}
+\end{figure}
+
+\index{The order of the group element}
+We defined the order of group before. For group element, we can define order as well. For element $a$, the minimum positive integer $m$ that satisfies $a^m = e$ is called the order of $a$. If such $m$ does not exist, we say the order of $a$ is infinite. Using the Rubik cube group for example, if we repeat F rotation 4 times, the cube returns to its original state. Therefore, the order of F is 4. Because rotating $F'$ twice returns the original state, the order of $F'$ is 2. Another example is the integer multiplicative group modulo 5. For all elements except 1, the 4th power modulo 5 are 1. All their orders are 4. Actually, we have the following interesting theorem:
+
+\begin{theorem}
+For any finite group, all elements have finite order.
+\end{theorem}
+
+\begin{proof}
+Denote the order of a given finite group $G$ as $n$. For any element $a$, we can construct a set $\{a, a^2, ..., a^{n+1}\}$. There are $n + 1$ elements in this set, however, the order of the group is $n$. According to the principle of pigeon hole, there are at least two equal elements. Denote such two equal elements as $a^i$ and $a^j$, where $0 < i < j \leq n + 1$ without loss of generality. We have:
+
+\[
+\begin{array}{rcll}
+a^ja^{-i} & = & a^{i}a^{-i} & \text{since}\ a^i = a^j \\
+a^ja^{-i} & = & e & \text{$a^i$ is inverse to $a^{-i}$} \\
+a^{j-i} & = & e & \text{the order of $a$ is}\ j - i
+\end{array}
+\]
+Thus the order of $a$, $j - i$ is finite.
+\end{proof}
+
+We use the term `isomorphism' in chapter 1 to describe things that have the same inner structure. It's time to give the strict definition for homomorphism and isomorphism. Suppose there is a mapping (morphism) $f$ from set $A$ to set $B$. $a$ and $b$ are two elements in $A$, their images in $B$ are $f(a)$ and $f(b)$ respectively. Let's consider the element $a \cdot b$, which is result of the binary closed operation defined in $A$. Under the map (morphism) $f$, its image in $B$ is $f(a \cdot b)$. If for the binary closed operation defined in $B$, the following equation always holds:
+
+\[
+f(a) \cdot f(b) = f(a \cdot b)
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (0, 0) circle[x radius=1cm, y radius=3cm]
+      (5, 0) circle[x radius=1cm, y radius=3cm];
+\path (0, 3) node[above] {$A:$ semigroup $N(\cdot)$}
+      (6, 3) node[above] {$B:$ semigroup for squares $N^2(\cdot)$};
+\path (0, 0) node (b) {}
+      (5, 0) node (fb) {}
+      (0, 1.5) node (a) {}
+      (5, 1.5) node (fa) {}
+      (0, -1.5) node (c) {}
+      (5, -1.5) node (fc) {};
+\filldraw (0, 0) circle (1pt) node[above] {$b$}
+      (5, 0) circle (1pt) node[above] {$f(b)$}
+      (0, 1.5) circle (1pt) node[above] {$a$}
+      (5, 1.5) circle (1pt) node[above] {$f(a)$}
+      (0, -1.5) circle (1pt) node[above] {$ab$}
+      (5, -1.5) circle (1pt) node[above] {$f(ab)$};
+\draw[dashed, ->] (b) to node [above] {$f: x \to x^2$} (fb)
+      (a) to [bend left] (fa)
+      (c) to [bend right] (fc);
+\end{tikzpicture}
+\[
+\begin{array}{rl}
+a = 2 & f(a) = 4 \\
+b = 3 & f(b) = 9 \\
+ab = 6 & f(ab) = f(a)f(b) = 36
+\end{array}
+\]
+\caption{Isomorphism}
+\label{fig:isomorphism}
+\end{figure}
+
+\index{homomorphism}
+We say $f$ is a \textbf{homomorphism} from $A$ to $B$. If $f$ is a surjection, known as `onto', which means every element $b$ in $B$, has the corresponding $a$ in A, that $f(a) = b$, then $f$ is called surjective homomorphism. For example, consider a test function $odd: Z \to Bool$, it accepts an integer number, if the number is odd, then it returns True, otherwise returns False. All integers form a group under addition, while the Boolean value set $\{True, False\}$ also forms a group under logic exclusive or operation. We can verify that:
+
+\begin{enumerate}
+\item Both $a$ and $b$ are odd numbers. $odd(a)$ and $odd(b)$ are both True. Their sum is even, $odd(a+b)$ is False. Equation $odd(a) \oplus odd(b) = odd(a+b)$ holds;
+\item Both $a$ and $b$ are even numbers. $odd(a)$ and $odd(b)$ are both False. Their sum is also even, $odd(a+b)$ is False. Equation $odd(a) \oplus odd(b) = odd(a+b)$ holds;
+\item $a$ and $b$ one is odd, the other is even; $odd(a)$ and $odd(b)$ one is True, the other is False. Their sum is odd, $odd(a+b)$ is True. Equation $odd(a) \oplus odd(b) = odd(a+b)$ holds.
+\end{enumerate}
+
+\index{isomorphism}
+\index{automorphism}
+If $f$ is not only a surjection, but also a injection (there are no any two different elements map to the same image), then it's one-to-one mapping. We call $f$ is the \textbf{isomorphism} from $A$ to $B$. Denote as $A \cong B$. Isomorphism is a very powerful relationship. Besides group, isomorphism is also applicable to semigroups, monoids and other algebraic structures. As shown in figure \ref{fig:isomorphism}. If $A$ is isomorphic to $B$, from the abstracted view, they are essentially the same thing with different names. If there is a algebraic property in $A$, then there is exactly a same property in $B$ (\cite{ZhangHeRui1978} pp.25). The special isomorphism from $A$ to $A$ is called \textbf{automorphism} of $A$. For example, the group of integers with addition has a automorphism under the negate operation.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\path (0, 0) node[below] {cat}
+      (0, 2) node[above] {sheep}
+      (-2, 2) node[above] {dog}
+      (-2, 0) node[below] {cow};
+\filldraw (0, 0) circle (4pt) node (cat) {} --
+   (0, 2) circle (4pt) node (sheep) {} --
+   (-2, 2) circle (4pt) node (dog) {} --
+   (-2, 0) circle (4pt) node (cow) {};
+\draw (dog) -- (cat) -- (cow);
+
+\filldraw[fill=gray, draw=black, pattern=north west lines]
+    (3, 0) circle (4pt) node (collar) {} --
+    (5.6, 0) circle (4pt) node (bell) {} --
+    (4.3, 2.3) circle (4pt) node (milk) {} -- (collar) --
+    (4.3, 1) circle (4pt) node (wool) {} -- (bell);
+\path (3, 0) node[below] {collar}
+      (5.6, 0) node[below] {bell}
+      (4.3, 2.3) node[above] {milk}
+      (4.3, 1) node[below] {wool};
+
+\draw[dashed, ->] (dog) .. controls (-2.5, 1.5) .. (collar)
+    (sheep) to[bend left] (wool)
+    (cat) to[bend right] (bell)
+    (cow) .. controls (-3, 3) ..(milk);
+\end{tikzpicture}
+\[
+\begin{array}{rl}
+f(dog) = collar & f(cat) = bell \\
+f(sheep) = wool & f(cow) = milk
+\end{array}
+\]
+\caption{Graph isomorphism. The two different graphs have the same structure.}
+\label{fig:graph-isomorphism}
+\end{figure}
+
+People often use the familiar concrete, example to help understanding abstract algebraic structure. For groups, most time, we think about integers with addition. How those concepts, properties of group will be for integers? But this approach may give us illusion that the element of group is kind of entity, like numbers; and the binary operation is more like the common addition or multiplication that is commutative. We'll introduce an `exceptional' example, the transformation group. On one hand, it is not abelian, the binary operation is not commutative; on the other hand, its group elements are not numbers, but transformations.
+
+Transformation is a map from set $A$ to $A$ itself. Denoted as $\tau : A \to A$. It maps element $a$ in $A$ to $\tau(a)$. That is $a \to \tau(a)$. There are varies transformations for a set. The following are all the transformations for Boolean set, we denote true as $T$, false as $F$.
+
+\[
+\begin{array}{rll}
+\tau_1 : & T \to T, & F \to T \\
+\tau_2 : & T \to F, & F \to F \\
+\tau_3 : & T \to T, & F \to F \\
+\tau_4 : & T \to F, & F \to T
+\end{array}
+\]
+
+Among them, $\tau_3$ and $\tau_4$ are one to one transformations. For a given set $A$, all its transformations form a new set:
+
+\[
+S = \{\tau, \lambda, \mu, ...\}
+\]
+
+Let's next define a binary operation for $S$, and call it as multiplication. For convenient purpose, we express $\tau(a)$ as this way:
+
+\[
+\tau: a \to a^\tau = \tau(a)
+\]
+
+Note that $a^\tau$ does not mean the $\tau$ power of $a$. It is only a notation means transformation. Observe two elements $\tau$ and $\lambda$ in $S$.
+
+\[
+\tau: a \to a^\tau,  \lambda: a \to a^\lambda
+\]
+
+It's obvious that $a \to (a^\tau)^\lambda = \lambda(\tau(a))$ is also a transformation for $A$. We define it as the product of $\tau$ and $\lambda$.
+
+\[
+\tau\lambda: a \to (a^\tau)^\lambda = a^{\tau\lambda}
+\]
+
+Such multiplication is actually composition operation of two transformations. You can choose some Boolean transformations to verify their products. The multiplication is actually associative, since:
+
+\[
+\begin{array}{rl}
+\tau(\lambda\mu): & a \to (a^\tau)^{\lambda\mu} = ((a^\tau)^\lambda)^\mu \\
+(\tau\lambda)\mu: & a \to (a^{\tau\lambda})^\mu = ((a^\tau)^\lambda)^\mu
+\end{array}
+\]
+
+We benefit from the power expression. We can't say too much about a powerful notation system in the history of math. Euler, Leibniz were all masters invented many great symbols. For the above multiplication we defined, the identity element in $S$ is the identity transformation of $A$, which maps every element to itself, $\epsilon: a \to a$. We can verify that:
+
+\[
+\begin{array}{rl}
+\epsilon\tau: & a \to (a^\epsilon)^\tau = a^\tau \\
+\tau\epsilon: & a \to (a^\tau)^\epsilon = a^\tau
+\end{array}
+\]
+
+Therefore $\epsilon\tau = \tau\epsilon = \tau$. With this multiplication operation, set $S$ almost forms a group. Although we say it `almost', it eventually can not form a group. This is because for a given transformation $\tau$, there is not necessarily an inverse element. For example the $\tau_1$ in the Boolean set, it maps any Boolean value to true. None of the 4 transformations can change $\tau_1$ back. Thus there is no reverse element for $\tau_1$.
+
+Although $S$ can not form a group, interestingly, its subgroup $G$ can. In fact, as long as $G$ only contains the one-to-one transformations of $A$, then it form a group under the multiplication operation.
+
+\index{transformation group}
+
+For set $A$, the set of one to one transformations of $A$ together with the composite operation (defined above as multiplication) form a \textbf{transformation group} of $A$. We have the below important theorem:
+
+\begin{theorem}
+All the one to one transformations of set $A$ form a transformation group $G$.
+\end{theorem}
+
+Transformation groups are not necessarily abelian. It's easy to find negative examples. Consider the shift transformation $\tau_1$ which moves the origin point from (0, 0) to (1, 0) in the plane, and the rotation transformation $\tau_2$ which rotate around the origin by $\pi/2$. We have:
+
+\[
+\begin{array}{rl}
+\tau_1\tau_2: & (0, 0) \to (0, 1) \\
+\tau_2\tau_1: & (0, 0) \to (1, 0)
+\end{array}
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1]
+\draw[->] (-0.5, 0) -- (2, 0) node[right] (x axis) {$x$};
+\draw[->] (0, -1.5) -- (0, 1.5) node[above] (y axis) {$y$};
+\path (0, -1) node[left] {$a$}
+      (1, -1) node[right] {$b$}
+      (1, 1) node[above] {$c$};
+\filldraw (0, -1) circle(1pt) node (a) {}
+          (1, -1) circle(1pt) node (b) {}
+          (1, 1) circle(1pt) node (c) {};
+\draw[dashed, ->] (a) -- (b);
+\draw[dashed, ->] (b) .. controls (1.4, 0) .. (c);
+\draw (0, 0) -- (1.2, -1.2)
+      (0, 0) -- (1.2, 1.2)
+      (1, 0) arc (0:45:1)
+      (1, 0) arc (0:-45:1);
+
+\draw[->] (3.5, 0) -- (6.5, 0) node[right] (x axisr) {$x$};
+\draw[->] (4, -1.5) -- (4, 1.5) node[above] (y axisr) {$y$};
+\filldraw (4, -1) circle (1pt) node[left] (a1) {$a$}
+      (5, 0) circle (1pt) node[above] (b1) {$b'$}
+      (6, 0) circle (1pt) node[above] (c1) {$c'$};
+\draw[dashed, ->] (a1) .. controls (4.7, -0.7) .. (b1);
+\draw[dashed, ->] (b1) -- (c1);
+\draw (5, 0) arc (0:-90:0.8);
+\end{tikzpicture}
+\caption{The transform order matters, and cause different results.}
+\label{fig:transform-not-abelian}
+\end{figure}
+
+Therefore, this transformation group is not abelian. Transform groups are important and have wide applications. We have a strong fact:
+
+\begin{theorem}
+Every group is isomorphic to a transformation group.
+\end{theorem}
+
+% TODO：附录
+We skip the proof. This theorem tells us, for any abstract group, we can find a concrete instance as a transformation group. In other words, we needn't concern about finding an abstract group in the future, which is totally a castle in the air(\cite{ZhangHeRui1978} pp49).
+
+\begin{Exercise}
+\Question{Is the odd even test function homomorphic between the integer addition group $(Z，+)$ and the Boolean logic-and group $(Bool, \land)$? What about the group of integers without zero under multiplication?}
+\Question{Suppose two groups $G$ and $G'$ are homomorphic. In $G$, the element $a \to a'$. Is the order of $a$ same as the order of $a'$?}
+\Question{Prove that the identity element for transformation group must be identity transformation.}
+\end{Exercise}
+
+\subsection{Permutation group}
+\label{permutation group}
+\label{symmetric group}
+
+In this section, we introduce permutation group. It is the permutation group that Galois used to determine if a given equation is radical solvable. Permutation group is a special transformation group. Let's first define what is permutation. A \textbf{permutation} is a one to one transformation for a finite set. The permutations of a finite set form a \textbf{permutation group} under the composite operation. As the name indicates, it permutes elements in the set. Further, the group of {\em all} permutations of a set with $n$ elements is the \textbf{symmetric group} of degree $n$, denoted as $S_n$.
+
+We know from the permutation theory learned in high school, there are $n!$ different permutations for $n$ elements. Therefore, the symmetric group of degree $n$ has the order of $n!$. A permutation maps element $a_i$ in the set to $a_{k_i}$, where $i = 1, 2, ..., n$. The permutation can be determined by $n$ pairs of $(1, k_1), (2, k_2), ..., (n, k_n)$. We can express the permutation as:
+
+\[
+\begin{pmatrix}
+1 & 2 & ... & n \\
+k_1 & k_2 & ... & k_n
+\end{pmatrix}
+\]
+
+For example
+
+\[
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+2 & 5 & 4 & 3 & 1
+\end{pmatrix}
+\]
+
+It represents a permutation. Since the first row is always in the form $1, 2, ..., n$, we can further simplify the permutation to $(2, 5, 4, 3, 1)$. This permutation moves the 2nd element to the 1st position; moves the 5th element to the 2nd position and so on. We can use this notation to list all permutations for a set with 3 elements. It is group $S_3$:
+
+\[
+(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)
+\]
+
+When do the multiplication, which is composition essentially, we can determine the element for every position in this way: for the $i$-th position, first check what the new position should be in the first permutation, for example $j$; then check where $j$ should be mapped to in the second permutation, for example $k$. Therefore, the final position as the result of the multiplication is $k$. Let's pick two elements from $S_3$ to examine if it is abelian:
+
+\[
+\begin{array}{l}
+(1, 3, 2) (2, 1, 3) = (2, 3, 1) \\
+(2, 1, 3) (1, 3, 2) = (3, 1, 2)
+\end{array}
+\]
+
+They are different results. $S_3$ is not abelian. Actually, it is the smallest finite none abelian group. A finite none abelian group contains at least 6 elements. Observe the permutation for 5 elements $(2, 3, 1, 4, 5)$, only the first three ones change, while the rest two keep same. The changes for the first three elements have a pattern: $2 \to 1$, $3 \to 2$, $1 \to 3$, which is cyclic.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1]
+\path (0, 0) node[circle, draw] (1) {1}
+      (2, 0) node[circle, draw] (2) {2}
+      (4, 0) node[circle, draw] (3) {3};
+\draw[<-] (1) edge (2)
+          (2) edge (3)
+          (3) .. controls (2, 2) .. (1);
+\path (0, -0.5) node[below] {2}
+      (2, -0.5) node[below] {3}
+      (4, -0.5) node[below] {1};
+\end{tikzpicture}
+\caption{Permutation $(2\ 3\ 1)$ is cyclic}
+\label{fig:cycle-permutation}
+\end{figure}
+
+With this pattern, we can simplify the permutation notation from $(2, 3, 1, 4, 5)$ to $(2\ 3\ 1)$. Note there is no comma between elements, and we treat $(1\ 2\ 3)$, $(2\ 3\ 1)$, and $(3\ 1\ 2)$ represent the same 3-cyclic permutation\footnote{There are people use $(231)$ notation without any spaces as deliminator. However, when there are over 10 elements, it causes ambiguity. As it can also be $(23\ 1)$.}. Formally, we define $k$-cyclic permutation $(i_{j_1} i_{j_2} ... i_{j_k})$. It maps the next element to its previous position, and send the first element to the last to form the cycle:
+
+\[
+i_{j_2} \to i_{j_1}, i_{j_3} \to i_{j_2}, ..., i_{j_1} \to i_{j_k}
+\]
+
+The elements in $k$-cyclic permutation are not necessary adjacent, for example $(3\ 9\ 4)$, nor in a fixed order, for example $(2\ 4\ 1\ 3)$. If there are only two element in the circle, like $(i\ j)$, we call it transposition (swap). Identity transformation is the special case, for example $(1, 2, 3, 4, 5)$, we denote it as $\epsilon = (1)$, and let:
+
+\[
+\epsilon = (1) = (2) = ... = (n)
+\]
+
+Observe the permutation $(2, 1, 4, 5, 3)$, it contains two cycles, one is the 2-cyclic permutation $(1\ 2)$, the other is 3-cyclic permutation $(3\ 4\ 5)$. We can use the permutation multiplication to express this fact:
+
+\[
+(2, 1, 4, 5, 3) = (1\ 2)(3\ 4\ 5)
+\]
+
+In fact, every permutation $\pi$ for $n$ elements can be expressed with some mutual exclusive (without any common numbers) cyclic permutations. This approach brings us a useful advantage, although permutations are not commutative in common case, as $k$-cyclic permutations don't share same numbers, they are commutative. For example $(1\ 2)(3\ 4\ 5) = (3\ 4\ 5)(1\ 2)$.
+
+The following list express all the permutations in $S_3$ in this way:
+
+\[
+(1),
+(1\ 2), (1\ 3), (2\ 3),
+(1\ 2\ 3), (1\ 3\ 2)
+\]
+
+Given a permutation $(k_1, k_2, ..., k_n)$, how to express it as the product of cyclic forms? We can do it with such prescription. From left to right compare every position with the number in the permutation, if $k_i$ equals $i$, it means the element has already in the right position; otherwise open a pair of parentheses, write down the number in position $k_i$ in the parentheses, let say it is $k_j$, then check the position $k_j$ with $j$, if they are not equal, write in the parentheses. Repeat this step till we found some element form a cycle to the starting point. At this time point, we close the parentheses of this cycle. After that, we go on checking from left to right till all the elements are processed (\cite{Armstrong1988}, pp27). If for all positions, we have $k_i$ equals to $i$, then we write down $(1)$ to present the identity permutation. It very convenient to realize this process in programming. Below is the algorithm for it with example source code in a real programming language.
+
+\begin{algorithmic}
+\Function{k-cycles}{$\pi$}
+  \State $r \gets []$
+  \For{$i \gets 1$ to $|\pi|$}
+    \State $p \gets []$
+    \While{$i \neq \pi[i]$}
+      \State $p \gets \pi[i]:p$
+      \State Exchange $\pi[i] \leftrightarrow \pi[\pi[i]]$
+    \EndWhile
+    \If{$p \neq []$}
+      \State $r \gets r:(\pi[i]:reverse(p))$
+    \EndIf
+  \EndFor
+  \If{$r \neq []$}
+    \State \Return r
+  \Else
+    \State \Return $[[1]]$ \Comment{Identity permutation}
+  \EndIf
+\EndFunction
+\end{algorithmic}
+
+Express any permutation as product of $k$-cycle notation:
+
+\lstset{language=Python}
+\begin{lstlisting}
+def kcycles(a):
+    r = []
+    n = len(a)
+    for i in range(n):
+        p = []
+        while i + 1 != a[i]:
+            p.append(a[i])
+            j = a[i] - 1
+            a[i], a[j] = a[j], a[i]
+        if p != []:
+            r.append([a[i]] + p)
+    return r if r != [] else [[1]]
+\end{lstlisting}
+
+From the theorem in previous section, we further have:
+
+\begin{theorem}
+Every finite group is isomorphic to a permutation group.
+\end{theorem}
+
+For any finite group, like the solutions of a equation, we can study it with the permutation group, as it is easy to manipulate. This is exactly how Galois solve the problem to determine if the equation is radical solvable.
+
+\begin{Exercise}
+\Question{List all the elements in $S_4$.}
+\Question{Express all the elements in $S_3$ as the product of cyclic forms.}
+\Question{Write a program to convert the product of $k$-cycles back to permutation.}
+\end{Exercise}
+
+\subsection{Cyclic group}
+
+\index{cyclic group}
+Among all the groups, the cyclic group is the easiest. It's the groups we completely understand as of today. Is it possible that all the elements in a group $G$ are power of a given element? Such group does exist. Consider the integer multiplicative group modulo 5 without 0 for example. It contains 4 elements $\{1, 2, 3, 4\}$. If list all the powers of 2 modulo 5, we have the following result:
+
+\[
+\begin{array}{l}
+2^1 \bmod 5 = 2 \\
+2^2 \bmod 5 = 4 \\
+2^3 \bmod 5 = 3 \\
+2^4 \bmod 5 = 1
+\end{array}
+\]
+
+Thus the powers of 2 generate all the elements in this group. We define:
+
+\begin{definition}
+If all the elements in a group $G$ are the power of a fixed element $a$, we say $G$ is a \textbf{cyclic group}. In other words $G$ is generated by element $a$, denoted as:
+
+\[
+G = (a)
+\]
+
+We call $a$ the generator of group $G$.
+\end{definition}
+
+Let us see two important examples of cyclic group:
+
+\begin{example}
+The additive group of integers. All integers are `power' of 1. Here the binary operation is addition, therefore, power means keep adding 1. For any positive integer $m$:
+
+\[
+\begin{array}{rcll}
+1^m & = & 1 \cdot 1 \cdot 1 \cdot ... \cdot 1 & \text{$m$ power of} \\
+    & = & 1 + 1 + ... + 1 & \text{+ is the multiplicative operation for $G(Z, +)$} \\
+    & = & m &
+\end{array}
+\]
+
+In additive group of integers, the inverse element of 1 is -1. This is because 1 + (-1) = 0, and 0 is the identity element. For any negative integer $-m$:
+
+\[
+\begin{array}{rcll}
+1^{-m} & = (-1)^m & \text{inverse element} & \\
+(-1)^m & = & (-1) \cdot (-1) \cdot (-1) \cdot ... \cdot (-1) & \text{$m$ times} \\
+       & = & -1 + (-1) + ... + (-1) & \text{+ is the multiplicative operation for $G(Z, +)$} \\
+       & = & -m &
+\end{array}
+\]
+
+As 0 is the identity element, we define $0 = 1^0$. Summarize all these three cases, we have $Z = (1)$.
+\end{example}
+
+The additive group of integers is an example of infinite cyclic group. Let us see an example of finite cyclic group.
+
+\begin{example}
+Consider integers residue modulo $n$. For integer $a$, we use notation $[a]$ to represent the residue $a$ belongs to. Define the binary operation as the addition modulo $n$.
+
+\[
+[a] + [b] = [a + b]
+\]
+
+For instance, when compute $[3] + [4]$ modulo 5, the result is $7 \bmod 5 = [2]$. It's easy to verify this binary operation satisfies the associative axiom. The identity element is [0], and all elements have inverse. We call this group additive group of integer residues modulo $n$. The group elements are [0], [1], ..., [$n$-1]. It is a cyclic group because every element [$i$] can be expressed as $i$ power of [1].
+
+\[
+[i] = [1] + [1] + ... + [1] \quad \text{Total $i$ times}
+\]
+\end{example}
+
+We intentionally choose these two examples. In fact, we've already understood all the cyclic groups through these two examples! This is because of the following theorem:
+
+\begin{theorem}
+If $G$ is a cyclic group generated by element $a$, then the algebraic structure of $G$ is completely determined by order of $a$:
+\begin{itemize}
+\item If the order of $a$ is infinite, then $G$ is isomorphic to the additive group of integers;
+\item If the order of $a$ is $n$, then $G$ is isomorphic to the additive group of integer residues modulo $n$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+If the order of $a$ is infinite, we have $a^h = a^k$ if and only if $h = k$. Otherwise, if $h \neq k$, let $h > k$ without loss of generality, we have $a^{h - k} = e$, which conflicts with the condition that the order of $a$ is infinite. Therefore, we can construct a one to one map:
+
+\[
+f: a^k \to k
+\]
+
+This map is isomorphic between the cyclic group $G = (a)$ and the additive group of integers $Z$. That is $a^ha^k \to h + k$.
+
+If the order of $a$ is integer $n$, which means $a^n = e$. Then $a^h = a^k$ if and only if $h \equiv k \mod n$. We can construct another one to one map:
+
+\[
+f: a^k \to [k]
+\]
+
+This map is isomorphic between the cyclic group $G = (a)$ and the additive group of integer residues modulo $n$. That is:
+
+\[
+a^ha^k = a^{h + k} \to [h + k] = [h] + [k]
+\]
+\end{proof}
+
+Therefore, from the abstract perspective, there is only one group that the order of generator is infinite, and there is only one group that the order of generator is a given positive integer. We clearly understand the algebraic structure of these cyclic groups:
+
+\begin{itemize}
+\item The order of $a$ is infinite
+  \begin{itemize}
+  \item Group elements: ..., $a^{-2}, a^{-1}, a^0, a^1, a^2$, ...
+  \item Binary operation: $a^ha^k = a^{h + k}$
+  \end{itemize}
+\item The order of $a$ is $n$
+  \begin{itemize}
+  \item Group elements: $a^0, a^1, a^2, ..., a^{n-1}$
+  \item Binary operation: $a^ha^k = a^{(h + k) \bmod n}$
+  \end{itemize}
+\end{itemize}
+
+\begin{Exercise}
+\Question{Proof that cyclic groups are abelian.}
+\end{Exercise}
+
+\subsection{Subgroup}
+\index{subgroup}
+
+The next important concept is subgroup. It helps us to understand a group through its subset.
+
+\begin{definition}
+For a given group $G$, a subset $H$ of $G$ is called \textbf{subgroup} if $H$ forms a group under the multiplication of $G$.
+\end{definition}
+
+For any group $G$, there are at least two subgroups. One is $G$ itself, the other is the singleton set only contains the identity element $\{e\}$. They are called trivial subgroups. Taking the additive group of integers for example, all the even numbers under addition form a subgroup, while the odd numbers do not form a subgroup (do you know why?). Here is another example, for the permutation group $S_3$, consider its subset $H = \{(1), (1\ 2)\}$. $H$ form a subgroup under the composite operation. We can verify it as the following:
+
+\begin{enumerate}
+\item Close under multiplication: $(1)(1) = (1)$, $(1)(1\ 2) = (1\ 2)$, $(1\ 2)(1) = (1\ 2)$, $(1\ 2) (1\ 2) = (1)$. The last equation means to swap the first two elements, then swap again. It equals to identity transformation;
+\item The associative law applies to all elements in $S_3$, thus also applies to $H$;
+\item The identity element $(1) \in H$;
+\item All elements in $H$ have inverse: $(1)(1) = (1)$、$(1\ 2) (1\ 2) = (1)$。
+\end{enumerate}
+
+It's tedious to verify all these group properties for arbitrary subset. Fortunately, there is a powerful tool:
+
+\begin{theorem}
+For any group $G$, a none empty subset $H$ forms a subgroup if and only if：
+\begin{enumerate}
+\item For all $a, b \in H$, the product $ab \in H$;
+\item For all element $a \in H$, its reverse $a^{-1} \in H$.
+\end{enumerate}
+\label{theorem:subgroup}
+\end{theorem}
+
+We leave the proof to this theorem as exercise. From this theorem, we can deduce that, if $H$ is a subgroup of $G$, then the identity element in $H$ is also the identity element in $G$, and for any element $a$ in $H$, its reverse element in $H$ is also the reverse element in $G$. We can combine the two conditions in this theorem into one:
+
+\begin{theorem}
+For any group $G$, a none empty subset $H$ forms a subgroup if and only if, for all $a, b \in H$, then $ab^{-1} \in H$ holds.
+\label{theorem:subgroup-2}
+\end{theorem}
+
+\begin{proof}
+First prove the sufficiency. Let $a, b \in H$, from the second condition in theorem \ref{theorem:subgroup}, we have $b^{-1} \in H$. Then using the first condition, we get $ab^{-1} \in H$;
+
+Next prove the necessity. Let $a \in H$, according to the identity axiom, we have $aa^{-1} = e \in H$. Since $e, a \in H$, therefore, $ea^{-1} = a^{-1} \in H$. This is the second condition in theorem \ref{theorem:subgroup}; For all $a, b \in H$, we just proved $b^{-1} \in H$. Therefore, $a(b^{-1})^{-1} = ab \in H$. This is the first condition in theorem \ref{theorem:subgroup}.
+\end{proof}
+
+If the subset $H$ is finite, then the condition to form a subgroup can be further simplified:
+
+\begin{theorem}
+For any group $G$, the finite subset $H$ forms a subgroup if and only if for all $a, b \in H$, $ab \in H$ holds.
+\end{theorem}
+
+With integer $n$, we can partition all the integers into residues modulo $n$. Using the similar idea, we can partition the elements in a group. Consider the additive group of integers $Z$, let $H$ be the subset of all multiples of $n$, i.e. $H = \{ kn \}$ where $k = 0, \pm 1, \pm 2, ...$. For any two elements $hn$ and $kn$, $hn + (-k)n = (h - k)n \in H$. While $-kn$ is exactly the inverse of $kn$ in $Z$, and $+$ is the binary operation in additive group of integers. According to the theorem \ref{theorem:subgroup-2}, $H$ is the subgroup of $Z$.
+
+When we partition integers into residues modulo $n$, we use the equivalence relation as:
+
+\[
+a \equiv b \mod n, \text{if and only if}\ n | (a - b)
+\]
+
+Using subgroup $H$, this equivalence relation can also be defined as:
+
+\[
+a \equiv b \mod n, \text{if and only if}\ (a - b) \in H
+\]
+
+Thus we use subgroup $H$ to partition $Z$ into residues. Now let's expand this to more generic case, to partition any group $G$ with subgroup $H$. To do that, we need define the equivalence relation $\sim$ with subgroup $H$ first:
+
+\[
+a \sim b, \text{if and only if}\ ab^{-1} \in H
+\]
+
+Given $a$ and $b$, we can strictly determine if $ab^{-1}$ belongs $H$. Why is $\sim$ an equivalence relation? Because it satisfies all the three conditions for equivalence:
+
+\begin{enumerate}
+\item As $aa^{-1} = e \in H$, we have $a \sim a$. It is reflexive;
+\item If $ab^{-1} \in H$, then its reverse $(ab^{-1})^{-1}= ba^{-1} \in H$. Therefore, $a \sim b \Rightarrow b \sim a$. It is symmetric;
+\item If $ab^{-1} \in H, bc^{-1} \in H$, we have $(ab^{-1})(bc^{-1}) = ac^{-1} \in H$. Therefore $a \sim b, b \sim c \Rightarrow a \sim c$. It is transitive.
+\end{enumerate}
+
+\index{right coset}
+\begin{definition}
+The subset determined by the equivalence relation $\sim$ is called the \textbf{right coset} of subgroup $H$. if $a$ is a group element, the right coset that includes $a$ is denoted as $Ha$.
+\end{definition}
+
+When using $a$ to multiply every element in $H$ from right, we get the coset that includes $a$. In other words, $Ha$ contains all the elements in $G$ with the form $ha$, where $h \in H$.
+
+\[
+Ha = \{ha | h \in H\}
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.6]
+\draw (0, 3) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H) {$H$ \\ $0, \pm 3, \pm 6, ...$}
+      (-5.5, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H0) {$H0$ \\ $0, \pm 3, \pm 6, ...$}
+      (0, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H1) {$H1$ \\ $... -2, 1, 4, 7, ...$}
+      (5.5, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H2) {$H2$ \\ $... -1, 2, 5, 8, ...$};
+\draw[->] (H) edge (H0)
+          (H) edge (H1)
+          (H) edge (H2);
+\end{tikzpicture}
+\caption{Right coset. For the additive group of integers, the subgroup $H$ contains all multiples of 3. Using 0, 1, 2 add to all these multiples, we get three non-overlapping sets. It is exactly a partition of integers.}
+\label{fig:right-cosets-Z3}
+\end{figure}
+
+As shown in figure \ref{fig:right-cosets-Z3}, $Z$ is the additive group of integers. Set $H$ contains all multiples of 3, includes $0, \pm 3, \pm 6, ...$. It forms a subgroup under the addition. We add 0 in $Z$ from right\footnote{As the additive group of integers is abelian, the addition is commutative, therefore, the left and right cosets are same.} to every element in $H$, which gives $H0$. Obviously, $H0$ equals to $H$. It contains all the remainders of 0 modulo 3, denoted as [0]. Adding 1 in $Z$ from right to every element in $H$ gives $H1$. It contains all remainders of 1 modulo 3, denoted as [1]; Adding 2 in $Z$ from right to every element in $H$ gives $H2$. It contains all remainders of 2 modulo 3, denoted as [2]. If add 3 to every element in $H$, the result is as same as $H0$. In fact, whatever element $a$ we choose from $H0$ to generate a right coset $Ha$, it is always as same as $H0$; whatever element $b$ we choose from $H1$ to generate a right coset $Hb$, it is always as same as $H1$; whatever element $c$ we choose from $H2$ to generate a right coset $Hc$, it is always as same as $H2$. Put the three right cosets $H0$, $H1$, and $H2$ together, the result is exactly all the integers $Z$. It is a partition of $Z$: [0], [1], [2].
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.6]
+\draw (0, 3) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H) {$H$ \\ $(1), (1\ 2)$}
+      (-5.5, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H1) {$H(1)$ \\ $(1), (1\ 2)$}
+      (0, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H13) {$H(1\ 3)$ \\ $(1\ 3), (1\ 2\ 3)$}
+      (5.5, 0) circle[x radius=2.5cm, y radius=1cm] node[align=center] (H23) {$H(2\ 3)$ \\ $(2\ 3), (1\ 3\ 2)$};
+\draw[->] (H) edge (H1)
+          (H) edge (H13)
+          (H) edge (H23);
+\end{tikzpicture}
+\caption{right cosets of a finite non-abelian group.}
+\label{fig:right-cosets-S3}
+\end{figure}
+
+Let's see another example about finite non-abelian group. Consider a permutation group with degree 3.
+
+$G = S_3 = \{(1), (1\ 2), (1\ 3), (2\ 3), (1\ 2\ 3), (1\ 3\ 2)\}$，
+
+It has a subgroup $H = \{(1), (1\ 2)\}$. We use the identity permutation $(1)$ and another two permutations $(1\ 3)$, $(2\ 3)$ to multiply $H$ from right. It gives 3 right cosets:
+
+\[
+\begin{array}{rcl}
+H(1) & = & \{(1), (1\ 2)\} \\
+H(1\ 3) & = & \{(1\ 3), (1\ 2\ 3)\} \\
+H(2\ 3) & = & \{(2\ 3), (1\ 3\ 2)\}
+\end{array}
+\]
+
+We can use another three different elements to form the right cosets:
+
+$H(1\ 2)$、$H(1\ 2\ 3)$、$H(1\ 3\ 2)$
+
+Because $(1\ 2) \in H(1)$, $(1\ 2\ 3) \in H(1\ 3)$, $(1\ 3\ 2) \in H(2\ 3)$, therefore we have:
+
+\[
+\begin{array}{l}
+H(1) = H(1\ 2) \\
+H(1\ 3) = H(1\ 2\ 3) \\
+H(2\ 3) = H(1\ 3\ 2)
+\end{array}
+\]
+
+The subgroup $H$ partitions the group $G = S_3$ into three disjoint right cosets $H(1)$,$H(1\ 3)$, and $H(2\ 3)$. Putting these three right cosets together gets exactly $G$. They form a partition of $G$.
+
+\index{left coset}
+Symmetric to right coset, we can also define left coset. Define the symmetric equivalence relation $\sim'$ as:
+
+\[
+a \sim' b\ \text{if and only if}\ b^{-1}a \in H
+\]
+
+The subset determined by equivalence relation $\sim'$ is called left coset of subgroup $H$. The left coset respect to element $a$ is denoted as $aH$. It contains all the elements in form of $ah, h \in H$ in $G$. As the multiplication operation for group may not be necessarily commutative, $\sim$ is not identical to $\sim'$ typically, therefore the left and right cosets are not necessarily same as well. However, there is a common property for both left and right cosets:
+
+\begin{theorem}
+For a given subgroup $H$, there are same numbers of left and right cosets. They are either infinity many, or the same finite number.
+\end{theorem}
+
+To prove this theorem, we can construct a map from the left coset to the right coset of $H$: $f: Ha \to a^{-1}H$. It's easy to verify this map is bijective (one to one correspondence). For all $Ha = Hb$, we have $ab^{-1} \in H$, and $(ab^{-1})^{-1} = ba^{-1} \in H$. Therefore, $a^{-1}H= b^{-1}H$. Since there exists one to one mapping, the numbers of left and right cosets are same.
+
+\index{index of subgroup}
+With this theorem, we can use the number of the cosets (left or right) for a subgroup $H$ to define the \textbf{index} of $H$ in $G$.
+
+In common cases, the right coset $Ha$ does not equal to the left coset $aH$. If they are same, such subgroup is called normal subgroup. It was Galois, who first introduced normal subgroups to analyze if equations are solvable in radicals.
+
+\index{normal subgroup} \index{invariant subgroup}
+\begin{definition}
+For a group $G$, the subgroup $N$ is called \textbf{normal subgroup} (or invariant subgroup) if for every element $a$ in $G$, the equation:
+
+\[
+Na = aN
+\]
+
+holds. The left (or right) coset for a normal group is called \textbf{coset} of $N$.
+\label{normal-subgroup}
+\end{definition}
+
+For the symmetric reason, a normal subgroup is also called the center of a group. We have two theorems to determine if a group is normal subgroup:
+
+\begin{theorem}
+For a group $G$, the subgroup $N$ is a normal subgroup (or invariant subgroup) if and only if for every element $a$ in $G$, equation:
+
+\[
+aNa^{-1} = N
+\]
+
+holds.
+\end{theorem}
+
+\begin{theorem}
+For a group $G$, the subgroup $N$ is a normal subgroup (or invariant subgroup) if and only if for every element $a$ in $G$, $n$ in $N$, equation:
+
+\[
+ana^{-1} \in N
+\]
+
+holds.
+\end{theorem}
+
+For a normal subgroup $N$, all the cosets $\{aN, bN, cN, ...\}$ form a set. We define the multiplication for this set as:
+
+\[
+(xN)(yN) = (xy)N
+\]
+
+\index{quotient group}
+It easy to verify that, the set of cosets form a group under this multiplication operation. This group is called \textbf{quotient group}, denoted as $G/N$. There is an important relation between the normal subgroup, quotient group, and homomorphism. First, there is a homomorphism between $G$ and every its quotient group $G/N$. To proof it, we can construct a map $a \to aN, a \in G$. It is obvious that this map is surjective. For all elements $a, b$ in $G$, we have $ab \to abN = (aN)(bN)$. Therefore, it is a surjective homomorphism. This fact tell us, we can either use the subgroup, or quotient group to understand the property of $G$. To do that, let us define the concept of `kernel'.
+
+\index{kernel}
+\begin{definition}
+If $f$ is a surjective homomorphism from group $G$ to another group $G'$, consider the identity element $e'$ in $G'$, its preimage under $f$ is a subset of $G$. This subset is called the \textbf{kernel} of the homomorphism.
+\end{definition}
+
+We have the following theorem. If $G$ is homomorphic to $G'$, then the kernal $N$ of the homomorphism is the normal subgroup of $G$. And the quotient group $G/N \cong G'$. A group is homomorphic to every of its quotient group, and from the abstract point of view, $G$ can only be homomorphic to its quotient groups. Sometimes, we find $G$ is homomorphic to $G'$, and we don't know well about the properties of $G'$. However, we are sure to be able to find a normal subgroup $N$ of $G$, that the properties of $G'$ are essentially identical to the quotient group $G/N$. We can see the importance of the normal subgroup and the quotient group. Galois did use this idea to figure out the way to define the equation group is solvable or not.
+
+\begin{Exercise}
+\Question{Proof theorem \ref{theorem:subgroup}, which determines if a subset forms a subgroup.}
+\Question{List the left cosets for $H$ in figure \ref{fig:right-cosets-S3}.}
+\end{Exercise}
+
+\subsection{Lagrange's theorem}
+\index{Lagrange}
+
+Lagrange's theorem greatly demonstrates the power of abstract algebra. We can reveal the inner pattern of the abstract structure even without knowing any concrete meanings of the group elements or their operations.
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{R}{0.4\textwidth}
+ %\raggedright
+ \centering
+ \includegraphics[scale=1.5]{img/lagrange.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Stamp of Joseph-Louise Lagrange}
+ \label{fig:Lagrange}
+\end{wrapfigure}
+%\end{figure}
+
+Joseph-Louise Lagrange, was an mathematics, physics, and astronomer. He was born on January 25, 1736 in Turin, Italy. Lagrange was of Italian and French descent. His paternal great-grandfather was a French army officer who had moved to Turin, and married an Italian. His father, who had charge of the king's military chest and was Treasurer of the Office of Public Works and Fortifications in Turin. But before Lagrange grew up he had lost most of his property in speculations. A career as a lawyer was planned out for Lagrange by his father, and certainly Lagrange seemed to have accepted this willingly. He later claimed: ``If I had been rich, I probably would not have devoted myself to mathematics.'' Lagrange studied at the University of Turin. At first he had no great enthusiasm for mathematics, finding Greek geometry rather dull.
+
+It was not until he was seventeen that he showed any taste for mathematics – his interest in mathematics being first excited by a paper by Edmond Halley which he came across by accident. That paper introduced about the new calculus invented by Newton. Alone and unaided he threw himself into mathematical studies.
+
+Starting from 1754, he worked on the problem of tautochrone, discovering a method of maximising and minimising functionals in a way similar to finding extrema of functions. Lagrange wrote several letters to Leonhard Euler between 1754 and 1756 describing his results. His work made him one of the founders of the calculus of variations. Euler was very impressed with Lagrange's results. As an accomplished mathematician, Lagrange was appointed to be an mathematics assistant professor at the Royal Military Academy of the Theory and Practice of Artillery in 1755. Already in 1756, Euler and Maupertuis, seeing Lagrange's mathematical talent, tried to persuade him to come to Berlin, but Lagrange had no such intention and shyly refused the offer.
+
+In 1766, king Frederick of Prussia wrote to Lagrange expressing the wish of ``the greatest king in Europe'' to have ``the greatest mathematician in Europe'' resident at his court. Lagrange was finally persuaded and he spent the next twenty years in Prussia, where he produced not only the long series of papers published in the Berlin and Turin transactions, but also his monumental work, the {\em Mécanique analytique}.
+
+Lagrange was a favourite of the king, who used frequently to discourse to him on the advantages of perfect regularity of life. The lesson went home, and thenceforth Lagrange studied his mind and body as though they were machines, and found by experiment the exact amount of work which he was able to do without breaking down. Every night he set himself a definite task for the next day, and on completing any branch of a subject he wrote a short analysis to see what points in the demonstrations or in the subject-matter were capable of improvement. He always thought out the subject of his papers before he began to compose them, and usually wrote them straight off without a single erasure or correction.
+
+Nonetheless, during his years in Berlin, Lagrange's health was rather poor on many occasions, and that of his wife Vittoria was even worse. She died in 1783 after years of illness and Lagrange was very depressed.
+
+In 1786, following Frederick's death, Lagrange accepted the offer of Louis XVI to move to Paris. In France he was received with every mark of distinction and special apartments in the Louvre were prepared for his reception, and he became a member of the French Academy of Sciences. It was about the same time, 1792, that the unaccountable sadness of his life and his timidity moved the compassion of 24-year-old Renée-Françoise-Adélaïde Le Monnier, daughter of his friend, the astronomer Pierre Charles Le Monnier. She insisted on marrying him, and proved a devoted wife to whom he became warmly attached.
+
+In September 1793, the French revolution broke out. Under intervention of Antoine Lavoisier (known as the father of modern chemistry, who recognized and named oxygen and hydrogen), who himself was by then already thrown out of the Academy along with many other scholars, Lagrange was specifically exempted by name in the decree of October 1793 that ordered all foreigners to leave France. On May 4, 1794, Lavoisier, who had saved Lagrange from arrest, and 27 other tax farmers were arrested and sentenced to death and guillotined on the afternoon after the trial. According to a story, the appeal to spare Lavoisier's life so that he could continue his experiments was cut short by the judge, J. B. Coffinhal: ``The Republic has no need of scientists or chemists; the course of justice cannot be delayed.''. Lagrange said on the death of Lavoisier on May 8: ``It took only a moment to cause this head to fall and a hundred years will not suffice to produce its like.''\cite{Wiki-Lagrange}
+
+After Coup of Brumaire 18, 1799, Napoleon attained the power of France. He warmly encouraged science and mathematics studies in France, and was a liberal benefactor of them. He loaded Lagrange with honors and distinctions, appointed Lagrange as senator. In 1808, Napoleon made Lagrange a Grand Officer of the Legion of Honour and a Count of the Empire. Then honoured him with the Grand Croix of the Ordre of the Reunion on April 3, 1813. A week after, Lagrange died on April 10 at the age of 77. The funeral operation was pronounced by Laplace, represented the House of Lords, and Dean Lacépède represented the French Academy. The commemorative events were held in Italian universities.
+
+Lagrange was the great mathematician and scientist in the 18 to 19 Century. He made significant contributions to the fields of analysis, number theory, and both classical and celestial mechanics. Napoleon said ``Lagrange is the lofty pyramid of the mathematical science''. But above all his contribution, he is best known for his work on mechanics, where he transformed Newtonian mechanics into a branch of analysis, Lagrangian mechanics as it is now called, and presented the so-called mechanical "principles" as simple results of the variational calculus.
+
+Lagrange made important progress in solving algebraic equations of any degree in the first decades in Berlin. He introduced a concept called Lagrange resolvents. The significance of this method is that it exhibits the already known formulas for solving equations of second, third, and fourth degrees as manifestations of a single principle. He failed to give a general formula for solutions of an equation of degree five and higher, because the auxiliary equation involved had higher degree than the original one. Nevertheless, Lagrange's idea already implied the concept of permutation group. The permutations made the resolvent invariant form a subgroup, and the order of the subgroup is the factor of the original permutation group. This is exactly the famous Lagrange's theorem in group theory. Lagrange is a pioneer of group theory. His thoughts were adopted and developed later by Abel and Galois, and was foundational in Galois theory.
+
+Let us first introduce a lemma before Lagrange's theorem.
+
+\begin{lemma}
+For a subgroup $H$, there exists one to one mapping between $H$ and every right coset $Ha$.
+\end{lemma}
+
+As the left and right cosets are symmetric, this lemma applies to left cosets as well. To prove it, we can build a map $f: h \to ha$. It is one to one mapping from the subgroup to right cosets because:
+
+\begin{enumerate}
+\item For every element $h$ in $H$, there exists unique image $ha$;
+\item For every element $ha$ in $Ha$, it is the image of $h$ in subgroup $H$;
+\item For any $h_1a = h_2a$, the equation $h_1 = h_2$ holds.
+\end{enumerate}
+
+From the existence of this one to one mapping, we know that for finite group $G$, the number of elements for any coset must equal to the order of the subgroup $H$. And according to the partition nature, every element in the group must be in some coset. Therefore, we have the insight between the subgroup $H$ and the finite group $G$ through cosets:
+
+\index{Lagrange's theorem}
+\begin{theorem}
+\textbf{Lagrange's theorem}: For any finite group $G$, the order (number of elements) of every subgroup $H$ of $G$ divides the order of $G$.
+\end{theorem}
+
+\begin{proof}
+First, we know that $G$ can be fully partitioned by the cosets of $H$; From the equivalence relation defined for coset, we know there is no overlap among them. If element $c$ belongs to both $Ha$ and $Hb$, then $c \sim a$, and $c \sim b$, therefore, $a \sim b$. Equation $Ha = Hb$ holds. And with the one to one mapping between the subgroup $H$ and cosets, we know the order of every coset equals to the order of $H$, which is $|H| = n$. Given the number of cosets is $m$ (which equals to the index of $H$), we finally get the result:
+
+\[
+|G| = mn
+\]
+\end{proof}
+
+Note that there is a conversed question to Lagrange's theorem, whether every divisor of the order of a group is the order of some subgroup? This does not hold in general. Later we'll see such negative example in figure \ref{fig:group-graph} (c). The order of alternative group $A_4$ is 12, but it has no subgroup of order 6. We can deduce many interesting results from Lagrange's theorem.
+
+\begin{corollary}
+If $G$ is a finite group, the order of every element $a$ is a divisor of the order of $G$.
+\end{corollary}
+
+This is because $a$ generates a subgroup of order $n$, therefore $n$ divides $|G|$.
+
+\begin{corollary}
+If $G$ has prime order, then $G$ is cyclic.
+\end{corollary}
+
+This is because for every element $a$ excludes the identity element, the subgroup generated by $a$ has the same order as $G$. Therefore, $a$ is the generator of $G$, i.e. $G = (a)$.
+
+\begin{corollary}
+For every element $a$ in a finite group $G$, equation $a^{|G|} = e$ holds.
+\label{corollary:Lagrange-elem-order}
+\end{corollary}
+
+This is because the order $n$ of $a$ divides $G$, let $|G| = nk$, we have:
+
+\[
+a^{|G|} = a^{nk} = (a^n)^k = e^k = e
+\]
+
+Lagrange's theorem in group theory can be used to prove the Fermat's little theorem in number theory. The theorem is named after Pierre de Fermat, who found it in 1636. In a letter he wrote to a friend\footnote{Friend and confidant, French mathematician Frénicle de Bessy.} in October 18, 1640, Fermat stated this theorem first. It is called the ``little theorem'' to distinguish it from Fermat's last theorem. Euler provided the first published proof in 1736. But Leibniz had given virtually the same proof in an unpublished manuscript from sometime before 1683.
+
+\index{Fermat's little theorem}
+\begin{theorem}
+\textbf{Fermat's little theorem}: If $p$ is prime, for any integer $a$ that $0 < a < p$, then $p$ divides $a^{p-1}-1$.
+\end{theorem}
+
+\begin{proof}
+Consider the multiplicative integer group modulo $p$. The group elements are all none zero residues modulo $p$. As $p$ is prime, therefore the group elements are 1, 2, ..., $p-1$. The identity element $e = 1$. The order of the group is thus $p-1$. According to the corollary \ref{corollary:Lagrange-elem-order} of Lagrange's theorem, we have:
+
+\[
+a^{p-1} = e
+\]
+
+Since the identity element is 1, this equation can be written as:
+
+\[
+a^{p-1} \equiv 1 \mod p
+\]
+
+Therefore, $p$ divides $a^{p-1} - 1$.
+\end{proof}
+
+Compare to this method, the way to prove Fermat's little theorem in elementary theory of number is much more complex (for example, section 5.2 - 5.4 in \cite{StepanovRose15}). Here we give another interesting combinatorial method called proof by counting necklace\cite{Wiki-FLT-proof}.
+
+\begin{proof}
+Consider there are pearls in $a$ different colors. we are going to make strings of length $p$, where $p$ is prime. Obviously there are total $a^p$ different strings, because every pearl can be chosen among $a$ colors, and we need make $p$ times selection.
+
+For example there are pearls in two different colors: $A$ red, and $B$ green. When make strings containing 5 pearls, that is $a = 2, p = 5$, there are total $2^5 = 32$ different strings:
+
+\begin{verbatim}
+  AAAAA, AAAAB, AAABA, ..., BBBBA, BBBBB.
+\end{verbatim}
+
+Corresponding to
+
+\begin{verbatim}
+  red-red-red-red-red,
+  red-red-red-red-green,
+  red-red-red-green-red,
+  ...,
+  green-green-green-green-red,
+  green-green-green-green-green.
+\end{verbatim}
+
+We are going to prove that, among these $a^p$ strings, if remove $a$ strings that are all in the same color (in the above example, they are strings of \texttt{AAAAA} and \texttt{BBBBB}), the rest $a^p - a$ strings can be divided in several groups. Each group has exactly $p$ strings, thus $p$ divides $a^p - a$.
+
+If we link the head and tail for every pearl string to make a necklace, some different strings will become the same necklace. When a string can transform to the other by rotation, the two strings must form the same necklace. The following 5 strings form the same necklace for example:
+
+\begin{verbatim}
+  AAAAB, AAABA, AABAA, ABAAA, BAAAA.
+\end{verbatim}
+
+\begin{figure}[htbp]
+  \centering
+  \subcaptionbox{A necklace in 3 colors represents 7 different strings: \texttt{ABCBAAC}, \texttt{BCBAACA}, \texttt{CBAACAB}, \texttt{BAACABC}, \texttt{AACABCB}, \texttt{ACABCBA}, \texttt{CABCBAA}}[0.45\linewidth]{\includegraphics[scale=0.2]{img/bracelet-rotate.eps}} \quad
+  \subcaptionbox{The necklace in same color only represent one string: \texttt{AAAAAAA}}[0.45\linewidth]{\includegraphics[scale=0.2]{img/bracelet-identical.eps}}
+  \caption{Partition strings through necklace}
+  \label{fig:bracelet}
+\end{figure}
+
+By this means, the 32 pearl strings in above example, can be partitioned into 5 necklaces in different colors and 2 necklaces in the same color:
+
+\begin{verbatim}
+  [AAABB, AABBA, ABBAA, BBAAA, BAAAB];
+  [AABAB, ABABA, BABAA, ABAAB, BAABA];
+  [AABBB, ABBBA, BBBAA, BBAAB, BAABB];
+  [ABABB, BABBA, ABBAB, BBABA, BABAB];
+  [ABBBB, BBBBA, BBBAB, BBABB, BABBB];
+  [AAAAA];
+  [BBBBB].
+\end{verbatim}
+
+How many strings can a necklace represent? If a string $S$ can be split into several same sub-string $T$, while $T$ can't be split into sub-string any more, then the necklace $S$ represents $|T|$ different strings, where $|T|$ is the length of sub-string $T$. For example, string $S=$\texttt{ABBABBABBABB} can be split into sub-string $T=$\texttt{ABB}, while \texttt{ABB} can't be split any more. If we rotate a pearl per time, there are total 3 different results:
+
+\begin{verbatim}
+  ABBABBABBABB,
+  BBABBABBABBA,
+  BABBABBABBAB.
+\end{verbatim}
+
+There are not any other different strings besides these 3. Since the length of \texttt{ABB} is 3, further rotation must give the same result. Basically, there are two types for all the $a^p$ pearl strings. One contains $a$ strings in same color; the rest are strings in different colors. However, as the length of the string $p$ is prime, it cannot be generated by duplicating sub-strings. Therefore, every necklace in different colors, represents $p$ different strings. There are total $a^p -a$ strings in different colors. They can be partitioned into groups by the necklaces. Each group contains exactly $p$ strings all can be represented with the same necklace. It tells us $p$ must divide $a^p-a = a(a^{p-1}-1)$. Since $a$ and $p$ are coprime, hence $p$ divides $a^{p-1}-1$.
+
+\end{proof}
+
+The proof by counting necklaces might be the most straightforward method people developed. It need little mathematical knowledge. The key idea is two different counting methods must give the same result.
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{L}{0.35\textwidth}
+  \centering %\raggedleft
+ \includegraphics[scale=0.4]{img/Fermat.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Pierre de Fermat, 1601-1665}
+ \label{fig:Fermat}
+\end{wrapfigure}
+%\end{figure}
+
+It took 100 years from the born of Fermat's little theorem to Euler's proof. It is not rare, but a typical Fermat style. Fermat's last theorem stimulated many talent mathematicians. It took 358 years till British mathematician Andrew Wiles solved it in 1995 successfully. The main tools Wiles used include elliptic curves, modularity theory, and Galois representations\cite{HanXueTao2009}. These conjectures left by Fermat are a rich mathematical treasure.
+
+\vspace{5mm}
+
+\index{Pierre de Fermat}
+
+Pierre de Fermat was a French mathematician, born about August 1601. His father was a wealthy leather merchant. He became a lawyer at the Parlement of Toulouse French after grown up. In 1630, he bought the office of a councillor at the Parlement of Toulouse, one of the High Courts of Judicature in France, and was sworn in by the Grand Chambre in May 1631. He held this office for the rest of his life. Fermat thereby became entitled to change his name from Pierre Fermat to Pierre de Fermat. He was fluent in six languages. Fermat studied mathematics in his spare time. But the mathematical achievements made by Fermat were the peak of his time. Fermat's pioneering work in analytic geometry was circulated in manuscript form in 1636. It was based on results he achieved in 1629\footnote{The 8 pages paper, {\em Introduction to Plane and Solid Loci} was completed in 1630, but it was published posthumously in 1679, which was 14 years after Fermat's death.}. Together with René Descartes, Fermat was one of the two leading mathematicians of the first half of the 17th Century developed analytic geometry.
+
+Fermat and Blaise Pascal laid the foundation for the theory of probability through their correspondence in 1654. From this brief but productive collaboration on the problem of points, they are now regarded as joint founders of probability theory. Fermat is credited with carrying out the first ever rigorous probability calculation.
+
+In physics, Fermat refined the ancient Greek result about light and generalized to ``light travels between two given points along the path of shortest time'' now known as the principle of least time. For this, Fermat is recognized as a key figure in the historical development of the fundamental principle of least action in physics. The terms Fermat's principle and Fermat functional were named in recognition of this role. Fermat also contributed to the early development of calculus.
+
+But Fermat's crowning achievement was in the theory of numbers. Fermat was inspired by the Diophantus's great work {\em Arithmetica} in ancient Greek. It was translated into Latin and published in France in 1621 by Claude Bachet. Fermat bought this book in Paris, and was deeply attracted by the puzzles in theory of numbers. One special feature of this edition was there were wide margin left in pages, it turned to be Fermat's `note book' when reading it. During the study of Diophantus' problems and answers, Fermat often got inspired to consider wider and deeper problems, then wrote his thoughts and comments in the margin.
+
+Fermat published nearly nothing in his lifetime, although it is unbelievable from the view point of today. It was common in Fermat's time, that sometimes he wrote mails to his scholar friends about his findings. Some of the most striking of his results were found after his death on loose sheets of paper or written in the margins of works which he had read and annotated, and are unaccompanied by any proof. He was constitutionally modest and retiring, and does not seem to have intended his papers to be published. Fermat was totally driven by the strong curiousity to explore the mathematical mysteries. It's purely because he treated mathematics study as a hobby. When he found the result that had never been touched, Fermat was truly exciting and self-satisfied. It was not significant to him to publish the result and get recognition\cite{HanXueTao2009}. Interestingly, this silent genius sometimes liked to tease people. He often challenged other mathematicians in mails by asking them to prove his discoveries.
+
+\begin{wrapfigure}{R}{0.33\textwidth}
+%\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.5]{img/Arithmetica.eps}
+ \captionsetup{labelformat=empty}
+ \caption{The 1670 edition of the {\em Arithmetica of Diophantus}, with Fermat's annotation.}
+ \label{fig:Arithmetica}
+%\end{figure}
+\end{wrapfigure}
+
+When Fermat died in Jan, 1665, his research results were scattered here and there. His son Clément-Samuel Fermat spent 5 years to collect Fermat's mails and notes, then produced a special edition of {\em Arithmetica} contained his father's achievement. On the cover page, it printed ``augmented with Fermat's commentary''. This edition includes 48 comments by Fermat. In 1679, Samuel collected and published the second volume of Fermat's work. His research results were finally circulated, which greatly enriched the mathematics in the 17th Century, and impact the development of mathematics later.
+
+Before Fermat, the theory of numbers was basically a collection of problems. It was Fermat who first systematically studied the theory of numbers. He proposed a large number of theorems, and introduced generalized methods and principles, thus brought the theory of numbers to the modern development. It can be said that it was Fermat's systematic work that the theory of numbers really began to become a branch of mathematics. With his gift for number relations and his ability to find proofs for many of his theorems, Fermat essentially created the modern theory of numbers. He was called the "father of modern number theory." Before Gauss's {\em Arithmetic Research}, the development of number theory was originally driven by Fermat.
+
+However, for many propositions conjectured, Fermat only provided some key part, or even without any proof. Some of them were found wrong\footnote{For example Fermat number, named after Fermat who first studied them in 1640, is a positive number of the form $2^{2^n}+1$. Fermat claimed all such numbers are primes. It is true when $n$ is 0, 1, 2, 3, 4. The corresponding numbers are 3, 5, 17, 257, 65537. However, in 1732 Euler calculated that $2^{2^5} + 1 = 641 \times 6700417$, is not a prime number. As of 2017, people have found 243 negative examples, without finding the 6th Fermat prime number. It is still a unsolved conjecture whether there are any other Fermat primes.}. Before given the strict mathematical proof, these propositions could only be called conjecture. Most of them were later solved by Euler. What's more, Euler greatly developed the theory of numbers on top of Fermat's work.
+
+The Euler theorem in theory of numbers, is more generic than Fermat's little theorem. Euler did not satisfied after successfully proved Fermat's little theorem. What if $p$ is not prime? After carefully studied the general condition that covered composite numbers, Eular found and proved the following theorem.
+
+\index{Euler Theorem} \index{Euler function}
+\begin{theorem}
+\textbf{Euler theorem}: If $0 < a < n$, $a$ and $n$ are coprime, then $n$ divides $a^{\upphi(n)} - 1$.
+\end{theorem}
+
+Where $\upphi(n)$ is Euler function\footnote{Also know as Euler totient function, or Euler $\upphi(n)$ function.}. It is defined as the number of all positive integers that less than $n$, and coprime to $n$.
+
+\[
+\upphi(n) = |\{i | 0 < i < n\ \text{and}\ gcd(i, n) = 1 \}|
+\]
+
+Euler proved this theorem with the method in elementary theory of numbers. There is a elegant proof by using Lagrange's theorem in group theory.
+
+\begin{proof}
+Consider the none zero residues modulo $n$. We pick out all the mutually inverse residues under the multiplication modulo $n$. They form a multiplicative group modulo $n$. From the definition of Euler $\upphi$ function, the value of $\upphi(n)$ is the number of all positive integers that less than $n$ and coprime to $n$. While these positive numbers are exactly the elements of the multiplicative group. Thus the order of this group is $\upphi(n)$. From the corollary \ref{corollary:Lagrange-elem-order} of Lagrange's theorem, we have:
+
+\[
+a^{\upphi(n)} = e
+\]
+
+Therefore, $a^{\upphi(n)} \equiv 1 \mod n$, which immediately gives the result, $n$ divides $a^{\upphi(n)} - 1$.
+\end{proof}
+
+Let us see an example. Below is the multiplication table for all the none zero residues modulo 10. We can locate the identity element 1, and mark the cells underline. Then from that cell, along with the row and column, we can find two numbers, marked in bold. Their modulo product is 1, and both are coprime to 10. On the other hand, for every residue number that is not coprime to 10, the row and column where it is in also contain 0. But 0 is not group element. We can see that all the residues that are coprime to 10 are exactly the group elements 1, 3, 7, 9.
+
+\vspace{5mm}
+\begin{center}
+\definecolor{Gray}{gray}{0.9}
+\newcolumntype{g}{>{\columncolor{Gray}}c}
+\begin{tabular}{c|g|c|g|c|c|c|g|c|g|}
+  & \textbf{1} & 2 & \textbf{3} & 4 & 5 & 6 & \textbf{7} & 8 & \textbf{9} \\
+\hline
+\rowcolor{Gray}
+\textbf{1} & \cellcolor{gray} \underline{1} & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 8 \\
+\hline
+2 & 2 & 4 & 6 & 8 & 0 & 2 & 4 & 6 & 8 \\
+\hline
+\rowcolor{Gray}
+\textbf{3} & 3 & 6 & 9 & 2 & 5 & 8 & \cellcolor{gray}\underline{1} & 4 & 7 \\
+\hline
+4 & 4 & 8 & 2 & 6 & 0 & 4 & 8 & 2 & 6 \\
+\hline
+5 & 5 & 0 & 5 & 0 & 5 & 0 & 5 & 0 & 5 \\
+\hline
+6 & 6 & 2 & 8 & 4 & 0 & 6 & 2 & 8 & 4 \\
+\hline
+\rowcolor{Gray}
+\textbf{7} & 7 & 4 & \cellcolor{gray} \underline{1} & 8 & 5 & 2 & 9 & 6 & 3 \\
+\hline
+8 & 8 & 6 & 4 & 2 & 0 & 8 & 6 & 4 & 2 \\
+\hline
+\rowcolor{Gray}
+\textbf{9} & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & \cellcolor{gray} \underline{1} \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{5mm}
+
+Given integer $n$, how to evaluate Euler function? As any integer greater than 1 can be factored as power of prime numbers, let us first see how to evaluate $\upphi(p^m)$ for the $m$ power of prime $p$. We are going to count how many numbers from 1 to $p^m - 1$ are coprime to $p^m$. We can easily do this by removing the multiples of $p$. These numbers are $p, 2p, 3p, ..., p^m - p$. Divide them by $p$, gives the nature number sequence $1, 2, 3, ..., p^{m-1} - 1$. We immediately know there are $p^{m-1} - 1$ numbers. On top of this, we deduce the value of Euler function for the power of prime as:
+
+\begin{align*}
+\upphi(p^m) &= (p^m - 1) - (p^{m-1} - 1) \\
+            &= p^m - p^{m-1} \\
+            &= p^m(1-\dfrac{1}{p})
+\end{align*}
+
+We next consider number in form of $n = p^uq^v$, which is product of power of different prime numbers. We need first remove all multiples of $p$, then remove all multiples of $q$. But there are numbers that are the multiples of both $p$ and $q$. They are removed twice. We need add these multiples of $pq$ back (Principle of inclusion and exclusion in combinatorics). Thus we have:
+
+\begin{align*}
+\upphi(p^uq^v) &=  (n - 1) - (\dfrac{n}{p} - 1) - (\dfrac{n}{q} - 1) + (\dfrac{n}{pq} - 1) \\
+          &=  n(1 - \dfrac{1}{p})(1 - \dfrac{1}{q}) \\[5pt]
+          &=  p^u(1 - \dfrac{1}{p})q^v(1 - \dfrac{1}{q}) \\[5pt]
+          &=  \upphi(p^u)\upphi(p^v)
+\end{align*}
+
+Particularly when both $u$ and $v$ are 1, we have $\upphi(pq) = \upphi(p)\upphi(q)$. We can expand this result to multiple powers of prime numbers. Given $n = p_1^{k_1}, p_2^{k_2}...p_m^{k_m}$, the Euler function can be evaluated as:
+
+\begin{align*}
+\upphi(n) &= n(1-\dfrac{1}{p_1})(1-\dfrac{1}{p_2})...(1-\dfrac{1}{p_m}) \\[5pt]
+    &= \upphi(p_1^{k_1})\upphi(p_2^{k_2})...\upphi(p_m^{k_m})
+%\end{array}
+\end{align*}
+
+We can develop the fast evaluation algorithm from this result. We leave this as an exercise in this chapter.
+
+\vspace{5mm}
+
+\index{Euler}
+
+Leonhard Euler was a great Swiss mathematician and scientist. He is held to be one of the greatest mathematician in the history together with Archimedes, Newton, and Gauss. Euler was born on April 15, 1707 in Basel Switzerland. As a paster, his father urged him to study theology and became paster too. Euler enrolled at the University of Basel at the age of 13 with major of philosophy and theology. During that time, he was receiving Saturday afternoon lessons from Johann Bernoulli, the foremost mathematician in Europe. Bernoulli quickly discovered Euler's incredible talent for mathematics, and convinced his father that Leonhard was destined to become a great mathematician.
+
+%\begin{wrapfigure}{R}{0.4\textwidth}
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=0.4]{img/euler.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Stamps commemorating Leonhard Euler (1707 - 1783)}
+ \label{fig:Leonhard-Euler}
+\end{figure}
+%\end{wrapfigure}
+
+In 1727, Euler became a member of Imperial Russian Academy of Sciences in Saint Petersburg. He devoted himself to research work and later became the head of mathematics department after his friend, Daniel Bernoulli left for Basel. During the 14 years in Russia, Euler studied analytics, number theory, and mechanics. In 1747, Euler took up a position at the Berlin Academy, which he had been offered by Frederick the Great of Prussia. He lived for 25 years in Berlin, where he wrote over 380 articles. During this time, his research was more extensive, involving planetary motion, rigid body movement, thermodynamics, ballistics, and demography. These work was closely connected with his research in mathematics. Euler made groundbreakings in differential equations, and surface differential geometry. After the political situation in Russia stabilized after Catherine the Great's accession to the throne, in 1766 Euler accepted an invitation to return to the St. Petersburg Academy. He spent the rest of his life in Russia.
+
+Euler worked in almost all areas of mathematics, such as geometry, infinitesimal calculus, trigonometry, algebra, and number theory, as well as continuum physics, lunar theory and other areas of physics. He is a seminal figure in the history of mathematics; From the age of 19 till he died at 76, he published huge number of research papers and books in half a Century. Euler's name is associated with almost every area in mathematics. He was the top productive mathematician in the history with a total of 856 papers, and 31 books. And these did not counted the loss of the fire in St. Petersburg in 1771. (Euler's record was refreshed by Hungarian mathematician Paul Erdős in the 20th Century, who published 1525 papers and 32 books) \cite{Wiki-Euler}.
+
+Euler had unbelievable strong willpower. His right eye lost sight from a fever. Three years later, he became almost blind in his right eye. But even worse, his left eye lost sight too in 1771. But Euler rather blamed the painstaking work on cartography he performed for his condition. Just as deafness did not stop Beethoven’s music creation, blindness did not stop Euler’s mathematical exploration\cite{HanXueTao2009}. Euler remarked on his loss of vision, ``Now I will have fewer distractions.'' As he compensated for it with his mental calculation skills and exceptional memory. He could not only remember the first 100 prime numbers, but also their squares, cubics, and even higher powers. He could also perform complex mental arithmetic. With the aid of his scribes, Euler's productivity on many areas of study actually increased. He produced, on average, one mathematical paper every week in the year 1775. Half of Euler's work was dictated after his eyes were completely blind. The French physicist François Arago said ``Euler calculated without any apparent effort, just as men breathe, as eagles sustain themselves in the air.'' Euler could work in any bad environments. He often held the child on the lap to complete the papers, regardless of any noise around.
+
+Among Euler's work, there are difficult monographs as well as readings for the general public. Euler wrote over 200 letters to a German Princess in early 1760s, which were later compiled into a best-selling volume entitled {\em Letters of Euler on different Subjects in Natural Philosophy Addressed to a German Princess}. This book became more widely read than any of his mathematical works and was published across Europe and in the United States. The popularity of the "Letters" testifies to Euler's ability to communicate scientific matters effectively to a lay audience, a rare ability for a dedicated research scientist. Euler also wrote a course on elementary algebra for readers of non-mathematics background, which is still in print today. Many popular mathematical notations we are using today were carefully introduced by Euler, for example $\pi$ (1736), the imaginary unit $i$ (1777), the base of the natural logarithm $e$, now also known as Euler's number (1748), circular function $sin$, $cos$ (1748), and $tg$ (1753), $\Delta x$ (1755), summation $\sum$ (1755), function $f(x)$ (1734) and so on\cite{HanXueTao2009}.
+
+On September 18, 1783, after lunch with his family, Euler was discussing the newly discovered planet Uranus and its orbit with a fellow academician. As usual, he played with one of his granddaughter while having tea. Suddenly, the pipe drop from his hand. He said ``My pipe'', then bent over to pick it, but he was not able to stand, uttered only ``I am dying'' before he lost consciousness. ``He ceased to calculate and to live.''\footnote{In the eulogy for the French Academy, French mathematician and philosopher Marquis de Condorcet wrote this.}
+
+\vspace{5mm}
+
+\index{RSA cryptosystem}
+
+Fermat little theorem is widely used in our everyday life, from internet shopping to electronic payment. In 1976, professor Whitfield Diffie and Martin Hellman in Stanford University developed the concept of asymmetric public-private key cryptosystem. In 1977, Ron Rivest, Adi Shamir, and Leonard Adleman in Massachusetts Institute of Technology (MIT) developed a one-way function that was hard to invert based on theory of numbers. The algorithm is now known as RSA – the initials of their surnames in same order as their paper.
+
+The key asymmetry concept of RSA is based on the fact that we can easily create a composite numbers from two large prime numbers, while there is practical difficulty to factor them. This is known as the {\em factoring problem}. For a large number of over 200 digits, even the most powerful super computer will cost time longer than the age of universe. In order to construct a encrypt key hard to break, we need a method that can find large prime numbers fast. However, people do not know the exact pattern about how prime numbers distributed in nature numbers. There is no formula to enumerate prime numbers. The brute force method is to randomly pick a number $n$, then examine from 1 to $\sqrt{n}$, check if all do not divide $n$. But this primality test method is very ineffective. The time will also exceed the age of universe. A better method is the Eratosthenes sieve algorithm. We first enumerate all numbers from 2 to $n$. Starting from 2, removal all multiples of 2, then remove all multiples of 3... Repeat this every time from the next number that is not filtered out, till the number not greater than $\sqrt{n}$. This process gives all the prime numbers to $n$. However, it is still only applicable for small $n$, but can't serve for the large number primality test.
+
+Interestingly, Fermat's little theorem provides a way for fast primality test. For a large number $n$, we can randomly select a positive integer $a$ less than it as a `witness'. Then check if the remainder of $a^{n-1}$ modulo $n$ is 1. If not 1, $n$ must not be prime number according to Fermat's little theorem. Otherwise if it is 1, then $n$ may be a prime number.
+
+The {\em Fermat primality test} algorithm (also known as Fermat test) based on this idea can be described as below:
+
+\begin{algorithmic}
+\Function{primality}{$n$}
+  \State Random select a positive integer $a < n$
+  \If{$a^{n-1} \equiv 1 \mod n$}
+    \State \Return prime number
+  \Else
+    \State \Return composite number
+  \EndIf
+\EndFunction
+\end{algorithmic}
+
+We needn't compute the exact value of $n-1$ power of $a$, then divide $n$ to get the remainder. We can use modular arithmetic to speed up. The intermediate result can be largely re-used. After we calculate $b = a^2 \mod n$, we can next get $b^2 \mod n$, which equals to $a^4 \mod n$. For example, when evaluate $a^{11} \mod n$, since:
+
+\[
+a^{11} = a^{8 + 2 + 1} = ((a^2)^2)^2a^2a \mod n
+\]
+
+What have to calculated are only $a^2 \mod n$, $(a^2)^2 \mod n$, and $((a^2)^2)^2 \mod n$. Basically, we can express $n$ in binary format, and only iterate calculating the modular product for the digits of 1. The complexity of this algorithm is $O(\lg n)$ (proportion to the logarithm of $n$). Fermat test is very fast because of this.
+
+However, even a number can pass Fermat test, it is not necessarily prime. For example 341 = 11 $\times$ 31 is a composite number, but $2^{340} \equiv 1 \mod 341$ can pass the Fermat test. To reduce the probability of such failure, people developed many improvements. The first improvement is to increase the number of witness. We can prove that, if a number does not pass Fermat test, then there exist at least half of $n$ numbers that can't pass too (\cite{Algorithms-DPV}, pp26).
+
+\begin{theorem}
+For positive integer $a$ less than $n$, and coprime with $n$, if $a^{n-1} \not\equiv 1 \mod n$, then for all selected $a < n$, it also holds for at least half.
+\end{theorem}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (0, 0) circle[x radius=1cm, y radius=3cm]
+      (5, 0) circle[x radius=1cm, y radius=3cm];
+\path (0, 3) node[above] {pass Fermat test}
+      (5, 3) node[above] {not pass Fermat test};
+\path (0, 0) node (b) {}
+      (5, 0) node (fb) {}
+      (0, 1.5) node (a) {}
+      (5, 1.5) node (fa) {}
+      (0, -1.5) node (c) {}
+      (5, -1.5) node (fc) {};
+\filldraw (0, 0) circle (1pt) node[above] {}
+      (5, 0) circle (1pt) node[above] {}
+      (0, 1.5) circle (1pt) node[above] {$b$}
+      (5, 1.5) circle (1pt) node[above] {$ab$}
+      (5, 1) circle (1pt) node[right] {$c$}
+      (0, -1.5) circle (1pt) node[above] {}
+      (5, -1.5) circle (1pt) node[above] {};
+\draw[dashed, ->] (b) to node [above] {$f: b \to ab$} (fb)
+      (a) to [bend left] (fa)
+      (c) to [bend right] (fc);
+\end{tikzpicture} \\
+Set $\{1, 2, ..., n-1\}$
+\caption{Map from the set that pass Fermat test to the set that does not}
+\label{fig:Fermat-test}
+\end{figure}
+
+\begin{proof}
+If for some $a$ that $a^{n-1} \not\equiv 1 \mod n$ holds, then for any witness $b$ that passes Fermat test (It means $b^{n-1} \equiv 1 \mod n$), we can create a negative case for Fermat test $ab$.
+
+\[
+(ab)^{n-1} \equiv a^{n-1}b^{n-1} \equiv a^{n-1}1 \not\equiv 1 \mod n
+\]
+
+And because $i \neq j$, we have $a \cdot i \not\equiv a \cdot j$, therefore, all these negative cases are not same.
+
+As shown in figure \ref{fig:Fermat-test}, if there exists a number that can't pass Fermat test, then the positive cases are as same amount as the negative cases.
+\end{proof}
+
+If we select $k$ different witness and perform Fermat test, we can reduce the probability of failure that $n$ is not prime number to $\dfrac{1}{2^k}$. However, there exist such composite number $n$, that for any $a$ less than $n$ and coprime to $n$, $a^{n-1} \equiv 1 \mod n$ holds. It means whatever $a$ we selected, such composite number can pass Fermat test. Carmichael found first such number in 1910, that 561 = 3 $\times$ 11 $\times$ 17. This kind of numbers is called Carmichael numbers or Fermat pseudoprime\footnote{The Czech mathematician Václav Šimerka found the first 7 Fermat pseudoprimes: 561 = 3 $\times$7 $\times$11, 1105 = 5 $\times$13 $\times$7, 1729 = 7 $\times$13 $\times$19, 2465 = 5 $\times$17 $\times$29, 2821 = 7 $\times$13 $\times$31, 6601 = 7 $\times$23 $\times$41, 8911 = 7 $\times$19 $\times$67. However, his work was not well known to the people}. Erdős conjectured there are infinite many Carmichael numbers. In 1994, people proved for sufficient large $n$, there are at least $n^{2/7}$ Carmichael numbers from 1 to $n$. Thus explains Erdős' conjecture\cite{Wiki-Carmichael-number}.
+
+The primality test algorithm in RSA is Miller-Rabin algorithm. It is also a probabilistic algorithm\footnote{There is a deterministic version of Miller-Rabin algorithm, but the correctness is on top of the generalized Riemann hypothesis (GRH)\cite{Wiki-Miller-Rabin}.}. According to the above theorem, if select more than 100 witnesses, the probability of failure is expected less than $\dfrac{1}{2^{100}}$. Donald Knuth commented ``far less, for instance, than the probability that a random cosmic ray will sabotage the computer during the computation!''
+
+%TODO: Add RSA implementation in Appendix.
+
+\vspace{5mm}
+
+We summarized the relations for group, semigroup, monoid introduced so far as the following diagram.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (4, 2) node (abeliangroup) {abelian group}
+      (2, 1) node (group) {group}
+      (0, 0) node (monoid) {monoid}
+      (-2, -1) node (semigroup) {semigroup};
+\draw (-4, -2) circle[x radius = 1.5cm, y radius = 0.5cm] node (assoc) {associativity}
+      (0, -2) circle[x radius = 1.5cm, y radius = 0.5cm] node (binop) {binary operation}
+      (2, -1) circle[x radius = 1.5cm, y radius = 0.5cm] node (unit) {identity element}
+      (4, 0) circle[x radius = 1.5cm, y radius = 0.5cm] node (invert) {inverse element}
+      (6, 1) circle[x radius = 1.5cm, y radius = 0.5cm] node (community) {community};
+\draw (abeliangroup) to (community)
+      (abeliangroup) to (group)
+      (group) to (invert)
+      (group) to (monoid)
+      (monoid) to (unit)
+      (monoid) to (semigroup)
+      (semigroup) to (binop)
+      (semigroup) to (assoc);
+\end{tikzpicture}
+\caption{group, semigroup, monoid}
+\label{fig:groups}
+\end{figure}
+
+\begin{Exercise}
+\Question{Today is Sunday, what day it will be after $2^{100}$ days?}
+\Question{Given two strings (character string or list), write a program to test if they form the same necklace.}
+\Question{Write a program to realize Eratosthenes sieve algorithm.}
+\Question{Extend the idea of Eratosthenes sieve algorithm, write a program to generate Euler $\upphi$ function values for all numbers from 2 to 100.}
+\Question{Write a program to realize fast modular multiplication, and Fermat's primality test.}
+\end{Exercise}
+
+\section{Ring and Field}
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+%\begin{figure}[htbp]
+ \centering
+ \includegraphics[scale=1]{img/Noether.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Emmy Noether, 1882-1935}
+ \label{fig:Noether}
+%\end{figure}
+\end{wrapfigure}
+
+\index{Emmy Noether}
+
+The modern theory of rings, fields, and abstract algebra was greatly developed by German mathematician Emmy Noether. Noether was born to a Jewish family in Erlangen Germany on March 23, 1882. Her father was a mathematician in the University of Erlangen. She originally planned to teach French and English after passing the required examinations in 1900, but she chose instead to continue her studies at the University of Erlangen where her father lectured.
+
+This was an unconventional decision. Two years earlier, the Academic Senate of the university had declared that allowing mixed-sex education would ``overthrow all academic order''. As one of only two women in a university of 986 students, Noether was only allowed to audit classes rather than participate fully, and required the permission of individual professors whose lectures she wished to attend. Despite these obstacles, on July 14, 1903 she passed the graduation exam at a Realgymnasium in Nuremberg.
+
+During the 1903–1904 winter semester, she studied at the University of Göttingen, attending lectures given by astronomer Karl Schwarzschild and mathematicians Hermann Minkowski, Otto Blumenthal, Felix Klein, and David Hilbert. Noether returned to Erlangen. She officially reentered the university in October 1904, and declared her intention to focus solely on mathematics. Under the supervision of Paul Gordan she wrote her dissertation. For the next seven years (1908–1915) she taught at the University of Erlangen's Mathematical Institute without pay only because she was a woman.
+
+The mathematician Ernst Fischer was an important influencer on Noether, in particular by introducing her to the work of David Hilbert. From 1913 to 1916 Noether published several papers extending and applying Hilbert's methods to mathematical objects such as fields of rational functions and the invariants of finite groups. This phase marks the beginning of her engagement with abstract algebra, the field of mathematics to which she would make groundbreaking contributions.
+
+In the spring of 1915, Noether was invited to return to the University of Göttingen by David Hilbert and Felix Klein. Their effort to recruit her, however, was blocked by the philologists and historians among the philosophical faculty: Women, they insisted, should not become privatdozenten. Hilbert responded with indignation, stating, ``I do not see that the sex of the candidate is an argument against her admission as privatdozent. After all, we are a university, not a bath house.''
+
+During her first years teaching at Göttingen she did not have an official position and was not paid; her family paid for her room and board and supported her academic work. Her lectures often were advertised under Hilbert's name, and Noether would provide ``assistance''.
+
+Soon after arriving at Göttingen, however, she demonstrated her capabilities by proving the theorem now known as Noether's theorem, which shows that a conservation law is associated with any differentiable symmetry of a physical system. American physicists Leon M. Lederman and Christopher T. Hill argue in their book Symmetry and the Beautiful Universe that Noether's theorem is ``certainly one of the most important mathematical theorems ever proved in guiding the development of modern physics, possibly on a par with the Pythagorean theorem''.
+
+In 1919 the University of Göttingen allowed Noether to proceed with her habilitation. Noether was not paid for her lectures until she was appointed to the special position in 1923.
+
+Noether's work in algebra began in 1920. She published the important paper {\em Theory of Ideals in Ring Domains} in 1921. This revolutionary work gave rise to the term ``Noetherian ring'' and the naming of several other mathematical objects as Noetherian. In 1931, Noether's student, Dutch mathematician Van der Waerden published {\em Moderne Algebra}, a central text in the field developed by Noether. Although Noether did not seek recognition, Van der Waerden included a note ``based in part on lectures by E. Artin and E. Noether''. This classic book influenced a generation of young mathematicians in that time. In Göttingen, Noether supervised more than a dozen doctoral students. In November 1932, Noether delivered one hour speech at the 9th International Congress of Mathematicians in Zürich. with 800 attendees. Apparently, this prominent speaking position was a recognition of the importance of her contributions to mathematics. The 1932 congress is sometimes described as the high point of her career.
+
+However, the huge reputation and recognition did not improve her difficult situation as a woman. Her colleagues were frustrated for the fact that she was not elected to the Göttingen academy of sciences and was never promoted to the position of full professor. Her frugal lifestyle was due to being denied pay for her work; However, even after the university began paying her a small salary in 1923, she continued to live a simple and modest life.
+
+After Hitler gain the power of German, Nazi administration persecuted Jews intensified. In 1929, Noether was taken out of the apartment where she lived. In April 1933, Noether was forced to stop teaching at the University of Göttingen. Several of Noether's colleagues, including Max Born and Richard Courant, also had their positions revoked. Noether accepted the decision calmly, providing support for others during this difficult time. Hermann Weyl later wrote that ``Emmy Noether—her courage, her frankness, her unconcern about her own fate, her conciliatory spirit—was in the midst of all the hatred and meanness, despair and sorrow surrounding us, a moral solace.''
+
+As dozens of newly unemployed professors began searching for positions outside of Germany. Albert Einstein and Hermann Weyl were appointed by the Institute for Advanced Study in Princeton, while others worked to find a sponsor required for legal immigration. Although Noether was the world famous mathematician, it was very hard for her to get a position from large institutions as a women. After a series of negotiations with the Rockefeller Foundation, a grant to Bryn Mawr College in the United States was approved for Noether and she took a position there, starting in late 1933. This is a girl's University, and Noether lectured there as a visiting scholar. Although she was invited to Princeton University to give lectures, she remarked that she was not welcome at ``the men's university, where nothing female is admitted''.
+
+In April 1935, doctors discovered a tumor in Noether's pelvis. She was died after the surgery on April 14 at the age of 53.
+
+Noether is best remembered for her contributions to abstract algebra. Nathan Jacobson wrote that: ``The development of abstract algebra, which is one of the most distinctive innovations of twentieth century mathematics, is largely due to her.'' She sometimes allowed her colleagues and students to receive credit for her ideas, helping them develop their careers at the expense of her own. She was described by Pavel Alexandrov, Albert Einstein, Jean Dieudonné, Hermann Weyl and Norbert Wiener as the most important woman in the history of mathematics\cite{Wiki-Noether}.
+
+\subsection{Ring}
+\index{ring}
+Let us see how ring is defined.
+
+\begin{definition}
+A ring is a set $R$ that satisfies below \textbf{ring axioms}:
+\begin{enumerate}
+\item $R$ is an additive group, it means $R$ forms an abelian group under the addition operation defined on it;
+\item There is multiplication defined for $R$, and $R$ is close under this multiplication operation;
+\item The multiplication is associative. For all $a, b, c$, equation $(ab)c = a(bc)$ holds;
+\item Multiplication is distributive with respect to addition, meaning that, for all $a, b, c$, we have:
+\[
+\begin{array}{l}
+a(b + c) = ab + ac \\
+(b + c)a = ba + ca
+\end{array}
+\]
+\end{enumerate}
+\end{definition}
+
+\index{commutative ring}
+Obviously, all integers form a ring under the addition and multiplication. Other examples are polynomials and matrix form ring under the addition and multiplication. The ring definition only requires the addition operation is commutative, thus the ring is an abelian group under addition. It does not have such requirement for multiplication. When the ring multiplication is also commutative, we call it \textbf{commutative ring}. In commutative ring, for positive integer $n$ and any two elements, the following equation holds:
+
+\[
+a^nb^n = (ab)^n
+\]
+
+The ring definition does not require an identity element for the multiplication too. If there exists an element $e$ in $R$, it satisfies the below equation for all elements:
+
+\[
+ea = ae = a
+\]
+
+We call $e$ the \textbf{unity} (multiplicative identity element) of the ring. A ring may not necessarily have unity. Traditionally, we use 1 to represent the unity. It is just a symbol, but not means the actual number 1. With unity, we can also define inverse element. If $ab = ba = 1$, we say $b$ is the inverse element of $a$. According to the group property, we know that if the ring has an identity element for multiplication, it is unique. If an element is invertible, the inverse element is also unique. While it is not necessary that all elements are invertible. For example, the integer ring has unity, but except for $\pm 1$, all other integers are not invertible. We call the invertible element a \textbf{unit}.
+
+From the distributive axiom, we have:
+
+\[
+(a - a)a = aa - aa = 0
+\]
+
+It means, if either $a$ or $b$ is 0, then $ab = 0$. But the inverse proposition does not hold. We can not deduce from $ab =0$ to either $a$ or $b$ is 0. Let's see a negative example. Consider the residue class modulo $n$, where the addition operation is modulo addition: $[a] + [b] = [a + b]$, which takes modulo $n$ on top of the sum. It forms an abelian addition group. The multiplication modulo $n$ is defined as: $[a][b] = [ab]$, which takes modulo $n$ on top of the product. It's easy to verify that this is a ring, named as residue ring modulo $n$.
+
+If $n$ is not prime, for example 10, we can multiply two none zero elements $[5][2] = [5 \times 2] = [0]$. In fact, for any two factors of $n$, their modulo product must be zero.
+
+\index{zero divisor}
+In a ring, if there exists $a \neq 0, b \neq 0$, but $ab = 0$, we call $a$ is a \textbf{left zero divisor}, and $b$ is a \textbf{right zero divisor} of the ring. For the commutative ring, a left zero divisor is also right zero divisor. Of course, it's possible there is no zero divisor, for example the integer ring. For $ab = 0$, we can deduce either $a$ or $b$ is 0 only if there is no zero divisor in the ring. And we have the following theorem:
+
+\begin{theorem}
+For a ring without zero divisor, the following two cancellation rules hold.
+\begin{itemize}
+\item If $a \neq 0$, and $ab = ac$, then $b = c$;
+\item If $a \neq 0$, and $ba = ca$, then $b = c$.
+\end{itemize}
+\end{theorem}
+
+Conversely, if one cancellation rule holds in a ring, then the other cancellation rule also holds, and there is no zero divisor in this ring.
+
+\index{integral domain}
+So far, we introduced three additional conditions: (1) Multiplication is commutative; (2) There exists unity; (3) No zero divisor. A ring that satisfies these three additional constraints is called \textbf{integral domain} (nonzero commutative ring). It's obvious that integer ring is an integral domain.
+
+\index{semiring}
+The ring constraints are strong. Sometimes, we needn't the additive inverse. By weakening the limitation, we obtain the \textbf{semiring}.
+
+\begin{definition}
+A set $R$ under the addition and multiplication forms a semiring if it satisfies the following axioms:
+\begin{enumerate}
+\item $R$ forms a commutative monoid under addition, and there exists the identity element 0;
+\item $R$ forms a monoid under multiplication, and there exists the identity element 1 (unity);
+\item Multiplication is distributive with respect to addition. For any $a, b, c$:
+\[
+\begin{array}{l}
+a(b + c) = ab + ac \\
+(b + c)a = ba + ca
+\end{array}
+\]
+\item Any element multiplies 0 gives 0, meaning that: $a0 = 0a = 0$.
+\end{enumerate}
+\end{definition}
+Natural numbers $N$ is an example of semiring. The Boolean operations form a semiring with two elements.
+
+\begin{Exercise}
+\Question{Prove the theorem that the two cancellation rules hold in a nonzero ring (ring without zero divisor).}
+\Question{Prove that, all real numbers in the form of $a + b \sqrt{2}$, where $a, b$ are integers form a integral domain under the normal addition and multiplication.}
+\end{Exercise}
+
+\subsection{Division ring and field}
+
+We know that not all elements have inverse element in a ring. If every non-zero element has its inverse, then it forms a special ring. For example all rational numbers form a ring under the normal addition and multiplication. In this ring, every non-zero element $a$ has its inverse $\dfrac{1}{a}$.
+
+\index{division ring}
+\begin{definition}
+A ring $R$ is a \textbf{division ring} if it satisfies the following conditions:
+\begin{enumerate}
+\item $R$ contains at least one non-zero element;
+\item $R$ has unity;
+\item Every non-zero element in $R$ is invertible (unit).
+\end{enumerate}
+\end{definition}
+
+\index{field}
+\begin{definition}
+A commutative division ring is a \textbf{field域}.
+\end{definition}
+
+According to this definition, all rational numbers form a field. Similarly, all real numbers and all complex numbers form fields under the addition and multiplication\footnote{We'll see in later chapter, rational number field is countable, while real number field and complex number field are not countable.}. There are some interesting properties for division ring and field. There is no zero divisor in a division ring. This is because if $a \neq 0$, and $ab = 0$, then we multiply the inverse element of $a$ from left to both sides:
+
+\[
+a^{-1}ab = b = 0
+\]
+
+Thus $b$ must be zero, therefore, division ring is a nonzero ring (does not contain zero divisor). The other property is that, all non-zero elements in division ring $R$ form a group under multiplication, denoted as $R*$. We call $R*$ the multiplicative group of division ring $R$. A division ring consists of two groups: addition group and multiplication group. The distributive axiom bridges the two groups together. We summarized the ring, semiring, integral domain, division ring, and field as figure \ref{fig:ring}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (0, 1) node (semiring) {semiring}
+      (0, 0) node (ring) {ring}
+      (-4, -1) node (commu-ring) {commutative ring}
+      (0, -1) node (unit) {unit}
+      (3, -1) node (zero-factor) {nonzero}
+      (-3, -3) node (integral-domain) {integral domain}
+      (3, -3) node (division-ring) {division ring}
+      (0, -4) node (field) {field};
+\draw (0, 2) circle[x radius = 1.5cm, y radius = 0.5cm] node (add-monoid) {add monoid}
+      (4, 2) circle[x radius = 1.5cm, y radius = 0.5cm] node (mul-monoid) {mul monoid}
+      (-4, 2) circle[x radius = 1.5cm, y radius = 0.5cm] node (distribution-law) {distributive}
+      (4, 0.5) circle[x radius = 1.5cm, y radius = 0.5cm] node (negate) {add invertible}
+      (-5, 0) circle[x radius = 1.5cm, y radius = 0.5cm] node (mul-commu) {mul commutative}
+      (0, -3) circle[x radius = 1.5cm, y radius = 0.5cm] node (mul-invert) {mul invertible};
+\draw (distribution-law) to (semiring)
+      (add-monoid) to (semiring)
+      (mul-monoid) to (semiring)
+      (semiring) to (ring)
+      (negate) to (ring)
+      (mul-commu) to (commu-ring)
+      (ring) to (commu-ring)
+      (ring) to (unit)
+      (ring) to (zero-factor)
+      (commu-ring) to (integral-domain)
+      (unit) to (integral-domain)
+      (zero-factor) to (integral-domain)
+      (unit) to (division-ring)
+      (zero-factor) to (division-ring)
+      (integral-domain) to (field)
+      (division-ring) to (field)
+      (mul-invert) to (division-ring);
+\end{tikzpicture}
+\caption{semiring, ring, integral domain, and field}
+\label{fig:ring}
+\end{figure}
+
+We skipped some important algebraic structure here like subring, ideal, principal ideal domain, and Euclidean domain.
+
+\section{Galois theory}
+
+Galois theory provides connection between group and field. Using Galois theory, certain problems in field theory can be reduced to group theory, which is in some sense simpler and easier to understand. A field can contain infinite many elements with adding, subtracting, multiplying, and dividing. It's a complex mathematical object. Galois theory can simplify the problems in field to a corresponding problem in finite group with only one operation. This is the key idea of Galois theory.
+
+Galois theory is famous for its difficulty and hard to understand. Compare to its original form, the modern Galois theory is no longer ambiguous, and much clearer and elegant. This is because more than two dozens of masters greatly developed and improved it in the past. The most important contributors are Jordan, Dedekind, and Emil Artin. Jordan and Dedekind first systematically developed Galois theory in France and Germany. The definition of Galois group we are using today was given by Dedekind. The modern form of Galois theory is made by Artin\cite{ZhangPu2013}. We adopted a gentle explanation that is friendly to beginners\cite{Stillwell1994} in this short section. It's quite common that we can't understand it in the first time reading. It's always helpful to read the masters. Our life is not linear. I recommend the way to revisit what we learned before, find more great books to read. Our understanding changes along the time, and there must be aha moment in the future.
+
+\subsection{Field extension}
+\index{field extension}
+
+From the definition of field, we know that all rational numbers form a field $Q$. Let us consider a set of all the numbers in the form of $a + b\sqrt{2}$, where $a$ and $b$ are rational numbers\cite{Goodman2011}. Obviously, the set of rational numbers is a subset of it (just let $b = 0$). It's easy to verify that, for any two such numbers, the result of add, subtract, multiply, and divide are still in the form of $a + b \sqrt{2}$. Among them, divide takes more steps to verify. Given $x = \dfrac{1}{a + b\sqrt{2}}$, we can multiply both nominator and denominator by $a - b \sqrt{2}$ to get:
+
+\begin{align*}
+x & = \dfrac{a - b \sqrt{2}}{(a + b \sqrt{2})(a - b \sqrt{2})} \\[3pt]
+  & = \dfrac{a - b \sqrt{2}}{a^2 - 2b^2}
+\end{align*}
+
+Let $p = a^2 - 2b^2$, then $x$ can be expressed as $(a/p) -(b/p)\sqrt{2}$. Thus we verified for divide operation as well. This set is really a field. We denote it as $Q[\sqrt{2}]$. Similarly, $Q[\sqrt{3}]$ is also a field. They are both example of field extension concept.
+
+\begin{definition}
+If field $E$ contains field $F$, then $E$ is \textbf{field extension} of $F$, denoted as $F \subseteq E$ or $E/F$.
+\end{definition}
+
+For example, the field of real numbers is the field extension of rational numbers; $Q[\sqrt{2}]$ is the field extension of rational numbers $Q$. Basically, for field $F$, if $\alpha \in F$, but $\sqrt{\alpha} \not\in F$, then $F_1 = F[\sqrt{\alpha}]$ is also a field. We can keep extending the field with this method. If $\beta \in F_1$, but $\sqrt{\beta} \not\in F_1$, then:
+
+\[
+\begin{array}{rl}
+F_2 & = F_1[\sqrt{\beta}] \\
+    & = F[\sqrt{\alpha}][\sqrt{\beta}] \\
+    & = F[\sqrt{\alpha}, \sqrt{\beta}]
+\end{array}
+\]
+
+All numbers like $a + b \sqrt{\beta}$ where $a, b \in F_1$ form a higher level field extension. Starting from rational numbers, we can obtain a series of field extensions $Q \subset F_1 \subset F_2 ... \subset F_n$.
+
+Why does field extension matter? For example, equation $x^2 - 2 = 0$ can not be solved in the field of rational numbers (there are not any rational numbers satisfy this equation), however, if we extend from the rational number field, there is pair of solutions in the $Q[\sqrt{2}]$, which are $x = \pm \sqrt{2}$. Here is another example, for equation $x^4 - 5x^2 + 6 = 0$, there is no rational number solution, but there are two solutions in field extension $Q[\sqrt{2}]$, which are $\pm \sqrt{2}$; if we extent the field one more step to $Q[\sqrt{2}, \sqrt{3}]$, we obtain the complete four solutions: $\pm \sqrt{2}$, and $\pm \sqrt{3}$. It leads to the important concept of \textbf{splitting field}.
+
+\index{splitting field} \index{root field}
+\begin{definition}
+For equation $p(x) = 0$, the smallest field extension that contains all the roots is called the \textbf{splitting} field of $p(x)$. It's also called as root field.
+\end{definition}
+
+Thus the splitting field of equation $x^2 -2 = 0$ is $Q[\sqrt{2}]$. Why is it named as `splitting'? The polynomial $x^2-2$ can not be decomposed in rational number field $Q$, however, in field extension $Q[\sqrt{2}]$ it can be {\em split} to:
+\[
+(x + \sqrt{2}) (x - \sqrt{2})
+\]
+
+For a given polynomial equation, if we can start from the basic rational number field, with a series of field extension, reach to its splitting field, then this equation is radical solvable.
+
+We've seen the example of square root. There are more complex cases. Cubic equation may need cubic root, some equation even requires imaginary unit $i$. From the high school math, we know that for the simplest equation $x^p-1=0$, there are $p$ roots of $1, \zeta, \zeta^2, ..., \zeta^{p-1}$, where $\zeta \neq 1$ is a complex root in the unit circle. We need a strict description of field extension to cover these cases.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=3]
+ \draw[step=.5cm, gray, very thin] (-1.2,-1.2) grid (1.2,1.2);
+ \draw[->] (-1.25,0) -- (1.25,0) coordinate (x axis);
+ \draw[->] (0,-1.25) -- (0,1.25) coordinate (y axis);
+ \draw (0,0) circle (1cm);
+ \draw[->, very thick] (0, 0) edge node[below=2pt,fill=white] {$\zeta^0 = \zeta^3 = 1$} (1, 0)
+     (0, 0) edge node[above] {$\zeta = \dfrac{-1 + i\sqrt{3}}{2}$} (120:1cm)
+     (0, 0) edge node[below] {$\zeta^2 = \dfrac{-1 - i\sqrt{3}}{2}$} (-120:1cm);
+\end{tikzpicture}
+\caption{Unit root of $x^3 - 1 = 0$}
+\label{fig:root-of-unity}
+\end{figure}
+
+If the integer power of $\alpha$ is some element $b$ in field $F$, which means $\alpha^m = b \in F$, such $\alpha$ can be obtained through radical form of $b$ as $\alpha = \sqrt[m]{b}$. We can extend the field with a series of such radical forms to $F[\alpha_1][\alpha_2]...[\alpha_k]$. If each $\alpha_i$ is radical form, we call the field extension $F[\alpha_1, \alpha_2, ..., \alpha_k]$ as radical extension of $F$. Let the equation roots be $x_1, x_2, ..., x_n$ (Note $x_i$ may not be radical form), if the splitting field $E = Q[x_1, x_2, ..., x_n]$ is radical extension, then the equation is radical solvable.
+
+\begin{Exercise}
+\Question{Prove that $Q[a, b] = Q[a][b]$, where $Q[a, b]$ contains all the expressions combined with $a$ and $b$, such as $2ab, a + a^2b$ etc.}
+\end{Exercise}
+
+\subsection{Automorphism and Galois group}
+
+Our thought so far is to start from the rational number field, where the coefficients of the equation belong to, then move forward to the splitting field step by step through a series of radical extensions. How to further simplify the problem to find the answer? At this stage, Galois changed his mind to another direction. He turned to consider the symmetry among the roots of the equation. For example, There is a pair of roots for equation $x^2 - 2 = 0$, which are $\pm \sqrt{2}$. Obviously, if replace $\sqrt{2}$ with $-\sqrt{2}$, the equation still holds. Besides that, replacing $\sqrt{2}$ in equation $\sqrt{2}^2 + \sqrt{2} + 1 = 3 + \sqrt{2}$ with $-\sqrt{2}$ also gives the same result. It means, the pair of roots $\pm \sqrt{2}$ is symmetric to the relation $\alpha^2 + \alpha + 1 = 3 + \alpha$. We can further say, for any expressions that only consist of addition and multiplication of $\sqrt{2}$, the pair of roots can be exchanged with each other. We know that the most powerful tool to describe symmetry is group nowadays, in particular, the symmetric group (we just introduced it in section \ref{symmetric group}). To connect field extension and group, Galois introduced an important concept of field automorphism.
+
+Using the same example of $Q[\sqrt{2}]$, we can define a function from $Q[\sqrt{2}]$ to $Q[\sqrt{2}]$ with type $f: Q[\sqrt{2}] \to Q[\sqrt{2}]$. The definition is as this:
+
+\[
+f(a + b \sqrt{2}) = a - b \sqrt{2}
+\]
+
+Then $f$ is a field automorphism.
+
+\index{automorphism}
+\begin{definition}
+\textbf{Field Automorphism} is a invertible function $f$, that maps the field to itself. It satisfies $f(x + y) = f(x) + f(y)$，$f(ax) = f(a) f(x)$，$f(1/x) = 1/f(x)$.
+\end{definition}
+
+We can verify the example function $f(a + b \sqrt{2}) = a - b \sqrt{2}$ satisfies all the three conditions. The idea behind field automorphism is that, we can permute some elements in the field without any impact to the field structure.
+
+\begin{definition}
+$F$-Automorphism: If $E$ is field extension of $F$, the automorphism $f$ of field $E$ also satisfy an extra condition, that for any element in $F$, equation $f(x) = x$ holds, then it is called $F$-automorphism of $E$.
+\end{definition}
+
+The symmetry among roots is precisely defined. Under the $F$-automorphism, all the elements in $F$ keep unchanged, while all the new elements, and only these new elements in filed extension $E$ are changed. The changing among the elements in the field exactly means permutation, while the relations keep unchanged after permutation exactly means symmetry. For the example of $Q[\sqrt{2}]$, there are only two functions in $Q$-automorphism: one is the identity function $g(x) = x$, the other is $f$ we defined above.
+
+Let us summarize the result we obtained so far with the example $p(x) = x^2 - 2$:
+
+\begin{enumerate}
+\item The splitting field of $p(x)$ is $Q[\sqrt{2}]$;
+\item The $Q$-automorphism defines the symmetry of the roots of $p(x)$. It contains two functions: $f(a + b\sqrt{2}) = a - b\sqrt{2}$, and $g(x) = x$.
+\end{enumerate}
+
+However, we can't ensure the symmetry to all roots if only extend to the splitting field. For example, the splitting field of equation $x^4 - 5x + 6 = 0$ is $Q[\sqrt{2}, \sqrt{3}]$. Although there is automorphism $f$ that swaps (permute) $\pm \sqrt{2}$, there does not exist $Q$-automorphism permutes $\sqrt{2}$ and $\sqrt{3}$. Otherwise, suppose there was $f(\sqrt{2}) = \sqrt{3}$, then $f(\sqrt{2})^2 = f(\sqrt{2}^2) = f(2) = 2$, because $f$ preserves multiplicative structure and $f(x) = x$ for rational $x$. On the other hand, since $f(\sqrt{2}) = f(\sqrt{3})$, we have $f(\sqrt{2})^2 = \sqrt{3}^2 = 3$. It means $2 = 3$, which is clearly nonsense. Besides that, consider field extension $Q[x_1, ..., x_n, \sqrt{x_1}]$, it contains the square root of $x_1$, but does not contain the square root of $x_2$. Therefore, there is not automorphism that permutes $x_1$ and $x_2$. In order to obtain the complete symmetry, we need keep extending the field with $\sqrt{x_2}, ..., \sqrt{x_n}$.
+
+\begin{theorem}
+For each radical extension $E$ of $Q[x_1, ..., x_n]$, there exists a bigger radical extension $E \subseteq \overline{E}$ with automorphisms $\sigma$ extending all permutations of $x_1, ..., x_n$.
+\end{theorem}
+
+With this, we connected the field extension with automorphism. If we put all the automorphisms together as a set, using composition as the binary operation, and let the identity function be the identity element, we obtain a group, named Galois group.
+
+\index{Galois group}
+\begin{definition}
+\textbf{Galois group}: For field extension $E$ from $F$, there is a set $G$ contains all the $F$-automorphisms of $E$. For any two $F$-automorphisms $f$ and $g$ in $G$, define the binary operation as $(f \cdot g)(x) = f(g(x))$. We define $G$ as the Galois group of field extension $E/F$. Denoted as $Gal(E/F)$.
+\end{definition}
+
+We still use $p(x) = x^2 - 2$ for example. Galois group $G = Gal(p) = \{f, g\}$, contains two elements, one is $f(a + b\sqrt{2}) = a - b\sqrt{2}$, the other is $g(x) = x$. Where the identity element is $g$. Let's verify if $f \cdot f = g$:
+
+\[
+\begin{array}{rll}
+(f \cdot f)(a + b\sqrt{2}) & = f(f(a + b\sqrt{2})) & \text{Composition} \\
+  & = f(a - b\sqrt{2}) & \text{Definition of $f$ for inner parenthesis} \\
+  & = a + b\sqrt{2} & \text{Definition of $f$ again} \\
+  & = g(a + b\sqrt{2}) & \text{Definition of identity function $g$}
+\end{array}
+\]
+
+We do see that $G$ is a group. It's isomorphic (identical) to a 2-cycle cyclic group, and is also isomorphic to the degree 2 symmetric group $S_2$. This group can be written as $\{f, f^2\}$, since $f^2 = f \cdot f = 1$ is the identity element. It can also be written as the permutation group $\{(1), (1\ 2)\}$, where (1) keeps the two roots unchanged, and (1 2) swaps the two roots.
+
+\begin{Exercise}
+\Question{Prove that, for any polynomial $p(x)$, with rational coefficients, $E/Q$ is the field extension, $f$ is the $Q$-automorphism of $E$, then equation $f(p(x)) = p(f(x))$ holds.}
+\Question{Taking the complex number into account, what is the splitting field for polynomial $p(x) = x^4-1$? What are the functions in its $Q$-automorphism?}
+\Question{What's the Galois group for quadratic equation $x^2 - bx + c = 0$?}
+\Question{Prove that, if $p$ is prime number, then Galois group for equation $x^p - 1$ is the ($q-1$)-cycle cyclic group $C_{q-1}$.}
+\end{Exercise}
+
+\subsection{Fundamental theorem of Galois theory}
+\index{Fundamental theorem of Galois theory}
+
+We come to the center of Galois theory. Starting from the equation coefficient field $F$, we keep extending the fields to the splitting field $F \subset F_1 \subset F_2 ... \subset E$. The corresponding Galois group is $Gal(E/F)$. Galois found, there was one to one correspondence between the Galois subgroups and its intermediate fields $F_1, F_2, ...$ in the reversed order.
+
+\begin{theorem}
+\textbf{Fundamental theorem of Galois theory}: If $E/F$ is field extension\footnote{Strictly speaking, it should be Galois extension, we skipped the definition of Galois extension here.}, $G$ is the corresponding Galois group. There is one to one correspondence between subgroups of $G$ and intermediate fields. If $F \subset L \subset E$, and $Gal(E/L) = H$, then $H$ is the subgroup of $Gal(E/F)$.
+\end{theorem}
+
+The reason why it's in reversed order is because the group gets smaller when extend the field. The starting point of field extension is $F$, the corresponding Galois group is $G = Gal(E/F)$; the end point is the splitting field $E$, while the corresponding group only contains one element, which is the identity permutation $\{1\}$. For the intermediate field $L$, the corresponding group is $H = Gal(E/L)$. It's a subgroup, $Gal(E/L) \subset Gal(E/F)$. If $H$ is a normal subgroup (refer to previous section \ref{normal-subgroup}), then its quotient group is $G/H = Gal(L/F)$.
+
+Let us see a concrete example\cite{MArtin} (pp. 490). Consider equation $x^4 - 8x^2 + 15 = 0$, it can be factored as $(x^2 - 3)(x^2 - 5) = 0$. The coefficients are in rational field $Q$, the splitting field is $E = Q[\sqrt{3}, \sqrt{5}]$. The order of its Galois group $Gal(E/Q)$ is 4. It is isomorphic to a 4-cycle cyclic group. We can find 3 intermediate field extensions: $Q[\sqrt{3}]$, $Q[\sqrt{5}]$, and $Q[\sqrt{15}]$. The Galois subgroup orders corresponding to all these 3 intermediate fields are 2. While the Galois group of the equation, which is the 4-cycle cyclic group only has one subgroup of order 2. Besides that, it hasn't any other non-trivial subgroups. According to the fundamental theorem of Galois theory, we know there is no other field extension besides those 3 intermediate field extensions. We can consider it from another view point. All elements in the splitting field are in the form of $\alpha = a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15}$, where $a, b, c, d$ are rational numbers. For any elements in the 3 intermediate field extensions, among $b, c, d$, there are at least two are 0.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw (-3, 3) node (Q3-5) {$Q[\sqrt{3}, \sqrt{5}]$}
+      (-5, 0) node (Q5) {$Q[\sqrt{5}]$}
+      (-3, 0) node (Q15) {$Q[\sqrt{15}]$}
+      (-1, 0) node (Q3) {$Q[\sqrt{3}]$}
+      (-3, -3) node (Q) {$Q$};
+\draw (3, 3) node (G1) {$\{1\}$}
+      (1, 0) node (G3) {$\{1, f\}$}
+      (3, 0) node (G15) {$\{1, (f \cdot g)\}$}
+      (5, 0) node (G5) {$\{1, g\}$}
+      (3, -3) node (G) {$\{1, f, g, (f \cdot g)\}$};
+\draw[->] (Q3-5) edge node[midway, above] {Galois group} (G1)
+      (G) edge node[midway, above] {field extension correspondence} (Q)
+      (Q3) edge node[midway] {field extensions} (Q3-5)
+      (Q15) edge (Q3-5)
+      (Q5) edge (Q3-5)
+      (Q) edge (Q3)
+      (Q) edge (Q15)
+      (Q) edge (Q5)
+      (G1) edge node[midway] {subgroups} (G3)
+      (G1) edge (G15)
+      (G1) edge (G5)
+      (G3) edge (G)
+      (G15) edge (G)
+      (G5) edge (G);
+\end{tikzpicture}
+\caption{Galois correspondence}
+\label{fig:Galois-Correspondence}
+\end{figure}
+
+As shown in figure \ref{fig:Galois-Correspondence}, any element in the splitting field can be written in form:
+
+\[
+\begin{array}{rl}
+\alpha &= (a + b\sqrt{3}) + (c + d\sqrt{3}) \sqrt {5} \\
+       &= a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15}
+\end{array}
+\]
+
+Where $a, b, c, d$ are rational numbers. We define the following automorphisms:
+
+Morphism $f$ negates $\sqrt{3}$:
+
+\[
+\begin{array}{rl}
+f((a + b\sqrt{3}) + (c + d\sqrt{3}) \sqrt {5}) & = (a - b\sqrt{3}) + (c - d\sqrt{3})\sqrt{5} \\
+ & = a - b\sqrt{3} + c\sqrt{5} - d\sqrt{15}
+\end{array}
+\]
+
+Morphism $g$ negates $\sqrt{5}$:
+
+\[
+\begin{array}{rl}
+g((a + b\sqrt{3}) + (c + d\sqrt{3}) \sqrt {5}) & = (a + b\sqrt{3}) - (c + d\sqrt{3})\sqrt{5} \\
+ & = a + b\sqrt{3} - c\sqrt{5} - d\sqrt{15}
+\end{array}
+\]
+
+The composite morphism $f \cdot g$ negates $\sqrt{3}$ and $\sqrt{5}$ at the same time:
+
+\[
+\begin{array}{rl}
+(f \cdot g)((a + b\sqrt{3}) + (c + d\sqrt{3}) \sqrt {5}) & = (a - b\sqrt{3}) - (c - d\sqrt{3})\sqrt{5} \\
+ & = a - b\sqrt{3} - c\sqrt{5} + d\sqrt{15}
+\end{array}
+\]
+
+%\begin{figure}[htbp]
+\begin{wrapfigure}{R}{0.4\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.7]
+\filldraw[fill=gray, draw=gray] (-1, -2) rectangle (1, 2)
+    (-2, -0.5) rectangle (2, 0.5);
+\end{tikzpicture}
+\captionsetup{labelformat=empty}
+\caption{Klein four group. Symmetric when flip horizontally, vertically, or flip at the same time.}
+\label{fig:Klein-four-group}
+\end{wrapfigure}
+%\end{figure}
+
+In addition to the identity morphism 1, for the base field $Q$, there are four elements in its Galois group: $G = \{1, f, g, (f \cdot g)\}$. This group is isomorphic to Klein four group, while the Klein group is the product of two 2-cycle cyclic groups. It has 5 subgroups, each is corresponding to a field extension:
+
+\begin{itemize}
+\item The subgroup only contains the identity element $\{1\}$, it corresponds to the splitting field $Q[\sqrt{3}, \sqrt{5}]$;
+\item $G$ itself, corresponds to the rational field $Q$;
+\item Order 2 subgroup $\{1, f\}$, corresponds to field extension $Q[\sqrt{5}]$. $f$ only negates $\sqrt{3}$ and leaves $\sqrt{5}$ unchanged;
+\item Order 2 subgroup $\{1, g\}$, corresponds to field extension $Q[\sqrt{3}]$. $g$ only negates $\sqrt{5}$ and leaves $\sqrt{3}$ unchanged;
+\item Order 2 subgroup $\{1, (f \cdot g)\}$, corresponds to field extension $Q[\sqrt{15}]$. $(f \cdot g)$ negates $\sqrt{5}$ and $\sqrt{3}$ at the same time, and leaves $\sqrt{15}$ unchanged.
+\end{itemize}
+
+We can also write the Galois group of this equation in the form of permutation group \{(1), (1 2), (3 4), (1 2)(3 4)\}. Where (1) keeps all the 4 roots unchanged; (1 2) swaps $\pm \sqrt{3}$; (3 4) swaps $\pm \sqrt{5}$; while (1 2)(3 4) swaps these two pairs at the same time.
+
+Through the fundamental theorem of Galois theory, we managed to convert the equation problem in field to an equivalent problem about permutation group. The last attack is to reveal the solvability essence with group.
+
+\subsection{Solvability}
+
+Through Galois correspondence, we connect the radical extension with group structure. To simplify the problem, we add some extra conditions. First, for every radical extension $F[\alpha_i]$, we assume the $\alpha_i$ being extended is a $p$-th root for some prime $p$. For example, we will factor $\sqrt[6]{\alpha}$ to $\sqrt{\alpha} = \beta$ and $\sqrt[3]{\beta}$. Then extend the field two times with them one by one. Second, if $\alpha_i$ is $p$-th root, and the radical extension $F[\alpha_1, ..., \alpha_{i-1}]$ does not contain $p$-th root of unity, we can assume the next radical extension $F[\alpha_1, ..., \alpha_i]$ does not contain $p$-th root of unity too, unless $\alpha_i$ itself is a $p$-th root of unity. For example, when we want to extend the field with root $\alpha = \sqrt[3]{2}$, if the field $F$ does not contain $\zeta = \dfrac{-1 + i\sqrt{3}}{2}$ as shown in figure \ref{fig:root-of-unity}, we can assume the radical extension $F[\sqrt[3]{2}]$ does not contain $\zeta$ too, unless $\alpha^3 = 1$, which means $\alpha$ itself equals $\zeta$. If it isn't the case, we can adjoin $\zeta$ before $\alpha_i$, then the radical extension $F[\alpha_1, ..., \alpha_{i-1}, \zeta]$ contains all the $p$-th root of unity: $1, \zeta, \zeta^2, ..., \zeta^{p-1}$. With both these modifications, the final field $F[\alpha_1, ..., \alpha_k]$ is the same, and it remains the same if the newly adjoined root $\zeta$ are included in the list $\alpha_1, ..., \alpha_k$.
+
+Hence any radical extension $F[\alpha_1, ..., \alpha_k]$ is a chain of ascending fields:
+
+\[
+F = F_0 \subseteq F_1 \subseteq F_2 \subseteq ... \subseteq F_k = F[\alpha_1, ..., \alpha_k]
+\]
+
+Where every $F_i = F_{i-1}[\alpha_i]$. $\alpha_i$ is the $p$-th root of some element in $F_{i-1}$, where $p$ is prime. They satisfy the condition about root of unity above. Corresponding to this chain of radical extensions, we have a chain of descending groups:
+
+\[
+Gal(F_k/F_0) = G_0 \supseteq G_1 \supseteq ... \supseteq G_k = Gal(F_k/F_k) = \{1\}
+\]
+
+Where $G_i = Gal(F_k/F_i) = Gal(F_k/F_{i-1}[\alpha_i])$. Every step moves from $G_{i-1}$ to its subgroup $G_i$, corresponding to adjoin $p$-th root $\alpha_i$ to field $F$, where $p$ is prime. Using the terms in group theory, $G_i$ is the normal subgroup of the previous group $G_{i-1}$, while the quotient group $G_{i-1}/G_i$ is abelian (commutative). We have the following theorem reflects this fact:
+
+\begin{theorem}
+In field extension $B \subseteq B[\alpha] \subseteq E$, $\alpha^p \in B$ for some prime $p$, if $B[\alpha]$ contains no $p$-th roots of unity not in $B$ unless $\alpha$ itself is a $p$-th root of unity, then $Gal(E/B[\alpha])$ is a normal subgroup of $Gal(E/B)$, and the quotient group
+
+\[
+Gal(E/B) / Gal(E/B[\alpha])
+\]
+is abelian.
+
+\end{theorem}
+
+\begin{mdframed}
+The proof is a bit complex, reader can skip it in the this frame
+\begin{proof}
+We'll use the homomorphism theorem for groups introduced in section \ref{normal-subgroup} to prove this theorem. We need find a homomorphism of $Gal(E/B)$, with the kernal of $Gal(E/B[\alpha])$, into an abelian group (onto a subgroup of an abelian group, which of course is also abelian). The obvious map with kernel $Gal(E/B[\alpha])$ is restriction to field $B[\alpha]$, we denote this map as $|_{B[\alpha]}$. According to the definition of Galois group, the group elements are automorphisms:
+
+\[
+\sigma \in Gal(E/B[\alpha]) \iff \sigma|_{B[\alpha]} \text{is the identity map}
+\]
+
+All such automorphisms $\sigma$ in Galois group $Gal(E/B)$ satisfy the homomorphism property:
+
+\[
+\sigma'\sigma|_{B[\alpha]} = \sigma'|_{B[\alpha]}\sigma|_{B[\alpha]}
+\]
+
+Since $\sigma$ fixes all elements in $B$, $\sigma|_{B[\alpha]}$ is completely determined by the value of $\sigma(\alpha)$. There are two cases. In the first case, $\alpha$ is a $p$-th root of unity $\zeta$, then:
+
+\[
+(\sigma(\alpha))^p = \sigma(\alpha^p) = \sigma(\zeta^p) = \sigma(1) = 1
+\]
+
+Hence $\sigma(\alpha) = \zeta^i \in B[\alpha]$, since each $p$-th root of unity is some $\zeta^i$. In the second case, $\alpha$ is not a root of unity, then:
+
+\[
+(\sigma(\alpha))^p = \sigma(\alpha^p) = \alpha^p
+\]
+
+According to radical extension rule, $\alpha^p$ is in field $B$, hence $\sigma(\alpha) = \zeta^j\alpha$ for some $p$-th root of unity $\zeta$, and $\zeta \in B$, so again $\sigma(\alpha) \in B[\alpha]$. Thus $B[\alpha]$ is closed for every $\sigma$.
+
+This also implies that $|_{B[\alpha]}$ maps $Gal(E/B)$ into $Gal(E/B[\alpha])$, so it now remains to check that $Gal(B[\alpha]/B)$ is abelian. There are two cases: In the first case, $\alpha$ is a root of unity, then every element in Galois group, which is automorphism $\sigma_i = \sigma|_{B[\alpha]} \in Gal(B[\alpha]/B)$ can be written in form $\sigma_i(\alpha) = \alpha^i$, hence:
+
+\[
+\sigma_i\sigma_j(\alpha) = \sigma_i(\alpha^j) = \alpha^{ij} = \sigma_j\sigma_i(\alpha)
+\]
+
+In the second case, $\alpha$ is not a root of unity, then each group element, the automorphism $\sigma_i$ is of the form $\sigma_i(\alpha) = \zeta^i\alpha$, hence:
+
+\[
+\sigma_i\sigma_j(\alpha) = \sigma_i(\zeta^j\alpha) = \zeta^{i + j}\alpha = \sigma_j\sigma_i(\alpha)
+\]
+
+Since $\zeta \in B$, therefore $\zeta$ is fixed under the automorphism. Hence in either case, $Gal(B[\alpha]/B)$ is abelian.
+\end{proof}
+\end{mdframed}
+
+When observe the chain of Galois subgroups:
+
+\[
+Gal(F[\alpha_1, ..., \alpha_k]/F) = G_0 \supseteq G_1 \supseteq ... \supseteq G_k = \{1\}
+\]
+
+Along this chain, if every group $G_i$ is the normal subgroup of the previous group $G_{i-1}$, and every quotient group $G_{i-1}/G_i$ is abelian, then we say the Galois group $Gal(F[\alpha_1, ..., \alpha_k]/F)$ is \textbf{solvable}.
+
+Now let us see the general $n$-th degree equation:
+
+\[
+x^n - a_1x^{n-1} + a_2x^{n-2}... \pm a_n = 0
+\]
+
+The base field contains coefficients is $Q[a_1, ..., a_n]$. Let its $n$ roots (not necessarily be radical) be $x_1, ..., x_n$, which means:
+
+\[
+(x - x_1)...(x - x_n) = x^n - a_1x^{n-1} ... \pm a_n
+\]
+
+The splitting field of the equation is $Q[x_1, ..., x_n]$. If whatever radical extension we obtain, it can't contain the splitting field, then the equation is not radical solvable.
+
+\begin{theorem}
+When $n \geq 5$, any radical extension of $Q[a_1, ..., a_n]$ does not contain the splitting field $Q[x_1, ..., x_n]$.
+\end{theorem}
+
+\begin{proof}
+We use the reduction to absurdity method. Suppose some radical extension $E$ contains the splitting field $Q[x_1, ..., x_n]$. According to the theorem we proved previously, there exits a bigger radical extension $\overline{E} \supseteq E$, such that the corresponding Galois group $G_0 = Gal(\overline{E}/Q[a_1, ..., a_n])$ includes automorphisms of permutations of all roots. Hence we can construct a chain of Galois subgroups:
+
+\[
+G_0 \supseteq G_1 \supseteq ... \supseteq G_k = \{1\}
+\]
+
+Where each $G_i$ is the normal subgroup of the previous group $G_{i-1}$, and the quotient group $G_{i-1}/G_i$ is abelian. We now show that this is impossible. Since the normal subgroup $G_i$ is the kernel of the homomorphism of $G_{i-1}$, for any two automorphisms $\sigma, \tau$ in $G_{i-1}$, we have:
+
+\[
+\sigma^{-1}\tau^{-1}\sigma\tau \in G_{i}
+\]
+
+When $n \geq 5$, $G_0$ contains the permutations of all roots. It is isomorphic to symmetric group $S_n$, it must include 3-cycle permutation $(a\ b\ c)$. Suppose $G_{i-1}$ also include 3-cycle permutation, we have:
+
+\[
+(a\ b\ c) = (d\ a\ c)^{-1}(c\ e\ b)^{-1}(d\ a\ c)(c\ e\ b) \in G_i
+\]
+
+Where $a, b, c, d, e$ are distinct. It means $G_i$ includes 3-cycle permutation as well. According to mathematical induction, all groups in the chain include 3-cycle permutation. But this is impossible, because the last group in this chain is $\{1\}$, it does not include 3-cycle permutation.
+\end{proof}
+
+\begin{figure}[htbp]
+%\begin{wrapfigure}{R}{0.3\textwidth}
+ \centering
+ \includegraphics[scale=0.3]{img/Soccer-ball.eps}
+ \captionsetup{labelformat=empty}
+ \caption{Symmetric group $S_5$ is the production of alternating group $A_5$ and 2-cycle cyclic group. It can describe the symmetry of a football}
+ \label{fig:S5}
+%\end{wrapfigure}
+\end{figure}
+
+Thus we proved the general 5th degree equation is not radical solvable. We can explain from another perspective. The symmetric group $S_5$ has 120 elements, its only normal subgroup is $A_5$. Where $A_5$ is called alternating group, which contains 60 elements. The only normal subgroup of $A_5$ is $\{1\}$. Hence the subgroup chain is $S_5 \supset A_5 \supset \{1\}$. However, the quotient group $A_5/\{1\}$ is not abelian (not commutative). Therefore, it is not solvable group. The corresponding general 5th degree equation is not radical solvable.
+
+For the general 4th degree equation, the symmetric group $S_4$ has a normal subgroup $A_4$, and the alternating group $A_4$ has a normal subgroup:
+
+\[
+\{(1), (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\}
+\]
+
+This group is isomorphic to Klein group, which is solvable.
+
+For the general cubic equation, the symmetric group $S_3$ has a normal subgroup $A_3$, and the alternating group $A_3$ is isomorphic to 3-cycle cyclic group. Hence it is also solvable.
+
+\begin{figure}[htbp]
+  \centering
+  \subcaptionbox{Alternating $A_3$ is isomorphic to 3-cycle cyclic group}[0.3\linewidth]{\includegraphics[scale=0.25]{img/C3.eps}} \quad
+  \subcaptionbox{Symmetric group $S_3$, the upper part is $A_3$}[0.3\linewidth]{\includegraphics[scale=0.25]{img/S3.eps}}
+  \subcaptionbox{Alternating group $A_4$}[0.3\linewidth]{\includegraphics[scale=0.25]{img/A4.eps}}
+  \caption{Symmetric group and alternating group. Black point is identity element, cycle is closed loop}
+  \label{fig:group-graph}
+\end{figure}
+
+We introduced Galois theory in this short section. Galois theory is a powerful tool in abstract algebra. It can solve many problems, like to prove the fundamental theorem of algebra, prove Gauss's finding that the regular heptadecagon (17-sided polygon) can be constructed with straightedge and compass. Galois theory can also prove that the three classic geometric problems with straightedge and compass in ancient Greek, squaring the circle, trisecting the angle, and doubling the cube, are all impossible. We hope that readers can appreciate the depth and beauty of abstract thinking through this chapter.
+
+\begin{Exercise}
+\Question{The 5th degree equation $x^5 - 1 = 0$ is radical solvable. What's its Galois subgroup chain?}
+\end{Exercise}
+
+\section{Further reading}
+
+There are many textbooks introduce about abstract algebra. {\em Groups and Symmetry} by Armstrong is a good book about basic concept of groups and how it related and define symmetry in mathematics. {\em Algebra} by Micheal Artin is also a widely used textbook. It introduces Galois theory in the last chapter. {\em Galois Theory} by Emil Artin published in 1944 is the classic book. It was republished several times in 1998 and 2007. Artin was the important expositor. He gave the modern form of Galois theory. Harold M. Edwards introduced the development history in his {\em Galois Theory}, and took the classic way to explain this topic.
+
+\ifx\wholebook\relax \else
+\begin{thebibliography}{99}
+
+\bibitem{HanXueTao16}
+{\fontspec{\cnmainft}韩雪涛 ``数学悖论与三次数学危机''. 人民邮电出版社.} 2016, ISBN: 9787115430434
+
+\bibitem{LiuXinyu2017}
+{\fontspec{\cnmainft}刘新宇 ``算法新解'' 人民邮电出版社.} 2017, ISBN: 9787115440358
+
+\bibitem{HanXueTao2009}
+{\fontspec{\cnmainft}韩雪涛 ``好的数学——“下金蛋”的数学问题''. 湖南科学技术出版社.} 2009, ISBN: 9787535756725
+
+\bibitem{HanXueTao2012}
+{\fontspec{\cnmainft}韩雪涛 ``好的数学——方程的故事''. 湖南科学技术出版社.} 2012, ISBN: 9787535770066
+
+\bibitem{Wiki-Galois-theory}
+Wikipedia ``Galois theory''. \url{https://en.wikipedia.org/wiki/Galois_theory}
+
+\bibitem{Wiki-Galois}
+Wikipedia ``Évariste Galois''. \url{https://en.wikipedia.org/wiki/Évariste_Galois}
+
+\bibitem{Galois-1832}
+Anita R Singh. ``The Last Mathematical Testament of Galois'' Resonance Oct 1999. pp93-100.
+
+\bibitem{Liouville-1846}
+Sawilowsky, Shlomo S. and Cuzzocrea, John L. (2005) ``Joseph Liouville’s `Mathematical Works Of Évariste Galois','' Journal of Modern Applied Statistical Methods: Vol. 5 : Iss. 2 , Article 32. DOI: 10.22237/jmasm/1162355460
+
+\bibitem{StepanovRose15}
+Alexander A. Stepanov, Daniel E. Rose ``From Mathematics to Generic Programming''. Addison-Wesley Professional; 1 edition (November 17, 2014) ISBN-13: 978-0321942043
+
+\bibitem{Wiki-Rubik-Cube-group}
+Wikipedia ``Rubik's Cube group''. \url{https://en.wikipedia.org/wiki/Rubik's_Cube_group}
+
+\bibitem{ZhangHeRui1978}
+{\fontspec{\cnmainft}张禾瑞 ``近世代数基础''. 高等教育出版社.} 1978, ISBN: 9787040012224
+
+\bibitem{Armstrong1988}
+M.A. Armstrong ``Groups and Symmetry''. Springer. 1988. ISBN: 0387966757.
+
+\bibitem{Wiki-Lagrange}
+Wikipedia ``Joseph-Louis Lagrange''. \url{https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange}
+
+\bibitem{Wiki-FLT-proof}
+Wikipedia ``Proofs of Fermat's little theorem''. \url{https://en.wikipedia.org/wiki/Proofs_of_Fermat's_little_theorem}
+
+\bibitem{Wiki-Euler}
+Wikipedia ``Leonhard Euler''. \url{https://en.wikipedia.org/wiki/Leonhard_Euler}
+
+\bibitem{Wiki-Carmichael-number}
+Wikipedia ``Carmichaeal number''. \url{https://en.wikipedia.org/wiki/Carmichael_number}
+
+\bibitem{Algorithms-DPV}
+Sanjoy Dsgupta, Christos Papadimitriou, Umesh Vazirani. ``Algorithms''. McGraw-Hill Education. Sept. 2006. ISBN: 9780073523408
+
+\bibitem{Wiki-Miller-Rabin}
+Wikipedia ``Miller-Rabin primality test''. \url{https://en.wikipedia.org/wiki/Miller-Rabin_primality_test}
+
+\bibitem{Wiki-Noether}
+Wikipedia ``Emmy Noether''. \url{https://en.wikipedia.org/wiki/Emmy_Noether}
+
+\bibitem{ZhangPu2013}
+{\fontspec{\cnmainft}章璞. ``伽罗瓦理论：天才的激情''. 高等教育出版社.} 2013. ISBN: 9787040372526
+
+\bibitem{Stillwell1994}
+John Stillwell. ``Galois Theory for Beginners''. The American Mathematical Monthly, Vol. 101, No. 1 (Jan., 1994), pp. 22-2
+
+\bibitem{Goodman2011}
+Dan Goodman. ``An Introduction to Galois Theory''. \url{https://nrich.maths.org/1422}
+
+\bibitem{MArtin}
+Michael Artin. ``Algebra (Second Edition)''. Pearson. Feb. 2017. ISBN: 9780134689609
+
+\end{thebibliography}
+
+\expandafter\enddocument
+%\end{document}
+
+\fi

@@ -1,0 +1,61 @@
+name:                hoad
+version:             0.1.0.0
+github:              "conal/hoad"
+license:             BSD3
+author:              "Conal Elliott"
+maintainer:          "conal@conal.net"
+copyright:           "2019 Conal Elliott"
+
+synopsis:            Higher-order automatic differentiation
+category:            categories, math
+
+description:         Please see the README on GitHub at <https://github.com/conal/hoad#readme>
+
+default-extensions:
+  # - AllowAmbiguousTypes
+  - CPP
+  - ConstraintKinds
+  - DefaultSignatures
+  # - DeriveFoldable
+  # - DeriveFunctor
+  - FlexibleContexts
+  - FlexibleInstances
+  # - FunctionalDependencies
+  # - GADTs
+  # - GeneralizedNewtypeDeriving
+  # - LambdaCase
+  - MultiParamTypeClasses
+  # - OverloadedStrings  # for Poly, since dante doesn't pick up
+  - PatternSynonyms
+  # - QuantifiedConstraints
+  # - RankNTypes
+  # - StandaloneDeriving
+  # - TupleSections
+  # - TypeApplications
+  - TypeFamilies
+  - TypeOperators
+  - ViewPatterns
+  # - ScopedTypeVariables
+
+ghc-options:
+  -Wall
+  # -O2  # Use when benchmarking
+
+cpp-options:      -DVectorSized
+
+library:
+  dependencies:
+    - base >= 4.7 && < 5
+    - ghc-prim
+    - constraints
+    - free
+    - adjunctions
+    - newtype-generics
+    - vector-sized
+    - concat-classes
+  other-modules: []
+  include-dirs: src
+  source-dirs: src
+  exposed-modules:
+    - Vector
+    - AD

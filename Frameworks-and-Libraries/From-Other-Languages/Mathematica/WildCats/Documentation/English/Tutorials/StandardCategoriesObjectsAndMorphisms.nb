@@ -1,0 +1,3875 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    122679,       3865]
+NotebookOptionsPosition[    104862,       3235]
+NotebookOutlinePosition[    107736,       3316]
+CellTagsIndexPosition[    107520,       3308]
+WindowTitle->Standard categories, objects and morphisms - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS PACKAGE TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"CATStructure\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/tutorial/CATStructure"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Ab0\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/Ab0"], "\<\"BinarySet\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/BinarySet"], "\<\"Cat1Object\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Cat1Object"], "\<\"Cat2Morphism\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Cat2Morphism"], "\<\"Cat2Object1\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Cat2Object1"], "\<\"Cat2Object2\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Cat2Object2"], "\<\"CRng0\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/CRng0"], "\<\"IntegersPlus\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/IntegersPlus"], "\<\"IntegersPlusTimes\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/IntegersPlusTimes"], "\<\"IntegersTimes\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/IntegersTimes"], "\<\"MetSingleton\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/MetSingleton"], "\<\"Met\[EmptySet]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Met\[EmptySet]"], "\<\"Mod0\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Mod0"], "\<\"MorphismQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/MorphismQ"], "\<\"Morphisms\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Morphisms"], "\<\"Naturals\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Naturals"], "\<\"NaturalsPlus\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/NaturalsPlus"], "\<\"NaturalsTimes\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/NaturalsTimes"], "\<\"ObjectQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/ObjectQ"], "\<\"Objects\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Objects"], "\<\"ParCodMorphism\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/ParCodMorphism"], "\<\"ParDomMorphism\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/ParDomMorphism"], "\<\"ParObject1\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/ParObject1"], "\<\"ParObject2\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/ParObject2"], "\<\"PosSingleton\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/PosSingleton"], "\<\"RealsPlus\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/RealsPlus"], "\<\"RealsPlusTimes\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/RealsPlusTimes"], "\<\"RealsTimes\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/RealsTimes"], "\<\"Rel\[EmptySet]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Rel\[EmptySet]"], "\<\"SetQ\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/SetQ"], "\<\"Singleton\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Singleton"], "\<\"StandardCategories\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/StandardCategories"], "\<\"TopReals\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/TopReals"], "\<\"TopSingleton\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/TopSingleton"], "\<\"Top\[EmptySet]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/Top\[EmptySet]"], "\<\"\[DoubleStruckCapitalA]\
+\[DoubleStruckB]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalADoubleStruckB"], "\<\"\
+\[DoubleStruckCapitalA]\[DoubleStruckB]Top\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalADoubleStruckBTop"], "\<\"\
+\[DoubleStruckCapitalB]\[DoubleStruckA]\[DoubleStruckN]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalBDoubleStruckADoubleStruckN"], \
+"\<\"\[DoubleStruckCapitalB]\[DoubleStruckO]\[DoubleStruckO]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalBDoubleStruckODoubleStruckO"], \
+"\<\"\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT"], \
+"\<\"\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalRDoubleStruckNDoubleStruckG"], "\<\"\
+\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\[DoubleStruckCapitalO]\
+\[DoubleStruckR]\[DoubleStruckD]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckIDoubleStruckNDoubleStruckCapitalODoubleStruck\
+RDoubleStruckD"], \
+"\<\"\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckIDoubleStruckNDoubleStruckCapitalSDoubleStruck\
+EDoubleStruckT"], \
+"\<\"\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]"], "\<\"\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]\[DoubleStruckH]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]\[DoubleStruckH]"], "\<\"\[DoubleStruckCapitalK]\
+\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD]"], "\<\"\[DoubleStruckCapitalM]\
+\[DoubleStruckA]\[DoubleStruckT]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckADoubleStruckT"], \
+"\<\"\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckEDoubleStruckT"], \
+"\<\"\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]\"\
+\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckEDoubleStruckTDoubleStruckC"], "\<\"\
+\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\[DoubleStruckCapitalK]\
+\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckODoubleStruckDDoubleStruckCapitalK"], "\<\"\
+\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\[DoubleStruckCapitalR]\
+\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckODoubleStruckDDoubleStruckCapitalR"], "\<\"\
+\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckODoubleStruckN"], \
+"\<\"\[DoubleStruckCapitalP]\[DoubleStruckA]\[DoubleStruckR]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalPDoubleStruckADoubleStruckR"], \
+"\<\"\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalPDoubleStruckODoubleStruckS"], \
+"\<\"\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalRDoubleStruckEDoubleStruckL"], \
+"\<\"\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalRDoubleStruckCapitalMDoubleStruckODoubleStruckD"], "\<\"\
+\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalRDoubleStruckNDoubleStruckG"], \
+"\<\"\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalSDoubleStruckEDoubleStruckT"], \
+"\<\"\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalTDoubleStruckODoubleStruckP"], \
+"\<\"\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]\[DoubleStruckH]\"\
+\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalTDoubleStruckODoubleStruckPDoubleStruckH"], "\<\"\
+\[DoubleStruckCapitalV]\[DoubleStruckC]\[DoubleStruckT]\[DoubleStruckCapitalF]\
+\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\
+DoubleStruckCapitalVDoubleStruckCDoubleStruckTDoubleStruckCapitalF"], "\<\"\
+\[DoubleStruckOne]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT1"],\
+ "\<\"\[DoubleStruckTwo]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT2"],\
+ "\<\"\[DoubleStruckZero]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT0"],\
+ "\<\"\[EmptySet]\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/ref/\[EmptySet]"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"WildCats/tutorial/\
+StandardCategoriesObjectsAndMorphisms\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/tutorial/StandardCategoriesObjectsAndMorphisms"]},
+             Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+StandardCategoriesObjectsAndMorphisms.html"], StandardForm]], "Input", 
+              TextClipboardType -> "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/StandardCategoriesObjectsAndMorphisms", 
+             ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["Standard categories, objects and morphisms", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "This terminates the current ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " session and starts a new clean session"
+}], "Text",
+ CellID->12172402],
+
+Cell["(recommended for troubleshooting)", "Text",
+ CellID->121457497],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->309037897],
+
+Cell["This loads the package:", "Text",
+ CellID->1825449234],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->98796305],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.62.3\"","\", \"",RowBox[{"{", 
+         RowBox[{"2013", ",", "11", ",", "12"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2013, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package and palette\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->173520873]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Standard categories", "Section",
+ CellID->292760998],
+
+Cell["WildCats knows several standard categories.", "Text",
+ CellID->65165492],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["StandardCategories",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/StandardCategories"], Cell[
+    "list of all standard categories known in WildCats", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->952161528],
+
+Cell["Standard categories.", "Caption",
+ CellID->18453368],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["StandardCategories"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->5426181],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "\[DoubleStruckCapitalA]\[DoubleStruckB]", ",", 
+   "\[DoubleStruckCapitalA]\[DoubleStruckB]Top", ",", 
+   "\[DoubleStruckCapitalB]\[DoubleStruckA]\[DoubleStruckN]", ",", 
+   "\[DoubleStruckCapitalB]\[DoubleStruckO]\[DoubleStruckO]", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckZero]", ",", "\[DoubleStruckOne]", ",", 
+   "\[DoubleStruckTwo]", ",", 
+   "\[DoubleStruckCapitalP]\[DoubleStruckA]\[DoubleStruckR]", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalO]\[DoubleStruckR]\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", ",", 
+   "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]\[DoubleStruckH]", 
+   ",", "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckA]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]", 
+   ",", "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", ",", 
+   "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", ",", 
+   "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", ",", 
+   "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]\[DoubleStruckH]", 
+   ",", "\[DoubleStruckCapitalV]\[DoubleStruckC]\[DoubleStruckT]\
+\[DoubleStruckCapitalF]"}], "}"}]], "Output",
+ ImageSize->{538, 33},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->215674629]
+}, Open  ]],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["\[DoubleStruckCapitalA]\[DoubleStruckB]",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/DoubleStruckCapitalADoubleStruckB"], 
+    Cell["abelian groups and group-morphisms", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalA]\[DoubleStruckB]Top",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/DoubleStruckCapitalADoubleStruckBTop"], 
+    Cell["\<\
+abelian topological groups and continuous abelian groups-morphisms\
+\>", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalB]\[DoubleStruckA]\[DoubleStruckN]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalBDoubleStruckADoubleStruckN"], 
+    Cell["Banach spaces and linear contractions", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalB]\[DoubleStruckO]\[DoubleStruckO]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalBDoubleStruckODoubleStruckO"], 
+    Cell["boolean algebras and boolean-morphisms", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalC]\[DoubleStruckA]\[DoubleStruckT]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT"], 
+    Cell["small categories and functors", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckZero]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT0"], 
+    Cell["empty category with no objects and no morphisms", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckOne]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT1"], 
+    Cell["one object and one morphism", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckTwo]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalCDoubleStruckADoubleStruckT2"], 
+    Cell["two objects and one morphism between them", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalCDoubleStruckCapitalRDoubleStruckNDoubleStruckG"], Cell["\<\
+commutative rings (with units) and commutative ring-morphisms (preserving \
+units\
+\>", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalO]\[DoubleStruckR]\[DoubleStruckD]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckIDoubleStruckNDoubleStruckCapitalODoubleStruck\
+RDoubleStruckD"], Cell[
+    "finite ordinals and functions between them", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalF]\[DoubleStruckI]\[DoubleStruckN]\
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalFDoubleStruckIDoubleStruckNDoubleStruckCapitalSDoubleStruck\
+EDoubleStruckT"], Cell["finite sets and functions between them", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox["\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalGDoubleStruckRDoubleStruckP"], 
+    Cell["groups and group-morphisms", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox[
+      "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]\[DoubleStruckH]\
+",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/tutorial/\[DoubleStruckCapitalG]\[DoubleStruckR]\
+\[DoubleStruckP]\[DoubleStruckH]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalGDoubleStruckRDoubleStruckPDoubleStruckH"], Cell[
+    "oriented graphs and oriented graph-morphisms", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox[
+      "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:WildCats/ref/\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD]"],
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalKDoubleStruckCapitalMDoubleStruckODoubleStruckD"], Cell[
+    "left modules over the commutative ring K and linear maps", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalM]\[DoubleStruckA]\[DoubleStruckT]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckADoubleStruckT"], 
+    Cell["natural numbers and matrices", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckEDoubleStruckT"], 
+    Cell["metric spaces and non-expansive continuous functions", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckEDoubleStruckTDoubleStruckC"], Cell[
+    "metric spaces and continuous functions", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckODoubleStruckDDoubleStruckCapitalK"], Cell[
+    "right modules over the commutative ring K and linear maps", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalMDoubleStruckODoubleStruckDDoubleStruckCapitalR"], Cell[
+    "right modules over ring R and linear maps", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalMDoubleStruckODoubleStruckN"], 
+    Cell["monoids and monoid-morphisms", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalP]\[DoubleStruckA]\[DoubleStruckR]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalPDoubleStruckADoubleStruckR"], 
+    Cell["\<\
+two objects and two different parallel morphisms between them\
+\>", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalPDoubleStruckODoubleStruckS"], 
+    Cell["posets and order-preserving functions", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalRDoubleStruckEDoubleStruckL"], 
+    Cell["sets with relations and relation-preserving functions", 
+     "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalRDoubleStruckCapitalMDoubleStruckODoubleStruckD"], Cell[
+    "left modules over ring R and linear maps", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalRDoubleStruckNDoubleStruckG"], 
+    Cell["rings (with units) and ring-morphisms (preserving units)", 
+     "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalSDoubleStruckEDoubleStruckT"], 
+    Cell["sets and functions", "TableText"]},
+   {
+    ButtonBox["\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/DoubleStruckCapitalTDoubleStruckODoubleStruckP"], 
+    Cell["topological spaces and continuous functions", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]\[DoubleStruckH]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalTDoubleStruckODoubleStruckPDoubleStruckH"], Cell["\<\
+topological spaces and homotopy classes of continuous functions\
+\>", "TableText"]},
+   {
+    ButtonBox[
+     "\[DoubleStruckCapitalV]\[DoubleStruckC]\[DoubleStruckT]\
+\[DoubleStruckCapitalF]",
+     BaseStyle->"Link",
+     ButtonData->
+      "paclet:WildCats/ref/\
+DoubleStruckCapitalVDoubleStruckCDoubleStruckTDoubleStruckCapitalF"], Cell[
+    TextData[Cell[BoxData[
+    Cell["Vector spaces over field F and linear maps", "TableText"]]]], 
+     "TableText"]}
+  }]], "DefinitionBox",
+ CellID->10174063],
+
+Cell["Standard categories.", "Caption",
+ CellID->346298606],
+
+Cell["Some common mathematical entities known to WildCats", "Text",
+ CellID->401197070],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["\[EmptySet]",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/\[EmptySet]"], Cell[
+    "empty set. Alias \[EscapeKey]es\[EscapeKey]", "TableText"]},
+   {
+    ButtonBox["Singleton",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Singleton"], Cell[
+    "any singleton set", "TableText"]},
+   {
+    ButtonBox["BinarySet",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/BinarySet"], Cell[
+    "any set with two elements", "TableText"]},
+   {
+    ButtonBox["Naturals",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Naturals"], Cell[
+    "set of natural numbers {0, 1, 2,...}", "TableText"]},
+   {
+    ButtonBox["NaturalsPlus",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/NaturalsPlus"], Cell[
+    "monoid of the natural numbers with addition", "TableText"]},
+   {
+    ButtonBox["NaturalsTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/NaturalsTimes"], Cell[
+    "monoid of the natural numbers with multiplication", "TableText"]},
+   {
+    ButtonBox["IntegersPlus",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/IntegersPlus"], Cell[
+    "abelian group of the integer numbers with addition", "TableText"]},
+   {
+    ButtonBox["IntegersTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/IntegersTimes"], Cell[
+    "monoid of the integer numbers with multiplication", "TableText"]},
+   {
+    ButtonBox["IntegersPlusTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/IntegersPlusTimes"], Cell["\<\
+commutative ring of the integer numbers with addition and multiplication\
+\>", "TableText"]},
+   {
+    ButtonBox["RealsPlus",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsPlus"], Cell[
+    "abelian group of the real numbers with addition", "TableText"]},
+   {
+    ButtonBox["RealsTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsTimes"], Cell[
+    "monoid of the real numbers with multiplication", "TableText"]},
+   {
+    ButtonBox["RealsPlusTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsPlusTimes"], Cell["\<\
+commutative ring of the real numbers with addition and multiplication\
+\>", "TableText"]},
+   {
+    ButtonBox["Ab0",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Ab0"], Cell[
+    "group and monoid with only one element (its unit)", "TableText"]},
+   {
+    ButtonBox["Cat1Object",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Cat1Object"], Cell["\<\
+the only object in the \[DoubleStruckOne] category\
+\>", "TableText"]},
+   {
+    ButtonBox["Cat2Object1",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Cat2Object1"], Cell["\<\
+the initial object in the \[DoubleStruckTwo] category\
+\>", "TableText"]},
+   {
+    ButtonBox["Cat2Object2",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Cat2Object2"], Cell["\<\
+the terminal object in the \[DoubleStruckTwo] category\
+\>", "TableText"]},
+   {
+    ButtonBox["Cat2Morphism",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Cat2Morphism"], Cell["\<\
+the only morphism in the \[DoubleStruckTwo] category\
+\>", "TableText"]},
+   {
+    ButtonBox["ParObject1",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/ParObject1"], Cell["\<\
+the domain object in the \[DoubleStruckCapitalP]\[DoubleStruckA]\
+\[DoubleStruckR] category\
+\>", "TableText"]},
+   {
+    ButtonBox["ParObject2",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/ParObject2"], Cell["\<\
+the codomain object in the \[DoubleStruckCapitalP]\[DoubleStruckA]\
+\[DoubleStruckR] category\
+\>", "TableText"]},
+   {
+    ButtonBox["ParDomMorphism",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/ParDomMorphism"], Cell["\<\
+the domain morphism in the \[DoubleStruckCapitalP]\[DoubleStruckA]\
+\[DoubleStruckR] category\
+\>", "TableText"]},
+   {
+    ButtonBox["ParCodMorphism",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/ParCodMorphism"], Cell["\<\
+the codomain morphism in the \[DoubleStruckCapitalP]\[DoubleStruckA]\
+\[DoubleStruckR] category\
+\>", "TableText"]},
+   {
+    ButtonBox["Mod0",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Mod0"], Cell["\<\
+left or right module over the commutative ring K with only one element acting \
+as 0\
+\>", "TableText"]},
+   {
+    ButtonBox["CRng0",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/CRng0"], Cell[
+    "ring with only one element acting as 0 and 1", "TableText"]},
+   {
+    ButtonBox[
+     ButtonBox["Met\[EmptySet]",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/Met\[EmptySet]"],
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/MetEmptySet"], Cell[
+    "empty set, considered as a metric space", "TableText"]},
+   {
+    ButtonBox["MetSingleton",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/MetSingleton"], Cell[
+    "singleton set, considered as a metric space", "TableText"]},
+   {
+    ButtonBox["PosSingleton",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/PosSingleton"], Cell[
+    "singleton set, considered as a poset", "TableText"]},
+   {
+    ButtonBox["Rel\[EmptySet]",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Rel\[EmptySet]"], Cell[
+    "empty set with the empty relation", "TableText"]},
+   {
+    ButtonBox["TopReals",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/TopReals"], Cell[
+    "real numbers with the usual topology", "TableText"]},
+   {
+    ButtonBox["Top\[EmptySet]",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/Top\[EmptySet]"], Cell[
+    "empty set with the trivial topology", "TableText"]},
+   {
+    ButtonBox["TopSingleton",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/TopSingleton"], Cell[
+    "singleton set with the trivial topology", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->336493106],
+
+Cell["Well-known mathematical objects.", "Caption",
+ CellID->51885127],
+
+Cell[TextData[{
+ "WildCats also uses the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " symbols  Integers, Reals and Complexes as sets. "
+}], "Text",
+ CellID->480229822],
+
+Cell[BoxData[GridBox[{
+   {"Integers", Cell[
+    "the set of integer numbers (negative, 0, positive)", "TableText"]},
+   {"Reals", Cell["the set of real numbers", "TableText"]},
+   {"Complexes", Cell["the set of complex numbers", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->511605136],
+
+Cell["These usual mathematica symbols are interpreted as sets.", "Caption",
+ CellID->27479194],
+
+Cell["\<\
+These three symbols need not be defined. Their usage message has not been \
+modified. These are meant to be sets without any operation.
+So, for example, WildCats distinguishes between different types of real \
+numbers.\
+\>", "Text",
+ CellID->745303816],
+
+Cell["Simple Reals and more structured sets", "Text",
+ CellID->211172238],
+
+Cell[BoxData[GridBox[{
+   {"Reals", Cell[
+    "represents the set of real numbers with no further structure", 
+     "TableText"]},
+   {
+    ButtonBox["RealsPlus",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsPlus"], Cell[
+    "abelian group of the real numbers with addition", "TableText"]},
+   {
+    ButtonBox["RealsTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsTimes"], Cell[
+    "monoid of the real numbers with multiplication", "TableText"]},
+   {
+    ButtonBox["RealsPlusTimes",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/RealsPlusTimes"], Cell["\<\
+commutative ring of the real numbers with addition and multiplication\
+\>", "TableText"]},
+   {
+    ButtonBox["TopReals",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/TopReals"], Cell[
+    "real numbers with the usual topology", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->59879914],
+
+Cell["Real numbers with different structures", "Caption",
+ CellID->478094263],
+
+Cell[TextData[{
+ "Reals are described with the usual ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " symbol and the usage message has not been overloaded"
+}], "Text",
+ CellID->99753369],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Reals"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->520836722],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"Reals represents the domain of real numbers, as in \
+\\!\\(\\*RowBox[{StyleBox[\\\"x\\\", \\\"TI\\\"], \
+StyleBox[\\\"\[Element]\\\", \\\"TR\\\"], \\\"Reals\\\"}]\\). \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Reals"]}]], "Print", "PrintUsage",
+ CellTags->"Info3527521806-1912369",
+ CellID->3578872]
+}, Open  ]],
+
+Cell["\<\
+RealsPlusTimes, for example,  is defined mathematically as an ordered 5-tuple \
+of a \
+\>", "Text",
+ CellID->65180877],
+
+Cell["set (Reals), ", "Text",
+ CellDingbat->"\[FilledCircle]",
+ CellID->415263817],
+
+Cell["another set (the addition, a binary function) ", "Text",
+ CellDingbat->"\[FilledCircle]",
+ CellID->4141957],
+
+Cell["and yet another set (the multiplication, a binary function)", "Text",
+ CellDingbat->"\[FilledCircle]",
+ CellID->867800446],
+
+Cell["and the 2 nullary operations 0 and 1 (again sets).", "Text",
+ CellDingbat->"\[FilledCircle]",
+ CellID->642184541],
+
+Cell["\<\
+Since an ordered 5-tuple of sets is a set, WildCats knows it is an object of \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]\
+\>", "Text",
+ CellID->134280802],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+  "RealsPlusTimes", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->480480062],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->487187152]
+}, Open  ]],
+
+Cell["Another way to check that an object is a set", "Text",
+ CellID->723533465],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetQ", "[", "RealsPlusTimes", "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->149869295],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->335979733]
+}, Open  ]],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["ObjectQ",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/ObjectQ"], "[", 
+     RowBox[{
+      StyleBox["obj",
+       FontSlant->"Italic"], ",", " ", 
+      StyleBox["qcat",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "test whether ",
+     StyleBox["obj",
+      FontSlant->"Italic"],
+     " is in quasicategory ",
+     StyleBox["qcat",
+      FontSlant->"Italic"]
+    }], "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["SetQ",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/SetQ"], "[", 
+     StyleBox["obj",
+      FontSlant->"Italic"], "]"}], Cell[TextData[{
+     "test whether ",
+     StyleBox["obj",
+      FontSlant->"Italic"],
+     " is a set"
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->252378650],
+
+Cell["Test objects", "Caption",
+ CellID->355714161],
+
+Cell["This is true of all algebraic structures.", "Text",
+ CellID->180370271],
+
+Cell[TextData[{
+ "Testing commands like ",
+ Cell[BoxData[
+  ButtonBox["ObjectQ",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/ObjectQ"]]],
+ " or ",
+ Cell[BoxData[
+  ButtonBox["SetQ",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/SetQ"]]],
+ " are described in more detail in ",
+ ButtonBox["this",
+  BaseStyle->"Link",
+  ButtonData->"paclet:WildCats/tutorial/PredicateQueryFunctions"],
+ " tutorial"
+}], "Text",
+ CellID->158189982],
+
+Cell["\<\
+But WildCats also knows that the plus and times operations satisfy certain \
+properties tipical of commutative rings\
+\>", "Text",
+ CellID->435967886],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+  "RealsPlusTimes", ",", 
+   "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]"}], "]"}]], "Input",
+ CellID->56199484],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->92242245]
+}, Open  ]],
+
+Cell["and since it is a commutative ring , it is also a ring", "Text",
+ CellID->482291195],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+  "RealsPlusTimes", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"}], 
+  "]"}]], "Input",
+ CellID->97238120],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->21361769]
+}, Open  ]],
+
+Cell["\<\
+but it is not a monoid, since it has two operations, while monoids only have \
+one (monoids are ordered 3-tuples, not ordered 5-tuples )\
+\>", "Text",
+ CellID->867327738],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+  "RealsPlusTimes", ",", 
+   "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]"}], 
+  "]"}]], "Input",
+ CellID->657949851],
+
+Cell[BoxData["False"], "Output",
+ ImageSize->{39, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->491357643]
+}, Open  ]],
+
+Cell[TextData[{
+ "WildCats draws these conclusions thanks to its knowledge of ",
+ Cell[BoxData[
+  ButtonBox["CATStructure",
+   BaseStyle->"Link",
+   ButtonData->"paclet:WildCats/ref/CATStructure"]], "InlineFormula"]
+}], "Text",
+ CellID->54947289],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryPlot", "[", 
+  RowBox[{"CATStructure", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]\
+", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "2"}], "}"}]}], ",", 
+     RowBox[{"\[DoubleStruckCapitalA]\[DoubleStruckB]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "2"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "2"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}]}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->236485100],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+      WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+       WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+       WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL], 
+       WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]}, {{{
+       13, 12}, {13, 4}, {12, 9}, {12, 4}, {11, 10}, {11, 4}, {10, 9}, {10, 
+       4}, {8, 6}, {6, 9}, {6, 5}, {9, 7}, {7, 5}, {5, 4}, {1, 2}, {2, 3}, {3,
+        4}, {4, 14}, {15, 4}, {6, 4}, {8, 4}, {7, 4}, {9, 4}}, Null}, {
+      EdgeLabels -> {
+        DirectedEdge[
+          WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+           WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U}, 
+       EdgeLabelStyle -> {
+         Directive[Background -> GrayLevel[1]]}, EdgeShapeFunction -> {{Black, 
+          Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> All, 
+       VertexCoordinates -> {{0., 0.}, {1., 0.}, {2., 0.}, {3., 0.}, {4., 
+        0.}, {5., 1.}, {5., -1.}, {5., 2.}, {6., 0.}, {6., -1.}, {6., -2.}, {
+        6., 1.}, {6., 2.}, {3., -1.}, {3., 1.}}, VertexLabels -> {
+         Placed["Name", Center]}, VertexShapeFunction -> {None}, VertexStyle -> {
+         Directive[
+          EdgeForm[], 
+          GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{1., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]", TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{2., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$3"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$4"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{4., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$5"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$5", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$5"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$6"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$6", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$6"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$7"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$7", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$7"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$8"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", TraditionalForm], 
+          DynamicLocation["VertexID$8", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$8"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$9"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalA]\[DoubleStruckB]", TraditionalForm], 
+          DynamicLocation["VertexID$9", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$9"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$10"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", TraditionalForm], 
+          DynamicLocation["VertexID$10", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$10"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -2.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$11"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", TraditionalForm], 
+          DynamicLocation["VertexID$11", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$11"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$12"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$12", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$12"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$13"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$13", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$13"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$14"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$14", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$14"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$15"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$15", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$15"]}, {
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{0., 0.}, {1., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$1"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$1", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{1., 0.}, {2., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$2"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$2", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{2., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$3"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$3", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 0.}, {3., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$4"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$4", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{4., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$5"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$5", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$6"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$6", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {4., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$7"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$7", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$8"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$8", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {4., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$9"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$9", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$10"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$10", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {5., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$11"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$11", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$12"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$12", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {5., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$13"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$13", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$14"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$14", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$15"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$15", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$16"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$16", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {6., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$17"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$17", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$18"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$18", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$19"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$19", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$20"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$20", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {6., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$21"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$21", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$22"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$22", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$23"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$23", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], Typeset`data}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      2, Typeset`graph, Typeset`boxes], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {}},
+      ImageSizeCache->{{19.548, 427.3520000000001}, {-137.36800000000005`, 
+       132.168}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{Typeset`data}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None,
+  ImagePadding->20,
+  ImageSize->{442.4000000000001, 316.8}]], "Output",
+ ImageSize->{446, 317},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->366733109]
+}, Open  ]],
+
+Cell["\<\
+and not using a look-up table.
+This can be seen very easily using Objects.\
+\>", "Text",
+ CellID->107319984],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["Objects",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/Objects"], "[", 
+     StyleBox["qcat",
+      FontSlant->"Italic"], "]"}], Cell[TextData[{
+     "is a list of some objects in ",
+     StyleBox["qcat",
+      FontSlant->"Italic"]
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->212654259],
+
+Cell["Objects in a quasicategory", "Caption",
+ CellID->821454805],
+
+Cell[TextData[{
+ "It is important to stress that Objects only lists ",
+ StyleBox["some",
+  FontSlant->"Italic"],
+ StyleBox[" ",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["objects present in a quasicategory.\nMost quasicategories have \
+infinite objects, so we cannot put them all within a finite structure like \
+Objects[qcat]\nThe proper way to test if an expression is an object in a \
+certain quasicategory is to use ObjectQ\nObjects[qcat] is a secondary \
+structure that might be deleted in future versions of ",
+  FontColor->GrayLevel[0]],
+ "WildCats",
+ StyleBox[". ",
+  FontColor->GrayLevel[0]],
+ "\nWe see that RealsPlusTimes is listed among "
+}], "Text",
+ CellID->215415229],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Objects", "[", 
+  "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", "]"}]], "Input",
+ CellLabel->"In[47]:=",
+ CellID->423714020],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"IntegersPlusTimes", ",", "RealsPlusTimes", ",", "CRng0"}], 
+  "}"}]], "Output",
+ ImageSize->{292, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[47]=",
+ CellID->313946909]
+}, Open  ]],
+
+Cell["But is not present in ", "Text",
+ CellID->181647892],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Objects", "[", 
+  "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "]"}]], "Input",
+ CellLabel->"In[48]:=",
+ CellID->181369568],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ ImageSize->{18, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[48]=",
+ CellID->602118788]
+}, Open  ]],
+
+Cell["\<\
+As said before, Objects[\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]] only lists some of the objects present in \
+\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]. RealsPlusTimes is \
+not one of them\
+\>", "Text",
+ CellID->516607495],
+
+Cell["\<\
+Yet ObjectQ checks the presence of inclusion functors \[ScriptI] (see \
+CATStructure picture above) when trying to determine the appropriate answer\
+\>", "Text",
+ CellID->70645452],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+  "RealsPlusTimes", ",", 
+   "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[49]:=",
+ CellID->103584062],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[49]=",
+ CellID->16201934]
+}, Open  ]],
+
+Cell["\<\
+in this way, if a user defines later a new category whose subcategory is \
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]\
+, RealsPlusTimes would be automatically included.\
+\>", "Text",
+ CellID->86734919],
+
+Cell["\<\
+Quasicategories also have morphisms with the related list and predicate \
+functions\
+\>", "Text",
+ CellID->859618342],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["MorphismQ",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/MorphismQ"], "[", 
+     RowBox[{
+      StyleBox["mor",
+       FontSlant->"Italic"], ",", " ", 
+      StyleBox["qcat",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "test whether ",
+     StyleBox["mor",
+      FontSlant->"Italic"],
+     " is in quasicategory ",
+     StyleBox["qcat",
+      FontSlant->"Italic"]
+    }], "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["Morphisms",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/Morphisms"], "[", 
+     StyleBox["qcat",
+      FontSlant->"Italic"], "]"}], 
+    RowBox[{
+    "is", " ", "a", " ", "list", " ", "of", " ", "some", " ", "morphisms", 
+     " ", "in", " ", 
+     StyleBox["qcat",
+      FontSlant->"Italic"]}]}
+  }]], "DefinitionBox",
+ CellID->471465542],
+
+Cell["Morphisms in a quasicategory", "Caption",
+ CellID->146275163],
+
+Cell["They are used in the same manner as Objects and ObjectQ", "Text",
+ CellID->256372177]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Numbers are sets", "Section",
+ CellID->500673904],
+
+Cell["Various sets of numbers", "Text",
+ CellID->590743554],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetQ", "[", 
+  RowBox[{"Naturals", ",", "Integers", ",", "Reals", ",", "Complexes"}], 
+  "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->294198001],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{163, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->14648998]
+}, Open  ]],
+
+Cell["Checking membership to variuos sets of numbers", "Text",
+ CellID->101251561],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2.35", "+", 
+   RowBox[{"3", "I"}]}], "\[Element]", "Complexes"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->136882465],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->199401722]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", "\[Element]", "Naturals"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->228227453],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->55264527]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", "\[Element]", "Reals"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->43367541],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->106382655]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"2", "\[Element]", "Complexes"}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->286136681],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[6]=",
+ CellID->900652796]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"163", "\[Element]", "Integers"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->71138170],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->69788912]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Pi", "\[Element]", "Reals"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->87975339],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->336956487]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", "/", "5"}], "\[Element]", "Reals"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->230987658],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->325970465]
+}, Open  ]],
+
+Cell["Any number is a set, because it belongs to a set", "Text",
+ CellID->437864199],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"SetQ", "[", 
+    RowBox[{"2.35", "+", 
+     RowBox[{"3", "I"}]}], "]"}], ",", 
+   RowBox[{"SetQ", "[", "53", "]"}], ",", 
+   RowBox[{"SetQ", "[", 
+    RowBox[{"\[Pi]", "-", "\[ExponentialE]"}], "]"}]}], "}"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->334455696],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{124, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[10]=",
+ CellID->16040054]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Finite sets", "Section",
+ CellID->5991682],
+
+Cell["A finite set is a finite collection of (arbitrary) sets.", "Text",
+ CellID->57393796],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{"FiniteSet", "[", 
+     RowBox[{"el1", ",", "...", ",", "eln"}], "]"}], Cell[
+    "represents the finite set with elements el1,...,eln", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->431364769],
+
+Cell["Finite sets.", "Caption",
+ CellID->43170032],
+
+Cell["Define some sets a, b, c, d", "Text",
+ CellID->147738852],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+  "a", ",", "b", ",", "c", ",", "d", ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->1008572673],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", "Null", ",", "Null", ",", "Null"}], "}"}]], "Output",
+ ImageSize->{163, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->627884876]
+}, Open  ]],
+
+Cell["A set with 3 elements. WildCats reorders the elements", "Text",
+ CellID->88450830],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"b", ",", "a", ",", "c"}], "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->307307176],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"a", ",", "b", ",", "c"}], "]"}]], "Output",
+ ImageSize->{124, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->110900520]
+}, Open  ]],
+
+Cell["\<\
+A set with 3 distinct elements. Duplicated elements are eliminated\
+\>", "Text",
+ CellID->849934274],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"d", ",", "b", ",", "b", ",", "c"}], "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->469776143],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"b", ",", "c", ",", "d"}], "]"}]], "Output",
+ ImageSize->{124, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->349952593]
+}, Open  ]],
+
+Cell["A finite set with no elements is the empty set", "Text",
+ CellID->221288996],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", "]"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->122800244],
+
+Cell[BoxData["\[EmptySet]"], "Output",
+ ImageSize->{11, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->450058317]
+}, Open  ]],
+
+Cell[TextData[{
+ "The standard ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " functions ",
+ ButtonBox["Union",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Union"],
+ ", ",
+ ButtonBox["Intersection",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Intersection"],
+ ", ",
+ ButtonBox["Complement",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Complement"],
+ " work fine with FiniteSet"
+}], "Text",
+ CellID->411933870],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "b", ",", "c"}], "]"}], "\[Union]", 
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "a", ",", "c"}], "]"}]}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->71555364],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"a", ",", "b", ",", "c"}], "]"}]], "Output",
+ ImageSize->{124, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[6]=",
+ CellID->838696026]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"a", ",", "b", ",", "c"}], "]"}], "\[Union]", 
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "c", ",", "d"}], "]"}]}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->131555107],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}]], "Output",
+ ImageSize->{142, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->147083174]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"a", ",", "b", ",", "c"}], "]"}], "\[Intersection]", 
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "c", ",", "d"}], "]"}]}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->42254225],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"b", ",", "c"}], "]"}]], "Output",
+ ImageSize->{106, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->18032384]
+}, Open  ]],
+
+Cell["Intersection with empty set", "Text",
+ CellID->223368951],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "c"}], "]"}], "\[Intersection]", 
+  "\[EmptySet]"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->301799094],
+
+Cell[BoxData["\[EmptySet]"], "Output",
+ ImageSize->{11, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->119707066]
+}, Open  ]],
+
+Cell["Union with empty set", "Text",
+ CellID->175478352],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "c"}], "]"}], "\[Union]", "\[EmptySet]"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->208112327],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"b", ",", "c"}], "]"}]], "Output",
+ ImageSize->{106, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[10]=",
+ CellID->302823000]
+}, Open  ]],
+
+Cell[TextData[{
+ ButtonBox["Complement",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Complement"],
+ "  of finite set FiniteSet[c,a] inside finite set FiniteSet[a,b,c,d]"
+}], "Text",
+ CellID->36331246],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Complement", "[", 
+  RowBox[{
+   RowBox[{"FiniteSet", "[", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}], ",", 
+   RowBox[{"FiniteSet", "[", 
+    RowBox[{"c", ",", "a"}], "]"}], ",", 
+   RowBox[{"FiniteSet", "[", 
+    RowBox[{"b", ",", "b", ",", "a"}], "]"}]}], "]"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->195442236],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", "d", "]"}]], "Output",
+ ImageSize->{88, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[8]=",
+ CellID->91394462]
+}, Open  ]],
+
+Cell["\<\
+The PowerSet functor  \[ScriptCapitalP], computes the powerset of (finite) \
+sets\
+\>", "Text",
+ CellID->320784857],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[ScriptCapitalP]", "[", 
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"b", ",", "b", ",", "c"}], "]"}], "]"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->85624356],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"\[EmptySet]", ",", 
+   RowBox[{"FiniteSet", "[", "b", "]"}], ",", 
+   RowBox[{"FiniteSet", "[", "c", "]"}], ",", 
+   RowBox[{"FiniteSet", "[", 
+    RowBox[{"b", ",", "c"}], "]"}]}], "]"}]], "Output",
+ ImageSize->{391, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->24688028]
+}, Open  ]],
+
+Cell[TextData[{
+ "The PowerSet functor is described in more detail in the ",
+ ButtonBox["Functors",
+  BaseStyle->"Link",
+  ButtonData->"paclet:WildCats/tutorial/Functors"],
+ " tutorial"
+}], "Text",
+ CellID->169665731],
+
+Cell["Power set of the singleton set", "Text",
+ CellID->204301582],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[ScriptCapitalP]", "[", "\[FivePointedStar]", "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->418297364],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"\[FivePointedStar]", ",", "\[EmptySet]"}], "]"}]], "Output",
+ ImageSize->{107, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->110088880]
+}, Open  ]],
+
+Cell["Power set of a power set", "Text",
+ CellID->146556563],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[ScriptCapitalP]", "[", 
+  RowBox[{"\[ScriptCapitalP]", "[", "\[FivePointedStar]", "]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->172363132],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"\[EmptySet]", ",", 
+   RowBox[{"FiniteSet", "[", "\[FivePointedStar]", "]"}], ",", 
+   RowBox[{"FiniteSet", "[", "\[EmptySet]", "]"}], ",", 
+   RowBox[{"FiniteSet", "[", 
+    RowBox[{"\[FivePointedStar]", ",", "\[EmptySet]"}], "]"}]}], 
+  "]"}]], "Output",
+ ImageSize->{393, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[10]=",
+ CellID->53798646]
+}, Open  ]],
+
+Cell["\<\
+The power set of the empty set is a set with just one element \
+\>", "Text",
+ CellID->371245771],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[ScriptCapitalP]", "[", "\[EmptySet]", "]"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->43136825],
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", "\[EmptySet]", "]"}]], "Output",
+ ImageSize->{88, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->377812323]
+}, Open  ]],
+
+Cell["\<\
+FiniteSet[el1,...,eln] is an object in \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]\
+\>", "Text",
+ CellID->10023740],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"a", ",", "b", ",", "c"}], "]"}], "//", "SetQ"}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->291637286],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[10]=",
+ CellID->65677485]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FiniteSet", "[", 
+   RowBox[{"Integers", ",", "3.5", ",", "Pi"}], "]"}], "//", 
+  "SetQ"}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->43965214],
+
+Cell[BoxData["True"], "Output",
+ ImageSize->{32, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[16]=",
+ CellID->351917213]
+}, Open  ]],
+
+Cell["\<\
+All members of a finite set, must be sets, otherwise an error is issued\
+\>", "Text",
+ CellID->142494746],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FiniteSet", "[", 
+  RowBox[{"2", ",", "3", ",", "noset"}], "]"}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->183022895],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"FiniteSet", "::", "noset"}], "MessageName"], ":", 
+  " ", "\<\"Some of the arguments \[NoBreak]\\!\\(\\*TemplateBox[List[\\\"2\\\
+\", \\\"3\\\", \\\"noset\\\"], \\\"Row\\\", Rule[DisplayFunction, \
+Function[RowBox[List[Slot[1], \\\", \\\", Slot[2], \\\", \\\", Slot[3]]]]], \
+Rule[InterpretationFunction, Function[RowBox[List[\\\"Row\\\", \\\"[\\\", \
+RowBox[List[RowBox[List[\\\"{\\\", RowBox[List[Slot[1], \\\",\\\", Slot[2], \
+\\\",\\\", Slot[3]]], \\\"}\\\"]], \\\",\\\", \\\"\\\\\\\", \\\\\\\"\\\"]], \
+\\\"]\\\"]]]]]\\)\[NoBreak] are not sets. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:WildCats/ref/FiniteSet\\\", ButtonNote -> \
+\\\"WildCats`FiniteSet::noset\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellLabel->"During evaluation of In[11]:=",
+ CellID->37174355],
+
+Cell[BoxData["$Aborted"], "Output",
+ ImageSize->{60, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[11]=",
+ CellID->789719091]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Defining elements of a set and families of sets", "Section",
+ CellID->319093472],
+
+Cell[TextData[{
+ "In WildCats it is possible to test or define an element of a set using ",
+ ButtonBox["Element",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Element"]
+}], "Text",
+ CellID->457891110],
+
+Cell["0, 1 and 530 are natural numbers", "Text",
+ CellID->265317756],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"0", "\[Element]", " ", "Naturals"}], ",", 
+   RowBox[{"1", "\[Element]", " ", "Naturals"}], ",", 
+   RowBox[{"530", "\[Element]", "Naturals"}]}], "}"}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->371980491],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{124, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[12]=",
+ CellID->668374816]
+}, Open  ]],
+
+Cell["Negative numbers and nonintegers are not natural numbers", "Text",
+ CellID->397132684],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "5"}], "\[Element]", "Naturals"}], ",", 
+   RowBox[{"3.2", "\[Element]", "Naturals"}]}], "}"}]], "Input",
+ CellLabel->"In[13]:=",
+ CellID->991553],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"False", ",", "False"}], "}"}]], "Output",
+ ImageSize->{99, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[13]=",
+ CellID->86694652]
+}, Open  ]],
+
+Cell["\<\
+We will show how we can define a set A whose elements satisfy a pattern.\
+\>", "Text",
+ CellID->314256649],
+
+Cell[TextData[{
+ "Define an arbitrary set A (see this ",
+ ButtonBox["tutorial",
+  BaseStyle->"Link",
+  ButtonData->"paclet:WildCats/tutorial/DefiningAndModifyingACategory"],
+ " for details)"
+}], "Text",
+ CellID->611467119],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+  "A", ",", "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[14]:=",
+ CellID->103774658],
+
+Cell["\<\
+It is important to pre-define the elements of a set A as sets themselves\
+\>", "Text",
+ CellID->107995415],
+
+Cell[TextData[{
+ "Define all objects ",
+ Cell[BoxData[
+  SubscriptBox["a", "n_"]], "InlineFormula"],
+ "  as sets. They behave as indexed objects in mathematics."
+}], "Text",
+ CellID->435993405],
+
+Cell["Expressions with patterns must be wrapped in HoldPattern", "Text",
+ CellID->285970834],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{"a", "[", "n_", "]"}], "]"}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[15]:=",
+ CellID->377241479],
+
+Cell["\<\
+We can see some objects in \[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]. This pattern is the last one in the list.\
+\>", "Text",
+ CellID->565721319],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Objects", "[", 
+  "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", "]"}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->489641671],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "\[EmptySet]", ",", "\[FivePointedStar]", ",", "BinarySet", ",", "Naturals",
+    ",", "Integers", ",", "Reals", ",", "Complexes", ",", 
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{"FiniteSet", "[", "WildCats`Private`x__", "]"}], "]"}], ",", 
+   "Cat1Object", ",", "Cat2Object1", ",", "Cat2Object2", ",", "Cat2Morphism", 
+   ",", "ParObject1", ",", "ParObject2", ",", "ParDomMorphism", ",", 
+   "ParCodMorphism", ",", "a", ",", "b", ",", "c", ",", "d", ",", "A", ",", 
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{"a", "[", "n_", "]"}], "]"}]}], "}"}]], "Output",
+ ImageSize->{456, 67},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[16]=",
+ CellID->469310886]
+}, Open  ]],
+
+Cell["\<\
+We now have various objects in \[DoubleStruckCapitalS]\[DoubleStruckE]\
+\[DoubleStruckT]\
+\>", "Text",
+ CellID->433076265],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ObjectQ", "[", 
+  RowBox[{
+   RowBox[{"a", "[", "q", "]"}], ",", 
+   RowBox[{"a", "[", "123", "]"}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[19]:=",
+ CellID->754087429],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[19]=",
+ CellID->434200251]
+}, Open  ]],
+
+Cell["\<\
+Another, faster way to test objects in \
+\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT] \
+\>", "Text",
+ CellID->539618547],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetQ", "[", 
+  RowBox[{
+   RowBox[{"a", "[", "q", "]"}], ",", 
+   RowBox[{"a", "[", "123", "]"}]}], "]"}]], "Input",
+ CellLabel->"In[18]:=",
+ CellID->68344544],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[18]=",
+ CellID->453680180]
+}, Open  ]],
+
+Cell["\<\
+Just for aesthetic reasons, we can create a custom notation, so that the \
+index becomes a subscript\
+\>", "Text",
+ CellID->24269692],
+
+Cell[BoxData[
+ RowBox[{"Notation", "[", 
+  RowBox[{
+   TemplateBox[{SubscriptBox["a", "n_"]},
+    "NotationTemplateTag"], " ", "\[DoubleLongLeftRightArrow]", " ", 
+   TemplateBox[{RowBox[{"a", "[", "n_", "]"}]},
+    "NotationTemplateTag"]}], "]"}]], "Input",
+ CellLabel->"In[20]:=",
+ CellID->176146298],
+
+Cell["We can do the last check again using the custom notation", "Text",
+ CellID->315754996],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetQ", "[", 
+  RowBox[{
+   SubscriptBox["a", "q"], ",", 
+   SubscriptBox["a", "123"]}], "]"}]], "Input",
+ CellLabel->"In[21]:=",
+ CellID->22031871],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{85, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[21]=",
+ CellID->3632024]
+}, Open  ]],
+
+Cell[TextData[{
+ "Assert that all symbols ",
+ Cell[BoxData[
+  SubscriptBox["a", "n_"]], "InlineFormula"],
+ " are elements in set A"
+}], "Text",
+ CellID->286254677],
+
+Cell[BoxData[
+ RowBox[{"A", "/:", 
+  RowBox[{"Element", "[", 
+   RowBox[{
+    SubscriptBox["a", "n_"], ",", "A"}], "]"}], ":=", "True"}]], "Input",
+ CellLabel->"In[22]:=",
+ CellID->480126099],
+
+Cell["\<\
+Note that the use of upvalues (A/:) is required, since Element is protected.\
+\>", "Text",
+ CellID->102926394],
+
+Cell["The information is stored under symbol A.", "Text",
+ CellID->498797094],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "A"}]], "Input",
+ CellLabel->"In[23]:=",
+ CellID->818263734],
+
+Cell[CellGroupData[{
+
+Cell["Notebook$$19$142343`A", "Print", "PrintUsage",
+ CellTags->"Info3569148669-9820156",
+ CellID->78154585],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{"A", "/:", 
+         RowBox[{"ObjectQ", "[", 
+          RowBox[{
+          "A", ",", 
+           "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}],
+          ":=", "True"}]},
+       {" "},
+       {
+        RowBox[{"A", "/:", 
+         RowBox[{
+          SubscriptBox["a", "n_"], "\[Element]", "A"}], ":=", "True"}]}
+      },
+      BaselinePosition->{Baseline, {1, 1}},
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxItemSize->{"Columns" -> {{
+           Scaled[0.999]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+        "RowsIndexed" -> {}}]}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  Definition[$CellContext`A],
+  Editable->False]], "Print",
+ CellTags->"Info3569148669-9820156",
+ CellID->78341231]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ "Now all ",
+ Cell[BoxData[
+  SubscriptBox["a", "n_"]], "InlineFormula"],
+ " are in set A"
+}], "Text",
+ CellID->483053516],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["a", "1"], "\[Element]", "A"}], ",", 
+   RowBox[{
+    SubscriptBox["a", "5"], "\[Element]", "A"}], ",", 
+   RowBox[{
+    SubscriptBox["a", "200"], "\[Element]", "A"}], ",", " ", 
+   RowBox[{
+    SubscriptBox["a", "k"], "\[Element]", " ", "A"}]}], "}"}]], "Input",
+ CellLabel->"In[24]:=",
+ CellID->76669043],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]], "Output",
+ ImageSize->{163, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[24]=",
+ CellID->104684820]
+}, Open  ]],
+
+Cell[TextData[{
+ "In the next example we define a family of sets ",
+ Cell[BoxData[
+  SubscriptBox["B", "i"]], "InlineFormula"],
+ " where each ",
+ Cell[BoxData[
+  SubscriptBox["B", "i"]], "InlineFormula"],
+ " has an element ",
+ Cell[BoxData[
+  SubscriptBox["b", "i"]], "InlineFormula"]
+}], "Text",
+ CellID->271983124],
+
+Cell[TextData[{
+ "Define custom notation for sets ",
+ Cell[BoxData[
+  SubscriptBox["B", "i"]], "InlineFormula"]
+}], "Text",
+ CellID->531064232],
+
+Cell[BoxData[
+ RowBox[{"Notation", "[", 
+  RowBox[{
+   TemplateBox[{SubscriptBox["B", "i_"]},
+    "NotationTemplateTag"], " ", "\[DoubleLongLeftRightArrow]", " ", 
+   TemplateBox[{RowBox[{"B", "[", "i_", "]"}]},
+    "NotationTemplateTag"]}], "]"}]], "Input",
+ CellLabel->"In[25]:=",
+ CellID->151331589],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+   RowBox[{"HoldPattern", "@", 
+    SubscriptBox["B", "i_"]}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[26]:=",
+ CellID->418333519],
+
+Cell[TextData[{
+ "Define custom notation for sets ",
+ Cell[BoxData[
+  SubscriptBox["b", "i"]], "InlineFormula"]
+}], "Text",
+ CellID->21684194],
+
+Cell[BoxData[
+ RowBox[{"Notation", "[", 
+  RowBox[{
+   TemplateBox[{SubscriptBox["b", "i_"]},
+    "NotationTemplateTag"], " ", "\[DoubleLongLeftRightArrow]", " ", 
+   TemplateBox[{RowBox[{"b", "[", "i_", "]"}]},
+    "NotationTemplateTag"]}], "]"}]], "Input",
+ CellLabel->"In[27]:=",
+ CellID->114008366],
+
+Cell[BoxData[
+ RowBox[{"DefObject", "[", 
+  RowBox[{
+   RowBox[{"HoldPattern", "@", 
+    SubscriptBox["b", "i_"]}], ",", 
+   "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], 
+  "]"}]], "Input",
+ CellLabel->"In[28]:=",
+ CellID->478790271],
+
+Cell["\<\
+Define membership relations with upvalues and \[Element] notation\
+\>", "Text",
+ CellID->229959161],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["b", "i_"], "\[Element]", 
+   SubscriptBox["B", "i_"]}], "^:=", "True"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["b", "i_"], "\[Element]", 
+   SubscriptBox["B", "j_"]}], "^:=", "False"}]}], "Input",
+ CellLabel->"In[29]:=",
+ CellID->23519382],
+
+Cell["Using ^:=  stores the information under head B and b", "Text",
+ CellID->293236600],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"??", "B"}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->250045898],
+
+Cell[CellGroupData[{
+
+Cell["Notebook$$75$119168`B", "Print", "PrintUsage",
+ CellTags->"Info3568144759-9270125",
+ CellID->184152685],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{"B", "/:", 
+         RowBox[{"ObjectQ", "[", 
+          RowBox[{
+           RowBox[{"HoldPattern", "[", 
+            SubscriptBox["B", "i_"], "]"}], ",", 
+           "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}],
+          ":=", "True"}]},
+       {" "},
+       {
+        RowBox[{"B", "/:", 
+         RowBox[{
+          SubscriptBox["b", "i_"], "\[Element]", 
+          SubscriptBox["B", "i_"]}], ":=", "True"}]},
+       {" "},
+       {
+        RowBox[{"B", "/:", 
+         RowBox[{
+          SubscriptBox["b", "i_"], "\[Element]", 
+          SubscriptBox["B", "j_"]}], ":=", "False"}]}
+      },
+      BaselinePosition->{Baseline, {1, 1}},
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxItemSize->{"Columns" -> {{
+           Scaled[0.999]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+        "RowsIndexed" -> {}}]}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  Definition[$CellContext`B],
+  Editable->False]], "Print",
+ CellTags->"Info3568144759-9270125",
+ CellID->155679305]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"??", "b"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->306740798],
+
+Cell[CellGroupData[{
+
+Cell["Notebook$$75$119168`b", "Print", "PrintUsage",
+ CellTags->"Info3568144763-9270125",
+ CellID->44198092],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{"b", "/:", 
+         RowBox[{"ObjectQ", "[", 
+          RowBox[{
+           RowBox[{"HoldPattern", "[", 
+            SubscriptBox["b", "i_"], "]"}], ",", 
+           "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]"}], "]"}],
+          ":=", "True"}]},
+       {" "},
+       {
+        RowBox[{"b", "/:", 
+         RowBox[{
+          SubscriptBox["b", "i_"], "\[Element]", 
+          SubscriptBox["B", "i_"]}], ":=", "True"}]},
+       {" "},
+       {
+        RowBox[{"b", "/:", 
+         RowBox[{
+          SubscriptBox["b", "i_"], "\[Element]", 
+          SubscriptBox["B", "j_"]}], ":=", "False"}]}
+      },
+      BaselinePosition->{Baseline, {1, 1}},
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxItemSize->{"Columns" -> {{
+           Scaled[0.999]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+        "RowsIndexed" -> {}}]}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  Definition[$CellContext`b],
+  Editable->False]], "Print",
+ CellTags->"Info3568144763-9270125",
+ CellID->459642518]
+}, Open  ]]
+}, Open  ]],
+
+Cell["We can now check the membership relations", "Text",
+ CellID->18813608],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["b", "1"], "\[Element]", 
+    SubscriptBox["B", "1"]}], ",", 
+   RowBox[{
+    SubscriptBox["b", "5"], "\[Element]", 
+    SubscriptBox["B", "5"]}], ",", 
+   RowBox[{
+    SubscriptBox["b", "200"], "\[Element]", 
+    SubscriptBox["B", "100"]}]}], "}"}]], "Input",
+ CellLabel->"In[31]:=",
+ CellID->260441748],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True", ",", "False"}], "}"}]], "Output",
+ ImageSize->{131, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[31]=",
+ CellID->54700562]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->961285135],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->29968],
+
+Cell[TextData[ButtonBox["CATStructure",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/tutorial/CATStructure"]], "RelatedTutorials",
+ CellID->241112985]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Standard categories, objects and morphisms - Wolfram \
+Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 44, 18.0111485}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> 
+    "Wild Cats Package Tutorial", "language" -> "en", "paclet" -> 
+    "WildCats Package", "status" -> "None", "summary" -> 
+    "This terminates the current Mathematica session and starts a new clean \
+session (recommended for troubleshooting) This loads the package:", 
+    "synonyms" -> {}, "title" -> "Standard categories, objects and morphisms",
+     "type" -> "Tutorial", "uri" -> 
+    "WildCats/tutorial/StandardCategoriesObjectsAndMorphisms"}, "LinkTrails" -> 
+  "", "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info3527521806-1912369"->{
+  Cell[34919, 890, 456, 12, 70, "Print",
+   CellTags->"Info3527521806-1912369",
+   CellID->3578872]},
+ "Info3569148669-9820156"->{
+  Cell[96202, 2907, 108, 2, 70, "Print",
+   CellTags->"Info3569148669-9820156",
+   CellID->78154585],
+  Cell[96313, 2911, 1035, 31, 70, "Print",
+   CellTags->"Info3569148669-9820156",
+   CellID->78341231]},
+ "Info3568144759-9270125"->{
+  Cell[100548, 3076, 109, 2, 70, "Print",
+   CellTags->"Info3568144759-9270125",
+   CellID->184152685],
+  Cell[100660, 3080, 1310, 39, 70, "Print",
+   CellTags->"Info3568144759-9270125",
+   CellID->155679305]},
+ "Info3568144763-9270125"->{
+  Cell[102132, 3132, 108, 2, 70, "Print",
+   CellTags->"Info3568144763-9270125",
+   CellID->44198092],
+  Cell[102243, 3136, 1310, 39, 70, "Print",
+   CellTags->"Info3568144763-9270125",
+   CellID->459642518]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info3527521806-1912369", 106680, 3280},
+ {"Info3569148669-9820156", 106811, 3284},
+ {"Info3568144759-9270125", 107047, 3291},
+ {"Info3568144763-9270125", 107287, 3298}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[635, 21, 78, 1, 70, "TutorialColorBar"],
+Cell[716, 24, 179, 5, 70, "LinkTrail"],
+Cell[898, 31, 12195, 238, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[13118, 273, 79, 1, 70, "Title",
+ CellID->509267359],
+Cell[13200, 276, 171, 6, 70, "Text",
+ CellID->12172402],
+Cell[13374, 284, 69, 1, 70, "Text",
+ CellID->121457497],
+Cell[13446, 287, 73, 2, 70, "Input",
+ CellID->309037897],
+Cell[13522, 291, 60, 1, 70, "Text",
+ CellID->1825449234],
+Cell[CellGroupData[{
+Cell[13607, 296, 116, 3, 70, "Input",
+ CellID->98796305],
+Cell[13726, 301, 879, 22, 70, "Print",
+ CellID->173520873]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14642, 328, 58, 1, 70, "Section",
+ CellID->292760998],
+Cell[14703, 331, 78, 1, 70, "Text",
+ CellID->65165492],
+Cell[14784, 334, 268, 7, 70, "DefinitionBox",
+ CellID->952161528],
+Cell[15055, 343, 58, 1, 70, "Caption",
+ CellID->18453368],
+Cell[CellGroupData[{
+Cell[15138, 348, 85, 2, 70, "Input",
+ CellID->5426181],
+Cell[15226, 352, 2324, 43, 54, "Output",
+ CellID->215674629]
+}, Open  ]],
+Cell[17565, 398, 8942, 232, 70, "DefinitionBox",
+ CellID->10174063],
+Cell[26510, 632, 59, 1, 70, "Caption",
+ CellID->346298606],
+Cell[26572, 635, 87, 1, 70, "Text",
+ CellID->401197070],
+Cell[26662, 638, 5952, 171, 70, "DefinitionBox",
+ CellID->336493106],
+Cell[32617, 811, 70, 1, 70, "Caption",
+ CellID->51885127],
+Cell[32690, 814, 177, 6, 70, "Text",
+ CellID->480229822],
+Cell[32870, 822, 287, 6, 70, "DefinitionBox",
+ CellID->511605136],
+Cell[33160, 830, 94, 1, 70, "Caption",
+ CellID->27479194],
+Cell[33257, 833, 262, 6, 70, "Text",
+ CellID->745303816],
+Cell[33522, 841, 73, 1, 70, "Text",
+ CellID->211172238],
+Cell[33598, 844, 927, 26, 70, "DefinitionBox",
+ CellID->59879914],
+Cell[34528, 872, 77, 1, 70, "Caption",
+ CellID->478094263],
+Cell[34608, 875, 192, 6, 70, "Text",
+ CellID->99753369],
+Cell[CellGroupData[{
+Cell[34825, 885, 91, 3, 70, "Input",
+ CellID->520836722],
+Cell[34919, 890, 456, 12, 70, "Print",
+ CellTags->"Info3527521806-1912369",
+ CellID->3578872]
+}, Open  ]],
+Cell[35390, 905, 128, 4, 70, "Text",
+ CellID->65180877],
+Cell[35521, 911, 82, 2, 70, "Text",
+ CellID->415263817],
+Cell[35606, 915, 113, 2, 70, "Text",
+ CellID->4141957],
+Cell[35722, 919, 128, 2, 70, "Text",
+ CellID->867800446],
+Cell[35853, 923, 119, 2, 70, "Text",
+ CellID->642184541],
+Cell[35975, 927, 178, 4, 70, "Text",
+ CellID->134280802],
+Cell[CellGroupData[{
+Cell[36178, 935, 203, 7, 70, "Input",
+ CellID->480480062],
+Cell[36384, 944, 161, 5, 36, "Output",
+ CellID->487187152]
+}, Open  ]],
+Cell[36560, 952, 80, 1, 70, "Text",
+ CellID->723533465],
+Cell[CellGroupData[{
+Cell[36665, 957, 113, 3, 70, "Input",
+ CellID->149869295],
+Cell[36781, 962, 161, 5, 36, "Output",
+ CellID->335979733]
+}, Open  ]],
+Cell[36957, 970, 818, 31, 70, "DefinitionBox",
+ CellID->252378650],
+Cell[37778, 1003, 51, 1, 70, "Caption",
+ CellID->355714161],
+Cell[37832, 1006, 77, 1, 70, "Text",
+ CellID->180370271],
+Cell[37912, 1009, 453, 17, 70, "Text",
+ CellID->158189982],
+Cell[38368, 1028, 160, 4, 70, "Text",
+ CellID->435967886],
+Cell[CellGroupData[{
+Cell[38553, 1036, 201, 6, 70, "Input",
+ CellID->56199484],
+Cell[38757, 1044, 137, 4, 36, "Output",
+ CellID->92242245]
+}, Open  ]],
+Cell[38909, 1051, 90, 1, 70, "Text",
+ CellID->482291195],
+Cell[CellGroupData[{
+Cell[39024, 1056, 179, 6, 70, "Input",
+ CellID->97238120],
+Cell[39206, 1064, 137, 4, 36, "Output",
+ CellID->21361769]
+}, Open  ]],
+Cell[39358, 1071, 180, 4, 70, "Text",
+ CellID->867327738],
+Cell[CellGroupData[{
+Cell[39563, 1079, 180, 6, 70, "Input",
+ CellID->657949851],
+Cell[39746, 1087, 139, 4, 36, "Output",
+ CellID->491357643]
+}, Open  ]],
+Cell[39900, 1094, 246, 7, 70, "Text",
+ CellID->54947289],
+Cell[CellGroupData[{
+Cell[40171, 1105, 2743, 75, 70, "Input",
+ CellID->236485100],
+Cell[42917, 1182, 27552, 671, 70, "Output",
+ CellID->366733109]
+}, Open  ]],
+Cell[70484, 1856, 118, 4, 70, "Text",
+ CellID->107319984],
+Cell[70605, 1862, 373, 13, 70, "DefinitionBox",
+ CellID->212654259],
+Cell[70981, 1877, 65, 1, 70, "Caption",
+ CellID->821454805],
+Cell[71049, 1880, 683, 17, 70, "Text",
+ CellID->215415229],
+Cell[CellGroupData[{
+Cell[71757, 1901, 186, 5, 70, "Input",
+ CellID->423714020],
+Cell[71946, 1908, 251, 8, 36, "Output",
+ CellID->313946909]
+}, Open  ]],
+Cell[72212, 1919, 58, 1, 70, "Text",
+ CellID->181647892],
+Cell[CellGroupData[{
+Cell[72295, 1924, 161, 4, 70, "Input",
+ CellID->181369568],
+Cell[72459, 1930, 176, 6, 36, "Output",
+ CellID->602118788]
+}, Open  ]],
+Cell[72650, 1939, 263, 6, 70, "Text",
+ CellID->516607495],
+Cell[72916, 1947, 190, 4, 70, "Text",
+ CellID->70645452],
+Cell[CellGroupData[{
+Cell[73131, 1955, 204, 7, 70, "Input",
+ CellID->103584062],
+Cell[73338, 1964, 161, 5, 36, "Output",
+ CellID->16201934]
+}, Open  ]],
+Cell[73514, 1972, 247, 5, 70, "Text",
+ CellID->86734919],
+Cell[73764, 1979, 127, 4, 70, "Text",
+ CellID->859618342],
+Cell[73894, 1985, 871, 31, 70, "DefinitionBox",
+ CellID->471465542],
+Cell[74768, 2018, 67, 1, 70, "Caption",
+ CellID->146275163],
+Cell[74838, 2021, 91, 1, 70, "Text",
+ CellID->256372177]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[74966, 2027, 55, 1, 70, "Section",
+ CellID->500673904],
+Cell[75024, 2030, 59, 1, 70, "Text",
+ CellID->590743554],
+Cell[CellGroupData[{
+Cell[75108, 2035, 172, 5, 70, "Input",
+ CellID->294198001],
+Cell[75283, 2042, 235, 7, 36, "Output",
+ CellID->14648998]
+}, Open  ]],
+Cell[75533, 2052, 82, 1, 70, "Text",
+ CellID->101251561],
+Cell[CellGroupData[{
+Cell[75640, 2057, 154, 5, 70, "Input",
+ CellID->136882465],
+Cell[75797, 2064, 161, 5, 36, "Output",
+ CellID->199401722]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75995, 2074, 108, 3, 70, "Input",
+ CellID->228227453],
+Cell[76106, 2079, 160, 5, 36, "Output",
+ CellID->55264527]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76303, 2089, 104, 3, 70, "Input",
+ CellID->43367541],
+Cell[76410, 2094, 161, 5, 36, "Output",
+ CellID->106382655]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76608, 2104, 109, 3, 70, "Input",
+ CellID->286136681],
+Cell[76720, 2109, 161, 5, 36, "Output",
+ CellID->900652796]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76918, 2119, 109, 3, 70, "Input",
+ CellID->71138170],
+Cell[77030, 2124, 160, 5, 36, "Output",
+ CellID->69788912]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[77227, 2134, 105, 3, 70, "Input",
+ CellID->87975339],
+Cell[77335, 2139, 161, 5, 36, "Output",
+ CellID->336956487]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[77533, 2149, 128, 4, 70, "Input",
+ CellID->230987658],
+Cell[77664, 2155, 161, 5, 36, "Output",
+ CellID->325970465]
+}, Open  ]],
+Cell[77840, 2163, 84, 1, 70, "Text",
+ CellID->437864199],
+Cell[CellGroupData[{
+Cell[77949, 2168, 315, 10, 70, "Input",
+ CellID->334455696],
+Cell[78267, 2180, 223, 7, 36, "Output",
+ CellID->16040054]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[78539, 2193, 48, 1, 70, "Section",
+ CellID->5991682],
+Cell[78590, 2196, 91, 1, 70, "Text",
+ CellID->57393796],
+Cell[78684, 2199, 234, 6, 70, "DefinitionBox",
+ CellID->431364769],
+Cell[78921, 2207, 50, 1, 70, "Caption",
+ CellID->43170032],
+Cell[78974, 2210, 63, 1, 70, "Text",
+ CellID->147738852],
+Cell[CellGroupData[{
+Cell[79062, 2215, 223, 7, 70, "Input",
+ CellID->1008572673],
+Cell[79288, 2224, 236, 7, 36, "Output",
+ CellID->627884876]
+}, Open  ]],
+Cell[79539, 2234, 88, 1, 70, "Text",
+ CellID->88450830],
+Cell[CellGroupData[{
+Cell[79652, 2239, 138, 4, 70, "Input",
+ CellID->307307176],
+Cell[79793, 2245, 227, 7, 36, "Output",
+ CellID->110900520]
+}, Open  ]],
+Cell[80035, 2255, 110, 3, 70, "Text",
+ CellID->849934274],
+Cell[CellGroupData[{
+Cell[80170, 2262, 148, 4, 70, "Input",
+ CellID->469776143],
+Cell[80321, 2268, 227, 7, 36, "Output",
+ CellID->349952593]
+}, Open  ]],
+Cell[80563, 2278, 82, 1, 70, "Text",
+ CellID->221288996],
+Cell[CellGroupData[{
+Cell[80670, 2283, 100, 3, 70, "Input",
+ CellID->122800244],
+Cell[80773, 2288, 168, 5, 36, "Output",
+ CellID->450058317]
+}, Open  ]],
+Cell[80956, 2296, 425, 18, 70, "Text",
+ CellID->411933870],
+Cell[CellGroupData[{
+Cell[81406, 2318, 238, 7, 70, "Input",
+ CellID->71555364],
+Cell[81647, 2327, 227, 7, 36, "Output",
+ CellID->838696026]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[81911, 2339, 239, 7, 70, "Input",
+ CellID->131555107],
+Cell[82153, 2348, 237, 7, 36, "Output",
+ CellID->147083174]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[82427, 2360, 245, 7, 70, "Input",
+ CellID->42254225],
+Cell[82675, 2369, 216, 7, 36, "Output",
+ CellID->18032384]
+}, Open  ]],
+Cell[82906, 2379, 63, 1, 70, "Text",
+ CellID->223368951],
+Cell[CellGroupData[{
+Cell[82994, 2384, 179, 6, 70, "Input",
+ CellID->301799094],
+Cell[83176, 2392, 168, 5, 36, "Output",
+ CellID->119707066]
+}, Open  ]],
+Cell[83359, 2400, 56, 1, 70, "Text",
+ CellID->175478352],
+Cell[CellGroupData[{
+Cell[83440, 2405, 170, 5, 70, "Input",
+ CellID->208112327],
+Cell[83613, 2412, 218, 7, 36, "Output",
+ CellID->302823000]
+}, Open  ]],
+Cell[83846, 2422, 203, 6, 70, "Text",
+ CellID->36331246],
+Cell[CellGroupData[{
+Cell[84074, 2432, 355, 10, 70, "Input",
+ CellID->195442236],
+Cell[84432, 2444, 192, 6, 36, "Output",
+ CellID->91394462]
+}, Open  ]],
+Cell[84639, 2453, 125, 4, 70, "Text",
+ CellID->320784857],
+Cell[CellGroupData[{
+Cell[84789, 2461, 182, 5, 70, "Input",
+ CellID->85624356],
+Cell[84974, 2468, 382, 11, 36, "Output",
+ CellID->24688028]
+}, Open  ]],
+Cell[85371, 2482, 217, 7, 70, "Text",
+ CellID->169665731],
+Cell[85591, 2491, 66, 1, 70, "Text",
+ CellID->204301582],
+Cell[CellGroupData[{
+Cell[85682, 2496, 130, 3, 70, "Input",
+ CellID->418297364],
+Cell[85815, 2501, 244, 7, 36, "Output",
+ CellID->110088880]
+}, Open  ]],
+Cell[86074, 2511, 60, 1, 70, "Text",
+ CellID->146556563],
+Cell[CellGroupData[{
+Cell[86159, 2516, 178, 5, 70, "Input",
+ CellID->172363132],
+Cell[86340, 2523, 440, 12, 36, "Output",
+ CellID->53798646]
+}, Open  ]],
+Cell[86795, 2538, 106, 3, 70, "Text",
+ CellID->371245771],
+Cell[CellGroupData[{
+Cell[86926, 2545, 122, 3, 70, "Input",
+ CellID->43136825],
+Cell[87051, 2550, 203, 6, 36, "Output",
+ CellID->377812323]
+}, Open  ]],
+Cell[87269, 2559, 139, 4, 70, "Text",
+ CellID->10023740],
+Cell[CellGroupData[{
+Cell[87433, 2567, 167, 5, 70, "Input",
+ CellID->291637286],
+Cell[87603, 2574, 161, 5, 36, "Output",
+ CellID->65677485]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[87801, 2584, 179, 6, 70, "Input",
+ CellID->43965214],
+Cell[87983, 2592, 162, 5, 36, "Output",
+ CellID->351917213]
+}, Open  ]],
+Cell[88160, 2600, 115, 3, 70, "Text",
+ CellID->142494746],
+Cell[CellGroupData[{
+Cell[88300, 2607, 143, 4, 70, "Input",
+ CellID->183022895],
+Cell[88446, 2613, 888, 15, 70, "Message",
+ CellID->37174355],
+Cell[89337, 2630, 166, 5, 36, "Output",
+ CellID->789719091]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[89552, 2641, 86, 1, 70, "Section",
+ CellID->319093472],
+Cell[89641, 2644, 202, 6, 70, "Text",
+ CellID->457891110],
+Cell[89846, 2652, 68, 1, 70, "Text",
+ CellID->265317756],
+Cell[CellGroupData[{
+Cell[89939, 2657, 258, 7, 70, "Input",
+ CellID->371980491],
+Cell[90200, 2666, 224, 7, 36, "Output",
+ CellID->668374816]
+}, Open  ]],
+Cell[90439, 2676, 92, 1, 70, "Text",
+ CellID->397132684],
+Cell[CellGroupData[{
+Cell[90556, 2681, 215, 7, 70, "Input",
+ CellID->991553],
+Cell[90774, 2690, 211, 7, 36, "Output",
+ CellID->86694652]
+}, Open  ]],
+Cell[91000, 2700, 116, 3, 70, "Text",
+ CellID->314256649],
+Cell[91119, 2705, 222, 7, 70, "Text",
+ CellID->611467119],
+Cell[91344, 2714, 189, 6, 70, "Input",
+ CellID->103774658],
+Cell[91536, 2722, 116, 3, 70, "Text",
+ CellID->107995415],
+Cell[91655, 2727, 193, 6, 70, "Text",
+ CellID->435993405],
+Cell[91851, 2735, 92, 1, 70, "Text",
+ CellID->285970834],
+Cell[91946, 2738, 260, 8, 70, "Input",
+ CellID->377241479],
+Cell[92209, 2748, 171, 4, 70, "Text",
+ CellID->565721319],
+Cell[CellGroupData[{
+Cell[92405, 2756, 161, 4, 70, "Input",
+ CellID->489641671],
+Cell[92569, 2762, 735, 16, 88, "Output",
+ CellID->469310886]
+}, Open  ]],
+Cell[93319, 2781, 132, 4, 70, "Text",
+ CellID->433076265],
+Cell[CellGroupData[{
+Cell[93476, 2789, 258, 8, 70, "Input",
+ CellID->754087429],
+Cell[93737, 2799, 210, 7, 36, "Output",
+ CellID->434200251]
+}, Open  ]],
+Cell[93962, 2809, 141, 4, 70, "Text",
+ CellID->539618547],
+Cell[CellGroupData[{
+Cell[94128, 2817, 183, 6, 70, "Input",
+ CellID->68344544],
+Cell[94314, 2825, 210, 7, 36, "Output",
+ CellID->453680180]
+}, Open  ]],
+Cell[94539, 2835, 143, 4, 70, "Text",
+ CellID->24269692],
+Cell[94685, 2841, 302, 8, 70, "Input",
+ CellID->176146298],
+Cell[94990, 2851, 92, 1, 70, "Text",
+ CellID->315754996],
+Cell[CellGroupData[{
+Cell[95107, 2856, 171, 6, 70, "Input",
+ CellID->22031871],
+Cell[95281, 2864, 208, 7, 36, "Output",
+ CellID->3632024]
+}, Open  ]],
+Cell[95504, 2874, 163, 6, 70, "Text",
+ CellID->286254677],
+Cell[95670, 2882, 191, 6, 70, "Input",
+ CellID->480126099],
+Cell[95864, 2890, 120, 3, 70, "Text",
+ CellID->102926394],
+Cell[95987, 2895, 77, 1, 70, "Text",
+ CellID->498797094],
+Cell[CellGroupData[{
+Cell[96089, 2900, 88, 3, 70, "Input",
+ CellID->818263734],
+Cell[CellGroupData[{
+Cell[96202, 2907, 108, 2, 70, "Print",
+ CellTags->"Info3569148669-9820156",
+ CellID->78154585],
+Cell[96313, 2911, 1035, 31, 70, "Print",
+ CellTags->"Info3569148669-9820156",
+ CellID->78341231]
+}, Open  ]]
+}, Open  ]],
+Cell[97375, 2946, 138, 6, 70, "Text",
+ CellID->483053516],
+Cell[CellGroupData[{
+Cell[97538, 2956, 375, 12, 70, "Input",
+ CellID->76669043],
+Cell[97916, 2970, 237, 7, 36, "Output",
+ CellID->104684820]
+}, Open  ]],
+Cell[98168, 2980, 316, 11, 70, "Text",
+ CellID->271983124],
+Cell[98487, 2993, 143, 5, 70, "Text",
+ CellID->531064232],
+Cell[98633, 3000, 302, 8, 70, "Input",
+ CellID->151331589],
+Cell[98938, 3010, 249, 8, 70, "Input",
+ CellID->418333519],
+Cell[99190, 3020, 142, 5, 70, "Text",
+ CellID->21684194],
+Cell[99335, 3027, 302, 8, 70, "Input",
+ CellID->114008366],
+Cell[99640, 3037, 249, 8, 70, "Input",
+ CellID->478790271],
+Cell[99892, 3047, 109, 3, 70, "Text",
+ CellID->229959161],
+Cell[100004, 3052, 315, 10, 70, "Input",
+ CellID->23519382],
+Cell[100322, 3064, 88, 1, 70, "Text",
+ CellID->293236600],
+Cell[CellGroupData[{
+Cell[100435, 3069, 88, 3, 70, "Input",
+ CellID->250045898],
+Cell[CellGroupData[{
+Cell[100548, 3076, 109, 2, 70, "Print",
+ CellTags->"Info3568144759-9270125",
+ CellID->184152685],
+Cell[100660, 3080, 1310, 39, 70, "Print",
+ CellTags->"Info3568144759-9270125",
+ CellID->155679305]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[102019, 3125, 88, 3, 70, "Input",
+ CellID->306740798],
+Cell[CellGroupData[{
+Cell[102132, 3132, 108, 2, 70, "Print",
+ CellTags->"Info3568144763-9270125",
+ CellID->44198092],
+Cell[102243, 3136, 1310, 39, 70, "Print",
+ CellTags->"Info3568144763-9270125",
+ CellID->459642518]
+}, Open  ]]
+}, Open  ]],
+Cell[103580, 3179, 76, 1, 70, "Text",
+ CellID->18813608],
+Cell[CellGroupData[{
+Cell[103681, 3184, 373, 13, 70, "Input",
+ CellID->260441748],
+Cell[104057, 3199, 224, 7, 36, "Output",
+ CellID->54700562]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[104330, 3212, 66, 1, 70, "TutorialMoreAboutSection",
+ CellID->961285135],
+Cell[104399, 3215, 150, 3, 70, "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104586, 3223, 64, 1, 70, "RelatedTutorialsSection",
+ CellID->29968],
+Cell[104653, 3226, 155, 3, 70, "RelatedTutorials",
+ CellID->241112985]
+}, Open  ]]
+}, Open  ]],
+Cell[104835, 3233, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,1956 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     74406,       1946]
+NotebookOptionsPosition[     70580,       1824]
+NotebookOutlinePosition[     72341,       1872]
+CellTagsIndexPosition[     72298,       1869]
+WindowTitle->CATStructure - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILD CATS PACKAGE TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Defining and modifying categories, objects, \
+morphisms\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/DefiningAndModifyingACategory"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats Guide\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/guide/WildCats"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Functions \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"CategoryPlot\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/CategoryPlot"], "\<\"CATStructure\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/CATStructure"], "\<\"U\"\>":>
+       Documentation`HelpLookup[
+       "paclet:WildCats/ref/U"], "\<\"\[ScriptI]\"\>":>
+       Documentation`HelpLookup["paclet:WildCats/ref/\[ScriptCapitalI]"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats/tutorial/CATStructure\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/tutorial/CATStructure"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/tutorial/\
+CATStructure.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/tutorial/CATStructure", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["CATStructure", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "This terminates the current ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " session and starts a new clean session"
+}], "Text",
+ CellID->12172402],
+
+Cell["(recommended for troubleshooting)", "Text",
+ CellID->121457497],
+
+Cell[BoxData["Quit"], "Input",
+ CellLabel->"In[1]:=",
+ CellID->309037897],
+
+Cell["This loads the package:", "Text",
+ CellID->1825449234],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<WildCats`\>\"", "]"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->98796305],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"Loaded WildCats  version \"","\"0.51.1\"","\", \"",RowBox[{"{", 
+         RowBox[{"2012", ",", "7", ",", "28"}], "}"}]},
+      "Row",
+      DisplayFunction->(
+       RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+         "\[InvisibleSpace]", #4}]& ),
+      InterpretationFunction->(RowBox[{"Row", "[", 
+         RowBox[{"{", 
+           RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )]},
+    {"\<\"Copyright (C) 2009-2012, Alessandro Stecchina,\"\>"},
+    {"\<\"under the General Public License.\"\>"},
+    {"\<\" \"\>"},
+    {"\<\"Loaded Notation package\"\>"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->320119871]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The structure of \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT]", "Section",
+ CellID->432019464],
+
+Cell["\<\
+With CategoryPlot it is possible to display W-categorical diagrams \
+(commutative diagrams), displaying objects and morphisms between them. \
+\>", "Text",
+ CellID->700999734],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["CategoryPlot",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/CategoryPlot"], Cell[
+    "displays the diagram of objects and morphisms", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->485945697],
+
+Cell["Diplay of W-categorical commutative diagrams.", "Caption",
+ CellID->242951374],
+
+Cell[TextData[{
+ "CategoryPlot is described in more detail in the ",
+ ButtonBox["Displaying Diagrams",
+  BaseStyle->"Link",
+  ButtonData->"paclet:WildCats/tutorial/DisplayingDiagrams"],
+ " tutorial."
+}], "Text",
+ CellID->32847518],
+
+Cell["\<\
+In particular it is possible to display (part of) the proper W-category \
+\[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\[DoubleStruckCapitalT]. \
+\>", "Text",
+ CellID->433499685],
+
+Cell["\<\
+The main structure of \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT] is described in CATStructure\
+\>", "Text",
+ CellID->416305091],
+
+Cell[BoxData[GridBox[{
+   {
+    ButtonBox["CATStructure",
+     BaseStyle->"Link",
+     ButtonData->"paclet:WildCats/ref/CATStructure"], Cell["\<\
+description of main standard categories and their interrelationship\
+\>", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->240603155],
+
+Cell["The main structure of \[DoubleStruckCapitalC]\[DoubleStruckCapitalA]\
+\[DoubleStruckCapitalT].", "Caption",
+ CellID->38897870],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryPlot", "[", 
+  RowBox[{"CATStructure", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]\
+", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "2"}], "}"}]}], ",", 
+     RowBox[{"\[DoubleStruckCapitalA]\[DoubleStruckB]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "2"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "2"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}]}], "}"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", " ", "500"}]}], "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->4504041],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+      WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+       WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+       WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL], 
+       WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]}, {{{
+       13, 12}, {13, 4}, {12, 9}, {12, 4}, {11, 10}, {11, 4}, {10, 9}, {10, 
+       4}, {8, 6}, {6, 9}, {6, 5}, {9, 7}, {7, 5}, {5, 4}, {1, 2}, {2, 3}, {3,
+        4}, {4, 14}, {15, 4}, {6, 4}, {8, 4}, {7, 4}, {9, 4}}, Null}, {
+      EdgeLabels -> {
+        DirectedEdge[
+          WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+           WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U}, 
+       EdgeLabelStyle -> {
+         Directive[Background -> GrayLevel[1]]}, EdgeShapeFunction -> {{Black, 
+          Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> 500, 
+       VertexCoordinates -> {{0., 0.}, {1., 0.}, {2., 0.}, {3., 0.}, {4., 
+        0.}, {5., 1.}, {5., -1.}, {5., 2.}, {6., 0.}, {6., -1.}, {6., -2.}, {
+        6., 1.}, {6., 2.}, {3., -1.}, {3., 1.}}, VertexLabels -> {
+         Placed["Name", Center]}, VertexShapeFunction -> {None}, VertexStyle -> {
+         Directive[
+          EdgeForm[], 
+          GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{1., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]", TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{2., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$3"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$4"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{4., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$5"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$5", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$5"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$6"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$6", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$6"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$7"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$7", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$7"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$8"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", TraditionalForm], 
+          DynamicLocation["VertexID$8", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$8"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$9"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalA]\[DoubleStruckB]", TraditionalForm], 
+          DynamicLocation["VertexID$9", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$9"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$10"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", TraditionalForm], 
+          DynamicLocation["VertexID$10", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$10"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -2.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$11"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", TraditionalForm], 
+          DynamicLocation["VertexID$11", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$11"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$12"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$12", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$12"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$13"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$13", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$13"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$14"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$14", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$14"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$15"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$15", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$15"]}, {
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{0., 0.}, {1., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$1"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$1", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{1., 0.}, {2., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$2"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$2", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{2., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$3"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$3", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 0.}, {3., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$4"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$4", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{4., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$5"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$5", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$6"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$6", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {4., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$7"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$7", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$8"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$8", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {4., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$9"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$9", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$10"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$10", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {5., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$11"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$11", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$12"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$12", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {5., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$13"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$13", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$14"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$14", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$15"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$15", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$16"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$16", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {6., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$17"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$17", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$18"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$18", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$19"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$19", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$20"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$20", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {6., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$21"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$21", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$22"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$22", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$23"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$23", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], Typeset`data}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      2, Typeset`graph, Typeset`boxes], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {}},
+      ImageSizeCache->{{20.700000000000003`, 483.8}, {-155.16799999999998`, 
+       151.23200000000006`}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{Typeset`data}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None,
+  ImagePadding->20,
+  ImageSize->500]], "Output",
+ ImageSize->{504, 352},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->101111182]
+}, Open  ]],
+
+Cell["\<\
+Arrows U and \[ScriptI] represent functors\
+\>", "Text",
+ CellID->351459813],
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     ButtonBox["U",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/U"], "[", 
+     RowBox[{
+      StyleBox["sourcecat",
+       FontSlant->"Italic"], ",", 
+      StyleBox["targetcat",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "the forgetful (underlying) functor from ",
+     StyleBox["sourcecat",
+      FontSlant->"Italic"],
+     " to ",
+     StyleBox["targetcat",
+      FontSlant->"Italic"]
+    }], "TableText"]},
+   {
+    RowBox[{
+     ButtonBox["\[ScriptI]",
+      BaseStyle->"Link",
+      ButtonData->"paclet:WildCats/ref/\[ScriptCapitalI]"], "[", 
+     RowBox[{
+      StyleBox["sourcecat",
+       FontSlant->"Italic"], ",", " ", 
+      StyleBox["targetcat",
+       FontSlant->"Italic"]}], "]"}], Cell[TextData[{
+     "the inclusion functor from ",
+     StyleBox["sourcecat",
+      FontSlant->"Italic"],
+     " to ",
+     StyleBox["targetcat",
+      FontSlant->"Italic"]
+    }], "TableText"]}
+  }]], "DefinitionBox",
+ CellID->462350664],
+
+Cell["Forgetful and inclusion functors", "Caption",
+ CellID->210491239],
+
+Cell["\<\
+Notice that there is no forgetful functor between \[DoubleStruckCapitalA]\
+\[DoubleStruckB] and \[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]. \
+What we see is the forgetful functor between \[DoubleStruckCapitalA]\
+\[DoubleStruckB] and \[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT].
+This can be better seen if \[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckN] is slightly displaced.\
+\>", "Text",
+ CellID->613444253],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CategoryPlot", "[", 
+  RowBox[{"CATStructure", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\[DoubleStruckC]\
+", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "0.2"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "2"}], "}"}]}], ",", 
+     RowBox[{"\[DoubleStruckCapitalA]\[DoubleStruckB]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", 
+        RowBox[{"-", "2"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "1"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "2"}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], ",", 
+     RowBox[{
+     "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}]}], "}"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", " ", "500"}]}], "]"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->23701550],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+      WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+       WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+       WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+       WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+       WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD], 
+       WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL], 
+       WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]}, {{{
+       13, 12}, {13, 4}, {12, 9}, {12, 4}, {11, 10}, {11, 4}, {10, 9}, {10, 
+       4}, {8, 6}, {6, 9}, {6, 5}, {9, 7}, {7, 5}, {5, 4}, {1, 2}, {2, 3}, {3,
+        4}, {4, 14}, {15, 4}, {6, 4}, {8, 4}, {7, 4}, {9, 4}}, Null}, {
+      EdgeLabels -> {
+        DirectedEdge[
+          WildCats`\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD]] -> WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\
+\[DoubleStruckN]\[DoubleStruckG], 
+           WildCats`\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]] -> 
+         WildCats`\[ScriptI], 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR], WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC], 
+           WildCats`\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]] -> 
+         WildCats`U, 
+         DirectedEdge[
+          WildCats`\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\
+\[DoubleStruckO]\[DoubleStruckD], 
+           WildCats`\[DoubleStruckCapitalA]\[DoubleStruckB]] -> WildCats`U}, 
+       EdgeLabelStyle -> {
+         Directive[Background -> GrayLevel[1]]}, EdgeShapeFunction -> {{Black, 
+          Arrow[#, {0.1, 0.1}]}& }, ImagePadding -> 20, ImageSize -> 500, 
+       VertexCoordinates -> {{0., 0.}, {1., 0.}, {2., 0.}, {3., 0.}, {4., 
+        0.2}, {5., 1.}, {5., -1.}, {5., 2.}, {6., 0.}, {6., -1.}, {6., -2.}, {
+        6., 1.}, {6., 2.}, {3., -1.}, {3., 1.}}, VertexLabels -> {
+         Placed["Name", Center]}, VertexShapeFunction -> {None}, VertexStyle -> {
+         Directive[
+          EdgeForm[], 
+          GrayLevel[1]]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{0., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{1., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckE]\[DoubleStruckT]\
+\[DoubleStruckC]", TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{2., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$3"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalT]\[DoubleStruckO]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$4"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalS]\[DoubleStruckE]\[DoubleStruckT]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{4., 0.2}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$5"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckN]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$5", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$5"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$6"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckN]\[DoubleStruckG]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$6", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$6"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$7"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalG]\[DoubleStruckR]\[DoubleStruckP]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$7", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$7"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{5., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$8"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalC]\[DoubleStruckCapitalR]\[DoubleStruckN]\
+\[DoubleStruckG]", TraditionalForm], 
+          DynamicLocation["VertexID$8", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$8"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 0.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$9"], 
+         InsetBox[
+          FormBox["\[DoubleStruckCapitalA]\[DoubleStruckB]", TraditionalForm], 
+          DynamicLocation["VertexID$9", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$9"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$10"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalR]", TraditionalForm], 
+          DynamicLocation["VertexID$10", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$10"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., -2.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$11"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalM]\[DoubleStruckO]\[DoubleStruckD]\
+\[DoubleStruckCapitalK]", TraditionalForm], 
+          DynamicLocation["VertexID$11", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$11"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$12"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$12", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$12"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{6., 2.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$13"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalK]\[DoubleStruckCapitalM]\[DoubleStruckO]\
+\[DoubleStruckD]", TraditionalForm], 
+          DynamicLocation["VertexID$13", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$13"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., -1.}], ShowContents -> False, StripOnInput -> 
+            False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$14"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalR]\[DoubleStruckE]\[DoubleStruckL]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$14", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$14"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           StyleBox[
+            PointBox[{3., 1.}], ShowContents -> False, StripOnInput -> False], 
+           Directive[
+            EdgeForm[], 
+            GrayLevel[1]], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$15"], 
+         InsetBox[
+          FormBox[
+          "\[DoubleStruckCapitalP]\[DoubleStruckO]\[DoubleStruckS]", 
+           TraditionalForm], 
+          DynamicLocation["VertexID$15", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$15"]}, {
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{0., 0.}, {1., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$1"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$1", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{1., 0.}, {2., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$2"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$2", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{2., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$3"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$3", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 0.}, {3., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$4"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$4", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{4., 0.2}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$5"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$5", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$6"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$6", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {4., 0.2}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$7"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$7", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$8"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$8", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {4., 0.2}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$9"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$9", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$10"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$10", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {5., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$11"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$11", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{5., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$12"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$12", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {5., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$13"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$13", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 0.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$14"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$14", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$15"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$15", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$16"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$16", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {6., -1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$17"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$17", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., -2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$18"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$18", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {6., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$19"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$19", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$20"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$20", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {6., 1.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$21"], 
+        InsetBox[
+         FormBox[
+          StyleBox["\[ScriptI]", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$21", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{6., 2.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$22"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$22", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}, {
+        TagBox[{
+          GrayLevel[0], 
+          ArrowBox[{{3., 1.}, {3., 0.}}, {0.1, 0.1}]}, "DynamicName", BoxID -> 
+         "EdgeLabelID$23"], 
+        InsetBox[
+         FormBox[
+          StyleBox["U", 
+           Directive[Background -> GrayLevel[1]], StripOnInput -> False], 
+          TraditionalForm], 
+         DynamicLocation["EdgeLabelID$23", Automatic, 
+          Scaled[0.5]], 
+         ImageScaled[{0.5, 0.5}], BaseStyle -> "Graphics"]}}}], Typeset`data}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      2, Typeset`graph, Typeset`boxes], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {}},
+      ImageSizeCache->{{20.700000000000003`, 483.8}, {-155.16799999999998`, 
+       151.23200000000006`}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{Typeset`data}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None,
+  ImagePadding->20,
+  ImageSize->500]], "Output",
+ ImageSize->{504, 352},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[9]=",
+ CellID->421993751]
+}, Open  ]],
+
+Cell["\<\
+Other interesting categories (eg. Sgr: category of semigroups) will be \
+implemented later. \
+\>", "Text",
+ CellID->227912194]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "TutorialMoreAboutSection",
+ CellID->961285135],
+
+Cell[TextData[ButtonBox["WildCats Guide",
+ BaseStyle->"Link",
+ ButtonData->"paclet:WildCats/guide/WildCats"]], "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEXT TUTORIAL", "RelatedTutorialsSection",
+ CellID->295681771],
+
+Cell[TextData[ButtonBox["Defining and modifying categories, objects, \
+morphisms",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/DefiningAndModifyingACategory"]], \
+"RelatedTutorials",
+ CellID->111726643]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"CATStructure - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 41, 2.9869938}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> 
+    "Wild Cats Package Tutorial", "language" -> "en", "paclet" -> 
+    "WildCats Package", "status" -> "None", "summary" -> 
+    "This terminates the current Mathematica session and starts a new clean \
+session (recommended for troubleshooting) This loads the package:", 
+    "synonyms" -> {}, "title" -> "CATStructure", "type" -> "Tutorial", "uri" -> 
+    "WildCats/tutorial/CATStructure"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[605, 21, 78, 1, 70, "TutorialColorBar"],
+Cell[686, 24, 179, 5, 70, "LinkTrail"],
+Cell[868, 31, 3350, 77, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[4243, 112, 49, 1, 70, "Title",
+ CellID->509267359],
+Cell[4295, 115, 171, 6, 70, "Text",
+ CellID->12172402],
+Cell[4469, 123, 69, 1, 70, "Text",
+ CellID->121457497],
+Cell[4541, 126, 73, 2, 70, "Input",
+ CellID->309037897],
+Cell[4617, 130, 60, 1, 70, "Text",
+ CellID->1825449234],
+Cell[CellGroupData[{
+Cell[4702, 135, 116, 3, 70, "Input",
+ CellID->98796305],
+Cell[4821, 140, 866, 22, 70, "Print",
+ CellID->320119871]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5724, 167, 127, 2, 70, "Section",
+ CellID->432019464],
+Cell[5854, 171, 184, 4, 70, "Text",
+ CellID->700999734],
+Cell[6041, 177, 252, 7, 70, "DefinitionBox",
+ CellID->485945697],
+Cell[6296, 186, 84, 1, 70, "Caption",
+ CellID->242951374],
+Cell[6383, 189, 230, 7, 70, "Text",
+ CellID->32847518],
+Cell[6616, 198, 189, 4, 70, "Text",
+ CellID->433499685],
+Cell[6808, 204, 166, 4, 70, "Text",
+ CellID->416305091],
+Cell[6977, 210, 277, 8, 70, "DefinitionBox",
+ CellID->240603155],
+Cell[7257, 220, 132, 2, 70, "Caption",
+ CellID->38897870],
+Cell[CellGroupData[{
+Cell[7414, 226, 2796, 76, 70, "Input",
+ CellID->4504041],
+Cell[10213, 304, 27542, 671, 70, "Output",
+ CellID->101111182]
+}, Open  ]],
+Cell[37770, 978, 86, 3, 70, "Text",
+ CellID->351459813],
+Cell[37859, 983, 1014, 36, 70, "DefinitionBox",
+ CellID->462350664],
+Cell[38876, 1021, 71, 1, 70, "Caption",
+ CellID->210491239],
+Cell[38950, 1024, 454, 8, 70, "Text",
+ CellID->613444253],
+Cell[CellGroupData[{
+Cell[39429, 1036, 2799, 76, 70, "Input",
+ CellID->23701550],
+Cell[42231, 1114, 27560, 672, 70, "Output",
+ CellID->421993751]
+}, Open  ]],
+Cell[69806, 1789, 136, 4, 70, "Text",
+ CellID->227912194]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[69979, 1798, 66, 1, 70, "TutorialMoreAboutSection",
+ CellID->961285135],
+Cell[70048, 1801, 150, 3, 70, "TutorialMoreAbout",
+ CellID->70541790]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70235, 1809, 68, 1, 70, "RelatedTutorialsSection",
+ CellID->295681771],
+Cell[70306, 1812, 220, 6, 70, "RelatedTutorials",
+ CellID->111726643]
+}, Open  ]]
+}, Open  ]],
+Cell[70553, 1822, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

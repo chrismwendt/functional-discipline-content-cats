@@ -1,0 +1,33 @@
+set-pp-renderer ascii
+set-pp-width 80
+
+-- set-pp-type     Omit
+set-pp-type     Show
+
+set-pp-coercion Kind
+-- set-pp-coercion Show
+-- set-pp-coercion Omit
+
+--------
+
+rhs-of 'sumt0
+
+observe "--------------------------------" ; one-td (repeat simplify-one-step <+ standardize-case <+ standardize-con <+ unfold-poly)
+observe "--------------------------------" ; one-td (repeat simplify-one-step <+ standardize-case <+ standardize-con <+ unfold-poly)
+observe "--------------------------------" ; one-td (repeat simplify-one-step <+ standardize-case <+ standardize-con <+ unfold-poly)
+observe "--------------------------------" ; one-td (repeat simplify-one-step <+ standardize-case <+ standardize-con <+ unfold-poly)
+
+[cast-expr,lam-body]
+
+case-expr
+abst-repr'
+
+-- any-td (repeat (standardize-case <+ standardize-con <+ unfold-poly <+ inline-global))
+-- try simplify-with-let-floating
+-- try unshadow
+
+-- application-of 'repr'
+-- [app-fun,app-arg,app-fun,app-fun,app-fun,app-fun] -- to case
+-- case-expr                                         --
+
+-- occurrence-of '$p1Applicative

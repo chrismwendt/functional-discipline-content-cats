@@ -1,0 +1,302 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9421,        292]
+NotebookOptionsPosition[      7117,        222]
+NotebookOutlinePosition[      8561,        261]
+CellTagsIndexPosition[      8518,        258]
+WindowTitle->DefMorphismProperties - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["WildCats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:WildCats/guide/WildCats"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["WILDCATS PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Defining and modifying categories, objects, \
+morphisms\"\>":>Documentation`HelpLookup[
+       "paclet:WildCats/tutorial/DefiningAndModifyingACategory"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"WildCats/ref/DefMorphismProperties\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["WildCats/ref/DefMorphismProperties"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/WildCats/ref/\
+DefMorphismProperties.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "WildCats/ref/DefMorphismProperties", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["DefMorphismProperties", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData["DefMorphismProperties"], "InlineFormula"],
+     "[",
+     StyleBox["mor, proplist, wcat",
+      FontSlant->"Italic"],
+     "]\[LineSeparator]assigns properties in ",
+     StyleBox["proplist",
+      FontSlant->"Italic"],
+     " to morphism ",
+     StyleBox["mor",
+      FontSlant->"Italic"],
+     "  in  W-category w",
+     StyleBox["cat",
+      FontSlant->"Italic"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->109477440],
+
+Cell[TextData[{
+ StyleBox["mor",
+  FontSlant->"Italic"],
+ " can be any expression"
+}], "Notes",
+ CellID->106111866],
+
+Cell[TextData[{
+ StyleBox["wcat",
+  FontSlant->"Italic"],
+ " can be any W-category"
+}], "Notes",
+ CellID->110713682],
+
+Cell["proplist is a list of properties", "Notes",
+ CellID->354783984],
+
+Cell["morphism properties are strings ", "Notes",
+ CellID->615345971],
+
+Cell[TextData[{
+ "Possible properties for a morphism ",
+ StyleBox["mor ",
+  FontSlant->"Italic"],
+ "include"
+}], "Notes",
+ CellID->1067943069],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "\"\<Iso\>\"", Cell[
+    "mor is an isomorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<Mono\>\"", Cell[
+    "mor is a monomorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<StrongMono\>\"", Cell[
+    "mor is a strong monomorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<ExtremeMono\>\"", Cell[
+    "mor is an extreme monomorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<Epi\>\"", Cell[
+    "mor is an epimorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<StrongEpi\>\"", Cell[
+    "mor is a strong epimorphism", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "\"\<ExtremeEpi\>\"", Cell[
+    "mor is an extreme epimorphism", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "2ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, None, {None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{True, True, True, True, True, True, True, True}}}},
+ CellID->3244]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "TutorialsSection",
+ CellID->250839057],
+
+Cell[TextData[ButtonBox[Cell["Defining and modifying categories, objects, \
+morphisms", "GuideTutorial"],
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:WildCats/tutorial/DefiningAndModifyingACategory"]], "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 730},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"DefMorphismProperties - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2014, 3, 6, 20, 28, 6.6775914}", "context" -> "WildCats`", 
+    "keywords" -> {}, "index" -> True, "label" -> "WildCats Paclet Symbol", 
+    "language" -> "en", "paclet" -> "WildCats", "status" -> "None", "summary" -> 
+    "DefMorphismProperties[mor, proplist, wcat] assigns properties in \
+proplist to morphism mor in W-category wcat.", "synonyms" -> {}, "title" -> 
+    "DefMorphismProperties", "type" -> "Symbol", "uri" -> 
+    "WildCats/ref/DefMorphismProperties"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[614, 21, 76, 1, 70, "SymbolColorBar"],
+Cell[693, 24, 179, 5, 70, "LinkTrail"],
+Cell[875, 31, 2427, 55, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3327, 90, 64, 1, 70, "ObjectName",
+ CellID->1224892054],
+Cell[3394, 93, 623, 22, 70, "Usage",
+ CellID->982511436]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4054, 120, 580, 17, 70, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->109477440],
+Cell[4637, 139, 115, 5, 70, "Notes",
+ CellID->106111866],
+Cell[4755, 146, 116, 5, 70, "Notes",
+ CellID->110713682],
+Cell[4874, 153, 69, 1, 70, "Notes",
+ CellID->354783984],
+Cell[4946, 156, 69, 1, 70, "Notes",
+ CellID->615345971],
+Cell[5018, 159, 142, 6, 70, "Notes",
+ CellID->1067943069],
+Cell[5163, 167, 1219, 26, 70, "2ColumnTableMod",
+ CellID->3244]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[6419, 198, 419, 12, 70, "TutorialsSection",
+ CellID->250839057],
+Cell[6841, 212, 234, 5, 70, "Tutorials",
+ CellID->341631938]
+}, Open  ]],
+Cell[7090, 220, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

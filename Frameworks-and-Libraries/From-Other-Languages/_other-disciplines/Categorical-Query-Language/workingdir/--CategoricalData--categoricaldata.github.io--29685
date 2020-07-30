@@ -1,0 +1,5 @@
+child_process(29685)::clone(https://github.com/CategoricalData/categoricaldata.github.io):stderr:data: Cloning into 'undefined\CD--06-22-2020--8sJp4eQhqajNsqWKyc1pXx/categoricaldata.github.io'...
+child_process(29685)::clone(https://github.com/CategoricalData/categoricaldata.github.io):stderr:data: POST git-upload-pack (165 bytes)
+child_process(29685)::clone(https://github.com/CategoricalData/categoricaldata.github.io):stderr:data: remote: Enumerating objects: 50, done.        
+child_process(29685)::clone(https://github.com/CategoricalData/categoricaldata.github.io):stderr:data: remote: Total 50 (delta 0), reused 0 (delta 0), pack-reused 50        
+child_process(29685)::clone(https://github.com/CategoricalData/categoricaldata.github.io):close()

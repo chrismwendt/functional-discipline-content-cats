@@ -1,0 +1,122 @@
+\ifx\wholebook\relax \else
+
+\documentclass[UTF8]{article}
+
+\usepackage[en]{../../prelude}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+\title{Natural numbers}
+
+\author{LIU Xinyu
+\thanks{{\bfseries LIU Xinyu} \newline
+  Email: liuxinyu95@gmail.com \newline}
+  }
+
+\maketitle
+\fi
+
+\markboth{Natural numbers}{Mathematics of Programming}
+
+\chapter*{Proof of commutative law of addition}
+\phantomsection  % so hyperref creates bookmarks
+\addcontentsline{toc}{chapter}{Proof of commutative law of addition}
+
+To prove the commutative law of addition $a + b = b + a$, we prepare three things. The first states that, for any natural number $a$, we have:
+
+\be
+0 + a = a
+\label{eq:left-zero}
+\ee
+
+It means the zero on the left side can be cancelled for addition. When $a = 0$, according to the first rule of addition, it holds:
+
+\[
+0 + 0 = 0
+\]
+
+As the induction, suppose $0 + a = a$ holds, we are going to show that $0 + a' = a'$.
+
+\[
+\begin{array}{rlr}
+0 + a' & = (0 + a)' & \text{second rule of addition} \\
+       & = a' & \text{induction assumption}
+\end{array}
+\]
+
+Next we define the successor of 0 be 1, and prove the second fact:
+
+\be
+a' = a + 1
+\label{eq:one-succ}
+\ee
+
+It means the successor of any natural number is this number plus 1. This is because:
+
+\[
+\begin{array}{rlr}
+a' & = (a + 0)' & \text{first rule of addition} \\
+   & = a + 0' & \text{second rule of addition} \\
+   & = a + 1 & \text{1 is defined as the successor of 0}
+\end{array}
+\]
+
+The third thing we are going to prove is the starting case:
+
+\be
+a + 1 = 1 + a
+\label{eq:one-commu}
+\ee
+
+When $a = 0$, we have:
+
+\[
+\begin{array}{rlr}
+0 + 1 & = 1 & \text{We proved the left 0 can be cancelled} \\
+      & = 1 + 0 & \text{first rule of addition}
+\end{array}
+\]
+
+For induction case, suppose $a + 1 = 1 + a$ holds, we are going to show $a' + 1 = 1 + a'$.
+
+\[
+\begin{array}{rlr}
+a' + 1 & = a' + 0' & \text{1 is the successor of 0} \\
+       & = (a' + 0)' & \text{first rule of addition} \\
+       & = ((a + 1) + 0)' & \text{second result we proved. (\ref{eq:one-succ})} \\
+       & = (a + 1)' & \text{second rule of addition} \\
+       & = (1 + a)' & \text{induction assumption} \\
+       & = 1 + a' & \text{second rule of addition}
+\end{array}
+\]
+
+On top of these three results, we can prove the commutative law of addition. We first show that when $b = 0$ it holds. According to the first rule of addition, we have $a + 0 = a$; While from the first result we proved, $0 + a = a$ holds too. Hence $a + 0 = 0 + a$. Then we prove the induction case. Suppose $a + b = b + a$ holds, we are going to show $a + b' = b' + a$.
+
+\[
+\begin{array}{rlr}
+a + b' & = (a + b)' & \text{second rule of addition} \\
+       & = (b + a)' & \text{induction assumption} \\
+       & = b + a' & \text{second rule of addition} \\
+       & = b + a + 1 & \text{second result we proved. (\ref{eq:one-succ})} \\
+       & = b + 1 + a & \text{third result we proved. (\ref{eq:one-commu})} \\
+       & = (b + 1) + a & \text{associative law proved in chapter 1} \\
+       & = b' + a & \text{third result we proved. (\ref{eq:one-commu})}
+\end{array}
+\]
+
+Therefore we proved commutative law of addition with Peano's axioms(\cite{StepanovRose15}, p147 - 148).
+
+\ifx\wholebook\relax \else
+\begin{thebibliography}{99}
+
+\bibitem{StepanovRose15}
+Alexander A. Stepanov, Daniel E. Rose ``From Mathematics to Generic Programming''. Addison-Wesley Professional; 1 edition (November 17, 2014) ISBN-13: 978-0321942043
+
+\end{thebibliography}
+
+\expandafter\enddocument
+%\end{document}
+
+\fi
