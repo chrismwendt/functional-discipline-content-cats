@@ -1,0 +1,145 @@
+
+
+
+
+- Standard Category Theory References
+   - Abelian Categories
+   - Algebraic Geometry
+   - Algebraic Topology
+   - Boolean Algebras
+   - Calculus of Fractions and Homotopy Theory
+   - Categories for the Working Mathematician
+   - General Topology
+   - A Course in Homological Algebra
+   - Lattice Theory
+   - The Mathematics of Metamathematics
+   - Sheaf Theory
+   - Topologie Algebrique et Theorie des Faisceaux
+
+General and Introductory Accounts of Topos Theory
+   - Grothendieck Topologies
+   - Generalities sur les topos de Lawvere et Tierney
+   - Aspects of Topoi
+   - Theorie des Topos
+   - Elementary Topoi
+   - Elementary Toposes
+   - Continuously Variable Sets: Algebraic Geometry = Geometric Logic
+   - Variable Sets, Etendu and Variable Structures in Topoi
+   - Variable quantities and variable structures in topoi
+   - Toposes, Algebraic Geometry and Logic
+   - Model Theory ane Topoi
+   - Quantifiers and Sheaves
+   - Sets, Topoi, and Internal Logic in Categories
+   - Coherent Logic
+   - From sheaves to logic
+   - Topoidal Set Theory
+   - Topos di Grothendieck e topos di Lawvere e Tierney
+   - Axiomatic Sheaf Theory: some constructions and applications
+   - Lectures on  Elementary Topoi
+   - Logic from Topology: a survey of Topoi
+
+- Other papers on topos theory and related subjects
+   - Generalisation d'un resultat sur le triple de la reunion
+   - Exact Categories and categories of Sheaves
+   - The point of the empty set
+   - Toposes without points
+   - Atomic Sites
+   - Les distributeurs
+   - Problemes dans les topos
+   - Theories relatives a un corpus
+   - Fibrations petites et localement petites
+   - Exact functors and measurable cardinals
+   - Types vs Topos
+   - When is Omega a cogenerator in a topos?
+   - C.R. Acad Sci Paris 279
+   - Order and recursion in topoi
+   - Topos theory and Souslin's
+   - Topoi of internal presheaves
+   - Fibrations et extensions de Kan
+   - Categories of sets and models of set theory
+   - The bicategory of topoi and spectra
+   - Au sujet de l'existence d adjoints a droite aux foncteurs
+   - construction d'un modele boolean de la theorie des ensembles a parti dun topos boolean
+   - Theories coherentes et topos coherentes
+   - Algebras de Heyting dans les topos
+   - Language interne d'un topos
+   - Logique du premier ordre dans les topos elementaires
+   - Logique d'ordre superieur dans les topos elementaires
+   - Une approache logique des theories definissables par limites projectives finies
+   - An adjoint-functor theorem over topoi
+   - Ensemble sous-jacent dans un topos
+   - Change of base for toposes with generators
+   - Axiom of choice and complementation
+   - Simplicial methods and the interpretation of "triple" cohomology
+   - Subobject classifiers and classes of subfunctors
+   - Uniform spaces in Topoi
+   - The logic of topoi
+   - Comparaison des reeles d'un topos: structures lisses sur un topos elementaire
+   - On canonizing category theory
+   - Cohomologie non abelian
+   - Classifying topos. Toposes, algebraic geometry and logic
+   - Directed colimits and sheaves in some non-abelian categories
+   - Regular categories "Exact categories and categories of Sheaves"
+   - Sur quelqas points d' algebrae homologie
+   - Technique de descente et theoremes d existence on Geometrie Algebrique
+   - Revetements etales et groupe fondamental
+   - Topos anneles et schemas relatifs
+   - On the category of Sheaves
+   - A category approach to boolean valued set theory
+   - Fibrations and Grothendieck topologies
+   - Representation of algebras by continuous sections
+   - Complexe cotangent et deformations
+   - Atomless parts of Spaces
+   - THe associated sheaf functor in an elementary topos
+   - Internal categories and classification theorems "Model theory and Topoi"
+   - Adjoint lifting theorems for categories of algebras
+   - Rings, fields, and spectra
+   - Automorphisms of Omega
+   - On a topological Topos
+   - Algebraic theories in Toposes
+   - Integral domain type representations in sheaves and other topoi
+   - Linear algebra and projective geometry in the Zarinski topos
+   - Linear algebra in a local ringed site
+   - Universal projective geometry via topos theory
+   - A simple axiomatics for differentiation
+   - Some topos-theoretic concepts of finiteness "Model theory and Topoi"
+   - Non-Standard extensions in the theory of toposes
+   - Topos theoretic factorization of non-standard extensions
+   - Doctrines in Categorical Logic "Handbook in Logic"
+   - Construzione del monoide dei quozienti in un topos elementare
+   - Localization and Sheaf Reflectors
+   - An elementary theory of the category of sets
+   - The category of categories as a foundation for mathematics
+   - Diagonal arguments and cartesian closed categories "Category Theory, Homology Theory, and their applications II"
+   - Adjointness in foundations
+   - Equality in Hyperdoctrines and the Comprehension Schema as an adjoint functor
+
+   - Teoria delle categorie sopra un topos di base
+   - Quantificateurs dans les topos elementairs
+   - Structure algebriques dans les topos elementaires
+   - Some aspects of the model theory in a topos
+   - Topos infintesimal
+   - Theorems exemples et contre-exemples pour certaines proprietes des entiers naturesl dans les topos
+   - Model theoretic methods in the theory of topoi and related
+   - Model Theory and Topoi
+   - Lattice-theoretic and logical aspects of elementary topoi
+   - On topoi as closed categories
+   - Categories of Boolean topoi
+   - Institutional algebra and representations of rings. Memoirs
+   - A generalization of Swans theorem
+   - Compact ringed spaces
+   - The real numbers in a topos
+   - Categorical Set Theory: a charcteization of the category of sets
+   - The internal and external aspects of logic and set theory in elementary topoi
+
+   - Colimits in topooi
+   - Abstract families and the Adjoint Functor Theorems
+   -
+
+Miscellaneous
+   - Abelian groups that are direct summands of every containing abelian group
+   - Homology and standard ""
+
+   - Triples, algebras and cohomology
+   - Categories avec multiplication
+   - Categories
